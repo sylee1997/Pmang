@@ -47,7 +47,7 @@
 		
 	</div>
 	
-	<div id="container" style="border:3px solid black">
+	<div id="container" style="border:3px solid black">	<!-- 세주,유라,승은파트 -->
 		<div id="slide" style="height:100px; border:2px solid red">인기 카테고리 슬라이드 영역</div>
 		<div id="selection" style="width: 800px; border:3px solid pink">
 		최근 상품 게시판 영역
