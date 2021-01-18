@@ -1,6 +1,8 @@
 /.metadata/
-.classpath/
+.classpath
+.project
 .settings/
-META-INF/
-Servers/
-
+WebContent/META-INF/
+WebContent/WEB-INF/
+build/
+/Servers/
