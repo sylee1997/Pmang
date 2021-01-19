@@ -1,0 +1,112 @@
+@charset "EUC-KR";
+
+/* footer */
+.footer {
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    background: rgb(255, 255, 255);
+    
+}
+
+.footer a {
+    color: rgb(33, 33, 33);
+    text-decoration: none;
+    cursor: pointer;
+    background-color: transparent;
+    
+    webkit-box-flex: 1;
+    flex-grow: 1;
+    text-align: center;
+    
+}
+
+.cIPDuS {
+    display: block;
+    font-size: 13px;
+    color: rgb(77, 77, 77);
+    position: relative;
+}
+
+.cgGBdw {
+    display: block;
+    font-size: 13px;
+    color: rgb(77, 77, 77);
+    position: relative;
+}
+
+.footerCategoryArea {
+    width: 100%;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    border-top: 1px solid rgb(238, 238, 238);
+    border-bottom: 1px solid rgb(238, 238, 238);
+}
+
+.footerCategory {
+    height: 64px;
+    width: 1024px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.cIPDuS::after{
+
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 1px;
+    height: 14px;
+    border-right: 1px solid rgb(204, 204, 204);
+    box-sizing: border-box;
+}
+
+.cgGBdw::after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 1px;
+    height: 14px;
+    border-right: 1px solid rgb(204, 204, 204);
+    box-sizing: border-box;
+}
+
+::after {
+    box-sizing: border-box;
+}
+
+.footerContent{
+	display: flex;
+}
+
+.footerContentArea {
+    padding: 32px 0px 24px;
+
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 36px;
+    
+}
+
+.footerContentMarkTitle {
+    line-height: 1.57;
+    letter-spacing: -0.8px;
+}
+
+.footerCompanyInfo {
+	width: 1024px;
+    font-size: 13px;
+    color: rgb(153, 153, 153);
+}
+
+.infomain{
+	line-height: 1.57;
+    margin-bottom: 24px;
+}
