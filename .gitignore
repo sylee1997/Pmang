@@ -1,8 +1,10 @@
 /.metadata/
-Servers/
 .classpath
 .project
+.springBeans
 .settings/
-WebContent/META-INF/
-WebContent/WEB-INF/
-build/
+target/
+src/test/
+src/main/resources/META-INF/
+src/main/resources/log4j.xml
+/Servers/
