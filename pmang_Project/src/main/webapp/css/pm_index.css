@@ -2,7 +2,13 @@
 
 /* 가운데 정렬 */
 
-#wrap{
+#wrap {
+width: 1300px;
+   height: 100%;
+   min-width: 1024px;
+   margin: 0 auto;
+}
+/* #wrap{
 	width: 1300px;
 	margin: 0 auto;
 }
@@ -10,15 +16,14 @@
 body > #wrap { 
 	height : auto;
 	min-height: 100%; 
-}
-
-
+} */
 /* header부분 */
 #header{
 	position: -webkit-sticky;
 	position: sticky;
 	height : 150px;
 	top: 0;
+	z-index:20;
 }
 
 #topHeaderNav {
@@ -137,68 +142,161 @@ body > #wrap {
 /* container부분 */
 
 #container {
-	height : 2000px;
+   position: relative;
+   width: 100%;
+   height: 5729px;
 }
-
-
-.content {
+/* .content { 이거 몬지 모르겠어요..	
 	float: left;
 	width: 1180px;
 	overflow: auto;
 }
+ */
+ 
+ 
+#slide {
+    position: relative;
+    max-width: 64.375rem;
+    margin: 0px auto;
+    height: 300px;
+    background: white;
+}
+
+.slideInitial {
+    position: relative;
+    display: block;
+}
+
+#slideAct {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
 
 #selection {
+    width: 1024px;
+    margin: auto;
+    padding: 3.5rem 0px 1.5rem;
+}
+
+.selection1{
+    position: relative;
+    overflow: hidden;
+}
+
+.selection3{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.slide_wrap {
+   /* background: red; */
+   /* width: 1000px; */
+   margin: 0;
+   padding: 0;
+}
+
+.slide_item {
+   /* background: green; */
+   width: 1024px;
+   height: 200px;
+   list-style: none;
+   float: left;
+   text-align: center;
+   line-height: 50px;
+}
+
+.slide_item a {
+   text-decoration: none;
+   color: black;
+}
+
+/* 게시물 */
+.itemFrame:nth-child(5n) {
+    margin-right: 0px;
+}
+
+.itemFrame {
+    width: 196px;
+    margin-right: 11px;
+    margin-bottom: 11px;
+}
+
+.itemLink {
+    border: 1px solid rgb(238, 238, 238);
+    background: rgb(255, 255, 255);
+    display: block;
+    color: rgb(33, 33, 33);
+    text-decoration: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.itemImageArea {
+    position: relative;
+    width: 100%;
+    height: 194px;
+}
+
+
+.itemImageArea>img {
+   vertical-align: bottom;
+   border-style: none;
+}
+
+.imageAreaDiv {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.itemContent {
+    padding: 15px 10px;
+    height: 80px;
+}
+
+.itemName {
+    position: relative;
+    font-size: 14px;
+    padding-bottom: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.itemPriceAndTime {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 20px;
+}
+
+.itemPrice {
+    font-size: 16px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.itemTime {
+    font-size: 12px;
+    color: rgb(136, 136, 136);
+}
+/* #selection {		서영씨가 잡아주신거
 	overflow : scroll;
 	-ms-overflow-style: none;
-}
+} */
 
 ::-webkit-scrollbar {
 
 display:none;
 
 } 
-
-
-/* 인기 카테고리 슬라이드 쇼 css*/
-/* .slide {
-	width: 200px;
-	position: relative;
-	left: -50%;
-	margin-right: -300px;
-	top: 400px;
-	align: center;
-	z-index: 100;
-} */
-
-.slide_wrap {
-	/* background: red; */
-	/* width: 1000px; */
-	margin: 0;
-	padding: 0;
-}
-
-.slide_item {
-	/* background: green; */
-	width: 1024px;
-	height: 200px;
-	list-style: none;
-	float: left;
-	text-align: center;
-	line-height: 50px;
-}
-
-.slide_item a {
-	text-decoration: none;
-	color: black;
-}
-
-#item {
-	float: left;
-	width: 220px; 
-	height: 320px;
-	border: 2px solid green;
-	margin: 5px 5px;
-}
 
 
 
