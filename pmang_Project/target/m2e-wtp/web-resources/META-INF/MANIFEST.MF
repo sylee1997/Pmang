@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: tome6
 Build-Jdk: 1.8.0_261
+=======
+Built-By: tmddms2292
+Build-Jdk: 1.8.0_201
+>>>>>>> origin
 Created-By: Maven Integration for Eclipse
 
