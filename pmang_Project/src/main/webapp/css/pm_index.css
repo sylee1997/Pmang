@@ -26,7 +26,7 @@ body > #wrap {
 	font-size: 13px;	/* 폰트사이즈 */
 	font-weight: bold;
 	color: green;
-	padding-left: 30px;
+	text-indent: 2em;/* 글자 앞 공백 */
 }
 
 #categoryDiv a {
@@ -64,6 +64,9 @@ body > #wrap {
 }
 .category1Menu>li:hover .category2Menu {/* 카테고리1 hover → 카테고리2 펼쳐짐 */
    left: 100%;
+}
+.category1Menu a {/* 하위 a태그 전부 적용 */
+	color: black;
 }
 .category1Menu a:hover {/* 하위 a태그 전부 적용 */
 	color: white; 
