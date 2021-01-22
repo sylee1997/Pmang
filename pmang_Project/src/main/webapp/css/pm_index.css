@@ -8,15 +8,7 @@ width: 1300px;
    min-width: 1024px;
    margin: 0 auto;
 }
-/* #wrap{
-	width: 1300px;
-	margin: 0 auto;
-}
 
-body > #wrap { 
-	height : auto;
-	min-height: 100%; 
-} */
 /* header부분 */
 #header{
 	position: -webkit-sticky;
