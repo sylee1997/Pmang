@@ -30,6 +30,11 @@ $('#writeBtn').click(function(){
 		$('#repwdDiv').css('font-size','8pt')
 		$('#repwdDiv').css('font-weight','bold');
 		
+	}else if($('#id').val() != $('#check').val()){
+	$('#idDiv').text('중복체크 하세요')
+	$('#idDiv').css('color','red')
+	$('#idDiv').css('font-size','8pt')
+	$('#idDiv').css('font-weight','bold');
 	}else{
 		$('form[name=writeForm]').submit();
 	}
@@ -47,8 +52,6 @@ $('#checkPostSearchBtn').click(function(){
 		data: $('#checkPostForm').serialize(),
 		dataType: 'json',
 		success: function(data){
-			//alert(JSON.stringify(data));
-			
 			$('#checkPostTable tr:gt(2)').remove();
 			
 			$.each(data.list, function(index, items){
