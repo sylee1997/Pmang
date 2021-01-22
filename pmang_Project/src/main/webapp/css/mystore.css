@@ -150,13 +150,13 @@ span {
 	overflow: hidden;
 }
 
-#tabcontent {
+#tabContent {
 	display: flex;
 	border: 1px solid yellow;
 	padding: 6px 12px;
 }
 
-a {
+.tabmenu a {
 	display: inline-block;
 	color: #000;
 	text-align: center;
@@ -360,6 +360,7 @@ li {
 	float: left;
 	margin: 0 auto;
 	padding: 0;
+	text-decoration: none;
 }
 
 .defaultSort {
@@ -509,7 +510,6 @@ li {
 /* tab3 - 상점 후기*/
 .review {
 	width: 100%;
-	height: 454px;
 	margin: 0px;
 	padding: 0px;
 	font: inherit;
@@ -518,9 +518,9 @@ li {
 
 .review1 {
 	width: 100%;
-	height: 206px;
 	display: flex;
 	border-bottom: 1px solid rgb(238, 238, 238);
+	margin-top: 20px;
 }
 
 .reivew_snb {
@@ -536,24 +536,25 @@ li {
 }
 
 .review_content {
-	
+	flex: 1 1 0%;
+	width: 890px;
 }
 
 .review_header {
 	display: flex;
-    flex-direction: column;
-    -webkit-box-pack: center;
-    justify-content: center;
-    height: 60px;
+	flex-direction: column;
+	-webkit-box-pack: center;
+	justify-content: center;
+	height: 60px;
 }
 
 .reviewNameDiv {
 	display: flex;
-    margin-bottom: 10px;
-    -webkit-box-pack: justify;
-    justify-content: space-between;
-    -webkit-box-align: center;
-    align-items: center;
+	margin-bottom: 10px;
+	-webkit-box-pack: justify;
+	justify-content: space-between;
+	-webkit-box-align: center;
+	align-items: center;
 }
 
 .reviewName {
@@ -578,29 +579,59 @@ li {
 	border: 0px;
 	font: inherit;
 	vertical-align: baseline;
-	
 	display: block;
 	color: rgb(33, 33, 33);
-    text-decoration: none;
-    cursor: pointer;
-    background-color: transparent;
-    text-align:left;
-    font-size:10pt;
+	text-decoration: none;
+	cursor: pointer;
+	background-color: transparent;
+	text-align: left;
+	font-size: 10pt;
 }
 
-.reviewSubject {
-	padding: 0px;
-	border: 0px;
-	font: inherit;
-	vertical-align: baseline;
+.reviewSubjectWrap {
+	position: relative;
+	height: 30px;
+	display: flex;
+	width: 890px;
+	float: left;
+	text-align: left;
+	padding: 0;
+	margin: 0 auto;
+}
+
+.reviewSubjectBtn {
+	padding: 0px 10px;
+	height: 30px;
+	border: 1px solid rgb(238, 238, 238);
+	display: flex;
+	font-size: 13px;
+	background-color: transparent;
+	color: rgb(102, 102, 102);
+	float: left;
+	direction: ltr;
+	text-align: left;
+	letter-spacing: -0.5px;
+	align-items: center;
+	-webkit-box-pack: center;
+	justify-content: center;
+}
+
+.reviewPhoto {
+	display: flex;
+	float: left;
+	width: 100%;
+	height: 100px;
 }
 
 .reviewDetail {
 	border: 1px solid red;
+	width: 890px;
 	padding: 0px;
 	border: 0px;
 	font: inherit;
-	vertical-align: baseline;
+	text-align: left;
+	display: flex;
+	position: relative;
 }
 
 .reportDiv {
@@ -611,13 +642,12 @@ li {
 	outline: 0px;
 	border: 0px;
 	display: flex;
-	width: 909px;
-	height: 14px;
-	margin: 0px;
-	padding: 0px;
-	border: 0px;
-	font: inherit;
+	width: 100%;
+	height: 20px;
+	margin: 10px 0; 
+	font : inherit;
 	vertical-align: baseline;
+	font: inherit
 }
 
 .report {
@@ -629,20 +659,7 @@ li {
 	margin-right: 25px;
 	position: relative;
 	text-align: left;
-}
-
-.reviewSubjectBtn {
-	padding: 0px 10px;
-	height: 30px;
-	border: 1px solid rgb(238, 238, 238);
-	display: flex;
-	-webkit-box-align: center;
-	align-items: center;
-	-webkit-box-pack: center;
-	justify-content: center;
-	font-size: 13px;
-	background: rgb(255, 255, 255);
-	color: rgb(102, 102, 102);
+	text-decoration: none;
 }
 
 .moreReview {
