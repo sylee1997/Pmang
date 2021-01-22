@@ -30,60 +30,20 @@ $('#writeBtn').click(function(){
 		$('#repwdDiv').css('font-size','8pt')
 		$('#repwdDiv').css('font-weight','bold');
 		
-	}else if($('#id').val() != $('#check').val()){
-		$('#idDiv').text('중복체크 하세요')
-		$('#idDiv').css('color','red')
-		$('#idDiv').css('font-size','8pt')
-		$('#idDiv').css('font-weight','bold');
-	
 	}else{
 		$('form[name=writeForm]').submit();
 	}
 });
 
-//중복 아이디 체크
-$('#id').focusout(function(){
-	if($('#id').val()==''){
-		$('#idDiv').text('먼저 아이디를 입력하세요')
-		$('#idDiv').css('color','magenta')
-		$('#idDiv').css('font-size','8pt')
-		$('#idDiv').css('font-weight','bold');
-	
-	}else{
-		$.ajax({
-			type: 'post',
-			url: '/spring/member/checkId',
-			data: 'id='+$('#id').val(),
-			dataType: 'text',
-			success: function(data){
-				if(data == 'exist'){
-					$('#idDiv').text('사용 불가능')
-					$('#idDiv').css('color','magenta')
-					$('#idDiv').css('font-size','8pt')
-					$('#idDiv').css('font-weight','bold');
-					
-				}else if(data == 'non_exist'){
-					$('#check').val($('#id').val());					
-					
-					$('#idDiv').text('사용 가능')
-					$('#idDiv').css('color','blue')
-					$('#idDiv').css('font-size','8pt')
-					$('#idDiv').css('font-weight','bold');
-				}
-			}
-		});
-	}
-});
-
 //우편번호
 $('#checkPostBtn').click(function(){
-	window.open("/spring/member/checkPost", "zipcode", "width=700 height=500 scrollbars=yes");
+	window.open("/member/checkPost", "zipcode", "width=700 height=500 scrollbars=yes");
 });
 
 $('#checkPostSearchBtn').click(function(){
 	$.ajax({
 		type: 'post',
-		url: '/spring/member/checkPostSearch',
+		url: '/member/checkPostSearch',
 		data: $('#checkPostForm').serialize(),
 		dataType: 'json',
 		success: function(data){
@@ -115,10 +75,7 @@ $('#checkPostSearchBtn').click(function(){
 				).appendTo($('#checkPostTable'));
 			});//each
 			
-			$('a').click(function(){
-				//alert($(this).prop('tagName'));
-				//alert($(this).parent().prev().text());
-				
+			$('a').click(function(){				
 				$('#postcode', opener.document).val($(this).parent().prev().text());
 				$('#address', opener.document).val($(this).text());
 				$('#detailAddress', opener.document).focus();
