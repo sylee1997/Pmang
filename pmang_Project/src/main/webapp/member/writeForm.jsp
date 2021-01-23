@@ -6,7 +6,7 @@
 
 <link rel="stylesheet" href="/pmang/css/memWrite.css">
 
-<!-- 모달 사용할수있도록 끌고오기 -->
+<!-- 부트스트랩을 사용할 수 있도록 가져오기 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -91,18 +91,17 @@
 						<td style="vertical-align: middle;">이메일</td>
 						<td>
 							<div class="form-inline" align="left">
-								<input type="text" class="form-control input-sm" name="email1"
-									style="width: 120px;"> @ 
-								<input type="email" class="form-control input-sm" name="email2" list="email2"
-									style="width: 140px;" placeholder="직접입력">
-								<datalist id="email2">
-									<option value="gmail.com">
-									<option value="naver.com">
-									<option value="hanmail.net">
-								</datalist>&emsp;
+								<input type="text" class="form-control input-sm" name="email1" id="email1"> 
+								@ 
+								<input type="email" class="form-control input-sm" name="email2" id="email2">
+								<select class="form-control input-sm" name="selection">
+									<option value="1">직접 입력</option>
+									<option value="gmail.com">gmail.com</option>
+									<option value="naver.com">naver.com</option>
+									<option value="hanmail.net">hanmail.net</option>
+								</select>
 								
-								<button class="btn btn-primary" id="autoBtn" type="button">인증</button>
-								<!-- 버튼으로 인증을 진행할 경우 위 코드 주석을 제거해주세요 -->
+								<button class="btn btn-primary" id="authBtn" type="button">인증</button>
 							</div>
 						</td>
 					</tr>
@@ -111,13 +110,15 @@
 						<td style="vertical-align: middle;">핸드폰</td>
 						<td>
 							<div class="form-inline" align="left">
-								<select name="tel1" class="form-control" style="width: 80px;">
+								<select class="form-control" name="tel1" id="tel1">
 									<option value="010">010
 									<option value="011">011
 									<option value="019">019
-								</select> - 
-								<input type="text" class="form-control" name="tel2" style="width: 80px;"> - 
-								<input type="text" class="form-control" name="tel3" style="width: 80px;">
+								</select>
+								 - 
+								<input type="text" class="form-control" name="tel2" id="tel2">
+								 - 
+								<input type="text" class="form-control" name="tel3" id="tel3">
 							</div>
 						</td> 
 					</tr>
@@ -127,11 +128,11 @@
 						<td>
 							<div class="form-group">
 								<div class="form-inline" align="left">
-									<input type="text" class="form-control" id="postcode" name="zipcode" style="width: 80px; margin: 2px 0px;" readonly>
-									<button class="btn btn-primary" type="button" id="checkPostBtn" style="text-align: center; width: 110px;">우편번호검색</button>
+									<input type="text" class="form-control" id="postcode" name="zipcode" readonly>
+									<button class="btn btn-primary" type="button" id="checkPostBtn">우편번호검색</button>
 								</div>
-								<input type="text" class="form-control" id="address" name="addr1" maxlength="50" style="margin: 2px 0px;" placeholder="주소" readonly> 
-								<input type="text" class="form-control" id="detailAddress" name="addr2" maxlength="50" style="margin: 2px 0px;" placeholder="상세주소">
+								<input type="text" class="form-control" id="address" name="addr1" maxlength="50" placeholder="주소" readonly> 
+								<input type="text" class="form-control" id="detailAddress" name="addr2" maxlength="50" placeholder="상세주소">
 							</div>
 						</td>
 					</tr>

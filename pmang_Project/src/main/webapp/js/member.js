@@ -1,8 +1,21 @@
 //회원가입
-$('#writeBtn').click(function(){
-	// 아이디와 패스워드가 적합한지 검사할 정규식
-	var re = /^[a-zA-Z0-9]{4,12}$/ 
-	var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+
+$(document).ready(function(){			//이메일 주소 선택 이벤트
+	$('select[name=selection]').change(function() {
+		if($('#selection').val()=="1"){
+			$('#email2').val("");
+		} else {
+			$('#email2').val($(this).val());
+			$("#email2").attr("readonly", true);
+		}
+	});
+});
+
+$('#writeBtn').click(function(){			//유효성 검사
+	//각 항목이 적합한 양식인지 검사할 정규식
+	var userIdCheck = /^[a-zA-Z0-9]{6,16}$/;
+	var pwdCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,16}$/;
+	var nameCheck = /^[가-힣]{2,6}$/;
 	
 	$('#userIdDiv').empty();
 	$('#pwdDiv').empty();
@@ -10,18 +23,25 @@ $('#writeBtn').click(function(){
 	$('#userNameDiv').empty();
 
 	if($('#userId').val()==''){
-		$('#userIdDiv').text('아이디를 입력하세요')
-		$('#userIdDiv').css('color','red')
-		$('#userIdDiv').css('font-size','8pt')
-		$('#userIdDiv').css('font-weight','bold');		
-	}else if(!check(re,userId)){
-		$('#userIdDiv').empty();
-		$('#userIdDiv').text('4~12자의 영문 대소문자와 숫자로만 입력하세요')
+		$('#userIdDiv').text('필수 정보 입니다')
 		$('#userIdDiv').css('color','red')
 		$('#userIdDiv').css('font-size','8pt')
 		$('#userIdDiv').css('font-weight','bold');	
+				
+	}else if(!userIdCheck.test($('#userId').val())) {		//id 형식 유효성 검사
+		$('#userIdDiv').text('*영문, 숫자만 가능합니다(6~16자)')
+		$('#userIdDiv').css('color', 'red')
+		$('#userIdDiv').css('font-size', '8pt')
+		$('#userIdDiv').css('font-weight', 'bold');
+		
 	}else if($('input[name=pwd]').val()==''){
-		$('#pwdDiv').text('비밀번호를 입력하세요')
+		$('#pwdDiv').text('필수 정보 입니다')
+		$('#pwdDiv').css('color','red')
+		$('#pwdDiv').css('font-size','8pt')
+		$('#pwdDiv').css('font-weight','bold');
+		
+	}else if(!pwdCheck.test($('#pwd').val())){		//pwd 형식 유효성 검사
+		$('#pwdDiv').text('*영문, 숫자, 특수문자 포함(8~16자)')
 		$('#pwdDiv').css('color','red')
 		$('#pwdDiv').css('font-size','8pt')
 		$('#pwdDiv').css('font-weight','bold');
@@ -32,17 +52,24 @@ $('#writeBtn').click(function(){
 		$('#repwdDiv').css('font-size','8pt')
 		$('#repwdDiv').css('font-weight','bold');
 		
-	}else if($('input[id=userName]').val()==''){
-		$('#userNameDiv').text('이름을 입력하세요');
-		$('#userNameDiv').css('color','red');
-		$('#userNameDiv').css('font-size','8pt');
+	}else if($('#userName').val()==''){
+		$('#userNameDiv').text('필수 정보 입니다')
+		$('#userNameDiv').css('color','red')
+		$('#userNameDiv').css('font-size','8pt')
 		$('#userNameDiv').css('font-weight','bold');
 		
-	}else if($('#userId').val() != $('#check').val()){
-		$('#userIdDiv').text('중복체크 하세요')
-		$('#userIdDiv').css('color','red')
-		$('#userIdDiv').css('font-size','8pt')
-		$('#userIdDiv').css('font-weight','bold');
+	}else if(!nameCheck.test($('#userName').val())){		//이름 형식 유효성 검사
+		$('#userNameDiv').text('*한글만 가능합니다(2-6자)')
+		$('#userNameDiv').css('color','red')
+		$('#userNameDiv').css('font-size','8pt')
+		$('#userNameDiv').css('font-weight','bold');
+		
+	}else if($('#email1').val()==''||$('#email2').val()==''){
+		$('#emailDiv').text('필수 정보 입니다')
+		$('#emailDiv').css('color','red')
+		$('#emailDiv').css('font-size','8pt')
+		$('#emailDiv').css('font-weight','bold');
+		
 	}else{
 		$('form[name=writeForm]').submit();
 	}
