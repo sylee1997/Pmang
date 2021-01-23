@@ -19,6 +19,7 @@
 	margin-right: auto;
 	text-align: center;
 }
+
 </style>
 </head>
 
@@ -40,10 +41,10 @@
 						<td style="vertical-align: middle;">아이디</td>
 						<td>
 							<div class="form-group">
-								<input type="text" class="form-control" maxlength="50"
-									placeholder="아이디 입력" name="id" id="id"> <input
-									type="hidden" id="check" value="">
-								<div id="idDiv" align="left"></div>
+								<input type="text" class="form-control" maxlength="50" 
+										placeholder="아이디 입력" name="userId" id="userId"> 
+								<input type="hidden" id="check" value="">
+								<div id="userIdDiv" align="left"></div>
 							</div>
 						</td>
 					</tr>
@@ -52,8 +53,8 @@
 						<td style="vertical-align: middle;">비밀번호</td>
 						<td>
 							<div class="form-group">
-								<input type="password" class="form-control" maxlength="50"
-									placeholder="비밀번호 입력" name="pwd" id="pwd">
+								<input type="password" class="form-control" maxlength="50" 
+										placeholder="비밀번호 입력" name="pwd" id="pwd">
 								<div id="pwdDiv" align="left"></div>
 							</div>
 						</td>
@@ -66,6 +67,18 @@
 								<input type="password" class="form-control" maxlength="50"
 									placeholder="비밀번호 재입력" name="repwd" id="repwd">
 								<div id="repwdDiv" align="left"></div>
+							</div>
+						</td>
+					</tr>
+					
+					<tr>
+						<td style="vertical-align: middle;">이름</td>
+						<td>
+							<div class="form-group">
+								<input type="text" class="form-control" maxlength="50" 
+										placeholder="이름 입력" name="userName" id="userName"> 
+								<input type="hidden" id="check" value="">
+								<div id="userNameDiv" align="left"></div>
 							</div>
 						</td>
 					</tr>
@@ -133,10 +146,9 @@
 	
 					<tr>
 						<td></td>
-						<td align="left">
+						<td align="right">
 							<div class="form-group">
-								<button class="btn btn-primary" id="writeBtn" type="button">회원가입</button> &emsp;&emsp;
-								<button class="btn btn-primary" type="reset">다시 입력</button>
+								<button class="btn btn-primary" id="writeBtn" type="button">회원가입</button>
 							</div>
 						</td>
 					</tr>
@@ -146,7 +158,7 @@
 	</div>
 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script type="text/javascript" src="../js/member.js"></script>
+	<script type="text/javascript" src="/pmang/js/member.js"></script>
 	
 </body>
 

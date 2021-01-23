@@ -1,22 +1,16 @@
 //회원가입
 $('#writeBtn').click(function(){
-	$('#nameDiv').empty();
-	$('#idDiv').empty();
+	$('#userIdDiv').empty();
 	$('#pwdDiv').empty();
 	$('#repwdDiv').empty();
+	$('#userNameDiv').empty();
 	
 	//if($('#name').val()==''){
-	if($('input[id=name]').val()==''){
-		$('#nameDiv').text('이름을 입력하세요');
-		$('#nameDiv').css('color','red');
-		$('#nameDiv').css('font-size','8pt');
-		$('#nameDiv').css('font-weight','bold');
-		
-	}else if($('#id').val()==''){
-		$('#idDiv').text('아이디를 입력하세요')
-		$('#idDiv').css('color','red')
-		$('#idDiv').css('font-size','8pt')
-		$('#idDiv').css('font-weight','bold');
+	if($('#userId').val()==''){
+		$('#userIdDiv').text('아이디를 입력하세요')
+		$('#userIdDiv').css('color','red')
+		$('#userIdDiv').css('font-size','8pt')
+		$('#userIdDiv').css('font-weight','bold');
 		
 	}else if($('input[name=pwd]').val()==''){
 		$('#pwdDiv').text('비밀번호를 입력하세요')
@@ -30,11 +24,17 @@ $('#writeBtn').click(function(){
 		$('#repwdDiv').css('font-size','8pt')
 		$('#repwdDiv').css('font-weight','bold');
 		
+	}else if($('input[id=userName]').val()==''){
+		$('#userNameDiv').text('이름을 입력하세요');
+		$('#userNameDiv').css('color','red');
+		$('#userNameDiv').css('font-size','8pt');
+		$('#userNameDiv').css('font-weight','bold');
+		
 	}else if($('#id').val() != $('#check').val()){
-	$('#idDiv').text('중복체크 하세요')
-	$('#idDiv').css('color','red')
-	$('#idDiv').css('font-size','8pt')
-	$('#idDiv').css('font-weight','bold');
+		$('#idDiv').text('중복체크 하세요')
+		$('#idDiv').css('color','red')
+		$('#idDiv').css('font-size','8pt')
+		$('#idDiv').css('font-weight','bold');
 	}else{
 		$('form[name=writeForm]').submit();
 	}
@@ -42,7 +42,7 @@ $('#writeBtn').click(function(){
 
 //우편번호
 $('#checkPostBtn').click(function(){
-	window.open("/member/checkPost", "zipcode", "width=700 height=500 scrollbars=yes");
+	window.open("/pmang/member/checkPost", "zipcode", "width=700 height=500 scrollbars=yes");
 });
 
 $('#checkPostSearchBtn').click(function(){
