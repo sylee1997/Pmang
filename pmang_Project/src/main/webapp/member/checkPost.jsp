@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link rel="stylesheet" href="/pmang/css/member.css">
+<link rel="stylesheet" href="/pmang/css/memWrite.css">
 
 <!-- 모달 사용할수있도록 끌고오기 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">

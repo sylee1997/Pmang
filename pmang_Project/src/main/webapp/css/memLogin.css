@@ -83,17 +83,3 @@ button div p{
 	cursor: pointer;
 	color: black;
 }
-
-/* 회원가입창 */
-#wrap {
-	width: 530px;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-}
-
-/* 우편번호 찾기 */
-#addressA:link {color: black; text-decoration: none;}
-#addressA:visited {color: black; text-decoration: none;}
-#addressA:hover {color: blue; text-decoration: underline;}
-#addressA:active {color: black; text-decoration: none;}

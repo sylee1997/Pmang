@@ -1,5 +1,9 @@
 //회원가입
 $('#writeBtn').click(function(){
+	// 아이디와 패스워드가 적합한지 검사할 정규식
+	var re = /^[a-zA-Z0-9]{4,12}$/ 
+	var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	
 	$('#userIdDiv').empty();
 	$('#pwdDiv').empty();
 	$('#repwdDiv').empty();
@@ -9,8 +13,13 @@ $('#writeBtn').click(function(){
 		$('#userIdDiv').text('아이디를 입력하세요')
 		$('#userIdDiv').css('color','red')
 		$('#userIdDiv').css('font-size','8pt')
-		$('#userIdDiv').css('font-weight','bold');
-		
+		$('#userIdDiv').css('font-weight','bold');		
+	}else if(!check(re,userId)){
+		$('#userIdDiv').empty();
+		$('#userIdDiv').text('4~12자의 영문 대소문자와 숫자로만 입력하세요')
+		$('#userIdDiv').css('color','red')
+		$('#userIdDiv').css('font-size','8pt')
+		$('#userIdDiv').css('font-weight','bold');	
 	}else if($('input[name=pwd]').val()==''){
 		$('#pwdDiv').text('비밀번호를 입력하세요')
 		$('#pwdDiv').css('color','red')

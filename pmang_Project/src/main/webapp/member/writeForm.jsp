@@ -4,7 +4,7 @@
 <html>
 <head>
 
-<link rel="stylesheet" href="/pmang/css/member.css">
+<link rel="stylesheet" href="/pmang/css/memWrite.css">
 
 <!-- 모달 사용할수있도록 끌고오기 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -100,6 +100,7 @@
 									<option value="naver.com">
 									<option value="hanmail.net">
 								</datalist>&emsp;
+								
 								<button class="btn btn-primary" id="autoBtn" type="button">인증</button>
 								<!-- 버튼으로 인증을 진행할 경우 위 코드 주석을 제거해주세요 -->
 							</div>

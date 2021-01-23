@@ -4,7 +4,7 @@
 <html>
 <head>
 
-<link rel="stylesheet" href="/pmang/css/member.css">
+<link rel="stylesheet" href="/pmang/css/memLogin.css">
 
 <!-- 모달 사용할수있도록 끌고오기 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -103,16 +103,9 @@
 					</div>
 					<!-- 로그인폼 end -->
 				</div>
-
-
-
 			</div>
 		</div>
 	</div>
-
-
-
-
 </body>
 
 </html>
