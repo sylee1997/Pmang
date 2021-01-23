@@ -47,41 +47,278 @@
             </nav>
         </div>
       
-         <div id="header_category">
-            <nav id="categoryNav">
-            <ul>
-               <li id="categlryIcon"><a href="#"><img alt="" src="../image/category.png"> 카테고리</a>
-               <ul class="category1Menu">
-                  <li><a href="#">여성의류</a>
-                     <ul class="category2Menu">
-                        <li><a href="#">원피스</a></li>
-                        <li><a href="#">블라우스</a></li>
-                        <!-- 추가해야함... -->
-                     </ul></li>
-                  <li><a href="#">패션잡화</a>
-                     <ul class="category2Menu">
-                        <li><a href="#">...</a></li>
-                        <li><a href="#">...</a></li>
-                     </ul></li>
-                  <li><a href="#">남성의류</a>
-                     <ul class="category2Menu">
-                        <li><a href="#">...</a></li>
-                        <li><a href="#">...</a></li>
-                     </ul></li>
-                  <li><a href="#">기타</a>
-                     <ul class="category2Menu">
-                        <li><a href="#">...</a></li>
-                        <li><a href="#">...</a></li>
-                     </ul></li>
-                  <li><a href="#">등등..</a>
-                     <ul class="category2Menu">
-                        <li><a href="#">...</a></li>
-                        <li><a href="#">...</a></li>
-                     </ul></li>
-               </ul></li>
-            </ul>
-      </nav>
-      </div><!-- header category -->
+          <!-- 카테고리 -->
+	<hr>
+
+	<div id="categoryDiv">
+		<ul class="category">
+			<li><a>카테고리</a><!-- <li>&nbsp</li> ← 요거 카테고리 공백채우는용 지우지마세요! -->
+				<ul class="category1Menu">
+					<li><a href="#">패션</a>
+						<ul class="category2Menu">
+							<li><a href="#">여성의류</a>
+								<ul class="category3Menu">
+									<li><a href="#">아우터</a></li>
+									<li><a href="#">티셔츠</a></li>
+									<li><a href="#">니트</a></li>
+									<li><a href="#">셔츠 / 블라우스</a></li>
+									<li><a href="#">맨투맨 / 후드집업</a></li>
+									<li><a href="#">원피스 / 세트</a></li>
+									<li><a href="#">바지</a></li>
+									<li><a href="#">스커트</a></li>
+								</ul></li>
+							<li><a href="#">남성의류</a>
+								<ul class="category3Menu">
+									<li><a href="#">아우터</a></li>
+									<li><a href="#">티셔츠</a></li>
+									<li><a href="#">니트</a></li>
+									<li><a href="#">셔츠</a></li>
+									<li><a href="#">맨투맨 / 후드집업</a></li>
+									<li><a href="#">바지</a></li>
+									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+							<li><a href="#">패션잡화</a>
+								<ul class="category3Menu">
+									<li><a href="#">가방</a></li>
+									<li><a href="#">신발</a></li>
+									<li><a href="#">액세서리</a></li>
+									<li><a href="#">시계</a></li>
+									<li><a href="#">모자</a></li>
+									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+								<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+						</ul></li>
+					<li><a href="#">디지털 / 가전</a>
+						<ul class="category2Menu">
+							<li><a href="#">모바일</a>
+								<ul class="category3Menu">
+									<li><a href="#">스마트폰</a></li>
+									<li><a href="#">태블릿</a></li>
+									<li><a href="#">액세서리 / 주변기기</a></li>
+									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+							<li><a href="#">가전제품</a>
+								<ul class="category3Menu">
+									<li><a href="#">소형가전</a></li>
+									<li><a href="#">대형가전</a></li>
+									<li><a href="#">미용가전</a></li>
+									<li><a href="#">사무용품</a></li>
+									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+							<li><a href="#">음방 / 영상기기</a>
+								<ul class="category3Menu">
+									<li><a href="#">음향기기</a></li>
+									<li><a href="#">비디오 / 프로젝터</a></li>
+									<li><a href="#">CD / DVD / 음반</a></li>
+									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+							<li><a href="#">컴퓨터 / 주변기기</a>
+								<ul class="category3Menu">
+									<li><a href="#">데스크탑</a></li>
+									<li><a href="#">키보드 / 마우스</a></li>
+									<li><a href="#">모니터</a></li>
+									<li><a href="#">컴퓨터 부품</a></li>
+									<li><a href="#">노트북 / 넷북</a></li>
+									<li><a href="#">기타 액세서리</a></li>
+									<li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+							<li><a href="#">카메라</a>
+								<ul class="category3Menu">
+									<li><a href="#">DSLR / 미러리스</a></li>
+									<li><a href="#">필름카메라</a></li>
+									<li><a href="#">디지털 카메라</a></li>
+									<li><a href="#">기타 액세서리</a></li>
+									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+							<li><a href="#">게임</a>
+								<ul class="category3Menu">
+									<li><a href="#">PC게임</a></li>
+									<li><a href="#">콘솔게임</a></li>
+									<li><a href="#">게임 타이틀</a></li>
+									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+								<li>&nbsp</li><li>&nbsp</li>
+						</ul></li>
+					<li><a href="#">도서 / 티켓</a>
+						<ul class="category2Menu">
+							<li><a href="#">도서</a>
+								<ul class="category3Menu">
+									<li><a href="#">학습 / 사전 / 참고서</a></li>
+									<li><a href="#">만화 / 아동</a></li>
+									<li><a href="#">인문 / 교양 / 소설</a></li>
+									<li><a href="#">경영 / 경제 / 사회</a></li>
+									<li><a href="#">과학 / 컴퓨터 / 인터넷</a></li>
+									<li><a href="#">예술 / 디자인</a></li>
+									<li><a href="#">기타 도서</a></li>
+									<li>&nbsp</li>
+								</ul></li>
+							<li><a href="#">티켓</a>
+								<ul class="category3Menu">
+									<li><a href="#">기프티콘 / 상품권 / 쿠폰</a></li>
+									<li><a href="#">예매권 / 항공권</a></li>
+									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+							<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+						</ul></li>
+					<li><a href="#">리빙용품</a>
+						<ul class="category2Menu">
+							<li><a href="#">생활용품</a>
+								<ul class="category3Menu">
+									<li><a href="#">문구 / 학습</a></li>
+									<li><a href="#">침구</a></li>
+									<li><a href="#">욕실</a></li>
+									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+							<li><a href="#">가구</a>
+								<ul class="category3Menu">
+									<li><a href="#">거실가구</a></li>
+									<li><a href="#">생활가구</a></li>
+									<li><a href="#">사무용가구</a></li>
+									<li><a href="#">인테리어 소품</a></li>
+									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+							<li><a href="#">주방용품</a>
+								<ul class="category3Menu">
+									<li><a href="#">식기세트</a></li>
+									<li><a href="#">냄비 / 프라이팬</a></li>
+									<li><a href="#">조리도구</a></li>
+									<li><a href="#">수저 / 커트러리</a></li>
+									<li><a href="#">컵 / 잔 / 텀블러</a></li>
+									<li><a href="#">주방 잡화</a></li>
+									<li><a href="#">밀폐용기</a></li>
+									<li><a href="#">커피용품</a></li>
+
+								</ul></li>
+							<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+						</ul></li>
+					<li><a href="#">스포츠 / 레저</a>
+						<ul class="category2Menu">
+							<li><a href="#">실내</a>
+								<ul class="category3Menu">
+									<li><a href="#">헬스</a></li>
+									<li><a href="#">요가</a></li>
+									<li><a href="#">골프</a></li>
+									<li><a href="#">수영</a></li>
+									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+							<li><a href="#">실외</a>
+								<ul class="category3Menu">
+									<li><a href="#">축구</a></li>
+									<li><a href="#">야구</a></li>
+									<li><a href="#">농구</a></li>
+									<li><a href="#">자전거 / 킥보드</a></li>
+									<li><a href="#">등산</a></li>
+									<li><a href="#">낚시 / 캠핑</a></li>
+									<li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+							<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+						</ul></li>
+					<li><a href="#">뷰티 / 미용</a>
+						<ul class="category2Menu">
+							<li><a href="#">스킨케어</a>
+								<ul class="category3Menu">
+									<li><a href="#">클렌징 / 스크럽</a></li>
+									<li><a href="#">스킨 / 토너 / 미스트</a></li>
+									<li><a href="#">로션 / 에멀전</a></li>
+									<li><a href="#">에센스 / 크림</a></li>
+									<li><a href="#">팩 / 마스크</a></li>
+									<li><a href="#">썬케어</a></li>
+									<li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+							<li><a href="#">메이크업</a>
+								<ul class="category3Menu">
+									<li><a href="#">색조메이크업</a></li>
+									<li><a href="#">베이스메이크업</a></li>
+									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+							<li><a href="#">헤어 / 바디</a>
+								<ul class="category3Menu">
+									<li><a href="#">샴푸 / 린스 / 트리트먼트</a></li>
+									<li><a href="#">헤어스타일링</a></li>
+									<li><a href="#">바디클렌저 / 로션</a></li>
+									<li><a href="#">헤어 / 핸드 / 풋케어</a></li>
+									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+							<li><a href="#">향수 / 아로마</a>
+								<ul class="category3Menu">
+									<li><a href="#">여성향수</a></li>
+									<li><a href="#">남성향수</a></li>
+									<li><a href="#">공용향수</a></li>
+									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+							<li><a href="#">네일아트 케어</a>
+								<ul class="category3Menu">
+									<li><a href="#">네일아트 / 스티커</a></li>
+									<li><a href="#">매니큐어 / 패디큐어</a></li>
+									<li><a href="#">네일케어도구</a></li>
+									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+							<li><a href="#">뷰티소품</a>
+								<ul class="category3Menu">
+									<li><a href="#">브러시 / 퍼프</a></li>
+									<li><a href="#">파우치 / 정리함</a></li>
+									<li><a href="#">거울</a></li>
+									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+							<li>&nbsp</li><li>&nbsp</li>
+						</ul></li>
+					<li><a href="#">유아 / 출산</a>
+						<ul class="category2Menu">
+							<li><a href="#">영아의류 (-2세)</a>
+								<ul class="category3Menu">
+									<li><a href="#">상의</a></li>
+									<li><a href="#">하의</a></li>
+									<li><a href="#">기타</a></li>
+									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+							<li><a href="#">여아의류 (3-6세)</a>
+								<ul class="category3Menu">
+									<li><a href="#">원피스 / 세트</a></li>
+									<li><a href="#">아우터</a></li>
+									<li><a href="#">상하의</a></li>
+									<li><a href="#">티셔츠</a></li>
+									<li><a href="#">바지</a></li>
+									<li><a href="#">치마</a></li>
+									<li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+							<li><a href="#">남아의류 (3-6세)</a>
+								<ul class="category3Menu">
+									<li><a href="#">아우터</a></li>
+									<li><a href="#">상하의</a></li>
+									<li><a href="#">티셔츠</a></li>
+									<li><a href="#">바지</a></li>
+									<li><a href="#">남방</a></li>
+									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+							<li><a href="#">육아잡화</a>
+								<ul class="category3Menu">
+									<li><a href="#">신발</a></li>
+									<li><a href="#">모자</a></li>
+									<li><a href="#">가방</a></li>
+									<li><a href="#">양말</a></li>
+									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+							<li><a href="#">동화책 / 완구 / 인형</a>
+								<ul class="category3Menu">
+									<li><a href="#">인형</a></li>
+									<li><a href="#">교육 / 완구</a></li>
+									<li><a href="#">장난감</a></li>
+									<li><a href="#">물놀이도구</a></li>
+									<li><a href="#">놀이터도구</a></li>
+									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+								</ul></li>
+								<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+						</ul></li>
+					<li><a href="#">기타</a>
+						<ul class="category2Menu">
+							<li><a href="#">피망나눔</a></li>
+							<li><a href="#">차량 , 오토바이</a></li>
+							<li><a href="#">기타</a></li>
+							<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
+						</ul></li>
+				</ul></li>
+		</ul>
+	</div><!-- header category -->
       
         <div id="aside" style="border:3px solid yellow">
          <div class="asideDiv">
@@ -492,7 +729,6 @@
          </div>
       </div>
    </div>
-
 
 <script>
 
