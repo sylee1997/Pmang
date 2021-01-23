@@ -7,15 +7,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../css/member.css">
 
-<!-- 부트스트랩 사용할 수 있도록 끌어오기 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/pmang/css/member.css">
+
+<!-- 모달 사용할수있도록 끌고오기 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 <form id="checkPostForm">
