@@ -22,7 +22,7 @@
 			</div>
 		</div><!-- selectWrap -->
 	</div><!-- tab1bar -->
-		<div class="mystoreBar" style="border:1px solid black">
+		<div class="mystoreBar">
 			<div id="selectCategory">
 			전체<span>0</span>
 			</div><!-- selectCategory -->
@@ -36,7 +36,7 @@
 			</div><!-- sortItem -->
 		
 		</div><!-- "mystoreBar" -->
-		<div id="storeSelection" style="border: 1px solid green">
+		<div id="storeSelection">
             <div class="storeSelection1">
                <div class="storeSelection2">
                   <div class="storeSelection3">

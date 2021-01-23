@@ -7,7 +7,7 @@
 		</div><!-- tabName -->
 		
 	</div><!-- tab1bar -->
-	<div class="mystoreBar" style="border:1px solid black">
+	<div class="mystoreBar">
 		<div id="selectDelete">
 			<div class="choice">
 				<input type="checkbox" id="choice_chk"/>
@@ -26,13 +26,13 @@
 	</div><!-- mystoreBar -->
 	
 	<div class="mystoreFav">
-		<div class="mystoreFavList" style="border:1px solid orange;">
+		<div class="mystoreFavList">
 			<a class="favList" href="#">
 			<div class="favChoice">
-				<input type="checkbox" id="choice_chk"/>
+				<input type="checkbox" id="chk_li"/>
 				<label for="chk_li"><span></span></label>
 			</div><!--favChoice -->
-				<div class="favImg" style="border: 1px solid red;">
+				<div class="favImg">
 					<img src="" alt="찜한 상품사진">
 				</div><!-- "favImg" -->
 				<div class="favInfo" >
@@ -54,13 +54,13 @@
 			</a><!-- favList -->
 		</div><!-- mystoreFavList -->
 		
-		<div class="mystoreFavList" style="border:1px solid orange;">
+		<div class="mystoreFavList">
 			<a class="favList" href="#">
 			<div class="favChoice">
-				<input type="checkbox" id="choice_chk"/>
+				<input type="checkbox" id="chk_li"/>
 				<label for="chk_li"><span></span></label>
 			</div><!--favChoice -->
-				<div class="favImg" style="border: 1px solid red;">
+				<div class="favImg">
 					<img src="" alt="찜한 상품사진">
 				</div><!-- "favImg" -->
 				<div class="favInfo" >
@@ -82,13 +82,13 @@
 			</a><!-- favList -->
 		</div><!-- mystoreFavList -->
 		
-		<div class="mystoreFavList" style="border:1px solid orange;">
+		<div class="mystoreFavList">
 			<a class="favList" href="#">
 			<div class="favChoice">
-				<input type="checkbox" id="choice_chk"/>
+				<input type="checkbox" id="chk_li"/>
 				<label for="chk_li"><span></span></label>
 			</div><!--favChoice -->
-				<div class="favImg" style="border: 1px solid red;">
+				<div class="favImg">
 					<img src="" alt="찜한 상품사진">
 				</div><!-- "favImg" -->
 				<div class="favInfo" >
@@ -110,13 +110,13 @@
 			</a><!-- favList -->
 		</div><!-- mystoreFavList -->
 		
-		<div class="mystoreFavList" style="border:1px solid orange;">
+		<div class="mystoreFavList">
 			<a class="favList" href="#">
 			<div class="favChoice">
-				<input type="checkbox" id="choice_chk"/>
+				<input type="checkbox" id="chk_li"/>
 				<label for="chk_li"><span></span></label>
 			</div><!--favChoice -->
-				<div class="favImg" style="border: 1px solid red;">
+				<div class="favImg">
 					<img src="" alt="찜한 상품사진">
 				</div><!-- "favImg" -->
 				<div class="favInfo" >
@@ -138,13 +138,13 @@
 			</a><!-- favList -->
 		</div><!-- mystoreFavList -->
 		
-		<div class="mystoreFavList" style="border:1px solid orange;">
+		<div class="mystoreFavList">
 			<a class="favList" href="#">
 			<div class="favChoice">
-				<input type="checkbox" id="choice_chk"/>
+				<input type="checkbox" id="chk_li"/>
 				<label for="chk_li"><span></span></label>
 			</div><!--favChoice -->
-				<div class="favImg" style="border: 1px solid red;">
+				<div class="favImg">
 					<img src="" alt="찜한 상품사진">
 				</div><!-- "favImg" -->
 				<div class="favInfo" >

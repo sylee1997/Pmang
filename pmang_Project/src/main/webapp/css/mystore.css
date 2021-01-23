@@ -10,7 +10,7 @@
 .mystoreProfile {
 	display: inline-block;
 	float: left;
-	background-color: orange;
+	background: rgb(238, 238, 238);
 	width: 310px;
 	height: 310px;
 }
@@ -50,9 +50,9 @@
 .mystoreInfo {
 	flex: 1 0 0%;
 	padding: 0px 30px;
-	/*     border-top: 1px solid rgb(238, 238, 238);
-    border-right: 1px solid rgb(238, 238, 238);
-    border-bottom: 1px solid rgb(238, 238, 238); */
+	border-top: 1px solid rgb(238, 238, 238);
+	border-right: 1px solid rgb(238, 238, 238);
+	border-bottom: 1px solid rgb(238, 238, 238);
 	display: flex;
 	height: 310px;
 	flex-direction: column;
@@ -63,6 +63,7 @@
 	display: flex;
 	-webkit-box-align: center;
 	align-items: center;
+	border-bottom: 1px solid rgb(238, 238, 238);
 }
 
 #mystoreSpec {
@@ -70,8 +71,8 @@
 	display: flex;
 	-webkit-box-align: center;
 	align-items: center;
-	border-top: 1px solid rgb(250, 250, 250);
-	border-bottom: 1px solid rgb(250, 250, 250);
+
+border-bottom: 1px solid rgb(238, 238, 238);
 	margin-bottom: 20px;
 	flex-shrink: 0;
 }
@@ -103,16 +104,18 @@
 
 #mystoreIntroduce {
 	-webkit-box-flex: 1;
-	flex-grow: 1;
-	width: 100%;
-	overflow-y: auto;
-	line-height: 1.57;
-	white-space: pre-wrap;
+    flex-grow: 1;
+    width: 100%;
+    overflow-y: auto;
+    line-height: 1.57;
+    white-space: pre-wrap;
+    text-align:left;
 }
 
 #introEdit {
 	float: left;
 	display: flex;
+	margin-bottom: 10px;
 }
 
 #mystoreIntroduce>textarea {
@@ -141,6 +144,7 @@
 span {
 	margin-left: 10px;
 	color: red;
+	text-weight:bold;
 }
 
 .tab {
@@ -152,7 +156,6 @@ span {
 
 #tabContent {
 	display: flex;
-	border: 1px solid yellow;
 	padding: 6px 12px;
 }
 
@@ -164,6 +167,7 @@ span {
 	padding: 14px 16px;
 	font-size: 17px;
 	transition: 0.3s;
+	
 }
 
 a:visited {
@@ -195,7 +199,7 @@ li {
 .tab1bar {
 	width: 100%;
 	font-size: 18px;
-	padding: 50px 0px 20px;
+	padding: 30px 0px 20px;
 	border-bottom: 1px solid rgb(238, 238, 238);
 	display: flex;
 	-webkit-box-pack: justify;
@@ -263,6 +267,7 @@ li {
 	font-size: 12px;
 	color: rgb(77, 77, 77);
 	background: rgb(255, 255, 255);
+	overflow: hidden;
 }
 
 .select_box .box .select:after {
@@ -431,6 +436,7 @@ li {
 	border: 1px solid rgb(238, 238, 238);
 	position: relative;
 	padding: 0;
+	text-decoration: none;
 }
 
 .favChoice {
@@ -454,6 +460,7 @@ li {
 	width: 139px;
 	flex-shrink: 0;
 	height: 100%;
+	border: 1px solid rgb(238, 238, 238);
 }
 
 .favInfo {
@@ -464,16 +471,16 @@ li {
 
 .favInfoName {
 	margin-top: 18px;
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 	height: 22px;
-	font-size: 15pt;
+	font-size: 13pt;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
 	text-align: left;
 	font-weight: bold;
-	height: 22px;
 	padding-left: 20px;
+	text-decoration: none;
 }
 
 .favInfoPrice {
@@ -482,6 +489,7 @@ li {
 	font-size: 13pt;
 	font-weight: bold;
 	padding-left: 20px;
+	text-decoration: none;
 }
 
 .favInfoTime {
@@ -492,6 +500,7 @@ li {
 	color: rgb(136, 136, 136);
 	font-size: 12px;
 	padding-left: 20px;
+	text-decoration: none;
 }
 
 .favInfoLoc {
@@ -505,6 +514,7 @@ li {
 	font-size: 12px;
 	color: rgb(102, 102, 102);
 	box-sizing: border-box;
+	text-decoration: none;
 }
 
 /* tab3 - 상점 후기*/
@@ -626,7 +636,7 @@ li {
 .reviewDetail {
 	border: 1px solid red;
 	width: 890px;
-	padding: 0px;
+	padding: 10px;
 	border: 0px;
 	font: inherit;
 	text-align: left;
@@ -644,8 +654,8 @@ li {
 	display: flex;
 	width: 100%;
 	height: 20px;
-	margin: 10px 0; 
-	font : inherit;
+	margin: 10px 0;
+	font: inherit;
 	vertical-align: baseline;
 	font: inherit
 }
