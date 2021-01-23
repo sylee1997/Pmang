@@ -4,8 +4,7 @@ $('#writeBtn').click(function(){
 	$('#pwdDiv').empty();
 	$('#repwdDiv').empty();
 	$('#userNameDiv').empty();
-	
-	//if($('#name').val()==''){
+
 	if($('#userId').val()==''){
 		$('#userIdDiv').text('아이디를 입력하세요')
 		$('#userIdDiv').css('color','red')
@@ -30,11 +29,11 @@ $('#writeBtn').click(function(){
 		$('#userNameDiv').css('font-size','8pt');
 		$('#userNameDiv').css('font-weight','bold');
 		
-	}else if($('#id').val() != $('#check').val()){
-		$('#idDiv').text('중복체크 하세요')
-		$('#idDiv').css('color','red')
-		$('#idDiv').css('font-size','8pt')
-		$('#idDiv').css('font-weight','bold');
+	}else if($('#userId').val() != $('#check').val()){
+		$('#userIdDiv').text('중복체크 하세요')
+		$('#userIdDiv').css('color','red')
+		$('#userIdDiv').css('font-size','8pt')
+		$('#userIdDiv').css('font-weight','bold');
 	}else{
 		$('form[name=writeForm]').submit();
 	}
