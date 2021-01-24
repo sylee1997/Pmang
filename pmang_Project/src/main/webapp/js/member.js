@@ -1,27 +1,36 @@
 //회원가입
 
-$(document).ready(function(){			//이메일 주소 선택 이벤트
-	$('select[name=selection]').change(function() {
-		if($('#selection').val()=="1"){
-			$('#email2').val("");
-		} else {
-			$('#email2').val($(this).val());
-			$("#email2").attr("readonly", true);
-		}
-	});
-});
+function selectEmail(element){			//이메일 주소 선택 이벤트
+	var $element = $(element);
+	var $email2 = $('input[name=email2]');
+	
+	//'1'인 경우 직접 입력
+	if($element.val()=="1"){
+		$email2.attr('readonly', false);
+		$email2.val('');
+	} else {
+		$("#email2").attr("readonly", true);
+		$('#email2').val($element.val());
+	}
+};
 
 $('#writeBtn').click(function(){			//유효성 검사
 	//각 항목이 적합한 양식인지 검사할 정규식
 	var userIdCheck = /^[a-zA-Z0-9]{6,16}$/;
 	var pwdCheck = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,16}$/;
 	var nameCheck = /^[가-힣]{2,6}$/;
+	var email1Check = /^[A-Za-z0-9_\.\-]/;
+	var email2Check = /^[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+	var tel2Check = /^[0-9]{3,4}$/ ;
+	var tel3Check = /^[0-9]{4}$/ ;
 	
 	$('#userIdDiv').empty();
 	$('#pwdDiv').empty();
 	$('#repwdDiv').empty();
 	$('#userNameDiv').empty();
-
+	$('#emailDiv').empty();
+	$('#telDiv').empty();
+	
 	if($('#userId').val()==''){
 		$('#userIdDiv').text('필수 정보 입니다')
 		$('#userIdDiv').css('color','red')
@@ -70,9 +79,30 @@ $('#writeBtn').click(function(){			//유효성 검사
 		$('#emailDiv').css('font-size','8pt')
 		$('#emailDiv').css('font-weight','bold');
 		
+	}else if(!email1Check.test($('#email1').val())||!email2Check.test($('#email2').val())){		//이메일 형식 유효성 검사		
+		$('#emailDiv').text('유효하지 않은 이메일 형식입니다')
+		$('#emailDiv').css('color','red')
+		$('#emailDiv').css('font-size','8pt')
+		$('#emailDiv').css('font-weight','bold');
+		
+	}else if($('#tel2').val()!=''||$('#tel3').val()!=''){		//핸드폰 번호 형식 유효성 검사(입력시에만)
+		if(!tel2Check.test($('#tel2').val())||!tel3Check.test($('#tel3').val())){
+			$('#telDiv').text('유효하지 않은 형식입니다')
+			$('#telDiv').css('color','red')
+			$('#telDiv').css('font-size','8pt')
+			$('#telDiv').css('font-weight','bold');
+		}
+		
+	}else if($('#userId').val() != $('#check').val()){		//아이디 중복 체크
+		$('#userIdDiv').text('중복체크 하세요')
+		$('#userIdDiv').css('color','red')
+		$('#userIdDiv').css('font-size','8pt')
+		$('#userIdDiv').css('font-weight','bold');
+		
 	}else{
 		$('form[name=writeForm]').submit();
 	}
+	
 });
 
 //우편번호

@@ -94,14 +94,14 @@
 								<input type="text" class="form-control input-sm" name="email1" id="email1"> 
 								@ 
 								<input type="email" class="form-control input-sm" name="email2" id="email2">
-								<select class="form-control input-sm" name="selection">
+								<select class="form-control input-sm" name="selection" onChange="selectEmail(this)">
 									<option value="1">직접 입력</option>
 									<option value="gmail.com">gmail.com</option>
 									<option value="naver.com">naver.com</option>
 									<option value="hanmail.net">hanmail.net</option>
 								</select>
-								
 								<button class="btn btn-primary" id="authBtn" type="button">인증</button>
+								<div id="emailDiv" align="left"></div>
 							</div>
 						</td>
 					</tr>
@@ -120,6 +120,7 @@
 								 - 
 								<input type="text" class="form-control" name="tel3" id="tel3">
 							</div>
+							<div id="telDiv" align="left"></div>
 						</td> 
 					</tr>
 	
