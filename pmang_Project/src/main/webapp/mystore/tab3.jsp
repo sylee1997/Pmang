@@ -20,7 +20,7 @@
                   </a><!-- profileName -->
                   <div class="reviewTime">4<div>달전</div></div>
                </div><!-- profileNameDiv -->
-               <a class="score"><img src="scoreImg" alt="평점아이콘" width="20" height="20">별로에요/보통이에요/좋아요</a>
+               <a class="score"><img src="" alt="평점아이콘" width="20" height="20">별로에요/보통이에요/좋아요</a>
             </div><!-- review_header -->
             <div class="reviewSubjectWrap">         
        			<button class="reviewSubjectBtn">리뷰제목(버튼) &emsp; &gt;
