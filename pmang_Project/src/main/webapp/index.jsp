@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 
 
-<link rel="stylesheet" href="/pmang/css/pm_index.css">
+<link rel="stylesheet" href="/pmang/css/index.css">
 <style type="text/css">
    
          

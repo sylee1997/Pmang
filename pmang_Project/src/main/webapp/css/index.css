@@ -16,6 +16,7 @@ a {
     background-color: transparent;
 }
 
+
 #wrap {
 /* width: 1300px; */
 	width : 1150px;
@@ -301,7 +302,11 @@ body > #wrap {
 #container {
    position: relative;
    width: 1024px;
+<<<<<<< HEAD:pmang_Project/src/main/webapp/css/pm_index.css
    /* height: 5729px; */
+=======
+   height: 5729px;
+>>>>>>> 653429afdcf10438d8314dee1aec7c22728b1d97:pmang_Project/src/main/webapp/css/index.css
    overflow: auto;
 }
 /* .content { 이거 몬지 모르겠어요..	
