@@ -6,16 +6,11 @@
 <meta charset="UTF-8">
 
 
-<link rel="stylesheet" href="/pmang/css/pm_index.css">
+<link rel="stylesheet" href="/pmang/css/index.css">
 <style type="text/css">
-
    
          
 /* --------------------------------------------서영이조 */
-
-
-
-
 </style>
 <title>피망마켓에 오신것을 환영합니다.</title>
 </head>
@@ -740,7 +735,6 @@
    </div>
 
 <script>
-
       /* 인기 카테고리 슬라이드 쇼 이벤트 */
       var ul = document.querySelector('.slide_wrap');
       function move() {

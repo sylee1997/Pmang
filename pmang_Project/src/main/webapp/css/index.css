@@ -2,8 +2,16 @@
 
 /* 가운데 정렬 */
 
+html, body, div {
+	margin: 0px;
+    padding: 0px;
+    border: 0px;
+	
+}
+
 #wrap {
-width: 1300px;
+/* width: 1300px; */
+	width : 1150px;
    height: 100%;
    min-width: 1024px;
    margin: 0 auto;
@@ -12,7 +20,6 @@ width: 1300px;
 	width: 1300px;
 	margin: 0 auto;
 }
-
 body > #wrap { 
 	height : auto;
 	min-height: 100%; 
@@ -154,8 +161,9 @@ body > #wrap {
 
 #container {
    position: relative;
-   width: 100%;
+   width: 1024px;
    height: 5729px;
+   overflow: auto;
 }
 /* .content { 이거 몬지 모르겠어요..	
 	float: left;
