@@ -16,6 +16,7 @@ a {
     background-color: transparent;
 }
 
+
 #wrap {
 /* width: 1300px; */
 	width : 1150px;
@@ -31,6 +32,8 @@ body > #wrap {
 	height : auto;
 	min-height: 100%; 
 } */
+
+
 /* header부분 */
 #header{
 	position: -webkit-sticky;
@@ -39,6 +42,7 @@ body > #wrap {
 	top: 0;
 	z-index:20;
 	background: white;
+	border-bottom: 1px solid green;
 }
 
 /* 카테고리 */
@@ -129,20 +133,25 @@ body > #wrap {
 	background: white;
 	width: 180px;
 }
+
+.hoverli {
+	padding-left: 380px;
+}
+
 /* ---------------- */
 .header_logo {
   display: flex;
   align-items: center;
+  width: 100%;
+  margin: 8px 280px;
 }
 .header_logo .logo-wrap {
-  width: 20%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
-  cursor: pointer;
-  margin-right: 100px;
-  /* padding-right: 100px; */
+  /* width: 20%; */
+  	padding-left: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 .header_logo .logo-wrap img {
  /*  width: 30px;
@@ -161,16 +170,16 @@ body > #wrap {
 
 
 .header_logo .search-wrap {
-  /* width: 45%; */
-  width: 550px;
+   width: 25%; 
+  /* width: 550px; */
   /* 추가 */
   display: flex;
-  border: 2px solid red;
+  border: 2px solid rgb(22 119 4);
   align-items: center;
   padding: 0px 15px;
   position : relative;
   top: 5px;
-  left: 10px;
+  left: 70px;
 }
 
 .header_logo .search-wrap input {
@@ -184,7 +193,10 @@ body > #wrap {
   /* border: 2px solid red; */
 }
 .header_logo nav {
-  width: 55%;
+  /* width: 30%; */
+  left: 50px;
+  top : 5px;
+  position: relative;
 }
 .header_logo ul {
   list-style: none;
@@ -197,7 +209,8 @@ body > #wrap {
   align-items: center;
   font-size: 15px;
   cursor: pointer;
-  padding-right: 20px;
+  padding-right: 10px;
+  font-weight: bold;
 }
 .header_logo ul li .vertical {
   opacity: 0.7;
@@ -294,6 +307,159 @@ body > #wrap {
     left: 20px;
 }
 
+
+/* 모달창 */
+.loginModal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 100; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: hidden; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+}
+
+.loginModalContent {
+	background-color: #fefefe;
+    margin: 10% auto;
+    padding: 50px;
+    border: 1px solid #888;
+    width: 350px;
+    height: 500px;
+    border-radius: 10px;
+}
+
+.loginModal-header {
+    position: relative;
+    bottom: 20px;
+    color: darkgreen;
+    width: 450px;
+    right: 50px;
+}
+
+/* 로그인창 */
+
+.modal-header {
+    position: relative;
+    bottom: 30px;
+    border-bottom: 1px solid #e5e5e5;
+    text-align: center;
+}
+
+
+.close {
+	margin-top : -50px;
+    padding: 0 20px;
+    cursor: pointer;
+    background: 0 0;
+    border: 0;
+    outline: 0;
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+}
+
+.loginModal-Table tr th {
+    text-align: left;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+button {
+	background: inherit;
+	float: left;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 5px 20px;
+	overflow: visible;
+	cursor: pointer;
+}
+
+button div {
+	display: flex;
+	align-items: center;
+}
+button div img {
+	width: 30px;
+	height: 30px;
+}
+button div p{
+	font-size: 15px;
+    font-weight: 700;
+    margin: 10px auto;
+}
+
+#loginBtn {
+	width: 100%; 
+	height: 40px;
+	margin: 10px 0;
+	font-size: 15px;
+	font-weight: 700;	
+}
+#kakaoBtn {
+	width: 100%;
+	background-color: yellow;
+}
+#writeBtn {
+	width: 100%; 
+	background-color: green; 
+	margin-top:13px;
+}
+#writeP{
+	color: white;
+}
+#userId, #pwd {
+	width: 315px;
+}
+
+#userId:hover, #pwd:hover {
+	border-color: green;
+}
+
+
+#saveId {
+	text-align: left;
+	font-size: 14px;
+}
+#find {
+	text-align: left;
+	cursor: pointer;
+	color: black;
+}
+
+#find:hover {
+	text-decoration: underline;
+}
+
+#findIdPw {
+	text-align: center;
+    font-size: 11pt;
+}
+
+.form-control {
+    display: block;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-group {
+	margin-bottom: 15px;
+}
 
 
 /* container부분 */
@@ -468,16 +634,20 @@ display:none;
 	/* height : 800px; */
 	float: right;
 	
+	margin-right: 400px;
+	
 }
 
 .asideDiv {
-	/* position : absolute; */
+	position: relative;
+    bottom: 70px;
+    background: white;
 }
 
 .likebag {
 	font-size : 10pt;
 	font-weight : bold;
-	border : 1px solid rgb(204, 204, 204);
+	border : 1px solid rgb(22 119 4);
 	width : 100px;
 	height: 50px;
 	text-align : center;
@@ -497,7 +667,7 @@ display:none;
 	margin-top : 5px;
 	width : 100px;
 	height: 330px;
-	border : 1px solid rgb(204, 204, 204);
+	border : 1px solid rgb(22 119 4);
 	text-align : center;
 	font-weight : bold;
 	font-size : 10pt;
@@ -520,9 +690,10 @@ display:none;
 .topBtn {
 	text-align : center;
 	margin-top : 5px;
-	border : 1px solid rgb(204, 204, 204);
+	border : 1px solid rgb(22 119 4);
 	height: 30px;
 	padding-top: 10px;
+	width: 100%;
 }
 
 #topA {
