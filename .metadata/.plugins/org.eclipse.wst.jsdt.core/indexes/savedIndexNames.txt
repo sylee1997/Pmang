@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+D:\git_home\Pmang\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2230326959.index
+413143071.index
+3432550404.index
+616706.index
+1197372453.index
+686754121.index
