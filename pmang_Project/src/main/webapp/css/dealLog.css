@@ -1,0 +1,229 @@
+@charset "UTF-8";
+
+body * {
+	box-sizing: border-box;
+	font-family: "Noto Sans KR", -apple-system, BlinkMacSystemFont,
+		"Helvetica Neue", Arial, sans-serif;
+	outline: 0px;
+	font-size: 16px;
+}
+
+.dealLogWrap {
+	min-width: 320px;
+	max-width: 640px;
+	min-height: 100vh;
+	margin: 0px auto;
+	box-sizing: border-box;
+}
+
+.dealLogHeader {
+	position: sticky;
+	top: 0px;
+	line-height: 3.125rem;
+	font-weight: bold;
+	text-align: center;
+	color: rgb(30, 29, 41);
+	background-color: rgb(255, 255, 255);
+	z-index: 1;
+}
+
+.dealLogTab {
+	display: flex;
+	margin: 0 auto;
+	justify-content: space-between;
+	vertical-align: baseline;
+	min-width: 320px;
+	max-width: 800px;
+	margin: 0 auto;
+	background: #ffffff;
+}
+
+.logTabs li {
+	background: white;
+	width: 50%;
+	border: 1px solid #eee;
+	border-bottom-color: black;
+	background: #fafafa;
+	padding: 20px -0px;
+	list-style: none;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	cursor: pointer;
+	color:black;
+}
+
+.logTabs .current {
+	color: green;
+	border-top:2px solid green;
+}
+
+.logTabs {
+	display: flex;
+	width: 100%;
+	/* display: inline-block; */
+	margin: 0 auto;
+	padding: 10px 0px;
+	font-weight: 600;
+	text-align: center;
+	color: #bbb;
+	border: 1px solid transparent;
+	justify-content: space-between;
+	vertical-align: baseline;
+}
+
+.logTabContent {
+	clear: both;
+}
+
+.logTabContent div {
+	display: none;
+}
+
+.logTabContent div.current {
+	padding-bottom: 10px;
+	display: block;
+	-webkit-box-align: center;
+	align-items: center;
+	width: 100%;
+	border-bottom: 1px solid rgb(238, 238, 238);
+}
+
+.logCondition > input[type=radio]{
+	display:none;
+}
+.logCondition >input[type=radio]+label{
+	
+	background: rgb(238, 238, 238);
+	color:black;
+	border-radius: 12px;
+	cursor:pointer;
+	padding:0px 0.5rem;
+	height:1.5rem;
+	margin:5px;
+	
+}
+.logCondition >input[type=radio]:checked+label{
+	background:green;	
+	color:white;
+}
+.contentType {
+	padding: 0px 0.5rem;
+	height: 1.5rem;
+	border-radius: 12px;
+	text-align: center;
+	font-size: 13px;
+	color: black;
+	border: solid 1px transparent;
+	cursor: pointer;
+	margin: 5px;
+	list-style: none;
+}
+
+/*구매내역*/
+#buyLogImg {
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	height: 6rem;
+}
+
+#buyLogInfo {
+	display: flex;
+	width: 100%;
+	-webkit-box-pack: center;
+	justify-content: center;
+	flex-direction: column;
+	margin-left: 0.5rem;
+	overflow: hidden;
+	-webkit-box-pack: center;
+}
+
+#buyLogInfo span {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	margin: 2px 0;
+}
+
+#buyLogInfoName {
+	font-size: 0.875rem;
+}
+
+#buyLogInfoPrice {
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	padding: 4px 0px;
+	font-size: 0.8125rem;
+	line-height: 0.8125rem;
+}
+
+#buyLogInfoId {
+	font-size: 0.75rem;
+	color: gray;
+}
+
+#buyLogInfoTime {
+	font-size: 0.75rem;
+	color: gray;
+	vertical-align: baseline;
+}
+
+/*판매내역*/
+#sellLogImg {
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	height: 6rem;
+}
+
+#sellLogInfo {
+	display: flex;
+	width: 100%;
+	-webkit-box-pack: center;
+	justify-content: center;
+	flex-direction: column;
+	margin-left: 0.5rem;
+	overflow: hidden;
+	-webkit-box-pack: center;
+}
+
+#sellLogInfo span {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	margin: 2px 0;
+}
+
+#sellLogInfoName {
+	font-size: 0.875rem;
+}
+
+#sellLogInfoPrice {
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	padding: 4px 0px;
+	font-size: 0.8125rem;
+	line-height: 0.8125rem;
+}
+
+#sellLogInfoId {
+	font-size: 0.75rem;
+	color: gray;
+}
+
+#sellLogInfoTime {
+	font-size: 0.75rem;
+	color: gray;
+	vertical-align: baseline;
+}
+
+.dealLog {
+	width: 640px;
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	border-bottom: 1px solid rgb(238, 238, 238);
+}

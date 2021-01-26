@@ -147,7 +147,7 @@ $(document).on("click",".choiceDeleteBtn",function(){
 
 //탭메뉴 - 찜 전체선택
 $(document).on("click","input[id='choice_chk']",function(){
-	if(doubleSubmitCheck()) return;
+	
 	
 	
 	var chk=$(this).is(":checked");
