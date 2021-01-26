@@ -15,9 +15,83 @@
 <title>피망마켓에 오신것을 환영합니다.</title>
 </head>
 <body> 
-   <div id="wrap">
-      
-      <div id="header">
+<!-- 로그인 모달 -->
+<div class="loginModal">
+      	<div class="loginModalContent">
+      		<div class="loginModal-header">
+				<div class="modal-header">
+					<h3 class="modal-title" id="myModalLabel">피망 로그인</h3>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+	  		</div>
+	  
+	 		<div class="loginModal-center">
+	  			<table class="loginModal-Table">
+	  				<thead>	
+						<tr>
+							<th style="border-bottom: rgb(0,0,0);">아이디</th>
+						</tr>
+					</thead>
+					<thead>
+						<tr>
+							<td style="border-top: rgb(0,0,0); border-bottom: rgb(0,0,0);">
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="ID" width="1" name="userId" id="userId" maxlength='20'>
+								</div>
+							</td>
+						</tr>
+					</thead>
+					<thead>
+						<tr>
+							<th style="border-top: rgb(0,0,0); border-bottom: rgb(0,0,0);">비밀번호</th>
+						</tr>
+						<tr>
+							<td style="border-top: rgb(0,0,0); border-bottom: rgb(0,0,0);">
+								<div class="form-group">
+									<input type="password" class="form-control" maxlength="15" placeholder="Password" name="pwd" id="pwd">
+								</div>
+							</td>
+						</tr>
+					</thead>
+					<thead>
+						<tr>
+							<td style="border-top: rgb(0,0,0);">
+								<div id="saveId">
+								<input type="checkbox" name="saveId" value="saveId">아이디
+								저장
+								</div>
+								<div>
+									<input type="button" id="loginBtn" value="Login">
+								</div>					
+								<div id="findIdPw">
+									<a id="find" href="#">아이디 찾기</a> / <a id="find" href="#">비밀번호 찾기</a>
+								</div> <br>
+		
+								<button id="kakaoBtn">
+									<div>
+										<img src="/pmang/image/kakao_icon.png" alt="kakao_icon" />
+										<p id="kakaoP">카카오 1초 로그인/회원가입</p>
+									</div>
+								</button>
+								<button id="writeBtn">
+								<div>
+									<img src="/pmang/image/writeP.png" alt="writePmang">
+									<p id="writeP">일반 회원가입</p>
+								</div>
+								</button>
+						</td>
+					</tr>
+				</thead>
+			</table>
+	  	</div><!-- loginModal-center -->
+   </div> 
+</div> 
+
+
+	<!-- header -->
+	<div id="header">
       	<div class="header_logo">
             <div class="logo-wrap">
                  <img src="/pmang/image/main_logo.JPG" alt="main_logo" />
@@ -74,7 +148,7 @@
                 <li>
                   <span class="vertical">|</span>
                 </li>
-                <li>
+                <li id="loginli">
                   <img src="/pmang/image/login.png" alt="login" style="width: 30px; height: 30px;" />
                   <span>로그인</span>
                 </li>
@@ -435,6 +509,16 @@
       
         <div id="aside">
          <div class="asideDiv">
+              <!-- 알림창 구현 -->
+            <div class="notice">
+	            <div class="noticeDiv">
+	            	<div class="noticeContent">
+	            		<a href="#">로그인을 하세요.</a>
+	            	</div>
+	            </div>
+            	<img src="/pmang/image/noticeImg.PNG" style="width:30px; height:30px;"> 
+            	<div>알림(0)</div>
+            </div>
             <div class="likebag">찜한상품
                <div class="bag_click">
                   <a class="bag_clickA" href="#">
@@ -467,26 +551,13 @@
                	<div class="pmangTokDiv">피망Tok</div>
                </a>
             </div>
-            
-            
-            <!-- 알림창 구현 -->
-            
-            
-            <div class="notice">
-            <div class="noticeDiv">
-            	<div class="noticeContent">
-            		<a href="#">로그인을 하세요.</a>
-            	</div>
-            </div>
-            	<img src="/pmang/image/notice.JPG" style="width:50px; height:50px;"> 
-            	<div>알림(0)</div>
-            </div>
          </div><!-- asideDiv -->
 
       </div><!-- aside -->
    </div><!-- header -->
       <!-- ----------------헤더 -->
       
+   <div id="wrap">
       <div id="container">
          
          <!-- 인기카테고리 슬라이드영역 -->
@@ -918,6 +989,32 @@ $('.category2Menu').on('mouseenter mouseleave','li',function(){
 		$('.category3Div').text($(this).children('.category2A').text());
 	}
 });
+
+
+$('#loginli').click(function(){
+	$('.loginModal').show();
+	$('.loginModal').on('scroll touchmove mousewheel', function(e){
+		e.preventDefault();
+		e.stopPropagation(); 
+			return false;
+	});
+});
+
+$('.close').click(function(){
+	$('.loginModal').hide();
+	$('.loginModal').off('scroll touchmove mousewheel');
+});
+
+$(document).click(function(e){
+	if($('.loginModal').is(e.target)){
+		$('.loginModal').hide(); 
+		$('.loginModal').off('scroll touchmove mousewheel');
+	}
+});
+
+
+
+
 
 
 </script>
