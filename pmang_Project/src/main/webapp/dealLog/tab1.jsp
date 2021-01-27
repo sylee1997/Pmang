@@ -25,4 +25,4 @@
 			</span><!--  buyLogInfo -->
 		</a>
 	</div><!-- dealLogInfo -->
-</div>
+</div><!-- dealLogConditionTab -->
