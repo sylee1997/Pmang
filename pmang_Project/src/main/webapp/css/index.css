@@ -9,7 +9,7 @@ html, body, div {
 	
 }
 
-#a {
+a {
 	color: rgb(33, 33, 33);
     text-decoration: none;
     cursor: pointer;
@@ -19,7 +19,7 @@ html, body, div {
 
 #wrap {
 /* width: 1300px; */
-	width : 1150px;
+   width : 1024px;
    height: 100%;
    min-width: 1024px;
    margin: 0 auto;
@@ -36,7 +36,6 @@ body > #wrap {
 
 /* header부분 */
 #header{
-	position: -webkit-sticky;
 	position: sticky;
 	/* height : 150px; */
 	top: 0;
@@ -51,6 +50,9 @@ body > #wrap {
 	font-weight: bold;
 	color: green;
 	text-indent: 2em;/* 글자 앞 공백 */
+	
+	width: 1024px;
+	margin: 0 auto;
 }
 
 #categoryDiv a {
@@ -103,7 +105,18 @@ body > #wrap {
     text-indent: 2em;
     line-height: 30px;
     display: none;
+    z-index: 3;
 }
+
+.hoverli ul{
+	border-left:  2px solid green;
+}
+
+.category2Menu ul{
+	border-right: 2px solid green;
+}
+
+
 .category1Menu>li:hover .category2Menu {/* 카테고리1 hover → 카테고리2 펼쳐짐 */
    left: 100%;
 }
@@ -134,20 +147,15 @@ body > #wrap {
 	width: 180px;
 }
 
-.hoverli {
-	padding-left: 380px;
-}
-
 /* ---------------- */
 .header_logo {
   display: flex;
   align-items: center;
-  width: 100%;
-  margin: 8px 280px;
+  width: 1024px;
+  margin: 10px auto;
 }
 .header_logo .logo-wrap {
   /* width: 20%; */
-  	padding-left: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -170,8 +178,7 @@ body > #wrap {
 
 
 .header_logo .search-wrap {
-   width: 25%; 
-  /* width: 550px; */
+  width: 400px; 
   /* 추가 */
   display: flex;
   border: 2px solid rgb(22 119 4);
@@ -215,11 +222,10 @@ body > #wrap {
 .header_logo ul li .vertical {
   opacity: 0.7;
 }
-.header_logo ul li img {
- /*  width: 20px;
-  height: 20px; */
-  width: 40px;
-  height: 40px;
+
+
+.header_logo ul li .indexnavSpan:hover {
+ 	color : #246d24;
   
 }
 
@@ -231,7 +237,7 @@ body > #wrap {
     margin: 0px -17px;
     border: 1px solid rgb(217, 217, 217);
     background: rgb(255, 255, 255);
-    z-index: 10;
+    z-index: 1;
     display : none;
 }
 
@@ -249,33 +255,32 @@ body > #wrap {
     overflow: hidden;
 }
 
-.recentlyA {
-	padding: 25px 0px 10px;
-    flex-grow: 1;
-    border-bottom: 2px solid rgb(247, 47, 51);
-    height: 50px;
-    box-sizing: border-box;
-    text-align: center;
-    font-weight: 600;
-    color: rgb(247, 47, 51);
-    border-top-color: rgb(247, 47, 51);
-    border-right-color: rgb(247, 47, 51);
-    border-left-color: rgb(247, 47, 51);
+#index_searchInsertXspan {
+    position: absolute;
+    right: 50px;
+    bottom: 13px;
+    color: #79c179;
+    display: none;
+    cursor: pointer;
 }
 
-.bestA {
-	padding: 25px 0px 10px;
+.recentlyA {
+	padding: 25px 15px;
     flex-grow: 1;
-    border-bottom: 2px solid rgb(217, 217, 217);
+    border-bottom: 2px solid rgb(22 119 4);
     height: 50px;
     box-sizing: border-box;
-    text-align: center;
-    font-weight: 600;
+    font-weight: 1000;
+    color: rgb(22 119 4);
+    border-top-color: rgb(22 119 4);
+    border-right-color: rgb(22 119 4);
+    border-left-color: rgb(22 119 4);
+    text-decoration: none;
 }
 
 .searchListClose {
     height: 40px;
-    background: rgb(250, 250, 250);
+    background: #f4fdee;
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
@@ -284,7 +289,8 @@ body > #wrap {
 }
 
 .searchListClose a {
-	color: rgb(179, 179, 179);	
+	color:rgb(150 150 150);
+	cursor: pointer;	
 }
 
 .nonList {
@@ -296,6 +302,23 @@ body > #wrap {
     color: rgb(136, 136, 136);
     position: relative;
     top: 40%;
+}
+
+.existList div {
+	padding : 10px;
+	position: relative;
+}
+
+.existList div span {
+	cursor: pointer;
+}
+
+.existList div a {
+	position: absolute;
+	right : 20px;
+	font-size: 15pt;
+	color: green;
+	top : 4px;
 }
 
 .nonList img {
@@ -470,13 +493,7 @@ button div p{
    /* height: 5729px; */
    overflow: auto;
 }
-/* .content { 이거 몬지 모르겠어요..	
-	float: left;
-	width: 1180px;
-	overflow: auto;
-}
- */
- 
+
  
 #slide {
     position: relative;
@@ -627,14 +644,13 @@ display:none;
 
 /* aside부분 */
 #aside {
-	position: -webkit-sticky;
-	position: sticky;
-	top: 150px;
+	position: absolute;
+	top: 130px;
 	width: 100px;
 	/* height : 800px; */
 	float: right;
 	
-	margin-right: 400px;
+	right: calc(50% - 617px);
 	
 }
 
@@ -660,7 +676,7 @@ display:none;
 
 .bag_clickA {
 	text-decoration: none;
-	color : #00C6ED;
+	color : #c0c0c0;
 }
 
 .recentlyLook {
@@ -774,7 +790,13 @@ display:none;
     webkit-box-flex: 1;
     flex-grow: 1;
     text-align: center;
+    text-decoration: none;
     
+}
+
+.footerCategory a:hover {
+	color : #246d24;
+	text-decoration: underline;	
 }
 
 .cIPDuS {
@@ -798,10 +820,6 @@ display:none;
     justify-content: center;
     border-top: 1px solid rgb(238, 238, 238);
     border-bottom: 1px solid rgb(238, 238, 238);
-    
-    /* 서영이가 추가함 */
-    position: relative;
-    right : 80px;
 }
 
 .footerCategory {
@@ -852,14 +870,10 @@ display:none;
     justify-content: space-between;
     margin-bottom: 36px;
     
-     /* 서영이가 추가함 */
-    position: relative;
-    right : 80px;
-    
 }
 
 /* 서영이가 추가함 */
-.icon {
+.indexFooter_icon {
     position: relative;
     left: 200px;
 }

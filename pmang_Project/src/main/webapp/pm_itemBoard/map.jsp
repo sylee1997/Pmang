@@ -12,6 +12,13 @@ html, body {
 	padding: 0; 
 }
 
+#mapWrap {
+    width: 1024px;
+    height: 100%;
+    position: relative;
+    margin: 0 auto;
+}
+
 #map {
 	width: 800px;
 	height: 100%;
@@ -19,15 +26,22 @@ html, body {
 	overflow: hidden;
 }
 
-#header {
-	align-items: center;
+#mapHeaderForm {
 	position: fixed;
 	top: 0;
     right: 0;
     left: 0;
-	background: #fff;
-	z-index: 20;
+    border-bottom: 1px solid #e6e6e6;
+    z-index : 20;
+}
+
+#mapHeader {
+	align-items: center;
 	position: relative;
+	top: 0;
+    right: 0;
+    left: 0;
+	background: #fff;
     width: 100%;
     max-width: 76.8rem;
 /*     height: 4.4rem; */
@@ -38,29 +52,34 @@ html, body {
 }
 
 #x {
-	width: 45%;
+	margin: 0 11%;
 }
 
 #x button {
-	position: relative;
-    left: 100px;
-    bottom: 5px;
-    font-size: 30pt;
+	height: 3.4rem;
+    font-size: xx-large;
+}
+
+#mapHeader h3 {
+	margin : 0 20%;
 }
 
 #btn {
-	right: 100px;
-    top: 10px;
+	right: 10%;
+    /* top: 10px; */
+    bottom: 15px;
     position: absolute;
 }
 
 #btn button{
 	position: relative;
-	    top: 10px;
+	top: 10px;
 }
 
 button {
 	border: none;
+	outline: none;
+	cursor: pointer;
 	text-transform: none;
 	background: none;
 }
@@ -94,7 +113,30 @@ button {
     margin: 0 auto;
     border-bottom: 1px solid lightgrey;
 }
- 
+
+#mapFooter {
+	position: absolute;
+    /* margin: 0px; */
+    bottom: 50px;
+    z-index: 3;
+    width: 100%;
+
+}
+
+#mapFooter button {
+	z-index: 1;
+    margin: 0 10rem;
+    height: 3.5rem;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border: none;
+    width: calc(100% - 20rem);
+    background: #276141;
+    border-radius: 4px;
+}
+
+
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -110,6 +152,7 @@ window.onload = function() {
 			
 	};
 	var map = new daum.maps.Map(container, options)//지도 생성
+	$('#map').append('<div id="mapFooter"><button><span>위치지정 완료</span></button></div>');
 
 	//마커 생성
 	var marker = new daum.maps.Marker({
@@ -183,22 +226,25 @@ function searchDetailAddrFromCoords(coords, callback) {
 }
 
 
-
 </script>
 </head>
 <body>
-
-	<div id="header">
-		<div id="x">
-			<button>x</button>
+	<div id="mapWrap">
+	  <div id="mapHeaderForm">
+		<div id="mapHeader">
+			<div id="x">
+				<button>x</button>
+			</div>
+			<h3>지도로 위치 지정</h3>
+			<div id="btn">
+				<button><img width="30px" height="30px" src="//yaimg.yanolja.com/joy/sunny/static/images/btn-home-v7.svg" alt="홈"></button>
+			</div>
 		</div>
-		<h3>지도로 위치 지정</h3>
-		<div id="btn">
-			<button><img width="30px" height="30px" src="//yaimg.yanolja.com/joy/sunny/static/images/btn-home-v7.svg" alt="홈"></button>
+	  </div>
+	
+		<div id="map">
+		
 		</div>
 	</div>
-
-<div id="map"></div>
-
 </body>
 </html>

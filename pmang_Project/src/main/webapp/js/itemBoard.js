@@ -1,4 +1,4 @@
-<!-- 카테고리 펼쳐지는 부분 -->
+/*카테고리 펼쳐지는 부분*/
 $('.selectItem1').hover(function(){
 	$('.down1').css('display', 'block')
 },
@@ -151,6 +151,7 @@ $('.selectItem1').on('click', 'a', function(){
 	$('.detailItemList3').remove();
 	$('.secondCategory').hide();
 	$('.thirdCategory').hide();
+	$('.down1').hide();
 	
 	/* if($('.top2').text().trim().length){
 		//alert($('.top2').text())
@@ -387,6 +388,7 @@ $('.selectItem2').on('click', 'a', function(){
 	$('.detailItemList3').remove();
 	$('.thirdCategory').hide();
 	$('.detailItem').show();
+	$('.down2').hide();
 	
 	if($('.select2').text() == '여성의류' || $(this).text() == '여성의류'){
 		for(var i = 0; i < women.length; i++){
@@ -561,6 +563,7 @@ $('.selectItem3').on('click', 'a', function(){
 	$('.select3').removeClass('select3');
 	$(this).addClass('select3');
 	$('.top3').html($(this).text() + img);
+	$('.down3').hide();
 		
 });
 

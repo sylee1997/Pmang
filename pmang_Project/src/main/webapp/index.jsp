@@ -15,6 +15,7 @@
 <title>피망마켓에 오신것을 환영합니다.</title>
 </head>
 <body> 
+<form id="indexForm">
 <!-- 로그인 모달 -->
 <div class="loginModal">
       	<div class="loginModalContent">
@@ -98,10 +99,11 @@
                  <h2 style="color: green;">피망장터</h2>
                </div>
                <div class="search-wrap">
-                 <input type="text" class="searchInput" placeholder="상품명,지역명,@상점명입력" />
+                 <input type="text" class="searchInput" placeholder="상품명,지역명,@상점명입력" maxlength="20"/>
+                 <span id="index_searchInsertXspan">x</span>
                  	<!-- 서치버튼 추가(이서영) -->
                  <a class="searchBtn" href="#">
-                 	<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAeZJREFUOBGVVD1PAkEQ3VlOjY0xIdGOI0BMxMSGytJE+RsWWomx8mfYWNBpZWltg1b2NCZaGBppFAzR1njsOO9gzHEfIJdws/vmvcft7OySiT2DQqUakDtipjoZ4xsyzGy6RNzy2F7mu53nmGRiKprRw7XaQm/wdU6OG2xMTvFoFPKQLTXX86tn1G7/RHM6thjArP/xeWscn8rUWqJLee/klhdW8MM4xCQHDrjQqEkivhfLF++FEvf80luvsLGXIIwB5MABF5o0HoU1M+5RkvK1Xn29+3KfRlQMpmyCOyzfM3Y7XlMbboDUjIiuZpnBFBwsH3WGVv9Io8VuYuLEUMFZUbmqjfJt2BqC5JZyT9HEtLFyVRvlhrscBeYaS4/G+VaQV4DD7+FWPJk1Vy4aPs6R+nILoBTzMJ7MmitXtVGexXFCC8j5OpzWgyoCxzEfQQOt4hot+gjHSZZOhoLraabIEQU3EEMT70HgHl44m3KcNqUm+2SCVt8vX6E1dDdRMyzTcSCXBhRSImc6o9HkW7589Pz3cpAD8CBL3oXKkj1Ze+00xxZh+DNUMHF9SQKdEL2+en7lmNmFRmmm6jVXhGl4SchF0fcrjbnEWeQ008SSs8RZuC5fjIbWW6xm8ebCYdovlg8g+gXwsu0wmCVGbgAAAABJRU5ErkJggg==" width="16" height="16" alt="검색 버튼 아이콘">
+                 	<img src="/pmang/image/searchGreen.png" width="16" height="16" alt="검색 버튼 아이콘">
                  </a>
                   	<!--  -->
                
@@ -109,8 +111,7 @@
                <div class="searchClick">
                	<div class="searchListDiv">
                		<div class="searchA">
-               			<a class="recentlyA" href="#">최근검색어</a>
-               			<a class="bestA" href="#">인기검색어</a>
+               			<a class="recentlyA">최근검색어</a>
                		</div>
                		<div class="searchList">
                			<div class="existList"></div>
@@ -135,22 +136,22 @@
                <nav>
               <ul>
                 <li>
-                  <img src="/pmang/image/sell.png" alt="sale" />
-                  <span>판매하기</span>
+                  <img src="/pmang/image/sell.png" alt="sale" width="40px" height="40px" />
+                  <span class="indexnavSpan">판매하기</span>
                 </li>
                 <li>
                   <span class="vertical">|</span>
                 </li>
                 <li>
-                  <img src="/pmang/image/myShop.png" alt="store" />
-                  <span>내상점</span>
+                  <img src="/pmang/image/mystore.png" alt="store" width="30px" height="30px"/>
+                  <span class="indexnavSpan">내상점</span>
                 </li>
                 <li>
                   <span class="vertical">|</span>
                 </li>
                 <li id="loginli">
                   <img src="/pmang/image/login.png" alt="login" style="width: 30px; height: 30px;" />
-                  <span>로그인</span>
+                  <span class="indexnavSpan">로그인</span>
                 </li>
               </ul>
             </nav>
@@ -881,7 +882,7 @@
              <div class="footerContentMarkTitle">피나게 망하지 않을 만큼 판매하는 장터입니다. 누구나, 무엇이든 쉽고 편하고 안전하게 거래할 수 있습니다.</div>
             </div>
             
-            <div class="icon">
+            <div class="indexFooter_icon">
                <a href="#" target="_blank">
                   <img src="/pmang/image/facebook.png" alt="facebook icon" style="margin: 0px 5px 0px 16px;">
                </a>
@@ -927,6 +928,7 @@
          </div>
       </div>
    </div>
+</form>
 
 <script>
       /* 인기 카테고리 슬라이드 쇼 이벤트 */
@@ -955,17 +957,146 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 
+
+//검색 input에 커서 올라가면 이벤트
 $('.searchInput').focus(function(){
 	$('.searchClick').show();
+}); 
+
+//input안에 x버튼 추가하기
+$('.search-wrap').on('input', '.searchInput', function() {
+	if($('.searchInput').val() != ""){
+		$('#index_searchInsertXspan').show();	
+	}else{
+		$('#index_searchInsertXspan').hide();
+	}
 });
-$('.searchInput').blur(function(){
+
+//input안에 x버튼 누르면 삭제!
+$('#index_searchInsertXspan').click(function(){
+	$('.searchInput').val('');
+	$('#index_searchInsertXspan').hide();
+	$('.searchClick').show();
+});
+
+
+/* $('.searchInput').blur(function(){
+	$('.searchClick').hide();
+});  */
+
+
+/* $(document).on("click", function(e){
+	if($('#searchListHide').val() == 'show'){
+		$('.searchClick').show();
+	}else{
+		if($('.searchClick').is(e.target)){
+			$('.searchClick').hide();
+			$('#searchListHide').val("");
+		}
+	}
+});  */
+
+//검색창 이외에 다른 곳을 눌렀을 시 검색창 사라지게 하는것
+$(document).click(function(e){
+	if(e.target != $('.searchListDiv')){
+		if($('form, div').is(e.target)){
+			$('.searchClick').hide(); 
+		}else if($('#header h2, #header img, .indexnavSpan').is(e.target)){
+			$('.searchClick').hide(); 
+		}else if($('.footer a, .footer img').is(e.target)){
+			$('.searchClick').hide(); 
+		}else if($('.hoverli a').is(e.target)){
+			$('.searchClick').hide(); 
+		}else if($('#aside img, #aside a').is(e.target)){
+			$('.searchClick').hide(); 
+		}else if($('.slide_wrap img').is(e.target)){
+			$('.searchClick').hide(); 
+		}		
+	}
+});
+
+
+/* $(document).click(function(e){
+	if(e.target != $('.searchListDiv')){
+		if($('#aside img, #aside a').is(e.target)){
+			$('.searchClick').hide(); 
+		}	
+	}
+}); */
+
+//검색어 전체 삭제
+$('.entireDelete').click(function(){
+	$('.existList').remove();
+	$('.nonList').show();
+});
+
+
+
+/* 최근검색어 구현 */
+$('.searchBtn').click(function(){
+	if($('.searchInput').val() == ''){
+		alert('검색어를 입력해주세요.');
+	}else {
+		var keyword = $('.searchInput').val();
+		localStorage.setItem("search", keyword);
+	
+		var keyword = localStorage.getItem('search');
+		var insert = '<div id="index_listKeyword"><span>'+ keyword + '</span><a id="indexSearchX">x</a></div>'
+	
+		$('.existList').prepend(insert);
+	}
+	
+	
+	$('.searchClick').hide();
+	
+	
+	//최근검색어 보여주기
+	if($('.existList').first('div') == null){
+		$('.nonList').show();
+	}else {
+		$('.nonList').hide();
+	}
+});
+
+//엔터값 넣어주기
+$('.searchInput').keydown(function(key) {
+	if(key.keyCode == 13){
+		$('.searchBtn').trigger('click');
+		$('.searchInput').click(function(){
+			$('.searchClick').show();
+		});
+	}
+});
+
+
+//최근검색어 목록에 x 누르면 삭제되는것
+$('div').off('click').on('click' , '#indexSearchX', function(e){
+		e.stopPropagation(); //이벤트 여러번 발생시 부모한테 이벤트가 가지 못하게 막는 것.
+		$(this).parent().remove();
+		
+		if(!$('#index_listKeyword').length){
+			$('.nonList').show()
+		}else {
+			$('.nonList').hide();
+		}
+});
+
+//닫기버튼 클릭
+$('.search_exit').click(function(){
 	$('.searchClick').hide();
 });
 
+
+//------------------------------------------------------------------------------
+//aside 알림창
 $('.notice').hover(function(){
 	$('.noticeDiv').toggle();
 });
 
+
+
+//------------------------------------------------------------------------------
+//카테고리
 $('.hoverli').hover(function(){
 	var img = '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAgCAYAAABgrToAAAAAAXNSR0IArs4c6QAAAE9JREFUWAnt1rEJACAQA0B1IQv3n8tSwRXSPHLfP4RLk77nOq3wjcLZXjQBqzckHwECBAj8LtCtmbBiayYE9E6AAAECBEIBayYEbNZMKngBdrgHHmiUuOgAAAAASUVORK5CYII=" width="20" height="16" alt="메뉴 버튼 아이콘">';
 	$('.hoverliA').html(img);
@@ -991,12 +1122,16 @@ $('.category2Menu').on('mouseenter mouseleave','li',function(){
 });
 
 
+
+
+//----------------------------------------------------------------------
+//로그인모달 구현
 $('#loginli').click(function(){
 	$('.loginModal').show();
 	$('.loginModal').on('scroll touchmove mousewheel', function(e){
 		e.preventDefault();
 		e.stopPropagation(); 
-			return false;
+		return false;
 	});
 });
 
@@ -1011,6 +1146,13 @@ $(document).click(function(e){
 		$('.loginModal').off('scroll touchmove mousewheel');
 	}
 });
+
+/* ---------------------------------------------------------------------- */
+
+
+
+
+
 
 
 
