@@ -9,7 +9,7 @@ html, body, div {
 	
 }
 
-a {
+#a {
 	color: rgb(33, 33, 33);
     text-decoration: none;
     cursor: pointer;
