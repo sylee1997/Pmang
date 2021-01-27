@@ -28,7 +28,7 @@ body * {
 }
 
 .dealLogTab {
-	display: flex;
+	/* display: flex; */
 	margin: 0 auto;
 	justify-content: space-between;
 	vertical-align: baseline;
@@ -37,7 +37,15 @@ body * {
 	margin: 0 auto;
 	background: #ffffff;
 }
-
+.dealLogConditionTab{
+	width: 100%;
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    font: inherit;
+    vertical-align: baseline;
+}
 .logTabs li {
 	background: white;
 	width: 50%;
@@ -53,10 +61,6 @@ body * {
 	color:black;
 }
 
-.logTabs .current {
-	color: green;
-	border-top:2px solid green;
-}
 
 .logTabs {
 	display: flex;
@@ -74,25 +78,15 @@ body * {
 
 .logTabContent {
 	clear: both;
+	display:flex;
 }
 
-.logTabContent div {
-	display: none;
-}
 
-.logTabContent div.current {
-	padding-bottom: 10px;
-	display: block;
-	-webkit-box-align: center;
-	align-items: center;
-	width: 100%;
-	border-bottom: 1px solid rgb(238, 238, 238);
-}
 
-.logCondition > input[type=radio]{
+.dealLogConditionTab > input[type=radio]{
 	display:none;
 }
-.logCondition >input[type=radio]+label{
+.dealLogConditionTab >input[type=radio]+label{
 	
 	background: rgb(238, 238, 238);
 	color:black;
@@ -103,11 +97,12 @@ body * {
 	margin:5px;
 	
 }
-.logCondition >input[type=radio]:checked+label{
+.dealLogConditionTab >input[type=radio]:checked+label{
 	background:green;	
 	color:white;
 }
-.contentType {
+
+.buyContentType {
 	padding: 0px 0.5rem;
 	height: 1.5rem;
 	border-radius: 12px;
@@ -118,14 +113,50 @@ body * {
 	cursor: pointer;
 	margin: 5px;
 	list-style: none;
+} 
+
+.sellContentType {
+	padding: 0px 0.5rem;
+	height: 1.5rem;
+	border-radius: 12px;
+	text-align: center;
+	font-size: 13px;
+	color: black;
+	border: solid 1px transparent;
+	cursor: pointer;
+	margin: 5px;
+	list-style: none;
+} 
+.dealLogInfo a:link{
+	text-decoration:none;
+}
+.dealLogInfo a:visited{
+	text-decoration:none;
+}
+.dealLogInfo a:hover{
+	text-decoration:none;
 }
 
-/*구매내역*/
+.dealLogInfo a {
+	width: 640px;
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	border-bottom: 1px solid rgb(238, 238, 238);
+	margin-top:20px;
+}
+.dealLogInfo a>span{
+	color:black;
+	text-decoration:none;
+}
+ /*구매내역*/
+
 #buyLogImg {
 	display: flex;
 	-webkit-box-align: center;
 	align-items: center;
 	height: 6rem;
+	text-decoration:none;
 }
 
 #buyLogInfo {
@@ -137,6 +168,7 @@ body * {
 	margin-left: 0.5rem;
 	overflow: hidden;
 	-webkit-box-pack: center;
+	text-decoration:none;
 }
 
 #buyLogInfo span {
@@ -144,10 +176,12 @@ body * {
 	white-space: nowrap;
 	overflow: hidden;
 	margin: 2px 0;
+	text-decoration:none;
 }
 
 #buyLogInfoName {
 	font-size: 0.875rem;
+	text-decoration:none;
 }
 
 #buyLogInfoPrice {
@@ -157,20 +191,23 @@ body * {
 	padding: 4px 0px;
 	font-size: 0.8125rem;
 	line-height: 0.8125rem;
+text-decoration:none;
 }
 
 #buyLogInfoId {
 	font-size: 0.75rem;
 	color: gray;
+	text-decoration:none;
 }
 
 #buyLogInfoTime {
 	font-size: 0.75rem;
 	color: gray;
 	vertical-align: baseline;
+	text-decoration:none;
 }
 
-/*판매내역*/
+/* 판매내역 */
 #sellLogImg {
 	display: flex;
 	-webkit-box-align: center;
@@ -218,12 +255,5 @@ body * {
 	font-size: 0.75rem;
 	color: gray;
 	vertical-align: baseline;
-}
+} 
 
-.dealLog {
-	width: 640px;
-	display: flex;
-	-webkit-box-align: center;
-	align-items: center;
-	border-bottom: 1px solid rgb(238, 238, 238);
-}
