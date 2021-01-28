@@ -15,6 +15,7 @@
 <title>피망마켓에 오신것을 환영합니다.</title>
 </head>
 <body> 
+<<<<<<< HEAD
 <form id="indexForm">
 <!-- 로그인 모달 -->
 <div class="loginModal">
@@ -93,6 +94,11 @@
 
 	<!-- header -->
 	<div id="header">
+=======
+   <div id="wrap">
+      
+      <div id="header">
+>>>>>>> 9b19a0f0da851a078ca63032e34b609ca136c76e
       	<div class="header_logo">
             <div class="logo-wrap">
                  <img src="/pmang/image/main_logo.JPG" alt="main_logo" />
@@ -149,7 +155,7 @@
                 <li>
                   <span class="vertical">|</span>
                 </li>
-                <li id="loginli">
+                <li>
                   <img src="/pmang/image/login.png" alt="login" style="width: 30px; height: 30px;" />
                   <span class="indexnavSpan">로그인</span>
                 </li>
@@ -510,16 +516,6 @@
       
         <div id="aside">
          <div class="asideDiv">
-              <!-- 알림창 구현 -->
-            <div class="notice">
-	            <div class="noticeDiv">
-	            	<div class="noticeContent">
-	            		<a href="#">로그인을 하세요.</a>
-	            	</div>
-	            </div>
-            	<img src="/pmang/image/noticeImg.PNG" style="width:30px; height:30px;"> 
-            	<div>알림(0)</div>
-            </div>
             <div class="likebag">찜한상품
                <div class="bag_click">
                   <a class="bag_clickA" href="#">
@@ -552,13 +548,26 @@
                	<div class="pmangTokDiv">피망Tok</div>
                </a>
             </div>
+            
+            
+            <!-- 알림창 구현 -->
+            
+            
+            <div class="notice">
+            <div class="noticeDiv">
+            	<div class="noticeContent">
+            		<a href="#">로그인을 하세요.</a>
+            	</div>
+            </div>
+            	<img src="/pmang/image/notice.JPG" style="width:50px; height:50px;"> 
+            	<div>알림(0)</div>
+            </div>
          </div><!-- asideDiv -->
 
       </div><!-- aside -->
    </div><!-- header -->
       <!-- ----------------헤더 -->
       
-   <div id="wrap">
       <div id="container">
          
          <!-- 인기카테고리 슬라이드영역 -->
@@ -1122,6 +1131,7 @@ $('.category2Menu').on('mouseenter mouseleave','li',function(){
 });
 
 
+<<<<<<< HEAD
 
 
 //----------------------------------------------------------------------
@@ -1159,6 +1169,8 @@ $(document).click(function(e){
 
 
 
+=======
+>>>>>>> 9b19a0f0da851a078ca63032e34b609ca136c76e
 </script>
 </body>
 </html>
