@@ -44,7 +44,6 @@ $('#qtyparent').on('keyup','input',function(){
 	if(qtyVal.length > 0 && qtyVal.length <= 3 )
 	if(!qtyRule.test(qtyVal)){
 		$('input[name=qty]').val(qtyVal.replace(reg1,''));
-		//alert("숫자만 입력해주세요.");
 	}
 });
 

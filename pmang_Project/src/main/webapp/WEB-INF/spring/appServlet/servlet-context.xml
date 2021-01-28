@@ -3,7 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
@@ -25,6 +27,18 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.mvc.pmang" />
+	
+	<!-- 웹소켓 -->
+	<websocket:handlers>
+		<websocket:mapping handler="talkHandler" path="/talk" /> <!-- path에 요청이 오면 talkHandler를 처리하겠다. -->
+		<websocket:handshake-interceptors>
+	         <beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" /> <!-- Http의 Session을 낚아채서 websocket으로 가져온다. -->
+	    </websocket:handshake-interceptors>
+		<websocket:sockjs />
+	</websocket:handlers>
+    
+	<beans:bean id="talkHandler" class="talk.handler.TalkHandler"></beans:bean>
+
 	
 	
 	
