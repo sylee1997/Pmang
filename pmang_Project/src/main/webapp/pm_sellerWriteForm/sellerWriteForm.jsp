@@ -95,6 +95,7 @@
 							<div class="itemSubjectText_div">
 								<div class="itemSubjectText">
 									<input type="text" name="subject" maxlength="40" placeholder="상품 제목을 입력해주세요." class="itemSubject_input">
+									<a href="#"><img id="textRemove" src="/pmang/image/textRemove.png"></a>
 								</div>
 								<div class="textLength" id="textLength">
 								(0/40)
@@ -106,12 +107,15 @@
 							- 유효성검사이벤트시점(moutse가 out되었을 때.)
 							  
 							- 해당 클래스명에 대한 css는 미리 걸어두었습니다
+							-->
 							
 							<div class="itemSubjectDiv">
 								상품명을 2자 이상 입력해주세요.
 							</div>
-							 -->
+							
 						</div>
+						
+						
 					</li>
 					
 					<!-- 카테고리 -->
@@ -129,11 +133,11 @@
 										</li>
 										
 										<li class="category1_li">
-											<button type="button" name="category1" id="category1_2" class="category1_Btn">디지털 / 가전</button>
+											<button type="button" name="category1" id="category1_2" class="category1_Btn">디지털/가전</button>
 										</li>
 										
 										<li class="category1_li">
-											<button type="button" name="category1" id="category1_3" class="category1_Btn">도서 / 티켓</button>
+											<button type="button" name="category1" id="category1_3" class="category1_Btn">도서/티켓</button>
 										</li>
 										
 										<li class="category1_li">
@@ -141,15 +145,15 @@
 										</li>
 										
 										<li class="category1_li">
-											<button type="button" name="category1" id="category1_5" class="category1_Btn">스포츠 / 레저</button>
+											<button type="button" name="category1" id="category1_5" class="category1_Btn">스포츠/레저</button>
 										</li>
 										
 										<li class="category1_li">
-											<button type="button" name="category1" id="category1_6" class="category1_Btn">뷰티 / 미용</button>
+											<button type="button" name="category1" id="category1_6" class="category1_Btn">뷰티/미용</button>
 										</li>
 										
 										<li class="category1_li">
-											<button type="button" name="category1" id="category1_7" class="category1_Btn">유아 / 출산</button>
+											<button type="button" name="category1" id="category1_7" class="category1_Btn">유아/출산</button>
 										</li>
 										
 										<li class="category1_li">
@@ -157,18 +161,32 @@
 										</li>
 									</ul>
 								</div>
-								<div class="categoryArea">중분류 선택</div>
-								<div class="categoryArea">소분류 선택</div>
+								
+								<div class="categoryArea">
+								<span id="seller_categorySpanM">중분류 선택</span>
+									<ul class="category2" id="category2">
+										
+									</ul>
+								</div>
+								
+								<div class="categoryArea">
+								<span id="seller_categorySpanS">소분류 선택</span>
+									<ul class="category3" id="category3">
+										
+									</ul>
+								</div>
+								
+							</div><!-- categoryChoice_div -->
 								<!-- ajax이용 -->
 								<!-- 준분류 - 카테고리1번에서 항목을 클릭하면, div의 text를 지우고, 카테고리에 해당하는 데이터를 위에서 사용한 ul과 li 태그를 이용하여 append한다. -->
 								<!-- 소분류는 중분류를 클릭했을 때, 변경된다. -->
 								<!-- 생성한 ul과 li 태그의 class 값은 카테고리1 과 동일하게 하여 css속성을 따라가도록 한다. -->
-							</div>
-							<h3 class="selectCategory">선택한 카테고리 : 
-							<b id="choice"></b>	
-							</h3>
-						</div>
+								<h3 class="selectCategory">선택한 카테고리 : 
+									<b id="choice"></b>	
+								</h3>
+						</div><!-- categoryArea_div -->
 					</li>
+					
 					
 					<!-- location(동 까지만 입력하게 되어있습니다.) -->
 					<li class="item_li">

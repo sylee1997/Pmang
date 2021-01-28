@@ -99,7 +99,7 @@ $(document).ready(function(){
 			$('.detailItem').append(div);
 		}		
 	}else if($('.select1').text() == '디지털/가전'){
-		for(var i = 0; i < disital.length; i++){
+		for(var i = 0; i < digital.length; i++){
 			var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + fashion[i] + '</a></div>');
 			$('.detailItem').append(div);
 		}		
