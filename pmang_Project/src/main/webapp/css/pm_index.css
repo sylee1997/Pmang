@@ -1,0 +1,501 @@
+@charset "UTF-8";
+
+/* 가운데 정렬 */
+
+#wrap {
+width: 1300px;
+   height: 100%;
+   min-width: 1024px;
+   margin: 0 auto;
+}
+
+/* header부분 */
+#header{
+	position: -webkit-sticky;
+	position: sticky;
+	height : 150px;
+	top: 0;
+	z-index:20;
+}
+
+/* 카테고리 */
+#categoryDiv { /* 카테고리 기본 설정들 */
+	font-size: 13px;	/* 폰트사이즈 */
+	font-weight: bold;
+	color: green;
+	text-indent: 2em;/* 글자 앞 공백 */
+}
+
+#categoryDiv a {
+	text-decoration: none; /* 카테고리 a태그 text-style */
+	display: block; /* a태그 클릭범위 : 블럭 */
+}
+
+#categoryDiv ul { /* 카테고리 list스타일, 기본공백 지움 */
+	list-style-type: none;
+	margin: 0px; 
+	padding: 0px; 
+	
+}
+.category>li {/* [카테고리] */
+	float: left;
+	width: 180px;
+	line-height: 40px;
+	position: relative;
+}
+.category>li a {
+	display: block;/* a태그 선택범위 블럭 */
+}
+.category>li:hover .category1Menu {/* 카테고리 hover → 카테고리1 펼쳐짐 */
+    left: 0;
+}
+
+/* 카테고리1 */
+.category1Menu {
+	color: green;
+	position: absolute;
+	left: -9999px; /* 숨김 */
+	background: white;
+	width: 180px;
+	text-indent: 2em;/* 글자 앞 공백 */
+}
+.category1Menu>li:hover .category2Menu {/* 카테고리1 hover → 카테고리2 펼쳐짐 */
+   left: 100%;
+}
+.category1Menu a {/* 하위 a태그 전부 적용 */
+	color: black;
+}
+.category1Menu a:hover {/* 하위 a태그 전부 적용 */
+	color: white; 
+	background: green;
+}
+/* 카테고리2 */
+.category2Menu {
+	position: absolute;
+	top: 0px;
+	left: -9999px; /* 숨김 */
+	background: white;
+	width: 180px;
+}
+.category2Menu>li:hover .category3Menu {/* 카테고리2 hover → 카테고리3 펼쳐짐 */
+    left: 100%;
+}
+/* 카테고리3 */
+.category3Menu {
+	position: absolute;
+	top: 0px;
+	left: -9999px; /* 숨김 */
+	background: white;
+	width: 180px;
+}
+/* ---------------- */
+.header_logo {
+  display: flex;
+  align-items: center;
+}
+.header_logo .logo-wrap {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* padding-right: 100px; */
+}
+.header_logo .logo-wrap img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+.header_logo .logo-wrap h2 {
+  font-size: 30px;
+}
+.header_logo .search-wrap {
+  width: 45%;
+}
+.header_logo .search-wrap input {
+  width: 100%;
+  padding: 13px;
+  border: 2px solid red;
+}
+.header_logo nav {
+  width: 35%;
+}
+.header_logo ul {
+  list-style: none;
+  display: flex;
+  /* justify-content: space-evenly; */
+  padding-left: 80px;
+}
+.header_logo ul li {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  cursor: pointer;
+  padding-right: 20px;
+}
+.header_logo ul li .vertical {
+  opacity: 0.7;
+}
+.header_logo ul li img {
+  width: 20px;
+  height: 20px;
+}
+
+
+
+/* container부분 */
+
+#container {
+   position: relative;
+   width: 100%;
+   height: 5729px;
+}
+/* .content { 이거 몬지 모르겠어요..	
+	float: left;
+	width: 1180px;
+	overflow: auto;
+}
+ */
+ 
+ 
+#slide {
+    position: relative;
+    max-width: 64.375rem;
+    margin: 0px auto;
+    height: 300px;
+    background: white;
+}
+
+.slideInitial {
+    position: relative;
+    display: block;
+}
+
+#slideAct {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+#selection {
+    width: 1024px;
+    margin: auto;
+    padding: 3.5rem 0px 1.5rem;
+}
+
+.selection1{
+    position: relative;
+    overflow: hidden;
+}
+
+.selection3{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.slide_wrap {
+   /* background: red; */
+   /* width: 1000px; */
+   margin: 0;
+   padding: 0;
+}
+
+.slide_item {
+   /* background: green; */
+   width: 1024px;
+   height: 200px;
+   list-style: none;
+   float: left;
+   text-align: center;
+   line-height: 50px;
+}
+
+.slide_item a {
+   text-decoration: none;
+   color: black;
+}
+
+/* 게시물 */
+.itemFrame:nth-child(5n) {
+    margin-right: 0px;
+}
+
+.itemFrame {
+    width: 196px;
+    margin-right: 11px;
+    margin-bottom: 11px;
+}
+
+.itemLink {
+    border: 1px solid rgb(238, 238, 238);
+    background: rgb(255, 255, 255);
+    display: block;
+    color: rgb(33, 33, 33);
+    text-decoration: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.itemImageArea {
+    position: relative;
+    width: 100%;
+    height: 194px;
+}
+
+
+.itemImageArea>img {
+   vertical-align: bottom;
+   border-style: none;
+}
+
+.imageAreaDiv {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.itemContent {
+    padding: 15px 10px;
+    height: 80px;
+}
+
+.itemName {
+    position: relative;
+    font-size: 14px;
+    padding-bottom: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align:left;
+}
+
+.itemPriceAndTime {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 20px;
+}
+
+.itemPrice {
+    font-size: 16px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.itemTime {
+    font-size: 12px;
+    color: rgb(136, 136, 136);
+}
+/* #selection {		서영씨가 잡아주신거
+	overflow : scroll;
+	-ms-overflow-style: none;
+} */
+
+::-webkit-scrollbar {
+
+display:none;
+
+} 
+
+
+
+/* aside부분 */
+#aside {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 150px;
+	width: 100px;
+	height : 550px;
+	float: right;
+	
+}
+
+.asideDiv {
+	position : absolute;
+}
+
+.likebag {
+	font-size : 10pt;
+	font-weight : bold;
+	border : 1px solid rgb(204, 204, 204);
+	width : 100px;
+	height: 50px;
+	text-align : center;
+}
+
+.bag_click {
+	font-weight: normal;
+	font-size: 11pt;
+}
+
+.bag_clickA {
+	text-decoration: none;
+	color : #00C6ED;
+}
+
+.recentlyLook {
+	margin-top : 5px;
+	width : 100px;
+	height: 330px;
+	border : 1px solid rgb(204, 204, 204);
+	text-align : center;
+	font-weight : bold;
+	font-size : 10pt;
+}
+
+.goods {
+	position : relative;
+	margin-left: 8px;
+	
+}
+
+#goods_img1 {
+	margin-bottom: 5px;
+}
+
+#goods_img2 {
+	margin-bottom: 5px;
+}
+
+.topBtn {
+	text-align : center;
+	margin-top : 5px;
+	border : 1px solid rgb(204, 204, 204);
+	height: 30px;
+	padding-top: 10px;
+}
+
+#topA {
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.pmangTok {
+	margin-top : 10px;
+	height: 90px;
+	text-align: center;
+	font-weight: bold;
+	color: green;
+}
+
+.pmangTokA {
+	text-decoration: none;
+}
+
+
+/* footer */
+.footer {
+	clear:both;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    background: rgb(255, 255, 255);
+    
+}
+
+.footer a {
+    color: rgb(33, 33, 33);
+    text-decoration: none;
+    cursor: pointer;
+    background-color: transparent;
+    
+    webkit-box-flex: 1;
+    flex-grow: 1;
+    text-align: center;
+    
+}
+
+.cIPDuS {
+    display: block;
+    font-size: 13px;
+    color: rgb(77, 77, 77);
+    position: relative;
+}
+
+.cgGBdw {
+    display: block;
+    font-size: 13px;
+    color: rgb(77, 77, 77);
+    position: relative;
+}
+
+.footerCategoryArea {
+    width: 100%;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    border-top: 1px solid rgb(238, 238, 238);
+    border-bottom: 1px solid rgb(238, 238, 238);
+}
+
+.footerCategory {
+    height: 64px;
+    width: 1024px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.cIPDuS::after{
+
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 1px;
+    height: 14px;
+    border-right: 1px solid rgb(204, 204, 204);
+    box-sizing: border-box;
+}
+
+.cgGBdw::after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 1px;
+    height: 14px;
+    border-right: 1px solid rgb(204, 204, 204);
+    box-sizing: border-box;
+}
+
+::after {
+    box-sizing: border-box;
+}
+
+.footerContent{
+	display: flex;
+}
+
+.footerContentArea {
+    padding: 32px 0px 24px;
+
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 36px;
+    
+}
+
+.footerContentMarkTitle {
+    line-height: 1.57;
+    letter-spacing: -0.8px;
+}
+
+.footerCompanyInfo {
+	width: 1024px;
+    font-size: 13px;
+    color: rgb(153, 153, 153);
+}
+
+.infomain{
+	line-height: 1.57;
+    margin-bottom: 24px;
+}
