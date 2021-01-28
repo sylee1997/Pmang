@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="/pmang/css/itemView.css">
 <style>
 </style>
+
 <div id="itemViewDiv">
    <div class="selection01">
 	<div class="categoryDiv">
@@ -88,70 +89,6 @@
 	</div>
 	</div>
 
-<!-- 기존 코드 백업 
-
-
-	<div id="categoryDiv">
-		
-		<div id="categoryArea">
-			
-			<div class="homeicon">
-				<img src="/pmang/image/home.png" alt="홈" width="20" height="20">Home</div>
-				
-			
-		
-			<div class="categoryArea1">
-				<div class="category">
-					<img src="/pmang/image/arrow.png" alt="화살표" width="20" height="20">
-					디지털/가전
-					<img src="/pmang/image/down.png" alt="아래 화살표" width="20" height="20">
-					<div class="categoryDetail">
-						<a href="#">패션</a>
-						<a href="#">리빙</a>
-						<a href="#">디지털/가전</a>
-						<a href="#">뷰티/미용</a>
-						<a href="#">육아/출산</a>
-						<a href="#">스포츠/레저</a>
-						<a href="#">도서/음반</a>
-						<a href="#">기타/나눔</a>
-					</div>
-				</div>
-			</div>
-			
-			<div class="categoryArea2">
-				<div class="category">
-					<img src="/pmang/image/arrow.png" alt="화살표" width="20" height="20">
-					컴퓨터/주변기기
-					<img src="/pmang/image/down.png" alt="아래 화살표" width="20" height="20">
-					<div class="categoryDetail">
-						<a href="#">모바일</a>
-						<a href="#">가전제품</a>
-						<a href="#">음반/영상기기</a>
-						<a href="#">컴퓨터/주변기기</a>
-						<a href="#">카메라</a>
-						<a href="#">게임</a>					
-					</div>
-				</div>
-			</div>
-			
-			<div class="categoryArea3">
-				<div class="category">
-					<img src="/pmang/image/arrow.png" alt="화살표" width="20" height="20">
-					노트북/넷북
-					<img src="/pmang/image/down.png" alt="아래 화살표" width="20" height="20">
-					<div class="categoryDetail">
-						<a href="#">데스크탑</a>
-						<a href="#">키보드/마우스</a>
-						<a href="#">모니터</a>
-						<a href="#">CPU/메인보드/램/저장장치</a>
-						<a href="#">노트북/넷북</a>
-						<a href="#">기타 액세서리</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> -->
-	
 	
 	<!-- 상품 영역 -->
 	<div>
@@ -257,7 +194,9 @@
 	<div id="productInfo">
 		<div class="productInfo">
 			<div class="productInfoDiv">거래지역</div>
+
 			<div><a href="#">사용자가 지정한 위치</a></div>			
+
 		</div>
 		<div class="productInfo border">
 			<div class="productInfoDiv">카테고리</div>

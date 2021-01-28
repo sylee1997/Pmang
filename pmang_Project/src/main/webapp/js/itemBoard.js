@@ -1,46 +1,4 @@
-$(document).ready(function(){
-	
-	$('.contentMenu').click(function(){
-		var contentSection = $(this).attr('data-tab');/* 매뉴탭 data-tab값 */
-		/* content 탭메뉴 선택 */
-		$('li').removeClass('current');
-		$(this).addClass('current');
-		
-		/* To스크롤 */
-		var offset = $("#"+contentSection).offset();
-        $('html, body').animate({scrollTop : offset.top}, 400);
-		
-		
-	});
-	/* 문의댓글 글자 수 제한 */
-	$('#replyText').on('keyup', function(e) {
-		var replyText = $(this).val();
-		$(this).height(((replyText.split('\n').length + 1) * 1.5) + 'em');
-		$('#count').html(replyText.length);	
-		if(replyText.length >= 300){
-			 alert("최대 300자까지 입력 가능합니다.");
-			 $('#count').css('color', 'red');
-		}else
-			$('#count').css('color', 'black');
-
-		
-	});
-	$('#count').keyup();
-	
-	/* 댓글등록버튼 */
-	$('#replyBtn').click(function() {
-		/* 댓글 공백 유효성 검사 */
-		if($('#replyText').val()==''){
-			alert('댓글내용을 입력해주세요');
-			 $('#replyText').focus();
-		}
-	});
-
-});
-
-
-
-/* 카테고리 펼쳐지는 부분*/
+/*카테고리 펼쳐지는 부분*/
 $('.selectItem1').hover(function(){
 	$('.down1').css('display', 'block')
 },
@@ -114,50 +72,68 @@ var others = ['피망나눔','차량,오토바이', '기타',''];
 
 
 $(document).ready(function(){
+	//위치 검색
+	if (navigator.geolocation) { // GPS를 지원하면
+		    navigator.geolocation.getCurrentPosition(function(position) {
+		    	var lat = position.coords.latitude; //위도
+		    	var lon = position.coords.longitude; //경도
+		      	$('#lat').val(lat);
+		    	$('#lon').val(lon);
+		    }, function(error) {
+		      console.error(error);
+		    }, {
+		      enableHighAccuracy: false,
+		      maximumAge: 0,
+		      timeout: Infinity
+		    });
+		  } else {
+		    alert('GPS를 지원하지 않습니다');
+		  }
+	//처음 카테고리 창 구현
 	$('.secondCategory').hide();
 	$('.thirdCategory').hide();
 	//alert($('.select1').text());
-if($('.select1').text() == '패션'){
-	for(var i = 0; i < fashion.length; i++){
-		var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + fashion[i] + '</a></div>');
-		$('.detailItem').append(div);
-	}		
-}else if($('.select1').text() == '디지털/가전'){
-	for(var i = 0; i < disital.length; i++){
-		var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + fashion[i] + '</a></div>');
-		$('.detailItem').append(div);
-	}		
-}else if($('.select1').text() == '도서/티켓'){
-	for(var i = 0; i < book.length; i++){
-		var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + book[i] + '</a></div>');
-		$('.detailItem').append(div);
+	if($('.select1').text() == '패션'){
+		for(var i = 0; i < fashion.length; i++){
+			var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + fashion[i] + '</a></div>');
+			$('.detailItem').append(div);
+		}		
+	}else if($('.select1').text() == '디지털/가전'){
+		for(var i = 0; i < disital.length; i++){
+			var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + fashion[i] + '</a></div>');
+			$('.detailItem').append(div);
+		}		
+	}else if($('.select1').text() == '도서/티켓'){
+		for(var i = 0; i < book.length; i++){
+			var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + book[i] + '</a></div>');
+			$('.detailItem').append(div);
+		}
+	}else if($('.select1').text() == '리빙용품'){
+		for(var i = 0; i < living.length; i++){
+			var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + living[i] + '</a></div>');
+			$('.detailItem').append(div);
+		}
+	}else if($('.select1').text() == '스포츠/레저'){
+		for(var i = 0; i < sports.length; i++){
+			var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + sports[i] + '</a></div>');
+			$('.detailItem').append(div);
+		}
+	}else if($('.select1').text() == '뷰티/미용'){
+		for(var i = 0; i < beauty.length; i++){
+			var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + beauty[i] + '</a></div>');
+			$('.detailItem').append(div);
+		}
+	}else if($('.select1').text() == '유아/출산'){
+		for(var i = 0; i < child.length; i++){
+			var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + child[i] + '</a></div>');
+			$('.detailItem').append(div);
+		}
+	}else if($('.select1').text() == '기타'){
+		for(var i = 0; i < others.length; i++){
+			var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + others[i] + '</a></div>');
+			$('.detailItem').append(div);
+		}
 	}
-}else if($('.select1').text() == '리빙용품'){
-	for(var i = 0; i < living.length; i++){
-		var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + living[i] + '</a></div>');
-		$('.detailItem').append(div);
-	}
-}else if($('.select1').text() == '스포츠/레저'){
-	for(var i = 0; i < sports.length; i++){
-		var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + sports[i] + '</a></div>');
-		$('.detailItem').append(div);
-	}
-}else if($('.select1').text() == '뷰티/미용'){
-	for(var i = 0; i < beauty.length; i++){
-		var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + beauty[i] + '</a></div>');
-		$('.detailItem').append(div);
-	}
-}else if($('.select1').text() == '유아/출산'){
-	for(var i = 0; i < child.length; i++){
-		var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + child[i] + '</a></div>');
-		$('.detailItem').append(div);
-	}
-}else if($('.select1').text() == '기타'){
-	for(var i = 0; i < others.length; i++){
-		var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + others[i] + '</a></div>');
-		$('.detailItem').append(div);
-	}
-}
 });
 
 
@@ -175,6 +151,7 @@ $('.selectItem1').on('click', 'a', function(){
 	$('.detailItemList3').remove();
 	$('.secondCategory').hide();
 	$('.thirdCategory').hide();
+	$('.down1').hide();
 	
 	/* if($('.top2').text().trim().length){
 		//alert($('.top2').text())
@@ -411,6 +388,7 @@ $('.selectItem2').on('click', 'a', function(){
 	$('.detailItemList3').remove();
 	$('.thirdCategory').hide();
 	$('.detailItem').show();
+	$('.down2').hide();
 	
 	if($('.select2').text() == '여성의류' || $(this).text() == '여성의류'){
 		for(var i = 0; i < women.length; i++){
@@ -585,8 +563,62 @@ $('.selectItem3').on('click', 'a', function(){
 	$('.select3').removeClass('select3');
 	$(this).addClass('select3');
 	$('.top3').html($(this).text() + img);
+	$('.down3').hide();
 		
 });
+
+
+
+/* 위치 모달 */
+$('.locationSearch').click(function(){
+	 $('.locationModal').css('display','block'); 
+});
+
+$('#x').click(function(){
+	$('.locationModal').css('display','none');
+});
+
+$(document).click(function(e){
+	if($('.locationModal').is(e.target)){
+		$('.locationModal').css('display','none'); 
+	}
+}); 
+
+
+/* 위치 검색 */
+
+$('#gpsBtn').click(function(){
+	 var position = new daum.maps.LatLng($('#lat').val(), $('#lon').val()); 
+	 
+	 searchDetailAddrFromCoords(position, function(result, status) {
+	        if (status === kakao.maps.services.Status.OK) {
+	          
+	            var detailAddr = result[0].address.address_name;
+	           
+	            $('.detailAddr').html(detailAddr);
+	            $('.locationModal').css('display','none');
+	        }   
+	    });
+	 
+});
+
+
+$('#mainLocBtn').click(function(){
+	  window.open("mainLoc.jsp", "주요위치", "width=1024, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );  
+});
+
+$('#mapBtn').click(function(){
+	  window.open("map.jsp?lon=" + $('#lon').val() + "&lat=" + $('#lat').val(), "지도띄우기", "width=1000, height=800, toolbar=no, menubar=no, scrollbars=no, resizable=yes,left=500, top=100");
+});
+
+
+function searchDetailAddrFromCoords(coords, callback) {
+	var geocoder = new kakao.maps.services.Geocoder();
+	geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+}
+
+
+
 
 
 

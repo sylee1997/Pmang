@@ -6,14 +6,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+
 @RequestMapping(value="member")
 public class MemberController {
-	
-	
+
 	@RequestMapping(value="checkPost", method=RequestMethod.GET)
 	public String checkPost() {
 		return "/pm_writeForm/checkPost";
 	}
+
 	
 	@RequestMapping(value="sellerWriteForm", method=RequestMethod.GET)
 	public String sellerWriteForm(Model model) {
@@ -29,4 +30,5 @@ public class MemberController {
 	
 	
 	
+
 }

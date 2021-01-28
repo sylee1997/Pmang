@@ -558,10 +558,10 @@
    </div><!-- header -->
       <!-- ----------------헤더 -->
       
+
   	 <div id="wrap">
       <div id="container">
          <jsp:include page="${display}"/>
-       
       </div><!-- container -->
 
 
