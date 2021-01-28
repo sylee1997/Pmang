@@ -6,7 +6,7 @@
 </style>
 
 <div id="tabArea">
-	<div id="tabDiv">
+	<div id="tabDiv">  
 		
 		
 		    <input id="tab1" class="tabs" type="radio" name="tabName" value="1" checked>
