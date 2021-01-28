@@ -3,9 +3,9 @@
 .project
 .springBeans
 .settings/
+*.properties
 target/
 src/test/
 src/main/resources/META-INF/
 src/main/resources/log4j.xml
-*.properties
 /Servers/
