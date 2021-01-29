@@ -8,6 +8,27 @@
 <link rel="stylesheet" href="/pmang/css/sellerWriteForm.css">
 </head>
 <body>
+<input type="hidden" id="imageCountHidden" value=0>
+<div class="searchlocationModal">
+	<section class="searchlocationContent">
+		<header id="searchlocationHeader">주소 검색 <button type="button" class="searchlocationCloseBtn"></button></header>
+		<form class="searchlocationForm">
+			<input type="text" placeholder="동(읍/면/리) 입력해주세요." value="">
+			<button type="submit" class="searchlocationBtn"></button>
+		</form>
+	</section>
+
+</div>
+
+<div class="recentlyModal">
+	<section class="searchlocationContent">
+		<header>최근지역 <button type="button" class="searchlocationCloseBtn"></button></header>
+		<ul class="recentlyUl">
+			
+		</ul>
+	</section>
+
+</div>
 <!-- 컨테이너 안의 display 에 들어갈 내용 -->
 <form id="sellerWriteForm">
 
@@ -53,7 +74,6 @@
 						<span>*</span>
 						<small class="imageCount">
 						(0/3)<br>
-						여기는 나중에 사진 이미지 실제로가져오면수정
 						</small>
 						</div>
 						
@@ -61,12 +81,13 @@
 							<ul class="imageChoice_ul">
 								<li class="imageChoice_li">
 									이미지 등록
-									<input type="file" name="img[]" accept="image/jpg, image/jpeg, image/png" multiple>
+									<input type="file" class="imageChoice" name="img[]" accept="image/jpg, image/jpeg, image/png" multiple>
 									<!-- 추후에 이미지 3개까지 들어갈 수 있도록 코드작성해야함 -->
 									<!-- 또한 name 변수는 DTO에 데이터가 들어가지 않고 multipart로 가게하기 위해 DB 변수명이랑 다르게 하였음 -->
 								</li>
 								<!-- 그리고 이위치에 파일이 선택되었을 때(이벤트 발생) li태그가 추가된다. 어떠한 태그를 추가야해야하는지
 								번개장터에 잘 나와있으므로, f12를 눌러서 추가되는 태그를 확인해봐야한다.  -->
+								
 							</ul>
 							
 							<div class="imagecontent">
@@ -95,7 +116,7 @@
 							<div class="itemSubjectText_div">
 								<div class="itemSubjectText">
 									<input type="text" name="subject" maxlength="40" placeholder="상품 제목을 입력해주세요." class="itemSubject_input">
-									<a href="#"><img id="textRemove" src="/pmang/image/textRemove.png"></a>
+									<a id="textRemove"><img id="textRemoveClick" src="/pmang/image/textRemove.png" width="15px" height="15px"></a>
 								</div>
 								<div class="textLength" id="textLength">
 								(0/40)
@@ -108,7 +129,6 @@
 							  
 							- 해당 클래스명에 대한 css는 미리 걸어두었습니다
 							-->
-							
 							<div class="itemSubjectDiv">
 								상품명을 2자 이상 입력해주세요.
 							</div>
@@ -196,13 +216,14 @@
 						
 						<div class="locationArea_div">
 							<div class="locationArea">
-								<button type="button" class="locationSearchBtn">내 위치</button>
-								<button type="button" class="locationSearchBtn">최근 지역</button>
-								<button type="button" class="locationSearchBtn">주소 검색</button>
+								<button type="button" class="locationSearchBtn" id="mylocation">내 위치</button>
+								<button type="button" class="locationSearchBtn" id="recentlylocation">최근 지역</button>
+								<button type="button" class="locationSearchBtn" id="searchlocation">주소 검색</button>
 							</div>
 							
 							<input type="text" name="location" readonly placeholder="선호 거래 지역을 검색해주세요." class="location_input" value="">
 							<!-- 
+							클릭 전에 회원가입할 때 입력한 주소를 디비로 꺼내서 넣어놓자.
 							내위치 - 클릭하면 내 위치가  input의 value 로 들어간다. ex)경기도 안양시 만안구 안양동
 							최근 지역 - 거래지역으로 사용하였던 리스트들이 불러진다. (이걸하려면 DB에 location 이력을 남겨야하는데 우린 안되어있어서 보류.)
 							주소 검색 - 모달창이 하나 뜨고 주소를 입력하고 돋보기를 누르면, 주소 리스트들이 불러와진다. 그 후, 리스트 중 하나를 선택하면 value에 값이 들어간다. 
@@ -355,6 +376,7 @@
 </form>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=26152d095dcbd98e75d86172615ba45b&libraries=services"></script>
 <script type="text/javascript" src="../js/seller.js"></script>
 </body>
 </html>

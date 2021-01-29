@@ -3,9 +3,115 @@
 $(document).ready(function(){
 	$('#category2').hide();
 	$('#category3').hide();
+	
+	//$('.imageCount').text('('+$('#imageCountHidden').val()+'/3)');
 });
 
+
 //이미지 등록할 때 사진 리스트 추가 , 사진 갯수 (0/3) 구현해야함
+
+$('.imageChoice').change(function(e){
+	var files = e.target.files;
+	var arr = Array.prototype.slice.call(files);
+
+	//업로드 가능 파일인지 체크
+	for(var i=0; i<files.length; i++){
+		if(!checkExtension(files[i].name,files[i].size)){
+			return false;
+		}
+	}
+	
+	
+	if($('#imageCountHidden').val() == 1){
+		if(files.length < 3){
+			checkNumber(files, arr);
+		}else{
+			alert('사진 첨부는 최대 3장까지 가능합니다.')
+		}
+	}else if($('#imageCountHidden').val() == 2){
+		if(files.length < 2){
+			checkNumber(files, arr);
+		}else {
+			alert('사진 첨부는 최대 3장까지 가능합니다.')
+		}
+	}else if($('#imageCountHidden').val() == 3){
+		alert('사진 첨부는 최대 3장까지 가능합니다.')
+	}else{
+		checkNumber(files, arr);
+	}
+	
+	
+});
+
+
+function checkNumber(files, arr){
+	if(files.length > 3){
+		alert('사진 첨부는 최대 3장까지 가능합니다.')
+	}else{
+		$('#imageCountHidden').val(parseInt($('#imageCountHidden').val()) + files.length);
+		preview(arr);
+	}
+}
+
+function checkExtension(fileName, fileSize){
+
+    var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+    var maxSize = 20971520;  //20MB
+    
+    if(fileSize >= maxSize){
+      alert('파일 사이즈 초과');
+      $("input[type='file']").val("");  //파일 초기화
+      return false;
+    }
+    
+    if(regex.test(fileName)){
+      alert('업로드 불가능한 파일이 있습니다.');
+      $("input[type='file']").val("");  //파일 초기화
+      return false;
+    }
+    return true;
+}
+  
+
+function preview(arr){
+	if(parseInt($('#imageCountHidden').val()) <= 3){
+
+		arr.forEach(function(f){
+      
+      //파일명이 길면 파일명...으로 처리
+      var fileName = f.name;
+      if(fileName.length > 10){
+        fileName = fileName.substring(0,7)+"...";
+      }
+      
+      //div에 이미지 추가
+      var str = '<li class="imgli">';
+      /*str += '<span>'+fileName+'</span><br>';*/
+      
+      //이미지 파일 미리보기
+      if(f.type.match('image.*')){
+        var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+        reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+          //str += '<button type="button" class="delBtn" value="'+f.name+'" style="background: red">x</button><br>';
+          str += '<img src="'+e.target.result+'" title="'+f.name+'" width=195 height=202 />';
+          str += '</li></div>';
+          $(str).appendTo('.imageChoice_ul');
+        } 
+        reader.readAsDataURL(f);
+      }else{
+        str += '<img src="/pmang/image/bench.jpg" title="'+f.name+'" width=195 height=202 />';
+        $(str).appendTo('.imageChoice_ul');
+      }
+    
+    });//arr.forEach
+		
+		$('.imageCount').text('('+String($('#imageCountHidden').val())+'/3)');
+  }else{
+	  alert('사진 첨부는 최대 3장까지 가능합니다.');
+  }
+}
+
+
 
 
 //카테고리
@@ -348,8 +454,8 @@ $('#category3').on('click','button',function(){
 
 
 
-//제목 글자수 count
-
+//제목 글자수 count, 유효성 검사, input이벤트
+//최소입력수, 최대입력수
 $('input[name=subject]').on('keyup', function() {
 	var subjectText = $(this).val();
 	$('#textLength').html('('+subjectText.length + '/40)');   
@@ -364,15 +470,48 @@ $('input[name=subject]').on('keyup', function() {
 		$('.itemSubjectDiv').hide();
 		$('.itemSubjectText').css('border-color','rgb(195, 194, 204)');
 		$('input[name=subject]').css('border-color','rgb(195, 194, 204)');
-		$('#textRemove').show();
 	}else if(subjectText.length > 0 || subjectText.length < 2){
 		$('.itemSubjectDiv').show();
 		$('.itemSubjectText').css('border-color','green');
 		$('input[name=subject]').css('border-color','green');
+		$('#textRemove').hide();
+	}
+	
+	if(subjectText.length != 0){
+		$('#textRemove').show();
 	}
       
 });
 
+//최소 입력수
+$('input[name=subject]').click(function(){
+	var subjectText = $(this).val();
+	if(subjectText.length > 1){
+		$('.itemSubjectText').css('border-color','rgb(195, 194, 204)');
+		$('input[name=subject]').css('border-color','rgb(195, 194, 204)');
+		$('.itemSubjectDiv').hide();
+	}
+});
+
+
+$('input[name=subject]').focus(function(){
+	$('.itemSubjectText').css('border-color','rgb(195, 194, 204)');
+	$('input[name=subject]').css('border-color','rgb(195, 194, 204)');
+	$('.itemSubjectDiv').hide();
+	
+});
+
+//x눌렀을 때 상품제목 글자 다 없애기
+$("#textRemoveClick").click(function(){
+	$('input[name=subject]').val('');
+	$('#textRemove').hide();
+});
+
+
+
+
+
+//상품내용
 $('textarea[name=content]').on('keyup', function() {
 	var contentText = $(this).val();
 	$('#contentLength').html('('+contentText.length + '/2000)');   
@@ -384,23 +523,6 @@ $('textarea[name=content]').on('keyup', function() {
 		$('#contentLength').css('color', 'black');
       
 });
-
-//제목 수 입력시키기
-$('input[name=subject]').click(function(){
-		var subjectText = $(this).val();
-		if(subjectText.length < 2 || subjectText.length == 0){
-			$('.itemSubjectText').css('border-color','green');
-			$('input[name=subject]').css('border-color','green');
-			$('.itemSubjectDiv').show();
-		}else{
-			$('.itemSubjectText').css('border-color','rgb(195, 194, 204)');
-			$('input[name=subject]').css('border-color','rgb(195, 194, 204)');
-			$('.itemSubjectDiv').hide();
-		}
-});
-
-
-
 
 
 
@@ -431,8 +553,10 @@ $('#priceparent').on('keyup','input',function(){
 	
 	if(priceVal < 100){
 		$('#priceDiv').text('100원 이상 입력해주세요.');
+		$('.price_input').css('border','1px solid green');
 	}else{
 		$('#priceDiv').text('');
+		$('.price_input').css('border','1px solid rgb(195, 194, 204)');
 	}
 	
 	/*$('input[name=price]').val(addComma($('input[name=price]').val()));*/
@@ -491,6 +615,79 @@ $('#hashtag_div_this').on('click','#hashtag_closeBtn',function(){
 });
 
 
+//내 위치
+$("#mylocation").click(function(){
+	if (navigator.geolocation) { // GPS를 지원하면
+	    navigator.geolocation.getCurrentPosition(function(position) {
+	    	var lat = position.coords.latitude; //위도
+	    	var lon = position.coords.longitude; //경도
+	      	positionCheck(lat, lon);
+	    }, function(error) {
+	      console.error(error);
+	    }, {
+	      enableHighAccuracy: false,
+	      maximumAge: 0,
+	      timeout: Infinity
+	    });
+	  } else {
+	    alert('현재 위치를 가져올 수 없습니다. \n 브라우저 설정의 위치정보 사용을 허용으로 바꾸어 주시거나 GPS사용을 on으로 변경 후 다시 시도해 주세요.');
+	  }
+	
+});
+
+function positionCheck(lat, lon){
+	var position = new daum.maps.LatLng(lat, lon); 
+	searchDetailAddrFromCoords(position, function(result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+          
+            var detailAddr = result[0].address.address_name;
+           
+            $('.location_input').val(detailAddr);
+        }   
+    });
+}
+
+function searchDetailAddrFromCoords(coords, callback) {
+	var geocoder = new kakao.maps.services.Geocoder();
+	geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+}
+
+//주소 검색
+$("#searchlocation").click(function(){
+	$('.searchlocationModal').css('display', 'flex');
+	$('.searchlocationModal').on('scroll touchmove mousewheel', function(e){
+		e.preventDefault();
+		e.stopPropagation(); 
+		return false;
+	});
+});
+
+$('.searchlocationCloseBtn').click(function(){
+	$('.searchlocationModal').hide();
+	$('.recentlyModal').hide();
+	$('.searchlocationModal').off('scroll touchmove mousewheel');
+	$('.recentlyModal').off('scroll touchmove mousewheel');
+});
+
+$(document).click(function(e){
+	if($('.searchlocationModal').is(e.target)){
+		$('.searchlocationModal').hide(); 
+		$('.searchlocationModal').off('scroll touchmove mousewheel');
+	}else if($('.recentlyModal').is(e.target)){
+		$('.recentlyModal').hide(); 
+		$('.recentlyModal').off('scroll touchmove mousewheel');
+	}
+});
+
+//최근 지역
+$('#recentlylocation').click(function(){
+	$('.recentlyModal').css('display', 'flex');
+	$('.recentlyModal').on('scroll touchmove mousewheel', function(e){
+		e.preventDefault();
+		e.stopPropagation(); 
+		return false;
+	});
+});
 
 
 
