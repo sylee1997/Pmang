@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +16,7 @@
 <title>피망마켓에 오신것을 환영합니다.</title>
 </head>
 <body> 
-<form id="indexForm">
+
 <!-- 로그인 모달 -->
 <div class="loginModal">
       	<div class="loginModalContent">
@@ -96,7 +97,7 @@
       	<div class="header_logo">
             <div class="logo-wrap">
                  <img src="/pmang/image/main_logo.JPG" alt="main_logo" />
-                 <h2 style="color: green;">피망장터</h2>
+                 <h2 id="headerH2" style="color: green;">피망장터</h2>
                </div>
                <div class="search-wrap">
                  <input type="text" class="searchInput" placeholder="상품명,지역명,@상점명입력" maxlength="20"/>
@@ -137,7 +138,7 @@
               <ul>
                 <li>
                   <img src="/pmang/image/sell.png" alt="sale" width="40px" height="40px" />
-                  <span class="indexnavSpan">판매하기</span>
+                  <span class="indexnavSpan" onclick="location.href='/pmang/member/sellerWriteForm'">판매하기</span>
                 </li>
                 <li>
                   <span class="vertical">|</span>
@@ -561,19 +562,62 @@
 
   	 <div id="wrap">
       <div id="container">
+      
+      
          <jsp:include page="${display}"/>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       </div><!-- container -->
 
 
  
    </div><!-- wrap -->
-            
 
             
       
     
 
    
+    <footer class="sellerWriteForm_footer">
+			<div class="sellerWriteForm_footer_div">
+				<button type="button" class="itemWriteBtn">
+				</button>
+			</div>
+	</footer>        
    <div class="footer">
       <div class="footerCategoryArea">
          <div class="footerCategory">
@@ -641,29 +685,7 @@
          </div>
       </div>
    </div>
-</form>
 
-<script>
-      /* 인기 카테고리 슬라이드 쇼 이벤트 */
-      var ul = document.querySelector('.slide_wrap');
-      function move() {
-         var curIndex = 0;
-         setInterval(function() {
-            ul.style.transition = '0.5s';
-            ul.style.transform = "translate3d(-" + 1024 * (curIndex + 1)
-                  + "px, 0px, 0px)";
-            curIndex++;
-            if (curIndex === 4) {
-               curIndex = -1;
-            }
-         }, 1000);
-      }
-      document.addEventListener("DOMContentLoaded", function() {
-         // 
-         move();
-      });
-      /* 인기 카테고리 슬라이드 쇼 이벤트 */
-</script>
 
 
 <!-- 검색 클릭 이벤트 -->
@@ -861,8 +883,11 @@ $(document).click(function(e){
 });
 
 /* ---------------------------------------------------------------------- */
+//로고 눌렀을 때
 
-
+$('.logo-wrap').click(function(){
+	location.href='/pmang/index';
+});
 
 
 

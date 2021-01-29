@@ -1,23 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+
 <link rel="stylesheet" href="/pmang/css/sellerWriteForm.css">
-</head>
-<body>
+
 <input type="hidden" id="imageCountHidden" value=0>
 <div class="searchlocationModal">
 	<section class="searchlocationContent">
 		<header id="searchlocationHeader">주소 검색 <button type="button" class="searchlocationCloseBtn"></button></header>
-		<form class="searchlocationForm">
+		<div class="searchlocationForm">
 			<input type="text" placeholder="동(읍/면/리) 입력해주세요." value="">
 			<button type="submit" class="searchlocationBtn"></button>
-		</form>
+			<ul class="searchlocationList">
+			
+			</ul>
+		</div>
 	</section>
-
 </div>
 
 <div class="recentlyModal">
@@ -29,15 +26,13 @@
 	</section>
 
 </div>
-<!-- 컨테이너 안의 display 에 들어갈 내용 -->
-<form id="sellerWriteForm">
 
 	<div class="wirteForm_head">
 		<nav class="writeForm_nav">
 			<!-- 만약 선택한 페이지로 이동한다면,선택된 a태그의 color 를 red로 바꿔줘야한다. -->
 			<!-- 기존에 우리가 페이징 처리할때 했던것 처럼 id 를 주어서 id 가 현재페이지라면, 바꾸면될듯하다 -->
 			<div class="nav_writeForm">
-				<a class="nav_move1" href="/pmang/seller/sellerWriteForm"> 
+				<a class="nav_move1" href="/pmang/member/sellerWriteForm"> 
 				상품등록
 				</a>
 			</div>
@@ -55,13 +50,14 @@
 			</div>
 		</nav>
 	</div>
-	
+
 	<div class="writeForm_body">
-		<main class="writeForm_main">
-			<section class="main_sectionFrame">
-				<h2>기본정보
-					<span>*필수항목</span>
-				</h2>
+		<form id="sellerWriteForm">
+			<main class="writeForm_main">
+				<section class="main_sectionFrame">
+					<h2>기본정보
+						<span>*필수항목</span>
+					</h2>
 				<!-- 상품이미지 -->
 				<!-- 
 				등록하기 버튼을 눌렀을 때, 유효성 검사를 하여 이미지가 없다면 이미지등록 아래 div를 append 하고 
@@ -89,6 +85,7 @@
 								번개장터에 잘 나와있으므로, f12를 눌러서 추가되는 태그를 확인해봐야한다.  -->
 								
 							</ul>
+							<div id="imageCheck">※상품 사진을 등록해주세요.</div>
 							
 							<div class="imagecontent">
 								<b>* 상품 이미지는 640x640에 최적화 되어 있습니다.</b>
@@ -101,7 +98,7 @@
 								<br>
 								- 큰 이미지일경우 이미지가 깨지는 경우가 발생할 수 있습니다.
 								<br>
-								최대 지원 사이즈인 640 X 640 으로 리사이즈 해서 올려주세요.(개당 이미지 최대 10M)
+								최대 지원 사이즈인 640 X 640 으로 리사이즈 해서 올려주세요.(개당 이미지 최대 20M)
 							</div>
 						</div>
 					</li>
@@ -115,7 +112,7 @@
 						<div class="itemSubjectTextArea_div">
 							<div class="itemSubjectText_div">
 								<div class="itemSubjectText">
-									<input type="text" name="subject" maxlength="40" placeholder="상품 제목을 입력해주세요." class="itemSubject_input">
+									<input type="text" name="itemSubject" maxlength="40" placeholder="상품 제목을 입력해주세요." class="itemSubject_input">
 									<a id="textRemove"><img id="textRemoveClick" src="/pmang/image/textRemove.png" width="15px" height="15px"></a>
 								</div>
 								<div class="textLength" id="textLength">
@@ -130,7 +127,7 @@
 							- 해당 클래스명에 대한 css는 미리 걸어두었습니다
 							-->
 							<div class="itemSubjectDiv">
-								상품명을 2자 이상 입력해주세요.
+								※상품명을 2자 이상 입력해주세요.
 							</div>
 							
 						</div>
@@ -201,6 +198,8 @@
 								<!-- 준분류 - 카테고리1번에서 항목을 클릭하면, div의 text를 지우고, 카테고리에 해당하는 데이터를 위에서 사용한 ul과 li 태그를 이용하여 append한다. -->
 								<!-- 소분류는 중분류를 클릭했을 때, 변경된다. -->
 								<!-- 생성한 ul과 li 태그의 class 값은 카테고리1 과 동일하게 하여 css속성을 따라가도록 한다. -->
+								
+							<div id="categoryCheck">※카테고리를 선택해주세요.</div>
 								<h3 class="selectCategory">선택한 카테고리 : 
 									<b id="choice"></b>	
 								</h3>
@@ -221,7 +220,7 @@
 								<button type="button" class="locationSearchBtn" id="searchlocation">주소 검색</button>
 							</div>
 							
-							<input type="text" name="location" readonly placeholder="선호 거래 지역을 검색해주세요." class="location_input" value="">
+							<input type="text" name="item_location" readonly placeholder="선호 거래 지역을 검색해주세요." class="location_input" value="">
 							<!-- 
 							클릭 전에 회원가입할 때 입력한 주소를 디비로 꺼내서 넣어놓자.
 							내위치 - 클릭하면 내 위치가  input의 value 로 들어간다. ex)경기도 안양시 만안구 안양동
@@ -240,17 +239,17 @@
 						<div class="stateArea_div">
 							<div class="state_div">
 								<label for="upper" class="state_upper">
-									<input type="radio" name="state" id="upper" value="0" checked>
+									<input type="radio" name="condition" id="upper" value="upper" checked>
 									상
 								</label>
 								
 								<label for="middle" class="state_middle">
-									<input type="radio" name="state" id="middle" value="0">
+									<input type="radio" name="condition" id="middle" value="middle">
 									중
 								</label>
 								
 								<label for="lower" class="state_lower">
-									<input type="radio" name="state" id="lower" value="0">
+									<input type="radio" name="condition" id="lower" value="lower">
 									하
 								</label>
 							</div>
@@ -266,12 +265,12 @@
 						<div class="negoArea_div">
 							<div class="nego_div">
 								<label for="impossibility" class="nego_impossibility">
-									<input type="radio" name="nego" id="impossibility" value="0" checked>
+									<input type="radio" name="nego" id="impossibility" value="impossibility" checked>
 									불가능
 								</label>
 								
 								<label for="possibility" class="nego_possibility">
-									<input type="radio" name="nego" id="possibility" value="0">
+									<input type="radio" name="nego" id="possibility" value="possibility">
 									가능
 								</label>
 							</div>
@@ -287,7 +286,7 @@
 						<div class="priceArea_div">
 							<div id="priceparent" class="price_div">
 								<!-- <input type="number" min='0' max='999999999' name="price" placeholder="숫자만 입력해주세요." class="price_input">원 -->
-								<input type="text" name="price" maxlength="9" placeholder="숫자만 입력해주세요." class="price_input">원
+								<input type="text" name="item_price" maxlength="9" placeholder="숫자만 입력해주세요." class="price_input">원
 							</div>
 							<div id="priceDiv"></div><!-- mouseout 100원 이상 입력해주세요 , 한글 키 눌리면 바로 alert- 숫자만 입력해주세요.-->
 							<!-- ajax에서 css 는 추가안해도됨 해놨음. -->
@@ -306,7 +305,7 @@
 					<li class="item_li">
 						<div class="contentText_div">설명</div>
 						<div class="contentArea_div">
-							<textarea name="content" rows="6" maxlength="2000" placeholder="상품 설명을 입력해주세요." class="content_textarea"></textarea>
+							<textarea name="item_content" rows="6" maxlength="2000" placeholder="상품 설명을 입력해주세요." class="content_textarea"></textarea>
 						
 							<div class="Transaction_prohibited_item">
 								<a target="_blank" href="#">
@@ -332,7 +331,7 @@
 							
 								<div class="hashtagdetail2_div" id="hashtagdetail2_div">
 									<div class="hashtagdetail3_div">
-										<input type="text" id="hashtag" placeholder="연관태그를 입력해주세요. (최대 3개)">
+										<input type="text" id="hashtag" placeholder="연관태그를 입력해주세요. (최대 3개)" maxlength="9">
 									</div>
 								</div>
 							</div>
@@ -365,18 +364,16 @@
 				</ul>
 			</section>
 		</main>
-		<footer class="sellerWriteForm_footer">
+		
+		<!-- <footer class="sellerWriteForm_footer">
 			<div class="sellerWriteForm_footer_div">
 				<button type="button" class="itemWriteBtn">
 				</button>
 			</div>
-		</footer>
+		</footer> -->
+		</form>
 	</div>
-	
-</form>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=26152d095dcbd98e75d86172615ba45b&libraries=services"></script>
 <script type="text/javascript" src="../js/seller.js"></script>
-</body>
-</html>

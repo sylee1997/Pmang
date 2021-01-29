@@ -106,6 +106,8 @@ function preview(arr){
     });//arr.forEach
 		
 		$('.imageCount').text('('+String($('#imageCountHidden').val())+'/3)');
+		$('.imageChoice_li').css('border-color','rgb(195, 194, 204)');
+		$('#imageCheck').hide();
   }else{
 	  alert('사진 첨부는 최대 3장까지 가능합니다.');
   }
@@ -116,6 +118,8 @@ function preview(arr){
 
 //카테고리
 $('#category1').on('click','button',function(){
+	$('.categoryChoice_div').css('border-color','rgb(195, 194, 204)');
+	$('#categoryCheck').hide();
 	//카테고리 목록
 	var fashion = ['여성의류', '남성의류', '패션잡화'];
 	var digital = ['모바일', '가전제품', '음반/영상기기', '컴퓨터/주변기기', '카메라', '게임'];
@@ -456,7 +460,7 @@ $('#category3').on('click','button',function(){
 
 //제목 글자수 count, 유효성 검사, input이벤트
 //최소입력수, 최대입력수
-$('input[name=subject]').on('keyup', function() {
+$('input[name=itemSubject]').on('keyup', function() {
 	var subjectText = $(this).val();
 	$('#textLength').html('('+subjectText.length + '/40)');   
 	
@@ -469,11 +473,11 @@ $('input[name=subject]').on('keyup', function() {
 	if(subjectText.length > 1 ){
 		$('.itemSubjectDiv').hide();
 		$('.itemSubjectText').css('border-color','rgb(195, 194, 204)');
-		$('input[name=subject]').css('border-color','rgb(195, 194, 204)');
+		$('input[name=itemSubject]').css('border-color','rgb(195, 194, 204)');
 	}else if(subjectText.length > 0 || subjectText.length < 2){
 		$('.itemSubjectDiv').show();
 		$('.itemSubjectText').css('border-color','green');
-		$('input[name=subject]').css('border-color','green');
+		$('input[name=itemSubject]').css('border-color','green');
 		$('#textRemove').hide();
 	}
 	
@@ -484,26 +488,35 @@ $('input[name=subject]').on('keyup', function() {
 });
 
 //최소 입력수
-$('input[name=subject]').click(function(){
+$('input[name=itemSubject]').click(function(){
 	var subjectText = $(this).val();
 	if(subjectText.length > 1){
 		$('.itemSubjectText').css('border-color','rgb(195, 194, 204)');
-		$('input[name=subject]').css('border-color','rgb(195, 194, 204)');
+		$('input[name=itemSubject]').css('border-color','rgb(195, 194, 204)');
 		$('.itemSubjectDiv').hide();
 	}
 });
 
 
-$('input[name=subject]').focus(function(){
+$('input[name=itemSubject]').focus(function(){
 	$('.itemSubjectText').css('border-color','rgb(195, 194, 204)');
-	$('input[name=subject]').css('border-color','rgb(195, 194, 204)');
+	$('input[name=itemSubject]').css('border-color','rgb(195, 194, 204)');
 	$('.itemSubjectDiv').hide();
 	
 });
 
+$('input[name=itemSubject]').blur(function(){
+	var subjectText = $(this).val();
+	if(subjectText.length < 2){
+		$('.itemSubjectText').css('border-color','green');
+		$('input[name=itemSubject]').css('border-color','green');
+		$('.itemSubjectDiv').show();
+	}
+});
+
 //x눌렀을 때 상품제목 글자 다 없애기
 $("#textRemoveClick").click(function(){
-	$('input[name=subject]').val('');
+	$('input[name=itemSubject]').val('');
 	$('#textRemove').hide();
 });
 
@@ -552,7 +565,7 @@ $('#priceparent').on('keyup','input',function(){
 	}
 	
 	if(priceVal < 100){
-		$('#priceDiv').text('100원 이상 입력해주세요.');
+		$('#priceDiv').text('※100원 이상 입력해주세요.');
 		$('.price_input').css('border','1px solid green');
 	}else{
 		$('#priceDiv').text('');
@@ -582,6 +595,7 @@ $('#hashtag').on('keydown', function(e) {
 				type: 'button',
 				text: '#' + text,
 				class: 'hashtag_button',
+				id: 'hashtag' + (hashtag_count+1),
 				name: 'hashtag' + (hashtag_count+1) //해시태그값을 저장해 놓은 변수. ajax에서 이용.
 			})).append($('<button/>',{
 				type: 'button',
@@ -690,7 +704,93 @@ $('#recentlylocation').click(function(){
 });
 
 
+//등록하기 버튼 클릭 -> db전송
+$('.itemWriteBtn').click(function(){
+	//전송할 formData 생성!
+	var formData = new FormData($('#sellerWriteForm')[0]); 
+	
+	for(var i = 1; i < 4; i++){
+		if($("#hashtag"+i).text() != ""){
+			formData.append("hashtag"+i, $("#hashtag"+i).text());
+		}
+	}
+	
+	var category1 = $(".selectL").text();
+	var category2 = $(".selectM").text();
+	var category3 = $(".selectS").text();
+	
+	formData.append("category1",category1);
+	formData.append("category2",category2);
+	formData.append("category3",category3);
 
+	//데이터 잘 들어왔는지 확인
+	/*for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }*/
+
+	
+	
+	
+	//유효성 검사
+	$('#imageCheck').hide();
+	$('.itemSubjectDiv').hide();
+	$('#categoryCheck').hide();
+	$('#priceDiv').text("");
+	
+	$('.imageChoice_ul').css('border-color','rgb(195, 194, 204)');
+	$('.itemSubjectText').css('border-color','rgb(195, 194, 204)');
+	$('input[name=itemSubject]').css('border-color','rgb(195, 194, 204)');
+	$('.categoryChoice_div').css('border-color','rgb(195, 194, 204)');
+	$('.price_input').css('border','1px solid rgb(195, 194, 204)');
+	
+	if($('#imageCountHidden').val() == 0){ //이미지 등록 확인
+		$('#imageCheck').show();
+		$('.imageChoice_li').css('border-color','green');
+		
+		var offset = $('.main_sectionFrame').offset();
+		$('html').animate({scrollTop : offset.top}, 400);
+		
+	}else if($('input[name=itemSubject]').val().length < 2){ //제목 수 확인
+		$('input[name=itemSubject]').css('border-color','green');
+		$('input[name=itemSubject]').css('border-color','green');
+		$('.itemSubjectDiv').show();
+		
+		var offset = $('.imageChoice_div').offset();
+		$('html').animate({scrollTop : offset.top}, 400);
+		
+	}else if($('#choice').text() == ""){ //카테고리 확인
+		$('.categoryChoice_div').css('border-color','green');
+		$('#categoryCheck').show();
+		
+		var offset = $('.imagecontent').offset();
+		$('html').animate({scrollTop : offset.top}, 400);
+		
+	}else if($('.price_input').val() == "" || $('.price_input').val() < 100){ //가격확인
+		$('#priceDiv').text('※100원 이상 입력해주세요.');
+		$('.price_input').css('border','1px solid green');
+		
+		var offset = $('.locationText_div').offset();
+		$('html').animate({scrollTop : offset.top}, 400);
+		
+	}else if($('.qty_input').val() == ""){ //수량 확인
+		$('.qty_input').val('1');
+	}else {
+		$.ajax({
+			type: 'post',
+			enctype: 'multipart/form-data',
+			processData: false, //데이터를 컨텐트 타입에 맞게 변환 여부
+			contentType: false,//요청 컨텐트 타입
+			url: '/pmang/member/sellerWrite',
+			data: formData,
+			success: function(data){
+				alert('상품 등록 완료');
+				location.href='/spring/index'; //추후에 상품관리 페이지로 바뀌게 해야함!
+			},
+			error: function(err){
+				console.log(err);
+			}
+		});
+		
+	}
+});
 
 
 

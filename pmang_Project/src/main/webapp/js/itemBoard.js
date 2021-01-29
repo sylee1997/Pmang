@@ -608,7 +608,7 @@ $('#mainLocBtn').click(function(){
 });
 
 $('#mapBtn').click(function(){
-	  window.open("map.jsp?lon=" + $('#lon').val() + "&lat=" + $('#lat').val(), "지도띄우기", "width=1000, height=800, toolbar=no, menubar=no, scrollbars=no, resizable=yes,left=500, top=100");
+	  window.open("/pmang/pm_itemBoard/map.jsp?lon=" + $('#lon').val() + "&lat=" + $('#lat').val(), "지도띄우기", "width=1000, height=800, toolbar=no, menubar=no, scrollbars=no, resizable=yes,left=500, top=100");
 });
 
 

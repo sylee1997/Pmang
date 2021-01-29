@@ -2,11 +2,15 @@
 
 /* 가운데 정렬 */
 
-html, body, div {
+html, body, div, ul {
 	margin: 0px;
     padding: 0px;
     border: 0px;
 	
+}
+
+*, ::before, ::after {
+    box-sizing: border-box;
 }
 
 a {
@@ -16,6 +20,18 @@ a {
     background-color: transparent;
 }
 
+
+h2 {
+	font-family: bold;
+}
+
+input:focus {
+	outline: none;
+}
+
+textarea:focus {
+	outline : none;
+}
 
 #wrap {
 /* width: 1300px; */
@@ -37,7 +53,7 @@ body > #wrap {
 /* header부분 */
 #header{
 	position: sticky;
-	/* height : 150px; */
+	/* height : 136px; */
 	top: 0;
 	z-index:20;
 	background: white;
@@ -178,7 +194,7 @@ body > #wrap {
 
 
 .header_logo .search-wrap {
-  width: 400px; 
+  width: 470px; 
   /* 추가 */
   display: flex;
   border: 2px solid rgb(22 119 4);
@@ -350,8 +366,8 @@ body > #wrap {
     margin: 10% auto;
     padding: 50px;
     border: 1px solid #888;
-    width: 350px;
-    height: 500px;
+    width: 452px;
+    height: 600px;
     border-radius: 10px;
 }
 
@@ -441,7 +457,7 @@ button div p{
 	color: white;
 }
 #userId, #pwd {
-	width: 315px;
+	width: 340px;
 }
 
 #userId:hover, #pwd:hover {
@@ -650,7 +666,7 @@ display:none;
 	/* height : 800px; */
 	float: right;
 	
-	right: calc(50% - 617px);
+	right: calc(50% - 650px);
 	
 }
 
@@ -707,7 +723,7 @@ display:none;
 	text-align : center;
 	margin-top : 5px;
 	border : 1px solid rgb(22 119 4);
-	height: 30px;
+	height: 45px;
 	padding-top: 10px;
 	width: 100%;
 }
@@ -892,4 +908,8 @@ display:none;
 .infomain{
 	line-height: 1.57;
     margin-bottom: 24px;
+}
+
+.sellerWriteForm_footer {
+	display : none;
 }
