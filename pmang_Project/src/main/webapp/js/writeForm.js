@@ -107,7 +107,9 @@ $('#writeBtn').click(function(){			//유효성 검사
 
 //우편번호
 $('#checkPostBtn').click(function(){
-	window.open("/pmang/pm_writeForm/checkPost", "zipcode", "width=700 height=500 scrollbars=yes");
+
+	window.open("/pmang/member/checkPost", "zipcode", "width=700 height=500 scrollbars=yes");
+
 });
 
 $('#checkPostSearchBtn').click(function(){

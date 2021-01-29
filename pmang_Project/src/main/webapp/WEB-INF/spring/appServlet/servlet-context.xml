@@ -9,12 +9,10 @@
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 
-	<context:component-scan base-package="pmang_item.controller"/>
-	<context:component-scan base-package="pmang_chat.controller"/>
-	<context:component-scan base-package="pmang_user.controller"/>
-
 	<context:component-scan base-package="member.controller"/>
-
+	<context:component-scan base-package="board.controller"/>
+	<context:component-scan base-package="hello.controller"/>
+	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
@@ -26,6 +24,7 @@
 	<resources location="/js/" mapping="/js/**"/>
 	<resources location="/item/" mapping="/item/**"/>
 	<resources location="/storage/" mapping="/storage/**"/>
+
 	<resources location="/pm_itemView/" mapping="/pm_itemView/**"/>
 	<resources location="/pm_mystore/" mapping="/pm_mystore/**"/>
 	
