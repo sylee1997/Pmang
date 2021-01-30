@@ -554,7 +554,7 @@ $('#qtyparent').on('keyup','input',function(){
 
 //가격 숫자만 입력
 $('#priceparent').on('keyup','input',function(){
-	let priceVal = $('input[name=price]').val();
+	let priceVal = $('input[name=item_price]').val();
 	let priceRule = /^[0-9]*$/;// * 이 기존에 {0,9}
 	let reg2 =/[^0-9]/g;   //
 
@@ -704,8 +704,9 @@ $('#recentlylocation').click(function(){
 });
 
 
-//등록하기 버튼 클릭 -> db전송
-$('.itemWriteBtn').click(function(){
+//등록하기 버튼 클릭 -> db전송 -> index.jsp
+/*$('.itemWriteBtn').click(function(){
+	//alert('아')
 	//전송할 formData 생성!
 	var formData = new FormData($('#sellerWriteForm')[0]); 
 	
@@ -724,7 +725,7 @@ $('.itemWriteBtn').click(function(){
 	formData.append("category3",category3);
 
 	//데이터 잘 들어왔는지 확인
-	/*for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }*/
+	//for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }
 
 	
 	
@@ -790,7 +791,7 @@ $('.itemWriteBtn').click(function(){
 		});
 		
 	}
-});
+});*/
 
 
 

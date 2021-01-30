@@ -1,4 +1,6 @@
-
+$(document).ready(function(){
+	
+});
 
 $('.postArea').click(function(){
 	$('.postContent').slideUp();

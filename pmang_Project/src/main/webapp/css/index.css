@@ -448,7 +448,7 @@ button div p{
 	width: 100%;
 	background-color: yellow;
 }
-#writeBtn {
+#index_writeBtn {
 	width: 100%; 
 	background-color: green; 
 	margin-top:13px;
@@ -733,6 +733,11 @@ display:none;
 	font-weight: bold;
 }
 
+#aside_noticeA:hover {
+	text-decoration: underline;
+	color : green;
+}
+
 .pmangTok {
     /* margin-top: 15px; */
     margin: 15px auto;
@@ -746,6 +751,8 @@ display:none;
     font-weight: 1000;
     background-image: url(/pmang/image/pmangTok1.png);
     background-size: contain;
+    cursor : pointer;
+    color : green;
 }
 
 .pmangTokDiv {
@@ -756,11 +763,6 @@ display:none;
 .pmangTok img {
 	width: 50px;
 	height: 50px;
-}
-
-.pmangTokA {
-	text-decoration: none;
-	color : green;
 }
 
 .notice {

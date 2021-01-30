@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-
+    pageEncoding="UTF-8"%>
+    
 <link rel="stylesheet" href="/pmang/css/writeForm.css">
 
 <!-- 부트스트랩을 사용할 수 있도록 가져오기 -->
@@ -12,13 +9,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-</head>
 
-<body>
 	<div id="wrap">
 		<br><br>
         <b><font size="6" color="gray">회원가입</font></b>
-        <br><br><br>
+        <br><br>
         
 		<form action="#" method="post">
 			<table class="table table-hover">
@@ -31,7 +26,7 @@
 					<tr>
 						<td style="vertical-align: middle;">아이디</td>
 						<td>
-							<div class="form-group">
+							<div class="form-group" style="margin: 10px;">
 								<input type="text" class="form-control" maxlength="50" 
 										placeholder="아이디 입력" name="userId" id="userId"> 
 								<input type="hidden" id="check" value="">
@@ -43,7 +38,7 @@
 					<tr>
 						<td style="vertical-align: middle;">비밀번호</td>
 						<td>
-							<div class="form-group">
+							<div class="form-group" style="margin: 10px;">
 								<input type="password" class="form-control" maxlength="50" 
 										placeholder="비밀번호 입력" name="pwd" id="pwd">
 								<div id="pwdDiv" align="left"></div>
@@ -54,7 +49,7 @@
 					<tr>
 						<td style="vertical-align: middle;">비밀번호 재확인</td>
 						<td>
-							<div class="form-group">
+							<div class="form-group" style="margin: 10px;">
 								<input type="password" class="form-control" maxlength="50"
 									placeholder="비밀번호 재입력" name="repwd" id="repwd">
 								<div id="repwdDiv" align="left"></div>
@@ -65,7 +60,7 @@
 					<tr>
 						<td style="vertical-align: middle;">이름</td>
 						<td>
-							<div class="form-group">
+							<div class="form-group" style="margin: 10px;">
 								<input type="text" class="form-control" maxlength="50" 
 										placeholder="이름 입력" name="userName" id="userName"> 
 								<input type="hidden" id="check" value="">
@@ -77,6 +72,7 @@
 					<tr>
 						<td style="vertical-align: middle;">성별</td>
 						<td align="left">
+						<div class="form-group" style="margin: 10px;">
 							<div class="radio-inline">
 								<input type="radio" name="gender" value="0" checked>남
 								&emsp;
@@ -84,12 +80,14 @@
 							<div class="radio-inline">
 								<input type="radio" name="gender" value="1">여
 							</div>
+						</div>
 						</td>
 					</tr>
 	
 					<tr>
 						<td style="vertical-align: middle;">이메일</td>
 						<td>
+						<div class="form-group" style="margin: 10px;">
 							<div class="form-inline" align="left">
 								<input type="text" class="form-control input-sm" name="email1" id="email1"> 
 								@ 
@@ -100,8 +98,9 @@
 									<option value="naver.com">naver.com</option>
 									<option value="hanmail.net">hanmail.net</option>
 								</select>
-								<button class="btn btn-primary" id="authBtn" type="button">인증</button>
+								<button class="btn btn-primary" id="authBtn" type="button" style="position: absolute; margin: -2px 10px;">인증</button>
 								<div id="emailDiv" align="left"></div>
+							</div>
 							</div>
 						</td>
 					</tr>
@@ -109,16 +108,18 @@
 					<tr>
 						<td style="vertical-align: middle;">핸드폰</td>
 						<td>
-							<div class="form-inline" align="left">
-								<select class="form-control" name="tel1" id="tel1">
-									<option value="010">010
-									<option value="011">011
-									<option value="019">019
-								</select>
-								 - 
-								<input type="text" class="form-control" name="tel2" id="tel2">
-								 - 
-								<input type="text" class="form-control" name="tel3" id="tel3">
+							<div class="form-group" style="margin: 10px;">
+								<div class="form-inline" align="left">
+									<select class="form-control" name="tel1" id="tel1">
+										<option value="010">010
+										<option value="011">011
+										<option value="019">019
+									</select>
+									 - 
+									<input type="text" class="form-control" name="tel2" id="tel2">
+									 - 
+									<input type="text" class="form-control" name="tel3" id="tel3">
+								</div>
 							</div>
 							<div id="telDiv" align="left"></div>
 						</td> 
@@ -127,22 +128,21 @@
 					<tr>
 						<td style="vertical-align: middle;">주소</td>
 						<td>
-							<div class="form-group">
+							<div class="form-group" style="margin: 10px;">
 								<div class="form-inline" align="left">
-									<input type="text" class="form-control" id="postcode" name="zipcode" readonly>
+									<input type="text" class="form-control" id="postcode" name="zipcode" readonly style="margin: 2px 10px;">
 									<button class="btn btn-primary" type="button" id="checkPostBtn">우편번호검색</button>
 								</div>
-								<input type="text" class="form-control" id="address" name="addr1" maxlength="50" placeholder="주소" readonly> 
-								<input type="text" class="form-control" id="detailAddress" name="addr2" maxlength="50" placeholder="상세주소">
+								<input type="text" class="form-control" id="address" name="addr1" maxlength="50" placeholder="주소" readonly style="margin: 5px 0px;"> 
+								<input type="text" class="form-control" id="detailAddress" name="addr2" maxlength="50" placeholder="상세주소" style="margin: 5px 0px;">
 							</div>
 						</td>
 					</tr>
 	
 					<tr>
-						<td></td>
-						<td align="right">
+						<td align="center" colspan="2">
 							<div class="form-group">
-								<button class="btn btn-primary" id="writeBtn" type="button">회원가입</button>
+								<button class="btn btn-primary" id="writeBtn" type="button" style="width: 50%; margin: 10px 25%;">회원가입</button>
 							</div>
 						</td>
 					</tr>
@@ -154,6 +154,3 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript" src="/pmang/js/writeForm.js"></script>
 	
-</body>
-
-</html>

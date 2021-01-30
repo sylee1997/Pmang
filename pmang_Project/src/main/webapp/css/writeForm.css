@@ -24,6 +24,9 @@
 #address, #detailAddress{
 	margin: 2px 0px;
 }
+#checkPostBtn, #writeBtn, #authBtn {
+	background-color : green;
+}
 
 /* 우편번호 찾기 */
 #addressA:link {color: black; text-decoration: none;}

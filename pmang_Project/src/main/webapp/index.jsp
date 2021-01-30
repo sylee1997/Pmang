@@ -16,7 +16,9 @@
 <title>피망마켓에 오신것을 환영합니다.</title>
 </head>
 <body> 
-
+<input type="hidden" id="category1" value="">
+<input type="hidden" id="category2" value="">
+<input type="hidden" id="category3" value="">
 <!-- 로그인 모달 -->
 <div class="loginModal">
       	<div class="loginModalContent">
@@ -77,8 +79,8 @@
 										<p id="kakaoP">카카오 1초 로그인/회원가입</p>
 									</div>
 								</button>
-								<button id="writeBtn">
-								<div>
+								<button id="index_writeBtn">
+								<div onclick="location.href='/pmang/member/writeForm'">
 									<img src="/pmang/image/writeP.png" alt="writePmang">
 									<p id="writeP">일반 회원가입</p>
 								</div>
@@ -97,7 +99,7 @@
       	<div class="header_logo">
             <div class="logo-wrap">
                  <img src="/pmang/image/main_logo.JPG" alt="main_logo" />
-                 <h2 id="headerH2" style="color: green;">피망장터</h2>
+                 <h2 id="headerH2" style="color: green; font-weight: bold;">피망장터</h2>
                </div>
                <div class="search-wrap">
                  <input type="text" class="searchInput" placeholder="상품명,지역명,@상점명입력" maxlength="20"/>
@@ -145,7 +147,7 @@
                 </li>
                 <li>
                   <img src="/pmang/image/mystore.png" alt="store" width="30px" height="30px"/>
-                  <span class="indexnavSpan">내상점</span>
+                  <span class="indexnavSpan" onclick="location.href='/pmang/board/mystore'">내상점</span>
                 </li>
                 <li>
                   <span class="vertical">|</span>
@@ -171,20 +173,20 @@
 				<ul class="category1Menu">
 					<div>전체 카테고리</div>
 					<hr>
-					<li><a class="category1A" href="#">패션</a>
+					<li id="categoryClickli1"><a class="category1A" href="#">패션</a>
 						<ul class="category2Menu">
 						<div class="category2Div"></div>
 						<hr>
-							<li><a class="category2A" href="#">여성의류</a>
+							<li class="categoryClickli2"><a class="category2A" href="#">여성의류</a>
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
 									<li><a href="#">아우터</a></li>
 									<li><a href="#">티셔츠</a></li>
 									<li><a href="#">니트</a></li>
-									<li><a href="#">셔츠 / 블라우스</a></li>
-									<li><a href="#">맨투맨 / 후드집업</a></li>
-									<li><a href="#">원피스 / 세트</a></li>
+									<li><a href="#">셔츠/블라우스</a></li>
+									<li><a href="#">맨투맨/후드집업</a></li>
+									<li><a href="#">원피스/세트</a></li>
 									<li><a href="#">바지</a></li>
 									<li><a href="#">스커트</a></li>
 								</ul></li>
@@ -196,7 +198,7 @@
 									<li><a href="#">티셔츠</a></li>
 									<li><a href="#">니트</a></li>
 									<li><a href="#">셔츠</a></li>
-									<li><a href="#">맨투맨 / 후드집업</a></li>
+									<li><a href="#">맨투맨/후드집업</a></li>
 									<li><a href="#">바지</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
@@ -213,7 +215,7 @@
 								</ul></li>
 								<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 						</ul></li>
-					<li><a class="category1A" href="#">디지털 / 가전</a>
+					<li id="categoryClickli1"><a class="category1A" href="#">디지털/가전</a>
 						<ul class="category2Menu">
 						<div class="category2Div"></div>
 						<hr>
@@ -223,7 +225,7 @@
 								<hr>
 									<li><a href="#">스마트폰</a></li>
 									<li><a href="#">태블릿</a></li>
-									<li><a href="#">액세서리 / 주변기기</a></li>
+									<li><a href="#">액세서리/주변기기</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
 							<li><a class="category2A" href="#">가전제품</a>
@@ -236,24 +238,24 @@
 									<li><a href="#">사무용품</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
-							<li><a class="category2A" href="#">음방 / 영상기기</a>
+							<li><a class="category2A" href="#">음반/영상기기</a>
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
 									<li><a href="#">음향기기</a></li>
-									<li><a href="#">비디오 / 프로젝터</a></li>
-									<li><a href="#">CD / DVD / 음반</a></li>
+									<li><a href="#">비디오/프로젝터</a></li>
+									<li><a href="#">CD/DVD/음반</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
-							<li><a class="category2A" href="#">컴퓨터 / 주변기기</a>
+							<li><a class="category2A" href="#">컴퓨터/주변기기</a>
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
 									<li><a href="#">데스크탑</a></li>
-									<li><a href="#">키보드 / 마우스</a></li>
+									<li><a href="#">키보드/마우스</a></li>
 									<li><a href="#">모니터</a></li>
 									<li><a href="#">컴퓨터 부품</a></li>
-									<li><a href="#">노트북 / 넷북</a></li>
+									<li><a href="#">노트북/넷북</a></li>
 									<li><a href="#">기타 액세서리</a></li>
 									<li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
@@ -261,7 +263,7 @@
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
-									<li><a href="#">DSLR / 미러리스</a></li>
+									<li><a href="#">DSLR/미러리스</a></li>
 									<li><a href="#">필름카메라</a></li>
 									<li><a href="#">디지털 카메라</a></li>
 									<li><a href="#">기타 액세서리</a></li>
@@ -278,7 +280,7 @@
 								</ul></li>
 								<li>&nbsp</li><li>&nbsp</li>
 						</ul></li>
-					<li><a class="category1A" href="#">도서 / 티켓</a>
+					<li id="categoryClickli1"><a class="category1A" href="#">도서/티켓</a>
 						<ul class="category2Menu">
 						<div class="category2Div"></div>
 						<hr>
@@ -286,12 +288,12 @@
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
-									<li><a href="#">학습 / 사전 / 참고서</a></li>
-									<li><a href="#">만화 / 아동</a></li>
-									<li><a href="#">인문 / 교양 / 소설</a></li>
-									<li><a href="#">경영 / 경제 / 사회</a></li>
-									<li><a href="#">과학 / 컴퓨터 / 인터넷</a></li>
-									<li><a href="#">예술 / 디자인</a></li>
+									<li><a href="#">학습/사전/참고서</a></li>
+									<li><a href="#">만화/아동</a></li>
+									<li><a href="#">인문/교양/소설</a></li>
+									<li><a href="#">경영/경제/사회</a></li>
+									<li><a href="#">과학/컴퓨터/인터넷</a></li>
+									<li><a href="#">예술/디자인</a></li>
 									<li><a href="#">기타 도서</a></li>
 									<li>&nbsp</li>
 								</ul></li>
@@ -299,13 +301,13 @@
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
-									<li><a href="#">기프티콘 / 상품권 / 쿠폰</a></li>
-									<li><a href="#">예매권 / 항공권</a></li>
+									<li><a href="#">기프티콘/상품권/쿠폰</a></li>
+									<li><a href="#">예매권/항공권</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
 							<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 						</ul></li>
-					<li><a class="category1A" href="#">리빙용품</a>
+					<li id="categoryClickli1"><a class="category1A" href="#">리빙용품</a>
 						<ul class="category2Menu">
 						<div class="category2Div"></div>
 						<hr>
@@ -313,7 +315,7 @@
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
-									<li><a href="#">문구 / 학습</a></li>
+									<li><a href="#">문구/학습</a></li>
 									<li><a href="#">침구</a></li>
 									<li><a href="#">욕실</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
@@ -333,10 +335,10 @@
 								<div class="category3Div"></div>
 								<hr>
 									<li><a href="#">식기세트</a></li>
-									<li><a href="#">냄비 / 프라이팬</a></li>
+									<li><a href="#">냄비/프라이팬</a></li>
 									<li><a href="#">조리도구</a></li>
-									<li><a href="#">수저 / 커트러리</a></li>
-									<li><a href="#">컵 / 잔 / 텀블러</a></li>
+									<li><a href="#">수저/커트러리</a></li>
+									<li><a href="#">컵/잔/텀블러</a></li>
 									<li><a href="#">주방 잡화</a></li>
 									<li><a href="#">밀폐용기</a></li>
 									<li><a href="#">커피용품</a></li>
@@ -344,7 +346,7 @@
 								</ul></li>
 							<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 						</ul></li>
-					<li><a class="category1A" href="#">스포츠 / 레저</a>
+					<li id="categoryClickli1"><a class="category1A" href="#">스포츠/레저</a>
 						<ul class="category2Menu">
 						<div class="category2Div"></div>
 						<hr>
@@ -365,14 +367,14 @@
 									<li><a href="#">축구</a></li>
 									<li><a href="#">야구</a></li>
 									<li><a href="#">농구</a></li>
-									<li><a href="#">자전거 / 킥보드</a></li>
+									<li><a href="#">자전거/킥보드</a></li>
 									<li><a href="#">등산</a></li>
-									<li><a href="#">낚시 / 캠핑</a></li>
+									<li><a href="#">낚시/캠핑</a></li>
 									<li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
 							<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 						</ul></li>
-					<li><a class="category1A" href="#">뷰티 / 미용</a>
+					<li id="categoryClickli1"><a class="category1A" href="#">뷰티/미용</a>
 						<ul class="category2Menu">
 						<div class="category2Div"></div>
 						<hr>
@@ -380,11 +382,11 @@
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
-									<li><a href="#">클렌징 / 스크럽</a></li>
-									<li><a href="#">스킨 / 토너 / 미스트</a></li>
-									<li><a href="#">로션 / 에멀전</a></li>
-									<li><a href="#">에센스 / 크림</a></li>
-									<li><a href="#">팩 / 마스크</a></li>
+									<li><a href="#">클렌징/스크럽</a></li>
+									<li><a href="#">스킨/토너/미스트</a></li>
+									<li><a href="#">로션/에멀전</a></li>
+									<li><a href="#">에센스/크림</a></li>
+									<li><a href="#">팩/마스크</a></li>
 									<li><a href="#">썬케어</a></li>
 									<li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
@@ -396,17 +398,17 @@
 									<li><a href="#">베이스메이크업</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
-							<li><a class="category2A" href="#">헤어 / 바디</a>
+							<li><a class="category2A" href="#">헤어/바디</a>
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
-									<li><a href="#">샴푸 / 린스 / 트리트먼트</a></li>
+									<li><a href="#">샴푸/린스/트리트먼트</a></li>
 									<li><a href="#">헤어스타일링</a></li>
-									<li><a href="#">바디클렌저 / 로션</a></li>
-									<li><a href="#">헤어 / 핸드 / 풋케어</a></li>
+									<li><a href="#">바디클렌저/로션</a></li>
+									<li><a href="#">헤어/핸드/풋케어</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
-							<li><a class="category2A" href="#">향수 / 아로마</a>
+							<li><a class="category2A" href="#">향수/아로마</a>
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
@@ -415,12 +417,12 @@
 									<li><a href="#">공용향수</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
-							<li><a class="category2A" href="#">네일아트 케어</a>
+							<li><a class="category2A" href="#">네일아트/케어</a>
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
-									<li><a href="#">네일아트 / 스티커</a></li>
-									<li><a href="#">매니큐어 / 패디큐어</a></li>
+									<li><a href="#">네일아트/스티커</a></li>
+									<li><a href="#">매니큐어/패디큐어</a></li>
 									<li><a href="#">네일케어도구</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
@@ -428,18 +430,18 @@
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
-									<li><a href="#">브러시 / 퍼프</a></li>
-									<li><a href="#">파우치 / 정리함</a></li>
+									<li><a href="#">브러시/퍼프</a></li>
+									<li><a href="#">파우치/정리함</a></li>
 									<li><a href="#">거울</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
 							<li>&nbsp</li><li>&nbsp</li>
 						</ul></li>
-					<li><a class="category1A" href="#">유아 / 출산</a>
+					<li id="categoryClickli1"><a class="category1A" href="#">유아/출산</a>
 						<ul class="category2Menu">
 						<div class="category2Div"></div>
 						<hr>
-							<li><a class="category2A" href="#">영아의류 (-2세)</a>
+							<li><a class="category2A" href="#">영아의류(-2세)</a>
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
@@ -448,11 +450,11 @@
 									<li><a href="#">기타</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
-							<li><a class="category2A" href="#">여아의류 (3-6세)</a>
+							<li><a class="category2A" href="#">여아의류(3-6세)</a>
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
-									<li><a href="#">원피스 / 세트</a></li>
+									<li><a href="#">원피스/세트</a></li>
 									<li><a href="#">아우터</a></li>
 									<li><a href="#">상하의</a></li>
 									<li><a href="#">티셔츠</a></li>
@@ -460,7 +462,7 @@
 									<li><a href="#">치마</a></li>
 									<li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
-							<li><a class="category2A" href="#">남아의류 (3-6세)</a>
+							<li><a class="category2A" href="#">남아의류(3-6세)</a>
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
@@ -481,12 +483,12 @@
 									<li><a href="#">양말</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
-							<li><a class="category2A" href="#">동화책 / 완구 / 인형</a>
+							<li><a class="category2A" href="#">동화책/완구/인형</a>
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
 									<li><a href="#">인형</a></li>
-									<li><a href="#">교육 / 완구</a></li>
+									<li><a href="#">교육/완구</a></li>
 									<li><a href="#">장난감</a></li>
 									<li><a href="#">물놀이도구</a></li>
 									<li><a href="#">놀이터도구</a></li>
@@ -494,12 +496,12 @@
 								</ul></li>
 								<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 						</ul></li>
-					<li><a class="category1A" href="#">기타</a>
+					<li id="categoryClickli1"><a class="category1A" href="#">기타</a>
 						<ul class="category2Menu">
 						<div class="category2Div"></div>
 						<hr>
 							<li><a href="#">피망나눔</a></li>
-							<li><a href="#">차량 , 오토바이</a></li>
+							<li><a href="#">차량,오토바이</a></li>
 							<li><a href="#">기타</a></li>
 							<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 						</ul></li>
@@ -515,7 +517,7 @@
             <div class="notice">
 	            <div class="noticeDiv">
 	            	<div class="noticeContent">
-	            		<a href="#">로그인을 하세요.</a>
+	            		<a id="aside_noticeA" href="#">로그인을 하세요.</a>
 	            	</div>
 	            </div>
             	<img src="/pmang/image/noticeImg.PNG" style="width:30px; height:30px;"> 
@@ -545,13 +547,12 @@
             </div>
             
             <div class="topBtn">
-               <a id="topA" href="#header">TOP</a>
+               <a id="topA" href="#" style="color: black; font-size:12pt">TOP</a>
             </div>
             
             <div class="pmangTok">
-               <a class="pmangTokA" href="#">
                	<div class="pmangTokDiv">피망Tok</div>
-               </a>
+               
             </div>
          </div><!-- asideDiv -->
 
@@ -621,9 +622,9 @@
    <div class="footer">
       <div class="footerCategoryArea">
          <div class="footerCategory">
-            <a class="cIPDuS" href="#">공지사항</a>
-            <a class="cIPDuS" href="#">자주묻는질문</a>
-            <a class="cgGBdw" href="#">운영정책</a>
+            <a class="cIPDuS" href="/pmang/board/notice">공지사항</a>
+            <a class="cIPDuS" href="/pmang/board/notice">자주묻는질문</a>
+            <a class="cgGBdw" href="/pmang/board/notice">운영정책</a>
             <a class="cIPDuS" href="#">1:1문의하기</a>
             <a class="cgGBdw" href="#">사업자정보확인</a>
             <a class="cgGBdw" href="#">이용약관</a>
@@ -734,7 +735,7 @@ $('#index_searchInsertXspan').click(function(){
 //검색창 이외에 다른 곳을 눌렀을 시 검색창 사라지게 하는것
 $(document).click(function(e){
 	if(e.target != $('.searchListDiv')){
-		if($('form, div').is(e.target)){
+		if($('body, div').is(e.target)){
 			$('.searchClick').hide(); 
 		}else if($('#header h2, #header img, .indexnavSpan').is(e.target)){
 			$('.searchClick').hide(); 
@@ -776,7 +777,7 @@ $('.searchBtn').click(function(){
 		localStorage.setItem("search", keyword);
 	
 		var keyword = localStorage.getItem('search');
-		var insert = '<div id="index_listKeyword"><span>'+ keyword + '</span><a id="indexSearchX">x</a></div>'
+		var insert = '<div id="index_listKeyword"><span id="index_searchkeyword">'+ keyword + '</span><a id="indexSearchX">x</a></div>'
 	
 		$('.existList').prepend(insert);
 	}
@@ -793,7 +794,14 @@ $('.searchBtn').click(function(){
 	}
 });
 
-//엔터값 넣어주기
+//최신검색어 클릭했을때 검색창으로 들어오게끔!
+//주의! 동적으로 만들어진 요소에 이벤트를 걸때는 이런식으로 걸어줘야 한다..
+$(document).on("click","#index_searchkeyword",function(event){
+	$('.searchInput').val($(this).text());
+});
+
+
+//검색어 엔터치면 값 넣어주기
 $('.searchInput').keydown(function(key) {
 	if(key.keyCode == 13){
 		$('.searchBtn').trigger('click');
@@ -842,21 +850,80 @@ $('.hoverli').hover(function(){
 	$('.category1Menu').hide();
 });
 
-$('.category1Menu').on('mouseenter mouseleave','li',function(){
+
+/*  $('.category1Menu').on('mouseenter mouseleave','li',function(){
 	//alert($(this).children('a').text());
 	if($(this).children('.category1A').text() != ""){
 		$('.category2Div').text($(this).children('.category1A').text());
 	}
+}); */
+
+
+
+$('.category1Menu').on('mouseenter','li',function(){
+	if($(this).children('.category1A').text() != ""){
+		$(this).css('background','green');
+		$(this).children('.category1A').css('color','white');
+		if($(this).children('.category1A').text() != ""){
+			$('.category2Div').text($(this).children('.category1A').text());
+		}
+	}
 });
 
-$('.category2Menu').on('mouseenter mouseleave','li',function(){
+$('.category1Menu').on('mouseleave','li',function(){
+	if($(this).children('.category1A').text() != ""){
+		$(this).css('background','white');
+		$(this).children('.category1A').css('color','black');
+		
+	}
+});
+
+/* $('.category2Menu').on('mouseenter mouseleave','li',function(){
 	//alert($(this).children('a').text());
 	if($(this).children('.category2A').text() != ""){
 		$('.category3Div').text($(this).children('.category2A').text());
 	}
+}); */
+
+$('.category2Menu').on('mouseenter','li',function(){
+	if($(this).children('.category2A').text() != ""){
+		$(this).css('background','green');
+		$(this).children('.category2A').css('color','white');
+		if($(this).children('.category2A').text() != ""){
+			$('.category3Div').text($(this).children('.category2A').text());
+		}
+	}
+});
+
+$('.category1Menu').on('mouseleave','li',function(){
+	if($(this).children('.category2A').text() != ""){
+		$(this).css('background','white');
+		$(this).children('.category2A').css('color','black');
+	}
 });
 
 
+
+$('.category1A').click(function(){
+	var firstCategory = $(this).text(); 
+	location.href = "/pmang/board/itemBoard?category1="+firstCategory;
+});
+
+$('.category2A').click(function(){
+	var firstCategory = $(this).parents('#categoryClickli1').children('a').text();
+	var secondCategory = $(this).text();
+	
+	location.href = "/pmang/board/itemBoard?category1="+firstCategory+"&category2="+secondCategory;
+});
+
+$('.category3Menu').on('click','li',function(){
+	var firstCategory = $(this).parents('#categoryClickli1').children('a').text();
+	var secondCategory = $(this).parent().parent().children('a').text();
+	var thirdCategory = $(this).children('a').text();
+	
+	location.href = "/pmang/board/itemBoard?category1="+firstCategory+"&category2="+secondCategory+"&category3="+thirdCategory;
+	
+});
 
 
 //----------------------------------------------------------------------
@@ -868,6 +935,10 @@ $('#loginli').click(function(){
 		e.stopPropagation(); 
 		return false;
 	});
+});
+
+$('#aside_noticeA').click(function(){
+	$('#loginli').trigger('click');
 });
 
 $('.close').click(function(){
@@ -887,6 +958,123 @@ $(document).click(function(e){
 
 $('.logo-wrap').click(function(){
 	location.href='/pmang/index';
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//여긴 상품등록쪽..
+//---------------------------------------------------------------------------------------------------
+//등록하기 버튼을 클릭했을때.
+$('.itemWriteBtn').click(function(){
+	//alert('아')
+	//전송할 formData 생성!
+	var formData = new FormData($('#sellerWriteForm')[0]); 
+	
+	for(var i = 1; i < 4; i++){
+		if($("#hashtag"+i).text() != ""){
+			formData.append("hashtag"+i, $("#hashtag"+i).text());
+		}
+	}
+	
+	var category1 = $(".selectL").text();
+	var category2 = $(".selectM").text();
+	var category3 = $(".selectS").text();
+	
+	formData.append("category1",category1);
+	formData.append("category2",category2);
+	formData.append("category3",category3);
+
+	//데이터 잘 들어왔는지 확인
+	//for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }
+
+	
+	
+	
+	//유효성 검사
+	$('#imageCheck').hide();
+	$('.itemSubjectDiv').hide();
+	$('#categoryCheck').hide();
+	$('#priceDiv').text("");
+	
+	$('.imageChoice_ul').css('border-color','rgb(195, 194, 204)');
+	$('.itemSubjectText').css('border-color','rgb(195, 194, 204)');
+	$('input[name=itemSubject]').css('border-color','rgb(195, 194, 204)');
+	$('.categoryChoice_div').css('border-color','rgb(195, 194, 204)');
+	$('.price_input').css('border','1px solid rgb(195, 194, 204)');
+	
+	if($('#imageCountHidden').val() == 0){ //이미지 등록 확인
+		$('#imageCheck').show();
+		$('.imageChoice_li').css('border-color','green');
+		
+		var offset = $('.main_sectionFrame').offset();
+		$('html').animate({scrollTop : offset.top}, 400);
+		
+	}else if($('input[name=itemSubject]').val().length < 2){ //제목 수 확인
+		$('input[name=itemSubject]').css('border-color','green');
+		$('input[name=itemSubject]').css('border-color','green');
+		$('.itemSubjectDiv').show();
+		
+		var offset = $('.imageChoice_div').offset();
+		$('html').animate({scrollTop : offset.top}, 400);
+		
+	}else if($('#choice').text() == ""){ //카테고리 확인
+		$('.categoryChoice_div').css('border-color','green');
+		$('#categoryCheck').show();
+		
+		var offset = $('.imagecontent').offset();
+		$('html').animate({scrollTop : offset.top}, 400);
+		
+	}else if($('.price_input').val() == "" || $('.price_input').val() < 100){ //가격확인
+		$('#priceDiv').text('※100원 이상 입력해주세요.');
+		$('.price_input').css('border','1px solid green');
+		
+		var offset = $('.locationText_div').offset();
+		$('html').animate({scrollTop : offset.top}, 400);
+		
+	}else if($('.qty_input').val() == ""){ //수량 확인
+		$('.qty_input').val('1');
+	}else {
+		$.ajax({
+			type: 'post',
+			enctype: 'multipart/form-data',
+			processData: false, //데이터를 컨텐트 타입에 맞게 변환 여부
+			contentType: false,//요청 컨텐트 타입
+			url: '/pmang/member/sellerWrite',
+			data: formData,
+			success: function(data){
+				alert('상품 등록 완료');
+				location.href='/spring/index'; //추후에 상품관리 페이지로 바뀌게 해야함!
+			},
+			error: function(err){
+				console.log(err);
+			}
+		});
+		
+	}
 });
 
 

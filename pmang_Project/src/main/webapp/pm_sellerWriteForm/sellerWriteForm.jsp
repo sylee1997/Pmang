@@ -365,12 +365,12 @@
 			</section>
 		</main>
 		
-		<!-- <footer class="sellerWriteForm_footer">
+<!-- 		 <footer class="sellerWriteForm_footer">
 			<div class="sellerWriteForm_footer_div">
 				<button type="button" class="itemWriteBtn">
 				</button>
 			</div>
-		</footer> -->
+		</footer>  -->
 		</form>
 	</div>
 

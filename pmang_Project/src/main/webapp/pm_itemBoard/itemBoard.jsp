@@ -39,7 +39,7 @@
 				 width="6" height="10" alt="카테고리 선택그룹 아이콘">
 			 	<div class="selectItem1">
 			 		<div class="top1">
-			 		패션
+			 		${param.category1 }
 			 			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAAAXNSR0IArs4c6QAAASVJREFUOBGlks9qwkAQxrMLihRKQXyUHjx58dBLEXqxUPCavIKvkpCQgxcTD0LpSQQfoBfpRXwHj16av37fYWWrJhvqwDCbb2d+O5NdYcFc120hzIQQkW3bS2pNzPf9blEUC+ROUffNGkEYQWVZvuE7xfq9CRR1T8hfw5/hR/jIcZyN8DyPsDEEZUZoEASPeZ6vUNdXRYi/aOZVYjGHp9pGC4kRDmLHV4bOHrIs+7qAWYDtoW0lx+OYqDRCwzDsIO8TPtBPQv0PYEOMfGCHVhNoHMftJEl4YcMqGHWhb3JMjguNt64slVJOoH/AR0pk1DtT+h8gxQqoyj/HWzBuXgEpmqBVsEpgHbQOVgu8BTXBjEAdCthOPQ3qdxn+6QsedO8uyH+LT8nvvwPGjeHzAAAAAElFTkSuQmCC" 
 			 			width="10" height="6" alt="카테고리 화살표 아이콘">
 			 		</div>
@@ -63,14 +63,12 @@
 			 	width="6" height="10" alt="카테고리 선택그룹 아이콘">
 			 	<div class="selectItem2">
 			 		<div class="top2">
-			 			여성의류
+			 			${param.category2 }
 			 			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAAAXNSR0IArs4c6QAAASVJREFUOBGlks9qwkAQxrMLihRKQXyUHjx58dBLEXqxUPCavIKvkpCQgxcTD0LpSQQfoBfpRXwHj16av37fYWWrJhvqwDCbb2d+O5NdYcFc120hzIQQkW3bS2pNzPf9blEUC+ROUffNGkEYQWVZvuE7xfq9CRR1T8hfw5/hR/jIcZyN8DyPsDEEZUZoEASPeZ6vUNdXRYi/aOZVYjGHp9pGC4kRDmLHV4bOHrIs+7qAWYDtoW0lx+OYqDRCwzDsIO8TPtBPQv0PYEOMfGCHVhNoHMftJEl4YcMqGHWhb3JMjguNt64slVJOoH/AR0pk1DtT+h8gxQqoyj/HWzBuXgEpmqBVsEpgHbQOVgu8BTXBjEAdCthOPQ3qdxn+6QsedO8uyH+LT8nvvwPGjeHzAAAAAElFTkSuQmCC" 
 			 			width="10" height="6" alt="카테고리 화살표 아이콘">
 			 		</div>
 			 		
-			 		<div class="down2">
-			 			
-			 		</div>
+			 		<div class="down2"></div>
 			 	</div> <!-- selectItem -->
 			</div><!-- secondCategory -->
 		
@@ -79,21 +77,12 @@
 			 	width="6" height="10" alt="카테고리 선택그룹 아이콘">
 			 	<div class="selectItem3">
 			 		<div class="top3">
-			 			아우터
+			 			${param.category3 }
 			 			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAAAXNSR0IArs4c6QAAASVJREFUOBGlks9qwkAQxrMLihRKQXyUHjx58dBLEXqxUPCavIKvkpCQgxcTD0LpSQQfoBfpRXwHj16av37fYWWrJhvqwDCbb2d+O5NdYcFc120hzIQQkW3bS2pNzPf9blEUC+ROUffNGkEYQWVZvuE7xfq9CRR1T8hfw5/hR/jIcZyN8DyPsDEEZUZoEASPeZ6vUNdXRYi/aOZVYjGHp9pGC4kRDmLHV4bOHrIs+7qAWYDtoW0lx+OYqDRCwzDsIO8TPtBPQv0PYEOMfGCHVhNoHMftJEl4YcMqGHWhb3JMjguNt64slVJOoH/AR0pk1DtT+h8gxQqoyj/HWzBuXgEpmqBVsEpgHbQOVgu8BTXBjEAdCthOPQ3qdxn+6QsedO8uyH+LT8nvvwPGjeHzAAAAAElFTkSuQmCC" 
 			 			width="10" height="6" alt="카테고리 화살표 아이콘">
 			 		</div>
 			 		
-			 		<div class="down3">
-			 			<a href="#">아우터</a>
-			 			<a href="#">티셔츠</a>
-			 			<a href="#">니트</a>
-			 			<a href="#">셔츠/블라우스</a>
-			 			<a href="#">맨투맨/후드집업</a>
-			 			<a href="#">원피스/세트</a>
-			 			<a href="#">바지</a>
-			 			<a href="#">스커트</a>
-			 		</div>
+			 		<div class="down3"></div>
 			 	</div><!-- selectItem -->
 			 </div><!-- thirdCategory -->
 			
