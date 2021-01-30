@@ -16,9 +16,6 @@
 <title>피망마켓에 오신것을 환영합니다.</title>
 </head>
 <body> 
-<input type="hidden" id="category1" value="">
-<input type="hidden" id="category2" value="">
-<input type="hidden" id="category3" value="">
 <!-- 로그인 모달 -->
 <div class="loginModal">
       	<div class="loginModalContent">
@@ -1009,7 +1006,7 @@ $('.itemWriteBtn').click(function(){
 	formData.append("category3",category3);
 
 	//데이터 잘 들어왔는지 확인
-	//for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }
+	for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }
 
 	
 	

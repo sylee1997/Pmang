@@ -1,6 +1,6 @@
 package member.dao;
 
-import member.bean.ItemDTO;
+import board.bean.ItemDTO;
 
 public interface MemberDAO {
 

@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <insert id="sellerWrite" parameterType="item">
 	insert into item values(seq_item.nextval,<!-- 등록상품키 -->
-											0,<!--  마켓(내상점)키 -->
+									seq_item.nextval,<!--  마켓(내상점)키 -->
 									   #{img1},
 									   #{img2},
 									   #{img3},

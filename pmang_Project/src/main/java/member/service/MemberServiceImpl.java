@@ -3,7 +3,7 @@ package member.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import member.bean.ItemDTO;
+import board.bean.ItemDTO;
 import member.dao.MemberDAO;
 
 @Service

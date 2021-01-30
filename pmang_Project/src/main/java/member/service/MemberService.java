@@ -1,6 +1,6 @@
 package member.service;
 
-import member.bean.ItemDTO;
+import board.bean.ItemDTO;
 
 public interface MemberService {
 
