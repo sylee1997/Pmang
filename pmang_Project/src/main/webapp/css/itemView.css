@@ -152,6 +152,7 @@ a {
 
 
 
+
 /* 상품영역 */
 
 
@@ -288,6 +289,7 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 
 
 
+
 	
 /***********/	
 	
@@ -387,7 +389,7 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 }
 
 .infoQ{
-    width: 120px;
+	width: 120px;
     padding-right: 25px;
     text-size : 20px; 
 }
@@ -415,8 +417,7 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 	width:100px;
 	color:white;
 	margin-bottom:0px;
-	
-	
+
 }
 
 #like{

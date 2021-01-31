@@ -6,7 +6,9 @@
 </style>
 
 <div id="tabArea">
+
 	<div id="tabDiv">  
+
 		
 		
 		    <input id="tab1" class="tabs" type="radio" name="tabName" value="1" checked>
@@ -27,6 +29,7 @@
 						<div class="bulletinTitle">[공지] 타 사이트 대리결제 거래 시 제재 정책 강화 안내</div>
 						<div class="bulletinDate">2021/01/15</div>
 						<div class="bulletinContent">
+
 							안녕하세요. 피망마켓입니다.
 							
 							타 사이트 대리결제를 통해 피해가 발생되고 있습니다.
@@ -34,6 +37,7 @@
 							깨끗한 거래 환경이 유지될 수 있도록 협조 부탁 드립니다.
 							감사합니다.
 							
+
 					</div></div>
 						
 					<div class="bulletinArea">
@@ -41,6 +45,7 @@
 						<div class="bulletinTitle">[공지] 각종 인증번호 거래 시 제재 정책 강화 안내</div>
 						<div class="bulletinDate">2020/11/18</div>
 						<div class="bulletinContent">
+
 							안녕하세요. 피망마켓입니다.
 							
 							최근 인증번호 거래를 통해 각종 피해가 발생되고 있습니다.
@@ -49,6 +54,7 @@
 							깨끗한 거래 환경이 유지될 수 있도록 협조 부탁 드립니다.
 							감사합니다.
 							
+
 					</div></div>
 				</div>
 		    </section><!-- bulletin -->
@@ -56,6 +62,7 @@
 		
 		    <section id="policy">
 		    	<div>
+
 					<div id="a1">
 						<div id="b1">
 							<div class="c1">이용제재/3아웃 정책
@@ -65,7 +72,9 @@
 						<div id="b2">
 							<div class="c3">
 								<img src="/pmang/image/policyPic1.png" width="20px" height="20px">
+
 								 금지 품목 거래 시, 제재 받을 수 있어요.  <span class="prohibitedItem"><a class="prohibitedLink">금지품목 보기</a></span>
+
 							</div>
 							<div class="c3">
 								<img src="/pmang/image/policyPic2.png" width="20px" height="20px">
@@ -138,6 +147,7 @@
 						</div>
 					</div>
 				</div>
+
 		    </section><!-- policy -->
 		
 		    <section id="FQA">
@@ -446,6 +456,7 @@
 		    </section><!-- FQA -->
 		
 	</div><!-- tabDiv -->
+
 </div><!-- tabArea -->
 
 <script type="text/javascript"src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

@@ -1,3 +1,6 @@
+$(document).ready(function(){
+	
+});
 
 $('.postArea').click(function(){
 	$('.postContent').slideUp();
@@ -32,7 +35,6 @@ $('.bulletinArea').click(function(){
 	}//if
 	
 });//bulletinArea click
-
 
 
 
