@@ -24,6 +24,8 @@
 	<resources location="/item/" mapping="/item/**"/>
 	<resources location="/storage/" mapping="/storage/**"/>
 
+	<resources mapping="/slideShowTest/**" location="/slideShowTest/" />
+	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="suffix" value=".jsp" />
@@ -37,12 +39,6 @@
 	<!-- Resolves views -->
 	<beans:bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<beans:property name="order" value="0"/>
-	</beans:bean>
-
-
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
 	<!-- fileupload -->

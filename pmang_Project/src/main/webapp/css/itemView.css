@@ -1,16 +1,16 @@
 @charset "UTF-8";
 
-
+/* 전체 영역 */
 #itemViewDiv{
 	margin: 0 auto;
 	width:1024px;
 	min-width: 1024px;
 	padding-top : 30px;
 }
-/* select01 */
 
 
-/* 카테고리 바 영역 */
+
+/* 카테고리  영역 */
 .categoryDiv {
 	display : flex;
 }
@@ -94,7 +94,6 @@
 	color: red;
 }
 
-
 /* 아이템 클릭 영역 */
 .detailItemDiv {
 	margin-top: 20px;
@@ -148,77 +147,177 @@ a {
 	text-decoration: none;
 	color: rgb(33, 33, 33);
 }
-/* #categoryDiv{
-	padding: 30px 0px 30px;
-    height: 30px;
-    border-bottom: 1px solid rgb(63, 63, 63);
-    vertical-align : middle;
-}
 
-#categoryArea{
-	position: absolute;
-	display: flex;
-    align-items: center;
-}
 
-.homeicon{
-	display: flex;	
-    align-items: center;
-    width:100px;
-    height:23px;
-}
 
-.category{
-	border : 1px solid gray;
-	height : 23px;
-	width : 230px;
-	display: flex;	
-    align-items: center;
-}
 
-.categoryArea1{
-	position:absolute;
-	left:150px;
-	width:230px;
-}
 
-.categoryArea2{	
-	position:absolute;
-	left:400px;
-	width:230px;
-}
-.categoryArea3{
-	position:absolute;
-	left:650px;
-	width:230px;
-}
+/* 상품영역 */
 
-.categoryDetail {
+
+/***** 모달창 구현 css *****/
+
+/* 체크박스 가리기 */
+#imgCheckBox {
 	display:none;
 }
 
-.categoryDetail a{
-	display:block;
-	background-color:white;
-	padding-left:20px;
+/* 확대 버튼  */
+#imgViewBtn {
+	cursor:pointer;
 }
 
-.category:hover .categoryDetail{
-	position:absolute;
-	left:0px;
-	top : 100%;
-	display:block;
-	width:230px;
-	margin:0px; 
-	padding:0px;
-	overflow:auto;
-} */
+/* 모달창 전체 영역*/
+#modalView {
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	z-index:100;
+}
+/* 모달안의 상품 제목 */
+#modalItemName{
+	position : absolute;
+	top:5%;
+	left:calc(50% - 150px);
+	width:500px;
+	height:100px;
+	font-size:30px;
+	color:white;
+	z-index:100;
+}
 
+
+/* 종료버튼 */
+#closeBtn {
+	position:absolute;
+	width:30px;
+	height:30px;
+	top:2%;
+	left:97%;
+	z-index:100;
+}
+
+/*  검은 배경 */
+#blackBackground {
+	position:fixed;
+	top:0;
+	left:0;
+	width:100vw;
+	height:100vh;
+	background:rgba(0,0,0,.8);
+	z-index:90;
+}
+
+/* 모달 안보이게 기본 셋팅 */
+.modalComp {
+	display:none; 
+}
+
+/***********/
+
+
+/***** 슬라이드 쇼 구현 *****/
+
+/* 전체영역 */
+#slideShowPage{
+	position:absolute;
+	left:0;
+	top:0;
+	width:100vw;
+	height:100vh;
+	
+}
+/* a{text-decoration:none; color:#666;}
+a:hover{color:#1bc1a3;}
+body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
+
+/* 속성을 위한 겉영역 */
+#slideShowArea{
+	position:absolute;
+	left:0;
+	top:0;
+  	width:100%;
+  	height:100%;
+  	margin:0 auto;
+  	color:#fff;
+}
+/* 사진과 버튼들을 담는 실제 영역 */
+#slideShowDiv{
+	position:absolute;
+	left:0;
+	top:0;
+  	width:100%;
+  	height:100%;
+}
+
+/* 사진과 글이 담기는 div */
+#slideShow{
+	width:100%;
+	height:750px;
+	position:absolute;
+	margin-left: calc(50% - 350px);
+	margin-top: 100px;
+	z-index:90;
+}
+
+/* 사진들이 담겨있는 div */
+#slideShowDiv #slideShow{
+	display:flex;
+	overflow:hidden;
+	z-index:100;
+}
+
+/* 사진한장에 대한 div */
+#slideShowDiv #slideShow > div
+{
+	width:700px;
+	height:700px;
+	margin:25px;
+}
+
+/* 사진 */
+#slideShowDiv #slideShow div img{
+	width:700px;
+	height: 700px;
+	position:relative;
+}
+
+
+
+
+
+	
+/***********/	
+	
 #itemDiv{
     display: flex;
     padding:20px 0px;
 }
+#imageArea{
+	position:relative;
+}
 
+#imgDetailBtn{
+	position:absolute;
+	top:85%;
+	left:83%;
+	cursor : pointer;
+}
+
+#imgLeftBtn{
+	position:absolute;
+	top:50%;
+	left:10%;
+	transform:translate(-50%,-50%);
+}
+#imgRightBtn{
+	position:absolute;
+	top:50%;
+	left:87%;
+	transform:translate(-50%,-50%);
+}
 #itemPic{
     margin-right: 20px;
     flex-shrink: 0;
@@ -236,13 +335,12 @@ a {
     width: 100%;
 }
 
-
 #itemPrice{
 	font-weight: 400;
 	position: relative;
 	left : 0;
 }
-#priceSpan{
+.priceSpan{
 	left-margin:10px;
 	font-size: 45px;
 	font-weight: 600;
@@ -333,7 +431,9 @@ a {
 
 
 
-/* ------------------------------------------- */
+
+
+/* 상품 정보 및 문의 영역 */
 
 #content {
 	width: 1024px;	

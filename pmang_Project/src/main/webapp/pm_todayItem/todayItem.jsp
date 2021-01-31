@@ -290,3 +290,4 @@
                </div><!-- selection2 -->
             </div><!-- selection1 -->
          </div><!-- selection -->
+<script type="text/javascript" src="/pmang/js/todayItem.js"></script>

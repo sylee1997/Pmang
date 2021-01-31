@@ -569,7 +569,7 @@ $('.detailItem').on('click', '.detailItemList2', function(){
 			if(down3[i] != ""){
 				$('.down3').append('<a href="#">'+down3[i]+'</a>');	
 			}
-		} 
+		}
 		
 		
 		for(var i=0; i<$('.down3').children().length; i++){
@@ -587,5 +587,24 @@ $('.selectItem3').on('click', 'a', function(){
 	$('.top3').html($(this).text() + img);
 		
 });
+
+
+//모달창 띄우기
+$("#imgCheckBox").on('change',(function(){
+	if($("#imgCheckBox").is(":checked")){
+		$('.modalComp').css('display', 'block');
+	}else{
+		$('.modalComp').css('display', 'none');
+	}
+}));
+
+//상품사진 넘기기
+
+
+
+
+
+
+
 
 
