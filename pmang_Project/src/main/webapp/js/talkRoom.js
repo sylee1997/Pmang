@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
    sock = new SockJS('/pmang/talk');
    sock.onopen = function() {
       console.log('open');
@@ -137,16 +136,26 @@ $(document).ready(function() {
       // 2-2. 메세지를 받은거라면 system시간 기준 1분 사이에 처음 보낸 메세지인지 마지막에 보낸메세지인지
    }
    // header 상점명 클릭
-   $('.talk_itemName_button').on('click', function() {
-      if ($('.header_modal').is('.on') == true) {
-         $('.header_modal').removeClass('on');
+   
+   $('.talk_itemName_button').on('click', function(event) {
+      if ($('.modal_area').is('.on') == true) {
+         $('.modal_area').removeClass('on');
          $('.itemName_arrow').css('transform', 'rotate(180deg)');
 
       } else {
-         $('.header_modal').addClass('on');
+         $('.modal_area').addClass('on');
          $('.itemName_arrow').css('transform', 'rotate(0deg)');
       }
+
+	   $('.modalDiv').toggle();/*toggle("normal")*/
    });
    // header 기타버튼 클릭
+   
+   $(document).click(function(e){
+		if($('.modal_area').is(e.target)){
+			$('.modalDiv').hide(); 
+			$('.modalDiv').off('scroll touchmove mousewheel');
+		}
+	});
 
 });

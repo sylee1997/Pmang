@@ -120,7 +120,6 @@ img {
     display: flex;
     flex-direction: row;
     height: 50px;
-    align-items: center;
     background: rgb(255, 255, 255);
     z-index: 10;
     padding: 0px 1rem;
@@ -415,24 +414,135 @@ img {
 
 /* 채팅창끝--------------------- */
 /* 모달 */
-.header_modal {
-   z-index: 1;
-}
-.all_modal {
-   z-index: 11;
-}
-.on {
-   position: fixed;
-   opacity: 0.6;
-   background: black;
-   width: 375px;
-    height: 667px;
+.modalDiv {
+	display: none;
+	position: fixed;
+    top: 50px;
+    left: 0px;
+    right: 0px;
+    width: 375px;
+    height: calc(100% - 50px);
+    z-index: 2;
 }
 
-.off {
-   
+.modal_area {
+	width: 375px;
+    height: calc(617px);
+    position: fixed;
+    background-color: rgba(0,0,0,0.5);
 }
 
+.modal_marketInfo_div{
+	position: absolute;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    background: rgb(255, 255, 255);
+    display: block;
+}
+
+.modal_marketInfo_detail_div {
+	width: 100%;
+    display: block;
+    padding: 8px 0px;
+}
+
+.modal_marketReview {
+	width: 100%;
+    display: block;
+    padding: 8px 0px;
+}
+
+.market_info_a {
+	display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 2.5rem;
+    align-items: center;
+    padding: 0px 3rem 0px 1.5rem;
+    position: relative;
+}
+
+.market_info_textDiv {
+	margin: 0px 1rem 0px 0px;
+    color: rgb(114, 112, 127);
+    font-size: 15px;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.market_review_dataArea {
+	flex: 1 1 0%;
+    min-width: 0px;
+    font-size: 15px;
+}
+
+.market_review_data {
+	display: flex;
+    flex-direction: row;
+    height: 1rem;
+}
+
+.market_review_data img {
+	width: 15px;
+	height: 15px;
+}
+
+.market_info_a::after {
+    content: "";
+    position: absolute;
+    background-image: url(/pmang/image/open.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    transform: rotate(270deg);
+    width: 1rem;
+    height: 1rem;
+    right: 1rem;
+}
+
+.market_review_dataArea b{
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
+	font-weight: bold;
+    font-size: 1rem;
+}
+
+
+
+.contact_time_div, .sales_details_div {
+	display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 2.5rem;
+    align-items: center;
+    padding: 0px 3rem 0px 1.5rem;
+}
+
+.market_info_Btns {
+	display: flex;
+	flex-direction: row;
+}
+
+.market_info_Btns > * {
+    flex: 1 1 0%;
+    height: 3.5rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.Fraud_report_Btn {
+    border-top: 1px solid rgb(244, 244, 250);
+    color: green;
+}
+
+.seller_market_a {
+	color: rgb(255, 255, 255);
+    background: green;
+}
 
 
 

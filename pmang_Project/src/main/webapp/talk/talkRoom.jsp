@@ -11,11 +11,63 @@
 
 <div id="root">
    <div>
-      <div class="modalDiv">
-          <div class="header_modal">
-          </div>
-          <div class="all_modal"></div>
-      </div>
+   		<div class="">
+   		</div>
+   		<!-- 여기부터 -->
+		<div class="modalDiv">
+			<div class="modal_area"></div>
+          	<div class="modal_marketInfo_div">
+				<div class="modal_marketInfo_detail_div">
+					<a href="내상점 - 상점후기페이지" class="market_info_a">
+	    				<div class="market_info_textDiv">상점후기</div>
+	    				<div class="market_review_dataArea">
+		    				<div class="market_review_data">
+		    					<img src="/pmang/image/main_logo.JPG" alt="좋아요">
+		    					<b>3</b> <!-- DB에서 상점후기count 불러오기 -->
+		    					<img src="/pmang/image/main_logo.JPG" alt="보통">
+		    					<b>5</b> <!-- DB에서 상점후기count 불러오기 -->
+		    					<img src="/pmang/image/main_logo.JPG" alt="싫어요">
+		    					<b>7</b> <!-- DB에서 상점후기count 불러오기 -->
+		    				</div>
+		    			</div>
+					</a>
+	    		
+					<a href="내상점 - 내상품페이지" class="market_info_a">
+	    				<div class="market_info_textDiv">판매상품</div>
+	    				<div class="market_review_dataArea">
+	    					<b>2</b><!-- DB 에서 상품갯수 count 하기 -->
+	    				</div>
+					</a>
+					
+					<!-- <button type="button" class="market_info_a">
+						<div class="market_info_textDiv">판매내역</div>
+						<div class="market_review_dataArea">
+							<b>4</b>실제 판매 거래완료 개수 카운터하기
+						</div>
+					</button> --> <!-- 우리는 직거래밖에 없으니까 제거, 혹시사용하게 되면 사용할게 -->
+					
+					<div class="sales_details_div">
+						<div class="market_info_textDiv">판매내역</div>
+						<div class="market_review_dataArea">
+							<b>4</b>  <!-- 실제 판매 거래완료 개수 카운터하기 -->
+						</div>
+					</div>
+					
+					<div class="contact_time_div">
+						<div class="market_info_textDiv">연락시간</div>
+						<div class="market_review_dataArea">24시간 연락가능</div>
+					</div>
+				</div>
+				
+				<div class="market_info_Btns">
+					<button type="button" class="Fraud_report_Btn">사기 신고조회</button> <!-- 윈도우창 띄워줘야함 -->
+					<a href="판매자상점으로 바로가기" class="seller_market_a">상점 바로가기</a> <!-- session에 판매자 상점key 기억 후, 이동? 해야하나.. -->
+				</div>	
+    	
+			</div>
+		</div>
+      
+      
       <div class="talk_Area">
          <div class="talk_area_div" style="border:1px solid black;">
             <header class="talk_header">
