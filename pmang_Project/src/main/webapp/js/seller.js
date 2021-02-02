@@ -1,3 +1,4 @@
+
 //처음 들어올때
 $(document).ready(function(){
 	$('#category2').hide();
@@ -722,8 +723,10 @@ $('#recentlylocation').click(function(){
 	formData.append("category1",category1);
 	formData.append("category2",category2);
 	formData.append("category3",category3);
+
 	//데이터 잘 들어왔는지 확인
 	//for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }
+
 	
 	
 	
@@ -789,3 +792,30 @@ $('#recentlylocation').click(function(){
 		
 	}
 });*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

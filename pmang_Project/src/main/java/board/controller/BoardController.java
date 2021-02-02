@@ -33,46 +33,46 @@ import member.bean.SellerDTO;
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
-	
+
 	@RequestMapping(value = "itemBoard", method = RequestMethod.GET)
 	public String itemBoard(Model model) {
 		model.addAttribute("display", "/pm_itemBoard/itemBoard.jsp");
 		return "/index";
 	}
-	//-------------------mystote------------------------
+
+	// -------------------mystote------------------------
 	@RequestMapping(value = "mystore", method = RequestMethod.GET)
-	public String mystore(HttpSession session,Model model) {
-		//나중에 세션 받아와야함.
-		//String userkey=(String)session.getAttribute("memId");
-		int userkey=1;
-		SellerDTO sellerDTO=boardService.getMystore(userkey);
-		
-		
-		model.addAttribute("sellerDTO",sellerDTO);
+	public String mystore(HttpSession session, Model model) {
+		// 나중에 세션 받아와야함.
+		// String userkey=(String)session.getAttribute("memId");
+		int userkey = 1;
+		SellerDTO sellerDTO = boardService.getMystore(userkey);
+
+		model.addAttribute("sellerDTO", sellerDTO);
+
 		model.addAttribute("display", "/pm_mystore/mystore.jsp");
 		return "/index";
 	}
-	
-	@RequestMapping(value="getMystore",method=RequestMethod.POST)
-	public ModelAndView getMystore(HttpSession session,
-			@CookieValue(value="memHit",required=false) Cookie cookie,HttpServletResponse response)
-	{
-		//int userkey=session.getAttribute("userkey");
-		int userkey=1;
-		
-		//조회수 - 새로고침방지
-		if(cookie!=null) {
+
+	@RequestMapping(value = "getMystore", method = RequestMethod.POST)
+	public ModelAndView getMystore(HttpSession session, @CookieValue(value = "memHit", required = false) Cookie cookie,
+			HttpServletResponse response) {
+		// int userkey=session.getAttribute("userkey");
+		int userkey = 1;
+
+		// 조회수 - 새로고침방지
+		if (cookie != null) {
 			boardService.mystoreHitUpdate(userkey);
 			cookie.setMaxAge(0);
 			response.addCookie(cookie);
 		}
-		SellerDTO sellerDTO=boardService.getMystore(userkey);
+		SellerDTO sellerDTO = boardService.getMystore(userkey);
 
-		ModelAndView mav=new ModelAndView();
-		mav.addObject("sellerDTO",sellerDTO);
-		mav.addObject("userkey",userkey);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("sellerDTO", sellerDTO);
+		mav.addObject("userkey", userkey);
 		mav.setViewName("jsonView");
-		
+
 		return mav;
 	}
 
@@ -93,41 +93,40 @@ public class BoardController {
 
 		return "/pm_mystore/tab3";
 	}
-	
-	@RequestMapping(value="mystoreModify",method=RequestMethod.POST)
+
+	@RequestMapping(value = "mystoreModify", method = RequestMethod.POST)
 	@ResponseBody
 	public void mystoreModify(@RequestParam String marketname, @RequestParam String marketcontent) {
-		Map<String,String> map=new HashMap<String,String>();
+		Map<String, String> map = new HashMap<String, String>();
 		map.put("marketname", marketname);
 		map.put("pf_content", marketcontent);
-		
+
 		boardService.mystoreModify(map);
 	}
-	
-	@RequestMapping(value="profileImgModify",method=RequestMethod.POST)
+
+	@RequestMapping(value = "profileImgModify", method = RequestMethod.POST)
 	@ResponseBody
-	public void profileImgModify(@ModelAttribute SellerDTO sellerDTO,
-							  @RequestParam("img") MultipartFile img) {
-		String filePath="C:\\project\\Pmang\\pmang_Project\\src\\main\\webapp\\storage";
-		String fileName=img.getOriginalFilename();
-		File file=new File(filePath,fileName);
-		
-		//파일복사
+	public void profileImgModify(@ModelAttribute SellerDTO sellerDTO, @RequestParam("img") MultipartFile img) {
+		String filePath = "C:\\project\\Pmang\\pmang_Project\\src\\main\\webapp\\storage";
+		String fileName = img.getOriginalFilename();
+		File file = new File(filePath, fileName);
+
+		// 파일복사
 		try {
 			FileCopyUtils.copy(img.getInputStream(), new FileOutputStream(file));
-			
-		}catch(IOException e) {
+
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		sellerDTO.setPf_photo(fileName);
-		
-		//db
+
+		// db
 		boardService.profileImgModify(sellerDTO);
 	}
 
-	//-----------------------mystore
-	
+	// -----------------------mystore
+
 	@RequestMapping(value = "notice", method = RequestMethod.GET)
 	public String notice(Model model) {
 		model.addAttribute("display", "/pm_notice/notice.jsp");
@@ -140,11 +139,11 @@ public class BoardController {
 		return "/index";
 	}
 
-	@RequestMapping(value="reviewWriteForm",method=RequestMethod.GET)
+	@RequestMapping(value = "reviewWriteForm", method = RequestMethod.GET)
 	public String reviewWriteForm() {
 		return "/pm_review/reviewWriteForm";
 	}
-	
+
 	@RequestMapping(value="reviewWrite",method=RequestMethod.POST)
 	@ResponseBody
 	public void reviewWrite(@ModelAttribute ReviewDTO reviewDTO,@RequestParam("img[]") List<MultipartFile> list) {
