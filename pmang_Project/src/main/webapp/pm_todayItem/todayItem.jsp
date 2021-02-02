@@ -1,47 +1,64 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	<link rel="stylesheet" href="/pmang/css/mystore.css">
-	<link rel="stylesheet" href="/pmang/css/index.css">
-	
-<div class="mystoreWrap">
-	<div class="tab1bar">
-		<div class="tabName">
-			상품<span>0</span>
-		</div><!-- tabName -->
-		<div class="selectWrap">
-			<div class="select_box">
-				<div class="box">
-					<div class="select">전체</div>
-					<ul class="selectList">
-						<li class="selected">전체</li>
-						<li>여기에 내가 올린 상품들의</li>
-						<li>카테고리가 올라가야함</li>
-						<li>중복되지않게</li>
-					</ul>
-				</div>
-			</div>
-		</div><!-- selectWrap -->
-	</div><!-- tab1bar -->
-		<div class="mystoreBar">
-			<div id="selectCategory">
-			전체 <span>0</span>
-			</div><!-- selectCategory -->
-			<div id="sortItem">
-				<div class="sortGroup">
-					<a href="#" class="defaultSort">최신순 &emsp;|&emsp;</a>
-					<a href="#" class="sort">인기순 &emsp;|&emsp;</a>
-					<a href="#" class="sort">저가순 &emsp;|&emsp;</a>
-					<a href="#" class="sort">고가순</a>&emsp;&emsp;
-				</div><!-- sortGroup -->
-			</div><!-- sortItem -->
-		
-		</div><!-- "mystoreBar" -->
-		<div id="storeSelection">
-            <div class="storeSelection1">
-               <div class="storeSelection2">
-                  <div class="storeSelection3">
+    pageEncoding="UTF-8"%>
+
+    
+  <!-- 인기카테고리 슬라이드영역 -->
+         <div id="slide">
+            <div id="slideInitial">
+               <!-- initial -->
+               
+               <div id="slideAct">
+                  <ul class="slide_wrap"
+                     style="width: 5120px; height: 300px;">
+                     <li class="slide_item">
+                        <a href="#">
+                           <img src="/pmang/image/image1.jpg" alt="배경1" />
+                        </a>
+                     </li>
+                     
+                     <li class="slide_item">
+                        <a href="#">
+                           <img src="/pmang/image/image2.jpg" alt="배경2" />
+                        </a>
+                     </li>
+                     
+                     <li class="slide_item">
+                        <a href="#">
+                           <img src="/pmang/image/image3.jpg" alt="배경3" />
+                        </a>
+                     </li>
+                     
+                     <li class="slide_item">
+                        <a href="#">
+                           <img src="/pmang/image/image4.jpg" alt="배경4" />
+                        </a>
+                     </li>
+                     
+                     <li class="slide_item">
+                        <a href="#">
+                           <img src="/pmang/image/image5.jpg" alt="배경5" />
+                        </a>
+                     </li>
+                     
+                     
+                     </ul>
+               </div><!-- slideAct -->
+               
+            </div><!-- slideInitial -->
+            
+         </div><!-- slide -->
+         
+         
+         <!-- 최근게시글 -->
+         <div id="selection">
+            <h2>오늘의 상품 추천</h2>
+            
+            
+            <div class="selection1">
+               <div class="selection2">
+                  <div class="selection3">
                      <!-- 1개상품 -->                  
-                     <div class="storeItemFrame">
+                     <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
                               <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
@@ -57,10 +74,10 @@
                               </div>
                            </div>
                         </a>
-                     </div><!-- storeItemFrame -->
+                     </div><!-- itemFrame -->
                      
                      <!-- 1개상품 -->                  
-                     <div class="storeItemFrame">
+                     <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
                               <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
@@ -76,10 +93,10 @@
                               </div>
                            </div>
                         </a>
-                     </div><!-- storeItemFrame -->
+                     </div><!-- itemFrame -->
                      
                      <!-- 1개상품 -->                  
-                     <div class="storeItemFrame">
+                     <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
                               <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
@@ -95,10 +112,10 @@
                               </div>
                            </div>
                         </a>
-                     </div><!-- storeItemFrame -->
+                     </div><!-- itemFrame -->
                      
                      <!-- 1개상품 -->                  
-                     <div class="storeItemFrame">
+                     <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
                               <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
@@ -114,10 +131,10 @@
                               </div>
                            </div>
                         </a>
-                     </div><!-- storeItemFrame -->
+                     </div><!-- itemFrame -->
                      
                      <!-- 1개상품 -->                  
-                     <div class="storeItemFrame">
+                     <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
                               <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
@@ -133,10 +150,10 @@
                               </div>
                            </div>
                         </a>
-                     </div><!-- storeItemFrame -->
+                     </div><!-- itemFrame -->
                      
                      <!-- 1개상품 -->                  
-                     <div class="storeItemFrame">
+                     <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
                               <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
@@ -152,10 +169,10 @@
                               </div>
                            </div>
                         </a>
-                     </div><!-- storeItemFrame -->
+                     </div><!-- itemFrame -->
                      
                      <!-- 1개상품 -->                  
-                     <div class="storeItemFrame">
+                     <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
                               <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
@@ -171,10 +188,10 @@
                               </div>
                            </div>
                         </a>
-                     </div><!-- storeItemFrame -->
+                     </div><!-- itemFrame -->
                      
                      <!-- 1개상품 -->                  
-                     <div class="storeItemFrame">
+                     <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
                               <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
@@ -190,10 +207,10 @@
                               </div>
                            </div>
                         </a>
-                     </div><!-- storeItemFrame -->
+                     </div><!-- itemFrame -->
                      
                      <!-- 1개상품 -->                  
-                     <div class="storeItemFrame">
+                     <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
                               <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
@@ -209,10 +226,10 @@
                               </div>
                            </div>
                         </a>
-                     </div><!-- storeItemFrame -->
+                     </div><!-- itemFrame -->
                      
                      <!-- 1개상품 -->                  
-                     <div class="storeItemFrame">
+                     <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
                               <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
@@ -228,10 +245,10 @@
                               </div>
                            </div>
                         </a>
-                     </div><!-- storeItemFrame -->
+                     </div><!-- itemFrame -->
                      
                      <!-- 1개상품 -->                  
-                     <div class="storeItemFrame">
+                     <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
                               <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
@@ -247,10 +264,10 @@
                               </div>
                            </div>
                         </a>
-                     </div><!-- storeItemFrame -->
+                     </div><!-- itemFrame -->
                      
                      <!-- 1개상품 -->                  
-                     <div class="storeItemFrame">
+                     <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
                               <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
@@ -266,15 +283,32 @@
                               </div>
                            </div>
                         </a>
-                     </div><!-- storeItemFrame -->
+                     </div><!-- itemFrame -->
                      
                      
                   </div><!-- selection3 -->
                </div><!-- selection2 -->
             </div><!-- selection1 -->
          </div><!-- selection -->
-</div><!-- mystoreWrap -->
-
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script type="text/javascript" src="/pmang/js/mystore.js"></script>
+         
+         <script>
+         /* 인기 카테고리 슬라이드 쇼 이벤트 */
+         var ul = document.querySelector('.slide_wrap');
+         function move() {
+         	var curIndex = 0;
+         	setInterval(function() {
+         		ul.style.transition = '0.5s';
+         		ul.style.transform = "translate3d(-" + 1024 * (curIndex + 1)
+         				+ "px, 0px, 0px)";
+         		curIndex++;
+         		if (curIndex === 4) {
+         			curIndex = -1;
+         		}
+         	}, 1000);
+         }
+         document.addEventListener("DOMContentLoaded", function() {
+         	// 
+         	move();
+         });
+         /* 인기 카테고리 슬라이드 쇼 이벤트 */
+         </script>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="mystoreSQL">
+ 
+ 	<update id="profileImgModify" parameterType="seller">
+ 		update sellertable set pf_photo=#{pfphoto}
+ 	</update>
+ 
+ 	<select id="getMystore" parameterType="int" resultType="seller">
+ 		select * from sellertable where userkey=#{userkey}
+ 	</select>
+ 	
+ 	<update id="mystoreHitUpdate" parameterType="int">
+ 		update sellertable set markethit=markethit+1 where userkey=#{userkey}
+ 	</update>
+ 	
+ 	<update id="mystoreModify" parameterType="java.util.Map">
+ 		update sellertable set marketname=#{marketname} , pf_content=#{pf_content}
+ 	</update>
+ </mapper>
