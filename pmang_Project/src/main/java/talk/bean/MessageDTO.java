@@ -7,13 +7,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MessageDTO {
-	private int talk_room_seq;//Åå¹æ seq
-	private String sender_user_id; //º¸³½»ç¶÷ id
-	private String receiver_user_id; //¹ŞÀº »ç¶÷id
-	private String user_id;//À¯Àúid
-	private String talk_content; //¸Ş¼¼Áö ³»¿ë
-	private Date send_time;//¸Ş¼¼Áö º¸³½½Ã°£
-	private Date read_time;//¸Ş¼¼Áö ÀĞÀº ½Ã°£
-	private int unread_count;//¸Ş¼¼Áö ¾ÈÀĞÀº °¹¼ö
+public class MessageDTO {// ë©”ì‹œì§€ í•œì¤„ í•œì¤„
+	private int talk_room_seq;//í†¡ë°© seq
+	private String sender_user_id;//ë³´ë‚¸ì‚¬ëŒ id
+	private String receiver_user_id;//ë°›ì€ì‚¬ëŒ id
+	private String user_id;//ìœ ì €id
+	private String talk_content;//ë©”ì‹œì§€ ë‚´ìš©
+	private Date send_time;//ë©”ì„¸ì§€ ë³´ë‚¸ ì‹œê°„
+	private Date read_time;//ë©”ì„¸ì§€ ë°›ì€ ì‹œê°„
+	private int unread;//ì•ˆì½ì€ ë©”ì‹œì§€ ì²´í¬
 }

@@ -11,14 +11,40 @@
 
 <div id="root">
    <div>
-   		<div class="">
+   		<div class="room_setting_modal">
+   			<div class="room_setting_modal_area"></div>
+   			<div class="room_setting_content">
+   				<button class="room_setting_notification_Btn">
+   				알림
+   				<b>ON</b>
+   				</button>
+   				
+   				<button class="room_setting_report">신고</button>
+   				<button class="room_setting_reportCheck">신고조회</button>
+   				<button class="room_setting_cutOff">차단</button>
+   				<button class="room_setting_out">나가기</button>
+   			</div>
    		</div>
    		<!-- 여기부터 -->
 		<div class="modalDiv">
+			<div class="header_modal">
+			</div>
+			<!-- 여기부터 하단모달 -->
+			<div class="all_modal">
+			</div>
+			<div class="item_choice_nav">
+                <div class="item_choice_div">상품선택</div><button class="item_choice_closeBtn">x</button>
+                <button class="opponent_item_choice">상대방상점의 상품 선택하기</button><!-- 상대방 아이디 세션필요. -->
+				<button class="my_item_choice">내상점 상품 선택하기</button>
+			</div>
+			<!-- 하단모달끝 -->
+			
+		
+		
 			<div class="modal_area"></div>
           	<div class="modal_marketInfo_div">
 				<div class="modal_marketInfo_detail_div">
-					<a href="내상점 - 상점후기페이지" class="market_info_a">
+					<a href="/pmang/board/mystore" class="market_info_a">
 	    				<div class="market_info_textDiv">상점후기</div>
 	    				<div class="market_review_dataArea">
 		    				<div class="market_review_data">
@@ -69,7 +95,7 @@
       
       
       <div class="talk_Area">
-         <div class="talk_area_div" style="border:1px solid black;">
+         <div class="talk_area_div">
             <header class="talk_header">
                <button type="button" class="talk_itemName_button">
                   <span class="itemName">상점명 받아오기</span>
@@ -78,7 +104,6 @@
                
                <div class="talk_item_detailDiv">
                   <button class="talk_item_detailBtn">
-                     
                   </button>
                   
                </div>
@@ -89,11 +114,11 @@
                </div>
             </header>
             
-            <div class="talk_itemInfo" style="border:1px solid green">
+            <div class="talk_itemInfo">
                <a class="itemboard_move">
-                  <img src="/pmang/image/maesae.jpg" alt="상품이미지" width="40px" height="40px">
+                  <img src="/pmang/image/itemPic.jpg" alt="상품이미지" width="40px" height="40px">
                   
-                  <div class="talk_itemList" style="border:1px solid orange;">
+                  <div class="talk_itemList">
                      <div class="item_price_div">0,000
                      <small>원</small>
                      </div>
@@ -132,22 +157,38 @@
                </div>
                <div class="talkReciveDiv"></div>받은톡 위와 동일 -->
                <div id="talkContentScroll"></div>
-            </div>
+			</div>
 
             <!-- 메시지창 -->
-            <div class="talk_footer">
-               <div class="talk_send_Area">
-                  <div class="message_option_Area">
-                     <button type="button" class="message_option_Btn"></button>
-                  </div>
+			<div class="talk_footer">
+				<div class="talk_send_Area">
+					<div class="message_option_Area">
+						<button type="button" class="message_option_Btn"></button>
+					</div>
                   
-                  <div class="message_text_Area">
-                     <form class="message_text_form">
-                        <textarea placeholder="메시지를 입력하세요" class="talk_message" id="talk_message" rows="1"></textarea>
-                        <input type="button" id="sendBtn" value="▲">
-                     </form>
-                  </div>
-               </div>
+					<div class="message_text_Area">
+						<form class="message_text_form">
+							<textarea placeholder="메시지를 입력하세요" class="talk_message" id="talk_message" rows="1"></textarea>
+							<input type="button" id="sendBtn" value="▲">
+						</form>
+					</div>
+				</div>
+               
+               <!-- 메세지옵션--------- -->
+				<div class="message_option_div">
+					<div class="sand_img_div">
+                        <input type="file"  multiple name="files"  id="files" accept="image/*"  onchange="changeValue(this)"/>
+                        <img alt="이미지아이콘" src="../image/014-picture.png" id="fileBtn" width="43px" height="43px" >
+						<div style="font-size: 13px;">이미지</div>
+					</div>
+					<div class="item_choice_div">
+						<div>
+							<img alt="상품아이콘" src="../image/035-shopping-cart.png" id="item_choice_Btn" width="50px" height="50px" >
+							<div style="font-size: 13px;">상품선택</div>
+						</div>
+					</div>
+				</div>
+				<!-- 메세지옵션끝--------- -->
             </div>
          </div>
       </div>

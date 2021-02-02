@@ -4,5 +4,9 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="board.bean.ItemDTO" alias="item" />
+		
+		<typeAlias type="talk.bean.TalkRoomDTO" alias="talkRoom"/>
+		<typeAlias type="talk.bean.MessageDTO" alias="message"/>
+		
 	</typeAliases>
 </configuration>
