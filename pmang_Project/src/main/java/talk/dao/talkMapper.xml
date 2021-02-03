@@ -4,6 +4,6 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="talkSQL">
  	<select id="getRoomList" parameterType="String" resultType="talkRoom">
- 		select * from talkroom where user_id = #{user_id}
+ 		select * from talkroom where userId = #{userId}
  	</select>
  </mapper>
