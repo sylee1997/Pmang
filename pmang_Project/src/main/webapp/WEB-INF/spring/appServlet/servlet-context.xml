@@ -26,9 +26,6 @@
 	<resources location="/js/" mapping="/js/**"/>
 	<resources location="/item/" mapping="/item/**"/>
 	<resources location="/storage/" mapping="/storage/**"/>
-
-	<resources location="/pm_itemView/" mapping="/pm_itemView/**"/>
-	<resources location="/pm_mystore/" mapping="/pm_mystore/**"/>
 	
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
@@ -48,7 +45,7 @@
 	
 	<!-- fileupload -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<beans:property name="maxUploadSize" value="5000000"/> <!-- 5MB -->
+		<beans:property name="maxUploadSize" value="20000000"/> <!-- 20MB -->
 	</beans:bean>
 	
 	<!-- 웹소켓 -->

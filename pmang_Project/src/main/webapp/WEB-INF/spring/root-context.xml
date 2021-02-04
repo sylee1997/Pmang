@@ -9,6 +9,12 @@
 	<context:component-scan base-package="member.service"/>
 	<context:component-scan base-package="member.dao"/>
 	<context:component-scan base-package="member.bean"/>
+	
+	<context:component-scan base-package="board.service"/>
+	<context:component-scan base-package="board.dao"/>
+	<context:component-scan base-package="board.bean"/>
 	<context:component-scan base-package="spring.conf"/>
+	
+	<context:component-scan base-package="data.url"/>
 	
 </beans>

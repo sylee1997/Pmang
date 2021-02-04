@@ -153,6 +153,13 @@
                   <img src="/pmang/image/login.png" alt="login" style="width: 30px; height: 30px;" />
                   <span class="indexnavSpan">로그인</span>
                 </li>
+                <li>
+                  <span class="vertical">|</span>
+                </li>
+                <div class="pmangTok">
+               		<div class="pmangTokDiv">피망Tok
+               	</div>
+            </div>
               </ul>
             </nav>
         </div>
@@ -480,7 +487,7 @@
 									<li><a href="#">양말</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
-							<li><a class="category2A" href="#">동화책/완구/인형</a>
+							<li><a class="category2A" href="#">동화책/완구/인형/장난감</a>
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
@@ -503,6 +510,7 @@
 							<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 						</ul></li>
 				</ul></li>
+				<div id="header_categoryTitle">전체 카테고리</div>
 			</div>
 		</ul>
 		
@@ -547,10 +555,6 @@
                <a id="topA" href="#" style="color: black; font-size:12pt">TOP</a>
             </div>
             
-            <div class="pmangTok">
-               	<div class="pmangTokDiv">피망Tok</div>
-               
-            </div>
          </div><!-- asideDiv -->
 
       </div><!-- aside -->
@@ -689,7 +693,6 @@
 <!-- 검색 클릭 이벤트 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-
 
 //검색 input에 커서 올라가면 이벤트
 $('.searchInput').focus(function(){
@@ -982,7 +985,6 @@ $('.logo-wrap').click(function(){
 
 
 
-
 //여긴 상품등록쪽..
 //---------------------------------------------------------------------------------------------------
 //등록하기 버튼을 클릭했을때.
@@ -994,6 +996,8 @@ $('.itemWriteBtn').click(function(){
 	for(var i = 1; i < 4; i++){
 		if($("#hashtag"+i).text() != ""){
 			formData.append("hashtag"+i, $("#hashtag"+i).text());
+		}else {
+			formData.append("hashtag"+i, "undefined");
 		}
 	}
 	
@@ -1001,12 +1005,26 @@ $('.itemWriteBtn').click(function(){
 	var category2 = $(".selectM").text();
 	var category3 = $(".selectS").text();
 	
+	var img1url = $('.imageChoice_ul').children().eq(1).children('img').attr("src");
+	var img2url = $('.imageChoice_ul').children().eq(2).children('img').attr("src");
+	var img3url = $('.imageChoice_ul').children().eq(3).children('img').attr("src");
+	var img1 = $('.imageChoice_ul').children().eq(1).children('img').attr("title");
+	var img2 = $('.imageChoice_ul').children().eq(2).children('img').attr("title");
+	var img3 = $('.imageChoice_ul').children().eq(3).children('img').attr("title");
+	
 	formData.append("category1",category1);
 	formData.append("category2",category2);
 	formData.append("category3",category3);
+	formData.append("img1",img1);
+	formData.append("img2",img2);
+	formData.append("img3",img3);
+	formData.append("img1url",img1url);
+	formData.append("img2url",img2url);
+	formData.append("img3url",img3url);
+	
 
 	//데이터 잘 들어왔는지 확인
-	for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }
+	//for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }
 
 	
 	
@@ -1057,14 +1075,14 @@ $('.itemWriteBtn').click(function(){
 	}else {
 		$.ajax({
 			type: 'post',
-			enctype: 'multipart/form-data',
+			enctype: 'form-data',
 			processData: false, //데이터를 컨텐트 타입에 맞게 변환 여부
 			contentType: false,//요청 컨텐트 타입
 			url: '/pmang/member/sellerWrite',
 			data: formData,
 			success: function(data){
 				alert('상품 등록 완료');
-				location.href='/spring/index'; //추후에 상품관리 페이지로 바뀌게 해야함!
+				location.href='/pmang/index'; //추후에 상품관리 페이지로 바뀌게 해야함!
 			},
 			error: function(err){
 				console.log(err);

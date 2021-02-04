@@ -7,8 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="memberSQL">
 
 <insert id="sellerWrite" parameterType="item">
-	insert into item values(seq_item.nextval,<!-- 등록상품키 -->
-									seq_item.nextval,<!--  마켓(내상점)키 -->
+	insert into item values(item_seq.nextval,<!-- 등록상품키 -->
+									5,<!--  유저키 -->
 									   #{img1},
 									   #{img2},
 									   #{img3},
@@ -25,12 +25,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									   #{hashtag1},
 									   #{hashtag2},
 									   #{hashtag3},
-									   0,<!-- #{qty} -->
-									   0,<!-- #{item_like} -->
-									   0,<!-- comment_seq -->
+									   0,<!-- #{buyer_Key} -->
 									   0,<!-- #{hit} -->
+									   0,<!-- #{qty} -->
 									   sysdate)
 									   
 </insert>
 
+
+<select id="searchlocation" parameterType="String" resultType="zipcode">
+	select DISTINCT sido, sigungu, yubmyundong from newzipcode where sigungu like '%'||#{address}||'%' or yubmyundong like '%'||#{address}||'%' or roadname like '%'||#{address}||'%' order by sido
+</select>
 </mapper>

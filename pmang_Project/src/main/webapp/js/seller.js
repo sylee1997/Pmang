@@ -5,12 +5,16 @@ $(document).ready(function(){
 	$('#category3').hide();
 	
 	//$('.imageCount').text('('+$('#imageCountHidden').val()+'/3)');
+	
+	
 });
+
 
 
 //이미지 등록할 때 사진 리스트 추가 , 사진 갯수 (0/3) 구현해야함
 
 $('.imageChoice').change(function(e){
+	alert($('#imageCountHidden').val());
 	var files = e.target.files;
 	var arr = Array.prototype.slice.call(files);
 
@@ -76,7 +80,7 @@ function checkExtension(fileName, fileSize){
 function preview(arr){
 	if(parseInt($('#imageCountHidden').val()) <= 3){
 
-		arr.forEach(function(f){
+	arr.forEach(function(f, index){
       
       //파일명이 길면 파일명...으로 처리
       var fileName = f.name;
@@ -93,13 +97,17 @@ function preview(arr){
         var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
         reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
           //str += '<button type="button" class="delBtn" value="'+f.name+'" style="background: red">x</button><br>';
-          str += '<img src="'+e.target.result+'" title="'+f.name+'" width=195 height=202 />';
-          str += '</li></div>';
+          if(index == 0 && $('#imgrep').length == 0){
+        	  str += '<div id="imgrep">대표이미지</div>';
+          }
+          str += '<img src="'+e.target.result+'" title="'+f.name+'" width=202 height=202 />';
+          str += '<button id="imgpreBtn"><img src="/pmang/image/closeBtn.png" alt="close" width=20 height=20"></button>';
+          str += '</li>';
           $(str).appendTo('.imageChoice_ul');
         } 
         reader.readAsDataURL(f);
       }else{
-        str += '<img src="/pmang/image/bench.jpg" title="'+f.name+'" width=195 height=202 />';
+        str += '<img src="/pmang/image/bench.jpg" title="'+f.name+'" width=202 height=202 />';
         $(str).appendTo('.imageChoice_ul');
       }
     
@@ -112,6 +120,19 @@ function preview(arr){
 	  alert('사진 첨부는 최대 3장까지 가능합니다.');
   }
 }
+
+
+
+
+
+
+$('.imageChoice_ul').on('click','#imgpreBtn',function(){
+	$(this).parent('.imgli').remove();
+	$('.imageChoice_ul').children().eq(1).append($('<div id="imgrep">대표이미지</div>'));
+	$('#imageCountHidden').val(parseInt($('#imageCountHidden').val())-1);
+	$('.imageCount').text('('+String($('#imageCountHidden').val())+'/3)');
+});
+
 
 
 
@@ -525,7 +546,7 @@ $("#textRemoveClick").click(function(){
 
 
 //상품내용
-$('textarea[name=content]').on('keyup', function() {
+$('textarea[name=item_content]').on('keyup', function() {
 	var contentText = $(this).val();
 	$('#contentLength').html('('+contentText.length + '/2000)');   
 	
@@ -541,26 +562,25 @@ $('textarea[name=content]').on('keyup', function() {
 
 //수량 숫자만 입력
 $('#qtyparent').on('keyup','input',function(){
-	qtyVal = $('input[name=qty]').val();
-	let qtyRule = /^[0-9]*$/; // * 이 기존에 {1,3}
+	qtyVal = $('.qty_input').val();
+	let qtyRule = /^[0-9]$/; // * 이 기존에 {1,3}
 	let reg1 = /[^0-9]/g;
 	
-	if(qtyVal.length > 0 && qtyVal.length <= 3 )
 	if(!qtyRule.test(qtyVal)){
-		$('input[name=qty]').val(qtyVal.replace(reg1,''));
+		$('.qty_input').val(qtyVal.replace(reg1,''));
 		//alert("숫자만 입력해주세요.");
 	}
 });
 
 //가격 숫자만 입력
-$('#priceparent').on('keyup','input',function(){
+/*$('#priceparent').on('keyup','input',function(e){
+	
 	let priceVal = $('input[name=item_price]').val();
-	let priceRule = /^[0-9]*$/;// * 이 기존에 {0,9}
-	let reg2 =/[^0-9]/g;   //
-
-	if(priceVal.length > 0 && priceVal.length <= 9 )
+	let priceRule = /^[0-9]$/;// * 이 기존에 {0,9}
+	let reg2 =/[^0-9]/g;   
+	
 	if(!priceRule.test(priceVal)){
-		$('input[name=price]').val(priceVal.replace(reg2,''));
+		$('input[name=item_price]').val(priceVal.replace(reg2,''));
 		//alert("숫자만 입력해주세요.");
 	}
 	
@@ -572,8 +592,59 @@ $('#priceparent').on('keyup','input',function(){
 		$('.price_input').css('border','1px solid rgb(195, 194, 204)');
 	}
 	
-	/*$('input[name=price]').val(addComma($('input[name=price]').val()));*/
+	
+	$('input[name=price]').val(addComma($('input[name=price]').val()));
+});*/
+
+
+$("input[name='item_price']").bind('keyup', function(e){
+	var rgx1 = /\D/g; //\d의 반대인 \D(숫자가 아닌것들)은 반복검색해서 추출함.
+	var rgx2 = /(\d+)(\d{3})/;
+	var num = this.value.replace(rgx1,"");
+	
+	if($(this).val() < 100){
+		$('#priceDiv').text('※100원 이상 입력해주세요.');
+		$('.price_input').css('border','1px solid green');
+		while (rgx2.test(num)) num = num.replace(rgx2, '$1' + ',' + '$2');
+		this.value = num;
+	}else{
+		$('#priceDiv').text('');
+		$('.price_input').css('border','1px solid rgb(195, 194, 204)');
+		while (rgx2.test(num)) num = num.replace(rgx2, '$1' + ',' + '$2');
+		this.value = num;
+	}
+	
+	
+	var realNum = $(this).val().replace(/\,/g,'');
+	if(realNum < 100){
+		$('#priceDiv').text('※100원 이상 입력해주세요.');
+	}
+	
+/*	if(rgx3.test(this.val())){
+		$('#priceDiv').text('※100원 이상 입력해주세요.');
+	}else{
+		$('#priceDiv').text('');
+		$('.price_input').css('border','1px solid rgb(195, 194, 204)');
+	}*/
+	
 });
+
+//가격 콤마
+/*	function comma(str) {
+	    str = String(str);
+	    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+	}
+	 
+	//콤마풀기
+	function uncomma(str) {
+	    str = String(str);
+	    return str.replace(/[^\d]+/g, '');
+	}
+	 
+	//값 입력시 콤마찍기
+	function inputNumberFormat(obj) {
+	    obj.value = comma(uncomma(obj.value));
+	}*/
 
 //3자리마다 콤마. 결과는 잘 나오지만 특수문자(,) 를 하나의 문자로 인식하여 /^[0-9]{1,9}$/ 정규식에 의해 걸림..
 /*function addComma(num){
@@ -669,29 +740,76 @@ function searchDetailAddrFromCoords(coords, callback) {
 //주소 검색
 $("#searchlocation").click(function(){
 	$('.searchlocationModal').css('display', 'flex');
-	$('.searchlocationModal').on('scroll touchmove mousewheel', function(e){
+	$('body').css('overflow','hidden');
+/*	$('.searchlocationModal').on('scroll touchmove mousewheel', function(e){
 		e.preventDefault();
 		e.stopPropagation(); 
 		return false;
-	});
+	});*/
 });
 
 $('.searchlocationCloseBtn').click(function(){
 	$('.searchlocationModal').hide();
 	$('.recentlyModal').hide();
-	$('.searchlocationModal').off('scroll touchmove mousewheel');
-	$('.recentlyModal').off('scroll touchmove mousewheel');
+	$('body').css('overflow','auto');
+	$('.searchlocationInput').val('');
+/*	$('.searchlocationModal').off('scroll touchmove mousewheel');
+	$('.recentlyModal').off('scroll touchmove mousewheel');*/
 });
 
 $(document).click(function(e){
 	if($('.searchlocationModal').is(e.target)){
 		$('.searchlocationModal').hide(); 
-		$('.searchlocationModal').off('scroll touchmove mousewheel');
+		$('body').css('overflow','auto');
+		$('.searchlocationInput').val('');
+/*		$('.searchlocationModal').off('scroll touchmove mousewheel');*/
 	}else if($('.recentlyModal').is(e.target)){
 		$('.recentlyModal').hide(); 
-		$('.recentlyModal').off('scroll touchmove mousewheel');
+		$('body').css('overflow','auto');
+/*		$('.recentlyModal').off('scroll touchmove mousewheel');*/
 	}
 });
+
+$('.searchlocationBtn').click(function(){
+	$('.searchlocationList').empty();
+	
+	if($('.searchlocationInput').val() != ""){
+		$.ajax({
+			type: 'post',
+			url : '/pmang/member/searchlocation',
+			data : {'address' : $('.searchlocationInput').val()},
+			dataType : 'json',
+			success: function(data){
+				if(data.list != ""){
+					$('.searchlocationList').show();
+					$.each(data.list, function(index, items){
+						var address = items.sido + " " + items.sigungu + " " + items.yubmyundong;
+						$('<li><button id="selectAddress">'+address+'</button></li>').appendTo($('.searchlocationList'));
+						
+					});
+				}else {
+					$('.searchlocationList').hide();
+				}
+			},
+			error: function(err){
+				console.log(err);
+			}
+		
+		});
+	}
+	
+});
+
+
+
+//검색할 지역을 클릭했을 때
+$('.searchlocationList').on('click','#selectAddress', function(){
+	$('.location_input').val($(this).text());
+	$('.searchlocationModal').hide(); 
+	$('body').css('overflow','auto');
+});
+
+
 
 //최근 지역
 $('#recentlylocation').click(function(){
@@ -792,8 +910,6 @@ $('#recentlylocation').click(function(){
 		
 	}
 });*/
-
-
 
 
 

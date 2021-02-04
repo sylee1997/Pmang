@@ -1,10 +1,15 @@
 @charset "UTF-8";
 
+#wrap {
+	background-color: rgb(42 171 42 / 5%);
+}
+
 /* 전체를 감싸주는 div */
 #itemBoard {
 	width : 1024px;
-	background-color: rgb(249, 249, 249);
+	/* background-color: rgb(249, 249, 249); */
 	padding-top: 30px;
+	height: 2000px;
 }
 
 /* select01 */
@@ -47,7 +52,8 @@
 }
 
  .select1, .select2, .select3 {
-	color : red;
+	color : green;
+	font-weight: bold;
 } 
 
 .top1, .top2, .top3 {
@@ -91,7 +97,8 @@
 }
 
 .down1 a:hover, .down2 a:hover, .down3 a:hover  {
-	color: red;
+	color : green;
+	font-weight: bold;
 }
 
 
@@ -114,6 +121,22 @@
 	width: 204px;
     height: 48px;
     margin-bottom: 1px;
+    position: relative;
+    display: flex;
+}
+
+#itemCount {
+	color: rgb(121 193 121 / 50%);
+    margin-left: 5px;
+    flex-shrink: 0;
+    position: absolute;
+    font-size: 12px;
+    left: 165.5px;
+    margin: 0 auto;
+    top: 16px;
+    width: 50px;
+    height: 20px;
+    font-weight: 600;
 }
 
 .detailItem div a {
@@ -126,7 +149,9 @@
     align-items: center;
     display: flex;
     padding: 0px 20px;
-    box-shadow: rgb(238, 238, 238) 0px 1px 0px 0px;
+    font-weight: 900;
+    /* box-shadow: rgb(238, 238, 238) 0px 1px 0px 0px; */
+    box-shadow: rgb(173 212 173 / 50%) 0px 1px 2px 0px;
 }
 
 .entireView {
@@ -139,11 +164,12 @@
     -webkit-box-align: center;
     align-items: center;
     font-size: 12px;
-    font-weight: 500;
+    font-weight: bold;
 }
 
-*, ::before, ::after {
-    box-sizing: border-box;
+.entireView img {
+	margin-left: 5px;
+    display: block;
 }
 
 a {
@@ -151,8 +177,10 @@ a {
 	color: rgb(33, 33, 33);
 }
 
-
-
+#clickno {
+	pointer-events: none;
+	cursor: default;
+}
 
 
 /* selection02 */
@@ -162,7 +190,7 @@ a {
 	width: 100%;
     max-width: 76.8rem;
     display: inline-block;
-    padding: 0px 10px 10px 10px;
+    padding: 0px 10px 20px 0px;
     margin: 0 auto;
     text-align: left;
 }
@@ -175,6 +203,7 @@ a {
     width: 300px;
     cursor: pointer;
     align-items: center;
+    width: 200px;
 }
 
 .locationSpan:before {
@@ -219,7 +248,7 @@ a {
 }
 
 .itemLink {
-    border: 1px solid rgb(238, 238, 238);
+    border: 1px solid rgb(238 238 238);
     background: rgb(255, 255, 255);
     display: block;
     color: rgb(33, 33, 33);
@@ -276,16 +305,24 @@ a {
     font-weight: 600;
     text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden;
+    overflow: visible;
 }
 
+.itemPrice::after {
+    content: "원";
+    font-size: 13px;
+    margin-left: 3px;
+
+}
 .itemTime {
     font-size: 12px;
     color: rgb(136, 136, 136);
+    text-align: right;
 }
 
-h2 {
-    margin: 50px 0px 25px;
+#findItemH2 {
+    margin: 40px 0px 25px;
+    font-size: 15pt;
 }
 
 .itemLocation {
@@ -307,6 +344,10 @@ h2 {
     left: 10px;
     top: calc(50% - 8px);
 
+}
+
+#itemSelectSpan {
+	color : green;
 }
 
 
