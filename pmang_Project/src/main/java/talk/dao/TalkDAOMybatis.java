@@ -16,6 +16,16 @@ public class TalkDAOMybatis implements TalkDAO {
 	private SqlSession sqlSession;
 	
 	@Override
+	public TalkRoomDTO isRoom(TalkRoomDTO talkRoomDTO) {
+		return sqlSession.selectOne("talkSQL.isRoom", talkRoomDTO);
+	}
+	
+	@Override
+	public void createRoom(TalkRoomDTO talkRoomDTO) {
+		sqlSession.insert("talkSQL.createRoom",talkRoomDTO);
+	}
+	
+	@Override
 	public List<TalkRoomDTO> getRoomList(String userId) {
 		return sqlSession.selectList("talkSQL.getRoomList", userId);
 	}

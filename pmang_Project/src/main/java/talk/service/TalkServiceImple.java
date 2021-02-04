@@ -14,9 +14,20 @@ public class TalkServiceImple implements TalkService {
 	private TalkDAO talkDAO;
 	
 	@Override
+	public TalkRoomDTO isRoom(TalkRoomDTO talkRoomDTO) {
+		
+		return talkDAO.isRoom(talkRoomDTO);
+	}
+	
+	@Override
+	public void createRoom(TalkRoomDTO talkRoomDTO) {
+		talkDAO.createRoom(talkRoomDTO);
+	}
+
+	@Override
 	public List<TalkRoomDTO> getRoomList(String userId) {
 
 		return talkDAO.getRoomList(userId);
 	}
-
+	
 }

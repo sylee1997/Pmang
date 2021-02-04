@@ -6,6 +6,10 @@ import talk.bean.TalkRoomDTO;
 
 public interface TalkDAO {
 
-	List<TalkRoomDTO> getRoomList(String userId);
+	public TalkRoomDTO isRoom(TalkRoomDTO talkRoomDTO);
+	
+	public void createRoom(TalkRoomDTO talkRoomDTO);
+	
+	public List<TalkRoomDTO> getRoomList(String userId);
 
 }

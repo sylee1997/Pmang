@@ -10,7 +10,7 @@ $(document).ready(function() {
       console.log("e - " + e)
       var obj = JSON.parse(data)
       console.log(obj)
-      appendMaessge(obj.message_content);
+      appendMaessge(obj.talk_content);
 
    };
    sock.onclose = function() {
@@ -20,17 +20,18 @@ $(document).ready(function() {
 
    // 메세지 보내기
    $('#sendBtn').click(function() {
-	  /*var msg = $.trim($('#talk_message').val());
-	  alert(msg);
-	  alert($('#talk_message').val());*/
-	  var msg = $('#talk_message').val();
-	  if(msg != ""){
-		  message = {
-			message_content : $('#talk_message').val(),
-		  }
-		  sock.send(JSON.stringify(message));
-		  $('#talk_message').val('');
-	  }
+     /*var msg = $.trim($('#talk_message').val());
+     alert(msg);
+     alert($('#talk_message').val());*/
+     var msg = $('#talk_message').val();
+     if(msg != ""){
+        message = {
+              talk_content : $('#talk_message').val(),
+              //room : ${room.userId } 
+        }
+        sock.send(JSON.stringify(message));
+        $('#talk_message').val('');
+     }
    });
 
    
@@ -41,8 +42,8 @@ $(document).ready(function() {
         }
    });
 
-   function appendMaessge(messageContent) {
-      var messageContent = messageContent;
+   function appendMaessge(talk_content) {
+      var talk_content = talk_content;
 
       var talkDate = '오늘날짜가들어감';
       var profileImg = '이미지주소가 들어감';
@@ -69,7 +70,7 @@ $(document).ready(function() {
          class : 'talkReciveTooltip',
       }).append($('<div />', {
          class : 'talkReciveContent',
-         text : messageContent
+         text : talk_content
       }));
       // 프로필 사진
       var talkReciveProfile = $('<div />', {
@@ -96,7 +97,7 @@ $(document).ready(function() {
          class : 'talkSendTooltip'
       }).append($('<div />', {
          class : 'talkSendContent',
-         text : messageContent
+         text : talk_content
       }));
       // 보낸메세지 시간
       var talkSendTime = $('<div />', {
@@ -115,6 +116,7 @@ $(document).ready(function() {
          class : 'talkSendDiv'
       }).append(talkSendTooltip));
       
+      //스크롤
       $("#talkContentDiv").scrollTop(document.body.scrollHeight)
       
 /*      $('#talkContentDiv').append($('<div />', {
@@ -148,39 +150,39 @@ $(document).ready(function() {
          $('.itemName_arrow').css('transform', 'rotate(0deg)');
       }
 
-	   $('.modalDiv').toggle();/*toggle("normal")*/
-	   $('.room_setting_modal').hide(); 
-	   $('.room_setting_modal').off('scroll touchmove mousewheel');
+      $('.modalDiv').toggle();/*toggle("normal")*/
+      $('.room_setting_modal').hide(); 
+      $('.room_setting_modal').off('scroll touchmove mousewheel');
    });
    
    
    //------------------------------------------------------------
    
    $('.talk_item_detailBtn').on('click',function(){
-	   $('.room_setting_modal').toggle();
-	   $('.modalDiv').hide(); 
-	   $('.modalDiv').off('scroll touchmove mousewheel');
+      $('.room_setting_modal').toggle();
+      $('.modalDiv').hide(); 
+      $('.modalDiv').off('scroll touchmove mousewheel');
    });
    
    //------------------------------------------------------------
    
    //모달창 닫기
    $(document).click(function(e){
-		if($('.modal_area').is(e.target)){
-			
-			$('.modalDiv').hide(); 
-			$('.modalDiv').off('scroll touchmove mousewheel');
-			
-		}
-		
-		if($('.room_setting_modal_area').is(e.target)){
-			
-			$('.room_setting_modal').hide(); 
-			$('.room_setting_modal').off('scroll touchmove mousewheel');
-			
-		}
-		
-	});
+      if($('.modal_area').is(e.target)){
+         
+         $('.modalDiv').hide(); 
+         $('.modalDiv').off('scroll touchmove mousewheel');
+         
+      }
+      
+      if($('.room_setting_modal_area').is(e.target)){
+         
+         $('.room_setting_modal').hide(); 
+         $('.room_setting_modal').off('scroll touchmove mousewheel');
+         
+      }
+      
+   });
    //------------------------------------------------------------
    
 // option버튼 -----------------
@@ -224,21 +226,21 @@ $(document).ready(function() {
 var sw=1;
 var Notification_status=1;//상태가 변화하면 Notification_status 변수를 들고 ajax로 가서 TalkRoom 테이블의 Notification_status 값 변경.
 $('.room_setting_notification_Btn').on('click',function(){
-	
-	if(sw == 1){
-		$('.room_setting_notification_Btn').css('background-image','url(/pmang/image/notification.png)');//회색
-		$('.room_setting_notification_Btn>b').text('OFF');
-		Notification_status = 0;
-	}else {
-		$('.room_setting_notification_Btn').css('background-image','url(/pmang/image/notification_green.png)');//녹색
-		$('.room_setting_notification_Btn>b').text('ON');
-		Notification_status = 1;
-	}
-	$('.room_setting_modal').hide(); 
-	$('.room_setting_modal').off('scroll touchmove mousewheel');
-	sw = sw * (-1);
-	
-	
+   
+   if(sw == 1){
+      $('.room_setting_notification_Btn').css('background-image','url(/pmang/image/notification.png)');//회색
+      $('.room_setting_notification_Btn>b').text('OFF');
+      Notification_status = 0;
+   }else {
+      $('.room_setting_notification_Btn').css('background-image','url(/pmang/image/notification_green.png)');//녹색
+      $('.room_setting_notification_Btn>b').text('ON');
+      Notification_status = 1;
+   }
+   $('.room_setting_modal').hide(); 
+   $('.room_setting_modal').off('scroll touchmove mousewheel');
+   sw = sw * (-1);
+   
+   
 });
    
    
