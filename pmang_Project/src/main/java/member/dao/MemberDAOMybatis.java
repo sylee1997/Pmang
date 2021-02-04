@@ -1,15 +1,23 @@
 package member.dao;
 
+<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+=======
+import java.util.List;
+>>>>>>> refs/heads/main
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+<<<<<<< HEAD
 import member.bean.MemberDTO;
+=======
+import board.bean.ItemDTO;
+>>>>>>> refs/heads/main
 import member.bean.ZipcodeDTO;
 
 @Repository
@@ -66,5 +74,12 @@ public class MemberDAOMybatis implements MemberDAO {
 		return sqlSession.insert("memberSQL.kakaoWrite", memberDTO);
 	}
 
+	
+	@Override
+	public List<ZipcodeDTO> searchlocation(String address) {
+		List<ZipcodeDTO> list = sqlSession.selectList("memberSQL.searchlocation", address);
+		System.out.println(list);
+		return sqlSession.selectList("memberSQL.searchlocation", address);
+	}
 	
 }

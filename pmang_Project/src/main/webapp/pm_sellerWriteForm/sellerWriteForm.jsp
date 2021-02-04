@@ -6,17 +6,48 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/pmang/css/sellerWriteForm.css">
+<<<<<<< HEAD
 </head>
 <body>
 <!-- 컨테이너 안의 display 에 들어갈 내용 -->
 <form id="sellerWriteForm">
+=======
+
+<input type="hidden" id="imageCountHidden" value=0>
+<div class="searchlocationModal">
+	<section class="searchlocationContent">
+		<header id="searchlocationHeader">주소 검색 <button type="button" class="searchlocationCloseBtn"></button></header>
+		<div class="searchlocationForm">
+			<input type="text" class="searchlocationInput" placeholder="동(읍/면/리) 입력해주세요." value="">
+			<button class="searchlocationBtn"></button>
+			<ul class="searchlocationList">
+			
+			</ul>
+		</div>
+	</section>
+</div>
+
+<div class="recentlyModal">
+	<section class="searchlocationContent">
+		<header>최근지역 <button type="button" class="searchlocationCloseBtn"></button></header>
+		<ul class="recentlyUl">
+			
+		</ul>
+	</section>
+
+</div>
+>>>>>>> refs/heads/main
 
 	<div class="wirteForm_head">
 		<nav class="writeForm_nav">
 			<!-- 만약 선택한 페이지로 이동한다면,선택된 a태그의 color 를 red로 바꿔줘야한다. -->
 			<!-- 기존에 우리가 페이징 처리할때 했던것 처럼 id 를 주어서 id 가 현재페이지라면, 바꾸면될듯하다 -->
 			<div class="nav_writeForm">
+<<<<<<< HEAD
 				<a class="nav_move1" href="/pmang/seller/sellerWriteForm"> 
+=======
+				<a class="nav_move1" href="/pmang/member/sellerWriteForm" style="color:green; font-weight: bold;"> 
+>>>>>>> refs/heads/main
 				상품등록
 				</a>
 			</div>

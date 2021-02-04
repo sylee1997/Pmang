@@ -5,6 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="memberSQL">
+<<<<<<< HEAD
 <!-- 로그인 -->
 	<select id="login" parameterType="String" resultType="member">
 		select * from usertable where ((userId=#{userId}) and (pwd=#{pwd}) and (user_key='Y'))
@@ -49,4 +50,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into usertable (userName, gender, email1, email2, userId, kakaoId)
 		values (#{userName}, #{gender}, #{email1}, #{email2}, #{kakaoId}, #{kakaoId})
 	</insert>
+=======
+
+<insert id="sellerWrite" parameterType="item">
+	insert into item values(item_seq.nextval,<!-- 등록상품키 -->
+									5,<!--  유저키 -->
+									   #{img1},
+									   #{img2},
+									   #{img3},
+									   #{itemSubject},
+									   #{category1},
+									   #{category2},
+									   #{category3},
+									   #{condition},
+									       'sell',<!-- #{item_state} -->
+									   #{item_location},
+									   #{item_price},
+									   #{nego},
+									   #{item_content},
+									   #{hashtag1},
+									   #{hashtag2},
+									   #{hashtag3},
+									   0,<!-- #{buyer_Key} -->
+									   0,<!-- #{hit} -->
+									   0,<!-- #{qty} -->
+									   sysdate)
+									   
+</insert>
+
+
+<select id="searchlocation" parameterType="String" resultType="zipcode">
+	select DISTINCT sido, sigungu, yubmyundong from newzipcode where sigungu like '%'||#{address}||'%' or yubmyundong like '%'||#{address}||'%' or roadname like '%'||#{address}||'%' order by sido
+</select>
+>>>>>>> refs/heads/main
 </mapper>

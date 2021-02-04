@@ -6,7 +6,7 @@ html, body, div {
 	margin: 0px;
     padding: 0px;
     border: 0px;
-	
+    letter-spacing: -0.5px; 	
 }
 
 a {
@@ -19,10 +19,10 @@ a {
 
 #wrap {
 /* width: 1300px; */
-   width : 1024px;
+   width : 100%;
    height: 100%;
    min-width: 1024px;
-   margin: 0 auto;
+  /* background-color: #add4ad; */
 }
 /* #wrap{
 	width: 1300px;
@@ -41,7 +41,8 @@ body > #wrap {
 	top: 0;
 	z-index:20;
 	background: white;
-	border-bottom: 1px solid green;
+	padding: 10px;
+	box-shadow: 0 1px 3px 0 rgb(0 0 0 / 12%);
 }
 
 /* 카테고리 */
@@ -64,7 +65,17 @@ body > #wrap {
 	list-style-type: none;
 	margin: 0px; 
 	padding: 0px; 
+	width: 190px;
 	
+}
+
+
+#header_categoryTitle {
+	font-size: 11pt;
+    margin-bottom: 6px;
+    padding: 0;
+    margin-left: -10px;
+    color: #004600;
 }
 
 .categoryListDiv {
@@ -106,6 +117,10 @@ body > #wrap {
     line-height: 30px;
     display: none;
     z-index: 3;
+}
+
+.category1Menu div {
+    padding-top: 10px;
 }
 
 .hoverli ul{
@@ -173,6 +188,7 @@ body > #wrap {
     font-size: 25px;
     position: relative;
     top: 3px;
+    width : 100px;
 }
 
 
@@ -186,7 +202,8 @@ body > #wrap {
   padding: 0px 15px;
   position : relative;
   top: 5px;
-  left: 70px;
+  left: 80px;
+  box-shadow : 0 4px 9px 0 rgb(0 0 0 / 5%);
 }
 
 .header_logo .search-wrap input {
@@ -201,7 +218,7 @@ body > #wrap {
 }
 .header_logo nav {
   /* width: 30%; */
-  left: 50px;
+  left: 130px;
   top : 5px;
   position: relative;
 }
@@ -209,7 +226,7 @@ body > #wrap {
   list-style: none;
   display: flex;
   /* justify-content: space-evenly; */
-  padding-left: 80px;
+/*   padding-left: 80px; */
 }
 .header_logo ul li {
   display: flex;
@@ -385,7 +402,7 @@ body > #wrap {
     font-weight: 700;
     line-height: 1;
     color: #000;
-    text-shadow: 0 1px 0 #fff;
+    /* text-shadow: 0 1px 0 #fff; */
     filter: alpha(opacity=20);
     opacity: .2;
 }
@@ -492,6 +509,7 @@ button div p{
    width: 1024px;
    /* height: 5729px; */
    overflow: auto;
+   margin: 0 auto;
 }
 
  
@@ -565,7 +583,7 @@ button div p{
 }
 
 .itemLink {
-    border: 1px solid rgb(238, 238, 238);
+    border: 1px solid rgb(238 238 238);
     background: rgb(255, 255, 255);
     display: block;
     color: rgb(33, 33, 33);
@@ -634,18 +652,18 @@ button div p{
 	-ms-overflow-style: none;
 } */
 
-::-webkit-scrollbar {
+ ::-webkit-scrollbar {
 
 display:none;
 
-} 
+}  
 
 
 
 /* aside부분 */
 #aside {
 	position: absolute;
-	top: 130px;
+	top: 170px;
 	width: 100px;
 	/* height : 800px; */
 	float: right;
@@ -665,8 +683,9 @@ display:none;
 	font-weight : bold;
 	border : 1px solid rgb(22 119 4);
 	width : 100px;
-	height: 50px;
+	/* height: 50px; */
 	text-align : center;
+	padding: 10px;
 }
 
 .bag_click {
@@ -680,13 +699,15 @@ display:none;
 }
 
 .recentlyLook {
-	margin-top : 5px;
+	/* margin-top : 5px; */
 	width : 100px;
-	height: 330px;
-	border : 1px solid rgb(22 119 4);
+	/* height: 330px; */
+	 border : 1px solid rgb(22 119 4);
+	 border-top : 0px;
 	text-align : center;
 	font-weight : bold;
 	font-size : 10pt;
+	padding: 15px 0px;
 }
 
 .goods {
@@ -705,9 +726,16 @@ display:none;
 
 .topBtn {
 	text-align : center;
+<<<<<<< HEAD
 	margin-top : 5px;
 	border : 1px solid rgb(22 119 4);
 	height: 30px;
+=======
+	/* margin-top : 5px; */
+	border: 1px solid rgb(22 119 4);
+	border-top : 0px;
+	height: 45px;
+>>>>>>> refs/heads/main
 	padding-top: 10px;
 	width: 100%;
 }
@@ -718,23 +746,26 @@ display:none;
 }
 
 .pmangTok {
-    /* margin-top: 15px; */
-    margin: 15px auto;
-    width: 60px;
-    height: 65px;
+   	margin-top: 12px;
+    width: 50px;
+    height: 54px;
     text-align: center;
     font-weight: bold;
-    /* color: green; */
-    /* border: 1px solid rgb(204, 204, 204); */
-    font-size: 10pt;
+    font-size: 9.5pt;
     font-weight: 1000;
     background-image: url(/pmang/image/pmangTok1.png);
     background-size: contain;
+<<<<<<< HEAD
+=======
+    cursor: pointer;
+    color: green;
+
+>>>>>>> refs/heads/main
 }
 
 .pmangTokDiv {
     position: relative;
-    padding: 10px 10px;
+    padding: 7px 10px;
 }
 
 .pmangTok img {
@@ -748,7 +779,7 @@ display:none;
 }
 
 .notice {
-	margin: 15px;
+	padding: 15px;
     text-align: center;
     font-weight: bold;
     font-size: 9pt;
