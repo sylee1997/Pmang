@@ -3,6 +3,7 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias type="member.bean.ItemDTO" alias="item" />
+		<typeAlias type="board.bean.ItemDTO" alias="item" />
+		<typeAlias type="member.bean.ZipcodeDTO" alias="zipcode" />
 	</typeAliases>
 </configuration>

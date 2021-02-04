@@ -3,7 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
@@ -24,9 +26,6 @@
 	<resources location="/js/" mapping="/js/**"/>
 	<resources location="/item/" mapping="/item/**"/>
 	<resources location="/storage/" mapping="/storage/**"/>
-
-	<resources location="/pm_itemView/" mapping="/pm_itemView/**"/>
-	<resources location="/pm_mystore/" mapping="/pm_mystore/**"/>
 	
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
@@ -43,18 +42,22 @@
 	<beans:bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<beans:property name="order" value="0"/>
 	</beans:bean>
-
-
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="suffix" value=".jsp" />
-	</beans:bean>
 	
 	<!-- fileupload -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<beans:property name="maxUploadSize" value="5000000"/> <!-- 5MB -->
+		<beans:property name="maxUploadSize" value="20000000"/> <!-- 20MB -->
 	</beans:bean>
 	
+	<!-- 웹소켓 -->
+	<beans:bean id="talkHandler" class="talk.handler.TalkHandler"></beans:bean>
+	
+	<websocket:handlers>
+		<websocket:mapping handler="talkHandler" path="/talk" /> <!-- path에 요청이 오면 talkHandler를 처리하겠다. -->
+		<websocket:handshake-interceptors>
+	         <beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" /> <!-- Http의 Session을 낚아채서 websocket으로 가져온다. -->
+	    </websocket:handshake-interceptors>
+		<websocket:sockjs />
+	</websocket:handlers>
 	
 	
 </beans:beans>

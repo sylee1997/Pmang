@@ -1,0 +1,442 @@
+@charset "UTF-8";
+
+/* 공통속성 */
+
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+
+html {
+    line-height: 1.15;
+    text-size-adjust: 100%;
+}
+
+body {
+    line-height: 1;
+    background-color: rgb(249, 249, 249);
+    font-size: 14px;
+}
+
+html, body {
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 400;
+    color: rgb(33, 33, 33);
+}
+
+
+body, #root {
+    max-width: 375px;
+    height: 667px;
+    overflow: hidden;
+    position: relative;
+}
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, main, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+body, input, textarea, select, button {
+    direction: ltr;
+    text-align: left;
+    color: rgb(33, 33, 33);
+    letter-spacing: -0.5px;
+    outline: 0px;
+    border: 0px;
+}
+
+button, [type="button"], [type="reset"], [type="submit"] {
+    appearance: button;
+}
+
+button {
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+}
+
+button, input[type="text"], input[type="tel"], input[type="number"] {
+    appearance: none;
+}
+
+button, input {
+    padding: 0px;
+    border: 0px;
+}
+
+button, select {
+    text-transform: none;
+}
+
+button, input {
+    overflow: visible;
+}
+
+button, input, optgroup, select, textarea {
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 1.15;
+    margin: 0px;
+}
+
+a {
+    color: rgb(33, 33, 33);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a {
+    background-color: transparent;
+}
+
+img {
+    vertical-align: bottom;
+}
+
+img {
+    border-style: none;
+}
+
+/* 개별 속성 */
+.talk_Area {
+   min-width: 1236px;
+}
+
+.talk_area_div {
+   display: flex;
+    flex-direction: column;
+    width: 375px;
+    height: 667px;
+    background: rgb(244, 244, 250);
+    position: relative;
+}
+
+.talk_header {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    align-items: center;
+    background: rgb(255, 255, 255);
+    z-index: 10;
+    padding: 0px 1rem;
+    justify-content: center;
+}
+
+.talk_itemName_button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.itemName {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    min-width: 4.5rem;
+    min-height: 1rem;
+}
+
+.itemName_arrow {
+    content: "";
+    background-image: url(/pmang/image/open.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 12px;
+    height: 12px;
+    margin-left: 4px;
+    transform: rotate(180deg);
+    will-change: transform;
+}
+
+.talk_item_detailDiv {
+    position: absolute;
+    display: flex;
+    top: 0px;
+    right: 0px;
+    height: 100%;
+    flex-direction: row;
+    align-items: center;
+}
+
+.talk_item_detailBtn {
+    height: 2rem;
+    background-image: url(/pmang/image/controll.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 2rem;
+    margin-right: 10px;
+}
+
+.talk_itemInfo {
+    display: flex;
+    width: 100%;
+    height: 3.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 2px solid rgb(255, 80, 88);
+    padding: 0.5rem; /* 좌우 8 */
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-orient: horizontal;
+}
+
+.itemboard_move {
+    display: flex;
+    flex: 1 1 0%;
+    padding-right: 0.5rem;
+    overflow: hidden;
+}
+
+.itemboard_move > img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 2px;
+    margin-right: 0.5rem;
+}
+
+.talk_itemList {
+   flex: 1 1 0%;
+    min-width: 0px;
+    line-height: 1.2;
+}
+
+.item_price_div {
+   display: block;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.item_price_div > small {
+   font-size: 13px;
+    margin-left: 2px
+}
+
+.item_subject_div {
+    display: block;
+    font-size: 14px;
+    line-height: 1.5;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.price_change {
+   height: 2rem;
+    border-radius: 4px;
+    background: rgb(234, 233, 241);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    padding: 0px 12px;
+}
+
+.talk_footer {
+    width: 100%;
+    background: rgb(255, 255, 255);
+    border-top: 1px solid rgb(238, 238, 238);
+    padding-top: 8px;
+    padding-bottom: 8px;
+    position: relative;
+}
+
+.talk_send_Area {
+   width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.message_option_Area {
+   display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.message_option_Btn {
+   height: 2.5rem;
+    background-image: url(/pmang/image/open.png); /* 개인적으로 돋보기로 바꾸고싶다.. */
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 26px 26px;
+    width: 46px;
+}
+
+.message_text_Area {
+    flex: 1 1 0%;
+    margin-right: 10px;
+}
+
+.message_text_form {
+   background: rgb(244, 244, 250);
+    border-radius: 20px;
+    position: relative;
+}
+
+.talk_message {
+   max-height: 63px;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    height: 39px;
+    appearance: none;
+    background: transparent;
+    outline: none;
+    border: 0px;
+    border-radius: 2px 0px 0px 2px;
+    padding: 9.5px 2.5rem 9.5px 20px;
+    line-height: 1.4;
+    resize: none;
+    overflow: auto;
+    font-size: 15px;
+    width: 100%;
+}
+
+/* ----------------------------------------------------- */
+/* 채팅방 */
+/* 채팅방 */
+#talkContentDiv {
+   border: solid 1px red;
+   width: 100%;
+   height: 100%;
+   background: white;
+   float: none;
+   overflow-y: auto;
+   overflow-x: hidden;
+}
+
+.talkDate {
+   color:#bcbcbc;
+   margin: 10px 0px;
+}
+.talkDate:before {
+   content: "";
+   border-bottom: 1px solid #bcbcbc;
+   width: 110px;
+   float: left;
+   display: inline-block;
+   margin-top: 10px; 
+}
+.talkDate:after {
+   content: "";
+   border-bottom: 1px solid #bcbcbc;
+   width: 110px;
+   float: right;
+   display: inline-block;
+   margin-top: 10px; 
+}
+/* 받은 메세지 */
+.talkReciveDiv {
+    width: 100%;
+   display: flex;
+   overflow:hidden;
+   height:auto;
+   margin: 10px 0px;
+}
+.talkReciveDiv div{
+   float: left;
+   margin: 0px 5px;
+}
+.talkReciveProfile img{
+   border-radius:20px 20px 20px 20px;
+}
+.talkReciveTooltip {
+   background-color: #f0f0f5;
+   border-radius: 0px 20px 20px 20px ;
+   max-width: 55%;
+   font-size: 14px;
+   padding: 10px;
+}
+
+.talkReciveContent {
+   width: 100%;
+   font-size: 15px;
+   word-break:break-all;
+}
+.talkReciveTime {
+   font-size: 10px;
+   flex-direction: column;
+   align-self: flex-end;
+}
+/* 보내는 메세지 */
+.talkSendDiv {
+   width: 100%;
+   display: flex;
+   overflow:hidden;
+   height:auto;
+    word-break:break-all;
+   margin: 20px 0px;
+   justify-content: flex-end;
+}
+.talkSendDiv div {
+/*    margin: 0px 3px; */
+}
+.talkSendTooltip {
+   background-color: green;
+   color: white;
+   font-size: 15px;
+   border-radius:20px 0px 20px 20px ;
+   padding: 10px;
+   max-width: 65%;
+   margin-right: 20px;
+}
+.talkSendContent {
+   width: 100%;
+   font-size: 15px;
+   word-break:break-all;
+}
+.talkTimeDiv {
+   font-size: 10px;
+     margin-left: 0.2px;
+   flex-direction: column;
+   align-self: flex-end;
+}
+
+#sendBtn {
+   position: absolute;
+   background: transparent;
+   color: green;
+    top: calc(50% - 1rem);
+    right: 4px;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    outline: none;
+    vertical-align: middle;
+}
+
+/* 채팅창끝--------------------- */
+/* 모달 */
+.header_modal {
+   z-index: 1;
+}
+.all_modal {
+   z-index: 11;
+}
+.on {
+   position: fixed;
+   opacity: 0.6;
+   background: black;
+   width: 375px;
+    height: 667px;
+}
+
+.off {
+   
+}
+
+
+
+
+
+
+
+
