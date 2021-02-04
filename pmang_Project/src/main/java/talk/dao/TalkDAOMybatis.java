@@ -1,5 +1,6 @@
 package talk.dao;
 
+<<<<<<< HEAD
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -24,5 +25,8 @@ public class TalkDAOMybatis implements TalkDAO {
 		sqlSession.insert("talkSQL.createRoom", talkRoomDTO);
 	}
 
+=======
+public class TalkDAOMybatis implements TalkDAO {
+>>>>>>> branch 'temp' of https://github.com/sylee1997/Pmang.git
 
 }

@@ -1,5 +1,6 @@
 package talk.service;
 
+<<<<<<< HEAD
 import java.util.List;
 
 import talk.bean.TalkRoomDTO;
@@ -12,5 +13,8 @@ public interface TalkService {
 
 	public void createRoom(TalkRoomDTO talkRoomDTO);
 
+=======
+public interface TalkService {
+>>>>>>> branch 'temp' of https://github.com/sylee1997/Pmang.git
 
 }

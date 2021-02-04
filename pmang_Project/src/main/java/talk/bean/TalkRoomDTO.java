@@ -1,5 +1,6 @@
 package talk.bean;
 
+<<<<<<< HEAD
 import lombok.Data;
 
 
@@ -10,4 +11,16 @@ public class TalkRoomDTO { //ë°©ì •ë³´
    private int item_seq;//íŒë§¤ seq
    private int talkRoom_seq;//í†¡ë°© seq DBì—ì„œ ìƒì„±
    private int Notification_status;//ì•Œë¦¼ì—¬ë¶€ 1-ì•Œë¦¼í—ˆìš© ,0-ì•Œë¦¼ë¶ˆê°€
+=======
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class TalkRoomDTO {
+	private String item_seq;//ÆÇ¸Åor±¸¸Å ¹°Ç° 
+	private String partner_user_id;//»ó´ë¹æid
+	private String user_id;//³» id
+	private int talk_room_seq;//Åå¹æseq
+>>>>>>> branch 'temp' of https://github.com/sylee1997/Pmang.git
 }

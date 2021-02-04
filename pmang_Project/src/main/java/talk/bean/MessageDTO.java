@@ -2,6 +2,7 @@ package talk.bean;
 
 import java.util.Date;
 
+<<<<<<< HEAD
 import com.google.gson.Gson;
 
 import lombok.Data;
@@ -26,4 +27,20 @@ public class MessageDTO {// ë©”ì‹œì§€ í•œì¤„ í•œì¤„
 
       return message;
    }
+=======
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class MessageDTO {
+	private int talk_room_seq;//Åå¹æ seq
+	private String sender_user_id; //º¸³½»ç¶÷ id
+	private String receiver_user_id; //¹ÞÀº »ç¶÷id
+	private String user_id;//À¯Àúid
+	private String talk_content; //¸Þ¼¼Áö ³»¿ë
+	private Date send_time;//¸Þ¼¼Áö º¸³½½Ã°£
+	private Date read_time;//¸Þ¼¼Áö ÀÐÀº ½Ã°£
+	private int unread_count;//¸Þ¼¼Áö ¾ÈÀÐÀº °¹¼ö
+>>>>>>> branch 'temp' of https://github.com/sylee1997/Pmang.git
 }

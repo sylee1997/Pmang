@@ -9,7 +9,7 @@
                
                <div id="slideAct" style="border: 1px solid black">
                   <ul class="slide_wrap"
-                     style="width: 5120px; height: 300px; border: 1px solid blue;">
+                     style="width: 6000px; height: 300px; border: 1px solid blue;">
                      <li class="slide_item">
                         <a href="#">
                            <img src="/pmang/image/image1.jpg" alt="배경1" />
@@ -290,3 +290,26 @@
                </div><!-- selection2 -->
             </div><!-- selection1 -->
          </div><!-- selection -->
+         
+         
+<script>
+      /* 인기 카테고리 슬라이드 쇼 이벤트 */
+      var ul = document.querySelector('.slide_wrap');
+      function move() {
+         var curIndex = 0;
+         setInterval(function() {
+            ul.style.transition = '0.5s';
+            ul.style.transform = "translate3d(-" + 1024 * (curIndex + 1)
+                  + "px, 0px, 0px)";
+            curIndex++;
+            if (curIndex === 4) {
+               curIndex = -1;
+            }
+         }, 1000);
+      }
+      document.addEventListener("DOMContentLoaded", function() {
+         // 
+         move();
+      });
+      /* 인기 카테고리 슬라이드 쇼 이벤트 */
+</script>

@@ -6,9 +6,17 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+<<<<<<< HEAD
 	<context:component-scan base-package="pmang_user.service"/>
 	<context:component-scan base-package="pmang_item.service"/>
 	<context:component-scan base-package="pmang_chat.service"/>
 	<context:component-scan base-package="talk.service"/>
 	<context:component-scan base-package="talk.dao"/>
+=======
+	<context:component-scan base-package="member.service"/>
+	<context:component-scan base-package="member.dao"/>
+	<context:component-scan base-package="member.bean"/>
+	<context:component-scan base-package="spring.conf"/>
+	
+>>>>>>> branch 'temp' of https://github.com/sylee1997/Pmang.git
 </beans>

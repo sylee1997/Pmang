@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper  
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="memberSQL">
+
+<insert id="sellerWrite" parameterType="item">
+	insert into item values(seq_item.nextval,<!-- 등록상품키 -->
+									seq_item.nextval,<!--  마켓(내상점)키 -->
+									   #{img1},
+									   #{img2},
+									   #{img3},
+									   #{itemSubject},
+									   #{category1},
+									   #{category2},
+									   #{category3},
+									   #{condition},
+									       'sell',<!-- #{item_state} -->
+									   #{item_location},
+									   #{item_price},
+									   #{nego},
+									   #{item_content},
+									   #{hashtag1},
+									   #{hashtag2},
+									   #{hashtag3},
+									   0,<!-- #{qty} -->
+									   0,<!-- #{item_like} -->
+									   0,<!-- comment_seq -->
+									   0,<!-- #{hit} -->
+									   sysdate)
+									   
+</insert>
+
+</mapper>

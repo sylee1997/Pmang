@@ -1,5 +1,6 @@
 package talk.service;
 
+<<<<<<< HEAD
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,8 @@ public class TalkServiceImple implements TalkService {
 		talkDAO.createRoom(talkRoomDTO);
 	}
 
+=======
+public class TalkServiceImple implements TalkService {
+>>>>>>> branch 'temp' of https://github.com/sylee1997/Pmang.git
 
 }
