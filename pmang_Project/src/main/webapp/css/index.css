@@ -473,11 +473,11 @@ button div p{
 #writeP{
 	color: white;
 }
-#userId, #pwd {
+#index_userId, #index_pwd {
 	width: 340px;
 }
 
-#userId:hover, #pwd:hover {
+#index_userId:hover, #index_pwd:hover {
 	border-color: green;
 }
 

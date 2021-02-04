@@ -7,13 +7,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="memberSQL">
 	<!-- 로그인 -->
 	<select id="login" parameterType="String" resultType="member">
-		select * from usertable where ((userId=#{userId}) and (pwd=#{pwd}) and (user_key='Y'))
+		select * from usertable where ((userId=#{userId}) and (pwd=#{pwd}) and (email_key='Y'))
 	</select>
 	
 	<!-- 회원가입 -->
 	<insert id="write" parameterType="member">
-		insert into usertable (userName, userId, pwd, gender, email1, email2, zipcode, addr1, addr2, tel1, tel2, tel3, logtime)
-		values (#{userName}, #{userId}, #{pwd}, #{gender}, #{email1}, #{email2}, #{zipcode}, #{addr1}, #{addr2}, #{tel1}, #{tel2}, #{tel3}, sysdate)
+		insert into usertable (userName, userId, pwd, gender, email1, email2, zipcode, addr1, addr2, tel1, tel2, tel3)
+		values (#{userName}, #{userId}, #{pwd}, #{gender}, #{email1}, #{email2}, #{zipcode}, #{addr1}, #{addr2}, #{tel1}, #{tel2}, #{tel3})
 	</insert>
 	
 	<!-- 아이디 중복체크 -->	
@@ -31,12 +31,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 메일인증키 -->
 	<insert id="GetKey" parameterType="java.util.Map">
-		update usertable set user_key = #{user_key} where userId = #{userId}
+		update usertable set email_key = #{email_key} where userId = #{userId}
 	</insert>
 	
 	<!--회원 인증키(난수) Y로 변경 -->
 	<update id="regSuccess" parameterType="java.util.Map">
-		update usertable set user_key = 'Y' where userId = #{userId} and user_key = #{user_key}
+		update usertable set email_key = 'Y' where userId = #{userId} and email_key = #{email_key}
 	</update>
 	
 	<!-- kakao id 확인 -->

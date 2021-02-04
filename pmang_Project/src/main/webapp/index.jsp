@@ -39,8 +39,8 @@
 						<tr>
 							<td style="border-top: rgb(0,0,0); border-bottom: rgb(0,0,0);">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="ID" width="1" name="userId" id="userId" maxlength='20'>
-									<div id="userIdDiv"></div>
+									<input type="text" class="form-control" placeholder="ID" width="1" name="userId" id="index_userId" maxlength='20'>
+									<div id="index_userIdDiv"></div>
 								</div>
 							</td>
 						</tr>
@@ -52,8 +52,8 @@
 						<tr>
 							<td style="border-top: rgb(0,0,0); border-bottom: rgb(0,0,0);">
 								<div class="form-group">
-									<input type="password" class="form-control" maxlength="15" placeholder="Password" name="pwd" id="pwd">
-									<div id="pwdDiv"></div>
+									<input type="password" class="form-control" maxlength="15" placeholder="Password" name="pwd" id="index_pwd">
+									<div id="index_pwdDiv"></div>
 								</div>
 							</td>
 						</tr>
@@ -141,14 +141,14 @@
               <ul>
                 <li>
                   <img src="/pmang/image/sell.png" alt="sale" width="40px" height="40px" />
-                  <span class="indexnavSpan" onclick="location.href='/pmang/member/sellerWriteForm'">판매하기</span>
+                  <span class="indexnavSpan" onclick="alert('먼저 로그인 하세요.')">판매하기</span>
                 </li>
                 <li>
                   <span class="vertical">|</span>
                 </li>
                 <li>
                   <img src="/pmang/image/mystore.png" alt="store" width="30px" height="30px"/>
-                  <span class="indexnavSpan" onclick="location.href='/pmang/board/mystore'">내상점</span>
+                  <span class="indexnavSpan" onclick="alert('먼저 로그인 하세요.')">내상점</span>
                 </li>
                 <li>
                   <span class="vertical">|</span>
@@ -163,7 +163,6 @@
                 <div class="pmangTok">
                		<div class="pmangTokDiv">피망Tok
                	</div>
-            </div>
               </ul>
             </nav>
          </c:if>
@@ -189,6 +188,12 @@
                   <img src="/pmang/image/login.png" alt="logout" style="width: 30px; height: 30px;" />
                   <span class="indexnavSpan">로그아웃</span>
                 </li>
+                 <li>
+                  <span class="vertical">|</span>
+                </li>
+                <div class="pmangTok">
+               		<div class="pmangTokDiv">피망Tok
+               	</div>
               </ul>
             </nav>
          </c:if>
@@ -583,7 +588,7 @@
             </div>
             
             <div class="topBtn">
-               <a id="topA" href="#header">TOP</a>
+               <a id="topA" href="#">TOP</a>
             </div>
          </div><!-- asideDiv -->
 
@@ -970,26 +975,42 @@ $(document).click(function(e){
 	}
 });
 
-$('#index_writeBtn').click(function(){
-	location.href="/pmang/member/writeForm"
+
+$('.noticeContent').on('click','a',function(){
+	$('#loginli').trigger('click');
 });
 
 
 
 
-//로그인 js
+
+
+
+
+
+
+
+
+
+
+
+//---------------------------------로그인. 회원가입--------------------------------------------------//
+$('#index_writeBtn').click(function(){
+	location.href="/pmang/member/writeForm"
+});
+
 $('#loginBtn').click(function(){
-	$('#userIdDiv').empty();
-	$('#pwdDiv').empty();
+	$('#index_userIdDiv').empty();
+	$('#index_pwdDiv').empty();
 	
-	if($('#userId').val()==''){
+	if($('#index_userId').val()==''){
 		$('#userIdDiv').text('아이디를 입력해 주세요')
 						.css('color','red')
 						.css('font-size','8pt')
 						.css('font-weight','bold');
 		
-	}else if($('#pwd').val()==''){
-		$('#pwdDiv').text('비밀번호를 입력해 주세요')
+	}else if($('#index_pwd').val()==''){
+		$('#index_pwdDiv').text('비밀번호를 입력해 주세요')
 						 .css('color','red')
 						 .css('font-size','8pt')
 						 .css('font-weight','bold');
@@ -997,7 +1018,7 @@ $('#loginBtn').click(function(){
 		$.ajax({
 			type: 'post',
 			url: '/pmang/member/login',
-			data: {'userId': $('#userId').val(), 'pwd': $('#pwd').val()},
+			data: {'userId': $('#index_userId').val(), 'pwd': $('#index_pwd').val()},
 			dataType: 'text',
 			success: function(data){
 				if(data == 'success'){
