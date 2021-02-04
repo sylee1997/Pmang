@@ -1,30 +1,26 @@
 @charset "UTF-8";
 
 /* index.jsp ���ͳ������°� */
-<<<<<<< HEAD
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, main, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-=======
 /* html, body, div, span, applet, object, iframe, h1, , h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, main, menu, nav, output, ruby, section, summary, time, mark, audio, video {
->>>>>>> refs/heads/main
     margin: 0px;
     padding: 0px;
     border: 0px;
     font: inherit;
     vertical-align: baseline;
 }
-
+ */
 b, strong {
     font-weight: bolder;
 }
 
-body, input, textarea, select, button {
+/* body, input, textarea, select, button {
     direction: ltr;
     text-align: left;
     color: rgb(33, 33, 33);
     letter-spacing: -0.5px;
     outline: 0px;
     border: 0px;
-}
+} */
 
 
 section ul {
@@ -37,13 +33,13 @@ section ul {
     /* padding-inline-start: 40px; */
 }
 
-section ul ul {
+section ul {
     list-style-type: circle;
     margin-block-start: 0px;
     margin-block-end: 0px;
 }
 
-button {
+/* button {
     appearance: auto;
     -webkit-writing-mode: horizontal-tb !important;
     text-rendering: auto;
@@ -67,8 +63,8 @@ button {
     border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
     border-image: initial;
 }
-
-input {
+ */
+/* input {
     -webkit-writing-mode: horizontal-tb !important;
     text-rendering: auto;
     color: -internal-light-dark(black, white);
@@ -90,13 +86,7 @@ input {
     border-style: inset;
     border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
     border-image: initial;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-size: 14px;
-    font-weight: 400;
-    margin: 0px;
-}
+} */
 
 button, input {
     overflow: visible;
@@ -109,8 +99,6 @@ button, input, optgroup, select, textarea {
     margin: 0px;
 }
 
-<<<<<<< HEAD
-=======
 .searchlocationModal {
 	width: 100%;
     height: 100%;
@@ -233,7 +221,6 @@ button, input, optgroup, select, textarea {
     overflow-y: auto;	
 }
 
->>>>>>> refs/heads/main
 /* writeForm_head Area */
 .wirteForm_head {
     height: 4rem;
@@ -318,6 +305,7 @@ button, input, optgroup, select, textarea {
 .itemList {
     padding-top: 0.5rem;
     list-style: none;
+    padding : 0;
 }
 
 /* .image_li {
@@ -362,6 +350,7 @@ button, input, optgroup, select, textarea {
     flex-wrap: wrap;
     overflow: hidden;
     list-style: none;
+    padding : 0;
 }
 
 .imageChoice_li {
@@ -393,8 +382,6 @@ button, input, optgroup, select, textarea {
     margin-bottom: 1rem;
 }
 
-<<<<<<< HEAD
-=======
 .imgli {
 	width: 202px;
     height: 202px;
@@ -430,7 +417,6 @@ button, input, optgroup, select, textarea {
     border: none;
 }
 
->>>>>>> refs/heads/main
 .imageChoice_li input {
     border: 1px solid rgb(195, 194, 204);
     width: 100%;
@@ -458,11 +444,16 @@ button, input, optgroup, select, textarea {
     margin-top: 1.5rem;
     color: rgb(74, 164, 255);
     line-height: 1.5;
-    font-size: 10px;
+    font-size: 13px;
 }
 
 .imagecontent b {
     font-weight: bolder;
+}
+
+#imageCheck {
+	display : none;
+	color : green;
 }
 
 /* .itemSubject_li {
@@ -480,8 +471,6 @@ button, input, optgroup, select, textarea {
     font-weight: bold;
 }
 
-<<<<<<< HEAD
-=======
 #textRemove {
 	position: absolute;
 	right: 20px;
@@ -493,7 +482,6 @@ button, input, optgroup, select, textarea {
 	cursor: pointer;
 }
 
->>>>>>> refs/heads/main
 .itemSubject_div > span {
     color: rgb(255, 80, 88);
     font-weight:bold;
@@ -544,25 +532,19 @@ button, input, optgroup, select, textarea {
     margin: 0px;
 }
 
-<<<<<<< HEAD
-=======
 .itemSubject_input:hover{
 	border: 1px solid green;
 }
 
->>>>>>> refs/heads/main
 .itemSubjectDiv {
-    color: rgb(245, 126, 0);
+    color: green;
     font-size: 14px;
     margin-top: 0.5rem;
     display: flex;
     -webkit-box-align: center;
     align-items: center;
-<<<<<<< HEAD
-=======
     display: none;
     font-weight: bold;
->>>>>>> refs/heads/main
 }
 
 .itemSubjectDiv::before {
@@ -620,35 +602,28 @@ button, input, optgroup, select, textarea {
     color: rgb(243 255 248);
 }
 
-.category1 {
+.category1,.category2,.category3 {
     width: 100%;
     height: 100%;
-    padding: 0.5rem 0px;
     list-style: none;
-<<<<<<< HEAD
-=======
     padding : 0 10px;
 
->>>>>>> refs/heads/main
 }
 
-<<<<<<< HEAD
-.category1_li {
-=======
 .category1_li:hover, .category2_li:hover, .category3_li:hover {
     background-color : green;
 }
 
 .category1_li, .category2_li, .category3_li {
->>>>>>> refs/heads/main
     display: flex;
     width: 100%;
     height: 40px;
     -webkit-box-align: center;
     align-items: center;
+
 }
 
-.category1_Btn {
+.category1_li button, .category2_li button, .category3_li button {
     width: 100%;
     height: 100%;
     padding: 0px 1.5rem;
@@ -659,7 +634,6 @@ button, input, optgroup, select, textarea {
     border: 0px;
     direction: ltr;
     text-align: left;
-    color: rgb(33, 33, 33);
     letter-spacing: -0.5px;
     text-transform: none;
     overflow: visible;
@@ -675,11 +649,8 @@ button, input, optgroup, select, textarea {
 }
 
 .selectCategory {
-    margin-top: 1.5rem;
+    margin-top: 1.0rem;
     font-size: 16px;
-<<<<<<< HEAD
-    color: rgb(255, 80, 88);
-=======
     color: green;
     font-weight: normal;
 }
@@ -693,7 +664,6 @@ button, input, optgroup, select, textarea {
 	display : none;
 	color : green;
 	padding : 10px 0px;
->>>>>>> refs/heads/main
 }
 
 /* .location_li {
@@ -740,16 +710,12 @@ button, input, optgroup, select, textarea {
     font-family: inherit;
     font-size: 100%;
     line-height: 1.15;
-<<<<<<< HEAD
-    margin: 0px;
-=======
     /* margin: 0px; */
     font-weight: bold;
 }
 
 .locationSearchBtn:hover {
 	background-color: rgb(243 255 248);
->>>>>>> refs/heads/main
 }
 
 .location_input {
@@ -813,8 +779,12 @@ button, input, optgroup, select, textarea {
     margin-right: 1rem;
 }
 
+.price_input:hover {
+	border: 1px solid green;
+}
+
 #priceDiv {
-	color: rgb(245, 126, 0);
+	color: green;
     font-size: 14px;
     margin-top: 0.5rem;
     display: flex;
@@ -863,6 +833,10 @@ button, input, optgroup, select, textarea {
     border: 1px solid rgb(195, 194, 204);
     width: 100%;
     overflow: auto;
+}
+
+.content_textarea:hover {
+	border: 1px solid green;
 }   
     
 .Transaction_prohibited_item {
@@ -912,6 +886,10 @@ button, input, optgroup, select, textarea {
     border: 0px !important;
 }
 
+.hashtagdetail1_div:hover {
+	border: 1px solid green;
+}
+
 .tagExplanation {
     padding-top: 0.5rem;
     line-height: 1.3;
@@ -933,6 +911,7 @@ button, input, optgroup, select, textarea {
 .tagExplanation > li > p {
     margin-left: 0.5rem;
     line-height: 1.5;
+    margin : 0;
 }
      
 .qtyText_div {
@@ -954,14 +933,11 @@ button, input, optgroup, select, textarea {
     margin-right: 1rem;
 } 
 
-<<<<<<< HEAD
-=======
 .qty_input:hover {
 	border: 1px solid green;
 	
 }
 
->>>>>>> refs/heads/main
 .sellerWriteForm_footer {
 	width: 100%;
     height: 5.5rem;
@@ -972,6 +948,7 @@ button, input, optgroup, select, textarea {
     position: sticky;
     left: 0px;
     bottom: 0px;
+    display: block;
 }
 
 .sellerWriteForm_footer_div {
@@ -992,7 +969,7 @@ button, input, optgroup, select, textarea {
     font-size: 20px;
     font-weight: 700;
     border-radius: 2px;
-    background: rgb(255, 80, 88);
+    background: rgb(94 160 71);
     position: relative;
     appearance: button;
     cursor: pointer;
@@ -1075,3 +1052,6 @@ button, input, optgroup, select, textarea {
 	line-height: 1.15;
 	margin: 0;
 }
+
+
+

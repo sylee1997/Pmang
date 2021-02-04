@@ -148,6 +148,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 		
 
+	//-------------------------seller-----------------------------------//
+	
+	@Override
+	public void sellerWrite(ItemDTO itemDTO) {
+		memberDAO.sellerWrite(itemDTO);
+	}
 
 	@Override
 	public List<ZipcodeDTO> searchlocation(String address) {

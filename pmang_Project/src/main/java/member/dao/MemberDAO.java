@@ -1,14 +1,9 @@
 package member.dao;
 
 import java.util.List;
-<<<<<<< HEAD
 import java.util.Map;
-
 import member.bean.MemberDTO;
-=======
-
 import board.bean.ItemDTO;
->>>>>>> refs/heads/main
 import member.bean.ZipcodeDTO;
 
 public interface MemberDAO {
@@ -28,6 +23,8 @@ public interface MemberDAO {
 	public int checkKakaoId(String kakaoId);
 
 	public int kakaoWrite(MemberDTO memberDTO);
+	
+	public void sellerWrite(ItemDTO itemDTO);
 
 	public List<ZipcodeDTO> searchlocation(String address);
 

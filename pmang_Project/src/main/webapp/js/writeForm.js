@@ -15,8 +15,9 @@ function selectEmail(element){			//이메일 주소 선택 이벤트
 };
 
 
-//유효성 검사
-$('#writeBtn').click(function(event){
+//유효성 검사'
+$(document).on("click","#writeBtn", function(event){
+	alert('dk')
 			//각 항목이 적합한 양식인지 검사할 정규식
 	var userIdCheck = /^[a-zA-Z0-9]{6,16}$/;
 	var pwdCheck = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,16}$/;
@@ -25,14 +26,14 @@ $('#writeBtn').click(function(event){
 	var email2Check = /^[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 	var tel2Check = /^[0-9]{3,4}$/ ;
 	var tel3Check = /^[0-9]{4}$/ ;
-	
+/*	
 	$('#userIdDiv').empty();
 	$('#pwdDiv').empty();
 	$('#repwdDiv').empty();
 	$('#userNameDiv').empty();
 	$('#emailDiv').empty();
 	$('#telDiv').empty();
-	$('#addrDiv').empty();
+	$('#addrDiv').empty();*/
 	
 	if($('#userId').val()==''){
 		$('#userIdDiv').text('필수 정보 입니다')

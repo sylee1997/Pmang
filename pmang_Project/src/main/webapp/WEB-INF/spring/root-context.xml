@@ -7,23 +7,15 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<context:component-scan base-package="member.dao"/>
-<<<<<<< HEAD
 	<context:component-scan base-package="member.service"/>
-=======
 	<context:component-scan base-package="member.bean"/>
 	
 	<context:component-scan base-package="board.service"/>
 	<context:component-scan base-package="board.dao"/>
 	<context:component-scan base-package="board.bean"/>
-	<context:component-scan base-package="spring.conf"/>
->>>>>>> refs/heads/main
-	
-<<<<<<< HEAD
+
 	<context:component-scan base-package="pmang.conf"/>
 	
-	<context:component-scan base-package="pmang_user.service"/>
-	<context:component-scan base-package="pmang_item.service"/>
-	<context:component-scan base-package="pmang_chat.service"/>
 	
 	<!-- 회원가입 메일 인증 -->
 	<bean id="mailSender"	class="org.springframework.mail.javamail.JavaMailSenderImpl">
@@ -41,8 +33,8 @@
 			</props>
 		</property>
 	</bean>
-=======
+
 	<context:component-scan base-package="data.url"/>
 	
->>>>>>> refs/heads/main
+
 </beans>

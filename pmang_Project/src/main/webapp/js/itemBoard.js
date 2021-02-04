@@ -20,16 +20,6 @@ function(){
 	$('.down3').css('display', 'none')
 });
 
-/* down color 입히기 */
-for(var i=1; i<4; i++){
-	for(var j=0; j<$('.down'+i).children().length; j++){
-		if($('.down'+i).children().eq(j).text().trim() == $('.top'+i).text().trim()){
-			//$('.down'+i).children().eq(j).css('color', 'red');
-			$('.down'+i).children().eq(j).addClass('select'+i);
-		}
-	}	
-};
-
 
 /* var firstCategory = ['패션', '디지털/가전', '도서/티켓', '리빙용품', '스포츠/레저', '뷰티/미용', '유아/출산', '기타', '커뮤니티' ] */
 /*  secondCategory 종류  */
@@ -38,39 +28,6 @@ var fashion = ['여성의류', '남성의류', '패션잡화', '', ''];
 	var men = ['아우터','티셔츠','니트','셔츠','맨투맨/후드집업','바지','','','',''];
 	var goods = ['가방','신발','액세서리','시계','모자'];
 
-<<<<<<< HEAD
-var digital = ['모바일', '가전제품', '음반/영상기기', '컴퓨터/주변기기', '카메라', '게임', '', '', ''];
-	var mobile = ['스마트폰', '태블릿', '액세서리/주변기기',''];
-	var home = ['소형가전(밥솥/다리미)', '대형가전(냉장고/세탁기/TV)', '미용가전', '사무용품(복사기/팩스)'];
-	var music = ['음향기기','비디오/프로젝터','CD/DVD/음반',''];
-	var pc = ['데스크탑', '키보드/마우스', '모니터', 'CPU/메인보드/메모리/HDD/SDD', '노트북/넷북', '기타 액세서리(잉크,쿨러,케이블,USB)','','',''];
-	var camera = ['DSLR/미러리스','필름카메라','디지털 카메라','기타 액세서리(메모리/렌즈/필름)'];
-	var game = ['pc게임', '콘솔 게임(닌텐도/플스)', '게임 타이틀',''];
-var book = ['도서', '티켓', '', ''];
-	var read = ['학습/사전/참고서', '만화/아동', '인문/교양/소설', '경영/경제/사회', '과학/컴퓨터/인터넷','예술/디자인','기타 도서(여행/취미/건강)','',''];
-	var ticket = ['기프티콘/쿠폰/상품권','예매권/항공권','',''];
-var living = ['생활용품', '가구', '주방용품', ''];
-	var daily = ['문구/학습', '침구', '욕실',''];
-	var furniture = ['거실가구(쇼파/테이블)', '생활가구(침대/화장대)', '사무용가구(책상/의자)', '인테리어 소품'];
-	var kitchen = ['식기세트','냄비/프라이팬','조리도구','수저/커트러리','컵/잔/텀블러', '주방 잡화','밀폐용기','커피용품',''];
-var sports = ['실내', '실외', '', ''];
-	var indoor = ['헬스','요가','골프','수영'];
-	var out = ['축구', '야구', '농구','자전거/킥보드','등산','낚시/캠핑','','',''];
-var beauty = ['스킨케어', '메이크업', '헤어/바디', '향수/아로마', '네일아트/케어', '뷰티소품','','',''];
-	var skin = ['클렌칭/스크럽','스킨/토너/미스트','로션/에멀젼','에센스/크림','팩/마스크','썬케어','','',''];
-	var makeup = ['색조메이크업','베이스메이크업','',''];
-	var hair = ['샴푸/린스/트리트먼트','헤어스타일링','바티클렌저/로션','헤어/핸드/풋케어'];
-	var perfume = ['여성향수','남성향수','공용향수',''];
-	var nailArt = ['네일아트/스티커','매니큐어/페디큐어','네일케어도구'];
-	var beautyTool = ['브러시/퍼프','파우치/정리함','거울',''];
-var child = ['영아의류(-2세)', '여아의류(3-6세)', '남아의류(3-6세)', '육아잡화', '동화책/완구/인형/장난감','','','',''];
-	var baby = ['상의', '하의', '기타',''];
-	var girl = ['원피스/셋트', '아우터(니트,점퍼,코트)','상하의','티셔츠','바지','치마','','',''];
-	var boy = ['아우터','상하의','티셔츠','바지','남방','','','',''];
-	var babygoods = ['신발','모자','가방','양말'];
-	var fairy = ['인형','교육/완구','장난감','물놀이도구','놀이터도구','','','',''];
-var others = ['피망나눔','차량,오토바이', '기타',''];
-=======
 var digital = ['모바일', '가전제품', '음반/영상기기', '컴퓨터/주변기기', '카메라', '게임', '', '', '',''];
 	var mobile = ['스마트폰', '태블릿', '액세서리/주변기기','',''];
 	var home = ['소형가전(밥솥/다리미)', '대형가전(냉장고/세탁기/TV)', '미용가전', '사무용품',''];
@@ -102,12 +59,9 @@ var child = ['영아의류(-2세)', '여아의류(3-6세)', '남아의류(3-6세
 	var babygoods = ['신발','모자','가방','양말',''];
 	var fairy = ['인형','교육/완구','장난감','물놀이도구','놀이터도구'];
 var others = ['피망나눔','차량,오토바이', '기타','',''];
->>>>>>> refs/heads/main
 
 
 $(document).ready(function(){
-<<<<<<< HEAD
-=======
 	/* down color 입히기 */
 /*	for(var i=1; i<4; i++){
 		for(var j=0; j<$('.down'+i).children().length; j++){
@@ -217,7 +171,6 @@ $(document).ready(function(){
 	}
 	
 	
->>>>>>> refs/heads/main
 	//위치 검색
 	if (navigator.geolocation) { // GPS를 지원하면
 		    navigator.geolocation.getCurrentPosition(function(position) {
@@ -235,26 +188,8 @@ $(document).ready(function(){
 		  } else {
 		    alert('GPS를 지원하지 않습니다');
 		  }
-	//처음 카테고리 창 구현
-	$('.secondCategory').hide();
-	$('.thirdCategory').hide();
+
 	//alert($('.select1').text());
-<<<<<<< HEAD
-	if($('.select1').text() == '패션'){
-		for(var i = 0; i < fashion.length; i++){
-			var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + fashion[i] + '</a></div>');
-			$('.detailItem').append(div);
-		}		
-	}else if($('.select1').text() == '디지털/가전'){
-		for(var i = 0; i < disital.length; i++){
-			var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + fashion[i] + '</a></div>');
-			$('.detailItem').append(div);
-		}		
-	}else if($('.select1').text() == '도서/티켓'){
-		for(var i = 0; i < book.length; i++){
-			var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + book[i] + '</a></div>');
-			$('.detailItem').append(div);
-=======
 	
 	
 	 if($('.select1').text() == '패션'){
@@ -359,35 +294,7 @@ $(document).ready(function(){
 
 				$('.detailItem').append(div);
 			}
->>>>>>> refs/heads/main
 		}
-<<<<<<< HEAD
-	}else if($('.select1').text() == '리빙용품'){
-		for(var i = 0; i < living.length; i++){
-			var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + living[i] + '</a></div>');
-			$('.detailItem').append(div);
-		}
-	}else if($('.select1').text() == '스포츠/레저'){
-		for(var i = 0; i < sports.length; i++){
-			var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + sports[i] + '</a></div>');
-			$('.detailItem').append(div);
-		}
-	}else if($('.select1').text() == '뷰티/미용'){
-		for(var i = 0; i < beauty.length; i++){
-			var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + beauty[i] + '</a></div>');
-			$('.detailItem').append(div);
-		}
-	}else if($('.select1').text() == '유아/출산'){
-		for(var i = 0; i < child.length; i++){
-			var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + child[i] + '</a></div>');
-			$('.detailItem').append(div);
-		}
-	}else if($('.select1').text() == '기타'){
-		for(var i = 0; i < others.length; i++){
-			var div = $('<div class = "detailItemList1" id="detailItemList' + i +'"><a href="#">' + others[i] + '</a></div>');
-			$('.detailItem').append(div);
-		}
-=======
 	 
 	 $('#findItemH2').html('<span id="itemSelectSpan">'+$('.select1').text()+'</span>의 전체상품');
 	 
@@ -414,10 +321,7 @@ $(document).ready(function(){
 					console.log(err);
 				}
 			});
->>>>>>> refs/heads/main
 	}
-<<<<<<< HEAD
-=======
 
 
 	
@@ -846,7 +750,6 @@ $(document).ready(function(){
 	}
 	
 
->>>>>>> refs/heads/main
 });
 
 
@@ -935,10 +838,6 @@ $('.selectItem1').on('click', 'a', function(){
 
 			$('.detailItem').append(div);
 		}
-<<<<<<< HEAD
-		
-		
-=======
 	}else if($('.select1').text() == '도서/티켓'){
 		for(var i = 0; i < book.length; i++){
 			var div = '<div class = "detailItemList1" id="detailItemList' + i +'">';
@@ -1042,7 +941,6 @@ $('.selectItem1').on('click', 'a', function(){
 		}
 	
 			
->>>>>>> refs/heads/main
 });
 
 
@@ -2077,7 +1975,7 @@ $('#mainLocBtn').click(function(){
 });
 
 $('#mapBtn').click(function(){
-	  window.open("map.jsp?lon=" + $('#lon').val() + "&lat=" + $('#lat').val(), "지도띄우기", "width=1000, height=800, toolbar=no, menubar=no, scrollbars=no, resizable=yes,left=500, top=100");
+	  window.open("/pmang/pm_itemBoard/map.jsp?lon=" + $('#lon').val() + "&lat=" + $('#lat').val(), "지도띄우기", "width=1000, height=800, toolbar=no, menubar=no, scrollbars=no, resizable=yes,left=500, top=100");
 });
 
 

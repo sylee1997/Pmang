@@ -19,6 +19,6 @@ public class MemberDTO {
 	private String tel2;
 	private String tel3;
 	private String kakaoId;
-	private String user_key;
+	private String email_key;
 	
 }

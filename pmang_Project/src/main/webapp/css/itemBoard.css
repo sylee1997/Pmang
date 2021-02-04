@@ -1,16 +1,7 @@
 @charset "UTF-8";
 
-<<<<<<< HEAD
-
-html, body, div {
-	margin: 0px;
-    padding: 0px;
-    border: 0px;
-	
-=======
 #wrap {
 	background-color: rgb(42 171 42 / 5%);
->>>>>>> refs/heads/main
 }
 
 /* 전체를 감싸주는 div */
@@ -366,7 +357,7 @@ a {
 .locationModal { /* background */
 	display: none;
 	position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 100; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */

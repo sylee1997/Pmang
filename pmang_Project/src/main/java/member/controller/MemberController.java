@@ -35,6 +35,10 @@ public class MemberController {
     @Autowired
 	private MemberService mailsender;
 
+    @RequestMapping(value="checkPost", method=RequestMethod.GET)
+    public String checkPost() {
+    	return "/member/checkPost";
+    }
 
 	@RequestMapping(value="login", method=RequestMethod.POST)
 	@ResponseBody 
@@ -42,10 +46,6 @@ public class MemberController {
 		return memberService.login(map, session); // 맵에실어서 리턴값 문자열을 가지고 간다
 	}
 
-	@RequestMapping(value="checkPost", method=RequestMethod.GET)
-	public String checkPost() {
-		return "/pm_writeForm/checkPost";
-	}
 	
 	
     @RequestMapping(value="loginForm")
@@ -62,8 +62,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="writeForm", method=RequestMethod.GET)
-	public String writeForm() {
-		return "/member/writeForm";
+	public String notice(Model model) {
+		model.addAttribute("display", "/member/writeForm.jsp");
+		return "/index";
 	}
 	
 	@RequestMapping(value="write", method=RequestMethod.POST)
@@ -118,7 +119,12 @@ public class MemberController {
 	
 	
 	//------------------------------------seller------------------------------------------------------//
-
+	
+	@RequestMapping(value="sellerWriteForm", method=RequestMethod.GET)
+	public String sellerWriteForm(Model model) {
+		model.addAttribute("display", "/pm_sellerWriteForm/sellerWriteForm.jsp");
+		return "/index";
+	}
 		
 	@RequestMapping(value="sellerWrite", method=RequestMethod.POST)
 	@ResponseBody

@@ -29,6 +29,9 @@ public interface MemberService {
 	public int regSuccess(String userId, String key);
 
 	public String kakaoLogin(MemberDTO memberDTO, HttpSession session);
+	
+	//-----------------------seller---------------------------//
+	public void sellerWrite(ItemDTO itemDTO);
 
 	public List<ZipcodeDTO> searchlocation(String address);
 
