@@ -11,7 +11,7 @@ import lombok.Data;
 public class ItemDTO {
 	private int item_seq;
 	private String img1, img2, img3;
-	private String itemSubject;
+	private String item_subject;
 	private String category1, category2, category3;
 	private String condition;
 	private String item_state;
@@ -20,10 +20,9 @@ public class ItemDTO {
 	private String nego;
 	private String item_content;
 	private String hashtag1, hashtag2, hashtag3;
-	private String qty;
-	
-	private int item_like;
+	private String buyer_key;
 	private int hit;
+	private int qty;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
 	private Date logtime;
 }

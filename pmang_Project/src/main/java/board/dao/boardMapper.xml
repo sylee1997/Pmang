@@ -4,7 +4,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="boardSQL">
 	<select id="getItemBoardList" parameterType="java.util.Map" resultType="item">
-		select item_seq, img1, itemSubject, category1, category2, category3, item_location, item_price,hashtag1, hashtag2, hashtag3, hit, logtime from item where category1 = #{category1}
+		select item_seq, img1, item_subject, category1, category2, category3, item_location, item_price,hashtag1, hashtag2, hashtag3, hit, logtime from item where category1 = #{category1}
 		<if test="category2 != null">
 			and category2 = #{category2}
 		</if>

@@ -87,7 +87,7 @@ $(document).ready(function(){
 					var itemLinkA = '<a class="itemLink">';
 					itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
 					var itemContentDiv = '<div class="itemContent">';
-					itemContentDiv += '<div class="itemName">'+items.itemSubject+'</div>';
+					itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
 					itemContentDiv += '<div class="itemPriceAndTime">';
 					itemContentDiv += '<div class="itemPrice">'+items.item_price+'</div><div class="itemTime"><span>'+items.logtime+'</span></div>'
 					itemContentDiv += '</div>';
@@ -116,7 +116,7 @@ $(document).ready(function(){
 					var itemLinkA = '<a class="itemLink">';
 					itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
 					var itemContentDiv = '<div class="itemContent">';
-					itemContentDiv += '<div class="itemName">'+items.itemSubject+'</div>';
+					itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
 					itemContentDiv += '<div class="itemPriceAndTime">';
 					itemContentDiv += '<div class="itemPrice">'+items.item_price+'</div><div class="itemTime"><span>'+items.logtime+'</span></div>'
 					itemContentDiv += '</div>';
@@ -145,7 +145,7 @@ $(document).ready(function(){
 					var itemLinkA = '<a class="itemLink">';
 					itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
 					var itemContentDiv = '<div class="itemContent">';
-					itemContentDiv += '<div class="itemName">'+items.itemSubject+'</div>';
+					itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
 					itemContentDiv += '<div class="itemPriceAndTime">';
 					itemContentDiv += '<div class="itemPrice">'+items.item_price+'</div><div class="itemTime"><span>'+items.logtime+'</span></div>'
 					itemContentDiv += '</div>';
@@ -775,7 +775,7 @@ $('.selectItem1').on('click', 'a', function(){
 				var itemLinkA = '<a class="itemLink">';
 				itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
 				var itemContentDiv = '<div class="itemContent">';
-				itemContentDiv += '<div class="itemName">'+items.itemSubject+'</div>';
+				itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
 				itemContentDiv += '<div class="itemPriceAndTime">';
 				itemContentDiv += '<div class="itemPrice">'+items.item_price+'</div><div class="itemTime"><span>'+items.logtime+'</span></div>'
 				itemContentDiv += '</div>';
@@ -989,7 +989,7 @@ $('.selectItem1').on('click', 'a', function(){
 					var itemLinkA = '<a class="itemLink">';
 					itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
 					var itemContentDiv = '<div class="itemContent">';
-					itemContentDiv += '<div class="itemName">'+items.itemSubject+'</div>';
+					itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
 					itemContentDiv += '<div class="itemPriceAndTime">';
 					itemContentDiv += '<div class="itemPrice">'+items.item_price+'</div><div class="itemTime"><span>'+items.logtime+'</span></div>'
 					itemContentDiv += '</div>';
@@ -1412,7 +1412,7 @@ $('.selectItem2').on('click', 'a', function(){
 				var itemLinkA = '<a class="itemLink">';
 				itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
 				var itemContentDiv = '<div class="itemContent">';
-				itemContentDiv += '<div class="itemName">'+items.itemSubject+'</div>';
+				itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
 				itemContentDiv += '<div class="itemPriceAndTime">';
 				itemContentDiv += '<div class="itemPrice">'+items.item_price+'</div><div class="itemTime"><span>'+items.logtime+'</span></div>'
 				itemContentDiv += '</div>';
@@ -1866,7 +1866,7 @@ $('.detailItem').on('click', '.detailItemList2', function(){
 						var itemLinkA = '<a class="itemLink">';
 						itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
 						var itemContentDiv = '<div class="itemContent">';
-						itemContentDiv += '<div class="itemName">'+items.itemSubject+'</div>';
+						itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
 						itemContentDiv += '<div class="itemPriceAndTime">';
 						itemContentDiv += '<div class="itemPrice">'+items.item_price+'</div><div class="itemTime"><span>'+items.logtime+'</span></div>'
 						itemContentDiv += '</div>';
@@ -1909,7 +1909,7 @@ $('.selectItem3').on('click', 'a', function(){
 				var itemLinkA = '<a class="itemLink">';
 				itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
 				var itemContentDiv = '<div class="itemContent">';
-				itemContentDiv += '<div class="itemName">'+items.itemSubject+'</div>';
+				itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
 				itemContentDiv += '<div class="itemPriceAndTime">';
 				itemContentDiv += '<div class="itemPrice">'+items.item_price+'</div><div class="itemTime"><span>'+items.logtime+'</span></div>'
 				itemContentDiv += '</div>';

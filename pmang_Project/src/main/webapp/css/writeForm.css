@@ -24,8 +24,12 @@
 #address, #detailAddress{
 	margin: 2px 0px;
 }
-#checkPostBtn, #writeBtn, #authBtn {
+#checkPostBtn, #writeBtn {
 	background-color : green;
+}
+
+#pwd:hover, #repwd:hover, #userName:hover, #userId:hover{
+	border-color: green;
 }
 
 /* 우편번호 찾기 */

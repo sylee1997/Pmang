@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +39,8 @@
 						<tr>
 							<td style="border-top: rgb(0,0,0); border-bottom: rgb(0,0,0);">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="ID" width="1" name="userId" id="userId" maxlength='20'>
+									<input type="text" class="form-control" placeholder="ID" width="1" name="userId" id="index_userId" maxlength='20'>
+									<div id="index_userIdDiv"></div>
 								</div>
 							</td>
 						</tr>
@@ -51,7 +52,8 @@
 						<tr>
 							<td style="border-top: rgb(0,0,0); border-bottom: rgb(0,0,0);">
 								<div class="form-group">
-									<input type="password" class="form-control" maxlength="15" placeholder="Password" name="pwd" id="pwd">
+									<input type="password" class="form-control" maxlength="15" placeholder="Password" name="pwd" id="index_pwd">
+									<div id="index_pwdDiv"></div>
 								</div>
 							</td>
 						</tr>
@@ -77,7 +79,7 @@
 									</div>
 								</button>
 								<button id="index_writeBtn">
-								<div onclick="location.href='/pmang/member/writeForm'">
+								<div>
 									<img src="/pmang/image/writeP.png" alt="writePmang">
 									<p id="writeP">일반 회원가입</p>
 								</div>
@@ -94,11 +96,12 @@
 	<!-- header -->
 	<div id="header">
       	<div class="header_logo">
-            <div class="logo-wrap">
+            <div class="logo-wrap" onclick="location.href='/pmang/index'">
                  <img src="/pmang/image/main_logo.JPG" alt="main_logo" />
-                 <h2 id="headerH2" style="color: green; font-weight: bold;">피망장터</h2>
-               </div>
-               <div class="search-wrap">
+                 <h2 style="color: green; font-weight: bold">피망장터</h2>
+           </div>
+           
+              <div class="search-wrap">
                  <input type="text" class="searchInput" placeholder="상품명,지역명,@상점명입력" maxlength="20"/>
                  <span id="index_searchInsertXspan">x</span>
                  	<!-- 서치버튼 추가(이서영) -->
@@ -132,8 +135,40 @@
                </div>
                
                </div>
-               
-               <nav>
+           	<!-- 세션없을때 -->
+           	<c:if test="${sessionScope.memUserId == null }">
+               <nav id="sessionOff">
+              <ul>
+                <li>
+                  <img src="/pmang/image/sell.png" alt="sale" width="40px" height="40px" />
+                  <span class="indexnavSpan" onclick="alert('먼저 로그인 하세요.')">판매하기</span>
+                </li>
+                <li>
+                  <span class="vertical">|</span>
+                </li>
+                <li>
+                  <img src="/pmang/image/mystore.png" alt="store" width="30px" height="30px"/>
+                  <span class="indexnavSpan" onclick="alert('먼저 로그인 하세요.')">내상점</span>
+                </li>
+                <li>
+                  <span class="vertical">|</span>
+                </li>
+                <li id="loginli">
+                  <img src="/pmang/image/login.png" alt="login" style="width: 30px; height: 30px;" />
+                  <span class="indexnavSpan">로그인</span>
+                </li>
+                <li>
+                  <span class="vertical">|</span>
+                </li>
+                <div class="pmangTok">
+               		<div class="pmangTokDiv">피망Tok
+               	</div>
+              </ul>
+            </nav>
+         </c:if>
+            <!-- 세션있을때  -->
+            <c:if test="${memUserId != null }">
+             <nav id="sessionOn">
               <ul>
                 <li>
                   <img src="/pmang/image/sell.png" alt="sale" width="40px" height="40px" />
@@ -149,19 +184,19 @@
                 <li>
                   <span class="vertical">|</span>
                 </li>
-                <li id="loginli">
-                  <img src="/pmang/image/login.png" alt="login" style="width: 30px; height: 30px;" />
-                  <span class="indexnavSpan">로그인</span>
+                <li style="CURSOR: hand" onclick="window.location='/pmang/member/logout'">
+                  <img src="/pmang/image/login.png" alt="logout" style="width: 30px; height: 30px;" />
+                  <span class="indexnavSpan">로그아웃</span>
                 </li>
-                <li>
+                 <li>
                   <span class="vertical">|</span>
                 </li>
                 <div class="pmangTok">
                		<div class="pmangTokDiv">피망Tok
                	</div>
-            </div>
               </ul>
             </nav>
+         </c:if>
         </div>
       
           <!-- 카테고리 -->
@@ -515,6 +550,7 @@
 		</ul>
 		
 	</div><!-- header category -->
+
       
         <div id="aside">
          <div class="asideDiv">
@@ -522,7 +558,7 @@
             <div class="notice">
 	            <div class="noticeDiv">
 	            	<div class="noticeContent">
-	            		<a id="aside_noticeA" href="#">로그인을 하세요.</a>
+	            		<a href="#">로그인을 하세요.</a>
 	            	</div>
 	            </div>
             	<img src="/pmang/image/noticeImg.PNG" style="width:30px; height:30px;"> 
@@ -552,74 +588,66 @@
             </div>
             
             <div class="topBtn">
-               <a id="topA" href="#" style="color: black; font-size:12pt">TOP</a>
+               <a id="topA" href="#">TOP</a>
             </div>
-            
          </div><!-- asideDiv -->
 
       </div><!-- aside -->
    </div><!-- header -->
-      <!-- ----------------헤더 -->
+   <!-- -----------------------------------------헤더 부분 ----------------------------------->
       
-
-  	 <div id="wrap">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+   <div id="wrap">
       <div id="container">
-      
-      
-         <jsp:include page="${display}"/>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      </div><!-- container -->
-
-
- 
+          <jsp:include page="${display}"/>
+ 	  </div><!-- container -->
    </div><!-- wrap -->
+            
 
             
-      
-    
-
-   
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+     <!-- 상품등록 footer -->
     <footer class="sellerWriteForm_footer">
 			<div class="sellerWriteForm_footer_div">
 				<button type="button" class="itemWriteBtn">
 				</button>
 			</div>
-	</footer>        
+	</footer>
+	
+	
+	<!-- index footer -->
    <div class="footer">
       <div class="footerCategoryArea">
          <div class="footerCategory">
@@ -692,7 +720,9 @@
 
 <!-- 검색 클릭 이벤트 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script> <!-- 카카오디벨로퍼 -->
 <script type="text/javascript">
+
 
 //검색 input에 커서 올라가면 이벤트
 $('.searchInput').focus(function(){
@@ -735,7 +765,7 @@ $('#index_searchInsertXspan').click(function(){
 //검색창 이외에 다른 곳을 눌렀을 시 검색창 사라지게 하는것
 $(document).click(function(e){
 	if(e.target != $('.searchListDiv')){
-		if($('body, div').is(e.target)){
+		if($('form, div').is(e.target)){
 			$('.searchClick').hide(); 
 		}else if($('#header h2, #header img, .indexnavSpan').is(e.target)){
 			$('.searchClick').hide(); 
@@ -777,7 +807,7 @@ $('.searchBtn').click(function(){
 		localStorage.setItem("search", keyword);
 	
 		var keyword = localStorage.getItem('search');
-		var insert = '<div id="index_listKeyword"><span id="index_searchkeyword">'+ keyword + '</span><a id="indexSearchX">x</a></div>'
+		var insert = '<div id="index_listKeyword"><span>'+ keyword + '</span><a id="indexSearchX">x</a></div>'
 	
 		$('.existList').prepend(insert);
 	}
@@ -794,14 +824,7 @@ $('.searchBtn').click(function(){
 	}
 });
 
-//최신검색어 클릭했을때 검색창으로 들어오게끔!
-//주의! 동적으로 만들어진 요소에 이벤트를 걸때는 이런식으로 걸어줘야 한다..
-$(document).on("click","#index_searchkeyword",function(event){
-	$('.searchInput').val($(this).text());
-});
-
-
-//검색어 엔터치면 값 넣어주기
+//엔터값 넣어주기
 $('.searchInput').keydown(function(key) {
 	if(key.keyCode == 13){
 		$('.searchBtn').trigger('click');
@@ -839,6 +862,7 @@ $('.notice').hover(function(){
 
 
 //------------------------------------------------------------------------------
+//카테고리
 //카테고리
 $('.hoverli').hover(function(){
 	var img = '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAgCAYAAABgrToAAAAAAXNSR0IArs4c6QAAAE9JREFUWAnt1rEJACAQA0B1IQv3n8tSwRXSPHLfP4RLk77nOq3wjcLZXjQBqzckHwECBAj8LtCtmbBiayYE9E6AAAECBEIBayYEbNZMKngBdrgHHmiUuOgAAAAASUVORK5CYII=" width="20" height="16" alt="메뉴 버튼 아이콘">';
@@ -926,6 +950,8 @@ $('.category3Menu').on('click','li',function(){
 });
 
 
+
+
 //----------------------------------------------------------------------
 //로그인모달 구현
 $('#loginli').click(function(){
@@ -935,10 +961,6 @@ $('#loginli').click(function(){
 		e.stopPropagation(); 
 		return false;
 	});
-});
-
-$('#aside_noticeA').click(function(){
-	$('#loginli').trigger('click');
 });
 
 $('.close').click(function(){
@@ -953,11 +975,9 @@ $(document).click(function(e){
 	}
 });
 
-/* ---------------------------------------------------------------------- */
-//로고 눌렀을 때
 
-$('.logo-wrap').click(function(){
-	location.href='/pmang/index';
+$('.noticeContent').on('click','a',function(){
+	$('#loginli').trigger('click');
 });
 
 
@@ -970,6 +990,50 @@ $('.logo-wrap').click(function(){
 
 
 
+
+
+
+
+//---------------------------------로그인. 회원가입--------------------------------------------------//
+$('#index_writeBtn').click(function(){
+	location.href="/pmang/member/writeForm"
+});
+
+$('#loginBtn').click(function(){
+	$('#index_userIdDiv').empty();
+	$('#index_pwdDiv').empty();
+	
+	if($('#index_userId').val()==''){
+		$('#userIdDiv').text('아이디를 입력해 주세요')
+						.css('color','red')
+						.css('font-size','8pt')
+						.css('font-weight','bold');
+		
+	}else if($('#index_pwd').val()==''){
+		$('#index_pwdDiv').text('비밀번호를 입력해 주세요')
+						 .css('color','red')
+						 .css('font-size','8pt')
+						 .css('font-weight','bold');
+	}else{
+		$.ajax({
+			type: 'post',
+			url: '/pmang/member/login',
+			data: {'userId': $('#index_userId').val(), 'pwd': $('#index_pwd').val()},
+			dataType: 'text',
+			success: function(data){
+				if(data == 'success'){
+					alert('로그인 성공');
+					location.reload();
+				}else if(data == 'fail'){
+					alert('메일인증 또는 회원정보를 확인해 주세요');
+				}
+			},
+			error: function(err){
+				console.log(err);
+			}
+		});	
+	}
+});
 
 
 
@@ -1037,7 +1101,7 @@ $('.itemWriteBtn').click(function(){
 	
 	$('.imageChoice_ul').css('border-color','rgb(195, 194, 204)');
 	$('.itemSubjectText').css('border-color','rgb(195, 194, 204)');
-	$('input[name=itemSubject]').css('border-color','rgb(195, 194, 204)');
+	$('input[name=item_subject]').css('border-color','rgb(195, 194, 204)');
 	$('.categoryChoice_div').css('border-color','rgb(195, 194, 204)');
 	$('.price_input').css('border','1px solid rgb(195, 194, 204)');
 	
@@ -1048,9 +1112,9 @@ $('.itemWriteBtn').click(function(){
 		var offset = $('.main_sectionFrame').offset();
 		$('html').animate({scrollTop : offset.top}, 400);
 		
-	}else if($('input[name=itemSubject]').val().length < 2){ //제목 수 확인
-		$('input[name=itemSubject]').css('border-color','green');
-		$('input[name=itemSubject]').css('border-color','green');
+	}else if($('input[name=item_subject]').val().length < 2){ //제목 수 확인
+		$('input[name=item_subject]').css('border-color','green');
+		$('input[name=item_subject]').css('border-color','green');
 		$('.itemSubjectDiv').show();
 		
 		var offset = $('.imageChoice_div').offset();
@@ -1094,12 +1158,59 @@ $('.itemWriteBtn').click(function(){
 
 
 
-
-
-
-
+/* ---------------------------------------------------------------------- */
+//카카오 로그인 js
+ window.Kakao.init("d738a87db4961b1bfd9e5ce2fefec44d");
+$('#kakaoBtn').click(function(event){
+	event.preventDefault();
+	 window.Kakao.Auth.login({
+		scope:'profile, account_email, gender',
+		success: function(authObj){
+			window.Kakao.API.request({
+				url:'/v2/user/me',
+				success: function(res){
+		
+					var kakaoId = res.id;
+					var userName = res.kakao_account.profile.nickname;
+					var gender = res.kakao_account.gender == 'male' ? 0 : 1;
+					var emailIndex= res.kakao_account.email.indexOf('@');
+					var email1 = res.kakao_account.email.substring(0,emailIndex);
+					var email2 = res.kakao_account.email.substring(emailIndex + 1, res.kakao_account.email.length);
+					 	
+					 $.ajax({
+						type: 'post',
+						url: '/pmang/member/kakaoLogin',
+						data: {
+							'kakaoId': kakaoId,
+							'userName': userName,
+							'gender': gender,
+							'email1': email1,
+							'email2': email2,
+						},
+						dataType: 'text',
+						success: function(data){
+							if(data == 'loginSuccess'){
+								alert('로그인 성공');
+								location.href="/pmang/index";
+							} else if(data == 'JoinSuccess'){
+								alert('카카오 회원가입을 축하드립니다.');
+							}
+							console.log(data);
+						},
+						error: function(err){
+							console.log(err);
+						}
+					}); 
+				}
+				
+				
+			});
+		}
+	}); 
+});
 
 
 </script>
+
 </body>
 </html>
