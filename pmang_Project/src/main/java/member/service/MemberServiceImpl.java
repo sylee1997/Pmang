@@ -1,0 +1,149 @@
+package member.service;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Service;
+
+
+import member.bean.MemberDTO;
+import member.bean.ZipcodeDTO;
+import member.dao.MemberDAO;
+
+@Service
+public class MemberServiceImpl implements MemberService {
+	@Autowired
+	private MemberDAO memberDAO;
+	@Autowired
+	private JavaMailSender mailSender;
+
+	// 난수를 이용한 키 생성
+	private boolean lowerCheck;
+	private int size;
+	
+	@Override
+	public String login(Map<String, String> map, HttpSession session) {
+		MemberDTO memberDTO = memberDAO.login(map);
+		if(memberDTO == null) { // 로그인 해당아이디가 있다 / 없다, 리턴 스트링값을 기다리고있기때문에
+			return "fail";
+		}else {
+			session.setAttribute("memUserName", memberDTO.getUserName());
+			session.setAttribute("memUserId", map.get("userId"));
+			session.setAttribute("memEmail", memberDTO.getEmail1()+"@"+memberDTO.getEmail2());
+			
+			return "success";
+		}
+		
+
+		
+	}
+	@Override
+	public int write(MemberDTO memberDTO) {
+		return memberDAO.write(memberDTO);
+	}
+	@Override
+	public String checkId(String userId) {
+		MemberDTO memberDTO = memberDAO.checkId(userId);
+		if(memberDTO == null)
+			return "non_exist";
+		else
+			return "exist";
+	}
+	@Override
+	public List<ZipcodeDTO> checkPostSearch(Map<String, String> map) {
+		return memberDAO.checkPostSearch(map);
+	}
+
+	// 이메일 난수 만드는 메서드
+	private String init() {
+		Random ran = new Random();
+		StringBuffer sb = new StringBuffer();
+		int num = 0;
+
+		do {
+			num = ran.nextInt(75) + 48;
+			if ((num >= 48 && num <= 57) || (num >= 65 && num <= 90) || (num >= 97 && num <= 122)) {
+				sb.append((char) num);
+			} else {
+				continue;
+			}
+
+		} while (sb.length() < size);
+		if (lowerCheck) {
+			return sb.toString().toLowerCase();
+		}
+		return sb.toString();
+	}
+
+
+
+	public String getKey(boolean lowerCheck, int size) {
+		this.lowerCheck = lowerCheck;
+		this.size = size;
+		return init();
+	}
+	@Override
+	public void mailSendWithUserKey(String email1, String email2, String userId, HttpServletRequest request) {
+		String email = email1+"@"+email2;
+		String key = getKey(false, 20);
+		memberDAO.GetKey(userId, key);
+		MimeMessage mail = mailSender.createMimeMessage();
+		String htmlStr = "<h2>안녕하세요 MS :p 피망마켓~ 입니다!</h2><br><br>" 
+				+ "<h3>" + userId + "님</h3>" + "<p>인증하기 버튼을 누르시면 로그인을 하실 수 있습니다 : " 
+				+ "<a href='http://localhost:8080" + request.getContextPath() + "/member/regSuccess?userId="+ userId +"&user_key="+key+"'>인증하기</a></p>"
+				+ "(혹시 잘못 전달된 메일이라면 이 이메일을 무시하셔도 됩니다)";
+		try {
+			mail.setSubject("[본인인증] MS :p 피망마켓의 인증메일입니다", "utf-8");
+			mail.setText(htmlStr, "utf-8", "html");
+			mail.addRecipient(RecipientType.TO, new InternetAddress(email));
+			
+			mailSender.send(mail);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}	
+		
+	}
+	@Override
+	public int regSuccess(String userId, String key) {
+		
+		int resultCnt = 0;
+		
+		resultCnt = memberDAO.regSuccess(userId, key);
+		
+		return resultCnt;
+		
+		
+	}
+	@Override
+	public String kakaoLogin(MemberDTO memberDTO, HttpSession session) {
+		// 카카오 회원가입, 로그인
+		
+		int count = memberDAO.checkKakaoId(memberDTO.getKakaoId());
+
+		//로그인
+		if(count > 0) {	
+			session.setAttribute("memUserId", memberDTO.getUserName());
+			session.setAttribute("memEmail", memberDTO.getEmail1()+"@"+memberDTO.getEmail2());
+			return "loginSuccess";
+		} else {
+		//회원가입	
+			int success = memberDAO.kakaoWrite(memberDTO);
+			return "JoinSuccess";
+		}
+		
+		
+	}
+		
+}
+	
+

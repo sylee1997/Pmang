@@ -31,17 +31,17 @@
 							</div>
 								<div class="hide report-hide-common">
 					           		<div class="report-ad-ad">
-					                	<button id="report-st-trade" type="button">교환신청</button>
+					                	<button type="button">교환신청</button>
 					                </div>
 					                <div class="report-ad-ad">
-					                	<button id="report-st-ad" type="button">상점홍보</button>
+					                	<button type="button">상점홍보</button>
 					                </div>
 									 <div class="report-ad-ad">
-					                	<button id="report-pr-app" type="button">타사이트,어플광고</button>
+					                	<button type="button">타사이트,어플광고</button>
 					                </div>
 					                <div class="etc">
 					                	<input type="text" placeholder="기타(사유)">
-					                	<button id="report-ad-st-write" type="button">등록</button>
+					                	<button type="button">등록</button>
 					                </div>
 					           	</div>
 							</div>
@@ -54,17 +54,17 @@
 							</div>
 								<div class="hide report-hide-common">
 					           		<div class="report-un-ad">
-					                	<button id="report-st-cancel" type="button">거래파기</button>
+					                	<button type="button">거래파기</button>
 					                </div>
 					                <div class="report-un-ad">
-					                	<button id="report-st-late" type="button">늦은배송</button>
+					                	<button type="button">늦은배송</button>
 					                </div>
 					                <div class="report-un-ad">
-					                	<button id="report-st-kindness" type="button">불친절한 응대</button>
+					                	<button type="button">불친절한 응대</button>
 					                </div>
 									<div class="etc">
 					                	<input type="text" placeholder="기타(사유)">
-					                	<button id="report-un-st-write" type="button">등록</button>
+					                	<button type="button">등록</button>
 					                </div>
 					           	</div>
 							</div>
@@ -77,20 +77,20 @@
 							</div>
 								<div class="hide report-hide-common">
 					           		<div class="report-dan-ad">
-					                	<button id="report-st-ciga" type="button">담배/주류</button>
+					                	<button type="button">담배/주류</button>
 					                </div>
 					                <div class="report-dan-ad">
-					                	<button id="report-st-lost" type="button">장물(분실폰,분실노트북,..)</button>
+					                	<button type="button">장물(분실폰,분실노트북,..)</button>
 					                </div>
 					                <div class="report-dan-ad">
-					                	<button id="report-st-medi" type="button">의약품류</button>
+					                	<button type="button">의약품류</button>
 					                </div>
 					                <div class="report-dan-ad">
-					                	<button id="report-st-lense" type="button">콘텍트 렌즈</button>
+					                	<button type="button">콘텍트 렌즈</button>
 					                </div>
 					                <div class="etc">
 					                	<input type="text" placeholder="기타(사유)">
-					                	<button id="report-dan-st-write" type="button">등록</button>
+					                	<button type="button">등록</button>
 					                </div>
 					           	</div>
 							</div>
@@ -103,17 +103,17 @@
 							</div>
 								<div class="hide report-hide-common">
 					           		<div class="report-viol-ad">
-					                	<button id="report-st-language" type="button">비방/욕설</button>
+					                	<button type="button">비방/욕설</button>
 					                </div>
 					                <div class="report-viol-ad">
-					                	<button id="report-st-sexual" type="button">성희롱</button>
+					                	<button type="button">성희롱</button>
 					                </div>
 					            	<div class="report-viol-ad">
 					                	<button type="button">리뷰(별점평가)요구 및 테러</button>
 					                </div>
 									 <div class="etc">
 					                	<input type="text" placeholder="기타(사유)">
-					                	<button id="report-viol-st-write" type="button">등록</button>
+					                	<button type="button">등록</button>
 					                </div>
 					           	</div>
 							</div>

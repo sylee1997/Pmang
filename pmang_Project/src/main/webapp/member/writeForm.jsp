@@ -20,7 +20,7 @@
         <b><font size="6" color="gray">회원가입</font></b>
         <br><br><br>
         
-		<form action="#" method="post">
+		<form name="writeForm" action="/pmang/member/write" method="post">
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -134,6 +134,7 @@
 								</div>
 								<input type="text" class="form-control" id="address" name="addr1" maxlength="50" placeholder="주소" readonly> 
 								<input type="text" class="form-control" id="detailAddress" name="addr2" maxlength="50" placeholder="상세주소">
+								<div id="addrDiv" align="left"></div>
 							</div>
 						</td>
 					</tr>
@@ -142,7 +143,7 @@
 						<td></td>
 						<td align="right">
 							<div class="form-group">
-								<button class="btn btn-primary" id="writeBtn" type="button">회원가입</button>
+                        <button class="btn btn-primary" id="writeBtn" type="button">회원가입</button>
 							</div>
 						</td>
 					</tr>

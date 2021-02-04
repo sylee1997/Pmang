@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +16,7 @@
 <title>피망마켓에 오신것을 환영합니다.</title>
 </head>
 <body> 
-<<<<<<< HEAD
-<form id="indexForm">
+<form id="indexForm" method="post">
 <!-- 로그인 모달 -->
 <div class="loginModal">
       	<div class="loginModalContent">
@@ -41,6 +41,7 @@
 							<td style="border-top: rgb(0,0,0); border-bottom: rgb(0,0,0);">
 								<div class="form-group">
 									<input type="text" class="form-control" placeholder="ID" width="1" name="userId" id="userId" maxlength='20'>
+									<div id="userIdDiv"></div>
 								</div>
 							</td>
 						</tr>
@@ -53,6 +54,7 @@
 							<td style="border-top: rgb(0,0,0); border-bottom: rgb(0,0,0);">
 								<div class="form-group">
 									<input type="password" class="form-control" maxlength="15" placeholder="Password" name="pwd" id="pwd">
+									<div id="pwdDiv"></div>
 								</div>
 							</td>
 						</tr>
@@ -94,11 +96,6 @@
 
 	<!-- header -->
 	<div id="header">
-=======
-   <div id="wrap">
-      
-      <div id="header">
->>>>>>> 9b19a0f0da851a078ca63032e34b609ca136c76e
       	<div class="header_logo">
             <div class="logo-wrap">
                  <img src="/pmang/image/main_logo.JPG" alt="main_logo" />
@@ -138,8 +135,9 @@
                </div>
                
                </div>
-               
-               <nav>
+           	<!-- 세션없을때 -->
+           	<c:if test="${sessionScope.memUserId == null }">
+               <nav id="sessionOff">
               <ul>
                 <li>
                   <img src="/pmang/image/sell.png" alt="sale" width="40px" height="40px" />
@@ -155,12 +153,38 @@
                 <li>
                   <span class="vertical">|</span>
                 </li>
-                <li>
+                <li id="loginli">
                   <img src="/pmang/image/login.png" alt="login" style="width: 30px; height: 30px;" />
                   <span class="indexnavSpan">로그인</span>
                 </li>
               </ul>
             </nav>
+         </c:if>
+            <!-- 세션있을때  -->
+            <c:if test="${memUserId != null }">
+             <nav id="sessionOn">
+              <ul>
+                <li>
+                  <img src="/pmang/image/sell.png" alt="sale" width="40px" height="40px" />
+                  <span class="indexnavSpan">판매하기</span>
+                </li>
+                <li>
+                  <span class="vertical">|</span>
+                </li>
+                <li>
+                  <img src="/pmang/image/mystore.png" alt="store" width="30px" height="30px"/>
+                  <span class="indexnavSpan">내상점</span>
+                </li>
+                <li>
+                  <span class="vertical">|</span>
+                </li>
+                <li style="CURSOR: hand" onclick=window.location="/pmang/member/logout">
+                  <img src="/pmang/image/login.png" alt="logout" style="width: 30px; height: 30px;" />
+                  <span class="indexnavSpan">로그아웃</span>
+                </li>
+              </ul>
+            </nav>
+         </c:if>
         </div>
       
           <!-- 카테고리 -->
@@ -516,6 +540,16 @@
       
         <div id="aside">
          <div class="asideDiv">
+              <!-- 알림창 구현 -->
+            <div class="notice">
+	            <div class="noticeDiv">
+	            	<div class="noticeContent">
+	            		<a href="#">로그인을 하세요.</a>
+	            	</div>
+	            </div>
+            	<img src="/pmang/image/noticeImg.PNG" style="width:30px; height:30px;"> 
+            	<div>알림(0)</div>
+            </div>
             <div class="likebag">찜한상품
                <div class="bag_click">
                   <a class="bag_clickA" href="#">
@@ -548,26 +582,13 @@
                	<div class="pmangTokDiv">피망Tok</div>
                </a>
             </div>
-            
-            
-            <!-- 알림창 구현 -->
-            
-            
-            <div class="notice">
-            <div class="noticeDiv">
-            	<div class="noticeContent">
-            		<a href="#">로그인을 하세요.</a>
-            	</div>
-            </div>
-            	<img src="/pmang/image/notice.JPG" style="width:50px; height:50px;"> 
-            	<div>알림(0)</div>
-            </div>
          </div><!-- asideDiv -->
 
       </div><!-- aside -->
    </div><!-- header -->
       <!-- ----------------헤더 -->
       
+   <div id="wrap">
       <div id="container">
          
          <!-- 인기카테고리 슬라이드영역 -->
@@ -964,6 +985,7 @@
 
 <!-- 검색 클릭 이벤트 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script> <!-- 카카오디벨로퍼 -->
 <script type="text/javascript">
 
 
@@ -1131,7 +1153,6 @@ $('.category2Menu').on('mouseenter mouseleave','li',function(){
 });
 
 
-<<<<<<< HEAD
 
 
 //----------------------------------------------------------------------
@@ -1157,20 +1178,110 @@ $(document).click(function(e){
 	}
 });
 
+$('#writeBtn').click(function(){
+	window.open("/pmang/member/writeForm", "width=700 height=500 scrollbars=yes");
+});
+
+
+
+//로그인 js
+$('#loginBtn').click(function(){
+	$('#userIdDiv').empty();
+	$('#pwdDiv').empty();
+	
+	if($('#userId').val()==''){
+		$('#userIdDiv').text('아이디를 입력해 주세요')
+						.css('color','red')
+						.css('font-size','8pt')
+						.css('font-weight','bold');
+		
+	}else if($('#pwd').val()==''){
+		$('#pwdDiv').text('비밀번호를 입력해 주세요')
+						 .css('color','red')
+						 .css('font-size','8pt')
+						 .css('font-weight','bold');
+	}else{
+		$.ajax({
+			type: 'post',
+			url: '/pmang/member/login',
+			data: {'userId': $('#userId').val(), 'pwd': $('#pwd').val()},
+			dataType: 'text',
+			success: function(data){
+				if(data == 'success'){
+					alert('로그인 성공');
+					location.reload();
+				}else if(data == 'fail'){
+					alert('메일인증 또는 회원정보를 확인해 주세요');
+				}
+			},
+			error: function(err){
+				console.log(err);
+			}
+		});	
+
+	}
+});
+
 /* ---------------------------------------------------------------------- */
+//카카오 로그인 js
+ window.Kakao.init("d738a87db4961b1bfd9e5ce2fefec44d");
+
+$('#kakaoBtn').click(function(event){
+	event.preventDefault();
+	 window.Kakao.Auth.login({
+		scope:'profile, account_email, gender',
+		success: function(authObj){
+			window.Kakao.API.request({
+				url:'/v2/user/me',
+				success: function(res){
+		
+					var kakaoId = res.id;
+					var userName = res.kakao_account.profile.nickname;
+					var gender = res.kakao_account.gender == 'male' ? 0 : 1;
+					var emailIndex= res.kakao_account.email.indexOf('@');
+					var email1 = res.kakao_account.email.substring(0,emailIndex);
+					var email2 = res.kakao_account.email.substring(emailIndex + 1, res.kakao_account.email.length);
+					 	
+					 $.ajax({
+						type: 'post',
+						url: '/pmang/member/kakaoLogin',
+						data: {
+							'kakaoId': kakaoId,
+							'userName': userName,
+							'gender': gender,
+							'email1': email1,
+							'email2': email2,
+						},
+						dataType: 'text',
+						success: function(data){
+							if(data == 'loginSuccess'){
+								alert('로그인 성공');
+								location.reload();
+							} else if(data == 'JoinSuccess'){
+								alert('카카오 회원가입을 축하드립니다.');
+							}
+							console.log(data);
+						},
+						error: function(err){
+							console.log(err);
+						}
+					}); 
+				}
+				
+				
+			});
+		}
+	}); 
+});
 
 
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> 9b19a0f0da851a078ca63032e34b609ca136c76e
 </script>
+	<div id="section">
+		<c:if test="${not empty display }">
+			<jsp:include page="${display }" />
+		</c:if>
+		<c:if test="${empty display }">
+		</c:if>
+	</div>
 </body>
 </html>

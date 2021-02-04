@@ -8,4 +8,3 @@ $('.noticeArea').click(function(){
 	}//if
 	
 });//noticeArea click
-

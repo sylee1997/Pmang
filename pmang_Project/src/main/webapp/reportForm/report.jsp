@@ -33,16 +33,16 @@
 							</div>
 								<div class="hide report-hide-common">
 					           		<div class="report-ad-ad">
-					                	<button id="report-pr-ad" type="button">상점홍보</button>
+					                	<button type="button">상점홍보</button>
 					                </div>
 					                <div class="report-ad-ad">
-					                	<button id="report-pr-fish" type="button">낚시글</button>
+					                	<button type="button">낚시글</button>
 					                </div>
 					                <div class="report-ad-ad">
-					                	<button id="report-pr-dobae" type="button">도배글</button>
+					                	<button type="button">도배글</button>
 					                </div>
 					                <div class="report-ad-ad">
-					                	<button id="report-pr-app" type="button">타사이트,어플 광고</button>
+					                	<button type="button">타사이트,어플 광고</button>
 					                </div>
 					                <div class="etc">
 					                	<input type="text" placeholder="기타(사유)">
@@ -72,7 +72,7 @@
 					                </div>
 					                <div class="etc">
 					                	<input type="text" placeholder="기타(사유)">
-					                	<button id="report-un-pr-write" type="button">등록</button>
+					                	<button type="button">등록</button>
 					                </div>
 					           	</div>
 							</div>
@@ -85,20 +85,20 @@
 							</div>
 								<div class="hide report-hide-common">
 					           		<div class="report-dan-ad">
-					                	<button id="report-pr-ciga" type="button">담배/주류</button>
+					                	<button type="button">담배/주류</button>
 					                </div>
 					                <div class="report-dan-ad">
-					                	<button id="report-pr-lost" type="button">장물(분실폰,분실노트북,..)</button>
+					                	<button type="button">장물(분실폰,분실노트북,..)</button>
 					                </div>
 					                <div class="report-dan-ad">
-					                	<button id="report-pr-medi" type="button">의약품류</button>
+					                	<button type="button">의약품류</button>
 					                </div>
 					                <div class="report-dan-ad">
-					                	<button id="report-pr-lense" type="button">콘텍트 렌즈</button>
+					                	<button type="button">콘텍트 렌즈</button>
 					                </div>
 					                <div class="etc">
 					                	<input type="text" placeholder="기타(사유)">
-					                	<button id="report-dan-pr-write" type="button">등록</button>
+					                	<button type="button">등록</button>
 					                </div>
 					           	</div>
 							</div>
@@ -111,14 +111,14 @@
 							</div>
 								<div class="hide report-hide-common">
 					           		<div class="report-viol-ad">
-					                	<button id="report-pr-language" type="button">비방/욕설</button>
+					                	<button type="button">비방/욕설</button>
 					                </div>
 					                <div class="report-viol-ad">
-					                	<button id="report-pr-sexual" type="button">성희롱</button>
+					                	<button type="button">성희롱</button>
 					                </div>
 									 <div class="etc">
 					                	<input type="text" placeholder="기타(사유)">
-					                	<button id="report-viol-pr-write" type="button">등록</button>
+					                	<button type="button">등록</button>
 					                </div>
 					           	</div>
 							</div>
