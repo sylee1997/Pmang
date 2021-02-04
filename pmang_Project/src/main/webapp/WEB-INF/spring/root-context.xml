@@ -9,4 +9,6 @@
 	<context:component-scan base-package="pmang_user.service"/>
 	<context:component-scan base-package="pmang_item.service"/>
 	<context:component-scan base-package="pmang_chat.service"/>
+	<context:component-scan base-package="talk.service"/>
+	<context:component-scan base-package="talk.dao"/>
 </beans>
