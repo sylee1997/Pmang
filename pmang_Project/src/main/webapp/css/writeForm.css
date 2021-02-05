@@ -24,9 +24,32 @@
 #address, #detailAddress{
 	margin: 2px 0px;
 }
-#checkPostBtn, #writeBtn, #authBtn {
+#checkPostBtn, #writeBtn {
 	background-color : green;
 }
+
+#pwd:hover, #repwd:hover, #userName:hover, #userId:hover{
+	border-color: green;
+}
+
+#myModalLabel {
+	display: block;
+    font-size: 15pt;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+/* .loginModal-title {
+    padding: 0;
+
+}  */
+
+.close span {
+    padding: 20px;
+}  
 
 /* 우편번호 찾기 */
 #addressA:link {color: black; text-decoration: none;}

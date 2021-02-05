@@ -28,7 +28,7 @@ $(document).ready(function() {
 	  var msg = $('#talk_message').val();
 	  if(msg != ""){
 		  message = {
-				  talk_content: $('#talk_message').val(),
+				  talk_content: $('#talk_message').val()
 		  }
 		  sock.send(JSON.stringify(message));
 		  $('#talk_message').val('');

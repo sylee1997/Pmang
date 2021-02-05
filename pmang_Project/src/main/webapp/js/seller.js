@@ -10,7 +10,9 @@ $(document).ready(function(){
 
 //이미지 등록할 때 사진 리스트 추가 , 사진 갯수 (0/3) 구현해야함
 
+
 $('.imageChoice').change(function(e){
+	alert($('#imageCountHidden').val());
 	var files = e.target.files;
 	var arr = Array.prototype.slice.call(files);
 
@@ -53,6 +55,8 @@ function checkNumber(files, arr){
 	}
 }
 
+
+
 function checkExtension(fileName, fileSize){
 
     var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
@@ -76,7 +80,7 @@ function checkExtension(fileName, fileSize){
 function preview(arr){
 	if(parseInt($('#imageCountHidden').val()) <= 3){
 
-		arr.forEach(function(f){
+	arr.forEach(function(f, index){
       
       //파일명이 길면 파일명...으로 처리
       var fileName = f.name;
@@ -93,13 +97,17 @@ function preview(arr){
         var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
         reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
           //str += '<button type="button" class="delBtn" value="'+f.name+'" style="background: red">x</button><br>';
-          str += '<img src="'+e.target.result+'" title="'+f.name+'" width=195 height=202 />';
-          str += '</li></div>';
+          if(index == 0 && $('#imgrep').length == 0){
+        	  str += '<div id="imgrep">대표이미지</div>';
+          }
+          str += '<img src="'+e.target.result+'" title="'+f.name+'" width=202 height=202 />';
+          str += '<button id="imgpreBtn"><img src="/pmang/image/closeBtn.png" alt="close" width=20 height=20"></button>';
+          str += '</li>';
           $(str).appendTo('.imageChoice_ul');
         } 
         reader.readAsDataURL(f);
       }else{
-        str += '<img src="/pmang/image/bench.jpg" title="'+f.name+'" width=195 height=202 />';
+        str += '<img src="/pmang/image/bench.jpg" title="'+f.name+'" width=202 height=202 />';
         $(str).appendTo('.imageChoice_ul');
       }
     
@@ -112,6 +120,15 @@ function preview(arr){
 	  alert('사진 첨부는 최대 3장까지 가능합니다.');
   }
 }
+
+
+
+$('.imageChoice_ul').on('click','#imgpreBtn',function(){
+	$(this).parent('.imgli').remove();
+	$('.imageChoice_ul').children().eq(1).append($('<div id="imgrep">대표이미지</div>'));
+	$('#imageCountHidden').val(parseInt($('#imageCountHidden').val())-1);
+	$('.imageCount').text('('+String($('#imageCountHidden').val())+'/3)');
+});
 
 
 
@@ -456,11 +473,24 @@ $('#category3').on('click','button',function(){
 	$('#category3').show();
 });
 
+//제목 글자수 count
+
+$('input[name=item_subject]').on('keyup', function() {
+	var subjectText = $(this).val();
+	$('#textLength').html('('+subjectText.length + '/40)');   
+	
+	if(subjectText.length >= 40){
+		alert("최대 40자까지 입력 가능합니다.");
+		$('#textLength').css('color', 'red');
+	}else
+		$('#textLength').css('color', 'black');
+      
+});
 
 
 //제목 글자수 count, 유효성 검사, input이벤트
 //최소입력수, 최대입력수
-$('input[name=itemSubject]').on('keyup', function() {
+$('input[name=item_subject]').on('keyup', function() {
 	var subjectText = $(this).val();
 	$('#textLength').html('('+subjectText.length + '/40)');   
 	
@@ -473,50 +503,50 @@ $('input[name=itemSubject]').on('keyup', function() {
 	if(subjectText.length > 1 ){
 		$('.itemSubjectDiv').hide();
 		$('.itemSubjectText').css('border-color','rgb(195, 194, 204)');
-		$('input[name=itemSubject]').css('border-color','rgb(195, 194, 204)');
+		$('input[name=item_subject]').css('border-color','rgb(195, 194, 204)');
 	}else if(subjectText.length > 0 || subjectText.length < 2){
 		$('.itemSubjectDiv').show();
 		$('.itemSubjectText').css('border-color','green');
-		$('input[name=itemSubject]').css('border-color','green');
+		$('input[name=item_subject]').css('border-color','green');
 		$('#textRemove').hide();
 	}
 	
 	if(subjectText.length != 0){
 		$('#textRemove').show();
 	}
-      
+    
 });
 
 //최소 입력수
-$('input[name=itemSubject]').click(function(){
+$('input[name=item_subject]').click(function(){
 	var subjectText = $(this).val();
 	if(subjectText.length > 1){
 		$('.itemSubjectText').css('border-color','rgb(195, 194, 204)');
-		$('input[name=itemSubject]').css('border-color','rgb(195, 194, 204)');
+		$('input[name=item_subject]').css('border-color','rgb(195, 194, 204)');
 		$('.itemSubjectDiv').hide();
 	}
 });
 
 
-$('input[name=itemSubject]').focus(function(){
+$('input[name=item_subject]').focus(function(){
 	$('.itemSubjectText').css('border-color','rgb(195, 194, 204)');
-	$('input[name=itemSubject]').css('border-color','rgb(195, 194, 204)');
+	$('input[name=item_subject]').css('border-color','rgb(195, 194, 204)');
 	$('.itemSubjectDiv').hide();
 	
 });
 
-$('input[name=itemSubject]').blur(function(){
+$('input[name=item_subject]').blur(function(){
 	var subjectText = $(this).val();
 	if(subjectText.length < 2){
 		$('.itemSubjectText').css('border-color','green');
-		$('input[name=itemSubject]').css('border-color','green');
+		$('input[name=item_subject]').css('border-color','green');
 		$('.itemSubjectDiv').show();
 	}
 });
 
 //x눌렀을 때 상품제목 글자 다 없애기
 $("#textRemoveClick").click(function(){
-	$('input[name=itemSubject]').val('');
+	$('input[name=item_subject]').val('');
 	$('#textRemove').hide();
 });
 
@@ -525,7 +555,8 @@ $("#textRemoveClick").click(function(){
 
 
 //상품내용
-$('textarea[name=content]').on('keyup', function() {
+$('textarea[name=item_content]').on('keyup', function() {
+
 	var contentText = $(this).val();
 	$('#contentLength').html('('+contentText.length + '/2000)');   
 	
@@ -537,43 +568,90 @@ $('textarea[name=content]').on('keyup', function() {
       
 });
 
-
-
 //수량 숫자만 입력
 $('#qtyparent').on('keyup','input',function(){
-	qtyVal = $('input[name=qty]').val();
-	let qtyRule = /^[0-9]*$/; // * 이 기존에 {1,3}
+	qtyVal = $('.qty_input').val();
+	let qtyRule = /^[0-9]$/; // * 이 기존에 {1,3}
 	let reg1 = /[^0-9]/g;
 	
-	if(qtyVal.length > 0 && qtyVal.length <= 3 )
 	if(!qtyRule.test(qtyVal)){
-		$('input[name=qty]').val(qtyVal.replace(reg1,''));
+		$('.qty_input').val(qtyVal.replace(reg1,''));
 		//alert("숫자만 입력해주세요.");
 	}
 });
 
 //가격 숫자만 입력
-$('#priceparent').on('keyup','input',function(){
+/*$('#priceparent').on('keyup','input',function(e){
+	
 	let priceVal = $('input[name=item_price]').val();
-	let priceRule = /^[0-9]*$/;// * 이 기존에 {0,9}
-	let reg2 =/[^0-9]/g;   //
-
-	if(priceVal.length > 0 && priceVal.length <= 9 )
+	let priceRule = /^[0-9]$/;// * 이 기존에 {0,9}
+	let reg2 =/[^0-9]/g;   
+	
+>>>>>>> refs/heads/main
 	if(!priceRule.test(priceVal)){
-		$('input[name=price]').val(priceVal.replace(reg2,''));
+		$('input[name=item_price]').val(priceVal.replace(reg2,''));
 		//alert("숫자만 입력해주세요.");
 	}
 	
 	if(priceVal < 100){
+		$('#priceDiv').text('100원 이상 입력해주세요.');
+	}else{
+		$('#priceDiv').text('');
+	}
+	
+	
+	$('input[name=price]').val(addComma($('input[name=price]').val()));
+});*/
+
+
+$("input[name='item_price']").bind('keyup', function(e){
+	var rgx1 = /\D/g; //\d의 반대인 \D(숫자가 아닌것들)은 반복검색해서 추출함.
+	var rgx2 = /(\d+)(\d{3})/;
+	var num = this.value.replace(rgx1,"");
+	
+	if($(this).val() < 100){
 		$('#priceDiv').text('※100원 이상 입력해주세요.');
 		$('.price_input').css('border','1px solid green');
+		while (rgx2.test(num)) num = num.replace(rgx2, '$1' + ',' + '$2');
+		this.value = num;
 	}else{
 		$('#priceDiv').text('');
 		$('.price_input').css('border','1px solid rgb(195, 194, 204)');
+		while (rgx2.test(num)) num = num.replace(rgx2, '$1' + ',' + '$2');
+		this.value = num;
 	}
 	
-	/*$('input[name=price]').val(addComma($('input[name=price]').val()));*/
+	
+	var realNum = $(this).val().replace(/\,/g,'');
+	if(realNum < 100){
+		$('#priceDiv').text('※100원 이상 입력해주세요.');
+	}
+	
+/*	if(rgx3.test(this.val())){
+		$('#priceDiv').text('※100원 이상 입력해주세요.');
+	}else{
+		$('#priceDiv').text('');
+		$('.price_input').css('border','1px solid rgb(195, 194, 204)');
+	}*/
+	
 });
+
+//가격 콤마
+/*	function comma(str) {
+	    str = String(str);
+	    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+	}
+	 
+	//콤마풀기
+	function uncomma(str) {
+	    str = String(str);
+	    return str.replace(/[^\d]+/g, '');
+	}
+	 
+	//값 입력시 콤마찍기
+	function inputNumberFormat(obj) {
+	    obj.value = comma(uncomma(obj.value));
+	}*/
 
 //3자리마다 콤마. 결과는 잘 나오지만 특수문자(,) 를 하나의 문자로 인식하여 /^[0-9]{1,9}$/ 정규식에 의해 걸림..
 /*function addComma(num){
@@ -595,7 +673,6 @@ $('#hashtag').on('keydown', function(e) {
 				type: 'button',
 				text: '#' + text,
 				class: 'hashtag_button',
-				id: 'hashtag' + (hashtag_count+1),
 				name: 'hashtag' + (hashtag_count+1) //해시태그값을 저장해 놓은 변수. ajax에서 이용.
 			})).append($('<button/>',{
 				type: 'button',
@@ -669,29 +746,76 @@ function searchDetailAddrFromCoords(coords, callback) {
 //주소 검색
 $("#searchlocation").click(function(){
 	$('.searchlocationModal').css('display', 'flex');
-	$('.searchlocationModal').on('scroll touchmove mousewheel', function(e){
+	$('body').css('overflow','hidden');
+/*	$('.searchlocationModal').on('scroll touchmove mousewheel', function(e){
 		e.preventDefault();
 		e.stopPropagation(); 
 		return false;
-	});
+	});*/
 });
 
 $('.searchlocationCloseBtn').click(function(){
 	$('.searchlocationModal').hide();
 	$('.recentlyModal').hide();
-	$('.searchlocationModal').off('scroll touchmove mousewheel');
-	$('.recentlyModal').off('scroll touchmove mousewheel');
+	$('body').css('overflow','auto');
+	$('.searchlocationInput').val('');
+/*	$('.searchlocationModal').off('scroll touchmove mousewheel');
+	$('.recentlyModal').off('scroll touchmove mousewheel');*/
 });
 
 $(document).click(function(e){
 	if($('.searchlocationModal').is(e.target)){
 		$('.searchlocationModal').hide(); 
-		$('.searchlocationModal').off('scroll touchmove mousewheel');
+		$('body').css('overflow','auto');
+		$('.searchlocationInput').val('');
+/*		$('.searchlocationModal').off('scroll touchmove mousewheel');*/
 	}else if($('.recentlyModal').is(e.target)){
 		$('.recentlyModal').hide(); 
-		$('.recentlyModal').off('scroll touchmove mousewheel');
+		$('body').css('overflow','auto');
+/*		$('.recentlyModal').off('scroll touchmove mousewheel');*/
 	}
 });
+
+$('.searchlocationBtn').click(function(){
+	$('.searchlocationList').empty();
+	
+	if($('.searchlocationInput').val() != ""){
+		$.ajax({
+			type: 'post',
+			url : '/pmang/member/searchlocation',
+			data : {'address' : $('.searchlocationInput').val()},
+			dataType : 'json',
+			success: function(data){
+				if(data.list != ""){
+					$('.searchlocationList').show();
+					$.each(data.list, function(index, items){
+						var address = items.sido + " " + items.sigungu + " " + items.yubmyundong;
+						$('<li><button id="selectAddress">'+address+'</button></li>').appendTo($('.searchlocationList'));
+						
+					});
+				}else {
+					$('.searchlocationList').hide();
+				}
+			},
+			error: function(err){
+				console.log(err);
+			}
+		
+		});
+	}
+	
+});
+
+
+
+//검색할 지역을 클릭했을 때
+$('.searchlocationList').on('click','#selectAddress', function(){
+	$('.location_input').val($(this).text());
+	$('.searchlocationModal').hide(); 
+	$('body').css('overflow','auto');
+});
+
+
 
 //최근 지역
 $('#recentlylocation').click(function(){
@@ -702,120 +826,4 @@ $('#recentlylocation').click(function(){
 		return false;
 	});
 });
-
-
-//등록하기 버튼 클릭 -> db전송 -> index.jsp
-/*$('.itemWriteBtn').click(function(){
-	//alert('아')
-	//전송할 formData 생성!
-	var formData = new FormData($('#sellerWriteForm')[0]); 
-	
-	for(var i = 1; i < 4; i++){
-		if($("#hashtag"+i).text() != ""){
-			formData.append("hashtag"+i, $("#hashtag"+i).text());
-		}
-	}
-	
-	var category1 = $(".selectL").text();
-	var category2 = $(".selectM").text();
-	var category3 = $(".selectS").text();
-	
-	formData.append("category1",category1);
-	formData.append("category2",category2);
-	formData.append("category3",category3);
-
-	//데이터 잘 들어왔는지 확인
-	//for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }
-
-	
-	
-	
-	//유효성 검사
-	$('#imageCheck').hide();
-	$('.itemSubjectDiv').hide();
-	$('#categoryCheck').hide();
-	$('#priceDiv').text("");
-	
-	$('.imageChoice_ul').css('border-color','rgb(195, 194, 204)');
-	$('.itemSubjectText').css('border-color','rgb(195, 194, 204)');
-	$('input[name=itemSubject]').css('border-color','rgb(195, 194, 204)');
-	$('.categoryChoice_div').css('border-color','rgb(195, 194, 204)');
-	$('.price_input').css('border','1px solid rgb(195, 194, 204)');
-	
-	if($('#imageCountHidden').val() == 0){ //이미지 등록 확인
-		$('#imageCheck').show();
-		$('.imageChoice_li').css('border-color','green');
-		
-		var offset = $('.main_sectionFrame').offset();
-		$('html').animate({scrollTop : offset.top}, 400);
-		
-	}else if($('input[name=itemSubject]').val().length < 2){ //제목 수 확인
-		$('input[name=itemSubject]').css('border-color','green');
-		$('input[name=itemSubject]').css('border-color','green');
-		$('.itemSubjectDiv').show();
-		
-		var offset = $('.imageChoice_div').offset();
-		$('html').animate({scrollTop : offset.top}, 400);
-		
-	}else if($('#choice').text() == ""){ //카테고리 확인
-		$('.categoryChoice_div').css('border-color','green');
-		$('#categoryCheck').show();
-		
-		var offset = $('.imagecontent').offset();
-		$('html').animate({scrollTop : offset.top}, 400);
-		
-	}else if($('.price_input').val() == "" || $('.price_input').val() < 100){ //가격확인
-		$('#priceDiv').text('※100원 이상 입력해주세요.');
-		$('.price_input').css('border','1px solid green');
-		
-		var offset = $('.locationText_div').offset();
-		$('html').animate({scrollTop : offset.top}, 400);
-		
-	}else if($('.qty_input').val() == ""){ //수량 확인
-		$('.qty_input').val('1');
-	}else {
-		$.ajax({
-			type: 'post',
-			enctype: 'multipart/form-data',
-			processData: false, //데이터를 컨텐트 타입에 맞게 변환 여부
-			contentType: false,//요청 컨텐트 타입
-			url: '/pmang/member/sellerWrite',
-			data: formData,
-			success: function(data){
-				alert('상품 등록 완료');
-				location.href='/spring/index'; //추후에 상품관리 페이지로 바뀌게 해야함!
-			},
-			error: function(err){
-				console.log(err);
-			}
-		});
-		
-	}
-});*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
