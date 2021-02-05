@@ -13,6 +13,7 @@
 <input type="hidden" id="sender_user_id" value="${room.userId }">
 <input type="hidden" id="receiver_user_id" value="${room.partner_userId }">
 <input type="hidden" id="talkRoom_seq" value="${room.talkRoom_seq }">
+<input type="hidden" id="receiver_pf_Photo" value="${room.pf_Photo }">
 
 <div id="root">
    <div>

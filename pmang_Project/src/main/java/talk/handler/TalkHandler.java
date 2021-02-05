@@ -57,15 +57,16 @@ public class TalkHandler extends TextWebSocketHandler {
 		talkRoomDTO.setUserId((String) httpSessionMap.get("userId"));
 		
 		
-		
+		//방이 없으면 새로 만들고 있으면 있는거 사용
 		TalkRoomDTO getTalkRoomDTO = talkService.isRoom(talkRoomDTO);
 		if(getTalkRoomDTO == null) {
 			talkService.createRoom(talkRoomDTO);
 		}
 		TalkRoomDTO room = talkService.isRoom(talkRoomDTO);
 		
+		messageDTO.setTalkRoom_seq(room.getTalkRoom_seq());
 		
-		//상대방에게 메시지가 왔을 때, 데이터저장 구현
+		
 		
 		
 		System.out.println(session.getId() + " 로 부터 " + message.getPayload() + "받음");
