@@ -27,7 +27,14 @@ $(document).ready(function() {
      if(msg != ""){
         message = {
               talk_content : $('#talk_message').val(),
-              //room : ${room.userId } 
+              item_seq : 77,
+              sender_user_id : '송신자',
+              receiver_user_id : '수신자',
+              talkRoom_seq : 1
+//              item_seq : $('#item_seq').val(),
+//              sender_user_id : $('#sender_user_id').val(),
+//              receiver_user_id : $('#receiver_user_id').val(),
+//              talkRoom_seq : $('#talkRoom_seq').val()
         }
         sock.send(JSON.stringify(message));
         $('#talk_message').val('');

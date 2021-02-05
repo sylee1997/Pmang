@@ -27,20 +27,8 @@ public class TalkController {
 	@RequestMapping(value="talkRoom",method=RequestMethod.GET)
 	public ModelAndView talkRoom(HttpSession session, @RequestParam Map<String,Object> map) {
 		
-		session.setAttribute("item_seq", 123);//임시세션넘버
-		
-		TalkRoomDTO talkRoomDTO = new TalkRoomDTO();
-		talkRoomDTO.setItem_seq((Integer) map.get("item_seq"));
-		talkRoomDTO.setPartner_userId((String) map.get("partner_userId"));
-		talkRoomDTO.setUserId((String) session.getAttribute("userId"));
-		
-		
-		
-		TalkRoomDTO getTalkRoomDTO = talkService.isRoom(talkRoomDTO);
-		if(getTalkRoomDTO == null) {
-			talkService.createRoom(talkRoomDTO);
-		}
-		TalkRoomDTO room = talkService.isRoom(talkRoomDTO);
+		int item_seq = (Integer)map.get("item_seq");
+		//talkRoom 으로 요청이 오게 되면, item_seq 를 받아서  아래의 데이터들을 search한다.
 		
 		//상점명,pf_Photo ->item_seq 를 통해서 userKey를 빼오고, userkey로 상점명,pf_Photo 검색.
 		
@@ -48,7 +36,6 @@ public class TalkController {
 		
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("room",room);
 		mav.setViewName("/talk/talkRoom");
 		
 		return mav;

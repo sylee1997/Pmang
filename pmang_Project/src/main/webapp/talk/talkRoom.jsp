@@ -9,6 +9,11 @@
 </head>
 <body>
 
+<input type="hidden" id="item_seq" value="${room.item_seq }">
+<input type="hidden" id="sender_user_id" value="${room.userId }">
+<input type="hidden" id="receiver_user_id" value="${room.partner_userId }">
+<input type="hidden" id="talkRoom_seq" value="${room.talkRoom_seq }">
+
 <div id="root">
    <div>
    		<div class="room_setting_modal">
