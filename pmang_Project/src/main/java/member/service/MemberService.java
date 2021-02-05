@@ -1,5 +1,6 @@
 package member.service;
 
+
 import java.util.List;
 
 import java.util.Map;
@@ -33,6 +34,8 @@ public interface MemberService {
 	//-----------------------seller---------------------------//
 	public void sellerWrite(ItemDTO itemDTO);
 
+
 	public List<ZipcodeDTO> searchlocation(String address);
+
 
 }

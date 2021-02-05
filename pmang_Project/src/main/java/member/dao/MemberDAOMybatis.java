@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import board.bean.ItemDTO;
 import member.bean.MemberDTO;
 import member.bean.ZipcodeDTO;
@@ -18,6 +19,7 @@ import member.bean.ZipcodeDTO;
 public class MemberDAOMybatis implements MemberDAO {
 	@Autowired
 	private SqlSession sqlSession;
+
 	
 	@Override
 	public MemberDTO login(Map<String, String> map) {
@@ -47,6 +49,7 @@ public class MemberDAOMybatis implements MemberDAO {
 		return sqlSession.update("memberSQL.GetKey", map);
 		
 	}
+
 
 	@Override
 	public int regSuccess(String userId, String email_key) {
@@ -83,4 +86,5 @@ public class MemberDAOMybatis implements MemberDAO {
 		
 		sqlSession.insert("memberSQL.sellerWrite", itemDTO);
 	}
+
 }

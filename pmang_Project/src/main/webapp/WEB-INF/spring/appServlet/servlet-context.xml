@@ -29,17 +29,19 @@
 	<resources location="/item/" mapping="/item/**"/>
 	<resources location="/storage/" mapping="/storage/**"/>
 
-
+	<resources location="/pm_itemView/" mapping="/pm_itemView/**"/>
+	<resources location="/pm_mystore/" mapping="/pm_mystore/**"/>
+	
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="suffix" value=".jsp" />
-	</beans:bean>
-	
+   <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <beans:property name="suffix" value=".jsp" />
+   </beans:bean>
+
 	<!-- json -->
-	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+ 	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
 		<beans:property name="contentType" value="text/html;charset=UTF-8"/>
-	</beans:bean>
+	</beans:bean> 
 	
 	<!-- Resolves views -->
 	<beans:bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
