@@ -31,7 +31,7 @@ $(document).ready(function() {
               sender_user_id : '송신자',
               receiver_user_id : '수신자',
               talkRoom_seq : 1,
-              receiver_pf_Photo : pmang.png
+              receiver_pf_Photo : 'pmang.png'
 //              item_seq : $('#item_seq').val(),
 //              sender_user_id : $('#sender_user_id').val(),
 //              receiver_user_id : $('#receiver_user_id').val(),
