@@ -20,8 +20,8 @@
 <div class="loginModal">
       	<div class="loginModalContent">
       		<div class="loginModal-header">
-				<div class="modal-header">
-					<h3 class="modal-title" id="myModalLabel">피망 로그인</h3>
+				<div class="loginModal-headerDiv">
+					<h3 class="loginModal-title" id="myModalLabel">피망 로그인</h3>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -567,7 +567,6 @@
             <div class="likebag">찜한상품
                <div class="bag_click">
                   <a class="bag_clickA" href="#">
-                  <img src="/pmang/image/zeroBag.png" style="padding-top:5px; width:18px; height:18px; cursor:pointer;">
                   0 <!-- 계속 바꿔줘야 되는것 -->
                   </a>
                </div>
@@ -579,16 +578,15 @@
                <br>
                0 <!-- 계속 바꿔줘야 되는것 -->
                <br>
-               <img src="/pmang/image/aside_1.JPG" style="width:50px; height:20px;">
                <div class="goods">
-                  <div id="goods_img1" style="width: 80px; height: 80px; border : 1px solid black"></div>
-                  <div id="goods_img2" style="width: 80px; height: 80px; border : 1px solid black"></div>
-                  <div id="goods_img3" style="width: 80px; height: 80px; border : 1px solid black"></div>
+                  <div id="goods_img1" style="width: 80px; height: 80px; border : 1px solid #e5e5e5"></div>
+                  <div id="goods_img2" style="width: 80px; height: 80px; border : 1px solid #e5e5e5"></div>
+                  <div id="goods_img3" style="width: 80px; height: 80px; border : 1px solid #e5e5e5"></div>
                </div>
             </div>
             
             <div class="topBtn">
-               <a id="topA" href="#">TOP</a>
+               <a id="topA" href="#" style="color:rgb(33, 33, 33); font-size: 12pt">TOP</a>
             </div>
          </div><!-- asideDiv -->
 
