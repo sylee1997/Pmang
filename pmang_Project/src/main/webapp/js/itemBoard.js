@@ -915,8 +915,8 @@ $('.selectItem1').on('click', 'a', function(){
 	 
 	 $('#findItemH2').html('<span id="itemSelectSpan">'+$('.select1').text()+'</span>의 전체상품');
 	 
-		if($('.top2').text().trim() == ""){
-			$.ajax({
+	
+		$.ajax({
 				type: 'post',
 				url: '/pmang/board/getItemBoardCount',
 				data : {'category1' : $('.select1').text().trim()},
@@ -938,7 +938,7 @@ $('.selectItem1').on('click', 'a', function(){
 					console.log(err);
 				}
 			});
-		}
+
 	
 			
 });
