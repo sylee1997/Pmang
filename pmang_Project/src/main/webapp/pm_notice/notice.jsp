@@ -11,7 +11,7 @@
 
 		
 		
-		    <input id="tab1" class="tabs" type="radio" name="tabName" value="1" checked>
+		    <input id="tab1" class="tabs" type="radio" name="tabName" value="1">
 		    <label class="tabLabel" for="tab1">공지사항</label>
 		
 		    <input id="tab2" class="tabs" type="radio" name="tabName" value="2">
@@ -25,7 +25,7 @@
 		    <section id="bulletin">
 				<div class="bulletinDiv">
 					<div class="bulletinArea">
-						<div class="arrowImg"><img  src="/pmang/image/down.png" width="20" height="20"></div>
+						<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
 						<div class="bulletinTitle">[공지] 타 사이트 대리결제 거래 시 제재 정책 강화 안내</div>
 						<div class="bulletinDate">2021/01/15</div>
 						<div class="bulletinContent">
@@ -41,7 +41,7 @@
 					</div></div>
 						
 					<div class="bulletinArea">
-						<div class="arrowImg"><img  src="/pmang/image/down.png" width="20" height="20"></div>
+						<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
 						<div class="bulletinTitle">[공지] 각종 인증번호 거래 시 제재 정책 강화 안내</div>
 						<div class="bulletinDate">2020/11/18</div>
 						<div class="bulletinContent">
@@ -184,7 +184,7 @@
 						<section id="section1">
 							<div class="postDiv">
 								<div class="postArea">
-									<div class="arrowImg"><img  src="/pmang/image/down.png" width="20" height="20"></div>
+									<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
 									<div class="postTitle">팔로우 숫자가 갑자기 줄었어요.</div>
 									<div class="postContent">
 										<span class="contentEmp">[내상점을 팔로우한 상점이 휴면계정 처리 되었을 때]</span>
@@ -196,7 +196,7 @@
 								</div></div>
 						
 								<div class="postArea">
-									<div class="arrowImg"><img  src="/pmang/image/down.png" width="20" height="20"></div>
+									<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
 									<div class="postTitle">통신판매업자이면 상품 판매에 필요한 절차가 있나요?</div>
 									<div class="postContent">
 									통신판매업자는 물품 판매를 위해 다음의 필수 기재사항을 제출해야 합니다.
@@ -220,7 +220,7 @@
 								</div></div>
 								
 								<div class="postArea">
-									<div class="arrowImg"><img  src="/pmang/image/down.png" width="20" height="20"></div>
+									<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
 									<div class="postTitle">상품 판매는 어떻게 하나요?</div>
 									<div class="postContent">
 										<span class="contentEmp">[상품 판매 등록 방법]</span>
@@ -229,7 +229,7 @@
 								</div></div>
 								
 								<div class="postArea">
-									<div class="arrowImg"><img  src="/pmang/image/down.png" width="20" height="20"></div>
+									<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
 									<div class="postTitle">상품 수정/삭제는 어떻게 하나요?</div>
 									<div class="postContent">
 										<span class="contentEmp">상품 수정/ 상품 삭제 방법</span>
@@ -238,7 +238,7 @@
 								</div></div>
 								
 								<div class="postArea">
-									<div class="arrowImg"><img  src="/pmang/image/down.png" width="20" height="20"></div>
+									<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
 									<div class="postTitle">내 상품이 판매완료/삭제 처리 됐어요.</div>
 									<div class="postContent">
 										<span class="contentEmp">[상품 삭제 및 판매완료 처리 기준]</span>
@@ -252,7 +252,7 @@
 								</div></div>
 								
 								<div class="postArea">
-									<div class="arrowImg"><img  src="/pmang/image/down.png" width="20" height="20"></div>
+									<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
 									<div class="postTitle">상점 주소는 어떻게 설정하나요?</div>
 									<div class="postContent">
 										<span class="contentEmp">[상점 주소 설정 방법]</span>
@@ -262,7 +262,7 @@
 								</div></div>
 								
 								<div class="postArea">
-									<div class="arrowImg"><img  src="/pmang/image/down.png" width="20" height="20"></div>
+									<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
 									<div class="postTitle">찜은 무엇이고, 어떻게 하나요?</div>
 									<div class="postContent">
 										1. 찜이란
@@ -276,7 +276,7 @@
 								
 								</div></div>
 								<div class="postArea">
-									<div class="arrowImg"><img  src="/pmang/image/down.png" width="20" height="20"></div>
+									<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
 									<div class="postTitle">탈퇴는 어떻게 하나요?</div>
 									<div class="postContent">
 										안녕하세요. 번개장터 입니다.
@@ -285,7 +285,7 @@
 								
 								</div></div>
 								<div class="postArea">
-									<div class="arrowImg"><img  src="/pmang/image/down.png" width="20" height="20"></div>
+									<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
 									<div class="postTitle">사진 업로드시 최적 사이즈는 어떻게 되나요?</div>
 									<div class="postContent">
 										<span class="contentEmp">[사진 업로드시 최적 사이즈]</span>
@@ -294,7 +294,7 @@
 								</div></div>
 								
 								<div class="postArea">
-									<div class="arrowImg"><img  src="/pmang/image/down.png" width="20" height="20"></div>
+									<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
 									<div class="postTitle">상점명 정책은 어떻게 되나요?</div>
 									<div class="postContent">
 										1. 상점명 등록 제한 수: 최소 2자, 최대 10자 (가입시 기본으로 생성되는 상점명 제외)
@@ -309,7 +309,7 @@
 								</div></div>
 								
 								<div class="postArea">
-									<div class="arrowImg"><img  src="/pmang/image/down.png" width="20" height="20"></div>
+									<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
 									<div class="postTitle">[찜] 찜 취소는 어떻게 하나요?</div>
 									<div class="postContent">
 										찜하신 것을 취소하고 싶으신가요?
@@ -323,7 +323,7 @@
 		    			<section id="section2">
 							<div class="postDiv">
 								<div class="postArea">
-									<div class="arrowImg"><img  src="/pmang/image/down.png" width="20" height="20"></div>
+									<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
 									<div class="postTitle">교환이나 환불은 어떻게 하나요?</div>
 									<div class="postContent">
 										<span class="contentEmp">교환/반품은 판매자와 협의 필요</span>
@@ -335,8 +335,8 @@
 								
 								</div></div>
 						
-								<div class="postArea">
-									<div class="arrowImg"><img  src="/pmang/image/down.png" width="20" height="20"></div>
+								<div class="postArea" id="postArea_prohibitedItem">
+									<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
 									<div class="postTitle">거래를 하면 안되는 것들은 어떤 것이 있나요?</div>
 									<div class="postContent">
 										

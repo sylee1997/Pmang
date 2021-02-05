@@ -6,9 +6,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="memberSQL">
 
-<insert id="sellerWrite" parameterType="item">
-	insert into item values(seq_item.nextval,<!-- 등록상품키 -->
-									seq_item.nextval,<!--  마켓(내상점)키 -->
+<insert id="sellerWrite" parameterType="member.bean.ItemDTO">
+	insert into item values(item_seq.nextval,<!-- 등록상품키 -->
+									item_seq.nextval,<!--  마켓(내상점)키 -->
 									   #{img1},
 									   #{img2},
 									   #{img3},

@@ -1,45 +1,3 @@
-$(document).ready(function(){
-	
-	$('.contentMenu').click(function(){
-		var contentSection = $(this).attr('data-tab');/* 매뉴탭 data-tab값 */
-		/* content 탭메뉴 선택 */
-		$('li').removeClass('current');
-		$(this).addClass('current');
-		
-		/* To스크롤 */
-		var offset = $("#"+contentSection).offset();
-        $('html, body').animate({scrollTop : offset.top}, 400);
-		
-		
-	});
-	/* 문의댓글 글자 수 제한 */
-	$('#replyText').on('keyup', function(e) {
-		var replyText = $(this).val();
-		$(this).height(((replyText.split('\n').length + 1) * 1.5) + 'em');
-		$('#count').html(replyText.length);	
-		if(replyText.length >= 300){
-			 alert("최대 300자까지 입력 가능합니다.");
-			 $('#count').css('color', 'red');
-		}else
-			$('#count').css('color', 'black');
-
-		
-	});
-	$('#count').keyup();
-	
-	/* 댓글등록버튼 */
-	$('#replyBtn').click(function() {
-		/* 댓글 공백 유효성 검사 */
-		if($('#replyText').val()==''){
-			alert('댓글내용을 입력해주세요');
-			 $('#replyText').focus();
-		}
-	});
-
-});
-
-
-
 /* 카테고리 펼쳐지는 부분*/
 $('.selectItem1').hover(function(){
 	$('.down1').css('display', 'block')
@@ -588,9 +546,40 @@ $('.selectItem3').on('click', 'a', function(){
 		
 });
 
+//탭메뉴, 문의댓글수 제한
+$(document).ready(function(){
+	
+	$('.contentMenu').click(function(){
+		var contentSection = $(this).attr('data-tab');/* 매뉴탭 data-tab값 */
+		/* content 탭메뉴 선택 */
+		$('li').removeClass('current');
+		$(this).addClass('current');
+		
+		/* To스크롤 */
+		var offset = $("#"+contentSection).offset();
+		$('html, body').animate({scrollTop : offset.top}, 200);
+		
+		
+	});
+	/* 문의댓글 글자 수 제한 */
+	$('#replyText').on('keyup', function(e) {
+		var replyText = $(this).val();
+		//글자입력란 늘이기
+		$(this).height(((replyText.split('\n').length + 1) * 1.5) + 'em');
+		//입력한 글자수 표기
+		$('#count').html(replyText.length);	
+		if(replyText.length >= 300){
+			alert("최대 300자까지 입력 가능합니다.");
+			$('#count').css('color', 'red');
+		}else
+			$('#count').css('color', 'black');	
+	});
+	$('#count').keyup();//이거 지우면 alert가 2번 뜸
+	
+});
 
 
-//모달창 띄우기
+//사진 모달 띄우기
 $("#imgCheckBox").on('change',(function(){
 	if($("#imgCheckBox").is(":checked")){
 		$('.modalComp').css('display', 'block');
@@ -599,14 +588,227 @@ $("#imgCheckBox").on('change',(function(){
 	}
 }));
 
-//상품사진 넘기기
+
+//아이템 정보 불러오기
+$(document).ready(function(){
+	$.ajax({
+		type:'post',
+		url:'/pmang/board/getItem',
+		data: 'item_seq='+$('#item_seq').val(),
+		dataType:'json',
+		error:function(err){
+			console.log(err);
+		},
+		success:function(result){
+			let money = Number(result.itemDTO.item_price);
+			$('.nameSpan').text(result.itemDTO.item_subject);
+			$('.priceSpan').text(money.toLocaleString());
+			$('.likeSpan').text(result.itemDTO.item_like);
+			$('.hitSpan').text(result.itemDTO.hit);
+			$('.dateSpan').text(result.itemDTO.logtime);
+			$('.conditionSpan').text(result.itemDTO.condition);
+			$('.negoSpan').text(result.itemDTO.nego);
+			$('.qtySpan').text(result.itemDTO.qty);
+			$('.locationSpan').text(result.itemDTO.item_location);
+			$('.commentSpan').text(result.itemDTO.item_content);
+			$('.category1Span').text(result.itemDTO.category1);
+			$('.category2Span').text(result.itemDTO.category2);
+			$('.category3Span').text(result.itemDTO.category3);
+			$('.hashtag1Span').text(result.itemDTO.hashtag1);
+			$('.hashtag2Span').text(result.itemDTO.hashtag2);
+			$('.hashtag3Span').text(result.itemDTO.hashtag3);
+
+			$('#comment_seq').trigger('click');
+			
+		}//success
+	});//ajax
+});//ready
+
+
+//댓글 등록하기
+$('#replyBtn').click(function() {
+	/* 댓글 공백 유효성 검사 */
+	if($('#replyText').val()==''){
+		alert('댓글내용을 입력해주세요');
+		 $('#replyText').focus();
+	}
+	
+	$.ajax({
+		type: 'post',
+		url: '/pmang/board/itemComment',
+		//세션에서 유저키 받아서 넣고, 페이징데이터 추가 필요.
+		data: {'item_seq' : $('#item_seq').val(), 'item_comment' : $('#replyText').val()},
+		dataType: 'json',
+		async : false,
+		error: function(err){
+			console.log(err)
+		},
+		success: function(result){
+			
+		}//success
+	});//ajax
+	
+	
+	$('#comment_seq').trigger('click');
+	
+});//replyBtn click
 
 
 
+//댓글 불러오기(강제 호출용)
+$('#comment_seq').click(function(event){
+	
+	$('#replyText').val('');
+	$('.replyList').empty();
+	
+	$.ajax({
+		type:'post',
+		url:'/pmang/board/getCommentList',
+		data: 'item_seq='+$('#item_seq').val(),
+		dataType:'json',
+		error:function(err){
+			console.log(err);
+		},
+		success:function(result){
+			//console.log(result);
+			let pageSize = 5;
+			let commentIndex = $('#commentIndex').val();
+			console.log(commentIndex);
+			$.each(result.list, function(index, items){
+				
+				if(index < (pageSize*commentIndex)){
+					
+				
+					$('<div/>',{
+						class:'replyUser'})
+								.append($('<a/>',{
+									href:'#'})
+											.append($('<img/>',{
+												class:'profilePic',
+												alt: '프사',
+												src: items.ph_photo,
+												width: '50',
+												height: '50'})))
+								.append($('<div/>',{
+									class: 'replyTot'})
+											.append($('<div/>',{
+												class: 'commentArea'})
+														.append($('<div/>',{
+															class: 'replyUserName',
+															text: items.userId}))
+														.append($('<div/>',{
+															class: 'replyDate',
+															align: 'right',
+															text: items.logtime})))
+											.append($('<div/>',{
+												class: 'replyContent',
+												text: items.item_comment}))
+											.append($('<div/>',{})
+														.append($('<div/>',{}))
+																	.append($('<a/>',{
+																					class: 'commentForComment',
+																					onclick:'commentForComment(this)',
+																					text:'덧글달기'}))
+														.append($('<div/>',{
+															class: 'report'+index}))))
+								.append($('<hr/>'))
+					.appendTo($('.replyList'));
+					
+					if(items.userId=='깜냥이'){ //이거 나중에 세션 값으로 바꿔줘
+						$('<a/>',{
+							class : 'deleteBtn',
+							onclick:'commentDelete(this)',
+							text:'삭제하기'})
+									.append($('<input/>',{
+										class: 'comment_seq',
+										type: 'hidden',
+										value: items.comment_seq
+									}))	
+						.appendTo($('.report'+index));			
+					}else{
+						$('<a/>',{
+							class : 'reportBtn',
+							text:'신고하기'})
+									.append($('<input/>',{
+										class: 'comment_seq',
+										type: 'hidden',
+										value: items.comment_seq
+									}))
+						.appendTo($('.report'+index));	
+					}
+				}//if
+			})//for
+			$('.commentNum').text(result.list.length);
+		}//success
+	});//ajax
+});//click
+
+//댓글 삭제하기 -> 이건 왜 안 먹냐면, jsp 바깥에서 만들었기 때문에 js에서 click이 적용이 안된다.
+$('.deleteBtn').on('click',function(){
+	alert(" ");
+});
+
+//댓글 삭제하기
+function commentDelete(that){
+	
+	let comment_seq = $(that).children('.comment_seq').val();
+	console.log(comment_seq);
+	
+	if(confirm("정말로 삭제하시겠습니까?")){
+		$.ajax({
+			type: 'post',
+			url: '/pmang/board/commentDelete',
+			//세션에서 유저키 받아서 넣고, 페이징데이터 추가 필요.
+			data: {'comment_seq' : comment_seq},
+			dataType: 'json',
+			async : false,
+			error: function(err){
+				console.log(err)
+			},
+			success: function(result){
+				
+			}//success
+		});//ajax
+	$('#comment_seq').trigger('click');
+	}//if
+}//commentDeleteBtn
+
+//대댓글 작성(append안에있어서click작동x)
+function commentForComment(that){
+	
+	//스크롤 이동하기
+	let scroll = $('#productInfo').offset();
+	$('html,body').stop().animate({scrollTop:scroll.top},300,'swing');
+	
+	let comment_seq = $(that).next().children().children('.comment_seq').val();
+	console.log(comment_seq);
+	
+	$.ajax({
+		type: 'post',
+		url: '/pmang/board/getAComment',
+		//세션에서 유저키 받아서 넣고, 페이징데이터 추가 필요.
+		data: {'comment_seq' : comment_seq},
+		dataType: 'json',
+		async : false,
+		error: function(err){
+			console.log(err)
+		},
+		success: function(result){
+			//console.log(result.commentDTO.userId);		
+			$('#replyText').val('@'+result.commentDTO.userId+':');
+		}//success
+	});//ajax
+
+}
 
 
-
-
+//댓글 더보기
+$('#moreBtn').click(function() {
+	let a = parseInt($('#commentIndex').val());
+	let b = a + 1;
+	$('#commentIndex').val(b);
+	$('#comment_seq').trigger('click');
+});
 
 
 

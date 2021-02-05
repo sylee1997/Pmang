@@ -5,8 +5,31 @@
 
 <mapper namespace="boardSQL">
 	
-	<select id="getItem" resultType="board.bean.ItemDTO">
+	<select id="getItem" resultType="item">
 		select * from item where item_seq=#{item_seq}
 	</select>
+	
+	<select id="getCommentList" resultType="comment">
+		select * from itemComment where item_seq=#{item_seq} order by logtime desc
+	</select>
+	
+	<insert id="itemComment" parameterType="java.util.Map">
+		insert into itemComment values(comment_seq.nextval,
+										#{item_seq},
+										'깜냥이',<!-- 유저아이디, 세션에서 받아 넣을 것 -->
+										#{item_comment},
+										sysdate,
+										'/pmang/image/itemPic.jpg' <!-- 유저아이디로 조인 걸어서 받아올 것 -->
+										)
+	</insert>
+	
+	<delete id="commentDelete">
+		delete itemComment where comment_seq=#{comment_seq}
+	</delete>
+	
+	<select id="getAComment" resultType="comment">
+		select * from itemComment where comment_seq=#{comment_seq}
+	</select>
+	
 	
 </mapper>

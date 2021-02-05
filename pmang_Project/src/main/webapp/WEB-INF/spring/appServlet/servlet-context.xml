@@ -54,7 +54,7 @@
 	</beans:bean>
 	
 	<!-- 웹소켓 -->
-	<!-- <beans:bean id="talkHandler" class="talk.handler.TalkHandler"></beans:bean> -->
+	<beans:bean id="talkHandler" class="talk.handler.TalkHandler"></beans:bean>
 	
 	<websocket:handlers>
 		<websocket:mapping handler="talkHandler" path="/talk" /> <!-- path에 요청이 오면 talkHandler를 처리하겠다. -->

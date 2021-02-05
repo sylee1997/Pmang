@@ -4,5 +4,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="board.bean.ItemDTO" alias="item" />
+		<typeAlias type="board.bean.CommentDTO" alias="comment" />
 	</typeAliases>
+	
 </configuration>

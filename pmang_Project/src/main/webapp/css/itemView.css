@@ -8,8 +8,6 @@
 	padding-top : 30px;
 }
 
-
-
 /* 카테고리  영역 */
 .categoryDiv {
 	display : flex;
@@ -180,8 +178,9 @@ a {
 /* 모달안의 상품 제목 */
 #modalItemName{
 	position : absolute;
+	text-align : center;
 	top:5%;
-	left:calc(50% - 150px);
+	left:calc(50% - 250px);
 	width:500px;
 	height:100px;
 	font-size:30px;
@@ -424,7 +423,7 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 	background-color:gray;
 }
 #contact{
-	background-color:orange;
+	background-color:green;
 }
 #pay{
 	background-color:red
@@ -487,7 +486,7 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 	border-bottom: solid 1px #eee;
 	border-top: solid 1px #eee;
 	padding: 10px;
-	width: 70%;
+	/* width: 70%; */
 	margin:0 auto; 
 	text-align: center;
 }
@@ -572,13 +571,16 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 	width: 90%;
 	padding: 15px;
 }
+.profilePic{
+	border-radius:50%;
+	margin:20px;
+
+}
 .replyUser {
 	width: 100%;
-	padding-top: 20px;
 	font-size: 14px;
 }
 .replyUser{
-	padding-top: 20px;
 	display: inline-block;
 	float: left;
 	width:100%;
@@ -597,7 +599,8 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 	padding-left: 20px;
 }
 .replyTot div {
-	padding-top:10px;
+	padding-top:5px;
+	padding-bottom:5px;
 
 }
 .replyTot div div {
@@ -610,11 +613,21 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 	color: #c8c8c8;
 }
 
+#moreBtn{
+	clear:both;
+	text-align:center;
+	padding:20px;
+	display:flex;
+	justify-content:center;
+}
 
+.deleteBtn{
+	margin-left:10px;
+}
 
-
-
-
+.reportBtn{
+	margin-left:10px;
+}
 
 
 
