@@ -32,5 +32,16 @@ public class BoardDAOMybatis implements BoardDAO {
 		}
 		
 	}
+	
+	@Override
+	public int getEntireItemNum(Map<String, String> map) {
+		return sqlSession.selectOne("boardSQL.getEntireItemNum", map);
+
+	}
+
+	@Override
+	public List<Object> getOrderbyItem(Map<String, String> map) {
+		return sqlSession.selectList("boardSQL.getOrderbyItem", map);
+	}
 
 }
