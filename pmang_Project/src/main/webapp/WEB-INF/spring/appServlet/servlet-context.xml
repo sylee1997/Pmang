@@ -30,7 +30,10 @@
 	<resources location="/pm_itemView/" mapping="/pm_itemView/**"/>
 	<resources location="/pm_mystore/" mapping="/pm_mystore/**"/>
 	
-
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+   <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <beans:property name="suffix" value=".jsp" />
+   </beans:bean>
 
 	<!-- json -->
  	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">

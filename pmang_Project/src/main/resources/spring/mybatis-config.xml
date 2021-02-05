@@ -7,7 +7,7 @@
 
 		<typeAlias type="board.bean.ItemDTO" alias="item" />
 		<typeAlias type="member.bean.SellerDTO" alias="seller" />
-
+		<typeAlias type="board.bean.WishDTO" alias="wish"/>
 	</typeAliases>
 
 	<!-- <mappers>json버전을 2.3으로 해줬기때문. <mapper resource="board/dao/MystoreDAOMapper.xml" 

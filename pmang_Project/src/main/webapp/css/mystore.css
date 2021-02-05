@@ -55,9 +55,9 @@
 	line-height: 1.15;
 	margin: 0px;
 }
-.mystoreProfileImg{
-	width: 150px
-	height: 150px;
+
+.mystoreProfileImg {
+	width: 150px height: 150px;
 	position: relative;
 	/* display: inline-block; */
 	-webkit-box-align: center;
@@ -69,15 +69,14 @@
 	font-size: 1rem;
 	/* margin-right: 1rem; */
 	/* margin-bottom: 1rem; */
-	
-
 }
+
 #mystoreName {
 	width: 100%;
 	margin-bottom: 10px;
 }
 
-.infoName span{
+.infoName span {
 	font-family: sans-serif;
 	margin-right: 10px;
 	font-weight: bold;
@@ -158,11 +157,13 @@
 	float: left;
 	display: flex;
 	margin-bottom: 10px;
-	margin-top:10px;
+	margin-top: 10px;
 }
-.introEdit1{
-	margin-top:10px;
+
+.introEdit1 {
+	margin-top: 10px;
 }
+
 #mystoreIntroduce>textarea {
 	-webkit-box-flex: 1;
 	display: flex;
@@ -172,8 +173,6 @@
 	flex-grow: 1;
 	resize: none;
 	background-color: rgb(238, 238, 238);
-	
-
 	border-color: transparent;
 	outline: none;
 }
@@ -259,8 +258,23 @@ a:visited {
 	width: 200px;
 	display: flex;
 }
-
+.tab2Name {
+	width: 200px;
+	display: flex;
+}
+.tab3Name {
+	width: 200px;
+	display: flex;
+}
 .tabName span {
+	color: red;
+	margin-left: 10px;
+}
+.tab2Name span {
+	color: red;
+	margin-left: 10px;
+}
+.tab3Name span {
 	color: red;
 	margin-left: 10px;
 }
@@ -424,13 +438,15 @@ a:visited {
 	margin: 0 auto;
 	padding: 0;
 	text-decoration: none;
+	 color:black; 
 }
 
 .defaultSort {
 	margin-right: 20px;
 	position: relative;
 	display: block;
-	color: rgb(247, 47, 51);
+	/* color: rgb(247, 47, 51); */
+	/* color:green; */
 }
 
 .sort {
@@ -523,11 +539,12 @@ a:visited {
 	flex-shrink: 0;
 	height: 100%;
 	border: 1px solid rgb(238, 238, 238);
+	object-fit: fill;
 }
 
 .favInfo {
 	padding: 0px 20px 0px 0px;
-	width: 100%;
+	width: 200px;
 	display: inline-block;
 }
 
@@ -535,12 +552,12 @@ a:visited {
 	margin-top: 18px;
 	margin-bottom: 5px;
 	height: 22px;
-	font-size: 13pt;
-	text-overflow: ellipsis;
+	font-size: 11pt;
+	text-overflow: sans-serif;
 	white-space: nowrap;
 	overflow: hidden;
 	text-align: left;
-	font-weight: bold;
+	/* font-weight: bold; */
 	padding-left: 20px;
 	text-decoration: none;
 }
@@ -610,6 +627,7 @@ a:visited {
 .review_content {
 	flex: 1 1 0%;
 	width: 890px;
+	margin-left: 10px;
 }
 
 .review_header {
@@ -658,6 +676,7 @@ a:visited {
 	background-color: transparent;
 	text-align: left;
 	font-size: 10pt;
+	margin-bottom: 5px;
 }
 
 .reviewSubjectWrap {
@@ -669,6 +688,7 @@ a:visited {
 	text-align: left;
 	padding: 0;
 	margin: 0 auto;
+	margin-bottom: 10px;
 }
 
 .reviewSubjectBtn {

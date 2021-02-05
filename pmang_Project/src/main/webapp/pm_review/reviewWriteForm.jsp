@@ -9,7 +9,7 @@
 </head>
 <body>
 	<input type="hidden" id="photoCountHidden" value=0>
-	<form action="" id="reviewWriteForm">
+	<form method="post" id="reviewWriteForm" enctype="multipart/form-data">
 		<div class="reviewHeader">
 			<span>리뷰쓰기</span>
 
@@ -23,7 +23,7 @@
 				<!-- reviewItemImg -->
 				<div class="reviewItemContent">
 					<p class="reviewStoreName">상점명상점명</p>
-					<h2 class="reviewItemName">상품명상품명상품명상품명</h2>
+					<h2 class="reviewSubject">상품명상품명상품명상품명</h2>
 					<p class="reviewTime">거래시간</p>
 				</div>
 				<!-- reviewItemContent -->
@@ -35,14 +35,14 @@
 					<strong>거래는 어떠셨나요?</strong>
 					<div class="scoreLevelDiv">
 						<div class="scoreLevel">
-							<input type="radio" class="scoreRadio" name="level1" id="level1"
-								value="score1" /> <label for="level1"> <img
+							<input type="radio" class="scoreRadio" name="level" id="level1" value="별로에요"
+								 /> <label for="level1"> <img
 								id="scoreLevel1" src="../image/grayPmang.png">
-							</label> <input type="radio" class="scoreRadio" name="level2" id="level2"
-								value="score2" /> <label for="level2"> <img
+							</label> <input type="radio" class="scoreRadio" name="level" id="level2" value="보통이에요"
+								 /> <label for="level2"> <img
 								id="scoreLevel2" src="../image/grayPmang.png">
-							</label> <input type="radio" class="scoreRadio" name="level3" id="level3"
-								value="score3" /> <label for="level3"> <img
+							</label> <input type="radio" class="scoreRadio" name="level" id="level3" value="좋아요"
+								 /> <label for="level3"> <img
 								id="scoreLevel3" src="../image/grayPmang.png">
 							</label>
 
@@ -58,7 +58,7 @@
 				<!-- reviewScore -->
 
 				<div class="reviewContentDiv">
-					<textarea class="reviewContent" id="reviewInput"
+					<textarea class="reviewContent" id="reviewInput" name="reviewContent"
 						placeholder="후기 내용을 남겨주세요.(최소 10자 이상)" cols="30"></textarea>
 					<div class="contentCountDiv">
 						<span id="counter">(0 / 최대 200자)</span>
@@ -76,7 +76,7 @@
 							<li class="reviewPhotoLi" />
 							<img src="../image/photoIcon.png" alt="카메라아이콘" />사진 등록
 							<input type="file" class="reviewPhoto" name="img[]"
-								accept="image/jpg, image/jpeg, image/png" multiple>
+								accept="image/jpg, image/jpeg, image/png" multiple="true">
 						</ul>
 					</div>
 					<!-- reviewPhotoDiv -->
@@ -89,7 +89,7 @@
 				<div class="reviewCheckDiv">
 					<div class="reviewCancel">
 						<!-- <input type="button" id="reviewCancelBtn" value="취소"> -->
-						<button class="reviewCancelBtn">취소</button>
+						<input type="reset" class="reviewCancelBtn" value="취소">
 					</div>
 					<!-- reviewCabcek -->
 					<div class="reviewOk">
@@ -122,6 +122,8 @@
 		$(document).ready(function() {
 			$('.reviewOkBtn').attr('disabled', true);
 		});
+		
+		
 	</script>
 
 </body>

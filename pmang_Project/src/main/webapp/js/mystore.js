@@ -70,16 +70,17 @@ function checkExtension(fileName,fileSize){
 
 
 //내상점정보수정
-$('#storeIntroEditBtn').on('click',function(){
+$('#storeIntroEditBtn').on('click',function(e){
+	//e.stopPropagation();
 	if(doubleSubmitCheck()) return;	//중복클릭방지
-	
+	//alert('클릭');
 	
 	//상점명
 	var infoName=$('.infoName span').text();
 	//$('#storeNameModify').hide();
 	$('.infoName').empty();
 	
-	$('.infoName').append('<input type=text id=storeNameEdit value="'+infoName+'">');
+	$('.infoName').append('<input type="text" id="storeNameEdit" value="'+infoName+'">');
 	//$('#storeNameModify1').show();
 	
 	//소개글
@@ -87,7 +88,7 @@ $('#storeIntroEditBtn').on('click',function(){
 	var mystoreIntroduce=$('#mystoreIntroduce textarea').text();
 	$('#mystoreIntroduce').empty();
 
-	$('#mystoreIntroduce').append('<textarea id=storeIntro>'+mystoreIntroduce+'</textarea>');
+	$('#mystoreIntroduce').append('<textarea id="storeIntro">'+mystoreIntroduce+'</textarea>');
 	
 	$('.introEdit1').show();
 	
@@ -111,6 +112,8 @@ $('#storeIntroEditBtn').on('click',function(){
 		});
 	});
 });
+
+
 
 // 셀렉트박스 커스텀
 function CustomSelectBox(selector) {
@@ -170,31 +173,5 @@ function CustomSelectBox(selector) {
 var select = new CustomSelectBox('.select_box');
 
 
-// 탭메뉴 - 찜(선택삭제) 유효성검사
-$(document).on("click",".choiceDeleteBtn",function(){
-	
-	if(doubleSubmitCheck()) return;		//중복클릭방지
-	
-	
-	if (!$("input:checked[id='chk_li']").is(":checked")) {
-		alert("삭제할 찜을 선택하세요.");
-		$("#choice_chk").focus();
-		return;
-	}
-});
 
-//탭메뉴 - 찜 전체선택
-$(document).on("click","input[id='choice_chk']",function(){
-	
-	
-	
-	var chk=$(this).is(":checked");
-	if(chk){
-		$(".favChoice input").prop('checked',true);
-		
-	}else{
-		$(".favChoice input").prop('checked',false);
-		
-	}
-});
 

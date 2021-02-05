@@ -70,7 +70,7 @@ function preview(arr){
 			}
 			
 			//div에 이미지 추가
-			var str='<li class="photoli">';
+			var str='<li class="photoli" onclick="removeimg(this)">';
 			
 			//이미지 파일 미리보기
 			if(f.type.match('image.*')){
@@ -95,7 +95,22 @@ function preview(arr){
 	}else{
 		alert('사진 첨부는 최대 3장까지 가능합니다.');
 	}
+	
+	
+	
 }
+
+
+function removeimg(value){
+	var result=confirm('선택한 이미지를 삭제하시겠습니까?');
+	
+	if(result){
+		$(value).remove();
+	}else{
+		
+	}
+}
+
 // 리뷰내용 글자수 제한
 $('.reviewContent').keyup(function(e) {
 	var content = $(this).val();
@@ -127,9 +142,9 @@ $('.scoreLevel input[type=radio]').on('click', function() {
 	function imageChange(clicked) {
 		var radioOn = clicked;
 
-		var radio_chk1 = $('input[name=level1]').attr('id');
-		var radio_chk2 = $('input[name=level2]').attr('id');
-		var radio_chk3 = $('input[name=level3]').attr('id');
+		var radio_chk1 = $('input[id=level1]').attr('id');
+		var radio_chk2 = $('input[id=level2]').attr('id');
+		var radio_chk3 = $('input[id=level3]').attr('id');
 
 		if (radioOn == radio_chk1) {
 			$('#scoreLevel2').attr('src', '../image/grayPmang.png');
@@ -147,3 +162,27 @@ $('.scoreLevel input[type=radio]').on('click', function() {
 	}
 
 });
+
+$('.reviewOkBtn').click(function(){
+	
+	let formData=new FormData($('#reviewWriteForm')[0]);
+	//alert(formData);
+	$.ajax({
+		type:'post',
+		enctype:'multipart/form-data',
+		processData:false,
+		contentType:false,
+		url:'/pmang/board/reviewWrite',
+		data:formData,
+		success:function(data){
+			alert('리뷰 작성을 완료하였습니다.');
+			
+		},
+		error:function(err){
+			console.log(err);
+		}
+	});
+});
+
+
+	
