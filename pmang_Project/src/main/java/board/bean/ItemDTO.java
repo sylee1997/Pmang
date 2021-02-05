@@ -2,6 +2,7 @@ package board.bean;
 
 import java.util.Date;
 
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
@@ -19,12 +20,11 @@ public class ItemDTO {
 	private String nego;
 	private String item_content;
 	private String hashtag1, hashtag2, hashtag3;
-	
+	private String buyer_key;
 	private int qty;
 	private int item_price;
-	private int item_like;
 	private int hit;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy.MM.dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
 	private Date logtime;
 
 }

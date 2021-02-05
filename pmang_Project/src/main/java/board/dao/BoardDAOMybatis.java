@@ -14,6 +14,7 @@ import board.bean.ItemDTO;
 @Transactional
 @Repository
 public class BoardDAOMybatis implements BoardDAO {
+
 	
 	@Autowired
 	private SqlSession sqlSession;
@@ -42,4 +43,23 @@ public class BoardDAOMybatis implements BoardDAO {
 		return sqlSession.selectOne("boardSQL.getAComment", comment_seq);
 	}
 
+	
+	@Override
+	public List<ItemDTO> getItemBoardList(Map<String, String> map) {
+		return sqlSession.selectList("boardSQL.getItemBoardList", map);
+	}
+
+	@Override
+	public List<Object> getItemBoardCount(Map<String, String> map) {
+		System.out.println(map.get("category1"));
+		System.out.println(map.get("category2"));
+		if(map.get("category2") == null) {
+			return sqlSession.selectList("boardSQL.getItemBoardCount1", map);
+		}else {
+			return sqlSession.selectList("boardSQL.getItemBoardCount2", map);
+		}
+		
+	}
+
 }
+

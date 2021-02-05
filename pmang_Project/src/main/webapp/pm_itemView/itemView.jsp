@@ -185,7 +185,7 @@
 							<img src="/pmang/image/hit.jpg" alt="조회수" width="20" height="20">
 							<span class="hitSpan">DB에러</span>
 						</div>
-						<div class="likeDateHit">
+						<div class="likeDateHit" style="width:200px;">
 							<img src="/pmang/image/date.jpg" alt="게시일" width="20" height="20">
 							<span class="dateSpan">DB에러</span>
 						</div>

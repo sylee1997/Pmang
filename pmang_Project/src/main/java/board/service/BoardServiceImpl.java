@@ -14,6 +14,7 @@ import board.dao.BoardDAO;
 
 @Service
 public class BoardServiceImpl implements BoardService {
+
 	
 	@Autowired
 	private BoardDAO boardDAO;
@@ -45,4 +46,18 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.getAComment(comment_seq);
 	}
 
+	
+	@Override
+	public List<ItemDTO> getItemBoardList(Map<String, String> map) {
+		
+		return boardDAO.getItemBoardList(map);
+	}
+
+	@Override
+	public List<Object> getItemBoardCount(Map<String, String> map) {
+		return boardDAO.getItemBoardCount(map);
+	}
+
 }
+
+

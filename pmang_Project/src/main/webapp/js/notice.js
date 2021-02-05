@@ -24,6 +24,7 @@ $('.bulletinArea').click(function(){
 		$(this).children(".arrowImg").stop().css({'transform': 'rotate(180deg)'},200);
 	}//if
 	
+
 });//bulletinArea click
 
 
@@ -40,6 +41,7 @@ $('.postArea').click(function(){
 	}//if
 	
 });//postArea click
+
 
 
 

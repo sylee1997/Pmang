@@ -1,3 +1,4 @@
+
 /* 카테고리 펼쳐지는 부분*/
 $('.selectItem1').hover(function(){
 	$('.down1').css('display', 'block')
@@ -547,6 +548,7 @@ $('.selectItem3').on('click', 'a', function(){
 });
 
 //탭메뉴, 문의댓글수 제한
+
 $(document).ready(function(){
 	
 	$('.contentMenu').click(function(){
@@ -558,12 +560,14 @@ $(document).ready(function(){
 		/* To스크롤 */
 		var offset = $("#"+contentSection).offset();
 		$('html, body').animate({scrollTop : offset.top}, 200);
+
 		
 		
 	});
 	/* 문의댓글 글자 수 제한 */
 	$('#replyText').on('keyup', function(e) {
 		var replyText = $(this).val();
+
 		//글자입력란 늘이기
 		$(this).height(((replyText.split('\n').length + 1) * 1.5) + 'em');
 		//입력한 글자수 표기
@@ -809,6 +813,7 @@ $('#moreBtn').click(function() {
 	$('#commentIndex').val(b);
 	$('#comment_seq').trigger('click');
 });
+
 
 
 

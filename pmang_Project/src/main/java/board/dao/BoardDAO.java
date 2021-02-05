@@ -8,6 +8,7 @@ import board.bean.ItemDTO;
 
 public interface BoardDAO {
 
+
 	public ItemDTO getItem(int item_seq);
 
 	public List<CommentDTO> getCommentList(int item_seq);
@@ -18,4 +19,9 @@ public interface BoardDAO {
 
 	public CommentDTO getAComment(String comment_seq);
 
+	public List<ItemDTO> getItemBoardList(Map<String, String> map);
+
+	public List<Object> getItemBoardCount(Map<String, String> map);
+
 }
+

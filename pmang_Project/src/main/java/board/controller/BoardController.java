@@ -1,5 +1,6 @@
 package board.controller;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +54,7 @@ public class BoardController {
 		model.addAttribute("display", "/pm_itemView/itemView.jsp");
 		return "/index";
 	}
-	
+
 	//판매글 정보 DB 읽어오기
 	@RequestMapping(value="getItem", method=RequestMethod.POST)
 	public ModelAndView getItem(@RequestParam(required=false, defaultValue="999") int item_seq) {
@@ -109,6 +110,38 @@ public class BoardController {
 		return mav;
 	}
 	
+	
+
+	@RequestMapping(value="getitemBoardList", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView getitemBoardList(@RequestParam Map<String, String> map) {
+		System.out.println(map.get("category1"));
+		System.out.println(map.get("category2"));
+		System.out.println(map.get("category3"));
+		List<ItemDTO> list = boardService.getItemBoardList(map);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("itemBoardList", list);
+		mav.setViewName("jsonView");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="getItemBoardCount", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView getItemBoardCount(@RequestParam Map<String, String> categoryMap) {
+		
+		List<Object> list = boardService.getItemBoardCount(categoryMap);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("ctgMapList", list);
+		mav.setViewName("jsonView");
+		
+		return mav;
+	}
+	
+
 	
 	
 	
