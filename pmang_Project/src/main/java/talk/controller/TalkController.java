@@ -38,12 +38,9 @@ public class TalkController {
 		//마켓명
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("room", room);
-		
+		mav.addObject("room", room);	
 		mav.setViewName("/talk/talkRoom");
-		
-		
-		
+
 		return mav;
 	}
 

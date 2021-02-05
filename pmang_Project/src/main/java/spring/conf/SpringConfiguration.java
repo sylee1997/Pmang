@@ -16,6 +16,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 public class SpringConfiguration {
 	@Autowired
 	private ApplicationContext applicationContext;
+	
 	@Bean
 	public BasicDataSource dataSource() {
 		BasicDataSource basicDataSource = new BasicDataSource();
@@ -25,6 +26,7 @@ public class SpringConfiguration {
 		basicDataSource.setPassword("bit");
 		basicDataSource.setMaxTotal(20);
 		basicDataSource.setMaxIdle(3);
+		
 		return basicDataSource;
 	}
 	
