@@ -1,27 +1,26 @@
 @charset "UTF-8";
 
 /* index.jsp ���ͳ������°� */
-/* html, body, div, span, applet, object, iframe, h1, , h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, main, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, main, menu, nav, output, ruby, section, summary, time, mark, audio, video {
     margin: 0px;
     padding: 0px;
     border: 0px;
     font: inherit;
     vertical-align: baseline;
 }
- */
+
 b, strong {
     font-weight: bolder;
 }
 
-/* body, input, textarea, select, button {
+body, input, textarea, select, button {
     direction: ltr;
     text-align: left;
     color: rgb(33, 33, 33);
     letter-spacing: -0.5px;
     outline: 0px;
     border: 0px;
-} */
-
+}
 
 section ul {
     display: block;
@@ -33,13 +32,13 @@ section ul {
     /* padding-inline-start: 40px; */
 }
 
-section ul {
+section ul ul {
     list-style-type: circle;
     margin-block-start: 0px;
     margin-block-end: 0px;
 }
 
-/* button {
+button {
     appearance: auto;
     -webkit-writing-mode: horizontal-tb !important;
     text-rendering: auto;
@@ -63,8 +62,8 @@ section ul {
     border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
     border-image: initial;
 }
- */
-/* input {
+
+input {
     -webkit-writing-mode: horizontal-tb !important;
     text-rendering: auto;
     color: -internal-light-dark(black, white);
@@ -86,7 +85,13 @@ section ul {
     border-style: inset;
     border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
     border-image: initial;
-} */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0px;
+}
 
 button, input {
     overflow: visible;
@@ -97,128 +102,6 @@ button, input, optgroup, select, textarea {
     font-size: 100%;
     line-height: 1.15;
     margin: 0px;
-}
-
-.searchlocationModal {
-	width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1000;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    display: none;
-}
-
-.searchlocationList {
-	margin : 0;
-    height: 20rem;
-    overflow-y: auto;
-    display: none;
-    list-style: none;
-    padding-top: 10px;
-}
-
-.searchlocationList li {
-	list-style: none;
-	display: block;
-    height: 3rem;
-}
-
-.searchlocationList li button {
-	width: 100%;
-    height: 100%;
-    border : none;
-    outline : none;
-    text-align: left;
-}
-
-.recentlyModal {
-	width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1000;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    display: none;
-}
-
-.searchlocationContent {
-	display: block;
-	width: 30rem;
-    background: rgb(255, 255, 255);
-    border-radius: 2px;
-}
-
-.searchlocationContent header {
-	height: 4.5rem;
-    font-size: 1.5rem;
-    margin: 0px 1.5rem;
-    border-bottom: 2px solid rgb(30, 29, 41);
-    display: flex;
-    align-items: center;
-    font-weight: 500;
-    justify-content: space-between;
-}
-
-.searchlocationCloseBtn {
-	background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 20px 20px;
-    width: 2rem;
-    height: 2rem;
-    background-image: url(/pmang/image/textRemove.png);
-    border: none;
-    outline : none;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-
-.searchlocationForm {
-	padding: 1.5rem;
-    position: relative;
-}
-
-.searchlocationForm input {
-    width: 100%;
-    height: 3.5rem !important;
-    border : 1px solid rgb(195, 194, 204);
-    padding: 0px 1rem;
-}
-
-.searchlocationBtn {
-	position: absolute;
-    right: 2rem;
-    top: 50px;
-    transform: translateY(-50%);
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 20px 20px;
-    width: 2rem;
-    height: 2rem;
-    padding: 0.5rem;
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj4KICAgIDxwYXRoIGZpbGw9IiMxRTFEMjkiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTIuMTUyIDguNjA4QTYuNDYzIDYuNDYzIDAgMCAxIDguNjEgMi4xNTJhNi40NjMgNi40NjMgMCAwIDEgNi40NTYgNi40NTYgNi40NjMgNi40NjMgMCAwIDEtNi40NTYgNi40NTYgNi40NjMgNi40NjMgMCAwIDEtNi40NTctNi40NTZtMTMuMjQ5IDUuMjdhOC41NSA4LjU1IDAgMCAwIDEuODE2LTUuMjdDMTcuMjE3IDMuODYyIDEzLjM1NSAwIDguNjEgMCAzLjg2MiAwIDAgMy44NjIgMCA4LjYwOGMwIDQuNzQ3IDMuODYyIDguNjA4IDguNjA5IDguNjA4YTguNTYgOC41NiAwIDAgMCA1LjI3LTEuODE2bDQuMjg0IDQuMjg0YTEuMDczIDEuMDczIDAgMCAwIDEuNTIxIDAgMS4wNzUgMS4wNzUgMCAwIDAgMC0xLjUyMmwtNC4yODMtNC4yODR6Ii8+Cjwvc3ZnPgo=);
-    border: none;
-    outline : none;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-.recentlyUl {
-	margin-top: 0.5rem;
-    padding: 0.5rem 0px;
-    max-height: 25rem;
-    overflow-y: auto;	
 }
 
 /* writeForm_head Area */
@@ -242,7 +125,7 @@ button, input, optgroup, select, textarea {
 	text-decoration: none;
 	cursor: pointer;
 	background-color: transparent;	
-	padding: 0.5rem;
+	padding: 0.5rem; /* rem�� �ֻ��� ������Ʈ�� body�� ��Ʈ�������� ���� ����� */
 }
 
 .writeForm_nav div {
@@ -269,7 +152,7 @@ button, input, optgroup, select, textarea {
 /* writeForm_body Area */
 
 .writeForm_body {
- /*    background: #add4ad; */
+    background: rgb(255, 255, 255);
     font-size: 16px;
     position: relative;
 }
@@ -292,7 +175,6 @@ button, input, optgroup, select, textarea {
     -webkit-box-align: center;
     align-items: center;
     border-bottom: 2px solid rgb(30, 29, 41);
-    font-weight: 400;
 }
 
 .writeForm_body section h2 > span {
@@ -305,7 +187,6 @@ button, input, optgroup, select, textarea {
 .itemList {
     padding-top: 0.5rem;
     list-style: none;
-    padding : 0;
 }
 
 /* .image_li {
@@ -325,8 +206,6 @@ button, input, optgroup, select, textarea {
 .imageText_div {
     width: 10.5rem;
     font-size: 18px;
-    color: #246d24;
-    font-weight: bold;
 }
 
 .imageText_div > span {
@@ -348,9 +227,8 @@ button, input, optgroup, select, textarea {
     display: flex;
     width: 856px;
     flex-wrap: wrap;
-    overflow: hidden;
+    overflow-x: hidden;
     list-style: none;
-    padding : 0;
 }
 
 .imageChoice_li {
@@ -382,41 +260,6 @@ button, input, optgroup, select, textarea {
     margin-bottom: 1rem;
 }
 
-.imgli {
-	width: 202px;
-    height: 202px;
-    border: 1px solid rgb(230, 229, 239);
-    margin-right: 1rem;
-    list-style-type: none;
-    position: relative;
-    display: flex;
-    cursor: pointer;
-}
-
-#imgrep {
-	position: absolute;
-    height: 1.5rem;
-    padding: 0px 0.5rem;
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    top: 0.5rem;
-    left: 0.5rem;
-    background-color: rgba(30, 29, 41, 0.32);
-    color: rgb(255, 255, 255);
-    border-radius: 12px;
-    font-size: 12px;
-}
-
-#imgpreBtn {
-	position: absolute;
-    right: 0;
-    padding: 10px;
-    margin: 0;
-    outline: none;
-    border: none;
-}
-
 .imageChoice_li input {
     border: 1px solid rgb(195, 194, 204);
     width: 100%;
@@ -444,16 +287,11 @@ button, input, optgroup, select, textarea {
     margin-top: 1.5rem;
     color: rgb(74, 164, 255);
     line-height: 1.5;
-    font-size: 13px;
+    font-size: 10px;
 }
 
 .imagecontent b {
     font-weight: bolder;
-}
-
-#imageCheck {
-	display : none;
-	color : green;
 }
 
 /* .itemSubject_li {
@@ -467,19 +305,6 @@ button, input, optgroup, select, textarea {
     width: 10.5rem;
     font-size: 18px;
     padding-top: 14px;
-    color: #246d24;
-    font-weight: bold;
-}
-
-#textRemove {
-	position: absolute;
-	right: 20px;
-	display: none;
-	bottom: 12.5px;
-}
-
-#textRemoveClick {
-	cursor: pointer;
 }
 
 .itemSubject_div > span {
@@ -532,19 +357,13 @@ button, input, optgroup, select, textarea {
     margin: 0px;
 }
 
-.itemSubject_input:hover{
-	border: 1px solid green;
-}
-
 .itemSubjectDiv {
-    color: green;
+    color: rgb(245, 126, 0);
     font-size: 14px;
     margin-top: 0.5rem;
     display: flex;
     -webkit-box-align: center;
     align-items: center;
-    display: none;
-    font-weight: bold;
 }
 
 .itemSubjectDiv::before {
@@ -566,19 +385,16 @@ button, input, optgroup, select, textarea {
     border-bottom: 1px solid rgb(220, 219, 228);
 } */
 
- .gategoryText_div {
+.gategoryText_div {
     width: 10.5rem;
     font-size: 18px;
     padding-top: 8px;
-    
-    color: #246d24;
-    font-weight: bold;
 }
 
 .gategoryText_div > span {
 	color: rgb(255, 80, 88);
 	font-weight:bold;
-} 
+}
 
 .categoryArea_div {
     flex: 1 1 0%;
@@ -589,7 +405,7 @@ button, input, optgroup, select, textarea {
     width: 100%;
     height: 19rem;
     overflow: hidden;
-    border: 1px solid rgb(195, 194, 204);
+    border: 1px solid rgb(220, 219, 228);
 }
 
 .categoryArea {
@@ -599,31 +415,25 @@ button, input, optgroup, select, textarea {
     align-items: center;
     justify-content: center;
     overflow-y: auto;
-    color: rgb(243 255 248);
+    color: rgb(195, 194, 204);
 }
 
-.category1,.category2,.category3 {
+.category1 {
     width: 100%;
     height: 100%;
+    padding: 0.5rem 0px;
     list-style: none;
-    padding : 0 10px;
-
 }
 
-.category1_li:hover, .category2_li:hover, .category3_li:hover {
-    background-color : green;
-}
-
-.category1_li, .category2_li, .category3_li {
+.category1_li {
     display: flex;
     width: 100%;
     height: 40px;
     -webkit-box-align: center;
     align-items: center;
-
 }
 
-.category1_li button, .category2_li button, .category3_li button {
+.category1_Btn {
     width: 100%;
     height: 100%;
     padding: 0px 1.5rem;
@@ -634,6 +444,7 @@ button, input, optgroup, select, textarea {
     border: 0px;
     direction: ltr;
     text-align: left;
+    color: rgb(33, 33, 33);
     letter-spacing: -0.5px;
     text-transform: none;
     overflow: visible;
@@ -641,7 +452,6 @@ button, input, optgroup, select, textarea {
     font-size: 100%;
     line-height: 1.15;
     margin: 0px;
-    font-weight: bold;
 }
 
 .categoryArea:nth-child(2), .categoryArea:nth-child(3) {
@@ -649,21 +459,9 @@ button, input, optgroup, select, textarea {
 }
 
 .selectCategory {
-    margin-top: 1.0rem;
+    margin-top: 1.5rem;
     font-size: 16px;
-    color: green;
-    font-weight: normal;
-}
-
-.selectL, .selectM, .selectS {
-	color: green;
-	font-weight: bold;
-}
-
-#categoryCheck {
-	display : none;
-	color : green;
-	padding : 10px 0px;
+    color: rgb(255, 80, 88);
 }
 
 /* .location_li {
@@ -677,8 +475,6 @@ button, input, optgroup, select, textarea {
 	width: 10.5rem;
     font-size: 18px;
     padding-top: 14px;
-    color: #246d24;
-    font-weight: bold;
 }
 
 .locationText_div > span {
@@ -694,7 +490,7 @@ button, input, optgroup, select, textarea {
     height: 3rem;
     width: 6.5rem;
     text-align: center;
-    border: 1px solid rgb(220, 219, 228);
+    border: 1px solid rgb(195, 194, 204);
     margin-right: 1rem;
     border-radius: 2px;
     appearance: button;
@@ -710,12 +506,7 @@ button, input, optgroup, select, textarea {
     font-family: inherit;
     font-size: 100%;
     line-height: 1.15;
-    /* margin: 0px; */
-    font-weight: bold;
-}
-
-.locationSearchBtn:hover {
-	background-color: rgb(243 255 248);
+    margin: 0px;
 }
 
 .location_input {
@@ -727,18 +518,12 @@ button, input, optgroup, select, textarea {
     margin-top: 1rem;
 }
 
-#selectAddress:hover {
-	background-color : rgb(243 255 248);
-}
-
 .stateText_div, .negoText_div {
     width: 10.5rem;
     font-size: 18px;
     /* display: flex; */
     -webkit-box-align: center;
     align-items: center;
-    color: #246d24;
-    font-weight: bold;
 }
 
 .stateText_div > span, .negoText_div > span, .priceText_div > span {
@@ -766,8 +551,6 @@ button, input, optgroup, select, textarea {
 	width: 10.5rem;
     font-size: 18px;
     padding-top: 14px;
-    color: #246d24;
-    font-weight: bold;
 }
 
 .price_input {
@@ -779,25 +562,18 @@ button, input, optgroup, select, textarea {
     margin-right: 1rem;
 }
 
-.price_input:hover {
-	border: 1px solid green;
-}
-
 #priceDiv {
-	color: green;
+	color: rgb(245, 126, 0);
     font-size: 14px;
     margin-top: 0.5rem;
     display: flex;
     -webkit-box-align: center;
     align-items: center;
-    font-weight: bold;
 }
 
 .priceOption_div {
 	display: flex;
 	margin-top: 1rem;	
-	color: #246d24;
-    font-weight: bold;
 }
 
 .price_option {
@@ -821,11 +597,8 @@ button, input, optgroup, select, textarea {
     width: 10.5rem;
     font-size: 18px;
     padding-top: 18px;
-    color: #246d24;
-    font-weight: bold;
 }
     
-  
 .content_textarea {
 	padding: 1rem;
     resize: none;
@@ -833,10 +606,6 @@ button, input, optgroup, select, textarea {
     border: 1px solid rgb(195, 194, 204);
     width: 100%;
     overflow: auto;
-}
-
-.content_textarea:hover {
-	border: 1px solid green;
 }   
     
 .Transaction_prohibited_item {
@@ -850,7 +619,7 @@ button, input, optgroup, select, textarea {
 }
 
 .Transaction_prohibited_item > a {
-	color: #004600;
+	color: rgb(155, 153, 169);
 	text-decoration: none;
     cursor: pointer;
     background-color: transparent;
@@ -862,8 +631,6 @@ button, input, optgroup, select, textarea {
     height: 3rem;
     border: 1px solid rgb(195, 194, 204);
     position: relative;
-    color: #246d24;
-    font-weight: bold;
 }
 
 .hashtagdetail2_div {
@@ -886,14 +653,10 @@ button, input, optgroup, select, textarea {
     border: 0px !important;
 }
 
-.hashtagdetail1_div:hover {
-	border: 1px solid green;
-}
-
 .tagExplanation {
     padding-top: 0.5rem;
     line-height: 1.3;
-    color: #004600;
+    color: rgb(136, 136, 136);
     list-style: none;
     appearance: none;
 }
@@ -911,7 +674,6 @@ button, input, optgroup, select, textarea {
 .tagExplanation > li > p {
     margin-left: 0.5rem;
     line-height: 1.5;
-    margin : 0;
 }
      
 .qtyText_div {
@@ -920,8 +682,6 @@ button, input, optgroup, select, textarea {
     display: flex;
     -webkit-box-align: center;
     align-items: center;
-    color: #246d24;
-    font-weight: bold;
 }
     
 .qty_input {
@@ -933,22 +693,15 @@ button, input, optgroup, select, textarea {
     margin-right: 1rem;
 } 
 
-.qty_input:hover {
-	border: 1px solid green;
-	
-}
-
 .sellerWriteForm_footer {
 	width: 100%;
     height: 5.5rem;
-    background: rgb(253 255 254);
-  /*   box-shadow: rgb(234 233 241) 0px -1px 0px 0px; */
-  box-shadow: rgb(234 233 241) 0px -1px 3px 0px;
+    background: rgb(250, 250, 253);
+    box-shadow: rgb(234 233 241) 0px -1px 0px 0px;
     /* position: absolute; �̰��� ����Ϸ��� �θ��� position �� ���������.*/
     position: sticky;
     left: 0px;
     bottom: 0px;
-    display: block;
 }
 
 .sellerWriteForm_footer_div {
@@ -969,7 +722,7 @@ button, input, optgroup, select, textarea {
     font-size: 20px;
     font-weight: 700;
     border-radius: 2px;
-    background: rgb(94 160 71);
+    background: rgb(255, 80, 88);
     position: relative;
     appearance: button;
     cursor: pointer;
@@ -1052,6 +805,3 @@ button, input, optgroup, select, textarea {
 	line-height: 1.15;
 	margin: 0;
 }
-
-
-

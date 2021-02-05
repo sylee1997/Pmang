@@ -4,8 +4,7 @@
 	padding-bottom:50px;
 }
 
-#tabDiv {
-
+#tabMenu {
 	min-width: 1024px;
 	width: 1024px;
 	margin: 0 auto;
@@ -16,15 +15,12 @@
 
 
 /*라디오버튼 숨김*/
-
-.tabs {
+input {
 	display: none;
 }
 
 /* 라디오버튼의 라벨화 */
-
-.tabLabel {
-
+label {
 	display: inline-block;
 	width:290px;
 	margin: 0 auto;
@@ -35,22 +31,19 @@
 	border: 1px solid transparent;		
 }
 
-
-.tabLabel:hover {
-	color: gray;
+label:hover {
+	color: #2e9cdf;
 	cursor: pointer;
 }
 
 /*input 클릭시, label 스타일*/
-
-.tabs:checked+label {
+input:checked+label {
 	color: red;
 	border-bottom: 3px solid red;
 }
 
 /* tab이 체크되면 tab부터 content까지의 모든 자식에 대한 스타일  */
-
-#tab1:checked ~ #bulletin,
+#tab1:checked ~ #notice,
 #tab2:checked ~ #policy,
 #tab3:checked ~ #FQA {
 	display: block;
@@ -62,80 +55,55 @@ section {
 	border-top: 1px solid #ddd;
 }
 
-
-/* 공지사항 영역 */
-.bulletinDiv{
-
+/* 공지사항 전체 영역 */
+.noticeDiv{
 
 }
 
 /* 공지사항 글 하나 */
-
-.bulletinArea{
-
+.noticeArea{
 	border:1px solid #d2d2d2;
 	text-align:left;
+	white-space : pre-line;
+	padding-bottom:0;
 	position:relative;
 }
 
-.bulletinArea:hover{
-	cursor:pointer;
-}
-
-.arrowImg{
-	position:absolute;
-	top:19px;
-	left:95%;
-}
-
-.bulletinTitle{
-
-	font-size:17px;
+.noticeTitle{
+	font-size:20px;
 	font-weight:600;
 	padding:10px;
-	padding-bottom:0;
 	margin : 0 auto;
 }
 
-.bulletinDate{
-
-	font-size:13px;
-	font-weight:600;
-	padding:10px;
-	padding-top:0;
+.noticeDate{
 	margin : 0 auto;
-    color: rgb(204, 204, 204);
+	padding: 10px;
+	color:rgb(204, 204, 204);
 }
 
-.bulletinContent{
-
+.noticeContent{
 	display:none;
 	text-align:left;
 	margin:0px;
 	padding:10px;
 	white-space : pre-line;
 	background-color:#eeeeee;
-	position:relative;	
+	position:relative;
+
+	
+	
 }
 
 .contentEmp{
 	color:red;
-
-}
-
-.contentExp{
-	color:blue;
+	text-decoration: underline;
 }
 
 .prohibitedItem{
 	font-weight:600;
 	text-decoration: underline;
 }
-
-.prohibitedLink:hover{
-	cursor:pointer;
-}
-
 
 #policy{
 	font-size:15px;
@@ -250,68 +218,6 @@ section {
 	font-weight: 600;
 }
 
-
-.menu {
-	display: none;
-}
-
-.menuLabel {
-	display: inline-block;
-	width:297px;
-	margin: 0 auto;
-	padding: 20px;
-	font-weight: 600;
-	font-size: 15px;
-	text-align: center;
-	
-}
-
-.menuLabel:hover {
-	color: gray;
-	cursor: pointer;
-}
-
-/*input 클릭시, label 스타일*/
-.menu:checked+label {
-	color: red;
-}
-
-/* tab이 체크되면 tab부터 content까지의 모든 자식에 대한 스타일  */
-#menu1:checked ~ #section1,
-#menu2:checked ~ #section2,
-#menu3:checked ~ #section3,
-#menu4:checked ~ #section4,
-#menu5:checked ~ #section5,
-#menu6:checked ~ #section6,
-#menu7:checked ~ #section7,
-#menu8:checked ~ #section8,
-#menu9:checked ~ #section9 {
-	display: block;
-}
-
-/* 공지사항 글 하나 */
-.postArea{
-	border:1px solid #d2d2d2;
-	text-align:left;
-	position:relative;
-}
-
-.postTitle{
-	font-size:17px;
-	font-weight:600;
-	padding:20px;
-	margin : 0 auto;
-}
-
-.postContent{
-	display:none;
-	text-align:left;
-	margin:0px;
-	padding:10px;
-	white-space : pre-line;
-	background-color:#eeeeee;
-	position:relative;
-}
 
 
 

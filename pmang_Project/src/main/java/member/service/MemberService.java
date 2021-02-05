@@ -1,17 +1,12 @@
 package member.service;
 
 import java.util.List;
-
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import member.bean.MemberDTO;
-
-
-import board.bean.ItemDTO;
-
 import member.bean.ZipcodeDTO;
 
 public interface MemberService {
@@ -29,10 +24,4 @@ public interface MemberService {
 	public int regSuccess(String userId, String key);
 
 	public String kakaoLogin(MemberDTO memberDTO, HttpSession session);
-	
-	//-----------------------seller---------------------------//
-	public void sellerWrite(ItemDTO itemDTO);
-
-	public List<ZipcodeDTO> searchlocation(String address);
-
 }

@@ -5,7 +5,7 @@
 window.onload=function(){
 	if("${su}" == "1"){
 		alert("회원가입을 축하합니다");
-		location.href='/pmang/index'
+		window.close();
 
 	}else{
 		alert("회원가입 실패");

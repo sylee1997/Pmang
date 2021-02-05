@@ -1,6 +1,5 @@
 package member.dao;
 
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import member.bean.MemberDTO;
-import board.bean.ItemDTO;
 import member.bean.ZipcodeDTO;
 
 @Repository
@@ -42,19 +39,19 @@ public class MemberDAOMybatis implements MemberDAO {
 	}
 
 	@Override
-	public int GetKey(String userId, String email_key) {
+	public int GetKey(String userId, String user_key) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("userId", userId);
-		map.put("email_key", email_key);
+		map.put("user_key", user_key);
 		return sqlSession.update("memberSQL.GetKey", map);
 		
 	}
 
 	@Override
-	public int regSuccess(String userId, String email_key) {
+	public int regSuccess(String userId, String user_key) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("userId", userId);
-		map.put("email_key", email_key); System.out.println(email_key);
+		map.put("user_key", user_key); System.out.println(user_key);
 		return sqlSession.update("memberSQL.regSuccess", map);
 	}
 
@@ -69,22 +66,5 @@ public class MemberDAOMybatis implements MemberDAO {
 		return sqlSession.insert("memberSQL.kakaoWrite", memberDTO);
 	}
 
-	
-	
-	
-	//---------------------------seller----------------------------------------//
-	
-	@Override
-	public List<ZipcodeDTO> searchlocation(String address) {
-		List<ZipcodeDTO> list = sqlSession.selectList("memberSQL.searchlocation", address);
-		System.out.println(list);
-		return sqlSession.selectList("memberSQL.searchlocation", address);
-	}
-
-	public void sellerWrite(ItemDTO itemDTO) {
-		
-		sqlSession.insert("memberSQL.sellerWrite", itemDTO);
-	}
-	
 	
 }

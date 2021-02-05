@@ -11,8 +11,4 @@ public class ZipcodeDTO {
 	private String ri;
 	private String roadname;
 	private String buildingname;
-
-
-
-
 }

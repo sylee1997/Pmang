@@ -1,7 +1,6 @@
 package member.service;
 
 import java.util.List;
-
 import java.util.Map;
 import java.util.Random;
 
@@ -12,16 +11,15 @@ import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+
 
 import member.bean.MemberDTO;
 import member.bean.ZipcodeDTO;
 import member.dao.MemberDAO;
 
-import board.bean.ItemDTO;
 @Service
 public class MemberServiceImpl implements MemberService {
 	@Autowired
@@ -49,7 +47,6 @@ public class MemberServiceImpl implements MemberService {
 
 		
 	}
-
 	@Override
 	public int write(MemberDTO memberDTO) {
 		return memberDAO.write(memberDTO);
@@ -147,19 +144,6 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 		
-
-	//-------------------------seller-----------------------------------//
-	
-	@Override
-	public void sellerWrite(ItemDTO itemDTO) {
-		memberDAO.sellerWrite(itemDTO);
-	}
-
-	@Override
-	public List<ZipcodeDTO> searchlocation(String address) {
-		return memberDAO.searchlocation(address);
-	}
-
 }
 	
 

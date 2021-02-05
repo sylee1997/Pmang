@@ -16,6 +16,7 @@
 <title>피망마켓에 오신것을 환영합니다.</title>
 </head>
 <body> 
+<form id="indexForm" method="post">
 <!-- 로그인 모달 -->
 <div class="loginModal">
       	<div class="loginModalContent">
@@ -39,8 +40,8 @@
 						<tr>
 							<td style="border-top: rgb(0,0,0); border-bottom: rgb(0,0,0);">
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder="ID" width="1" name="userId" id="index_userId" maxlength='20'>
-									<div id="index_userIdDiv"></div>
+									<input type="text" class="form-control" placeholder="ID" width="1" name="userId" id="userId" maxlength='20'>
+									<div id="userIdDiv"></div>
 								</div>
 							</td>
 						</tr>
@@ -52,8 +53,8 @@
 						<tr>
 							<td style="border-top: rgb(0,0,0); border-bottom: rgb(0,0,0);">
 								<div class="form-group">
-									<input type="password" class="form-control" maxlength="15" placeholder="Password" name="pwd" id="index_pwd">
-									<div id="index_pwdDiv"></div>
+									<input type="password" class="form-control" maxlength="15" placeholder="Password" name="pwd" id="pwd">
+									<div id="pwdDiv"></div>
 								</div>
 							</td>
 						</tr>
@@ -78,7 +79,7 @@
 										<p id="kakaoP">카카오 1초 로그인/회원가입</p>
 									</div>
 								</button>
-								<button id="index_writeBtn">
+								<button id="writeBtn">
 								<div>
 									<img src="/pmang/image/writeP.png" alt="writePmang">
 									<p id="writeP">일반 회원가입</p>
@@ -96,12 +97,11 @@
 	<!-- header -->
 	<div id="header">
       	<div class="header_logo">
-            <div class="logo-wrap" onclick="location.href='/pmang/index'">
+            <div class="logo-wrap">
                  <img src="/pmang/image/main_logo.JPG" alt="main_logo" />
-                 <h2 style="color: green; font-weight: bold">피망장터</h2>
-           </div>
-           
-              <div class="search-wrap">
+                 <h2 style="color: green;">피망장터</h2>
+               </div>
+               <div class="search-wrap">
                  <input type="text" class="searchInput" placeholder="상품명,지역명,@상점명입력" maxlength="20"/>
                  <span id="index_searchInsertXspan">x</span>
                  	<!-- 서치버튼 추가(이서영) -->
@@ -141,14 +141,14 @@
               <ul>
                 <li>
                   <img src="/pmang/image/sell.png" alt="sale" width="40px" height="40px" />
-                  <span class="indexnavSpan" onclick="alert('먼저 로그인 하세요.')">판매하기</span>
+                  <span class="indexnavSpan">판매하기</span>
                 </li>
                 <li>
                   <span class="vertical">|</span>
                 </li>
                 <li>
                   <img src="/pmang/image/mystore.png" alt="store" width="30px" height="30px"/>
-                  <span class="indexnavSpan" onclick="alert('먼저 로그인 하세요.')">내상점</span>
+                  <span class="indexnavSpan">내상점</span>
                 </li>
                 <li>
                   <span class="vertical">|</span>
@@ -157,12 +157,6 @@
                   <img src="/pmang/image/login.png" alt="login" style="width: 30px; height: 30px;" />
                   <span class="indexnavSpan">로그인</span>
                 </li>
-                <li>
-                  <span class="vertical">|</span>
-                </li>
-                <div class="pmangTok">
-               		<div class="pmangTokDiv">피망Tok
-               	</div>
               </ul>
             </nav>
          </c:if>
@@ -172,28 +166,22 @@
               <ul>
                 <li>
                   <img src="/pmang/image/sell.png" alt="sale" width="40px" height="40px" />
-                  <span class="indexnavSpan" onclick="location.href='/pmang/member/sellerWriteForm'">판매하기</span>
+                  <span class="indexnavSpan">판매하기</span>
                 </li>
                 <li>
                   <span class="vertical">|</span>
                 </li>
                 <li>
                   <img src="/pmang/image/mystore.png" alt="store" width="30px" height="30px"/>
-                  <span class="indexnavSpan" onclick="location.href='/pmang/board/mystore'">내상점</span>
+                  <span class="indexnavSpan">내상점</span>
                 </li>
                 <li>
                   <span class="vertical">|</span>
                 </li>
-                <li style="CURSOR: hand" onclick="window.location='/pmang/member/logout'">
+                <li style="CURSOR: hand" onclick=window.location="/pmang/member/logout">
                   <img src="/pmang/image/login.png" alt="logout" style="width: 30px; height: 30px;" />
                   <span class="indexnavSpan">로그아웃</span>
                 </li>
-                 <li>
-                  <span class="vertical">|</span>
-                </li>
-                <div class="pmangTok">
-               		<div class="pmangTokDiv">피망Tok
-               	</div>
               </ul>
             </nav>
          </c:if>
@@ -212,20 +200,20 @@
 				<ul class="category1Menu">
 					<div>전체 카테고리</div>
 					<hr>
-					<li id="categoryClickli1"><a class="category1A" href="#">패션</a>
+					<li><a class="category1A" href="#">패션</a>
 						<ul class="category2Menu">
 						<div class="category2Div"></div>
 						<hr>
-							<li class="categoryClickli2"><a class="category2A" href="#">여성의류</a>
+							<li><a class="category2A" href="#">여성의류</a>
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
 									<li><a href="#">아우터</a></li>
 									<li><a href="#">티셔츠</a></li>
 									<li><a href="#">니트</a></li>
-									<li><a href="#">셔츠/블라우스</a></li>
-									<li><a href="#">맨투맨/후드집업</a></li>
-									<li><a href="#">원피스/세트</a></li>
+									<li><a href="#">셔츠 / 블라우스</a></li>
+									<li><a href="#">맨투맨 / 후드집업</a></li>
+									<li><a href="#">원피스 / 세트</a></li>
 									<li><a href="#">바지</a></li>
 									<li><a href="#">스커트</a></li>
 								</ul></li>
@@ -237,7 +225,7 @@
 									<li><a href="#">티셔츠</a></li>
 									<li><a href="#">니트</a></li>
 									<li><a href="#">셔츠</a></li>
-									<li><a href="#">맨투맨/후드집업</a></li>
+									<li><a href="#">맨투맨 / 후드집업</a></li>
 									<li><a href="#">바지</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
@@ -254,7 +242,7 @@
 								</ul></li>
 								<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 						</ul></li>
-					<li id="categoryClickli1"><a class="category1A" href="#">디지털/가전</a>
+					<li><a class="category1A" href="#">디지털 / 가전</a>
 						<ul class="category2Menu">
 						<div class="category2Div"></div>
 						<hr>
@@ -264,7 +252,7 @@
 								<hr>
 									<li><a href="#">스마트폰</a></li>
 									<li><a href="#">태블릿</a></li>
-									<li><a href="#">액세서리/주변기기</a></li>
+									<li><a href="#">액세서리 / 주변기기</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
 							<li><a class="category2A" href="#">가전제품</a>
@@ -277,24 +265,24 @@
 									<li><a href="#">사무용품</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
-							<li><a class="category2A" href="#">음반/영상기기</a>
+							<li><a class="category2A" href="#">음방 / 영상기기</a>
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
 									<li><a href="#">음향기기</a></li>
-									<li><a href="#">비디오/프로젝터</a></li>
-									<li><a href="#">CD/DVD/음반</a></li>
+									<li><a href="#">비디오 / 프로젝터</a></li>
+									<li><a href="#">CD / DVD / 음반</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
-							<li><a class="category2A" href="#">컴퓨터/주변기기</a>
+							<li><a class="category2A" href="#">컴퓨터 / 주변기기</a>
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
 									<li><a href="#">데스크탑</a></li>
-									<li><a href="#">키보드/마우스</a></li>
+									<li><a href="#">키보드 / 마우스</a></li>
 									<li><a href="#">모니터</a></li>
 									<li><a href="#">컴퓨터 부품</a></li>
-									<li><a href="#">노트북/넷북</a></li>
+									<li><a href="#">노트북 / 넷북</a></li>
 									<li><a href="#">기타 액세서리</a></li>
 									<li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
@@ -302,7 +290,7 @@
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
-									<li><a href="#">DSLR/미러리스</a></li>
+									<li><a href="#">DSLR / 미러리스</a></li>
 									<li><a href="#">필름카메라</a></li>
 									<li><a href="#">디지털 카메라</a></li>
 									<li><a href="#">기타 액세서리</a></li>
@@ -319,7 +307,7 @@
 								</ul></li>
 								<li>&nbsp</li><li>&nbsp</li>
 						</ul></li>
-					<li id="categoryClickli1"><a class="category1A" href="#">도서/티켓</a>
+					<li><a class="category1A" href="#">도서 / 티켓</a>
 						<ul class="category2Menu">
 						<div class="category2Div"></div>
 						<hr>
@@ -327,12 +315,12 @@
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
-									<li><a href="#">학습/사전/참고서</a></li>
-									<li><a href="#">만화/아동</a></li>
-									<li><a href="#">인문/교양/소설</a></li>
-									<li><a href="#">경영/경제/사회</a></li>
-									<li><a href="#">과학/컴퓨터/인터넷</a></li>
-									<li><a href="#">예술/디자인</a></li>
+									<li><a href="#">학습 / 사전 / 참고서</a></li>
+									<li><a href="#">만화 / 아동</a></li>
+									<li><a href="#">인문 / 교양 / 소설</a></li>
+									<li><a href="#">경영 / 경제 / 사회</a></li>
+									<li><a href="#">과학 / 컴퓨터 / 인터넷</a></li>
+									<li><a href="#">예술 / 디자인</a></li>
 									<li><a href="#">기타 도서</a></li>
 									<li>&nbsp</li>
 								</ul></li>
@@ -340,13 +328,13 @@
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
-									<li><a href="#">기프티콘/상품권/쿠폰</a></li>
-									<li><a href="#">예매권/항공권</a></li>
+									<li><a href="#">기프티콘 / 상품권 / 쿠폰</a></li>
+									<li><a href="#">예매권 / 항공권</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
 							<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 						</ul></li>
-					<li id="categoryClickli1"><a class="category1A" href="#">리빙용품</a>
+					<li><a class="category1A" href="#">리빙용품</a>
 						<ul class="category2Menu">
 						<div class="category2Div"></div>
 						<hr>
@@ -354,7 +342,7 @@
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
-									<li><a href="#">문구/학습</a></li>
+									<li><a href="#">문구 / 학습</a></li>
 									<li><a href="#">침구</a></li>
 									<li><a href="#">욕실</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
@@ -374,10 +362,10 @@
 								<div class="category3Div"></div>
 								<hr>
 									<li><a href="#">식기세트</a></li>
-									<li><a href="#">냄비/프라이팬</a></li>
+									<li><a href="#">냄비 / 프라이팬</a></li>
 									<li><a href="#">조리도구</a></li>
-									<li><a href="#">수저/커트러리</a></li>
-									<li><a href="#">컵/잔/텀블러</a></li>
+									<li><a href="#">수저 / 커트러리</a></li>
+									<li><a href="#">컵 / 잔 / 텀블러</a></li>
 									<li><a href="#">주방 잡화</a></li>
 									<li><a href="#">밀폐용기</a></li>
 									<li><a href="#">커피용품</a></li>
@@ -385,7 +373,7 @@
 								</ul></li>
 							<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 						</ul></li>
-					<li id="categoryClickli1"><a class="category1A" href="#">스포츠/레저</a>
+					<li><a class="category1A" href="#">스포츠 / 레저</a>
 						<ul class="category2Menu">
 						<div class="category2Div"></div>
 						<hr>
@@ -406,14 +394,14 @@
 									<li><a href="#">축구</a></li>
 									<li><a href="#">야구</a></li>
 									<li><a href="#">농구</a></li>
-									<li><a href="#">자전거/킥보드</a></li>
+									<li><a href="#">자전거 / 킥보드</a></li>
 									<li><a href="#">등산</a></li>
-									<li><a href="#">낚시/캠핑</a></li>
+									<li><a href="#">낚시 / 캠핑</a></li>
 									<li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
 							<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 						</ul></li>
-					<li id="categoryClickli1"><a class="category1A" href="#">뷰티/미용</a>
+					<li><a class="category1A" href="#">뷰티 / 미용</a>
 						<ul class="category2Menu">
 						<div class="category2Div"></div>
 						<hr>
@@ -421,11 +409,11 @@
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
-									<li><a href="#">클렌징/스크럽</a></li>
-									<li><a href="#">스킨/토너/미스트</a></li>
-									<li><a href="#">로션/에멀전</a></li>
-									<li><a href="#">에센스/크림</a></li>
-									<li><a href="#">팩/마스크</a></li>
+									<li><a href="#">클렌징 / 스크럽</a></li>
+									<li><a href="#">스킨 / 토너 / 미스트</a></li>
+									<li><a href="#">로션 / 에멀전</a></li>
+									<li><a href="#">에센스 / 크림</a></li>
+									<li><a href="#">팩 / 마스크</a></li>
 									<li><a href="#">썬케어</a></li>
 									<li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
@@ -437,17 +425,17 @@
 									<li><a href="#">베이스메이크업</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
-							<li><a class="category2A" href="#">헤어/바디</a>
+							<li><a class="category2A" href="#">헤어 / 바디</a>
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
-									<li><a href="#">샴푸/린스/트리트먼트</a></li>
+									<li><a href="#">샴푸 / 린스 / 트리트먼트</a></li>
 									<li><a href="#">헤어스타일링</a></li>
-									<li><a href="#">바디클렌저/로션</a></li>
-									<li><a href="#">헤어/핸드/풋케어</a></li>
+									<li><a href="#">바디클렌저 / 로션</a></li>
+									<li><a href="#">헤어 / 핸드 / 풋케어</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
-							<li><a class="category2A" href="#">향수/아로마</a>
+							<li><a class="category2A" href="#">향수 / 아로마</a>
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
@@ -456,12 +444,12 @@
 									<li><a href="#">공용향수</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
-							<li><a class="category2A" href="#">네일아트/케어</a>
+							<li><a class="category2A" href="#">네일아트 케어</a>
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
-									<li><a href="#">네일아트/스티커</a></li>
-									<li><a href="#">매니큐어/패디큐어</a></li>
+									<li><a href="#">네일아트 / 스티커</a></li>
+									<li><a href="#">매니큐어 / 패디큐어</a></li>
 									<li><a href="#">네일케어도구</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
@@ -469,18 +457,18 @@
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
-									<li><a href="#">브러시/퍼프</a></li>
-									<li><a href="#">파우치/정리함</a></li>
+									<li><a href="#">브러시 / 퍼프</a></li>
+									<li><a href="#">파우치 / 정리함</a></li>
 									<li><a href="#">거울</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
 							<li>&nbsp</li><li>&nbsp</li>
 						</ul></li>
-					<li id="categoryClickli1"><a class="category1A" href="#">유아/출산</a>
+					<li><a class="category1A" href="#">유아 / 출산</a>
 						<ul class="category2Menu">
 						<div class="category2Div"></div>
 						<hr>
-							<li><a class="category2A" href="#">영아의류(-2세)</a>
+							<li><a class="category2A" href="#">영아의류 (-2세)</a>
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
@@ -489,11 +477,11 @@
 									<li><a href="#">기타</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
-							<li><a class="category2A" href="#">여아의류(3-6세)</a>
+							<li><a class="category2A" href="#">여아의류 (3-6세)</a>
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
-									<li><a href="#">원피스/세트</a></li>
+									<li><a href="#">원피스 / 세트</a></li>
 									<li><a href="#">아우터</a></li>
 									<li><a href="#">상하의</a></li>
 									<li><a href="#">티셔츠</a></li>
@@ -501,7 +489,7 @@
 									<li><a href="#">치마</a></li>
 									<li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
-							<li><a class="category2A" href="#">남아의류(3-6세)</a>
+							<li><a class="category2A" href="#">남아의류 (3-6세)</a>
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
@@ -522,12 +510,12 @@
 									<li><a href="#">양말</a></li>
 									<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 								</ul></li>
-							<li><a class="category2A" href="#">동화책/완구/인형/장난감</a>
+							<li><a class="category2A" href="#">동화책 / 완구 / 인형</a>
 								<ul class="category3Menu">
 								<div class="category3Div"></div>
 								<hr>
 									<li><a href="#">인형</a></li>
-									<li><a href="#">교육/완구</a></li>
+									<li><a href="#">교육 / 완구</a></li>
 									<li><a href="#">장난감</a></li>
 									<li><a href="#">물놀이도구</a></li>
 									<li><a href="#">놀이터도구</a></li>
@@ -535,22 +523,20 @@
 								</ul></li>
 								<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 						</ul></li>
-					<li id="categoryClickli1"><a class="category1A" href="#">기타</a>
+					<li><a class="category1A" href="#">기타</a>
 						<ul class="category2Menu">
 						<div class="category2Div"></div>
 						<hr>
 							<li><a href="#">피망나눔</a></li>
-							<li><a href="#">차량,오토바이</a></li>
+							<li><a href="#">차량 , 오토바이</a></li>
 							<li><a href="#">기타</a></li>
 							<li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li><li>&nbsp</li>
 						</ul></li>
 				</ul></li>
-				<div id="header_categoryTitle">전체 카테고리</div>
 			</div>
 		</ul>
 		
 	</div><!-- header category -->
-
       
         <div id="aside">
          <div class="asideDiv">
@@ -588,72 +574,329 @@
             </div>
             
             <div class="topBtn">
-               <a id="topA" href="#">TOP</a>
+               <a id="topA" href="#header">TOP</a>
+            </div>
+            
+            <div class="pmangTok">
+               <a class="pmangTokA" href="#">
+               	<div class="pmangTokDiv">피망Tok</div>
+               </a>
             </div>
          </div><!-- asideDiv -->
 
       </div><!-- aside -->
    </div><!-- header -->
-   <!-- -----------------------------------------헤더 부분 ----------------------------------->
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+      <!-- ----------------헤더 -->
       
    <div id="wrap">
       <div id="container">
-          <jsp:include page="${display}"/>
- 	  </div><!-- container -->
+         
+         <!-- 인기카테고리 슬라이드영역 -->
+         <div id="slide" style="border: 1px solid pink">
+            <div id="slideInitial" style="border: 1px solid pink">
+               <!-- initial -->
+               
+               <div id="slideAct" style="border: 1px solid black">
+                  <ul class="slide_wrap"
+                     style="width: 5120px; height: 300px; border: 1px solid blue;">
+                     <li class="slide_item">
+                        <a href="#">
+                           <img src="/pmang/image/image1.jpg" alt="배경1" />
+                        </a>
+                     </li>
+                     
+                     <li class="slide_item">
+                        <a href="#">
+                           <img src="/pmang/image/image2.jpg" alt="배경2" />
+                        </a>
+                     </li>
+                     
+                     <li class="slide_item">
+                        <a href="#">
+                           <img src="/pmang/image/image3.jpg" alt="배경3" />
+                        </a>
+                     </li>
+                     
+                     <li class="slide_item">
+                        <a href="#">
+                           <img src="/pmang/image/image4.jpg" alt="배경4" />
+                        </a>
+                     </li>
+                     
+                     <li class="slide_item">
+                        <a href="#">
+                           <img src="/pmang/image/image5.jpg" alt="배경5" />
+                        </a>
+                     </li>
+                     
+                     
+                     </ul>
+               </div><!-- slideAct -->
+               
+            </div><!-- slideInitial -->
+            
+         </div><!-- slide -->
+         
+         
+         <!-- 최근게시글 -->
+         <div id="selection">
+            <h2>오늘의 상품 추천</h2>
+            
+            
+            <div class="selection1">
+               <div class="selection2">
+                  <div class="selection3">
+                     <!-- 1개상품 -->                  
+                     <div class="itemFrame">
+                        <a class="itemLink" href="#">
+                           <div class="itemImageArea">
+                              <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
+                              <div class="imageAreaDiv"></div>
+                           </div>
+                           <div class="itemContent">
+                              <div class="itemName">상품명</div>
+                              <div class="itemPriceAndTime">
+                                 <div class="itemPrice">5000</div>
+                                 <div class="itemTime">
+                                    <span>7시간 전</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </a>
+                     </div><!-- itemFrame -->
+                     
+                     <!-- 1개상품 -->                  
+                     <div class="itemFrame">
+                        <a class="itemLink" href="#">
+                           <div class="itemImageArea">
+                              <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
+                              <div class="imageAreaDiv"></div>
+                           </div>
+                           <div class="itemContent">
+                              <div class="itemName">상품명</div>
+                              <div class="itemPriceAndTime">
+                                 <div class="itemPrice">5000</div>
+                                 <div class="itemTime">
+                                    <span>7시간 전</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </a>
+                     </div><!-- itemFrame -->
+                     
+                     <!-- 1개상품 -->                  
+                     <div class="itemFrame">
+                        <a class="itemLink" href="#">
+                           <div class="itemImageArea">
+                              <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
+                              <div class="imageAreaDiv"></div>
+                           </div>
+                           <div class="itemContent">
+                              <div class="itemName">상품명</div>
+                              <div class="itemPriceAndTime">
+                                 <div class="itemPrice">5000</div>
+                                 <div class="itemTime">
+                                    <span>7시간 전</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </a>
+                     </div><!-- itemFrame -->
+                     
+                     <!-- 1개상품 -->                  
+                     <div class="itemFrame">
+                        <a class="itemLink" href="#">
+                           <div class="itemImageArea">
+                              <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
+                              <div class="imageAreaDiv"></div>
+                           </div>
+                           <div class="itemContent">
+                              <div class="itemName">상품명</div>
+                              <div class="itemPriceAndTime">
+                                 <div class="itemPrice">5000</div>
+                                 <div class="itemTime">
+                                    <span>7시간 전</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </a>
+                     </div><!-- itemFrame -->
+                     
+                     <!-- 1개상품 -->                  
+                     <div class="itemFrame">
+                        <a class="itemLink" href="#">
+                           <div class="itemImageArea">
+                              <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
+                              <div class="imageAreaDiv"></div>
+                           </div>
+                           <div class="itemContent">
+                              <div class="itemName">상품명</div>
+                              <div class="itemPriceAndTime">
+                                 <div class="itemPrice">5000</div>
+                                 <div class="itemTime">
+                                    <span>7시간 전</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </a>
+                     </div><!-- itemFrame -->
+                     
+                     <!-- 1개상품 -->                  
+                     <div class="itemFrame">
+                        <a class="itemLink" href="#">
+                           <div class="itemImageArea">
+                              <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
+                              <div class="imageAreaDiv"></div>
+                           </div>
+                           <div class="itemContent">
+                              <div class="itemName">상품명</div>
+                              <div class="itemPriceAndTime">
+                                 <div class="itemPrice">5000</div>
+                                 <div class="itemTime">
+                                    <span>7시간 전</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </a>
+                     </div><!-- itemFrame -->
+                     
+                     <!-- 1개상품 -->                  
+                     <div class="itemFrame">
+                        <a class="itemLink" href="#">
+                           <div class="itemImageArea">
+                              <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
+                              <div class="imageAreaDiv"></div>
+                           </div>
+                           <div class="itemContent">
+                              <div class="itemName">상품명</div>
+                              <div class="itemPriceAndTime">
+                                 <div class="itemPrice">5000</div>
+                                 <div class="itemTime">
+                                    <span>7시간 전</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </a>
+                     </div><!-- itemFrame -->
+                     
+                     <!-- 1개상품 -->                  
+                     <div class="itemFrame">
+                        <a class="itemLink" href="#">
+                           <div class="itemImageArea">
+                              <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
+                              <div class="imageAreaDiv"></div>
+                           </div>
+                           <div class="itemContent">
+                              <div class="itemName">상품명</div>
+                              <div class="itemPriceAndTime">
+                                 <div class="itemPrice">5000</div>
+                                 <div class="itemTime">
+                                    <span>7시간 전</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </a>
+                     </div><!-- itemFrame -->
+                     
+                     <!-- 1개상품 -->                  
+                     <div class="itemFrame">
+                        <a class="itemLink" href="#">
+                           <div class="itemImageArea">
+                              <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
+                              <div class="imageAreaDiv"></div>
+                           </div>
+                           <div class="itemContent">
+                              <div class="itemName">상품명</div>
+                              <div class="itemPriceAndTime">
+                                 <div class="itemPrice">5000</div>
+                                 <div class="itemTime">
+                                    <span>7시간 전</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </a>
+                     </div><!-- itemFrame -->
+                     
+                     <!-- 1개상품 -->                  
+                     <div class="itemFrame">
+                        <a class="itemLink" href="#">
+                           <div class="itemImageArea">
+                              <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
+                              <div class="imageAreaDiv"></div>
+                           </div>
+                           <div class="itemContent">
+                              <div class="itemName">상품명</div>
+                              <div class="itemPriceAndTime">
+                                 <div class="itemPrice">5000</div>
+                                 <div class="itemTime">
+                                    <span>7시간 전</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </a>
+                     </div><!-- itemFrame -->
+                     
+                     <!-- 1개상품 -->                  
+                     <div class="itemFrame">
+                        <a class="itemLink" href="#">
+                           <div class="itemImageArea">
+                              <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
+                              <div class="imageAreaDiv"></div>
+                           </div>
+                           <div class="itemContent">
+                              <div class="itemName">상품명</div>
+                              <div class="itemPriceAndTime">
+                                 <div class="itemPrice">5000</div>
+                                 <div class="itemTime">
+                                    <span>7시간 전</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </a>
+                     </div><!-- itemFrame -->
+                     
+                     <!-- 1개상품 -->                  
+                     <div class="itemFrame">
+                        <a class="itemLink" href="#">
+                           <div class="itemImageArea">
+                              <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
+                              <div class="imageAreaDiv"></div>
+                           </div>
+                           <div class="itemContent">
+                              <div class="itemName">상품명</div>
+                              <div class="itemPriceAndTime">
+                                 <div class="itemPrice">5000</div>
+                                 <div class="itemTime">
+                                    <span>7시간 전</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </a>
+                     </div><!-- itemFrame -->
+                     
+                     
+                  </div><!-- selection3 -->
+               </div><!-- selection2 -->
+            </div><!-- selection1 -->
+         </div><!-- selection -->
+      </div><!-- container -->
+
+
+ 
    </div><!-- wrap -->
             
 
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-     <!-- 상품등록 footer -->
-    <footer class="sellerWriteForm_footer">
-			<div class="sellerWriteForm_footer_div">
-				<button type="button" class="itemWriteBtn">
-				</button>
-			</div>
-	</footer>
-	
-	
-	<!-- index footer -->
+      
+    
+
+   
    <div class="footer">
       <div class="footerCategoryArea">
          <div class="footerCategory">
-            <a class="cIPDuS" href="/pmang/board/notice">공지사항</a>
-            <a class="cIPDuS" href="/pmang/board/notice">자주묻는질문</a>
-            <a class="cgGBdw" href="/pmang/board/notice">운영정책</a>
+            <a class="cIPDuS" href="#">공지사항</a>
+            <a class="cIPDuS" href="#">자주묻는질문</a>
+            <a class="cgGBdw" href="#">운영정책</a>
             <a class="cIPDuS" href="#">1:1문의하기</a>
             <a class="cgGBdw" href="#">사업자정보확인</a>
             <a class="cgGBdw" href="#">이용약관</a>
@@ -715,7 +958,29 @@
          </div>
       </div>
    </div>
+</form>
 
+<script>
+      /* 인기 카테고리 슬라이드 쇼 이벤트 */
+      var ul = document.querySelector('.slide_wrap');
+      function move() {
+         var curIndex = 0;
+         setInterval(function() {
+            ul.style.transition = '0.5s';
+            ul.style.transform = "translate3d(-" + 1024 * (curIndex + 1)
+                  + "px, 0px, 0px)";
+            curIndex++;
+            if (curIndex === 4) {
+               curIndex = -1;
+            }
+         }, 1000);
+      }
+      document.addEventListener("DOMContentLoaded", function() {
+         // 
+         move();
+      });
+      /* 인기 카테고리 슬라이드 쇼 이벤트 */
+</script>
 
 
 <!-- 검색 클릭 이벤트 -->
@@ -863,7 +1128,6 @@ $('.notice').hover(function(){
 
 //------------------------------------------------------------------------------
 //카테고리
-//카테고리
 $('.hoverli').hover(function(){
 	var img = '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAgCAYAAABgrToAAAAAAXNSR0IArs4c6QAAAE9JREFUWAnt1rEJACAQA0B1IQv3n8tSwRXSPHLfP4RLk77nOq3wjcLZXjQBqzckHwECBAj8LtCtmbBiayYE9E6AAAECBEIBayYEbNZMKngBdrgHHmiUuOgAAAAASUVORK5CYII=" width="20" height="16" alt="메뉴 버튼 아이콘">';
 	$('.hoverliA').html(img);
@@ -874,79 +1138,18 @@ $('.hoverli').hover(function(){
 	$('.category1Menu').hide();
 });
 
-
-/*  $('.category1Menu').on('mouseenter mouseleave','li',function(){
+$('.category1Menu').on('mouseenter mouseleave','li',function(){
 	//alert($(this).children('a').text());
 	if($(this).children('.category1A').text() != ""){
 		$('.category2Div').text($(this).children('.category1A').text());
 	}
-}); */
-
-
-
-$('.category1Menu').on('mouseenter','li',function(){
-	if($(this).children('.category1A').text() != ""){
-		$(this).css('background','green');
-		$(this).children('.category1A').css('color','white');
-		if($(this).children('.category1A').text() != ""){
-			$('.category2Div').text($(this).children('.category1A').text());
-		}
-	}
 });
 
-$('.category1Menu').on('mouseleave','li',function(){
-	if($(this).children('.category1A').text() != ""){
-		$(this).css('background','white');
-		$(this).children('.category1A').css('color','black');
-		
-	}
-});
-
-/* $('.category2Menu').on('mouseenter mouseleave','li',function(){
+$('.category2Menu').on('mouseenter mouseleave','li',function(){
 	//alert($(this).children('a').text());
 	if($(this).children('.category2A').text() != ""){
 		$('.category3Div').text($(this).children('.category2A').text());
 	}
-}); */
-
-$('.category2Menu').on('mouseenter','li',function(){
-	if($(this).children('.category2A').text() != ""){
-		$(this).css('background','green');
-		$(this).children('.category2A').css('color','white');
-		if($(this).children('.category2A').text() != ""){
-			$('.category3Div').text($(this).children('.category2A').text());
-		}
-	}
-});
-
-$('.category1Menu').on('mouseleave','li',function(){
-	if($(this).children('.category2A').text() != ""){
-		$(this).css('background','white');
-		$(this).children('.category2A').css('color','black');
-	}
-});
-
-
-
-$('.category1A').click(function(){
-	var firstCategory = $(this).text(); 
-	location.href = "/pmang/board/itemBoard?category1="+firstCategory;
-});
-
-$('.category2A').click(function(){
-	var firstCategory = $(this).parents('#categoryClickli1').children('a').text();
-	var secondCategory = $(this).text();
-	
-	location.href = "/pmang/board/itemBoard?category1="+firstCategory+"&category2="+secondCategory;
-});
-
-$('.category3Menu').on('click','li',function(){
-	var firstCategory = $(this).parents('#categoryClickli1').children('a').text();
-	var secondCategory = $(this).parent().parent().children('a').text();
-	var thirdCategory = $(this).children('a').text();
-	
-	location.href = "/pmang/board/itemBoard?category1="+firstCategory+"&category2="+secondCategory+"&category3="+thirdCategory;
-	
 });
 
 
@@ -975,42 +1178,25 @@ $(document).click(function(e){
 	}
 });
 
-
-$('.noticeContent').on('click','a',function(){
-	$('#loginli').trigger('click');
+$('#writeBtn').click(function(){
+	window.open("/pmang/member/writeForm", "width=700 height=500 scrollbars=yes");
 });
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-//---------------------------------로그인. 회원가입--------------------------------------------------//
-$('#index_writeBtn').click(function(){
-	location.href="/pmang/member/writeForm"
-});
-
+//로그인 js
 $('#loginBtn').click(function(){
-	$('#index_userIdDiv').empty();
-	$('#index_pwdDiv').empty();
+	$('#userIdDiv').empty();
+	$('#pwdDiv').empty();
 	
-	if($('#index_userId').val()==''){
+	if($('#userId').val()==''){
 		$('#userIdDiv').text('아이디를 입력해 주세요')
 						.css('color','red')
 						.css('font-size','8pt')
 						.css('font-weight','bold');
 		
-	}else if($('#index_pwd').val()==''){
-		$('#index_pwdDiv').text('비밀번호를 입력해 주세요')
+	}else if($('#pwd').val()==''){
+		$('#pwdDiv').text('비밀번호를 입력해 주세요')
 						 .css('color','red')
 						 .css('font-size','8pt')
 						 .css('font-weight','bold');
@@ -1018,7 +1204,7 @@ $('#loginBtn').click(function(){
 		$.ajax({
 			type: 'post',
 			url: '/pmang/member/login',
-			data: {'userId': $('#index_userId').val(), 'pwd': $('#index_pwd').val()},
+			data: {'userId': $('#userId').val(), 'pwd': $('#pwd').val()},
 			dataType: 'text',
 			success: function(data){
 				if(data == 'success'){
@@ -1032,135 +1218,14 @@ $('#loginBtn').click(function(){
 				console.log(err);
 			}
 		});	
+
 	}
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//여긴 상품등록쪽..
-//---------------------------------------------------------------------------------------------------
-//등록하기 버튼을 클릭했을때.
-$('.itemWriteBtn').click(function(){
-	//alert('아')
-	//전송할 formData 생성!
-	var formData = new FormData($('#sellerWriteForm')[0]); 
-	
-	for(var i = 1; i < 4; i++){
-		if($("#hashtag"+i).text() != ""){
-			formData.append("hashtag"+i, $("#hashtag"+i).text());
-		}else {
-			formData.append("hashtag"+i, "undefined");
-		}
-	}
-	
-	var category1 = $(".selectL").text();
-	var category2 = $(".selectM").text();
-	var category3 = $(".selectS").text();
-	
-	var img1url = $('.imageChoice_ul').children().eq(1).children('img').attr("src");
-	var img2url = $('.imageChoice_ul').children().eq(2).children('img').attr("src");
-	var img3url = $('.imageChoice_ul').children().eq(3).children('img').attr("src");
-	var img1 = $('.imageChoice_ul').children().eq(1).children('img').attr("title");
-	var img2 = $('.imageChoice_ul').children().eq(2).children('img').attr("title");
-	var img3 = $('.imageChoice_ul').children().eq(3).children('img').attr("title");
-	
-	formData.append("category1",category1);
-	formData.append("category2",category2);
-	formData.append("category3",category3);
-	formData.append("img1",img1);
-	formData.append("img2",img2);
-	formData.append("img3",img3);
-	formData.append("img1url",img1url);
-	formData.append("img2url",img2url);
-	formData.append("img3url",img3url);
-	
-
-	//데이터 잘 들어왔는지 확인
-	//for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }
-
-	
-	
-	
-	//유효성 검사
-	$('#imageCheck').hide();
-	$('.itemSubjectDiv').hide();
-	$('#categoryCheck').hide();
-	$('#priceDiv').text("");
-	
-	$('.imageChoice_ul').css('border-color','rgb(195, 194, 204)');
-	$('.itemSubjectText').css('border-color','rgb(195, 194, 204)');
-	$('input[name=item_subject]').css('border-color','rgb(195, 194, 204)');
-	$('.categoryChoice_div').css('border-color','rgb(195, 194, 204)');
-	$('.price_input').css('border','1px solid rgb(195, 194, 204)');
-	
-	if($('#imageCountHidden').val() == 0){ //이미지 등록 확인
-		$('#imageCheck').show();
-		$('.imageChoice_li').css('border-color','green');
-		
-		var offset = $('.main_sectionFrame').offset();
-		$('html').animate({scrollTop : offset.top}, 400);
-		
-	}else if($('input[name=item_subject]').val().length < 2){ //제목 수 확인
-		$('input[name=item_subject]').css('border-color','green');
-		$('input[name=item_subject]').css('border-color','green');
-		$('.itemSubjectDiv').show();
-		
-		var offset = $('.imageChoice_div').offset();
-		$('html').animate({scrollTop : offset.top}, 400);
-		
-	}else if($('#choice').text() == ""){ //카테고리 확인
-		$('.categoryChoice_div').css('border-color','green');
-		$('#categoryCheck').show();
-		
-		var offset = $('.imagecontent').offset();
-		$('html').animate({scrollTop : offset.top}, 400);
-		
-	}else if($('.price_input').val() == "" || $('.price_input').val() < 100){ //가격확인
-		$('#priceDiv').text('※100원 이상 입력해주세요.');
-		$('.price_input').css('border','1px solid green');
-		
-		var offset = $('.locationText_div').offset();
-		$('html').animate({scrollTop : offset.top}, 400);
-		
-	}else if($('.qty_input').val() == ""){ //수량 확인
-		$('.qty_input').val('1');
-	}else {
-		$.ajax({
-			type: 'post',
-			enctype: 'form-data',
-			processData: false, //데이터를 컨텐트 타입에 맞게 변환 여부
-			contentType: false,//요청 컨텐트 타입
-			url: '/pmang/member/sellerWrite',
-			data: formData,
-			success: function(data){
-				alert('상품 등록 완료');
-				location.href='/pmang/index'; //추후에 상품관리 페이지로 바뀌게 해야함!
-			},
-			error: function(err){
-				console.log(err);
-			}
-		});
-		
-	}
-});
-
-
 
 /* ---------------------------------------------------------------------- */
 //카카오 로그인 js
  window.Kakao.init("d738a87db4961b1bfd9e5ce2fefec44d");
+
 $('#kakaoBtn').click(function(event){
 	event.preventDefault();
 	 window.Kakao.Auth.login({
@@ -1191,7 +1256,7 @@ $('#kakaoBtn').click(function(event){
 						success: function(data){
 							if(data == 'loginSuccess'){
 								alert('로그인 성공');
-								location.href="/pmang/index";
+								location.reload();
 							} else if(data == 'JoinSuccess'){
 								alert('카카오 회원가입을 축하드립니다.');
 							}
@@ -1211,6 +1276,12 @@ $('#kakaoBtn').click(function(event){
 
 
 </script>
-
+	<div id="section">
+		<c:if test="${not empty display }">
+			<jsp:include page="${display }" />
+		</c:if>
+		<c:if test="${empty display }">
+		</c:if>
+	</div>
 </body>
 </html>

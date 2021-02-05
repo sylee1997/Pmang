@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="memberSQL">
+<!-- 로그인 -->
+	<select id="login" parameterType="String" resultType="member">
+		select * from usertable where ((userId=#{userId}) and (pwd=#{pwd}) and (user_key='Y'))
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="write" parameterType="member">
+		insert into usertable (userName, userId, pwd, gender, email1, email2, zipcode, addr1, addr2, tel1, tel2, tel3, logtime)
+		values (#{userName}, #{userId}, #{pwd}, #{gender}, #{email1}, #{email2}, #{zipcode}, #{addr1}, #{addr2}, #{tel1}, #{tel2}, #{tel3}, sysdate)
+	</insert>
+	
+	<!-- 아이디 중복체크 -->	
+	<select id="checkId" parameterType="String" resultType="member">
+		select * from usertable where userId=#{userId}
+	</select>
+	
+	<!-- 우편번호 -->
+	<select id="checkPostSearch" parameterType="java.util.Map" resultType="zipcode">
+		select * from newzipcode 
+		where sido like '%'||#{sido}||'%' 
+		and nvl(sigungu,'0') like '%'||#{sigungu}||'%' 
+		and roadname like '%'||#{roadname}||'%'
+	</select>
+	
+	<!-- 메일인증키 -->
+	<insert id="GetKey" parameterType="java.util.Map">
+		update usertable set user_key = #{user_key} where userId = #{userId}
+	</insert>
+	
+	<!--회원 인증키(난수) Y로 변경 -->
+	<update id="regSuccess" parameterType="java.util.Map">
+		update usertable set user_key = 'Y' where userId = #{userId} and user_key = #{user_key}
+	</update>
+	
+	<!-- kakao id 확인 -->
+	<select id="checkKakaoId" parameterType="String" resultType="Integer">
+		select count(*) from usertable where kakaoId=#{kakaoId}
+	</select>
+	
+	<!-- kakao 회원가입  -->
+	<insert id="kakaoWrite" parameterType="member">
+		insert into usertable (userName, gender, email1, email2, userId, kakaoId)
+		values (#{userName}, #{gender}, #{email1}, #{email2}, #{kakaoId}, #{kakaoId})
+	</insert>
+</mapper>

@@ -4,8 +4,5 @@
 	<typeAliases>
 		<typeAlias type="member.bean.MemberDTO" alias="member"/>
 		<typeAlias type="member.bean.ZipcodeDTO" alias="zipcode"/>
-
-		<typeAlias type="board.bean.ItemDTO" alias="item" />
-
 	</typeAliases>
 </configuration>
