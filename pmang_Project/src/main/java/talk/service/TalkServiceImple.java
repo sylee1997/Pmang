@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import talk.bean.MessageDTO;
 import talk.bean.TalkRoomDTO;
 import talk.dao.TalkDAO;
 
@@ -28,6 +29,11 @@ public class TalkServiceImple implements TalkService {
 	public List<TalkRoomDTO> getRoomList(String userId) {
 
 		return talkDAO.getRoomList(userId);
+	}
+
+	@Override
+	public void insertMessage(MessageDTO messageDTO) {
+		talkDAO.insertMessage(messageDTO);
 	}
 	
 }

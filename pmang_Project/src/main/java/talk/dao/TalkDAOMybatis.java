@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import talk.bean.MessageDTO;
 import talk.bean.TalkRoomDTO;
 
 @Repository
@@ -28,6 +29,11 @@ public class TalkDAOMybatis implements TalkDAO {
 	@Override
 	public List<TalkRoomDTO> getRoomList(String userId) {
 		return sqlSession.selectList("talkSQL.getRoomList", userId);
+	}
+
+	@Override
+	public void insertMessage(MessageDTO messageDTO) {
+		sqlSession.insert("talkSQL.insertMessage",messageDTO);
 	}
 
 }

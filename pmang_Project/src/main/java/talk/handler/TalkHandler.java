@@ -66,13 +66,17 @@ public class TalkHandler extends TextWebSocketHandler {
 		
 		messageDTO.setTalkRoom_seq(room.getTalkRoom_seq());
 		
+		talkService.insertMessage(messageDTO);
 		
 		
 		
 		System.out.println(session.getId() + " 로 부터 " + message.getPayload() + "받음");
 		for(WebSocketSession se : sessionList) {
 			
-			se.sendMessage(new TextMessage(message.getPayload())); //모든 클라이언트들에게 TextMessage 전송. (브로드캐스트)
+			if(httpSessionMap.get("userId").equals(messageDTO.getSender_user_id()) || httpSessionMap.get("userId").equals(messageDTO.getReceiver_user_id())) {//현재 세션 id가 전송자 id 이거나, 수신자 id 라면 메시지를 보내라.
+				se.sendMessage(new TextMessage(message.getPayload())); //모든 클라이언트들에게 TextMessage 전송. (브로드캐스트)
+			}
+			
 		}
 		log.info("{}로 부터 {} 받음", session.getId(), message.getPayload());//getPayload 는 문자형태 그대로 받겠다는 말이다
 	}//클라이언트가 소켓에 메시지를 보냈을 떄 실행된다
