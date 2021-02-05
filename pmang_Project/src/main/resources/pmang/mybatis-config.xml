@@ -6,6 +6,9 @@
 		<typeAlias type="member.bean.ZipcodeDTO" alias="zipcode"/>
 
 		<typeAlias type="board.bean.ItemDTO" alias="item" />
+		<typeAlias type="board.bean.CommentDTO" alias="comment" />
+		<typeAlias type="board.bean.WishlistDTO" alias="wishlist" />
 
 	</typeAliases>
+	
 </configuration>

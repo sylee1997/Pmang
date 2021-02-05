@@ -8,11 +8,7 @@
 
 
 <link rel="stylesheet" href="/pmang/css/index.css">
-<style type="text/css">
-   
-         
-/* --------------------------------------------서영이조 */
-</style>
+<style type="text/css"></style>
 <title>피망마켓에 오신것을 환영합니다.</title>
 </head>
 <body> 
@@ -592,27 +588,22 @@
 
       </div><!-- aside -->
    </div><!-- header -->
-   <!-- -----------------------------------------헤더 부분 ----------------------------------->
+
+      <!-- ----------------헤더 -->
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-   <div id="wrap">
+
+  	 <div id="wrap">
       <div id="container">
-          <jsp:include page="${display}"/>
- 	  </div><!-- container -->
+      
+      
+         <jsp:include page="${display}"/>
+   
+      
+      </div><!-- container -->
+
+
+ 
+
    </div><!-- wrap -->
             
 
@@ -649,9 +640,9 @@
    <div class="footer">
       <div class="footerCategoryArea">
          <div class="footerCategory">
-            <a class="cIPDuS" href="/pmang/board/notice">공지사항</a>
-            <a class="cIPDuS" href="/pmang/board/notice">자주묻는질문</a>
-            <a class="cgGBdw" href="/pmang/board/notice">운영정책</a>
+            <a class="cIPDuS" id="footerNotice">공지사항</a>
+            <a class="cIPDuS" id="footerFQA">자주묻는질문</a>
+            <a class="cgGBdw" id="footerPolicy">운영정책</a>
             <a class="cIPDuS" href="#">1:1문의하기</a>
             <a class="cgGBdw" href="#">사업자정보확인</a>
             <a class="cgGBdw" href="#">이용약관</a>
@@ -716,9 +707,11 @@
 
 
 
+
 <!-- 검색 클릭 이벤트 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script> <!-- 카카오디벨로퍼 -->
+
 <script type="text/javascript">
 
 
@@ -1086,7 +1079,8 @@ $('.itemWriteBtn').click(function(){
 	
 
 	//데이터 잘 들어왔는지 확인
-	//for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }
+	/* for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); } */
+
 
 	
 	
@@ -1155,6 +1149,35 @@ $('.itemWriteBtn').click(function(){
 });
 
 
+$('#footerNotice').click(function(){
+	$(location).attr("href", "/pmang/board/notice?tabNo=1");
+});
+
+$('#footerPolicy').click(function(){
+	$(location).attr("href", "/pmang/board/notice?tabNo=2");	
+});
+
+$('#footerFQA').on('click',function(){
+	$(location).attr("href", "/pmang/board/notice?tabNo=3");
+});
+
+
+if('${tabNo}'=='1'){
+	$('#tab1').attr('checked', true);
+}else if('${tabNo}'=='2'){
+	$('#tab2').attr('checked', true);
+}else if('${tabNo}'=='3'){
+	$('#tab3').attr('checked', true);
+}else if('${tabNo}'=='4'){
+	$('#tab3').attr('checked', true);
+	$('#menu2').attr('checked', true);
+}else{
+	$('#tab1').attr('checked', true);
+}
+
+
+
+
 
 /* ---------------------------------------------------------------------- */
 //카카오 로그인 js
@@ -1208,7 +1231,9 @@ $('#kakaoBtn').click(function(event){
 });
 
 
+
 </script>
+
 
 </body>
 </html>

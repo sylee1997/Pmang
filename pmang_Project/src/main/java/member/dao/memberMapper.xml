@@ -50,14 +50,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values (#{userName}, #{gender}, #{email1}, #{email2}, #{kakaoId}, #{kakaoId})
 	</insert>
 
-
-
-
-
-
-
-
-
 	<!-- 상품등록쪽 -->
 	<insert id="sellerWrite" parameterType="item">
 	insert into item values(item_seq.nextval,
