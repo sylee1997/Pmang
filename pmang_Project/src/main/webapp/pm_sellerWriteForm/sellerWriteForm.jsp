@@ -112,7 +112,7 @@
 						<div class="itemSubjectTextArea_div">
 							<div class="itemSubjectText_div">
 								<div class="itemSubjectText">
-									<input type="text" name="itemSubject" maxlength="40" placeholder="상품 제목을 입력해주세요." class="itemSubject_input">
+									<input type="text" name="item_subject" maxlength="40" placeholder="상품 제목을 입력해주세요." class="itemSubject_input">
 									<a id="textRemove"><img id="textRemoveClick" src="/pmang/image/textRemove.png" width="15px" height="15px"></a>
 								</div>
 								<div class="textLength" id="textLength">

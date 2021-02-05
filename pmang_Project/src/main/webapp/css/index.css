@@ -144,7 +144,7 @@ body > #wrap {
 }
 
 .category2Menu ul{
-	border-right: 2px solid green;
+	/* border-right: 2px solid green; */
 }
 
 
@@ -398,7 +398,7 @@ body > #wrap {
 
 /* 로그인창 */
 
-.modal-header {
+.loginModal-headerDiv {
     position: relative;
     bottom: 30px;
     border-bottom: 1px solid #e5e5e5;
@@ -473,11 +473,11 @@ button div p{
 #writeP{
 	color: white;
 }
-#userId, #pwd {
+#index_userId, #index_pwd {
 	width: 340px;
 }
 
-#userId:hover, #pwd:hover {
+#index_userId:hover, #index_pwd:hover {
 	border-color: green;
 }
 
@@ -695,13 +695,14 @@ display:none;
 }
 
 .likebag {
-	font-size : 10pt;
-	font-weight : bold;
-	border : 1px solid rgb(22 119 4);
-	width : 100px;
-	/* height: 50px; */
-	text-align : center;
-	padding: 10px;
+	font-size: 10pt;
+    font-weight: bold;
+    border: 1px solid rgb(33 33 33);
+    width: 100px;
+    /* height: 50px; */
+    text-align: center;
+    padding: 7px;
+    margin-bottom: 5px;
 }
 
 .bag_click {
@@ -715,20 +716,21 @@ display:none;
 }
 
 .recentlyLook {
-	/* margin-top : 5px; */
-	width : 100px;
-	/* height: 330px; */
-	 border : 1px solid rgb(22 119 4);
-	 border-top : 0px;
-	text-align : center;
-	font-weight : bold;
-	font-size : 10pt;
-	padding: 15px 0px;
+	margin-top: 5px; */
+    width: 100px;
+    /* height: 330px; */
+    border: 1px solid rgb(204 204 204);
+    /* border-top: 0px; */
+    text-align: center;
+    font-weight: bold;
+    font-size: 10pt;
+    margin-bottom: 5px;
+    /* padding: 15px 0px; */
 }
 
 .goods {
 	position : relative;
-	margin-left: 8px;
+	margin: 8px;
 	
 }
 
@@ -741,13 +743,13 @@ display:none;
 }
 
 .topBtn {
-	text-align : center;
-	/* margin-top : 5px; */
-	border: 1px solid rgb(22 119 4);
-	border-top : 0px;
-	height: 45px;
-	padding-top: 10px;
-	width: 100%;
+	text-align: center;
+    /* margin-top: 5px; */
+    border: 1px solid rgb(204 204 204);
+    /* border-top: 0px; */
+    height: 45px;
+    padding-top: 10px;
+    width: 100%;
 }
 
 #topA {
@@ -755,7 +757,7 @@ display:none;
 	font-weight: bold;
 }
 
-#aside_noticeA:hover {
+.noticeContent a:hover {
 	text-decoration: underline;
 	color : green;
 }
