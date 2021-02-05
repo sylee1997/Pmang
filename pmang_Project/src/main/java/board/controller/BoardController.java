@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import board.bean.BoardPaging;
 import board.bean.ItemDTO;
 import board.service.BoardService;
 
@@ -47,15 +48,24 @@ public class BoardController {
 	
 	@RequestMapping(value="getitemBoardList", method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView getitemBoardList(@RequestParam Map<String, String> map) {
+	public ModelAndView getitemBoardList(@RequestParam(required=false, defaultValue="1") String pg, @RequestParam Map<String, String> map) {
 		System.out.println(map.get("category1"));
 		System.out.println(map.get("category2"));
 		System.out.println(map.get("category3"));
 		List<ItemDTO> list = boardService.getItemBoardList(map);
 		
+		//전체 카테고리 수 구하기
+		int entireItemNum = boardService.getEntireItemNum(map);
+		
+		//페이징 처리
+		BoardPaging boardPaging = boardService.boardPaging(pg, map);
+		
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("pg", pg);
+		mav.addObject("boardPaging", boardPaging);
 		mav.addObject("itemBoardList", list);
+		mav.addObject("entireItemNum", entireItemNum);
 		mav.setViewName("jsonView");
 		
 		return mav;
@@ -74,6 +84,21 @@ public class BoardController {
 		return mav;
 	}
 	
+	@RequestMapping(value="getOrderbyItem", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView getOrderbyItem(@RequestParam Map<String, String> map) {
+		
+		List<Object> list = boardService.getOrderbyItem(map);
+		int entireItemNum = boardService.getEntireItemNum(map);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("orderbylist", list);
+		mav.addObject("entireItemNum", entireItemNum);
+		mav.setViewName("jsonView");
+		
+		return mav;
+		
+	}
 
 	
 	

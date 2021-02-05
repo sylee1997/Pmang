@@ -23,8 +23,10 @@ public class BoardDAOMybatis implements BoardDAO {
 
 	@Override
 	public List<Object> getItemBoardCount(Map<String, String> map) {
-		System.out.println(map.get("category1"));
-		System.out.println(map.get("category2"));
+		
+		  System.out.println(map.get("category1"));
+		  System.out.println(map.get("category2"));
+		 
 		if(map.get("category2") == null) {
 			return sqlSession.selectList("boardSQL.getItemBoardCount1", map);
 		}else {
@@ -32,5 +34,18 @@ public class BoardDAOMybatis implements BoardDAO {
 		}
 		
 	}
+
+	@Override
+	public int getEntireItemNum(Map<String, String> map) {
+		return sqlSession.selectOne("boardSQL.getEntireItemNum", map);
+
+	}
+
+	@Override
+	public List<Object> getOrderbyItem(Map<String, String> map) {
+		return sqlSession.selectList("boardSQL.getOrderbyItem", map);
+	}
+
+
 
 }

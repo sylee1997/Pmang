@@ -11,4 +11,9 @@ public interface BoardDAO {
 
 	public List<Object> getItemBoardCount(Map<String, String> map);
 
+	public int getEntireItemNum(Map<String, String> map);
+
+	public List<Object> getOrderbyItem(Map<String, String> map);
+
+
 }

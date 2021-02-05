@@ -23,6 +23,42 @@
 	<select id="getItemBoardCount2" parameterType="java.util.Map" resultType="java.util.Map">
 	 	select category2, category3, count(category3) as cnt3 from item group by category2, category3 having category2 = #{category2} and category3 is not null
 	</select>
+	
+	<select id="getEntireItemNum" parameterType="java.util.Map" resultType="int">
+	 	<if test="category2 == null and category3 == null">
+	 		select count(category1) from item where category1 = #{category1}
+	 	</if>
+	 	<if test="category2 != null and category3 == null">
+	 		select count(category2) from item where category2 = #{category2}
+	 	</if>
+	 	<if test="category3 != null">
+	 		select count(category3) from item where category3 = #{category3}
+	 	</if>
+	</select>
+	
+	<select id="getOrderbyItem" parameterType="java.util.Map" resultType="item">
+		select item_seq, img1, item_subject, category1, category2, category3, item_location, item_price,hashtag1, hashtag2, hashtag3, hit, logtime from item where category1 = #{category1}
+		<if test="category2 != null">
+			and category2 = #{category2}
+		</if>
+		<if test="category3 != null">
+			and category3 = #{category3}
+		</if>
+		
+		<if test="order.equals('최신순')">
+			order by logtime desc
+		</if>
+		<if test="order.equals('인기순')">
+			order by hit
+		</if>
+		<if test="order.equals('저가순')">
+			order by item_price desc
+		</if>
+		<if test="order.equals('고가순')">
+			order by item_price
+		</if>
+		
+	</select>
 </mapper>
 
 
