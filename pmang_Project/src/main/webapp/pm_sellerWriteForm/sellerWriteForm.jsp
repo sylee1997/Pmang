@@ -8,8 +8,8 @@
 	<section class="searchlocationContent">
 		<header id="searchlocationHeader">주소 검색 <button type="button" class="searchlocationCloseBtn"></button></header>
 		<div class="searchlocationForm">
-			<input type="text" placeholder="동(읍/면/리) 입력해주세요." value="">
-			<button type="submit" class="searchlocationBtn"></button>
+			<input type="text" class="searchlocationInput" placeholder="동(읍/면/리) 입력해주세요." value="">
+			<button class="searchlocationBtn"></button>
 			<ul class="searchlocationList">
 			
 			</ul>
@@ -32,7 +32,7 @@
 			<!-- 만약 선택한 페이지로 이동한다면,선택된 a태그의 color 를 red로 바꿔줘야한다. -->
 			<!-- 기존에 우리가 페이징 처리할때 했던것 처럼 id 를 주어서 id 가 현재페이지라면, 바꾸면될듯하다 -->
 			<div class="nav_writeForm">
-				<a class="nav_move1" href="/pmang/member/sellerWriteForm"> 
+				<a class="nav_move1" href="/pmang/member/sellerWriteForm" style="color:green; font-weight: bold;"> 
 				상품등록
 				</a>
 			</div>
@@ -112,7 +112,7 @@
 						<div class="itemSubjectTextArea_div">
 							<div class="itemSubjectText_div">
 								<div class="itemSubjectText">
-									<input type="text" name="itemSubject" maxlength="40" placeholder="상품 제목을 입력해주세요." class="itemSubject_input">
+									<input type="text" name="item_subject" maxlength="40" placeholder="상품 제목을 입력해주세요." class="itemSubject_input">
 									<a id="textRemove"><img id="textRemoveClick" src="/pmang/image/textRemove.png" width="15px" height="15px"></a>
 								</div>
 								<div class="textLength" id="textLength">

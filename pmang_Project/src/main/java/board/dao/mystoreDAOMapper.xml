@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mystoreSQL">
+
+	<update id="profileImgModify" parameterType="seller">
+		update seller set
+		pf_photo=#{pfphoto}
+	</update>
+
+	<select id="getMystore" parameterType="int" resultType="seller">
+		select *
+		from seller where userkey=#{userkey}
+	</select>
+
+	<update id="mystoreHitUpdate" parameterType="int">
+		update seller set
+		markethit=markethit+1 where userkey=#{userkey}
+	</update>
+
+	<update id="mystoreModify" parameterType="java.util.Map">
+		update seller set
+		marketname=#{marketname} , pf_content=#{pf_content}
+	</update>
+
+	<select id="getMystoreItemList" parameterType="java.util.Map"
+		resultType="item">
+		select * from
+		(select rownum rn,tt.* from
+		(select * from item where
+		userkey=#{userkey} order by logtime desc)tt
+		)where rn <![CDATA[>=]]>#{startNum}
+		and rn <![CDATA[<=]]>
+		#{endNum}
+	</select>
+
+	<select id="getMystoreWishList" parameterType="java.util.Map"
+		resultType="wish">
+		select * from
+		(select rownum rn,tt.* from
+		(select item_seq,
+		itemsubject,img1,item_price, logtime,item_location
+		from wishlist w,item
+		t
+		where t.item_seq=w.itemnum and w.userkey=#{userkey} order by
+		w.wish_key)tt
+		)where rn <![CDATA[>=]]>#{startNum}
+		and rn <![CDATA[<=]]>
+		#{endNum}
+	</select>
+
+
+	<delete id="wishListDelete" parameterType="java.util.Map">
+		delete from wishlist
+		where userkey=#{userkey} and itemnum=#{item_seq}
+	</delete>
+
+	<select id="getMystoreReviewList" parameterType="java.util.Map"
+		resultType="review">
+		select * from
+		(select rownum rn,tt.* from
+		(select reviewwriter,
+		reviewstamp,reviewsubject,reviewimg1,reviewcontent,reviewlogtime,itemnum
+		from review r,seller s
+		where s.userkey=r.userkey and
+		r.userkey=#{userkey} order by r.reviewlogtime desc)tt
+		)where rn <![CDATA[>=]]>#{startNum}
+		and rn <![CDATA[<=]]>
+		#{endNum}
+	</select>
+
+	<select id="getMystoreItemCnt" parameterType="Integer"
+		resultType="String">
+		select count(*) from item where userkey=#{userkey}
+	</select>
+
+	<select id="getMystoreWishCnt" parameterType="Integer"
+		resultType="String">
+		select count(*) from wishlist where userkey=#{userkey}
+	</select>
+
+	<select id="getMystoreReviewCnt" parameterType="Integer"
+		resultType="String">
+		select count(*) from review where userkey=#{userkey}
+	</select>
+
+	<select id="getMystoreItemPopularList"
+		parameterType="java.util.Map" resultType="item">
+
+		select * from
+		(select rownum rn,tt.* from
+		(select * from item where
+		userkey=#{userkey} order by hit desc)tt
+		)where rn <![CDATA[>=]]>#{startNum}
+		and rn <![CDATA[<=]]>
+		#{endNum}
+	</select>
+	
+	<select id="getMystoreItemlowerPriceList" parameterType="java.util.Map" resultType="item">
+	select * from
+		(select rownum rn,tt.* from
+		(select * from item where
+		userkey=#{userkey} order by to_number(item_price))tt
+		)where rn <![CDATA[>=]]>#{startNum}
+		and rn <![CDATA[<=]]>
+		#{endNum}
+	</select>
+	
+	<select id="getMystoreItemHighestPriceList" parameterType="java.util.Map" resultType="item">
+	select * from
+		(select rownum rn,tt.* from
+		(select * from item where
+		userkey=#{userkey} order by to_number(item_price) desc)tt
+		)where rn <![CDATA[>=]]>#{startNum}
+		and rn <![CDATA[<=]]>
+		#{endNum}
+	</select>
+	
+	<select id="getMystoreWishPopularList" parameterType="java.util.Map" resultType="wish">
+	select * from
+		(select rownum rn,tt.* from
+		(select item_seq,
+		itemsubject,img1,item_price, logtime,item_location
+		from wishlist w,item
+		t
+		where t.item_seq=w.itemnum and w.userkey=#{userkey} order by
+		t.hit desc)tt
+		)where rn <![CDATA[>=]]>#{startNum}
+		and rn <![CDATA[<=]]>
+		#{endNum}
+	</select>
+	
+	<select id="getMystoreWishLowerPriceList" parameterType="java.util.Map" resultType="wish">
+	select * from
+		(select rownum rn,tt.* from
+		(select item_seq,
+		itemsubject,img1,item_price, logtime,item_location
+		from wishlist w,item
+		t
+		where t.item_seq=w.itemnum and w.userkey=#{userkey} order by
+		to_number(t.item_price))tt
+		)where rn <![CDATA[>=]]>#{startNum}
+		and rn <![CDATA[<=]]>
+		#{endNum}
+	</select>
+	
+	<select id="getMystoreWishHighestPriceList" parameterType="java.util.Map" resultType="wish">
+	select * from
+		(select rownum rn,tt.* from
+		(select item_seq,
+		itemsubject,img1,item_price, logtime,item_location
+		from wishlist w,item
+		t
+		where t.item_seq=w.itemnum and w.userkey=#{userkey} order by
+		to_number(t.item_price) desc)tt
+		)where rn <![CDATA[>=]]>#{startNum}
+		and rn <![CDATA[<=]]>
+		#{endNum}
+	</select>
+</mapper>

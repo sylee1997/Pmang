@@ -3,13 +3,13 @@
 
     
   <!-- 인기카테고리 슬라이드영역 -->
-         <div id="slide" style="border: 1px solid pink">
-            <div id="slideInitial" style="border: 1px solid pink">
+         <div id="slide">
+            <div id="slideInitial">
                <!-- initial -->
                
-               <div id="slideAct" style="border: 1px solid black">
+               <div id="slideAct">
                   <ul class="slide_wrap"
-                     style="width: 6000px; height: 300px; border: 1px solid blue;">
+                     style="width: 6000px; height: 300px;">
                      <li class="slide_item">
                         <a href="#">
                            <img src="/pmang/image/image1.jpg" alt="배경1" />
@@ -290,6 +290,9 @@
                </div><!-- selection2 -->
             </div><!-- selection1 -->
          </div><!-- selection -->
+<!-- <<<<<<< HEAD -->
+<script type="text/javascript" src="/pmang/js/todayItem.js"></script>
+<!-- =======
          
          
 <script>
@@ -313,3 +316,4 @@
       });
       /* 인기 카테고리 슬라이드 쇼 이벤트 */
 </script>
+>>>>>>> 9636e7367062cf487dfe6e491e12bf0858d65737 -->
