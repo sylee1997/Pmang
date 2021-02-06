@@ -19,13 +19,21 @@ public interface BoardDAO {
 
 	public CommentDTO getAComment(String comment_seq);
 
-	public List<ItemDTO> getItemBoardList(Map<String, String> map);
+	
+	public void itemHitUpdate(int item_seq);
+	
+	
+	//-------------------------------itemBoard----------------------------------------//
+	
+	
+	public List<ItemDTO> getItemBoardList(Map<String, Object> map);
 
-	public List<Object> getItemBoardCount(Map<String, String> map);
+	public List<Object> getItemBoardCount(Map<String, Object> map);
 
-	public int getEntireItemNum(Map<String, String> map);
+	public int getEntireItemNum(Map<String, Object> map);
 
-	public List<Object> getOrderbyItem(Map<String, String> map);
+	public List<Object> getOrderbyItem(Map<String, Object> map);
+
 
 
 }

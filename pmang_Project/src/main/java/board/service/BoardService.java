@@ -17,21 +17,21 @@ public interface BoardService {
 	public void commentDelete(String comment_seq);
 	public CommentDTO getAComment(String comment_seq);
 	
+	public void itemHitUpdate(int item_seq);
 	
 	
 	
-	public List<ItemDTO> getItemBoardList(Map<String, String> map);
+	//------------------------------ItemBoard--------------------------------------------//
+	public List<ItemDTO> getItemBoardList(String pg, Map<String, Object> map);
 	
-	
-	
-	public List<Object> getItemBoardCount(Map<String, String> map);
+	public List<Object> getItemBoardCount(Map<String, Object> map);
 
+	public int getEntireItemNum(Map<String, Object> map);
 
-	public int getEntireItemNum(Map<String, String> map);
+	public List<Object> getOrderbyItem(String pg, Map<String, Object> map);
 
-	public List<Object> getOrderbyItem(Map<String, String> map);
+	public BoardPaging boardPaging(String pg, Map<String, Object> map);
 
-	public BoardPaging boardPaging(String pg, Map<String, String> map);
 
 
 }

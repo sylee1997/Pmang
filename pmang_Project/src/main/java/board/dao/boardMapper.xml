@@ -17,7 +17,7 @@
 	<insert id="itemComment" parameterType="java.util.Map">
 		insert into itemComment values(comment_seq.nextval,
 										#{item_seq},
-										'깜냥이',<!-- 유저아이디, 세션에서 받아 넣을 것 -->
+										#{userId},<!-- 유저아이디, 세션에서 받아 넣을 것 --> <!-- 확인 -->
 										#{item_comment},
 										sysdate,
 										'/pmang/image/itemPic.jpg' <!-- 유저아이디로 조인 걸어서 받아올 것 -->
@@ -31,42 +31,58 @@
 	<select id="getAComment" resultType="comment">
 		select * from itemComment where comment_seq=#{comment_seq}
 	</select>
+	
+	
+	
+	
+	
+	<!-- ItemBoard -->
 
 	<select id="getItemBoardList" parameterType="java.util.Map" resultType="item">
-		select item_seq, img1, item_subject, category1, category2, category3, item_location, item_price, hashtag1, hashtag2, hashtag3, hit, logtime from item where category1 = #{category1}
+	select * from (select rownum rn, tt.* from (select item_seq, img1, item_subject, category1, category2, category3, item_location, item_price, hashtag1, hashtag2, hashtag3, hit, logtime from item where category1 = #{category1}	
 		<if test="category2 != null">
 			and category2 = #{category2}
 		</if>
 		<if test="category3 != null">
 			and category3 = #{category3}
 		</if>
-		
-		order by logtime desc
-		
+		order by logtime desc)tt)where rn <![CDATA[ >= ]]> #{startNum} and rn <![CDATA[ <= ]]> #{endNum}
+	
 	</select>
+	
+	
+	
 	
 	<select id="getItemBoardCount1" parameterType="java.util.Map" resultType="java.util.Map">
 		select category1, category2, count(category2) as cnt2 from item group by category1, category2 having category1 = #{category1} and category2 is not null
 	</select>
 	
+	
+	
 	<select id="getItemBoardCount2" parameterType="java.util.Map" resultType="java.util.Map">
 	 	select category2, category3, count(category3) as cnt3 from item group by category2, category3 having category2 = #{category2} and category3 is not null
 	</select>
+	
+	
 	
 	<select id="getEntireItemNum" parameterType="java.util.Map" resultType="int">
 	 	<if test="category2 == null and category3 == null">
 	 		select count(category1) from item where category1 = #{category1}
 	 	</if>
 	 	<if test="category2 != null and category3 == null">
-	 		select count(category2) from item where category2 = #{category2}
+	 		select count(category2) from item where category1 = #{category1} and category2 = #{category2}
 	 	</if>
 	 	<if test="category3 != null">
-	 		select count(category3) from item where category3 = #{category3}
+	 		select count(category3) from item where category1 = #{category1} and category2 = #{category2} and category3 = #{category3}
 	 	</if>
 	</select>
 	
+	
+	
+	
+	
 	<select id="getOrderbyItem" parameterType="java.util.Map" resultType="item">
-		select item_seq, img1, item_subject, category1, category2, category3, item_location, item_price,hashtag1, hashtag2, hashtag3, hit, logtime from item where category1 = #{category1}
+		select * from (select rownum rn, tt.* from (select item_seq, img1, item_subject, category1, category2, category3, item_location, item_price, hashtag1, hashtag2, hashtag3, hit, logtime from item where category1 = #{category1}
 		<if test="category2 != null">
 			and category2 = #{category2}
 		</if>
@@ -81,13 +97,18 @@
 			order by hit
 		</if>
 		<if test="order.equals('저가순')">
-			order by item_price desc
+			order by item_price 
 		</if>
 		<if test="order.equals('고가순')">
-			order by item_price
+			order by item_price desc
 		</if>
+			)tt)where rn <![CDATA[ >= ]]> #{startNum} and rn <![CDATA[ <= ]]> #{endNum}
 		
 	</select>
+	
+	<update id="itemHitUpdate" parameterType="int">
+		update item set hit=hit+1 where item_seq=#{item_seq}
+	</update>
 </mapper>
 
 
