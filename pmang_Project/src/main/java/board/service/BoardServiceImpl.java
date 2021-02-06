@@ -31,14 +31,14 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDAO boardDAO;
 	@Autowired
 	private BoardPaging boardPaging;
-	@Autowired
-	private HttpSession session;
-	
+
 	@Autowired
 	private MystoreDAO mystoreDAO;
 	@Autowired
 	private ReviewDAO reviewDAO;
 
+
+	//-------------------------------------------itemView----------------------------------//
 	@Override
 	public ItemDTO getItem(int item_seq) {
 		return boardDAO.getItem(item_seq);
@@ -64,42 +64,65 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.getAComment(comment_seq);
 	}
 
+	@Override
+	public void itemHitUpdate(int item_seq) {
+		boardDAO.itemHitUpdate(item_seq);
+	}
 	
 	
-	
+	//----------------------------ItemBoard------------------------------------------//
 	
 	@Override
-	public List<ItemDTO> getItemBoardList(Map<String, String> map) {
+	public List<ItemDTO> getItemBoardList(String pg, Map<String, Object> map) {
+		//1í˜ì´ì§€ë‹¹ 20ê°œì”©
+		int endNum = Integer.parseInt(pg)*20;
+		int startNum = endNum-19;
+		
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
+		
 		
 		return boardDAO.getItemBoardList(map);
 	}
 
 	@Override
-	public List<Object> getItemBoardCount(Map<String, String> map) {
+	public List<Object> getItemBoardCount(Map<String, Object> map) {
 		return boardDAO.getItemBoardCount(map);
 	}
 
 	@Override
-	public int getEntireItemNum(Map<String, String> map) {
+	public int getEntireItemNum(Map<String, Object> map) {
 		return boardDAO.getEntireItemNum(map);
 	}
 
 	@Override
-	public List<Object> getOrderbyItem(Map<String, String> map) {
+	public List<Object> getOrderbyItem(String pg, Map<String, Object> map) {
+		
+		//1í˜ì´ì§€ë‹¹ 20ê°œì”©
+		int endNum = Integer.parseInt(pg)*20;
+		int startNum = endNum-19;
+				
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
+				
 		return boardDAO.getOrderbyItem(map);
+		
 	}
 
 	@Override
-	public BoardPaging boardPaging(String pg, Map<String, String> map) {
+	public BoardPaging boardPaging(String pg, Map<String, Object> map) {
 		int totalA = boardDAO.getEntireItemNum(map);
 		
 		boardPaging.setCurrentPage(Integer.parseInt(pg));
 		boardPaging.setPageBlock(5);
-		boardPaging.setPageSize(25);
+		boardPaging.setPageSize(20);
 		boardPaging.setTotalA(totalA);
 		boardPaging.makePagingHTML();
 		return boardPaging;
 	}
+
+	
+	//------------------------------------------------myStore-------------------------------------------//
 
 	@Override
 	public void reviewWrite(ReviewDTO reviewDTO) {
@@ -131,7 +154,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<ItemDTO> getMystoreItemList(String pg, int userkey) {
-		// ÇÑÆäÀÌÁö´ç 25°³¾¿
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 25ï¿½ï¿½ï¿½ï¿½
 		int endNum = Integer.parseInt(pg) * 25;
 		int startNum = endNum - 24;
 
@@ -139,7 +162,7 @@ public class BoardServiceImpl implements BoardService {
 		map.put("startNum", startNum);
 		map.put("endNum", endNum);
 		map.put("userkey", userkey);
-		// ³ªÁß¿¡ ³Ö¾îÁà¾ßÇÔ..<String,Object>·Î ¹Ù²Ù´ø°¡
+		// ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..<String,Object>ï¿½ï¿½ ï¿½Ù²Ù´ï¿½ï¿½ï¿½
 		// map.put("userkey", session.getAttribute("userkey"));
 
 		List<ItemDTO> list = mystoreDAO.getMystoreItemList(map);
@@ -148,7 +171,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<WishDTO> getMystoreWishList(String pg, int userkey) {
-		// ÇÑÆäÀÌÁö´ç 6°³¾¿
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 6ï¿½ï¿½ï¿½ï¿½
 		int endNum = Integer.parseInt(pg) * 6;
 		int startNum = endNum - 5;
 
@@ -170,7 +193,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<ReviewDTO> getMystoreReviewList(String pg, int userkey) {
-		// ÇÑÆäÀÌÁö´ç 3°³¾¿
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½ï¿½ï¿½
 		int endNum = Integer.parseInt(pg) * 3;
 		int startNum = endNum - 2;
 
@@ -205,7 +228,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<ItemDTO> getMystoreItemPopularList(String pg, int userkey) {
-		// ÇÑÆäÀÌÁö´ç 25°³¾¿
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 25ï¿½ï¿½ï¿½ï¿½
 		int endNum = Integer.parseInt(pg) * 25;
 		int startNum = endNum - 24;
 
@@ -213,7 +236,7 @@ public class BoardServiceImpl implements BoardService {
 		map.put("startNum", startNum);
 		map.put("endNum", endNum);
 		map.put("userkey", userkey);
-		// ³ªÁß¿¡ ³Ö¾îÁà¾ßÇÔ..<String,Object>·Î ¹Ù²Ù´ø°¡
+		// ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..<String,Object>ï¿½ï¿½ ï¿½Ù²Ù´ï¿½ï¿½ï¿½
 		// map.put("userkey", session.getAttribute("userkey"));
 
 		List<ItemDTO> list = mystoreDAO.getMystoreItemPopularList(map);
@@ -222,7 +245,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<ItemDTO> getMystoreItemLowerPriceList(String pg, int userkey) {
-		// ÇÑÆäÀÌÁö´ç 25°³¾¿
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 25ï¿½ï¿½ï¿½ï¿½
 		int endNum = Integer.parseInt(pg) * 25;
 		int startNum = endNum - 24;
 
@@ -230,7 +253,7 @@ public class BoardServiceImpl implements BoardService {
 		map.put("startNum", startNum);
 		map.put("endNum", endNum);
 		map.put("userkey", userkey);
-		// ³ªÁß¿¡ ³Ö¾îÁà¾ßÇÔ..<String,Object>·Î ¹Ù²Ù´ø°¡
+		// ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..<String,Object>ï¿½ï¿½ ï¿½Ù²Ù´ï¿½ï¿½ï¿½
 		// map.put("userkey", session.getAttribute("userkey"));
 
 		List<ItemDTO> list = mystoreDAO.getMystoreItemLowerPriceList(map);
@@ -239,7 +262,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<ItemDTO> getMystoreItemHighestPriceList(String pg, int userkey) {
-		// ÇÑÆäÀÌÁö´ç 25°³¾¿
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 25ï¿½ï¿½ï¿½ï¿½
 		int endNum = Integer.parseInt(pg) * 25;
 		int startNum = endNum - 24;
 
@@ -247,7 +270,7 @@ public class BoardServiceImpl implements BoardService {
 		map.put("startNum", startNum);
 		map.put("endNum", endNum);
 		map.put("userkey", userkey);
-		// ³ªÁß¿¡ ³Ö¾îÁà¾ßÇÔ..<String,Object>·Î ¹Ù²Ù´ø°¡
+		// ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..<String,Object>ï¿½ï¿½ ï¿½Ù²Ù´ï¿½ï¿½ï¿½
 		// map.put("userkey", session.getAttribute("userkey"));
 
 		List<ItemDTO> list = mystoreDAO.getMystoreItemHighestPriceList(map);
@@ -256,7 +279,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<ItemDTO> getMystoreWishPopularList(String pg, int userkey) {
-		// ÇÑÆäÀÌÁö´ç 6°³¾¿
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 6ï¿½ï¿½ï¿½ï¿½
 		int endNum = Integer.parseInt(pg) * 6;
 		int startNum = endNum - 5;
 
@@ -264,7 +287,7 @@ public class BoardServiceImpl implements BoardService {
 		map.put("startNum", startNum);
 		map.put("endNum", endNum);
 		map.put("userkey", userkey);
-		// ³ªÁß¿¡ ³Ö¾îÁà¾ßÇÔ..<String,Object>·Î ¹Ù²Ù´ø°¡
+		// ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..<String,Object>ï¿½ï¿½ ï¿½Ù²Ù´ï¿½ï¿½ï¿½
 		// map.put("userkey", session.getAttribute("userkey"));
 
 		List<ItemDTO> list = mystoreDAO.getMystoreWishPopularList(map);
@@ -273,7 +296,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<ItemDTO> getMystoreWishHighestPriceList(String pg, int userkey) {
-		// ÇÑÆäÀÌÁö´ç 6°³¾¿
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 6ï¿½ï¿½ï¿½ï¿½
 		int endNum = Integer.parseInt(pg) * 6;
 		int startNum = endNum - 5;
 
@@ -281,7 +304,7 @@ public class BoardServiceImpl implements BoardService {
 		map.put("startNum", startNum);
 		map.put("endNum", endNum);
 		map.put("userkey", userkey);
-		// ³ªÁß¿¡ ³Ö¾îÁà¾ßÇÔ..<String,Object>·Î ¹Ù²Ù´ø°¡
+		// ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..<String,Object>ï¿½ï¿½ ï¿½Ù²Ù´ï¿½ï¿½ï¿½
 		// map.put("userkey", session.getAttribute("userkey"));
 
 		List<ItemDTO> list = mystoreDAO.getMystoreWishHighestPriceList(map);
@@ -290,7 +313,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<ItemDTO> getMystoreWishLowerPriceList(String pg, int userkey) {
-		// ÇÑÆäÀÌÁö´ç 6°³¾¿
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 6ï¿½ï¿½ï¿½ï¿½
 		int endNum = Integer.parseInt(pg) * 6;
 		int startNum = endNum - 5;
 
@@ -298,7 +321,7 @@ public class BoardServiceImpl implements BoardService {
 		map.put("startNum", startNum);
 		map.put("endNum", endNum);
 		map.put("userkey", userkey);
-		// ³ªÁß¿¡ ³Ö¾îÁà¾ßÇÔ..<String,Object>·Î ¹Ù²Ù´ø°¡
+		// ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..<String,Object>ï¿½ï¿½ ï¿½Ù²Ù´ï¿½ï¿½ï¿½
 		// map.put("userkey", session.getAttribute("userkey"));
 
 		List<ItemDTO> list = mystoreDAO.getMystoreWishLowerPriceList(map);

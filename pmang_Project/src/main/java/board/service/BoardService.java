@@ -16,23 +16,32 @@ public interface BoardService {
 	public ItemDTO getItem(int item_seq);
 
 	public List<CommentDTO> getCommentList(int item_seq);
-
+	
 	public void itemComment(Map<String, Object> map);
-
+	
 	public void commentDelete(String comment_seq);
-
+	
 	public CommentDTO getAComment(String comment_seq);
+	
+	public void itemHitUpdate(int item_seq);
+	
+	
+	
+	//------------------------------ItemBoard--------------------------------------------//
+	public List<ItemDTO> getItemBoardList(String pg, Map<String, Object> map);
+	
+	public List<Object> getItemBoardCount(Map<String, Object> map);
 
-	public List<ItemDTO> getItemBoardList(Map<String, String> map);
+	public int getEntireItemNum(Map<String, Object> map);
 
-	public List<Object> getItemBoardCount(Map<String, String> map);
+	public List<Object> getOrderbyItem(String pg, Map<String, Object> map);
 
-	public int getEntireItemNum(Map<String, String> map);
+	public BoardPaging boardPaging(String pg, Map<String, Object> map);
 
-	public List<Object> getOrderbyItem(Map<String, String> map);
 
-	public BoardPaging boardPaging(String pg, Map<String, String> map);
-
+	
+	//------------------------------------------mystore--------------------------------------//
+	
 	public void reviewWrite(ReviewDTO reviewDTO);
 
 	public void profileImgModify(SellerDTO sellerDTO);

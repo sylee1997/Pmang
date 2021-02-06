@@ -96,7 +96,7 @@ public class MemberController {
 		mailsender.regSuccess(userId, key); // mailsender�쓽 寃쎌슦 @Autowired
 
 		return "/member/regSuccess";
-		}
+	}
 	
 	// kakao Login
 	@RequestMapping(value="kakaoLogin", method=RequestMethod.POST)
@@ -130,7 +130,7 @@ public class MemberController {
 		
 	@RequestMapping(value="sellerWrite", method=RequestMethod.POST)
 	@ResponseBody
-	public void sellerWrite(@ModelAttribute ItemDTO itemDTO, HttpServletRequest request, @RequestParam("img1url") String img1url, @RequestParam(value="img2url") String img2url, @RequestParam(value="img3url") String img3url) {
+	public void sellerWrite(@ModelAttribute ItemDTO itemDTO, HttpSession session, HttpServletRequest request, @RequestParam("img1url") String img1url, @RequestParam(value="img2url") String img2url, @RequestParam(value="img3url") String img3url) {
 		//String filePath ="http://localhost:8080/pmang/storage";
 		
 		String filePath = "D:/git_home/Pmang/pmang_Project/src/main/webapp/storage/";
@@ -147,7 +147,7 @@ public class MemberController {
 		//String realPath = request.getServletPath();
 		//System.out.println(realPath);
 		
-		UUID uuid = UUID.randomUUID(); //以묐났 �뙆�씪�씠由� 諛⑹�瑜� �쐞�븳 uuid�꽕�젙
+		UUID uuid = UUID.randomUUID(); //이미지 이름 중복되지 못하게!
 		
 
 		try {
@@ -179,6 +179,7 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		
+			itemDTO.setUserId((String) session.getAttribute("memUserId"));
 			//DB
 			memberService.sellerWrite(itemDTO);
 		

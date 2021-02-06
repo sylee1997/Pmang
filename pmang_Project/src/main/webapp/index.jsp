@@ -164,6 +164,7 @@
          </c:if>
             <!-- 세션있을때  -->
             <c:if test="${memUserId != null }">
+            <input type="hidden" id="sessionId" value="${sessionScope.memUserId}">
              <nav id="sessionOn">
               <ul>
                 <li>
@@ -1044,107 +1045,117 @@ $('#loginBtn').click(function(){
 //---------------------------------------------------------------------------------------------------
 //등록하기 버튼을 클릭했을때.
 $('.itemWriteBtn').click(function(){
-	//alert('아')
-	//전송할 formData 생성!
-	var formData = new FormData($('#sellerWriteForm')[0]); 
-	
-	for(var i = 1; i < 4; i++){
-		if($("#hashtag"+i).text() != ""){
-			formData.append("hashtag"+i, $("#hashtag"+i).text());
-		}else {
-			formData.append("hashtag"+i, "undefined");
-		}
-	}
-	
-	var category1 = $(".selectL").text();
-	var category2 = $(".selectM").text();
-	var category3 = $(".selectS").text();
-	
-	var img1url = $('.imageChoice_ul').children().eq(1).children('img').attr("src");
-	var img2url = $('.imageChoice_ul').children().eq(2).children('img').attr("src");
-	var img3url = $('.imageChoice_ul').children().eq(3).children('img').attr("src");
-	var img1 = $('.imageChoice_ul').children().eq(1).children('img').attr("title");
-	var img2 = $('.imageChoice_ul').children().eq(2).children('img').attr("title");
-	var img3 = $('.imageChoice_ul').children().eq(3).children('img').attr("title");
-	
-	formData.append("category1",category1);
-	formData.append("category2",category2);
-	formData.append("category3",category3);
-	formData.append("img1",img1);
-	formData.append("img2",img2);
-	formData.append("img3",img3);
-	formData.append("img1url",img1url);
-	formData.append("img2url",img2url);
-	formData.append("img3url",img3url);
-	
-
-	//데이터 잘 들어왔는지 확인
-	/* for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); } */
-
-
-	
-	
-	
-	//유효성 검사
-	$('#imageCheck').hide();
-	$('.itemSubjectDiv').hide();
-	$('#categoryCheck').hide();
-	$('#priceDiv').text("");
-	
-	$('.imageChoice_ul').css('border-color','rgb(195, 194, 204)');
-	$('.itemSubjectText').css('border-color','rgb(195, 194, 204)');
-	$('input[name=item_subject]').css('border-color','rgb(195, 194, 204)');
-	$('.categoryChoice_div').css('border-color','rgb(195, 194, 204)');
-	$('.price_input').css('border','1px solid rgb(195, 194, 204)');
-	
-	if($('#imageCountHidden').val() == 0){ //이미지 등록 확인
-		$('#imageCheck').show();
-		$('.imageChoice_li').css('border-color','green');
+	//alert($('button[name=hashtag1]').text())
+	if($('#sessionId').val() != null){
+		//전송할 formData 생성!
+		var formData = new FormData($('#sellerWriteForm')[0]); 
 		
-		var offset = $('.main_sectionFrame').offset();
-		$('html').animate({scrollTop : offset.top}, 400);
-		
-	}else if($('input[name=item_subject]').val().length < 2){ //제목 수 확인
-		$('input[name=item_subject]').css('border-color','green');
-		$('input[name=item_subject]').css('border-color','green');
-		$('.itemSubjectDiv').show();
-		
-		var offset = $('.imageChoice_div').offset();
-		$('html').animate({scrollTop : offset.top}, 400);
-		
-	}else if($('#choice').text() == ""){ //카테고리 확인
-		$('.categoryChoice_div').css('border-color','green');
-		$('#categoryCheck').show();
-		
-		var offset = $('.imagecontent').offset();
-		$('html').animate({scrollTop : offset.top}, 400);
-		
-	}else if($('.price_input').val() == "" || $('.price_input').val() < 100){ //가격확인
-		$('#priceDiv').text('※100원 이상 입력해주세요.');
-		$('.price_input').css('border','1px solid green');
-		
-		var offset = $('.locationText_div').offset();
-		$('html').animate({scrollTop : offset.top}, 400);
-		
-	}else if($('.qty_input').val() == ""){ //수량 확인
-		$('.qty_input').val('1');
-	}else {
-		$.ajax({
-			type: 'post',
-			enctype: 'form-data',
-			processData: false, //데이터를 컨텐트 타입에 맞게 변환 여부
-			contentType: false,//요청 컨텐트 타입
-			url: '/pmang/member/sellerWrite',
-			data: formData,
-			success: function(data){
-				alert('상품 등록 완료');
-				location.href='/pmang/index'; //추후에 상품관리 페이지로 바뀌게 해야함!
-			},
-			error: function(err){
-				console.log(err);
+		for(var i = 1; i < 4; i++){
+			if($("button[name=hashtag"+i+"]").text() != ""){
+				formData.append("hashtag"+i, $("button[name=hashtag"+i+"]").text());
+			}else {
+				formData.append("hashtag"+i, "");
 			}
-		});
+		}
 		
+		var category1 = $(".selectL").text();
+		var category2 = $(".selectM").text();
+		var category3 = $(".selectS").text();
+		
+		var realNum = $('.price_input').val().replace(/\,/g,'');
+		
+		
+		var img1url = $('.imageChoice_ul').children().eq(1).children('img').attr("src");
+		var img2url = $('.imageChoice_ul').children().eq(2).children('img').attr("src");
+		var img3url = $('.imageChoice_ul').children().eq(3).children('img').attr("src");
+		var img1 = $('.imageChoice_ul').children().eq(1).children('img').attr("title");
+		var img2 = $('.imageChoice_ul').children().eq(2).children('img').attr("title");
+		var img3 = $('.imageChoice_ul').children().eq(3).children('img').attr("title");
+		
+		
+		formData.append("item_price",realNum);
+		formData.append("category1",category1);
+		formData.append("category2",category2);
+		formData.append("category3",category3);
+		formData.append("img1",img1);
+		formData.append("img2",img2);
+		formData.append("img3",img3);
+		formData.append("img1url",img1url);
+		formData.append("img2url",img2url);
+		formData.append("img3url",img3url);
+		
+	
+		//데이터 잘 들어왔는지 확인
+		/* for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); } */
+	
+	
+		
+		
+		
+		//유효성 검사
+		$('#imageCheck').hide();
+		$('.itemSubjectDiv').hide();
+		$('#categoryCheck').hide();
+		$('#priceDiv').text("");
+		
+		$('.imageChoice_ul').css('border-color','rgb(195, 194, 204)');
+		$('.itemSubjectText').css('border-color','rgb(195, 194, 204)');
+		$('input[name=item_subject]').css('border-color','rgb(195, 194, 204)');
+		$('.categoryChoice_div').css('border-color','rgb(195, 194, 204)');
+		$('.price_input').css('border','1px solid rgb(195, 194, 204)');
+		
+		if($('#imageCountHidden').val() == 0){ //이미지 등록 확인
+			$('#imageCheck').show();
+			$('.imageChoice_li').css('border-color','green');
+			
+			var offset = $('.main_sectionFrame').offset();
+			$('html').animate({scrollTop : offset.top}, 400);
+			
+		}else if($('input[name=item_subject]').val().length < 2){ //제목 수 확인
+			$('input[name=item_subject]').css('border-color','green');
+			$('input[name=item_subject]').css('border-color','green');
+			$('.itemSubjectDiv').show();
+			
+			var offset = $('.imageChoice_div').offset();
+			$('html').animate({scrollTop : offset.top}, 400);
+			
+		}else if($('#choice').text() == ""){ //카테고리 확인
+			$('.categoryChoice_div').css('border-color','green');
+			$('#categoryCheck').show();
+			
+			var offset = $('.imagecontent').offset();
+			$('html').animate({scrollTop : offset.top}, 400);
+			
+		}else if($('.price_input').val() == "" || $('.price_input').val() < 100){ //가격확인
+			$('#priceDiv').text('※100원 이상 입력해주세요.');
+			$('.price_input').css('border','1px solid green');
+			
+			var offset = $('.locationText_div').offset();
+			$('html').animate({scrollTop : offset.top}, 400);
+			
+		}else if($('.qty_input').val() == ""){ //수량 확인
+			$('.qty_input').val('1');
+		}else {
+			$.ajax({
+				type: 'post',
+				enctype: 'form-data',
+				processData: false, //데이터를 컨텐트 타입에 맞게 변환 여부
+				contentType: false,//요청 컨텐트 타입
+				url: '/pmang/member/sellerWrite',
+				data: formData,
+				success: function(data){
+					alert('상품 등록 완료');
+					location.href='/pmang/index'; //추후에 상품관리 페이지로 바뀌게 해야함!
+				},
+				error: function(err){
+					console.log(err);
+				}
+			});
+			
+		}
+	}else {
+		alert('로그인 하세요.');
+		$('#loginli').trigger('click');
 	}
 });
 

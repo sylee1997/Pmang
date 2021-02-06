@@ -5,9 +5,9 @@
 <link rel="stylesheet" href="/pmang/css/itemView.css">
 <style>
 </style>
-<input type="hidden" id="item_seq" name="item_seq" value="${item_seq}">
+<input type="hidden" id="item_seq" name="item_seq" value="${param.item_seq}">
 <input type="hidden" id="comment_seq" name="comment_seq" value="">
-<input type="hidden" id="userId" name="userId" value="hiddenId"> <!-- 나중에 세션에서 받는 값으로 변경 -->
+<input type="hidden" id="userId" name="userId" value="${sessionScope.memUserId }"> <!-- 나중에 세션에서 받는 값으로 변경 -->
 <input type="hidden" id="commentIndex" name="commentIndex" value="1">
 
 
@@ -26,7 +26,7 @@
 			 width="6" height="10" alt="카테고리 선택그룹 아이콘">
 		 	<div class="selectItem1">
 		 		<div class="top1">
-		 		패션     
+		 		     <span id="topSpan1"></span>
 		 			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAAAXNSR0IArs4c6QAAASVJREFUOBGlks9qwkAQxrMLihRKQXyUHjx58dBLEXqxUPCavIKvkpCQgxcTD0LpSQQfoBfpRXwHj16av37fYWWrJhvqwDCbb2d+O5NdYcFc120hzIQQkW3bS2pNzPf9blEUC+ROUffNGkEYQWVZvuE7xfq9CRR1T8hfw5/hR/jIcZyN8DyPsDEEZUZoEASPeZ6vUNdXRYi/aOZVYjGHp9pGC4kRDmLHV4bOHrIs+7qAWYDtoW0lx+OYqDRCwzDsIO8TPtBPQv0PYEOMfGCHVhNoHMftJEl4YcMqGHWhb3JMjguNt64slVJOoH/AR0pk1DtT+h8gxQqoyj/HWzBuXgEpmqBVsEpgHbQOVgu8BTXBjEAdCthOPQ3qdxn+6QsedO8uyH+LT8nvvwPGjeHzAAAAAElFTkSuQmCC" 
 		 			width="10" height="6" alt="카테고리 화살표 아이콘">
 		 		</div>
@@ -50,7 +50,7 @@
 		 	width="6" height="10" alt="카테고리 선택그룹 아이콘">
 		 	<div class="selectItem2">
 		 		<div class="top2">
-		 			여성의류
+		 			<span id="topSpan2"></span>
 		 			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAAAXNSR0IArs4c6QAAASVJREFUOBGlks9qwkAQxrMLihRKQXyUHjx58dBLEXqxUPCavIKvkpCQgxcTD0LpSQQfoBfpRXwHj16av37fYWWrJhvqwDCbb2d+O5NdYcFc120hzIQQkW3bS2pNzPf9blEUC+ROUffNGkEYQWVZvuE7xfq9CRR1T8hfw5/hR/jIcZyN8DyPsDEEZUZoEASPeZ6vUNdXRYi/aOZVYjGHp9pGC4kRDmLHV4bOHrIs+7qAWYDtoW0lx+OYqDRCwzDsIO8TPtBPQv0PYEOMfGCHVhNoHMftJEl4YcMqGHWhb3JMjguNt64slVJOoH/AR0pk1DtT+h8gxQqoyj/HWzBuXgEpmqBVsEpgHbQOVgu8BTXBjEAdCthOPQ3qdxn+6QsedO8uyH+LT8nvvwPGjeHzAAAAAElFTkSuQmCC" 
 		 			width="10" height="6" alt="카테고리 화살표 아이콘">
 		 		</div>
@@ -66,34 +66,19 @@
 		 	width="6" height="10" alt="카테고리 선택그룹 아이콘">
 		 	<div class="selectItem3">
 		 		<div class="top3">
-		 			아우터
+		 			<span id="topSpan3"></span>
 		 			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAAAXNSR0IArs4c6QAAASVJREFUOBGlks9qwkAQxrMLihRKQXyUHjx58dBLEXqxUPCavIKvkpCQgxcTD0LpSQQfoBfpRXwHj16av37fYWWrJhvqwDCbb2d+O5NdYcFc120hzIQQkW3bS2pNzPf9blEUC+ROUffNGkEYQWVZvuE7xfq9CRR1T8hfw5/hR/jIcZyN8DyPsDEEZUZoEASPeZ6vUNdXRYi/aOZVYjGHp9pGC4kRDmLHV4bOHrIs+7qAWYDtoW0lx+OYqDRCwzDsIO8TPtBPQv0PYEOMfGCHVhNoHMftJEl4YcMqGHWhb3JMjguNt64slVJOoH/AR0pk1DtT+h8gxQqoyj/HWzBuXgEpmqBVsEpgHbQOVgu8BTXBjEAdCthOPQ3qdxn+6QsedO8uyH+LT8nvvwPGjeHzAAAAAElFTkSuQmCC" 
 		 			width="10" height="6" alt="카테고리 화살표 아이콘">
 		 		</div>
 		 		
 		 		<div class="down3">
-		 			<a href="#">아우터</a>
-		 			<a href="#">티셔츠</a>
-		 			<a href="#">니트</a>
-		 			<a href="#">셔츠/블라우스</a>
-		 			<a href="#">맨투맨/후드집업</a>
-		 			<a href="#">원피스/세트</a>
-		 			<a href="#">바지</a>
-		 			<a href="#">스커트</a>
+		
 		 		</div>
 		 	</div><!-- selectItem -->
 		 </div><!-- thirdCategory -->
 		
 	</div><!-- categoryDiv -->
-	
-	<div class="detailItemDiv">
-		<div class="detailItem">
-			<a class="entireView" href="#" style="text-decoration: none;">
-			전체보기
-			</a>
-		</div>
-	</div>
-	</div>
+</div>
 
 	
 
@@ -121,7 +106,7 @@
 						<div id="slideShowDiv">
 							<div id="slideShow">
 								<div>
-									<img src="/pmang/image/itemPic.jpg">
+									<img src="/pmang/image/itemPic.jpg"> <!-- 얘네도 storage에서 끌고온걸로 변경해주셔야 해욤! img1,2,3 찾아서! -->
 								</div>
 								<div>
 									<img src="/pmang/image/itemPic.jpg">
@@ -182,6 +167,7 @@
 							<span class="likeSpan">DB에러</span>
 						</div>
 						<div class="likeDateHit">
+						
 							<img src="/pmang/image/hit.jpg" alt="조회수" width="20" height="20">
 							<span class="hitSpan">DB에러</span>
 						</div>
