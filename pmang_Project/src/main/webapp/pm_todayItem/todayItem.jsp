@@ -290,6 +290,9 @@
                </div><!-- selection2 -->
             </div><!-- selection1 -->
          </div><!-- selection -->
+<!-- <<<<<<< HEAD -->
+<script type="text/javascript" src="/pmang/js/todayItem.js"></script>
+<!-- =======
          
          
 <script>
@@ -313,3 +316,4 @@
       });
       /* 인기 카테고리 슬라이드 쇼 이벤트 */
 </script>
+>>>>>>> 9636e7367062cf487dfe6e491e12bf0858d65737 -->

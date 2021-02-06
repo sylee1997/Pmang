@@ -8,11 +8,7 @@
 
 
 <link rel="stylesheet" href="/pmang/css/index.css">
-<style type="text/css">
-   
-         
-/* --------------------------------------------서영이조 */
-</style>
+<style type="text/css"></style>
 <title>피망마켓에 오신것을 환영합니다.</title>
 </head>
 <body> 
@@ -168,6 +164,7 @@
          </c:if>
             <!-- 세션있을때  -->
             <c:if test="${memUserId != null }">
+            <input type="hidden" id="sessionId" value="${sessionScope.memUserId}">
              <nav id="sessionOn">
               <ul>
                 <li>
@@ -592,27 +589,22 @@
 
       </div><!-- aside -->
    </div><!-- header -->
-   <!-- -----------------------------------------헤더 부분 ----------------------------------->
+
+      <!-- ----------------헤더 -->
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-   <div id="wrap">
+
+  	 <div id="wrap">
       <div id="container">
-          <jsp:include page="${display}"/>
- 	  </div><!-- container -->
+      
+      
+         <jsp:include page="${display}"/>
+   
+      
+      </div><!-- container -->
+
+
+ 
+
    </div><!-- wrap -->
             
 
@@ -649,9 +641,9 @@
    <div class="footer">
       <div class="footerCategoryArea">
          <div class="footerCategory">
-            <a class="cIPDuS" href="/pmang/board/notice">공지사항</a>
-            <a class="cIPDuS" href="/pmang/board/notice">자주묻는질문</a>
-            <a class="cgGBdw" href="/pmang/board/notice">운영정책</a>
+            <a class="cIPDuS" id="footerNotice">공지사항</a>
+            <a class="cIPDuS" id="footerFQA">자주묻는질문</a>
+            <a class="cgGBdw" id="footerPolicy">운영정책</a>
             <a class="cIPDuS" href="#">1:1문의하기</a>
             <a class="cgGBdw" href="#">사업자정보확인</a>
             <a class="cgGBdw" href="#">이용약관</a>
@@ -716,9 +708,11 @@
 
 
 
+
 <!-- 검색 클릭 이벤트 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script> <!-- 카카오디벨로퍼 -->
+
 <script type="text/javascript">
 
 
@@ -1051,108 +1045,148 @@ $('#loginBtn').click(function(){
 //---------------------------------------------------------------------------------------------------
 //등록하기 버튼을 클릭했을때.
 $('.itemWriteBtn').click(function(){
-	//alert('아')
-	//전송할 formData 생성!
-	var formData = new FormData($('#sellerWriteForm')[0]); 
-	
-	for(var i = 1; i < 4; i++){
-		if($("#hashtag"+i).text() != ""){
-			formData.append("hashtag"+i, $("#hashtag"+i).text());
-		}else {
-			formData.append("hashtag"+i, "undefined");
-		}
-	}
-	
-	var category1 = $(".selectL").text();
-	var category2 = $(".selectM").text();
-	var category3 = $(".selectS").text();
-	
-	var img1url = $('.imageChoice_ul').children().eq(1).children('img').attr("src");
-	var img2url = $('.imageChoice_ul').children().eq(2).children('img').attr("src");
-	var img3url = $('.imageChoice_ul').children().eq(3).children('img').attr("src");
-	var img1 = $('.imageChoice_ul').children().eq(1).children('img').attr("title");
-	var img2 = $('.imageChoice_ul').children().eq(2).children('img').attr("title");
-	var img3 = $('.imageChoice_ul').children().eq(3).children('img').attr("title");
-	
-	formData.append("category1",category1);
-	formData.append("category2",category2);
-	formData.append("category3",category3);
-	formData.append("img1",img1);
-	formData.append("img2",img2);
-	formData.append("img3",img3);
-	formData.append("img1url",img1url);
-	formData.append("img2url",img2url);
-	formData.append("img3url",img3url);
-	
-
-	//데이터 잘 들어왔는지 확인
-	//for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }
-
-	
-	
-	
-	//유효성 검사
-	$('#imageCheck').hide();
-	$('.itemSubjectDiv').hide();
-	$('#categoryCheck').hide();
-	$('#priceDiv').text("");
-	
-	$('.imageChoice_ul').css('border-color','rgb(195, 194, 204)');
-	$('.itemSubjectText').css('border-color','rgb(195, 194, 204)');
-	$('input[name=item_subject]').css('border-color','rgb(195, 194, 204)');
-	$('.categoryChoice_div').css('border-color','rgb(195, 194, 204)');
-	$('.price_input').css('border','1px solid rgb(195, 194, 204)');
-	
-	if($('#imageCountHidden').val() == 0){ //이미지 등록 확인
-		$('#imageCheck').show();
-		$('.imageChoice_li').css('border-color','green');
+	//alert($('button[name=hashtag1]').text())
+	if($('#sessionId').val() != null){
+		//전송할 formData 생성!
+		var formData = new FormData($('#sellerWriteForm')[0]); 
 		
-		var offset = $('.main_sectionFrame').offset();
-		$('html').animate({scrollTop : offset.top}, 400);
-		
-	}else if($('input[name=item_subject]').val().length < 2){ //제목 수 확인
-		$('input[name=item_subject]').css('border-color','green');
-		$('input[name=item_subject]').css('border-color','green');
-		$('.itemSubjectDiv').show();
-		
-		var offset = $('.imageChoice_div').offset();
-		$('html').animate({scrollTop : offset.top}, 400);
-		
-	}else if($('#choice').text() == ""){ //카테고리 확인
-		$('.categoryChoice_div').css('border-color','green');
-		$('#categoryCheck').show();
-		
-		var offset = $('.imagecontent').offset();
-		$('html').animate({scrollTop : offset.top}, 400);
-		
-	}else if($('.price_input').val() == "" || $('.price_input').val() < 100){ //가격확인
-		$('#priceDiv').text('※100원 이상 입력해주세요.');
-		$('.price_input').css('border','1px solid green');
-		
-		var offset = $('.locationText_div').offset();
-		$('html').animate({scrollTop : offset.top}, 400);
-		
-	}else if($('.qty_input').val() == ""){ //수량 확인
-		$('.qty_input').val('1');
-	}else {
-		$.ajax({
-			type: 'post',
-			enctype: 'form-data',
-			processData: false, //데이터를 컨텐트 타입에 맞게 변환 여부
-			contentType: false,//요청 컨텐트 타입
-			url: '/pmang/member/sellerWrite',
-			data: formData,
-			success: function(data){
-				alert('상품 등록 완료');
-				location.href='/pmang/index'; //추후에 상품관리 페이지로 바뀌게 해야함!
-			},
-			error: function(err){
-				console.log(err);
+		for(var i = 1; i < 4; i++){
+			if($("button[name=hashtag"+i+"]").text() != ""){
+				formData.append("hashtag"+i, $("button[name=hashtag"+i+"]").text());
+			}else {
+				formData.append("hashtag"+i, "");
 			}
-		});
+		}
 		
+		var category1 = $(".selectL").text();
+		var category2 = $(".selectM").text();
+		var category3 = $(".selectS").text();
+		
+		var realNum = $('.price_input').val().replace(/\,/g,'');
+		
+		
+		var img1url = $('.imageChoice_ul').children().eq(1).children('img').attr("src");
+		var img2url = $('.imageChoice_ul').children().eq(2).children('img').attr("src");
+		var img3url = $('.imageChoice_ul').children().eq(3).children('img').attr("src");
+		var img1 = $('.imageChoice_ul').children().eq(1).children('img').attr("title");
+		var img2 = $('.imageChoice_ul').children().eq(2).children('img').attr("title");
+		var img3 = $('.imageChoice_ul').children().eq(3).children('img').attr("title");
+		
+		
+		formData.append("item_price",realNum);
+		formData.append("category1",category1);
+		formData.append("category2",category2);
+		formData.append("category3",category3);
+		formData.append("img1",img1);
+		formData.append("img2",img2);
+		formData.append("img3",img3);
+		formData.append("img1url",img1url);
+		formData.append("img2url",img2url);
+		formData.append("img3url",img3url);
+		
+	
+		//데이터 잘 들어왔는지 확인
+		/* for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); } */
+	
+	
+		
+		
+		
+		//유효성 검사
+		$('#imageCheck').hide();
+		$('.itemSubjectDiv').hide();
+		$('#categoryCheck').hide();
+		$('#priceDiv').text("");
+		
+		$('.imageChoice_ul').css('border-color','rgb(195, 194, 204)');
+		$('.itemSubjectText').css('border-color','rgb(195, 194, 204)');
+		$('input[name=item_subject]').css('border-color','rgb(195, 194, 204)');
+		$('.categoryChoice_div').css('border-color','rgb(195, 194, 204)');
+		$('.price_input').css('border','1px solid rgb(195, 194, 204)');
+		
+		if($('#imageCountHidden').val() == 0){ //이미지 등록 확인
+			$('#imageCheck').show();
+			$('.imageChoice_li').css('border-color','green');
+			
+			var offset = $('.main_sectionFrame').offset();
+			$('html').animate({scrollTop : offset.top}, 400);
+			
+		}else if($('input[name=item_subject]').val().length < 2){ //제목 수 확인
+			$('input[name=item_subject]').css('border-color','green');
+			$('input[name=item_subject]').css('border-color','green');
+			$('.itemSubjectDiv').show();
+			
+			var offset = $('.imageChoice_div').offset();
+			$('html').animate({scrollTop : offset.top}, 400);
+			
+		}else if($('#choice').text() == ""){ //카테고리 확인
+			$('.categoryChoice_div').css('border-color','green');
+			$('#categoryCheck').show();
+			
+			var offset = $('.imagecontent').offset();
+			$('html').animate({scrollTop : offset.top}, 400);
+			
+		}else if($('.price_input').val() == "" || $('.price_input').val() < 100){ //가격확인
+			$('#priceDiv').text('※100원 이상 입력해주세요.');
+			$('.price_input').css('border','1px solid green');
+			
+			var offset = $('.locationText_div').offset();
+			$('html').animate({scrollTop : offset.top}, 400);
+			
+		}else if($('.qty_input').val() == ""){ //수량 확인
+			$('.qty_input').val('1');
+		}else {
+			$.ajax({
+				type: 'post',
+				enctype: 'form-data',
+				processData: false, //데이터를 컨텐트 타입에 맞게 변환 여부
+				contentType: false,//요청 컨텐트 타입
+				url: '/pmang/member/sellerWrite',
+				data: formData,
+				success: function(data){
+					alert('상품 등록 완료');
+					location.href='/pmang/index'; //추후에 상품관리 페이지로 바뀌게 해야함!
+				},
+				error: function(err){
+					console.log(err);
+				}
+			});
+			
+		}
+	}else {
+		alert('로그인 하세요.');
+		$('#loginli').trigger('click');
 	}
 });
+
+
+$('#footerNotice').click(function(){
+	$(location).attr("href", "/pmang/board/notice?tabNo=1");
+});
+
+$('#footerPolicy').click(function(){
+	$(location).attr("href", "/pmang/board/notice?tabNo=2");	
+});
+
+$('#footerFQA').on('click',function(){
+	$(location).attr("href", "/pmang/board/notice?tabNo=3");
+});
+
+
+if('${tabNo}'=='1'){
+	$('#tab1').attr('checked', true);
+}else if('${tabNo}'=='2'){
+	$('#tab2').attr('checked', true);
+}else if('${tabNo}'=='3'){
+	$('#tab3').attr('checked', true);
+}else if('${tabNo}'=='4'){
+	$('#tab3').attr('checked', true);
+	$('#menu2').attr('checked', true);
+}else{
+	$('#tab1').attr('checked', true);
+}
+
+
 
 
 
@@ -1208,7 +1242,9 @@ $('#kakaoBtn').click(function(event){
 });
 
 
+
 </script>
+
 
 </body>
 </html>

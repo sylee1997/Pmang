@@ -50,17 +50,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values (#{userName}, #{gender}, #{email1}, #{email2}, #{kakaoId}, #{kakaoId})
 	</insert>
 
-
-
-
-
-
-
-
-
 	<!-- 상품등록쪽 -->
 	<insert id="sellerWrite" parameterType="item">
 	insert into item values(item_seq.nextval,
+									#{userId},
 									   #{img1},
 									   #{img2},
 									   #{img3},
@@ -77,9 +70,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 									   #{hashtag1},
 									   #{hashtag2},
 									   #{hashtag3},
+									   #{qty},<!-- #{qty} -->
 									   0,<!-- #{buyer_Key} -->
 									   0,<!-- #{hit} -->
-									   0,<!-- #{qty} -->
 									   sysdate)
 									   
 	</insert>
@@ -88,5 +81,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="searchlocation" parameterType="String" resultType="zipcode">
 		select DISTINCT sido, sigungu, yubmyundong from newzipcode where sigungu like '%'||#{address}||'%' or yubmyundong like '%'||#{address}||'%' or roadname like '%'||#{address}||'%' order by sido
 	</select>
+	
 	
 </mapper>
