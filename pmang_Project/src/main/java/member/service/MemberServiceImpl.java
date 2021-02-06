@@ -17,26 +17,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+
 import member.bean.MemberDTO;
 import member.bean.ZipcodeDTO;
+
+
+import board.bean.ItemDTO;
+
+
 import member.dao.MemberDAO;
 
 import board.bean.ItemDTO;
+
 @Service
 public class MemberServiceImpl implements MemberService {
+
+
+
 	@Autowired
 	private MemberDAO memberDAO;
 	@Autowired
 	private JavaMailSender mailSender;
 
-	// 난수를 이용한 키 생성
+	// �궃�닔瑜� �씠�슜�븳 �궎 �깮�꽦
 	private boolean lowerCheck;
 	private int size;
 	
 	@Override
 	public String login(Map<String, String> map, HttpSession session) {
 		MemberDTO memberDTO = memberDAO.login(map);
-		if(memberDTO == null) { // 로그인 해당아이디가 있다 / 없다, 리턴 스트링값을 기다리고있기때문에
+		if(memberDTO == null) { // 濡쒓렇�씤 �빐�떦�븘�씠�뵒媛� �엳�떎 / �뾾�떎, 由ы꽩 �뒪�듃留곴컪�쓣 湲곕떎由ш퀬�엳湲곕븣臾몄뿉
 			return "fail";
 		}else {
 			session.setAttribute("memUserName", memberDTO.getUserName());
@@ -67,7 +77,7 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.checkPostSearch(map);
 	}
 
-	// 이메일 난수 만드는 메서드
+	// �씠硫붿씪 �궃�닔 留뚮뱶�뒗 硫붿꽌�뱶
 	private String init() {
 		Random ran = new Random();
 		StringBuffer sb = new StringBuffer();
@@ -101,12 +111,12 @@ public class MemberServiceImpl implements MemberService {
 		String key = getKey(false, 20);
 		memberDAO.GetKey(userId, key);
 		MimeMessage mail = mailSender.createMimeMessage();
-		String htmlStr = "<h2>안녕하세요 MS :p 피망마켓~ 입니다!</h2><br><br>" 
-				+ "<h3>" + userId + "님</h3>" + "<p>인증하기 버튼을 누르시면 로그인을 하실 수 있습니다 : " 
-				+ "<a href='http://localhost:8080" + request.getContextPath() + "/member/regSuccess?userId="+ userId +"&user_key="+key+"'>인증하기</a></p>"
-				+ "(혹시 잘못 전달된 메일이라면 이 이메일을 무시하셔도 됩니다)";
+		String htmlStr = "<h2>�븞�뀞�븯�꽭�슂 MS :p �뵾留앸쭏耳�~ �엯�땲�떎!</h2><br><br>" 
+				+ "<h3>" + userId + "�떂</h3>" + "<p>�씤利앺븯湲� 踰꾪듉�쓣 �늻瑜댁떆硫� 濡쒓렇�씤�쓣 �븯�떎 �닔 �엳�뒿�땲�떎 : " 
+				+ "<a href='http://localhost:8080" + request.getContextPath() + "/member/regSuccess?userId="+ userId +"&user_key="+key+"'>�씤利앺븯湲�</a></p>"
+				+ "(�샊�떆 �옒紐� �쟾�떖�맂 硫붿씪�씠�씪硫� �씠 �씠硫붿씪�쓣 臾댁떆�븯�뀛�룄 �맗�땲�떎)";
 		try {
-			mail.setSubject("[본인인증] MS :p 피망마켓의 인증메일입니다", "utf-8");
+			mail.setSubject("[蹂몄씤�씤利�] MS :p �뵾留앸쭏耳볦쓽 �씤利앸찓�씪�엯�땲�떎", "utf-8");
 			mail.setText(htmlStr, "utf-8", "html");
 			mail.addRecipient(RecipientType.TO, new InternetAddress(email));
 			
@@ -129,17 +139,17 @@ public class MemberServiceImpl implements MemberService {
 	}
 	@Override
 	public String kakaoLogin(MemberDTO memberDTO, HttpSession session) {
-		// 카카오 회원가입, 로그인
+		// 移댁뭅�삤 �쉶�썝媛��엯, 濡쒓렇�씤
 		
 		int count = memberDAO.checkKakaoId(memberDTO.getKakaoId());
 
-		//로그인
+		//濡쒓렇�씤
 		if(count > 0) {	
 			session.setAttribute("memUserId", memberDTO.getUserName());
 			session.setAttribute("memEmail", memberDTO.getEmail1()+"@"+memberDTO.getEmail2());
 			return "loginSuccess";
 		} else {
-		//회원가입	
+		//�쉶�썝媛��엯	
 			int success = memberDAO.kakaoWrite(memberDTO);
 			return "JoinSuccess";
 		}
@@ -155,10 +165,12 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.sellerWrite(itemDTO);
 	}
 
+
 	@Override
 	public List<ZipcodeDTO> searchlocation(String address) {
 		return memberDAO.searchlocation(address);
 	}
+
 
 }
 	

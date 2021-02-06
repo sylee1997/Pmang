@@ -29,4 +29,5 @@ public interface MemberDAO {
 
 	public List<ZipcodeDTO> searchlocation(String address);
 
+
 }

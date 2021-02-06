@@ -1159,6 +1159,12 @@ $('.itemWriteBtn').click(function(){
 	}
 });
 
+//우석 수정 
+$('.pmangTok').on('click',function(){
+	window.open("/pmang/talk/roomList","","width=375 height=667");
+});
+// 우석 수정 -----------------------------------
+
 
 $('#footerNotice').click(function(){
 	$(location).attr("href", "/pmang/board/notice?tabNo=1");
