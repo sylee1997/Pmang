@@ -64,15 +64,19 @@ public class TalkHandler extends TextWebSocketHandler {
 		}
 		TalkRoomDTO room = talkService.isRoom(talkRoomDTO);
 		
-		messageDTO.setTalkRoom_seq(room.getTalkRoom_seq());
+		messageDTO.setTalkRoom_seq(room.getTalkRoom_seq());//room_seq 만 여기서 데이터 삽입.
 		
 		talkService.insertMessage(messageDTO);
 		
 		
 		
+		
+		
 		System.out.println(session.getId() + " 로 부터 " + message.getPayload() + "받음");
 		for(WebSocketSession se : sessionList) {
-			
+			//1. 판매자의 userkey를 get방식으로 보냄
+			//2. messageDTO.getReceiver_user_id 의 userKey를 조회
+			//3. get방식으로 넘어온 userKey 와, 판매자의 userKey를 비교하여 일치하면 메일을 보냄.
 			if(httpSessionMap.get("userId").equals(messageDTO.getSender_user_id()) || httpSessionMap.get("userId").equals(messageDTO.getReceiver_user_id())) {//현재 세션 id가 전송자 id 이거나, 수신자 id 라면 메시지를 보내라.
 				se.sendMessage(new TextMessage(message.getPayload())); //모든 클라이언트들에게 TextMessage 전송. (브로드캐스트)
 			}

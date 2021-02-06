@@ -26,16 +26,13 @@ $(document).ready(function() {
      var msg = $('#talk_message').val();
      if(msg != ""){
         message = {
-              talk_content : $('#talk_message').val(),
-              item_seq : 77,
-              sender_user_id : '송신자',
-              receiver_user_id : '수신자',
-              talkRoom_seq : 1,
-              receiver_pf_Photo : 'pmang.png'
-//              item_seq : $('#item_seq').val(),
-//              sender_user_id : $('#sender_user_id').val(),
-//              receiver_user_id : $('#receiver_user_id').val(),
-//              talkRoom_seq : $('#talkRoom_seq').val()
+        		sender_user_id : $('#sender_user_id'),
+                receiver_user_id : $('#receiver_user_id'),
+                talk_content : $('#talk_message').val(),
+                send_time : 값넣어놔야함,
+                receiver_pf_Photo : $('#receiver_pf_Photo'),
+                item_seq : $('#item_seq')
+              
         }
         sock.send(JSON.stringify(message));
         $('#talk_message').val('');
@@ -85,7 +82,7 @@ $(document).ready(function() {
          class : 'talkReciveProfile'
       }).append($('<img />', {
          class : 'profileImg',
-         src : '../image/profileimg.png',
+         src : 'pmang/image/'+$('#receiver_pf_Photo'),
          alt : '프로필이미지',
          width : '36',
          height : '36'

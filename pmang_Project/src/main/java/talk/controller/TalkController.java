@@ -1,7 +1,7 @@
 package talk.controller;
 
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import board.bean.ItemDTO;
-import talk.bean.TalkRoomDTO;
+import member.bean.SellerDTO;
 import talk.service.TalkService;
 
 @Controller
@@ -25,17 +25,28 @@ public class TalkController {
 	private TalkService talkService;
 	
 	@RequestMapping(value="talkRoom",method=RequestMethod.GET)
-	public ModelAndView talkRoom(HttpSession session, @RequestParam Map<String,Object> map) {
+	public ModelAndView talkRoom(HttpSession session, @RequestParam Map<String,String> map) {
 		
-		int item_seq = (Integer)map.get("item_seq");
-		//talkRoom 으로 요청이 오게 되면, item_seq 를 받아서  아래의 데이터들을 search한다.
+		int item_seq = (Integer) session.getAttribute("item_seq");//세션에 저장되어있는 item_seq
+		String userId = (String) session.getAttribute("userId");//세션에 로그인되어있는 아이디
 		
-		//상점명,pf_Photo ->item_seq 를 통해서 userKey를 빼오고, userkey로 상점명,pf_Photo 검색.
+		String partner_userId = talkService.getPartnerUserId(item_seq);
 		
-		//상품이미지 img1/img2/img3,상품 가격 item_price,상품 제목 itemSubject
+		//marketName,pf_Photo -> seller table
+		SellerDTO sellerDTO = talkService.getSellerInfoSearch(partner_userId);
+		//상품이미지 img1(대표사진 1개만),item_price,item_Subject
+		ItemDTO itemDTO = talkService.getItemInfoSearch(partner_userId);
 		
+		Map<String,Object> sellerItem = new HashMap<String,Object>();
+		sellerItem.put("marketName", sellerDTO.getMarketname());
+		sellerItem.put("pf_Photo", sellerDTO.getPf_photo());
+		sellerItem.put("img1", itemDTO.getImg1());
+		sellerItem.put("item_price", itemDTO.getItem_price());
+		sellerItem.put("item_Subject", itemDTO.getItem_subject());
+		sellerItem.put("partner_userId", partner_userId);
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("sellerItem",sellerItem);
 		mav.setViewName("/talk/talkRoom");
 		
 		return mav;

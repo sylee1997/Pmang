@@ -9,11 +9,10 @@
 </head>
 <body>
 
-<input type="hidden" id="item_seq" value="${room.item_seq }">
-<input type="hidden" id="sender_user_id" value="${room.userId }">
-<input type="hidden" id="receiver_user_id" value="${room.partner_userId }">
-<input type="hidden" id="talkRoom_seq" value="${room.talkRoom_seq }">
-<input type="hidden" id="receiver_pf_Photo" value="${room.pf_Photo }">
+<input type="hidden" id="item_seq" value="${sessionScope.item_seq }">
+<input type="hidden" id="sender_user_id" value="${sessionScope.userId }">
+<input type="hidden" id="receiver_user_id" value="${sellerItem.partner_userId }">
+<input type="hidden" id="receiver_pf_Photo" value="${sellerItem.pf_Photo }">
 
 <div id="root">
    <div>
@@ -102,9 +101,9 @@
       
       <div class="talk_Area">
          <div class="talk_area_div">
-            <header class="talk_header">
+            <header class="talk_header"><!-- class명 item이 아니라 marketName이다. 변경해라 -->
                <button type="button" class="talk_itemName_button">
-                  <span class="itemName">상점명 받아오기</span>
+                  <span class="itemName">${sellerItem.marketName }</span>
                   <span class="itemName_arrow"></span>
                </button>
                
@@ -122,14 +121,14 @@
             
             <div class="talk_itemInfo">
                <a class="itemboard_move">
-                  <img src="/pmang/image/itemPic.jpg" alt="상품이미지" width="40px" height="40px">
+                  <img src="/pmang/image/${sellerItem.img1 }" alt="상품이미지" width="40px" height="40px">
                   
                   <div class="talk_itemList">
-                     <div class="item_price_div">0,000
+                     <div class="item_price_div">${sellerItem.item_price }
                      <small>원</small>
                      </div>
                      
-                     <div class="item_subject_div">상품명</div>
+                     <div class="item_subject_div">${sellerItem.item_Subject }</div>
                   </div>
                </a><!-- 클릭하면 상품 판매 게시판으로이동 -->
                <button type="button" class="price_change">가격변경</button> <!-- 판매자일때만 띄우주기 -->

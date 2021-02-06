@@ -1,12 +1,15 @@
 package talk.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import board.bean.ItemDTO;
+import member.bean.SellerDTO;
 import talk.bean.MessageDTO;
 import talk.bean.TalkRoomDTO;
 
@@ -27,13 +30,28 @@ public class TalkDAOMybatis implements TalkDAO {
 	}
 	
 	@Override
-	public List<TalkRoomDTO> getRoomList(String userId) {
-		return sqlSession.selectList("talkSQL.getRoomList", userId);
+	public void insertMessage(MessageDTO messageDTO) {
+		sqlSession.insert("talkSQL.insertMessage",messageDTO);
 	}
 
 	@Override
-	public void insertMessage(MessageDTO messageDTO) {
-		sqlSession.insert("talkSQL.insertMessage",messageDTO);
+	public SellerDTO getSellerInfoSearch(String partner_userId) {
+		return sqlSession.selectOne("talkSQL.getSellerInfoSearch",partner_userId);
+	}
+
+	@Override
+	public ItemDTO getItemInfoSearch(String partner_userId) {
+		return sqlSession.selectOne("talkSQL.getItemInfoSearch",partner_userId);
+	}
+	
+	@Override
+	public String getPartnerUserId(int item_seq) {
+		return sqlSession.selectOne("talkSQL.getPartnerUserId", item_seq);
+	}
+
+	@Override
+	public List<TalkRoomDTO> getRoomList(String userId) {
+		return sqlSession.selectList("talkSQL.getRoomList", userId);
 	}
 
 }
