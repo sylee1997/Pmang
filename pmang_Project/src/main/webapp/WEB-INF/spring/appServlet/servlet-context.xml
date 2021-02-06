@@ -11,10 +11,12 @@
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 
+	
 	<context:component-scan base-package="member.controller"/>
 	<context:component-scan base-package="board.controller"/>
 	<context:component-scan base-package="hello.controller"/>
-	
+	<context:component-scan base-package="talk.controller"/>
+
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
@@ -32,35 +34,40 @@
 	
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="suffix" value=".jsp" />
-	</beans:bean>
-	
+   <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <beans:property name="suffix" value=".jsp" />
+   </beans:bean>
+
 	<!-- json -->
-	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+ 	<beans:bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
 		<beans:property name="contentType" value="text/html;charset=UTF-8"/>
-	</beans:bean>
+	</beans:bean> 
 	
 	<!-- Resolves views -->
 	<beans:bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<beans:property name="order" value="0"/>
 	</beans:bean>
+
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
 	
 	<!-- fileupload -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<beans:property name="maxUploadSize" value="5000000"/> <!-- 5MB -->
+		<beans:property name="maxUploadSize" value="20000000"/> <!-- 20MB -->
 	</beans:bean>
-	
+
 	<!-- 웹소켓 -->
 	<beans:bean id="talkHandler" class="talk.handler.TalkHandler"></beans:bean>
 	
 	<websocket:handlers>
-		<websocket:mapping handler="talkHandler" path="/talk" /> <!-- path에 요청이 오면 talkHandler를 처리하겠다. -->
+		<websocket:mapping handler="talkHandler" path="/talk-ws" /> <!-- path에 요청이 오면 talkHandler를 처리하겠다. -->
 		<websocket:handshake-interceptors>
 	         <beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" /> <!-- Http의 Session을 낚아채서 websocket으로 가져온다. -->
 	    </websocket:handshake-interceptors>
 		<websocket:sockjs />
 	</websocket:handlers>
-	
 	
 </beans:beans>
