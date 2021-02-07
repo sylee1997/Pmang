@@ -11,6 +11,7 @@
 <body>
 <input type="hidden" id="lon">
 <input type="hidden" id="lat">
+<input type="hidden" name="pg" id="pg" value="${pg }">
 <div id="itemBoard">
 	<div id="locationModal" class="locationModal">
 		<div class="locationModalContent">
@@ -111,6 +112,7 @@
 	</div>
 	
 	<div class="selection02">
+<<<<<<< HEAD
 		<h2>찾으시는 상품</h2>
             
 		<div class="locationSearch">
@@ -119,7 +121,27 @@
 			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAUCAYAAAC58NwRAAAAAXNSR0IArs4c6QAAAaVJREFUKBWFUz1LA0EQde9DIjaxSBNIG2shnR9whYVgIQqnjURikhP/QDqLVPoL9KJJEUHIgYggSFCs7K2tU6ZIrAwa73zvyB6bM8GB3Ox782Z2Z3YjZmCe5832er2WruvVYrH4Rm6aaQz0+/0ruC3f99v1en1xmpi85rpuNQiCfQL41HA4fGo0GhniSaYJIRZigQySnpGUivEhFKgqLmHwhzEBe7Ecx/lQee4QlEqlMsgbNYD1En4PGMicyodNI8nPZrN5+Ds1iPUKBnKLPk3JhwkElmUNk8nkHpIeZZAeR92Au4YPtVECg7Ztf5mmuY2kF2LFdmu12jmxUMho2Ww25weDQRtVlyOSYiHOxnaQwUQi4UMcSKz6PzuwQVS6h55njwycWy6Xj8Z2gIiYDY6JwbUw+mNm6/xIS6fTF1jnJaZHZU7NzuVyP8QGPzRM4RSVeYGqvWLUO5jetyTDI0FcgbgiyZHn09iE+FPlBZp0QPAoqr3jPlYLhUJXJbnmDmsxsgPx+iSxTDgYNcYGu4ZhUNyJFYlgeA98kXhknqZpJ//9RX8BYkCa7Y9z0J0AAAAASUVORK5CYII="
 			 width="6" height="10" alt="카테고리 선택그룹 아이콘">
 			</span>
+=======
+		<h2 id="findItemH2"></h2>
+         
+         <div class="locationorderby">   
+			<div class="locationSearch">
+
+				<span class="locationSpan">
+				<div class="detailAddr">위치검색</div>
+				<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAUCAYAAAC58NwRAAAAAXNSR0IArs4c6QAAAaVJREFUKBWFUz1LA0EQde9DIjaxSBNIG2shnR9whYVgIQqnjURikhP/QDqLVPoL9KJJEUHIgYggSFCs7K2tU6ZIrAwa73zvyB6bM8GB3Ox782Z2Z3YjZmCe5832er2WruvVYrH4Rm6aaQz0+/0ruC3f99v1en1xmpi85rpuNQiCfQL41HA4fGo0GhniSaYJIRZigQySnpGUivEhFKgqLmHwhzEBe7Ecx/lQee4QlEqlMsgbNYD1En4PGMicyodNI8nPZrN5+Ds1iPUKBnKLPk3JhwkElmUNk8nkHpIeZZAeR92Au4YPtVECg7Ztf5mmuY2kF2LFdmu12jmxUMho2Ww25weDQRtVlyOSYiHOxnaQwUQi4UMcSKz6PzuwQVS6h55njwycWy6Xj8Z2gIiYDY6JwbUw+mNm6/xIS6fTF1jnJaZHZU7NzuVyP8QGPzRM4RSVeYGqvWLUO5jetyTDI0FcgbgiyZHn09iE+FPlBZp0QPAoqr3jPlYLhUJXJbnmDmsxsgPx+iSxTDgYNcYGu4ZhUNyJFYlgeA98kXhknqZpJ//9RX8BYkCa7Y9z0J0AAAAASUVORK5CYII="
+				 width="6" height="10" alt="카테고리 선택그룹 아이콘">
+				</span>
+			</div>
+			<div class="orderby">
+				<a class="orderChoice">최신순</a>
+				<a>인기순</a>
+				<a>저가순</a>
+				<a>고가순</a>
+			</div>
+>>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 		</div>
+			
             
             <div class="selection1">
                <div class="selection2">
@@ -417,6 +439,12 @@
                </div><!-- selection2 -->
             </div><!-- selection1 -->
 	
+			<!-- pagingDiv 구역 -->
+			<div id="itemBoardPagingDiv">
+                 <div id="itemBoardPagingDiv2">
+                  		
+                 </div>
+            </div>
 	</div>
 </div>
 </body>

@@ -9,14 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+<<<<<<< HEAD
+=======
+
+import board.bean.ItemDTO;
+>>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 import member.bean.MemberDTO;
 import member.bean.ZipcodeDTO;
 
-@Repository
 @Transactional
+@Repository
 public class MemberDAOMybatis implements MemberDAO {
 	@Autowired
 	private SqlSession sqlSession;
+
 	
 	@Override
 	public MemberDTO login(Map<String, String> map) {
@@ -47,6 +53,7 @@ public class MemberDAOMybatis implements MemberDAO {
 		
 	}
 
+
 	@Override
 	public int regSuccess(String userId, String user_key) {
 		Map<String, String> map = new HashMap<String, String>();
@@ -67,4 +74,23 @@ public class MemberDAOMybatis implements MemberDAO {
 	}
 
 	
+<<<<<<< HEAD
+=======
+	
+	
+	//---------------------------seller----------------------------------------//
+	
+	@Override
+	public List<ZipcodeDTO> searchlocation(String address) {
+		List<ZipcodeDTO> list = sqlSession.selectList("memberSQL.searchlocation", address);
+		System.out.println(list);
+		return sqlSession.selectList("memberSQL.searchlocation", address);
+	}
+
+	public void sellerWrite(ItemDTO itemDTO) {
+		
+		sqlSession.insert("memberSQL.sellerWrite", itemDTO);
+	}
+
+>>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 }

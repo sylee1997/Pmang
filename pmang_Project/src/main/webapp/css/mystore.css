@@ -26,7 +26,49 @@
 	margin-top: 40px;
 	overflow: hidden;
 	text-align: center;
-	background: url(../image/defaultProfile.png) center 100% no-repeat;
+	/*  background: url(../image/defaultProfile.png) center 100% no-repeat; */
+	background-image: url(../image/grayPmang.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 150px;
+	object-fit: fill;
+}
+
+.mystoreProfileImg input {
+	border: 1px solid rgb(195, 194, 204);
+	width: 150px;
+	height: 150px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	opacity: 0;
+	cursor: pointer;
+	font-size: 0px;
+	padding: 0px;
+	-webkit-font-smoothing: antialiased;
+	direction: ltr;
+	text-align: left;
+	color: rgb(33, 33, 33);
+	letter-spacing: -0.5px;
+	outline: 0px;
+	overflow: visible;
+	line-height: 1.15;
+	margin: 0px;
+}
+
+.mystoreProfileImg {
+	width: 150px height: 150px;
+	position: relative;
+	/* display: inline-block; */
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	justify-content: center;
+	flex-direction: column;
+	color: rgb(155, 153, 169);
+	font-size: 1rem;
+	/* margin-right: 1rem; */
+	/* margin-bottom: 1rem; */
 }
 
 #mystoreName {
@@ -34,7 +76,7 @@
 	margin-bottom: 10px;
 }
 
-.infoName {
+.infoName span {
 	font-family: sans-serif;
 	margin-right: 10px;
 	font-weight: bold;
@@ -71,8 +113,7 @@
 	display: flex;
 	-webkit-box-align: center;
 	align-items: center;
-
-border-bottom: 1px solid rgb(238, 238, 238);
+	border-bottom: 1px solid rgb(238, 238, 238);
 	margin-bottom: 20px;
 	flex-shrink: 0;
 }
@@ -104,18 +145,23 @@ border-bottom: 1px solid rgb(238, 238, 238);
 
 #mystoreIntroduce {
 	-webkit-box-flex: 1;
-    flex-grow: 1;
-    width: 100%;
-    overflow-y: auto;
-    line-height: 1.57;
-    white-space: pre-wrap;
-    text-align:left;
+	flex-grow: 1;
+	width: 100%;
+	overflow-y: auto;
+	line-height: 1.57;
+	white-space: pre-wrap;
+	text-align: left;
 }
 
 #introEdit {
 	float: left;
 	display: flex;
 	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.introEdit1 {
+	margin-top: 10px;
 }
 
 #mystoreIntroduce>textarea {
@@ -127,6 +173,8 @@ border-bottom: 1px solid rgb(238, 238, 238);
 	flex-grow: 1;
 	resize: none;
 	background-color: rgb(238, 238, 238);
+	border-color: transparent;
+	outline: none;
 }
 
 #storeIntroBtn {
@@ -141,10 +189,10 @@ border-bottom: 1px solid rgb(238, 238, 238);
 	margin-top: 30px;
 }
 
-span {
+.tabmenu span {
 	margin-left: 10px;
 	color: red;
-	text-weight:bold;
+	text-weight: bold;
 }
 
 .tab {
@@ -152,6 +200,7 @@ span {
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
+	border-bottom: 1px solid gray;
 }
 
 #tabContent {
@@ -167,7 +216,6 @@ span {
 	padding: 14px 16px;
 	font-size: 17px;
 	transition: 0.3s;
-	
 }
 
 a:visited {
@@ -175,7 +223,7 @@ a:visited {
 	text-decoration: none;
 }
 
-li {
+.tab li {
 	float: left;
 	display: inline-block;
 	color: #000;
@@ -210,7 +258,26 @@ li {
 	width: 200px;
 	display: flex;
 }
-
+.tab2Name {
+	width: 200px;
+	display: flex;
+}
+.tab3Name {
+	width: 200px;
+	display: flex;
+}
+.tabName span {
+	color: red;
+	margin-left: 10px;
+}
+.tab2Name span {
+	color: red;
+	margin-left: 10px;
+}
+.tab3Name span {
+	color: red;
+	margin-left: 10px;
+}
 /* .select {
 	border: 1px solid rgb(238, 238, 238);
 	display: flex;
@@ -359,6 +426,11 @@ li {
 	float: left;
 }
 
+#selectCategory span {
+	color: red;
+	margin-left: 10px;
+}
+
 .sortGroup a {
 	font-size: 8pt;
 	display: flex;
@@ -366,13 +438,15 @@ li {
 	margin: 0 auto;
 	padding: 0;
 	text-decoration: none;
+	 color:black; 
 }
 
 .defaultSort {
 	margin-right: 20px;
 	position: relative;
 	display: block;
-	color: rgb(247, 47, 51);
+	/* color: rgb(247, 47, 51); */
+	/* color:green; */
 }
 
 .sort {
@@ -400,6 +474,10 @@ li {
 	margin-right: 10px;
 	margin-bottom: 10px;
 	overflow: hidden; /*영역잘린거보려고*/
+}
+
+.itemName {
+	text-align: left;
 }
 
 .itemTime span {
@@ -461,11 +539,12 @@ li {
 	flex-shrink: 0;
 	height: 100%;
 	border: 1px solid rgb(238, 238, 238);
+	object-fit: fill;
 }
 
 .favInfo {
 	padding: 0px 20px 0px 0px;
-	width: 100%;
+	width: 200px;
 	display: inline-block;
 }
 
@@ -473,12 +552,12 @@ li {
 	margin-top: 18px;
 	margin-bottom: 5px;
 	height: 22px;
-	font-size: 13pt;
-	text-overflow: ellipsis;
+	font-size: 11pt;
+	text-overflow: sans-serif;
 	white-space: nowrap;
 	overflow: hidden;
 	text-align: left;
-	font-weight: bold;
+	/* font-weight: bold; */
 	padding-left: 20px;
 	text-decoration: none;
 }
@@ -548,6 +627,7 @@ li {
 .review_content {
 	flex: 1 1 0%;
 	width: 890px;
+	margin-left: 10px;
 }
 
 .review_header {
@@ -596,6 +676,7 @@ li {
 	background-color: transparent;
 	text-align: left;
 	font-size: 10pt;
+	margin-bottom: 5px;
 }
 
 .reviewSubjectWrap {
@@ -607,6 +688,7 @@ li {
 	text-align: left;
 	padding: 0;
 	margin: 0 auto;
+	margin-bottom: 10px;
 }
 
 .reviewSubjectBtn {

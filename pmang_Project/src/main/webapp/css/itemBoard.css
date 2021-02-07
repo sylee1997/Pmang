@@ -13,6 +13,10 @@ html, body, div {
 	width : 1024px;
 	background-color: rgb(249, 249, 249);
 	padding-top: 30px;
+<<<<<<< HEAD
+=======
+	/* height: 2000px; */
+>>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 }
 
 /* select01 */
@@ -167,11 +171,15 @@ a {
 
 
 .locationSearch {
-	width: 100%;
     max-width: 76.8rem;
     display: inline-block;
+<<<<<<< HEAD
     padding: 0px 10px 10px 10px;
     margin: 0 auto;
+=======
+    padding: 0px 10px 20px 0px;
+    /* margin: 0 auto; */
+>>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
     text-align: left;
 }
 
@@ -183,6 +191,10 @@ a {
     width: 300px;
     cursor: pointer;
     align-items: center;
+<<<<<<< HEAD
+=======
+    width: 300px;
+>>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 }
 
 .locationSpan:before {
@@ -394,4 +406,76 @@ h2 {
 .locationModal_section a {
 	padding: 0.3rem 0.5rem;
 	text-align: center;
+}
+
+#entireItemNumSpan {
+	color: rgb(136, 136, 136);
+    margin-left: 5px;
+}
+
+.orderby {
+	font-size: 13px;
+    display: flex;
+    padding-left: 480px;
+}
+
+.orderby a {
+	margin-right: 20px;
+    position: relative;
+    display: block;
+    font-weight: 600;
+}
+
+.orderby a::after {
+	content: "";
+    position: absolute;
+    top: 1px;
+    right: -10px;
+    width: 1px;
+    height: 12px;
+    border-right: 1px solid rgb(204, 204, 204);
+}
+
+.locationorderby{
+	display : flex;
+}
+
+.orderChoice {
+	color : red;
+}
+
+#itemBoardPagingDiv {
+	display: flex;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+#itemBoardPagingDiv2 {
+	display: flex;
+}
+
+#paging{
+	width: 33px;
+    height: 33px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 12px;
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    border-radius: 2px;
+    color: rgb(155, 153, 169);
+}
+
+#currentPaging{
+	width: 33px;
+    height: 33px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 12px;
+    border: 1px solid #246d24;
+    border-radius: 2px;
+    color: rgb(255, 255, 255);
+    background: #246d24;
 }

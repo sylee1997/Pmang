@@ -1,6 +1,10 @@
 package pmang.conf;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+
+import org.apache.ibatis.session.SqlSession;
+
+
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -9,15 +13,23 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+
+import org.springframework.core.io.DefaultResourceLoader;
+
+
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 @Configuration
+
 public class PmangConfiguration {
+
 	@Autowired
 	private ApplicationContext applicationContext;
-	
+
 	@Bean
+
 	public BasicDataSource dataSource(){
+
 		BasicDataSource basicDataSource = new BasicDataSource();
 		basicDataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 		basicDataSource.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
@@ -25,7 +37,7 @@ public class PmangConfiguration {
 		basicDataSource.setPassword("bit");
 		basicDataSource.setMaxTotal(20);
 		basicDataSource.setMaxIdle(3);
-		
+
 		return basicDataSource;
 	}
 	
@@ -34,6 +46,7 @@ public class PmangConfiguration {
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		sqlSessionFactoryBean.setConfigLocation(new ClassPathResource("pmang/mybatis-config.xml"));
 		sqlSessionFactoryBean.setDataSource(dataSource());
+
 		sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:*/dao/*Mapper.xml"));        
 		return sqlSessionFactoryBean.getObject();
 	}
@@ -47,5 +60,6 @@ public class PmangConfiguration {
 	public DataSourceTransactionManager transactionManager() {
 		return new DataSourceTransactionManager(dataSource());
 	}
+
 }
 

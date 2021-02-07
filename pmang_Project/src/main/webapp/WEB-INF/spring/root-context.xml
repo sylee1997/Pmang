@@ -6,9 +6,22 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<context:component-scan base-package="member.dao"/>
-	<context:component-scan base-package="member.service"/>
+
+	<context:component-scan base-package="board.bean"/>
+	<context:component-scan base-package="board.dao"/>
+	<context:component-scan base-package="board.service"/>
 	
+
+
+	<context:component-scan base-package="member.service"/>
+<<<<<<< HEAD
+	
+=======
+	<context:component-scan base-package="member.dao"/>
+	<context:component-scan base-package="member.bean"/>
+
+	<context:component-scan base-package="spring.conf"/>
+>>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 	<context:component-scan base-package="pmang.conf"/>
 	
 	<context:component-scan base-package="pmang_user.service"/>
@@ -31,4 +44,12 @@
 			</props>
 		</property>
 	</bean>
+<<<<<<< HEAD
+=======
+
+	<context:component-scan base-package="data.url"/>
+	
+	<context:component-scan base-package="talk.service"/>
+	<context:component-scan base-package="talk.dao"/>
+>>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 </beans>

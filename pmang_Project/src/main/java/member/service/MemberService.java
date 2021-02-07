@@ -1,5 +1,6 @@
 package member.service;
 
+
 import java.util.List;
 import java.util.Map;
 
@@ -24,4 +25,15 @@ public interface MemberService {
 	public int regSuccess(String userId, String key);
 
 	public String kakaoLogin(MemberDTO memberDTO, HttpSession session);
+<<<<<<< HEAD
+=======
+	
+	//-----------------------seller---------------------------//
+	public void sellerWrite(ItemDTO itemDTO);
+
+
+	public List<ZipcodeDTO> searchlocation(String address);
+
+
+>>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 }

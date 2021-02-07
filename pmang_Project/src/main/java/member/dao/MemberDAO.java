@@ -3,6 +3,10 @@ package member.dao;
 import java.util.List;
 import java.util.Map;
 
+<<<<<<< HEAD
+=======
+import board.bean.ItemDTO;
+>>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 import member.bean.MemberDTO;
 import member.bean.ZipcodeDTO;
 
@@ -23,5 +27,6 @@ public interface MemberDAO {
 	public int checkKakaoId(String kakaoId);
 
 	public int kakaoWrite(MemberDTO memberDTO);
+
 
 }

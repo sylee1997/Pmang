@@ -14,6 +14,7 @@
 }
 
 
+<<<<<<< HEAD
 /*ë¼ë””ì˜¤ë²„íŠ¼ ìˆ¨ê¹€*/
 input {
 	display: none;
@@ -21,6 +22,18 @@ input {
 
 /* ë¼ë””ì˜¤ë²„íŠ¼ì˜ ë¼ë²¨í™” */
 label {
+=======
+/*¶óµğ¿À¹öÆ° ¼û±è*/
+
+.tabs {
+	display: none;
+}
+
+/* ¶óµğ¿À¹öÆ°ÀÇ ¶óº§È­ */
+
+.tabLabel {
+
+>>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 	display: inline-block;
 	width:290px;
 	margin: 0 auto;
@@ -36,25 +49,38 @@ label:hover {
 	cursor: pointer;
 }
 
+<<<<<<< HEAD
 /*input í´ë¦­ì‹œ, label ìŠ¤íƒ€ì¼*/
 input:checked+label {
+=======
+/*input Å¬¸¯½Ã, label ½ºÅ¸ÀÏ*/
+
+.tabs:checked+label {
+>>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 	color: red;
 	border-bottom: 3px solid red;
 }
 
+<<<<<<< HEAD
 /* tabì´ ì²´í¬ë˜ë©´ tabë¶€í„° contentê¹Œì§€ì˜ ëª¨ë“  ìì‹ì— ëŒ€í•œ ìŠ¤íƒ€ì¼  */
 #tab1:checked ~ #notice,
+=======
+/* tabÀÌ Ã¼Å©µÇ¸é tabºÎÅÍ content±îÁöÀÇ ¸ğµç ÀÚ½Ä¿¡ ´ëÇÑ ½ºÅ¸ÀÏ  */
+
+#tab1:checked ~ #bulletin,
+>>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 #tab2:checked ~ #policy,
 #tab3:checked ~ #FQA {
 	display: block;
 }
 
-/* ì„ íƒì— ë”°ë¼ ì¶”ê°€ë  ë‚´ìš© ìŠ¤íƒ€ì¼ */
+/* ¼±ÅÃ¿¡ µû¶ó Ãß°¡µÉ ³»¿ë ½ºÅ¸ÀÏ */
 section {
 	display: none;
 	border-top: 1px solid #ddd;
 }
 
+<<<<<<< HEAD
 /* ê³µì§€ì‚¬í•­ ì „ì²´ ì˜ì—­ */
 .noticeDiv{
 
@@ -62,11 +88,25 @@ section {
 
 /* ê³µì§€ì‚¬í•­ ê¸€ í•˜ë‚˜ */
 .noticeArea{
+=======
+
+/* °øÁö»çÇ× ¿µ¿ª */
+.bulletinDiv{
+
+
+}
+
+/* °øÁö»çÇ× ±Û ÇÏ³ª */
+
+.bulletinArea{
+
+>>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 	border:1px solid #d2d2d2;
 	text-align:left;
 	white-space : pre-line;
 	padding-bottom:0;
 	position:relative;
+	cursor:pointer;
 }
 
 .noticeTitle{
@@ -219,6 +259,72 @@ section {
 }
 
 
+<<<<<<< HEAD
+=======
+.menu {
+	display: none;
+}
+
+.menuLabel {
+	display: inline-block;
+	width:297px;
+	margin: 0 auto;
+	padding: 20px;
+	font-weight: 600;
+	font-size: 15px;
+	text-align: center;
+	
+}
+
+.menuLabel:hover {
+	color: gray;
+	cursor: pointer;
+}
+
+/*input Å¬¸¯½Ã, label ½ºÅ¸ÀÏ*/
+.menu:checked+label {
+	color: red;
+}
+
+/* tabÀÌ Ã¼Å©µÇ¸é tabºÎÅÍ content±îÁöÀÇ ¸ğµç ÀÚ½Ä¿¡ ´ëÇÑ ½ºÅ¸ÀÏ  */
+#menu1:checked ~ #section1,
+#menu2:checked ~ #section2,
+#menu3:checked ~ #section3,
+#menu4:checked ~ #section4,
+#menu5:checked ~ #section5,
+#menu6:checked ~ #section6,
+#menu7:checked ~ #section7,
+#menu8:checked ~ #section8,
+#menu9:checked ~ #section9 {
+	display: block;
+}
+
+/* °øÁö»çÇ× ±Û ÇÏ³ª */
+.postArea{
+	border:1px solid #d2d2d2;
+	text-align:left;
+	position:relative;
+	cursor:pointer;
+}
+
+.postTitle{
+	font-size:17px;
+	font-weight:600;
+	padding:20px;
+	margin : 0 auto;
+}
+
+.postContent{
+	display:none;
+	text-align:left;
+	margin:0px;
+	padding:10px;
+	white-space : pre-line;
+	background-color:#eeeeee;
+	position:relative;
+}
+
+>>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 
 
 

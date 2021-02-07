@@ -5,15 +5,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="memberSQL">
+<<<<<<< HEAD
 <!-- 로그인 -->
 	<select id="login" parameterType="String" resultType="member">
 		select * from usertable where ((userId=#{userId}) and (pwd=#{pwd}) and (user_key='Y'))
+=======
+	<!-- 로그인 -->
+	<select id="login" parameterType="String" resultType="member">
+		select * from usertable where ((userId=#{userId}) and (pwd=#{pwd}) and (email_key='Y'))
+>>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 	</select>
 	
 	<!-- 회원가입 -->
 	<insert id="write" parameterType="member">
+<<<<<<< HEAD
 		insert into usertable (userName, userId, pwd, gender, email1, email2, zipcode, addr1, addr2, tel1, tel2, tel3, logtime)
 		values (#{userName}, #{userId}, #{pwd}, #{gender}, #{email1}, #{email2}, #{zipcode}, #{addr1}, #{addr2}, #{tel1}, #{tel2}, #{tel3}, sysdate)
+=======
+		insert into usertable (userName, userId, pwd, gender, email1, email2, zipcode, addr1, addr2, tel1, tel2, tel3)
+		values (#{userName}, #{userId}, #{pwd}, #{gender}, #{email1}, #{email2}, #{zipcode}, #{addr1}, #{addr2}, #{tel1}, #{tel2}, #{tel3})
+>>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 	</insert>
 	
 	<!-- 아이디 중복체크 -->	
@@ -31,12 +42,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 메일인증키 -->
 	<insert id="GetKey" parameterType="java.util.Map">
+<<<<<<< HEAD
 		update usertable set user_key = #{user_key} where userId = #{userId}
+=======
+		update usertable set email_key = #{email_key} where userId = #{userId}
+>>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 	</insert>
 	
 	<!--회원 인증키(난수) Y로 변경 -->
 	<update id="regSuccess" parameterType="java.util.Map">
+<<<<<<< HEAD
 		update usertable set user_key = 'Y' where userId = #{userId} and user_key = #{user_key}
+=======
+		update usertable set email_key = 'Y' where userId = #{userId} and email_key = #{email_key}
+>>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 	</update>
 	
 	<!-- kakao id 확인 -->
@@ -49,4 +68,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into usertable (userName, gender, email1, email2, userId, kakaoId)
 		values (#{userName}, #{gender}, #{email1}, #{email2}, #{kakaoId}, #{kakaoId})
 	</insert>
+<<<<<<< HEAD
+=======
+
+	<!-- 상품등록쪽 -->
+	<insert id="sellerWrite" parameterType="item">
+	insert into item values(item_seq.nextval,
+									   #{img1},
+									   #{img2},
+									   #{img3},
+									   #{item_subject},
+									   #{category1},
+									   #{category2},
+									   #{category3},
+									   #{condition},
+									       'sell',<!-- #{item_state} -->
+									   #{item_location},
+									   #{item_price},
+									   #{nego},
+									   #{item_content},
+									   #{hashtag1},
+									   #{hashtag2},
+									   #{hashtag3},
+									   0,<!-- #{buyer_Key} -->
+									   0,<!-- #{hit} -->
+									   0,<!-- #{qty} -->
+									   sysdate)
+									   
+	</insert>
+
+
+	<select id="searchlocation" parameterType="String" resultType="zipcode">
+		select DISTINCT sido, sigungu, yubmyundong from newzipcode where sigungu like '%'||#{address}||'%' or yubmyundong like '%'||#{address}||'%' or roadname like '%'||#{address}||'%' order by sido
+	</select>
+	
+>>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 </mapper>
