@@ -16,7 +16,7 @@ public class TalkServiceImple implements TalkService {
 	private TalkDAO talkDAO;
 	
 	@Override
-	public Object isRoom(TalkRoomDTO talkRoomDTO) {
+	public TalkRoomDTO isRoom(TalkRoomDTO talkRoomDTO) {
 		return  talkDAO.getRoom(talkRoomDTO);
 	}
 	@Override

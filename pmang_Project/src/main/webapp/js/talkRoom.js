@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
    sock = new SockJS('/pmang/talk-ws');//나중에 혹시 안되면 "ws://192.168.8.32:8080/SpringWeb/chat-ws" 나중에 주소적을때 이런 양식으로.
 
    sock.onopen = function() {
@@ -7,10 +6,10 @@ $(document).ready(function() {
    };
    sock.onmessage = function(e) {
       var data = e.data;
-      console.log(data);
-      console.log("e - " + e);
-      var obj = JSON.parse(data);
-      console.log(obj);
+      console.log(data)
+      console.log("e - " + e)
+      var obj = JSON.parse(data)
+      console.log(obj)
       appendMaessge(obj.talk_content);
 
    };
@@ -21,18 +20,23 @@ $(document).ready(function() {
 
    // 메세지 보내기
    $('#sendBtn').click(function() {
-	  /*var msg = $.trim($('#talk_message').val());
-	  alert(msg);
-	  alert($('#talk_message').val());*/
-	   alert('${room.userId}');
-	  var msg = $('#talk_message').val();
-	  if(msg != ""){
-		  message = {
-				  talk_content: $('#talk_message').val()
-		  }
-		  sock.send(JSON.stringify(message));
-		  $('#talk_message').val('');
-	  }
+     /*var msg = $.trim($('#talk_message').val());
+     alert(msg);
+     alert($('#talk_message').val());*/
+     var msg = $('#talk_message').val();
+     if(msg != ""){
+        message = {
+        		sender_user_id : $('#sender_user_id'),
+                receiver_user_id : $('#receiver_user_id'),
+                talk_content : $('#talk_message').val(),
+                send_time : 값넣어놔야함,
+                receiver_pf_Photo : $('#receiver_pf_Photo'),
+                item_seq : $('#item_seq')
+              
+        }
+        sock.send(JSON.stringify(message));
+        $('#talk_message').val('');
+     }
    });
 
    
@@ -78,7 +82,7 @@ $(document).ready(function() {
          class : 'talkReciveProfile'
       }).append($('<img />', {
          class : 'profileImg',
-         src : '../image/profileimg.png',
+         src : 'pmang/image/'+$('#receiver_pf_Photo'),
          alt : '프로필이미지',
          width : '36',
          height : '36'
@@ -151,39 +155,39 @@ $(document).ready(function() {
          $('.itemName_arrow').css('transform', 'rotate(0deg)');
       }
 
-	   $('.modalDiv').toggle();/*toggle("normal")*/
-	   $('.room_setting_modal').hide(); 
-	   $('.room_setting_modal').off('scroll touchmove mousewheel');
+      $('.modalDiv').toggle();/*toggle("normal")*/
+      $('.room_setting_modal').hide(); 
+      $('.room_setting_modal').off('scroll touchmove mousewheel');
    });
    
    
    //------------------------------------------------------------
    
    $('.talk_item_detailBtn').on('click',function(){
-	   $('.room_setting_modal').toggle();
-	   $('.modalDiv').hide(); 
-	   $('.modalDiv').off('scroll touchmove mousewheel');
+      $('.room_setting_modal').toggle();
+      $('.modalDiv').hide(); 
+      $('.modalDiv').off('scroll touchmove mousewheel');
    });
    
    //------------------------------------------------------------
    
    //모달창 닫기
    $(document).click(function(e){
-		if($('.modal_area').is(e.target)){
-			
-			$('.modalDiv').hide(); 
-			$('.modalDiv').off('scroll touchmove mousewheel');
-			
-		}
-		
-		if($('.room_setting_modal_area').is(e.target)){
-			
-			$('.room_setting_modal').hide(); 
-			$('.room_setting_modal').off('scroll touchmove mousewheel');
-			
-		}
-		
-	});
+      if($('.modal_area').is(e.target)){
+         
+         $('.modalDiv').hide(); 
+         $('.modalDiv').off('scroll touchmove mousewheel');
+         
+      }
+      
+      if($('.room_setting_modal_area').is(e.target)){
+         
+         $('.room_setting_modal').hide(); 
+         $('.room_setting_modal').off('scroll touchmove mousewheel');
+         
+      }
+      
+   });
    //------------------------------------------------------------
    
 // option버튼 -----------------
@@ -227,26 +231,25 @@ $(document).ready(function() {
 var sw=1;
 var Notification_status=1;//상태가 변화하면 Notification_status 변수를 들고 ajax로 가서 TalkRoom 테이블의 Notification_status 값 변경.
 $('.room_setting_notification_Btn').on('click',function(){
-	
-	if(sw == 1){
-		$('.room_setting_notification_Btn').css('background-image','url(/pmang/image/notification.png)');//회색
-		$('.room_setting_notification_Btn>b').text('OFF');
-		Notification_status = 0;
-	}else {
-		$('.room_setting_notification_Btn').css('background-image','url(/pmang/image/notification_green.png)');//녹색
-		$('.room_setting_notification_Btn>b').text('ON');
-		Notification_status = 1;
-	}
-	$('.room_setting_modal').hide(); 
-	$('.room_setting_modal').off('scroll touchmove mousewheel');
-	sw = sw * (-1);
-	
-	
+   
+   if(sw == 1){
+      $('.room_setting_notification_Btn').css('background-image','url(/pmang/image/notification.png)');//회색
+      $('.room_setting_notification_Btn>b').text('OFF');
+      Notification_status = 0;
+   }else {
+      $('.room_setting_notification_Btn').css('background-image','url(/pmang/image/notification_green.png)');//녹색
+      $('.room_setting_notification_Btn>b').text('ON');
+      Notification_status = 1;
+   }
+   $('.room_setting_modal').hide(); 
+   $('.room_setting_modal').off('scroll touchmove mousewheel');
+   sw = sw * (-1);
+   
+   
 });
    
    
    
    
    
-
 });

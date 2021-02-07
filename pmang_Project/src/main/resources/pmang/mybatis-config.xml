@@ -6,7 +6,8 @@
 		<typeAlias type="member.bean.ZipcodeDTO" alias="zipcode"/>
 
 		<typeAlias type="board.bean.ItemDTO" alias="item" />
+		
 		<typeAlias type="talk.bean.MessageDTO" alias="message"/>
-		<typeAlias type="talk.bean.TalkRoomDTO.java" alias="talkRoom"/>
+		<typeAlias type="talk.bean.TalkRoomDTO" alias="talkRoom"/>
 	</typeAliases>
 </configuration>

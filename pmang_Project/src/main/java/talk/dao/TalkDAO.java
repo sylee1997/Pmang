@@ -6,7 +6,7 @@ import talk.bean.TalkRoomDTO;
 
 public interface TalkDAO {
 	
-	public Object getRoom(TalkRoomDTO talkRoomDTO);
+	public TalkRoomDTO getRoom(TalkRoomDTO talkRoomDTO);
 
 	public List<TalkRoomDTO> getRoomList(String user_id);
 

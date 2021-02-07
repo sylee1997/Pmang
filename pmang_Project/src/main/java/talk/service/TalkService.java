@@ -6,7 +6,7 @@ import talk.bean.TalkRoomDTO;
 
 public interface TalkService {
 
-	public Object isRoom(TalkRoomDTO talkRoomDTO);
+	public TalkRoomDTO isRoom(TalkRoomDTO talkRoomDTO);
 
 	public List<TalkRoomDTO> getRoomList(String id);
 
