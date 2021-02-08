@@ -35,23 +35,20 @@ public class TalkDAOMybatis implements TalkDAO {
 	}
 
 	@Override
-	public SellerDTO getSellerInfoSearch(String partner_userId) {
-		return sqlSession.selectOne("talkSQL.getSellerInfoSearch",partner_userId);
-	}
-
-	@Override
-	public ItemDTO getItemInfoSearch(String partner_userId) {
-		return sqlSession.selectOne("talkSQL.getItemInfoSearch",partner_userId);
+	public ItemDTO getItem(int item_seq) {
+		return sqlSession.selectOne("talkSQL.getItem",item_seq);
 	}
 	
 	@Override
-	public String getPartnerUserId(int item_seq) {
-		return sqlSession.selectOne("talkSQL.getPartnerUserId", item_seq);
+	public SellerDTO getSeller(String partner_userId) {
+		return sqlSession.selectOne("talkSQL.getSeller", partner_userId);
 	}
+
 
 	@Override
 	public List<TalkRoomDTO> getRoomList(String userId) {
 		return sqlSession.selectList("talkSQL.getRoomList", userId);
 	}
+
 
 }

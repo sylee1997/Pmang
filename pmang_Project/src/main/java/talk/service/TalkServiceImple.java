@@ -19,7 +19,6 @@ public class TalkServiceImple implements TalkService {
 	
 	@Override
 	public TalkRoomDTO isRoom(TalkRoomDTO talkRoomDTO) {
-		
 		return talkDAO.isRoom(talkRoomDTO);
 	}
 	
@@ -33,26 +32,21 @@ public class TalkServiceImple implements TalkService {
 		talkDAO.insertMessage(messageDTO);
 	}
 
+
 	@Override
-	public SellerDTO getSellerInfoSearch(String partner_userId) {
-		return talkDAO.getSellerInfoSearch(partner_userId);
+	public ItemDTO getItem(int item_seq) {
+		return talkDAO.getItem(item_seq);
 	}
 
 	@Override
-	public ItemDTO getItemInfoSearch(String partner_userId) {
-		return talkDAO.getItemInfoSearch(partner_userId);
+	public SellerDTO getSeller(String partner_userId) {
+		return talkDAO.getSeller(partner_userId);
 	}
-	
-	@Override
-	public String getPartnerUserId(int item_seq) {
-		return talkDAO.getPartnerUserId(item_seq);
-	}
-	
+
 	@Override
 	public List<TalkRoomDTO> getRoomList(String userId) {
 		
 		return talkDAO.getRoomList(userId);
 	}
-
 	
 }

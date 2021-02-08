@@ -16,23 +16,19 @@
  	
  	<!-- Message 생성 -->
  	<insert id="insertMessage" parameterType="message">
- 		insert into message values(#{sender_user_id},#{receiver_user},#{talkRoom_seq},#{talk_content},sysdate,#{receiver_user_profileImage},#{item_seq})
+ 		insert into message values(#{sender_user_id},#{receiver_user_id},#{talkRoom_seq},#{talk_content},sysdate,#{receiver_user_profileImage},#{item_seq})
  	</insert>
  	
- 	<!-- 방생성시 sellerTable 에서 marketName,pf_Photo 가져오기 -->
- 	<select id="getSellerInfoSearch" parameterType="String" resultType="seller">
- 		select marketName,pf_Photo from seller where userId = #{partner_userId }
- 	</select>
+ 	<!-- item 조회 -->
+ 	<select id="getItem" parameterType="int" resultType="item">
+       select * from item where item_seq = #{item_seq}
+    </select>
+    
+    <!-- seller조회 -->
+    <select id="getSeller" parameterType="String" resultType="seller">
+      select * from seller where userId=#{partner_userId}
+    </select>
  	
- 	<!-- 방생성시 itemTable 에서 img1,item_price,itemSubject 가져오기 -->
- 	<select id="getItemInfoSearch" parameterType="String" resultType="item">
- 		select img1,item_price,item_subject from item where userId = #{partner_userId }
- 	</select>
- 	
- 	<!-- partner_id 구하기 -->
- 	<select id="getPartnerUserId" parameterType="int" resultType="String">
- 		select userId from item where item_seq = #{item_seq }
- 	</select>
  	
  	<!-- 방 리스트 출력 -->
  	<select id="getRoomList" parameterType="String" resultType="talkRoom">

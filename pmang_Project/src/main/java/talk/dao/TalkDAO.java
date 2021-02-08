@@ -16,11 +16,10 @@ public interface TalkDAO {
 	
 	public void insertMessage(MessageDTO messageDTO);
 	
-	public SellerDTO getSellerInfoSearch(String partner_userId);
-
-	public ItemDTO getItemInfoSearch(String partner_userId);
-
-	public String getPartnerUserId(int item_seq);
+	public ItemDTO getItem(int item_seq);
+	
+	public SellerDTO getSeller(String partner_userId);
 	
 	public List<TalkRoomDTO> getRoomList(String userId);
+
 }

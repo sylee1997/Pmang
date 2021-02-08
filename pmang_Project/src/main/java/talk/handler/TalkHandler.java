@@ -22,15 +22,12 @@ public class TalkHandler extends TextWebSocketHandler {
 	
 	Logger log = LoggerFactory.getLogger(TalkHandler.class);
 	private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
-	private Map<String,WebSocketSession> sessionMap = new HashMap<String,WebSocketSession>();
 	@Autowired
 	private TalkService talkService;
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		
 		sessionList.add(session);//클라이언트가 접속할 때, session 정보를 sessionList에 저장
-		sessionMap.put(session.getId(), session);
 		
 		System.out.println("afterConnectionEstablished session : " + session);
 		System.out.println("afterConnectionEstablished 연결됨 ");// 테이블이 생성되면  session.getId()
@@ -44,7 +41,7 @@ public class TalkHandler extends TextWebSocketHandler {
 		System.out.println("handleTextMessage message : " + message);
 		System.out.println("message.getPayload() : " + message.getPayload());
 		
-		Map<String, Object> httpSessionMap = session.getAttributes();//HttpSession에 저장된 세션값을 저장한다.
+		Map<String, Object> httpSessionMap = session.getAttributes();
 		
 		//객체담기
 		MessageDTO messageDTO = MessageDTO.convertMessage(message.getPayload());//메세지로 넘어온 데이터 DTO에 삽입
@@ -69,20 +66,12 @@ public class TalkHandler extends TextWebSocketHandler {
 		talkService.insertMessage(messageDTO);
 		
 		
-		
-		
-		
 		System.out.println(session.getId() + " 로 부터 " + message.getPayload() + "받음");
 		for(WebSocketSession se : sessionList) {
-			//1. 판매자의 userkey를 get방식으로 보냄
-			//2. messageDTO.getReceiver_user_id 의 userKey를 조회
-			//3. get방식으로 넘어온 userKey 와, 판매자의 userKey를 비교하여 일치하면 메일을 보냄.
-			if(httpSessionMap.get("userId").equals(messageDTO.getSender_user_id()) || httpSessionMap.get("userId").equals(messageDTO.getReceiver_user_id())) {//현재 세션 id가 전송자 id 이거나, 수신자 id 라면 메시지를 보내라.
 				se.sendMessage(new TextMessage(message.getPayload())); //모든 클라이언트들에게 TextMessage 전송. (브로드캐스트)
-			}
-			
 		}
-		log.info("{}로 부터 {} 받음", session.getId(), message.getPayload());//getPayload 는 문자형태 그대로 받겠다는 말이다
+		
+			log.info("{}로 부터 {} 받음", session.getId(), message.getPayload());//getPayload 는 문자형태 그대로 받겠다는 말이다
 	}//클라이언트가 소켓에 메시지를 보냈을 떄 실행된다
 	
 	
@@ -92,7 +81,6 @@ public class TalkHandler extends TextWebSocketHandler {
 		System.out.println("afterConnectionClosed status : " + status);
 		
 		sessionList.remove(session);
-		sessionMap.remove(session.getId());
 		
 		log.info(session.getId()+ "연결 종료");
 	}//커넥션이 close 됐을때 실행된다.

@@ -1,4 +1,11 @@
 /* 카테고리 펼쳐지는 부분*/
+//우석 수정 -----------------------------
+$('#contact').on('click', function() {
+	window.open("/pmang/talk/talkRoom?item_seq=123","","width=375 height=667");
+
+});
+//-----------------------------------
+
 $('.selectItem1').hover(function(){
 	$('.down1').css('display', 'block')
 },
@@ -812,3 +819,4 @@ $('#moreBtn').click(function() {
 	$('#commentIndex').val(b);
 	$('#comment_seq').trigger('click');
 });
+

@@ -11,16 +11,14 @@ import talk.bean.TalkRoomDTO;
 public interface TalkService {
 
 	public TalkRoomDTO isRoom(TalkRoomDTO talkRoomDTO);
-	
+	   
 	public void createRoom(TalkRoomDTO talkRoomDTO);
-	
+	   
 	public void insertMessage(MessageDTO messageDTO);
+	   
+	public ItemDTO getItem(int item_seq);
 	
-	public SellerDTO getSellerInfoSearch(String partner_userId);
-
-	public ItemDTO getItemInfoSearch(String partner_userId);
-	
-	public String getPartnerUserId(int item_seq);
+	public SellerDTO getSeller(String partner_userId);
 
 	public List<TalkRoomDTO> getRoomList(String userId);
 

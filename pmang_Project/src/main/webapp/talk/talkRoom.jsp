@@ -9,10 +9,11 @@
 </head>
 <body>
 
-<input type="hidden" id="item_seq" value="${sessionScope.item_seq }">
+<input type="hidden" id="item_seq" value="${param.item_seq }">
 <input type="hidden" id="sender_user_id" value="${sessionScope.userId }">
 <input type="hidden" id="receiver_user_id" value="${sellerItem.partner_userId }">
-<input type="hidden" id="receiver_pf_Photo" value="${sellerItem.pf_Photo }">
+<input type="hidden" id="receiver_user_profileImage" value="${sellerItem.pf_Photo }">
+<%-- <input type="hidden" id="roomkey" value="${roomkey }"> --%>
 
 <div id="root">
    <div>
