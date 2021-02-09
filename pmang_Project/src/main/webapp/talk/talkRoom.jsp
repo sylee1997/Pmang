@@ -11,7 +11,7 @@
 
 <input type="hidden" id="item_seq" value="${param.item_seq }">
 <input type="hidden" id="sender_user_id" value="${sessionScope.userId }">
-<input type="hidden" id="receiver_user_id" value="${sellerItem.partner_userId }">
+<input type="hidden" id="receiver_user_id" value="${param.partner_userId }">
 <input type="hidden" id="receiver_user_profileImage" value="${sellerItem.pf_Photo }">
 <%-- <input type="hidden" id="roomkey" value="${roomkey }"> --%>
 

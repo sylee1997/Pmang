@@ -1,7 +1,6 @@
 package talk.service;
 
 import java.util.List;
-import java.util.Map;
 
 import board.bean.ItemDTO;
 import member.bean.SellerDTO;
@@ -21,5 +20,7 @@ public interface TalkService {
 	public SellerDTO getSeller(String partner_userId);
 
 	public List<TalkRoomDTO> getRoomList(String userId);
+
+	public MessageDTO getLastMessage(int talkRoom_seq); //마지막 메세지
 
 }

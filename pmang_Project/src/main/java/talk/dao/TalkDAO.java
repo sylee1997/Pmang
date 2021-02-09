@@ -22,4 +22,6 @@ public interface TalkDAO {
 	
 	public List<TalkRoomDTO> getRoomList(String userId);
 
+	public MessageDTO getLastMessage(int talkRoom_seq);
+
 }

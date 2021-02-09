@@ -50,5 +50,9 @@ public class TalkDAOMybatis implements TalkDAO {
 		return sqlSession.selectList("talkSQL.getRoomList", userId);
 	}
 
-
+	@Override
+	public MessageDTO getLastMessage(int talkRoom_seq) { //마지막 메세지
+		return sqlSession.selectOne("talkSQL.getLastMessage", talkRoom_seq);
+	}
+	
 }

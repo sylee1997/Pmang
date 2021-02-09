@@ -12,7 +12,7 @@ public class MessageDTO {// 메시지 한줄 한줄
 	private String receiver_user_id;//받은사람 id :O
 	private int talkRoom_seq;//톡방 seq :O
 	private String talk_content;//메시지 내용 :O
-	private Date send_time;//메세지 보낸 시간 :sysdate
+	private String send_time;//메세지 보낸 시간 :sysdate
 	//private Date read_time;//메세지 받은 시간 :
 	//private int unRead_Check;//안읽은 메시지 체크  : send_time < read_time
 	private String receiver_user_profileImage;//상대방 프로필 이미지 :O

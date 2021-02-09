@@ -43,10 +43,15 @@ public class TalkServiceImple implements TalkService {
 		return talkDAO.getSeller(partner_userId);
 	}
 
+	
 	@Override
 	public List<TalkRoomDTO> getRoomList(String userId) {
-		
 		return talkDAO.getRoomList(userId);
+	}
+
+	@Override
+	public MessageDTO getLastMessage(int talkRoom_seq) {
+		return talkDAO.getLastMessage(talkRoom_seq);
 	}
 	
 }

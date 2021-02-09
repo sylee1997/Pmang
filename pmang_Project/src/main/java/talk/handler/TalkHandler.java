@@ -63,7 +63,10 @@ public class TalkHandler extends TextWebSocketHandler {
 		
 		messageDTO.setTalkRoom_seq(room.getTalkRoom_seq());//room_seq 만 여기서 데이터 삽입.
 		
-		talkService.insertMessage(messageDTO);
+		talkService.insertMessage(messageDTO);//메세지 insert
+		
+		//MessageDTO lastMessage = talkService.getLastMessage();
+		//System.out.println("lastMessage Send_time" + lastMessage.getSend_time());;
 		
 		
 		System.out.println(session.getId() + " 로 부터 " + message.getPayload() + "받음");
