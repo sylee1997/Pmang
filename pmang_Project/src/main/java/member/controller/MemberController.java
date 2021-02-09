@@ -1,23 +1,21 @@
 package member.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-<<<<<<< HEAD
-=======
 
 import org.springframework.util.FileCopyUtils;
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import board.bean.ItemDTO;
+import data.url.Base64Utils;
 import member.bean.MemberDTO;
 import member.bean.ZipcodeDTO;
 import member.service.MemberService;
@@ -39,22 +39,33 @@ public class MemberController {
 	private MemberService mailsender;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    private String pwd;
 	@RequestMapping(value="login", method=RequestMethod.POST)
 	@ResponseBody 
-<<<<<<< HEAD
-	public String login(@ModelAttribute MemberDTO memberDTO, Model model, HttpSession session) {
-		String userId = memberDTO.getUserId();
-		pwd = memberDTO.getPwd();
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("userId", userId);
-		map.put("pwd", passwordEncoder.encode(pwd));
+	public String login(Model model, HttpSession session, HttpServletRequest request) {
+		String userId = request.getParameter("userId");
+		String pwd = request.getParameter("pwd");
+				
+		
+		MemberDTO memberDTO = memberService.login(userId);
+		
+		if(memberDTO == null) {
+			return "idFail";
+		}
+		
+		//비밀번호 암호화 후  입력비밀번호와 비교
+		if(!passwordEncoder.matches(pwd, memberDTO.getPwd())) {
+			return "pwdfail";
+		} 
 
-		return memberService.login(map, session); // 맵에실어서 리턴값 문자열을 가지고 간다
-=======
-	public String login(@RequestParam Map<String, String> map, HttpSession session) { // �뼱李⑦뵾 �뼵�젨媛��뒗 map�쑝濡� 臾띠뼱�빞 蹂대궪�닔�엳�뼱�꽌 �뿬湲곗꽌 留듭쑝濡� 臾띠뿀�떎
-		return memberService.login(map, session); // 留듭뿉�떎�뼱�꽌 由ы꽩媛� 臾몄옄�뿴�쓣 媛�吏�怨� 媛꾨떎
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
+		if(!memberDTO.getEmail_key().equals("Y")) {
+			return "authFail";
+		}
+		
+		model.addAttribute("memberDTO", memberDTO);
+		session.setAttribute("memUserId", memberDTO.getUserId());
+		
+		return "success";
+
 	}
 	
 	
@@ -72,8 +83,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="writeForm", method=RequestMethod.GET)
-	public String writeForm() {
-		return "/member/writeForm";
+	public String notice(Model model) {
+		model.addAttribute("display", "/member/writeForm.jsp");
+		return "/index";
 	}
 	
 	@RequestMapping(value="write", method=RequestMethod.POST)
@@ -81,7 +93,7 @@ public class MemberController {
 		memberDTO.setPwd(passwordEncoder.encode(memberDTO.getPwd()));
 		int su = memberService.write(memberDTO);
 
-		// �씤利� 硫붿씪 蹂대궡湲� 硫붿꽌�뱶
+		// 인증 메일 보내기 메서드
 		mailsender.mailSendWithUserKey(memberDTO.getEmail1(),memberDTO.getEmail2(), memberDTO.getUserId(), request);
 		
 		model.addAttribute("su", su);
@@ -99,28 +111,9 @@ public class MemberController {
 		
 	}
 	
-<<<<<<< HEAD
 	@RequestMapping(value="checkPost", method=RequestMethod.GET)
 	public String checkPost() {
 		return "/member/checkPost";
-=======
-	// e-mail �씤利� 而⑦듃濡ㅻ윭
-	@RequestMapping(value = "regSuccess", method = RequestMethod.GET)
-	public String regSuccess(@RequestParam("userId") String userId, @RequestParam("user_key") String key) {
-
-		mailsender.regSuccess(userId, key); // mailsender�쓽 寃쎌슦 @Autowired
-
-		return "/member/regSuccess";
-		}
-	
-	// kakao Login
-	@RequestMapping(value="kakaoLogin", method=RequestMethod.POST)
-	@ResponseBody 
-	public String kakaoLogin(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
-		System.out.println(memberDTO);
-		return memberService.kakaoLogin(memberDTO, session);
-		
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 	}
 	
 	@RequestMapping(value="checkPostSearch", method=RequestMethod.POST)
@@ -132,11 +125,73 @@ public class MemberController {
 		return mav;
 	}
 	
-<<<<<<< HEAD
 	// e-mail 인증 컨트롤러
 	@RequestMapping(value = "regSuccess", method = RequestMethod.GET)
-	public String regSuccess(@RequestParam("userId") String userId, @RequestParam("user_key") String key) {
-=======
+	public String regSuccess(@RequestParam("userId") String userId, @RequestParam("email_key") String key) {
+
+		mailsender.regSuccess(userId, key); // mailsender의 경우 @Autowired
+
+		return "/member/regSuccess";
+		}
+	
+	// kakao Login
+	@RequestMapping(value="kakaoLogin", method=RequestMethod.POST)
+	@ResponseBody 
+	public String kakaoLogin(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+		return memberService.kakaoLogin(memberDTO, session);
+		
+	}
+	
+	//id 찾기
+	@RequestMapping(value="findId", method=RequestMethod.POST)
+	@ResponseBody 
+	public String findId(@ModelAttribute MemberDTO memberDTO) {
+		return memberService.findId(memberDTO);
+		
+	}
+	
+	//pwd 찾기
+	@RequestMapping(value="findPwd", method=RequestMethod.POST)
+	@ResponseBody 
+	public String findPwd(@ModelAttribute MemberDTO memberDTO) {
+		return memberService.findPwd(memberDTO);
+
+		
+	}
+	@RequestMapping(value="modifyForm", method=RequestMethod.GET)
+	public String modifyForm(HttpSession session, Model model) {
+		String userId = (String) session.getAttribute("memUserId");
+		MemberDTO memberDTO = memberService.getMember(userId); 
+		
+		model.addAttribute("memberDTO", memberDTO); 
+		model.addAttribute("display", "/member/modifyForm.jsp");
+		return "/index";
+		
+	}
+	
+	@RequestMapping(value="modify", method=RequestMethod.POST)
+	@ResponseBody
+	public void modify(@ModelAttribute MemberDTO memberDTO) {
+		memberDTO.setPwd(passwordEncoder.encode(memberDTO.getPwd()));
+		memberService.modify(memberDTO);
+	}
+	
+	//아이디찾기 폼
+	@RequestMapping(value="searchId", method=RequestMethod.GET)
+	public String searchId(Model model) {
+		model.addAttribute("display", "/member/searchId.jsp");
+		return "/index";
+	}
+	
+	//비밀번호찾기 폼
+	@RequestMapping(value="searchPw", method=RequestMethod.GET)
+	public String searchPw(Model model) {
+		model.addAttribute("display", "/member/searchPw.jsp");
+		return "/index";
+	}
+	
+	
+	
 	
 	//------------------------------------seller------------------------------------------------------//
 	
@@ -182,26 +237,38 @@ public class MemberController {
 				FileCopyUtils.copy(in2, new FileOutputStream(file2));
 				itemDTO.setImg2(uuid.toString()+"_"+itemDTO.getImg2());
 			}
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 
-		mailsender.regSuccess(userId, key); // mailsender의 경우 @Autowired
+			if (!img3url.equals("undefined")) {
+				in3 = Base64Utils.decodeBase64ToBytes(img3url);
+				File file3 = new File(filePath, uuid.toString()+"_"+itemDTO.getImg3());
+				FileCopyUtils.copy(in3, new FileOutputStream(file3));
+				itemDTO.setImg3(uuid.toString()+"_"+itemDTO.getImg3());
+			}
+			
 
-		return "/member/regSuccess";
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-	
-	// kakao Login
-	@RequestMapping(value="kakaoLogin", method=RequestMethod.POST)
-	@ResponseBody 
-	public String kakaoLogin(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
-		return memberService.kakaoLogin(memberDTO, session);
+		
+			//DB
+			memberService.sellerWrite(itemDTO);
 		
 	}
-<<<<<<< HEAD
 		
-	
-=======
+	@RequestMapping(value="searchlocation", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView searchlocation(@RequestParam String address) {
+		List<ZipcodeDTO> zipcodeList = memberService.searchlocation(address);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+		mav.addObject("list", zipcodeList);
+		
+		return mav;
+	}
 
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 }
 
 

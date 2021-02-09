@@ -24,12 +24,9 @@
 #address, #detailAddress{
 	margin: 2px 0px;
 }
-<<<<<<< HEAD
-=======
 #checkPostBtn, #writeBtn, #authBtn {
 	background-color : green;
 }
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 
 /* 우편번호 찾기 */
 #addressA:link {color: black; text-decoration: none;}

@@ -14,19 +14,12 @@
 
 
 	<context:component-scan base-package="member.service"/>
-<<<<<<< HEAD
-	
-=======
 	<context:component-scan base-package="member.dao"/>
 	<context:component-scan base-package="member.bean"/>
 
 	<context:component-scan base-package="spring.conf"/>
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 	<context:component-scan base-package="pmang.conf"/>
 	
-	<context:component-scan base-package="pmang_user.service"/>
-	<context:component-scan base-package="pmang_item.service"/>
-	<context:component-scan base-package="pmang_chat.service"/>
 	
 	<!-- 회원가입 메일 인증 -->
 	<bean id="mailSender"	class="org.springframework.mail.javamail.JavaMailSenderImpl">
@@ -44,12 +37,9 @@
 			</props>
 		</property>
 	</bean>
-<<<<<<< HEAD
-=======
 
 	<context:component-scan base-package="data.url"/>
 	
 	<context:component-scan base-package="talk.service"/>
 	<context:component-scan base-package="talk.dao"/>
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 </beans>

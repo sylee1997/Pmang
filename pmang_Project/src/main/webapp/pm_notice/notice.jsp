@@ -6,13 +6,6 @@
 </style>
 
 <div id="tabArea">
-<<<<<<< HEAD
-	<div id="tabMenu">
-		
-		
-		    <input id="tab1" type="radio" name="tabs" checked>
-		    <label for="tab1">공지사항</label>
-=======
 
 	<div id="tabDiv">  
 
@@ -20,24 +13,15 @@
 		
 		    <input id="tab1" class="tabs" type="radio" name="tabName" value="1">
 		    <label class="tabLabel" for="tab1">공지사항</label>
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 		
-		    <input id="tab2" type="radio" name="tabs">
-		    <label for="tab2">운영정책</label>
+		    <input id="tab2" class="tabs" type="radio" name="tabName" value="2">
+		    <label class="tabLabel" for="tab2">운영정책</label>
 		
-		    <input id="tab3" type="radio" name="tabs">
-		    <label for="tab3">자주묻는 질문</label>
-		
+		    <input id="tab3" class="tabs" type="radio" name="tabName" value="3">
+		    <label class="tabLabel" for="tab3">자주묻는 질문</label>
 		
 		
-<<<<<<< HEAD
-		    <section id="notice">
-				<div class="noticeDiv">
-					<div class="noticeArea">
-						<div><span class="noticeTitle">[공지] 타 사이트 대리결제 거래 시 제재 정책 강화 안내</span>
-							<span class="noticeDate">2021/01/15</span></div>
-						<div class="noticeContent">
-=======
+		
 		    <section id="bulletin">
 				<div class="bulletinDiv">
 					<div class="bulletinArea">
@@ -46,7 +30,6 @@
 						<div class="bulletinDate">2021/01/15</div>
 						<div class="bulletinContent">
 
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 							안녕하세요. 피망마켓입니다.
 							
 							타 사이트 대리결제를 통해 피해가 발생되고 있습니다.
@@ -54,21 +37,15 @@
 							깨끗한 거래 환경이 유지될 수 있도록 협조 부탁 드립니다.
 							감사합니다.
 							
-						</div></div>
+
+					</div></div>
 						
-<<<<<<< HEAD
-					<div class="noticeArea">
-						<div><span class="noticeTitle">[공지] 각종 인증번호 거래 시 제재 정책 강화 안내</span>
-							<span class="noticeDate">2020/11/18</span></div>
-						<div class="noticeContent">
-=======
 					<div class="bulletinArea">
 						<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
 						<div class="bulletinTitle">[공지] 각종 인증번호 거래 시 제재 정책 강화 안내</div>
 						<div class="bulletinDate">2020/11/18</div>
 						<div class="bulletinContent">
 
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 							안녕하세요. 피망마켓입니다.
 							
 							최근 인증번호 거래를 통해 각종 피해가 발생되고 있습니다.
@@ -77,16 +54,15 @@
 							깨끗한 거래 환경이 유지될 수 있도록 협조 부탁 드립니다.
 							감사합니다.
 							
-						</div></div>
-					
-					
-					
+
+					</div></div>
 				</div>
-		    </section>
+		    </section><!-- bulletin -->
 		
 		
 		    <section id="policy">
-		    	<div >
+		    	<div>
+
 					<div id="a1">
 						<div id="b1">
 							<div class="c1">이용제재/3아웃 정책
@@ -96,7 +72,9 @@
 						<div id="b2">
 							<div class="c3">
 								<img src="/pmang/image/policyPic1.png" width="20px" height="20px">
-								 금지 품목 거래 시, 제재 받을 수 있어요.  <span class="prohibitedItem"><a href="#">금지품목 보기</a></span>
+
+								 금지 품목 거래 시, 제재 받을 수 있어요.  <span class="prohibitedItem"><a class="prohibitedLink">금지품목 보기</a></span>
+
 							</div>
 							<div class="c3">
 								<img src="/pmang/image/policyPic2.png" width="20px" height="20px">
@@ -169,15 +147,10 @@
 						</div>
 					</div>
 				</div>
-		    </section>
+
+		    </section><!-- policy -->
 		
 		    <section id="FQA">
-<<<<<<< HEAD
-				<div id="FQADiv">히히히</div>
-		    </section>
-		
-		
-=======
 				<div>
 					<div>
 				
@@ -447,12 +420,42 @@
 								</div></div>
 							</div>
 		    			</section>
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 
+						
+		    			<!-- <section id="section1">
+							<div class="postDiv">
+								<div class="postArea">
+									<div><span class="postTitle">제목</span></div>
+									<div class="postContent">
+										<span class="contentEmp">강조내용</span>
+										내용
+								
+								</div></div>
+						
+								<div class="postArea">
+									<div><span class="postTitle">제목</span></div>
+									<div class="postContent">
+										<span class="contentEmp">강조내용</span>
+										내용
+								
+								</div></div>
+							</div>
+		    			</section>		    	 -->				    					    					    					    					    					    					    			
+		    			
+		    			
+		    			
+		    			
+		    			
+		    			
+		    			
+		    			
+		    			
+		    						
+					</div>
+				</div>
+		    </section><!-- FQA -->
 		
-	
-
-	</div><!-- tabMenu -->
+	</div><!-- tabDiv -->
 
 </div><!-- tabArea -->
 

@@ -4,7 +4,8 @@
 	padding-bottom:50px;
 }
 
-#tabMenu {
+#tabDiv {
+
 	min-width: 1024px;
 	width: 1024px;
 	margin: 0 auto;
@@ -14,15 +15,6 @@
 }
 
 
-<<<<<<< HEAD
-/*ë¼ë””ì˜¤ë²„íŠ¼ ìˆ¨ê¹€*/
-input {
-	display: none;
-}
-
-/* ë¼ë””ì˜¤ë²„íŠ¼ì˜ ë¼ë²¨í™” */
-label {
-=======
 /*¶óµð¿À¹öÆ° ¼û±è*/
 
 .tabs {
@@ -33,7 +25,6 @@ label {
 
 .tabLabel {
 
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 	display: inline-block;
 	width:290px;
 	margin: 0 auto;
@@ -44,31 +35,22 @@ label {
 	border: 1px solid transparent;		
 }
 
-label:hover {
-	color: #2e9cdf;
+
+.tabLabel:hover {
+	color: gray;
 	cursor: pointer;
 }
 
-<<<<<<< HEAD
-/*input í´ë¦­ì‹œ, label ìŠ¤íƒ€ì¼*/
-input:checked+label {
-=======
 /*input Å¬¸¯½Ã, label ½ºÅ¸ÀÏ*/
 
 .tabs:checked+label {
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 	color: red;
 	border-bottom: 3px solid red;
 }
 
-<<<<<<< HEAD
-/* tabì´ ì²´í¬ë˜ë©´ tabë¶€í„° contentê¹Œì§€ì˜ ëª¨ë“  ìžì‹ì— ëŒ€í•œ ìŠ¤íƒ€ì¼  */
-#tab1:checked ~ #notice,
-=======
 /* tabÀÌ Ã¼Å©µÇ¸é tabºÎÅÍ content±îÁöÀÇ ¸ðµç ÀÚ½Ä¿¡ ´ëÇÑ ½ºÅ¸ÀÏ  */
 
 #tab1:checked ~ #bulletin,
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 #tab2:checked ~ #policy,
 #tab3:checked ~ #FQA {
 	display: block;
@@ -80,15 +62,6 @@ section {
 	border-top: 1px solid #ddd;
 }
 
-<<<<<<< HEAD
-/* ê³µì§€ì‚¬í•­ ì „ì²´ ì˜ì—­ */
-.noticeDiv{
-
-}
-
-/* ê³µì§€ì‚¬í•­ ê¸€ í•˜ë‚˜ */
-.noticeArea{
-=======
 
 /* °øÁö»çÇ× ¿µ¿ª */
 .bulletinDiv{
@@ -100,50 +73,70 @@ section {
 
 .bulletinArea{
 
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 	border:1px solid #d2d2d2;
 	text-align:left;
-	white-space : pre-line;
-	padding-bottom:0;
 	position:relative;
 	cursor:pointer;
 }
 
-.noticeTitle{
-	font-size:20px;
+.bulletinArea:hover{
+	cursor:pointer;
+}
+
+.arrowImg{
+	position:absolute;
+	top:19px;
+	left:95%;
+}
+
+.bulletinTitle{
+
+	font-size:17px;
 	font-weight:600;
 	padding:10px;
+	padding-bottom:0;
 	margin : 0 auto;
 }
 
-.noticeDate{
+.bulletinDate{
+
+	font-size:13px;
+	font-weight:600;
+	padding:10px;
+	padding-top:0;
 	margin : 0 auto;
-	padding: 10px;
-	color:rgb(204, 204, 204);
+    color: rgb(204, 204, 204);
 }
 
-.noticeContent{
+.bulletinContent{
+
 	display:none;
 	text-align:left;
 	margin:0px;
 	padding:10px;
 	white-space : pre-line;
 	background-color:#eeeeee;
-	position:relative;
-
-	
-	
+	position:relative;	
 }
 
 .contentEmp{
 	color:red;
-	text-decoration: underline;
+
+}
+
+.contentExp{
+	color:blue;
 }
 
 .prohibitedItem{
 	font-weight:600;
 	text-decoration: underline;
 }
+
+.prohibitedLink:hover{
+	cursor:pointer;
+}
+
 
 #policy{
 	font-size:15px;
@@ -259,8 +252,6 @@ section {
 }
 
 
-<<<<<<< HEAD
-=======
 .menu {
 	display: none;
 }
@@ -324,7 +315,6 @@ section {
 	position:relative;
 }
 
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 
 
 

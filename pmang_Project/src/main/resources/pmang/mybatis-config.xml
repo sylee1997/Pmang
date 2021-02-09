@@ -9,8 +9,6 @@
 	
 		<typeAlias type="member.bean.MemberDTO" alias="member"/>
 		<typeAlias type="member.bean.ZipcodeDTO" alias="zipcode"/>
-<<<<<<< HEAD
-=======
 
 		<typeAlias type="board.bean.ItemDTO" alias="item" />
 		<typeAlias type="board.bean.CommentDTO" alias="comment" />
@@ -20,7 +18,6 @@
 		<typeAlias type="talk.bean.MessageDTO" alias="message"/>
 		
 		
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 	</typeAliases>
 	
 </configuration>

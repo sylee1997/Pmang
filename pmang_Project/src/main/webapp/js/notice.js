@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-$('.noticeArea').click(function(){
-	$('.noticeContent').slideUp();
-	
-	if($(this).children('.noticeContent').is(':visible')){
-		$(this).children('.noticeContent').slideUp();
-	}else{
-		$(this).children('.noticeContent').slideDown();
-	}//if
-	
-});//noticeArea click
-=======
 $('.prohibitedLink').click(function() {
 	$(location).attr("href", "/pmang/board/notice?tabNo=4");
 	//거래항목 check조건은 index <script>에 포함됨
@@ -60,4 +48,3 @@ $('.postArea').click(function(){
 
 
 
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026

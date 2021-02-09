@@ -5,26 +5,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="memberSQL">
-<<<<<<< HEAD
-<!-- 로그인 -->
-	<select id="login" parameterType="String" resultType="member">
-		select * from usertable where ((userId=#{userId}) and (pwd=#{pwd}) and (user_key='Y'))
-=======
 	<!-- 로그인 -->
 	<select id="login" parameterType="String" resultType="member">
-		select * from usertable where ((userId=#{userId}) and (pwd=#{pwd}) and (email_key='Y'))
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
-	</select>
+		select * from usertable where userId=#{userId}
+	</select> 
 	
 	<!-- 회원가입 -->
 	<insert id="write" parameterType="member">
-<<<<<<< HEAD
-		insert into usertable (userName, userId, pwd, gender, email1, email2, zipcode, addr1, addr2, tel1, tel2, tel3, logtime)
-		values (#{userName}, #{userId}, #{pwd}, #{gender}, #{email1}, #{email2}, #{zipcode}, #{addr1}, #{addr2}, #{tel1}, #{tel2}, #{tel3}, sysdate)
-=======
 		insert into usertable (userName, userId, pwd, gender, email1, email2, zipcode, addr1, addr2, tel1, tel2, tel3)
 		values (#{userName}, #{userId}, #{pwd}, #{gender}, #{email1}, #{email2}, #{zipcode}, #{addr1}, #{addr2}, #{tel1}, #{tel2}, #{tel3})
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 	</insert>
 	
 	<!-- 아이디 중복체크 -->	
@@ -42,35 +31,61 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 메일인증키 -->
 	<insert id="GetKey" parameterType="java.util.Map">
-<<<<<<< HEAD
-		update usertable set user_key = #{user_key} where userId = #{userId}
-=======
 		update usertable set email_key = #{email_key} where userId = #{userId}
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 	</insert>
 	
 	<!--회원 인증키(난수) Y로 변경 -->
 	<update id="regSuccess" parameterType="java.util.Map">
-<<<<<<< HEAD
-		update usertable set user_key = 'Y' where userId = #{userId} and user_key = #{user_key}
-=======
 		update usertable set email_key = 'Y' where userId = #{userId} and email_key = #{email_key}
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 	</update>
 	
 	<!-- kakao id 확인 -->
 	<select id="checkKakaoId" parameterType="String" resultType="Integer">
-		select count(*) from usertable where kakaoId=#{kakaoId}
+		select count(*) from usertable where userId=#{kakaoId}
 	</select>
 	
 	<!-- kakao 회원가입  -->
 	<insert id="kakaoWrite" parameterType="member">
-		insert into usertable (userName, gender, email1, email2, userId, kakaoId)
-		values (#{userName}, #{gender}, #{email1}, #{email2}, #{kakaoId}, #{kakaoId})
+		insert into usertable (userName, gender, email1, email2, userId)
+		values (#{userName}, #{gender}, #{email1}, #{email2}, #{kakaoId})
 	</insert>
-<<<<<<< HEAD
-=======
-
+	
+	<!-- 아이찾기 -->
+	<select id="findId" parameterType="member" resultType="String">
+		select userId from usertable where email1=#{email1} and email2=#{email2} and userName=#{userName}
+	</select>
+	
+	<!-- 비밀번호찾기 -->
+	<select id="findPwd" parameterType="member" resultType="member">
+		select * from usertable where email1=#{email1} and email2=#{email2} and userId=#{userId}	
+	</select>
+	
+	<!-- 비밀번호변경(임시비밀번호) -->
+	<update id="updatePwd" parameterType="member">
+		update usertable set pwd = #{pwd} where userId=#{userId}
+	</update>
+	
+	<!-- 한사람의 정보 -->
+	<select id="getMember" parameterType="String" resultType="member">
+		select * from usertable where userId=#{userId}
+	</select>
+	
+	<update id="modify" parameterType="member">
+		update usertable set userName=#{userName}
+							, pwd=#{pwd}
+							, gender=#{gender}
+							, email1=#{email1}
+							, email2=#{email2}
+							, zipcode=#{zipcode}
+							, addr1=#{addr1}
+							, addr2=#{addr2}
+							, tel1=#{tel1}
+							, tel2=#{tel2}
+							, tel3=#{tel3} where userId=#{userId}
+	</update>
+	
+	<!-- seller -->
+	
 	<!-- 상품등록쪽 -->
 	<insert id="sellerWrite" parameterType="item">
 	insert into item values(item_seq.nextval,
@@ -102,5 +117,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select DISTINCT sido, sigungu, yubmyundong from newzipcode where sigungu like '%'||#{address}||'%' or yubmyundong like '%'||#{address}||'%' or roadname like '%'||#{address}||'%' order by sido
 	</select>
 	
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
 </mapper>

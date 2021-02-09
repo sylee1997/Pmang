@@ -2,17 +2,22 @@ package member.service;
 
 
 import java.util.List;
+
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import member.bean.MemberDTO;
+
+
+import board.bean.ItemDTO;
+
 import member.bean.ZipcodeDTO;
 
 public interface MemberService {
 
-	public String login(Map<String, String> map, HttpSession session);
+	public MemberDTO login(String userId);
 
 	public int write(MemberDTO memberDTO);
 
@@ -25,8 +30,14 @@ public interface MemberService {
 	public int regSuccess(String userId, String key);
 
 	public String kakaoLogin(MemberDTO memberDTO, HttpSession session);
-<<<<<<< HEAD
-=======
+
+	public String findId(MemberDTO memberDTO);
+
+	public String findPwd(MemberDTO memberDTO);
+	
+	public MemberDTO getMember(String userId);
+	
+	public void modify(MemberDTO memberDTO);
 	
 	//-----------------------seller---------------------------//
 	public void sellerWrite(ItemDTO itemDTO);
@@ -35,5 +46,8 @@ public interface MemberService {
 	public List<ZipcodeDTO> searchlocation(String address);
 
 
->>>>>>> d5fa777e772d693d7bee3e7a0711d1c4ece5e026
+
+	
+
+
 }
