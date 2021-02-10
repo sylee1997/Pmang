@@ -2,16 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
-<%-- <%
- 	Cookie[] cookies = request.getCookies();
-	String goods1 = null;
-	for(int i = 0; i< cookies.length; i++){
-		String str = cookies[i].getName();
-		if(str.equals("goods1")){
-			goods1 = cookies[i].getName();
-		}
-	} 
-%> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,14 +58,14 @@
 						<tr>
 							<td style="border-top: rgb(0,0,0);">
 								<div id="saveId">
-								<input type="checkbox" name="saveId" value="saveId">아이디
+								<input type="checkbox" name="saveId" value="saveId" id="checkedId">아이디
 								저장
 								</div>
 								<div>
 									<input type="button" id="loginBtn" value="Login">
 								</div>					
 								<div id="findIdPw">
-									<a id="find" href="#">아이디 찾기</a> / <a id="find" href="#">비밀번호 찾기</a>
+									<a id ="index_searchIdBtn">아이디 찾기</a> / <a id="index_searchPwBtn" href="#">비밀번호 찾기</a>
 								</div> <br>
 		
 								<button id="kakaoBtn">
@@ -727,7 +717,6 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script> <!-- 카카오디벨로퍼 -->
 <script type="text/javascript" src="/pmang/js/index.js"></script>
-
 
 </body>
 </html>

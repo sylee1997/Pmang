@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -38,18 +39,36 @@ public class MemberController {
 	private MemberService memberService;
     @Autowired
 	private MemberService mailsender;
-
-    @RequestMapping(value="checkPost", method=RequestMethod.GET)
-    public String checkPost() {
-    	return "/member/checkPost";
-    }
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 	@RequestMapping(value="login", method=RequestMethod.POST)
 	@ResponseBody 
-	public String login(@RequestParam Map<String, String> map, HttpSession session) { // �뼱李⑦뵾 �뼵�젨媛��뒗 map�쑝濡� 臾띠뼱�빞 蹂대궪�닔�엳�뼱�꽌 �뿬湲곗꽌 留듭쑝濡� 臾띠뿀�떎
-		return memberService.login(map, session); // 留듭뿉�떎�뼱�꽌 由ы꽩媛� 臾몄옄�뿴�쓣 媛�吏�怨� 媛꾨떎
-	}
+	public String login(Model model, HttpSession session, HttpServletRequest request) {
+		String userId = request.getParameter("userId");
+		String pwd = request.getParameter("pwd");
+				
+		
+		MemberDTO memberDTO = memberService.login(userId);
+		
+		if(memberDTO == null) {
+			return "idFail";
+		}
+		
+		//비밀번호 암호화 후  입력비밀번호와 비교
+		if(!passwordEncoder.matches(pwd, memberDTO.getPwd())) {
+			return "pwdfail";
+		} 
 
+		if(!memberDTO.getEmail_key().equals("Y")) {
+			return "authFail";
+		}
+		
+		model.addAttribute("memberDTO", memberDTO);
+		session.setAttribute("memUserId", memberDTO.getUserId());
+		
+		return "success";
+
+	}
 	
 	
     @RequestMapping(value="loginForm")
@@ -73,10 +92,10 @@ public class MemberController {
 	
 	@RequestMapping(value="write", method=RequestMethod.POST)
 	public String write(@ModelAttribute MemberDTO memberDTO, Model model,HttpServletRequest request) throws IOException {
-		
+		memberDTO.setPwd(passwordEncoder.encode(memberDTO.getPwd()));
 		int su = memberService.write(memberDTO);
 
-		// �씤利� 硫붿씪 蹂대궡湲� 硫붿꽌�뱶
+		// 인증 메일 보내기 메서드
 		mailsender.mailSendWithUserKey(memberDTO.getEmail1(),memberDTO.getEmail2(), memberDTO.getUserId(), request);
 		
 		model.addAttribute("su", su);
@@ -85,28 +104,18 @@ public class MemberController {
 	}
 	
 	
-	@RequestMapping(value="/checkId", produces = "application/String;charset=UTF-8",method=RequestMethod.POST)
+	@RequestMapping(value="/checkId", 
+			produces = "application/String;charset=UTF-8",
+			method=RequestMethod.POST)
 	public @ResponseBody String checkId(String userId) {
 		String result = memberService.checkId(userId);
 		return result;
-	}
-	
-	// e-mail �씤利� 而⑦듃濡ㅻ윭
-	@RequestMapping(value = "regSuccess", method = RequestMethod.GET)
-	public String regSuccess(@RequestParam("userId") String userId, @RequestParam("user_key") String key) {
-
-		mailsender.regSuccess(userId, key); // mailsender�쓽 寃쎌슦 @Autowired
-
-		return "/member/regSuccess";
-	}
-	
-	// kakao Login
-	@RequestMapping(value="kakaoLogin", method=RequestMethod.POST)
-	@ResponseBody 
-	public String kakaoLogin(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
-		System.out.println(memberDTO);
-		return memberService.kakaoLogin(memberDTO, session);
 		
+	}
+	
+	@RequestMapping(value="checkPost", method=RequestMethod.GET)
+	public String checkPost() {
+		return "/member/checkPost";
 	}
 	
 	@RequestMapping(value="checkPostSearch", method=RequestMethod.POST)
@@ -117,7 +126,71 @@ public class MemberController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
+	
+	// e-mail 인증 컨트롤러
+	@RequestMapping(value = "regSuccess", method = RequestMethod.GET)
+	public String regSuccess(@RequestParam("userId") String userId, @RequestParam("email_key") String key) {
 
+		mailsender.regSuccess(userId, key); // mailsender의 경우 @Autowired
+
+		return "/member/regSuccess";
+	}
+	
+	// kakao Login
+	@RequestMapping(value="kakaoLogin", method=RequestMethod.POST)
+	@ResponseBody 
+	public String kakaoLogin(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+		return memberService.kakaoLogin(memberDTO, session);
+		
+	}
+	
+	//id 찾기
+	@RequestMapping(value="findId", method=RequestMethod.POST)
+	@ResponseBody 
+	public String findId(@ModelAttribute MemberDTO memberDTO) {
+		return memberService.findId(memberDTO);
+		
+	}
+	
+	//pwd 찾기
+	@RequestMapping(value="findPwd", method=RequestMethod.POST)
+	@ResponseBody 
+	public String findPwd(@ModelAttribute MemberDTO memberDTO) {
+		return memberService.findPwd(memberDTO);
+
+		
+	}
+	@RequestMapping(value="modifyForm", method=RequestMethod.GET)
+	public String modifyForm(HttpSession session, Model model) {
+		String userId = (String) session.getAttribute("memUserId");
+		MemberDTO memberDTO = memberService.getMember(userId); 
+		
+		model.addAttribute("memberDTO", memberDTO); 
+		model.addAttribute("display", "/member/modifyForm.jsp");
+		return "/index";
+		
+	}
+	
+	@RequestMapping(value="modify", method=RequestMethod.POST)
+	@ResponseBody
+	public void modify(@ModelAttribute MemberDTO memberDTO) {
+		memberDTO.setPwd(passwordEncoder.encode(memberDTO.getPwd()));
+		memberService.modify(memberDTO);
+	}
+	
+	//아이디찾기 폼
+	@RequestMapping(value="searchId", method=RequestMethod.GET)
+	public String searchId(Model model) {
+		model.addAttribute("display", "/member/searchId.jsp");
+		return "/index";
+	}
+	
+	//비밀번호찾기 폼
+	@RequestMapping(value="searchPw", method=RequestMethod.GET)
+	public String searchPw(Model model) {
+		model.addAttribute("display", "/member/searchPw.jsp");
+		return "/index";
+	}
 	
 	
 	
