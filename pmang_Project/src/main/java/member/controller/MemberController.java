@@ -7,10 +7,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionListener;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,16 +36,20 @@ import data.url.Base64Utils;
 import member.bean.MemberDTO;
 import member.bean.ZipcodeDTO;
 import member.service.MemberService;
+import net.sf.json.JSONArray;
 
 @Controller
-@RequestMapping(value="member")
+@RequestMapping(value = "member")
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+
     @Autowired
 	private MemberService mailsender;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    
+    
 	@RequestMapping(value="login", method=RequestMethod.POST)
 	@ResponseBody 
 	public String login(Model model, HttpSession session, HttpServletRequest request) {
@@ -194,7 +203,6 @@ public class MemberController {
 	
 	
 	
-	
 	//------------------------------------seller------------------------------------------------------//
 	
 	@RequestMapping(value="sellerWriteForm", method=RequestMethod.GET)
@@ -272,26 +280,27 @@ public class MemberController {
 		return mav;
 	}
 	
-	/*
-	 * @RequestMapping(value="recentlyGoods", method=RequestMethod.POST)
-	 * 
-	 * @ResponseBody public ModelAndView recentlyGoods(@RequestParam String
-	 * imgSrc, @RequestParam String item_seq, HttpSession session) {
-	 * memberService.recentlyGoods session.setAttribute(img, value); }
-	 */
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
+
+	// -----------------admin
+	@RequestMapping(value = "adminUserDeleteForm", method = RequestMethod.GET)
+	public String adminUserDelete() {
+		return "/pm_admin/adminUserDeleteForm";
+	}
+
+	@RequestMapping(value = "adminUserDeleteSearch", method = RequestMethod.POST)
+	@ResponseBody
+	public String adminUserDeleteSearch(@RequestParam String userid) {
+		String resultId = memberService.adminUserDeleteSearch(userid);
+		return resultId;
+	}
+
+	@RequestMapping(value = "adminUserDelete", method = RequestMethod.POST)
+	@ResponseBody
+	public void adminUserDelete(@RequestParam String userid) {
+		memberService.adminUserDelete(userid);
+	}
+	
+	
+	
 }
-
-
-
-

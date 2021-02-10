@@ -1,4 +1,4 @@
-   $(document).ready(function () {
+$(document).ready(function () {
        $('.report-common').click(function (event) {
          var items = $('.report-hide-common');
          for (var item of items) {
@@ -75,4 +75,3 @@
       span111.onclick = function () {
         modal111.style.display = 'none';
       };
-

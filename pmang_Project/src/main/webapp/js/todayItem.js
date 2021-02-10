@@ -217,7 +217,6 @@ $('.selection3').on('click', '.itemLink', function(){
       				itemContentDiv += '</div>';
       				itemContentDiv += '</div>';
       				
-
       				
       				$(itemFrameDiv).append($(itemLinkA).append($(itemContentDiv))).appendTo($('.selection3'));
       			});

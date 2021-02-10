@@ -1,6 +1,7 @@
 package board.dao;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -11,8 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import board.bean.CommentDTO;
 import board.bean.ItemDTO;
+
 import board.bean.SearchDTO;
 import board.bean.WishlistDTO;
+
+import board.bean.ReportDTO;
+import board.bean.ReviewDTO;
 
 
 @Transactional
@@ -46,7 +51,7 @@ public class BoardDAOMybatis implements BoardDAO {
 	public CommentDTO getAComment(String comment_seq) {
 		return sqlSession.selectOne("boardSQL.getAComment", comment_seq);
 	}
-	
+
 
 	@Override
 	public List<WishlistDTO> getWishlist(int item_seq) {
@@ -85,6 +90,8 @@ public class BoardDAOMybatis implements BoardDAO {
 	public void itemHitUpdate(int item_seq) {
 		sqlSession.selectOne("boardSQL.itemHitUpdate", item_seq);
 	}
+
+
 
 	@Override
 	public List<ItemDTO> getItemBoardList(Map<String, Object> map) {
@@ -257,5 +264,16 @@ public class BoardDAOMybatis implements BoardDAO {
 		sqlSession.delete("boardSQL.searchAllDelete", userid);
 		
 	}
+
+
+	//리뷰작성
+	@Override
+	public void reviewWrite(ReviewDTO reviewDTO) {
+		 sqlSession.insert("boardSQL.reviewWrite", reviewDTO);
+
+	}
+
+
+
 
 }

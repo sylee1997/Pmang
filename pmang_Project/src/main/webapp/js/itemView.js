@@ -733,7 +733,6 @@ $(document).ready(function(){
 	});//ajax
 });//ready
 /*=======
-
 >>>>>>> b8d99ede94c84a2f307e279d9858c9db651b1157*/
 
 /* 카테고리 펼쳐지는 부분*/
@@ -1096,7 +1095,3 @@ $('#like').click(function() {
 		$('#likedOrNot').val('0');
 	}//if
 });
-
-
-
-

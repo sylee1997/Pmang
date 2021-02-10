@@ -3,9 +3,18 @@ package board.service;
 import java.util.List;
 import java.util.Map;
 
+
 import board.bean.BoardPaging;
 import board.bean.CommentDTO;
 import board.bean.ItemDTO;
+
+import board.bean.AdminDTO;
+import board.bean.BoardPaging;
+import board.bean.CommentDTO;
+import board.bean.ItemDTO;
+import board.bean.ReportDTO;
+
+
 import board.bean.ReviewDTO;
 import board.bean.SearchDTO;
 import board.bean.WishDTO;
@@ -41,46 +50,45 @@ public interface BoardService {
 	public BoardPaging boardPaging(String pg, Map<String, Object> map);
 	
 	//------------------------------------------mystore--------------------------------------//
-	
+
+
 	public void reviewWrite(ReviewDTO reviewDTO);
 
 	public void profileImgModify(SellerDTO sellerDTO);
 
-	public SellerDTO getMystore(int userkey);
+	public SellerDTO getMystore(String userid);
 
-	public void mystoreHitUpdate(int userkey);
+	public void mystoreHitUpdate(String userid);
 
 	public void mystoreModify(Map<String, String> map);
 
-	public List<ItemDTO> getMystoreItemList(String pg, int userkey);
 
-	public List<WishDTO> getMystoreWishList(String pg, int userkey);
+	public List<ItemDTO> getMystoreItemList(String pg, String userid);
+
+	public List<WishDTO> getMystoreWishList(String pg, String userid);
 
 	public void wishListDelete(Map<String, Object> map);
 
-	public List<ReviewDTO> getMystoreReviewList(String pg, int userkey);
+	public List<ReviewDTO> getMystoreReviewList(String pg, String userid);
 
-	public String getMystoreItemCnt(int userkey);
+	public String getMystoreItemCnt(String userid);
 
-	public String getMystoreWishCnt(int userkey);
+	public String getMystoreWishCnt(String userid);
 
-	// public MystoreTab1Paging mystoreTab1Paging(String pg,int userkey);
+	public String getMystoreReviewCnt(String userid);
 
-	// public MystoreTab2Paging mystoreTab2Paging(String pg, int userkey);
+	public List<ItemDTO> getMystoreItemPopularList(String pg, String userid);
 
-	public String getMystoreReviewCnt(int userkey);
+	public List<ItemDTO> getMystoreItemLowerPriceList(String pg, String userid);
 
-	public List<ItemDTO> getMystoreItemPopularList(String pg, int userkey);
+	public List<ItemDTO> getMystoreItemHighestPriceList(String pg, String userid);
 
-	public List<ItemDTO> getMystoreItemLowerPriceList(String pg, int userkey);
+	public List<ItemDTO> getMystoreWishPopularList(String pg, String userid);
 
-	public List<ItemDTO> getMystoreItemHighestPriceList(String pg, int userkey);
+	public List<ItemDTO> getMystoreWishHighestPriceList(String pg, String userid);
 
-	public List<ItemDTO> getMystoreWishPopularList(String pg, int userkey);
+	public List<ItemDTO> getMystoreWishLowerPriceList(String pg, String userid);
 
-	public List<ItemDTO> getMystoreWishHighestPriceList(String pg, int userkey);
-
-	public List<ItemDTO> getMystoreWishLowerPriceList(String pg, int userkey);
 	
 	
 	//--------------------------searchBoard--------------------------------------------//
@@ -146,6 +154,18 @@ public interface BoardService {
 
 	public String getUesrId(Map<String, Object> map);
 
+
+	public AdminDTO getAdmin();
+
+	public List<ReportDTO> getReportList();
+
 	
+
+	public List<ReportDTO> getReport(String userid);
+
+	public List<String> getReportTarget();
+
+	public void noticeWrite(Map<String, String> map);
+
 
 }

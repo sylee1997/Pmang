@@ -2360,8 +2360,3 @@ function searchDetailAddrFromCoords(coords, callback) {
 	geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
 }
 
-
-
-
-
-
