@@ -84,7 +84,7 @@ public class BoardController {
 	public ModelAndView getMystore(HttpSession session, @CookieValue(value = "memHit", required = false) Cookie cookie,
 			HttpServletResponse response) {
 		// int userid=session.getAttribute("userid");
-		String userid = "1"; // 세션값 받아야함
+		String userid = (String) session.getAttribute("memUserId"); // 세션값 받아야함
 
 		// 조회수 - 새로고침방지
 		if (cookie != null) {
@@ -164,7 +164,7 @@ public class BoardController {
 			HttpSession session, HttpServletResponse response) {
 
 		// String userid = (String) session.getAttribute("userid");
-		String userid = "1"; // 세션값 받아야함
+		String userid = (String) session.getAttribute("memUserId"); // 세션값 받아야함
 
 		List<ItemDTO> list = boardService.getMystoreItemList(pg, userid);
 
@@ -194,7 +194,7 @@ public class BoardController {
 	@RequestMapping(value = "getMystoreWishList", method = RequestMethod.POST)
 	public ModelAndView getMystoreWishList(@RequestParam(required = false, defaultValue = "1") String pg,
 			HttpSession session, HttpServletResponse response) {
-		String userid = "1"; // 세션값 받아야함
+		String userid = (String) session.getAttribute("memUserId"); // 세션값 받아야함
 		List<WishDTO> list = boardService.getMystoreWishList(pg, userid);
 
 		// 조회수 - 새로고침 방지
@@ -222,7 +222,7 @@ public class BoardController {
 	@RequestMapping(value = "wishListDelete", method = RequestMethod.POST)
 	@ResponseBody
 	public int wishListDelete(@RequestParam Map<String, Object> map, HttpSession session) {
-		String userid = "1"; // 세션값을 받아야함
+		String userid = (String) session.getAttribute("memUserId"); // 세션값을 받아야함
 
 		int result = 0;
 		int cnt = Integer.parseInt((String) map.get("cnt"));
@@ -246,7 +246,7 @@ public class BoardController {
 	public ModelAndView getMystoreReviewList(@RequestParam(required = false) String pg, HttpSession session,
 			HttpServletResponse response) {
 
-		String userid = "1"; // 세션값 받아야함
+		String userid = (String) session.getAttribute("memUserId"); // 세션값 받아야함
 
 		List<ReviewDTO> list = boardService.getMystoreReviewList(pg, userid);
 
@@ -270,7 +270,7 @@ public class BoardController {
 	@RequestMapping(value = "getMystoreItemCnt", method = RequestMethod.POST)
 	@ResponseBody
 	public String getMystoreItemCnt(HttpSession session, HttpServletResponse reponse) {
-		String userid = "1"; // 세션값 받아야함
+		String userid = (String) session.getAttribute("memUserId"); // 세션값 받아야함
 
 		String result = boardService.getMystoreItemCnt(userid);
 		return result;
@@ -280,7 +280,7 @@ public class BoardController {
 	@RequestMapping(value = "getMystoreWishCnt", method = RequestMethod.POST)
 	@ResponseBody
 	public String getMystoreWishCnt(HttpSession session, HttpServletResponse reponse) {
-		String userid = "1"; // 세션값 받아야함
+		String userid =(String) session.getAttribute("memUserId"); // 세션값 받아야함
 
 		String result = boardService.getMystoreWishCnt(userid);
 		return result;
@@ -290,7 +290,7 @@ public class BoardController {
 	@RequestMapping(value = "getMystoreReviewCnt", method = RequestMethod.POST)
 	@ResponseBody
 	public String getMystoreReviewCnt(HttpSession session, HttpServletResponse reponse) {
-		String userid = "1"; // 세션값 받아야함
+		String userid = (String) session.getAttribute("memUserId"); // 세션값 받아야함
 		String result = boardService.getMystoreReviewCnt(userid);
 		return result;
 	}
@@ -302,7 +302,7 @@ public class BoardController {
 
 		// 나중에 변경 세션받으면!
 		// String userid = (String) session.getAttribute("userid");
-		String userid = "1"; // 세션값 받아야함
+		String userid = (String) session.getAttribute("memUserId"); // 세션값 받아야함
 
 		List<ItemDTO> list = boardService.getMystoreItemPopularList(pg, userid);
 
@@ -335,7 +335,7 @@ public class BoardController {
 
 		// 나중에 변경 세션받으면!
 		// String userid = (String) session.getAttribute("userid");
-		String userid = "1"; // 세션값 받아야함
+		String userid = (String) session.getAttribute("memUserId");; // 세션값 받아야함
 
 		List<ItemDTO> list = boardService.getMystoreItemLowerPriceList(pg, userid);
 
@@ -367,7 +367,7 @@ public class BoardController {
 			HttpSession session, HttpServletResponse response) {
 
 		// String userid = (String) session.getAttribute("userid");
-		String userid = "1"; // 세션값 받아야함
+		String userid = (String) session.getAttribute("memUserId"); // 세션값 받아야함
 
 		List<ItemDTO> list = boardService.getMystoreItemHighestPriceList(pg, userid);
 
@@ -400,7 +400,7 @@ public class BoardController {
 		// 나중에 변경 세션받으면!
 
 		// String userid = (String) session.getAttribute("userid");
-		String userid = "1"; // 세션값 받아야함
+		String userid = (String) session.getAttribute("memUserId"); // 세션값 받아야함
 
 		List<ItemDTO> list = boardService.getMystoreWishPopularList(pg, userid);
 
@@ -434,7 +434,7 @@ public class BoardController {
 		// 나중에 변경 세션받으면!
 
 		// String userid = (String) session.getAttribute("userid");
-		String userid = "1"; // 세션값 받아야함
+		String userid = (String) session.getAttribute("memUserId"); // 세션값 받아야함
 
 		List<ItemDTO> list = boardService.getMystoreWishLowerPriceList(pg, userid);
 
@@ -468,7 +468,7 @@ public class BoardController {
 		// 나중에 변경 세션받으면!
 
 		// String userid = (String) session.getAttribute("userid");
-		String userid = "1"; // 세션값 받아야함
+		String userid = (String) session.getAttribute("memUserId"); // 세션값 받아야함
 		List<ItemDTO> list = boardService.getMystoreWishHighestPriceList(pg, userid);
 
 		// 조회수 - 새로고침 방지
@@ -507,10 +507,10 @@ public class BoardController {
 	@ResponseBody
 	public void reviewWrite(@ModelAttribute ReviewDTO reviewDTO, HttpServletRequest request,
 			@RequestParam("img1url") String img1url, @RequestParam("img2url") String img2url,
-			@RequestParam("img3url") String img3url) {
+			@RequestParam("img3url") String img3url,HttpSession session) {
 		String filePath = "C:/project/Pmang/pmang_Project/src/main/webapp/storage/";
 
-		String reviewWriter = "작성자id";// 작성자 아이디 세션으로 넣어야함
+		String reviewWriter =(String) session.getAttribute("memUserId");// 작성자 아이디 세션으로 넣어야함
 		reviewDTO.setReviewWriter(reviewWriter);
 
 		UUID uuid = UUID.randomUUID(); // 중복파일이름방지를 위한 uuid설정

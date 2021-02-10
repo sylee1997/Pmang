@@ -11,7 +11,7 @@
 
 <!-- <input type="hidden" id="memid" value="2"> -->
 <!-- 나중에 세션값 넣어줘야함 통일해야돼(이거는 일반회원!!) -->
-<input type="hidden" id="memid" value="admin">
+<input type="hidden" id="memid" value="${memUserId }">
 <!-- 나중에 세션값 넣어줘야함 통일해야돼(이거는 관리자!!) -->
 
 	<c:if test="${memid==admin }">
@@ -376,12 +376,12 @@
 
 										//세션이랑 유저아이디랑 같을시 내상점정보변경버튼,회원정보버튼이 보여야함
 										//아닐경우에는 숨기고, 신고하기버튼만 보이도록해야함
-										if ($('#memid').val() == data.sellerDTO.userid) {
+										if ($('#memid').val() == data.sellerDTO.userid) {	//내상점이 마이 페이지일 경우
 											$('#storeIntroEditBtn').show();
 											$('#memberInfoModify').show();
 											$('#myBtn').hide();
 											$('li#wish').show();
-										} else {
+										} else {											//내상점이 마이페이지가 아닐경우(남의 내상점)
 											$('#storeIntroEditBtn').hide();
 											$('#memberInfoModify').hide();
 											$('#myBtn').show();
@@ -494,7 +494,7 @@
 											alert(activeTab);
 										},
 										success : function(data) { //통신 성공시 탭 내용담는 div를 읽어들인 값으로 채운다.
-											alert(data);
+											//alert(data);
 											$('#tabContent').html(data);
 										}
 									});

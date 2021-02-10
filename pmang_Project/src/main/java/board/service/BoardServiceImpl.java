@@ -40,8 +40,7 @@ public class BoardServiceImpl implements BoardService {
 	private BoardPaging boardPaging;
 	@Autowired
 	private MystoreDAO mystoreDAO;
-	@Autowired
-	private HttpSession session;
+	
 
 	//-------------------------------------------itemView----------------------------------//
 
