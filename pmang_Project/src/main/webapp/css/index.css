@@ -523,7 +523,7 @@ button div p{
 #container {
    position: relative;
    width: 1024px;
-   /* height: 5729px; */
+  /*  height: 2000px; */
    overflow: auto;
    margin: 0 auto;
 }
@@ -668,11 +668,11 @@ button div p{
 	-ms-overflow-style: none;
 } */
 
- ::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
 
 display:none;
 
-}  
+}    */
 
 
 
@@ -936,4 +936,34 @@ display:none;
 
 .sellerWriteForm_footer {
 	display : none;
+}
+
+#item_seqSpan {
+	display: none;
+}
+
+.itemPrice::after {
+    content: "원";
+    font-size: 13px;
+    margin-left: 3px;
+}
+
+span#storageDate {
+   position: absolute;
+   right: 40px;
+}
+
+#keywordSpan:hover {
+	color: green;
+	font-weight: bold;
+}
+
+#keywordSpan {
+	display: flex;
+    width: 250px;
+}
+#storageDate {
+	position: absolute;
+    right: 40px;
+    bottom: 10px;
 }

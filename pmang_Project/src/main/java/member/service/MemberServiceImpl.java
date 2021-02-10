@@ -170,6 +170,8 @@ public class MemberServiceImpl implements MemberService {
 	public List<ZipcodeDTO> searchlocation(String address) {
 		return memberDAO.searchlocation(address);
 	}
+	
+	
 
 
 }

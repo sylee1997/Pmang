@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -196,6 +198,24 @@ public class MemberController {
 		
 		return mav;
 	}
+	
+	/*
+	 * @RequestMapping(value="recentlyGoods", method=RequestMethod.POST)
+	 * 
+	 * @ResponseBody public ModelAndView recentlyGoods(@RequestParam String
+	 * imgSrc, @RequestParam String item_seq, HttpSession session) {
+	 * memberService.recentlyGoods session.setAttribute(img, value); }
+	 */
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
 

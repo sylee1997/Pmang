@@ -2292,25 +2292,6 @@ $('.selection3').on('click', '.itemLink', function(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 위치 모달 */
 $('.locationSearch').click(function(){
 	 $('.locationModal').css('display','block');
