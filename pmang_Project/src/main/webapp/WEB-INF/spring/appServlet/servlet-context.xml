@@ -15,6 +15,8 @@
 	<context:component-scan base-package="member.controller"/>
 	<context:component-scan base-package="board.controller"/>
 	<context:component-scan base-package="hello.controller"/>
+	<context:component-scan base-package="talk.controller"/>
+
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
@@ -62,12 +64,11 @@
 	<beans:bean id="talkHandler" class="talk.handler.TalkHandler"></beans:bean>
 	
 	<websocket:handlers>
-		<websocket:mapping handler="talkHandler" path="/talk" /> <!-- path에 요청이 오면 talkHandler를 처리하겠다. -->
+		<websocket:mapping handler="talkHandler" path="/talk-ws" /> <!-- path에 요청이 오면 talkHandler를 처리하겠다. -->
 		<websocket:handshake-interceptors>
 	         <beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" /> <!-- Http의 Session을 낚아채서 websocket으로 가져온다. -->
 	    </websocket:handshake-interceptors>
 		<websocket:sockjs />
 	</websocket:handlers>
-	
 	
 </beans:beans>

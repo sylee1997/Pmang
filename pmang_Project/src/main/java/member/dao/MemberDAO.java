@@ -8,8 +8,7 @@ import member.bean.MemberDTO;
 import member.bean.ZipcodeDTO;
 
 public interface MemberDAO {
-
-	public MemberDTO login(Map<String, String> map);
+	public MemberDTO login(String userId);
 
 	public int write(MemberDTO memberDTO);
 
@@ -24,7 +23,18 @@ public interface MemberDAO {
 	public int checkKakaoId(String kakaoId);
 
 	public int kakaoWrite(MemberDTO memberDTO);
+
+	public String findId(MemberDTO memberDTO);
+
+	public void updatePwd(MemberDTO resultMember);
+
+	public MemberDTO findPwd(MemberDTO memberDTO);
 	
+	public MemberDTO getMember(String userId);
+	
+	public void modify(MemberDTO memberDTO);
+	
+	//-----------------------seller---------------------------//	
 	public void sellerWrite(ItemDTO itemDTO);
 
 	public List<ZipcodeDTO> searchlocation(String address);
@@ -32,6 +42,7 @@ public interface MemberDAO {
 	public String adminUserDeleteSearch(String userid);
 
 	public void adminUserDelete(String userid);
+
 
 
 }

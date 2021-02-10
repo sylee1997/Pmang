@@ -17,9 +17,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
+import org.springframework.web.bind.annotation.CookieValue;
+
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,12 +41,19 @@ import data.url.Base64Utils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import board.bean.BoardPaging;
+import board.bean.CommentDTO;
 import board.bean.ItemDTO;
+
+import board.bean.WishlistDTO;
+
 import board.bean.NoticeDTO;
 import board.bean.ReportDTO;
 
 import board.bean.ReviewDTO;
+import board.bean.SearchDTO;
 import board.bean.WishDTO;
+
 import board.service.BoardService;
 import member.bean.SellerDTO;
 
@@ -51,12 +62,6 @@ import member.bean.SellerDTO;
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
-
-	@RequestMapping(value = "itemBoard", method = RequestMethod.GET)
-	public String itemBoard(Model model) {
-		model.addAttribute("display", "/pm_itemBoard/itemBoard.jsp");
-		return "/index";
-	}
 
 	// -------------------mystote------------------------
 
@@ -128,10 +133,11 @@ public class BoardController {
 		boardService.mystoreModify(map);
 	}
 
-	// 프로필 사진 수정 
+	// 프로필 사진 수정
 	@RequestMapping(value = "profileImgModify", method = RequestMethod.POST)
-	//@ResponseBody
-	public String profileImgModify(@ModelAttribute SellerDTO sellerDTO, @RequestParam("img") MultipartFile img,Model model) {
+	// @ResponseBody
+	public String profileImgModify(@ModelAttribute SellerDTO sellerDTO, @RequestParam("img") MultipartFile img,
+			Model model) {
 		String filePath = "C:/project/Pmang/pmang_Project/src/main/webapp/storage/";
 		String fileName = img.getOriginalFilename();
 		File file = new File(filePath, fileName);
@@ -144,7 +150,7 @@ public class BoardController {
 			e.printStackTrace();
 		}
 
-		sellerDTO.setPf_photo("/pmang/image/"+fileName);
+		sellerDTO.setPf_photo("/pmang/image/" + fileName);
 
 		// db
 		boardService.profileImgModify(sellerDTO);
@@ -157,7 +163,6 @@ public class BoardController {
 	public ModelAndView getMystoreItemList(@RequestParam(required = false, defaultValue = "1") String pg,
 			HttpSession session, HttpServletResponse response) {
 
-		// 나중에 변경 세션받으면!
 		// String userid = (String) session.getAttribute("userid");
 		String userid = "1"; // 세션값 받아야함
 
@@ -218,8 +223,7 @@ public class BoardController {
 	@ResponseBody
 	public int wishListDelete(@RequestParam Map<String, Object> map, HttpSession session) {
 		String userid = "1"; // 세션값을 받아야함
-		
-		
+
 		int result = 0;
 		int cnt = Integer.parseInt((String) map.get("cnt"));
 		String item_seq = (String) map.get("item_seq");
@@ -236,10 +240,12 @@ public class BoardController {
 	}
 
 	// 내상점 상점후기 탭메뉴 최신순으로 출력(기본)
+
 	@RequestMapping(value = "getMystoreReviewList", method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView getMystoreReviewList(@RequestParam(required = false) String pg, HttpSession session,
 			HttpServletResponse response) {
+
 		String userid = "1"; // 세션값 받아야함
 
 		List<ReviewDTO> list = boardService.getMystoreReviewList(pg, userid);
@@ -264,7 +270,7 @@ public class BoardController {
 	@RequestMapping(value = "getMystoreItemCnt", method = RequestMethod.POST)
 	@ResponseBody
 	public String getMystoreItemCnt(HttpSession session, HttpServletResponse reponse) {
-		String userid ="1"; // 세션값 받아야함
+		String userid = "1"; // 세션값 받아야함
 
 		String result = boardService.getMystoreItemCnt(userid);
 		return result;
@@ -360,7 +366,6 @@ public class BoardController {
 	public ModelAndView getMystoreItemHighestPriceList(@RequestParam(required = false, defaultValue = "1") String pg,
 			HttpSession session, HttpServletResponse response) {
 
-		// 나중에 변경 세션받으면!
 		// String userid = (String) session.getAttribute("userid");
 		String userid = "1"; // 세션값 받아야함
 
@@ -393,6 +398,7 @@ public class BoardController {
 	public ModelAndView getMystoreWishPopularList(@RequestParam(required = false, defaultValue = "1") String pg,
 			HttpSession session, HttpServletResponse response) {
 		// 나중에 변경 세션받으면!
+
 		// String userid = (String) session.getAttribute("userid");
 		String userid = "1"; // 세션값 받아야함
 
@@ -421,10 +427,12 @@ public class BoardController {
 	}
 
 	// 내상점 찜 탭메뉴 저가순출력
+
 	@RequestMapping(value = "getMystoreWishLowerPriceList", method = RequestMethod.POST)
 	public ModelAndView getMystoreWishLowerPriceList(@RequestParam(required = false, defaultValue = "1") String pg,
 			HttpSession session, HttpServletResponse response) {
 		// 나중에 변경 세션받으면!
+
 		// String userid = (String) session.getAttribute("userid");
 		String userid = "1"; // 세션값 받아야함
 
@@ -450,6 +458,7 @@ public class BoardController {
 
 		mav.setViewName("jsonView");
 		return mav;
+
 	}
 
 	// 내상점 찜 탭메뉴 고가순출력
@@ -457,6 +466,7 @@ public class BoardController {
 	public ModelAndView getMystoreWishHighestPriceList(@RequestParam(required = false, defaultValue = "1") String pg,
 			HttpSession session, HttpServletResponse response) {
 		// 나중에 변경 세션받으면!
+
 		// String userid = (String) session.getAttribute("userid");
 		String userid = "1"; // 세션값 받아야함
 		List<ItemDTO> list = boardService.getMystoreWishHighestPriceList(pg, userid);
@@ -483,7 +493,7 @@ public class BoardController {
 		return mav;
 	}
 
-	// -----------------------mystore
+	// -----------------------mystore ---------------------- //
 
 	// -------------------review-------------------
 	// 리뷰 작성폼
@@ -492,68 +502,56 @@ public class BoardController {
 		return "/pm_review/reviewWriteForm";
 	}
 
-	// 리뷰 작성 
+	// 리뷰 작성
 	@RequestMapping(value = "reviewWrite", method = RequestMethod.POST)
 	@ResponseBody
 	public void reviewWrite(@ModelAttribute ReviewDTO reviewDTO, HttpServletRequest request,
-			@RequestParam("img1url") String img1url,@RequestParam("img2url") String img2url,@RequestParam("img3url") String img3url) {
+			@RequestParam("img1url") String img1url, @RequestParam("img2url") String img2url,
+			@RequestParam("img3url") String img3url) {
 		String filePath = "C:/project/Pmang/pmang_Project/src/main/webapp/storage/";
 
-		/*
-		 * System.out.println(reviewDTO); System.out.println(list);
-		 * 
-		 * for (MultipartFile img : list) { String fileName = img.getOriginalFilename();
-		 * File file = new File(filePath, fileName);
-		 * 
-		 * // 파일복사 try { FileCopyUtils.copy(img.getInputStream(), new
-		 * FileOutputStream(file)); } catch (IOException e) { e.printStackTrace(); }
-		 * 
-		 * // ReviewDTO reviewDTO=new ReviewDTO(); reviewDTO.setReviewWriter("승은"); //
-		 * 일단 임의로 넣음. reviewDTO.setReviewSubject("글제ㅔ목 일단 임의로");
-		 * reviewDTO.setReviewImg1(fileName); reviewDTO.setReviewImg2("");
-		 * reviewDTO.setReviewImg3("");
-		 */
-		String reviewWriter="작성자id";//작성자 아이디 세션으로 넣어야함
+		String reviewWriter = "작성자id";// 작성자 아이디 세션으로 넣어야함
 		reviewDTO.setReviewWriter(reviewWriter);
-		
-		UUID uuid=UUID.randomUUID();	//중복파일이름방지를 위한 uuid설정
-		
+
+		UUID uuid = UUID.randomUUID(); // 중복파일이름방지를 위한 uuid설정
+
 		try {
-		
-			byte[] in1=null;
-			byte[] in2=null;
-			byte[] in3=null;
-			
-			if(!img1url.equals("undefined")) {
-				in1=Base64Utils.decodeBase64ToBytes(img1url);
-				File file1=new File(filePath,uuid.toString()+"_"+reviewDTO.getImg1());
+
+			byte[] in1 = null;
+			byte[] in2 = null;
+			byte[] in3 = null;
+
+			if (!img1url.equals("undefined")) {
+				in1 = Base64Utils.decodeBase64ToBytes(img1url);
+				File file1 = new File(filePath, uuid.toString() + "_" + reviewDTO.getImg1());
 				FileCopyUtils.copy(in1, new FileOutputStream(file1));
-				reviewDTO.setImg1(uuid.toString()+"_"+reviewDTO.getImg1());
+				reviewDTO.setImg1(uuid.toString() + "_" + reviewDTO.getImg1());
 			}
-			if(!img2url.equals("undefined")) {
-				in2=Base64Utils.decodeBase64ToBytes(img2url);
-				File file2=new File(filePath,uuid.toString()+"_"+reviewDTO.getImg2());
+			if (!img2url.equals("undefined")) {
+				in2 = Base64Utils.decodeBase64ToBytes(img2url);
+				File file2 = new File(filePath, uuid.toString() + "_" + reviewDTO.getImg2());
 				FileCopyUtils.copy(in2, new FileOutputStream(file2));
-				reviewDTO.setImg2(uuid.toString()+"_"+reviewDTO.getImg2());
-						
+				reviewDTO.setImg2(uuid.toString() + "_" + reviewDTO.getImg2());
+
 			}
-			if(!img3url.equals("undefined")) {
-				in3=Base64Utils.decodeBase64ToBytes(img3url);
-				File file3=new File(filePath,uuid.toString()+"_"+reviewDTO.getImg3());
+			if (!img3url.equals("undefined")) {
+				in3 = Base64Utils.decodeBase64ToBytes(img3url);
+				File file3 = new File(filePath, uuid.toString() + "_" + reviewDTO.getImg3());
 				FileCopyUtils.copy(in3, new FileOutputStream(file3));
-				reviewDTO.setImg3(uuid.toString()+"_"+reviewDTO.getImg3());
+				reviewDTO.setImg3(uuid.toString() + "_" + reviewDTO.getImg3());
 			}
-		}catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-			// db
-			boardService.reviewWrite(reviewDTO);
+		// db
+		boardService.reviewWrite(reviewDTO);
 
-		
 	}
 
-	// -------------------review-------------------
+	// -------------------review------------------- //
+
+	// -------------------itemView----------------------------//
 
 	// 공지사항 창 열기
 	@RequestMapping(value = "notice", method = RequestMethod.GET)
@@ -566,30 +564,45 @@ public class BoardController {
 
 	// 판매글 창 열기
 	@RequestMapping(value = "itemView", method = RequestMethod.GET)
-	public String itemView(@RequestParam(required = false, defaultValue = "999") int item_seq, Model model) {
+	public String itemView(Model model/* @RequestParam(required=false, defaultValue="999") int item_seq */ ) {
 
-		model.addAttribute("item_seq", item_seq);
+		/* model.addAttribute("item_seq", item_seq); */
+
 		model.addAttribute("display", "/pm_itemView/itemView.jsp");
 		return "/index";
 	}
 
 	// 판매글 정보 DB 읽어오기
 	@RequestMapping(value = "getItem", method = RequestMethod.POST)
-	public ModelAndView getItem(@RequestParam(required = false, defaultValue = "999") int item_seq) {
-		// 留� �쐞�뿉 �쟾�뿭蹂��닔濡� �꽑�뼵�븯怨� Autowired 嫄몃㈃ �븞�맖.
+	public ModelAndView getItem(@RequestParam int item_seq,
+			@CookieValue(value = "itemHit", required = false) Cookie cookie, HttpServletResponse response,
+			HttpSession session) {
+		// 맨 위에 전역변수로 선언하고 Autowired 걸면 안됨. --> 고치면서 본건대 이게 무슨소리인가요..?
+
+		// 조회수 - 새로고침 방지
+		if (cookie != null) {
+			boardService.itemHitUpdate(item_seq); // 조회수 증가 -->서비스쪽이랑 디비, 매퍼 추가됬음요
+			cookie.setMaxAge(0); // 쿠키 삭제
+			response.addCookie(cookie); // 쿠키 삭제된걸 클라이언트에게 보내주기.
+		}
+
 		ItemDTO itemDTO = boardService.getItem(item_seq);
 
 		ModelAndView mav = new ModelAndView();
-		// �엫�쓽濡� �엯�젰�븳 媛� 999, click�븳 �긽�뭹�쓽 item_seq媛� parameter濡� �뱾�뼱���빞 �븿.
+
+		// 임의로 입력한 값 999, click한 상품의 item_seq가 parameter로 들어와야 함.
+		// -------------------------------------->해결!
+
 		mav.addObject("itemDTO", itemDTO);
 		mav.setViewName("jsonView");
 
 		return mav;
+
 	}
 
 	// 댓글리스트 DB 읽어오기
 	@RequestMapping(value = "getCommentList", method = RequestMethod.POST)
-	public ModelAndView getCommentList(@RequestParam(required = false, defaultValue = "999") int item_seq) {
+	public ModelAndView getCommentList(int item_seq) {
 
 		List<CommentDTO> list = boardService.getCommentList(item_seq);
 
@@ -600,23 +613,27 @@ public class BoardController {
 		return mav;
 	}
 
-	// �뙎湲� �깮�꽦
+	// 댓글 생성-------------------------------------->세션에서 받아온 유저 아이디 파라메타로 넣었습니당.
 	@RequestMapping(value = "itemComment", method = RequestMethod.POST)
-	public void itemComment(@RequestParam(required = false, defaultValue = "999") int item_seq,
-			@RequestParam String item_comment) {
+	public void itemComment(int item_seq, @RequestParam String userId, @RequestParam String item_comment) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("item_seq", item_seq);
 		map.put("item_comment", item_comment);
-		boardService.itemComment(map);
+		// --------------------------------------------------//
+		map.put("userId", userId);
+
+		boardService.itemComment(map); // -->서비스쪽이랑 디비, 메퍼쪽도 바뀌었으니 확인해보세용!
+
 	}
 
-	// �뙎湲� �궘�젣
+	// 댓글삭제
 	@RequestMapping(value = "commentDelete", method = RequestMethod.POST)
+	@ResponseBody
 	public void commentDelete(@RequestParam String comment_seq) {
 		boardService.commentDelete(comment_seq);
 	}
 
-	// �뙎湲� 1媛� �씫�뼱�삤湲� (���뙎湲��슜)
+	// 댓글 1개 읽어오기 (대댓글용)
 	@RequestMapping(value = "getAComment", method = RequestMethod.POST)
 	public ModelAndView getAComment(@RequestParam String comment_seq) {
 
@@ -629,20 +646,101 @@ public class BoardController {
 		return mav;
 	}
 
+	// 찜여부 체크
+	@RequestMapping(value = "getWishlist", method = RequestMethod.POST)
+	public ModelAndView getWishlist(@RequestParam(required = false, defaultValue = "999") int item_seq) {
+		List<WishlistDTO> list = boardService.getWishlist(item_seq);
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+
+		return mav;
+	}
+
+	// 찜하기
+	@RequestMapping(value = "pushLike", method = RequestMethod.POST)
+	@ResponseBody
+	public void pushLike(@RequestParam int item_seq, @RequestParam String userId) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("item_seq", item_seq);
+		map.put("userId", userId);
+		boardService.pushLike(map);
+	}
+
+	// 찜 해제
+	@RequestMapping(value = "cancelLike", method = RequestMethod.POST)
+	@ResponseBody
+	public void cancelLike(@RequestParam int item_seq, @RequestParam String userId) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("item_seq", item_seq);
+		map.put("userId", userId);
+		boardService.cancelLike(map);
+	}
+
+	@RequestMapping(value = "reportUser", method = RequestMethod.POST)
+	@ResponseBody
+	public void reportUser(@RequestParam int target_seq, @RequestParam String targetType,
+			@RequestParam String reportContent) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("target_seq", target_seq);
+		map.put("targetType", targetType);
+		String userId = boardService.getUesrId(map);
+
+		map.put("userId", userId);
+		map.put("reportContent", reportContent);
+		boardService.reportUser(map);
+		boardService.countReport(userId);
+
+	}
+
+	// ------------------------------------itemBoard-------------------------------------//
+
+	@RequestMapping(value = "itemBoard", method = RequestMethod.GET)
+	public String itemBoard(Model model) {
+		model.addAttribute("display", "/pm_itemBoard/itemBoard.jsp");
+
+		return "/index";
+	}
+
+	@RequestMapping(value = "getItemBoardCount", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView getItemBoardCount(@RequestParam Map<String, Object> categoryMap) {
+
+		List<Object> list = boardService.getItemBoardCount(categoryMap);
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("ctgMapList", list);
+		mav.setViewName("jsonView");
+
+		return mav;
+	}
+
+	// 처음 보여줄 때 리스트
 	@RequestMapping(value = "getitemBoardList", method = RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView getitemBoardList(@RequestParam(required = false, defaultValue = "1") String pg,
-			@RequestParam Map<String, String> map) {
+			@RequestParam Map<String, Object> map, HttpSession session, HttpServletResponse response) {
 		System.out.println(map.get("category1"));
 		System.out.println(map.get("category2"));
 		System.out.println(map.get("category3"));
-		List<ItemDTO> list = boardService.getItemBoardList(map);
+		List<ItemDTO> list = boardService.getItemBoardList(pg, map);
 
-		// �쟾泥� 移댄뀒怨좊━ �닔 援ы븯湲�
+		// 전체 카테고리 수 구하기
 		int entireItemNum = boardService.getEntireItemNum(map);
 
-		// �럹�씠吏� 泥섎━
+		// 페이징 처리
 		BoardPaging boardPaging = boardService.boardPaging(pg, map);
+
+		// 조회수 - 새로고침 방지
+		if (session.getAttribute("memUserId") != null) {
+			Cookie cookie = new Cookie("itemHit", "0");// 생성
+			cookie.setMaxAge(30 * 60);// 초 단위 생존기간
+			response.addCookie(cookie);// 클라이언트에게 보내기
+		}
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("pg", pg);
@@ -654,48 +752,351 @@ public class BoardController {
 		return mav;
 	}
 
-	@RequestMapping(value = "getItemBoardCount", method = RequestMethod.POST)
-	@ResponseBody
-	public ModelAndView getItemBoardCount(@RequestParam Map<String, String> categoryMap) {
-
-		List<Object> list = boardService.getItemBoardCount(categoryMap);
-
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("ctgMapList", list);
-		mav.setViewName("jsonView");
-
-		return mav;
-	}
-
+	// 최신순, 인기순, 고가순, 저가순...
 	@RequestMapping(value = "getOrderbyItem", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView getOrderbyItem(@RequestParam Map<String, String> map) {
+	public ModelAndView getOrderbyItem(@RequestParam(required = false, defaultValue = "1") String pg,
+			@RequestParam Map<String, Object> map, HttpSession session, HttpServletResponse response) {
 
-		List<Object> list = boardService.getOrderbyItem(map);
+		System.out.println(pg);
+		List<Object> list = boardService.getOrderbyItem(pg, map);
 		int entireItemNum = boardService.getEntireItemNum(map);
+		// 페이징 처리
+		BoardPaging boardPaging = boardService.boardPaging(pg, map);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("orderbylist", list);
 		mav.addObject("entireItemNum", entireItemNum);
+		mav.addObject("pg", pg);
+		mav.addObject("boardPaging", boardPaging);
+
 		mav.setViewName("jsonView");
 
 		return mav;
 
 	}
 
+	// searchBoard
+
+	@RequestMapping(value = "searchBoard", method = RequestMethod.GET)
+	public String searchBoard(Model model) {
+		model.addAttribute("display", "/pm_itemBoard/searchBoard.jsp");
+		return "/index";
+	}
+
+	@RequestMapping(value = "indexSearchBoard", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView indexSearchBoard(@RequestParam(required = false, defaultValue = "1") String pg,
+			@RequestParam String searchKeyword, @RequestParam(required = false, defaultValue = "최신순") String order,
+			HttpSession session, HttpServletResponse response) {
+		// System.out.println(searchKeyword);
+		List<Object> indexSearchBoardList = boardService.indexSearchBoardList(searchKeyword);
+		List<Object> category1List = boardService.getCategory1List(searchKeyword);
+		int totalSearchItem = boardService.getTotalSearchItem(searchKeyword);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pg", pg);
+		map.put("searchKeyword", searchKeyword);
+		map.put("order", order);
+		List<ItemDTO> itemList = boardService.getSearchItemList(map);
+
+		// 페이징 처리
+		BoardPaging boardPaging = boardService.boardPaging(pg, totalSearchItem);
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("bestItemList", indexSearchBoardList);
+		mav.addObject("category1List", category1List);
+		mav.addObject("totalSearchItem", totalSearchItem);
+		mav.addObject("itemList", itemList);
+		mav.addObject("boardPaging", boardPaging);
+		mav.setViewName("jsonView");
+
+		return mav;
+
+	}
+
+	@RequestMapping(value = "searchClickCtg1", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView searchClickCtg1(@RequestParam(required = false, defaultValue = "1") String pg,
+			@RequestParam String searchKeyword, @RequestParam String category1,
+			@RequestParam(required = false, defaultValue = "최신순") String order, HttpSession session,
+			HttpServletResponse response) {
+
+		List<Object> category2List = boardService.getCategory2List(category1, searchKeyword);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pg", pg);
+		map.put("searchKeyword", searchKeyword);
+		map.put("category1", category1);
+		map.put("order", order);
+
+		List<ItemDTO> itemList = boardService.getSearchItem1List(map);
+		// System.out.println(itemList.size());
+		// 페이징 처리
+		BoardPaging boardPaging = boardService.boardPaging(pg, itemList.size());
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("category2List", category2List);
+		mav.addObject("itemList", itemList);
+		mav.addObject("boardPaging", boardPaging);
+		mav.setViewName("jsonView");
+
+		return mav;
+	}
+
+	@RequestMapping(value = "searchClickCtg2", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView searchClickCtg2(@RequestParam(required = false, defaultValue = "1") String pg,
+			@RequestParam String searchKeyword, @RequestParam String category2,
+			@RequestParam(required = false, defaultValue = "최신순") String order, HttpSession session,
+			HttpServletResponse response) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pg", pg);
+		map.put("searchKeyword", searchKeyword);
+		map.put("category2", category2);
+		map.put("order", order);
+
+		List<Object> category3List = boardService.getCategory3List(map);
+		List<ItemDTO> itemList = boardService.getSearchItem2List(map);
+
+		// 페이징 처리
+		BoardPaging boardPaging = boardService.boardPaging(pg, itemList.size());
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("category3List", category3List);
+		mav.addObject("itemList", itemList);
+		mav.addObject("boardPaging", boardPaging);
+		mav.setViewName("jsonView");
+
+		return mav;
+
+	}
+
+	@RequestMapping(value = "searchClickCtg3", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView searchClickCtg3(@RequestParam(required = false, defaultValue = "1") String pg,
+			@RequestParam String searchKeyword, @RequestParam String category2, @RequestParam String category3,
+			@RequestParam(required = false, defaultValue = "최신순") String order, HttpSession session,
+			HttpServletResponse response) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pg", pg);
+		map.put("searchKeyword", searchKeyword);
+		map.put("category2", category2);
+		map.put("category3", category3);
+		map.put("order", order);
+
+		List<ItemDTO> itemList = boardService.getSearchItem3List(map);
+
+		// 페이징 처리
+		BoardPaging boardPaging = boardService.boardPaging(pg, itemList.size());
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("itemList", itemList);
+		mav.addObject("boardPaging", boardPaging);
+		mav.setViewName("jsonView");
+
+		return mav;
+
+	}
+
+	// -----------------------------------------todayItem-------------------------------------------//
+	@RequestMapping(value = "getIndexBoardList", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView getIndexBoardList(String pg, HttpSession session, HttpServletResponse response) {
+		List<ItemDTO> itemList = boardService.getIndexBoardList(pg);
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("itemList", itemList);
+		mav.setViewName("jsonView");
+
+		return mav;
+	}
+
+	@RequestMapping(value = "getIndexTotalItem", method = RequestMethod.POST)
+	@ResponseBody
+	public String getIndexTotalItem() {
+		String totalItem = boardService.getTotalItem();
+		int paging = (Integer.parseInt(totalItem) + 19) / 20;
+		String pagingTotal = "" + paging;
+		return pagingTotal;
+	}
+
+	// -----------------------------hashtagBoard-----------------------------------------------------//
+	@RequestMapping(value = "hashtagBoard", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView hashtagBoard(@RequestParam(required = false, defaultValue = "1") String pg,
+			@RequestParam String hashtag, @RequestParam(required = false, defaultValue = "최신순") String order,
+			HttpSession session, HttpServletResponse response) {
+		System.out.println(hashtag);
+		List<Object> hashtagBoardList = boardService.hashtagBoardList(hashtag);
+		List<Object> category1List = boardService.getHashtagCategory1List(hashtag);
+		int totalHashtagItem = boardService.getHashtagTotalSearchItem(hashtag);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pg", pg);
+		map.put("hashtag", hashtag);
+		map.put("order", order);
+		List<ItemDTO> itemList = boardService.getHashtagItemList(map);
+
+		// 페이징 처리
+		BoardPaging boardPaging = boardService.boardPaging(pg, totalHashtagItem);
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("bestItemList", hashtagBoardList);
+		mav.addObject("category1List", category1List);
+		mav.addObject("totalSearchItem", totalHashtagItem);
+		mav.addObject("itemList", itemList);
+		mav.addObject("boardPaging", boardPaging);
+		mav.setViewName("jsonView");
+
+		return mav;
+	}
+
+	@RequestMapping(value = "hashtagClickCtg1", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView hashtagClickCtg1(@RequestParam(required = false, defaultValue = "1") String pg,
+			@RequestParam String hashtag, @RequestParam String category1,
+			@RequestParam(required = false, defaultValue = "최신순") String order, HttpSession session,
+			HttpServletResponse response) {
+
+		List<Object> category2List = boardService.getHashtagCategory2List(category1, hashtag);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pg", pg);
+		map.put("hashtag", hashtag);
+		map.put("category1", category1);
+		map.put("order", order);
+
+		List<ItemDTO> itemList = boardService.getHashtagItem1List(map);
+		// System.out.println(itemList.size());
+		// 페이징 처리
+		BoardPaging boardPaging = boardService.boardPaging(pg, itemList.size());
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("category2List", category2List);
+		mav.addObject("itemList", itemList);
+		mav.addObject("boardPaging", boardPaging);
+		mav.setViewName("jsonView");
+
+		return mav;
+	}
+
+	@RequestMapping(value = "hashtagClickCtg2", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView hashtagClickCtg2(@RequestParam(required = false, defaultValue = "1") String pg,
+			@RequestParam String hashtag, @RequestParam String category2,
+			@RequestParam(required = false, defaultValue = "최신순") String order, HttpSession session,
+			HttpServletResponse response) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pg", pg);
+		map.put("hashtag", hashtag);
+		map.put("category2", category2);
+		map.put("order", order);
+
+		List<Object> category3List = boardService.getHashtagCategory3List(map);
+		List<ItemDTO> itemList = boardService.getHashtagItem2List(map);
+
+		// 페이징 처리
+		BoardPaging boardPaging = boardService.boardPaging(pg, itemList.size());
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("category3List", category3List);
+		mav.addObject("itemList", itemList);
+		mav.addObject("boardPaging", boardPaging);
+		mav.setViewName("jsonView");
+
+		return mav;
+
+	}
+
+	@RequestMapping(value = "hashtagClickCtg3", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView hashtagClickCtg3(@RequestParam(required = false, defaultValue = "1") String pg,
+			@RequestParam String hashtag, @RequestParam String category2, @RequestParam String category3,
+			@RequestParam(required = false, defaultValue = "최신순") String order, HttpSession session,
+			HttpServletResponse response) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pg", pg);
+		map.put("hashtag", hashtag);
+		map.put("category2", category2);
+		map.put("category3", category3);
+		map.put("order", order);
+
+		List<ItemDTO> itemList = boardService.getHashtagItem3List(map);
+
+		// 페이징 처리
+		BoardPaging boardPaging = boardService.boardPaging(pg, itemList.size());
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("itemList", itemList);
+		mav.addObject("boardPaging", boardPaging);
+		mav.setViewName("jsonView");
+
+		return mav;
+
+	}
+
+	// 검색
+	@RequestMapping(value = "setSearchKeyword", method = RequestMethod.POST)
+	@ResponseBody
+	public void setSearchKeyword(String keyword, HttpSession session) {
+		if (session.getAttribute("memUserId") != null) {
+			String userid = (String) session.getAttribute("memUserId");
+			boardService.setSearchKeyword(keyword, userid);
+			System.out.println(keyword);
+			System.out.println(userid);
+		}
+	}
+
+	@RequestMapping(value = "getSearchKeyword", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView getSearchKeyword(HttpSession session) {
+		List<SearchDTO> keywordList = null;
+		if (session.getAttribute("memUserId") != null) {
+			String userid = (String) session.getAttribute("memUserId");
+			keywordList = boardService.getSearchKeyword(userid);
+			System.out.println(keywordList);
+			System.out.println(userid);
+		}
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("keywordList", keywordList);
+		mav.setViewName("jsonView");
+		return mav;
+	}
+
+	@RequestMapping(value = "removeSearch", method = RequestMethod.POST)
+	@ResponseBody
+	public void removeSearch(String keyword, HttpSession session) {
+		if (session.getAttribute("memUserId") != null) {
+			String userid = (String) session.getAttribute("memUserId");
+			System.out.println(keyword);
+			System.out.println(userid);
+			boardService.removeSearch(keyword, userid);
+		}
+	}
+
+	@RequestMapping(value = "searchAllDelete", method = RequestMethod.POST)
+	@ResponseBody
+	public void searchAllDelete(HttpSession session) {
+		if (session.getAttribute("memUserId") != null) {
+			String userid = (String) session.getAttribute("memUserId");
+			System.out.println(userid);
+			boardService.searchAllDelete(userid);
+		}
+	}
+
+
 	// ------------------admin
 
-	// 일단 보여주기용으로!!~2/6 이후엔 mystore에 합치기! 세션으로 구분할거임
-	/*
-	 * @RequestMapping(value = "admin", method = RequestMethod.GET) public String
-	 * admin(Model model) { model.addAttribute("display", "/pm_admin/admin.jsp");
-	 * return "/index"; }
-	 */
 	@RequestMapping(value = "getAdmin", method = RequestMethod.POST)
 	public ModelAndView getAdmin() {
 		AdminDTO adminDTO = boardService.getAdmin();
 
-		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("adminDTO", adminDTO);
 		// mav.addObject("userid", userid);
@@ -725,67 +1126,64 @@ public class BoardController {
 	 * 
 	 * return "/pm_admin/tab3"; }
 	 */
-	
-	//신고 리스트
-	@RequestMapping(value="getReportList",method=RequestMethod.POST)
-	public ModelAndView getReportList()
-	{
-		List<ReportDTO> list=boardService.getReportList();
-		
-		//System.out.println(list);
-		//페이징 처리
-		//ReportPaging reportPaging=boardService.reportPaging(pg);
-		
-		
+
+	// 신고 리스트
+	@RequestMapping(value = "getReportList", method = RequestMethod.POST)
+	public ModelAndView getReportList() {
+		List<ReportDTO> list = boardService.getReportList();
+
+		// System.out.println(list);
+		// 페이징 처리
+		// ReportPaging reportPaging=boardService.reportPaging(pg);
+
 		ModelAndView mav = new ModelAndView();
-		//mav.addObject("pg", pg);
+		// mav.addObject("pg", pg);
 		mav.addObject("list", list);
-		//mav.addObject("reportPaging", reportPaging);
+		// mav.addObject("reportPaging", reportPaging);
 		mav.setViewName("jsonView");
-		
-		
-		
+
 		return mav;
-		
+
 	}
-	
-	//신고내역
-	@RequestMapping(value="reportView",method=RequestMethod.GET)
-	public String reportView(@RequestParam String userid,Model model) {
-		model.addAttribute("userid",userid);
+
+	// 신고내역
+	@RequestMapping(value = "reportView", method = RequestMethod.GET)
+	public String reportView(@RequestParam String userid, Model model) {
+		model.addAttribute("userid", userid);
 		return "/pm_admin/reportView";
 	}
-	
-	//신고 내역 리스트
-	@RequestMapping(value="getReport",method=RequestMethod.POST)
+
+	// 신고 내역 리스트
+	@RequestMapping(value = "getReport", method = RequestMethod.POST)
 	public ModelAndView getReport(@RequestParam String userid) {
-		List<ReportDTO> list=boardService.getReport(userid);
-		
-		//System.out.println(list);
-		ModelAndView mav=new ModelAndView();
-		mav.addObject("list",list);
+		List<ReportDTO> list = boardService.getReport(userid);
+
+		// System.out.println(list);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
 		mav.setViewName("jsonView");
-		
+
 		return mav;
 	}
-	
-	//신고 3회 이상 받은 회원 리스트
-	@RequestMapping(value="getReportTarget")
+
+	// 신고 3회 이상 받은 회원 리스트
+	@RequestMapping(value = "getReportTarget")
 	public ModelAndView getReportTarget() {
-		List<String> list=boardService.getReportTarget();
-		
-		ModelAndView mav=new ModelAndView();
-		mav.addObject("list",list);
+		List<String> list = boardService.getReportTarget();
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
 		mav.setViewName("jsonView");
-		
+
 		return mav;
 	}
-	
-	//공지사항 작성
-	@RequestMapping(value="noticeWrite",method=RequestMethod.POST)
+
+	// 공지사항 작성
+	@RequestMapping(value = "noticeWrite", method = RequestMethod.POST)
 	@ResponseBody
-	public void noticeWrite(@RequestParam Map<String,String> map) {
+	public void noticeWrite(@RequestParam Map<String, String> map) {
 		boardService.noticeWrite(map);
 	}
 	// ------------------admin
+
 }
