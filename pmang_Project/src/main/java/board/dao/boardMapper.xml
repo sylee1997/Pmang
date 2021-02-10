@@ -17,7 +17,7 @@
 	<insert id="itemComment" parameterType="java.util.Map">
 		insert into itemComment values(comment_seq.nextval,
 										#{item_seq},
-										'깜냥이',<!-- 유저아이디, 세션에서 받아 넣을 것 -->
+										#{userId},
 										#{item_comment},
 										sysdate,
 										'/pmang/image/itemPic.jpg' <!-- 유저아이디로 조인 걸어서 받아올 것 -->
@@ -33,7 +33,45 @@
 	</select>
 
 	<select id="getItemBoardList" parameterType="java.util.Map" resultType="item">
-		select item_seq, img1, item_subject, category1, category2, category3, item_location, item_price,hashtag1, hashtag2, hashtag3, hit, logtime from item where category1 = #{category1}
+	select * from (select rownum rn, tt.* from (select item_seq, img1, item_subject, category1, category2, category3, item_location, item_price, hashtag1, hashtag2, hashtag3, hit, logtime from item where category1 = #{category1}	
+		<if test="category2 != null">
+			and category2 = #{category2}
+		</if>
+		<if test="category3 != null">
+			and category3 = #{category3}
+		</if>
+		order by logtime desc)tt)where rn <![CDATA[ >= ]]> #{startNum} and rn <![CDATA[ <= ]]> #{endNum}
+	
+	</select>
+	
+	<select id="getItemBoardCount1" parameterType="java.util.Map" resultType="java.util.Map">
+		select category1, category2, count(category2) as cnt2 from item group by category1, category2 having category1 = #{category1} and category2 is not null
+	</select>
+	
+	
+	
+	<select id="getItemBoardCount2" parameterType="java.util.Map" resultType="java.util.Map">
+	 	select category2, category3, count(category3) as cnt3 from item group by category2, category3 having category2 = #{category2} and category3 is not null
+	</select>
+	
+	<select id="getEntireItemNum" parameterType="java.util.Map" resultType="int">
+	 	<if test="category2 == null and category3 == null">
+	 		select count(category1) from item where category1 = #{category1}
+	 	</if>
+	 	<if test="category2 != null and category3 == null">
+	 		select count(category2) from item where category1 = #{category1} and category2 = #{category2}
+	 	</if>
+	 	<if test="category3 != null">
+	 		select count(category3) from item where category1 = #{category1} and category2 = #{category2} and category3 = #{category3}
+	 	</if>
+	</select>
+	
+	
+	
+	
+	
+	<select id="getOrderbyItem" parameterType="java.util.Map" resultType="item">
+		select * from (select rownum rn, tt.* from (select item_seq, img1, item_subject, category1, category2, category3, item_location, item_price, hashtag1, hashtag2, hashtag3, hit, logtime from item where category1 = #{category1}
 		<if test="category2 != null">
 			and category2 = #{category2}
 		</if>
@@ -41,17 +79,69 @@
 			and category3 = #{category3}
 		</if>
 		
-		order by logtime desc
+		<if test="order.equals('최신순')">
+			order by logtime desc
+		</if>
+		<if test="order.equals('인기순')">
+			order by hit
+		</if>
+		<if test="order.equals('저가순')">
+			order by item_price 
+		</if>
+		<if test="order.equals('고가순')">
+			order by item_price desc
+		</if>
+			)tt)where rn <![CDATA[ >= ]]> #{startNum} and rn <![CDATA[ <= ]]> #{endNum}
 		
 	</select>
 	
-	<select id="getItemBoardCount1" parameterType="java.util.Map" resultType="java.util.Map">
-		select category1, category2, count(category2) as cnt2 from item group by category1, category2 having category1 = #{category1} and category2 is not null
+	<update id="itemHitUpdate" parameterType="int">
+		update item set hit=hit+1 where item_seq=#{item_seq}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	<select id="getWishlist" resultType="wishlist">
+	 	select * from wishlist where item_seq=#{item_seq}
 	</select>
 	
-	<select id="getItemBoardCount2" parameterType="java.util.Map" resultType="java.util.Map">
-	 	select category2, category3, count(category3) as cnt3 from item group by category2, category3 having category2 = #{category2} and category3 is not null
+	<insert id="pushLike" parameterType="java.util.Map">
+		insert into wishlist values(wishlist_seq.nextval,
+									#{userId},										
+									#{item_seq}
+									)
+	</insert>
+	
+	<delete id="cancelLike" parameterType="java.util.Map">
+		delete wishlist where item_seq=#{item_seq} and userId=#{userId}
+	</delete>
+	
+	<select id="getUserId" parameterType="java.util.Map" resultType="java.lang.String">
+		select userId from 
+			<if test='targetType=="item"'> item where item_seq=#{target_seq}</if>
+			<if test='targetType=="mystore"'> mystore where mystore_seq=#{target_seq}</if>
+			<if test='targetType=="comment"'> itemcomment where comment_seq=#{target_seq}</if>
 	</select>
+	
+	<insert id="reportUser" parameterType="java.util.Map">
+		insert into pm_report values(report_seq.nextval,
+									#{userId},
+									#{targetType},
+									#{reportContent},
+									#{target_seq},
+									sysdate
+									)
+	</insert>
+	
+	<insert id="countReport">
+		insert into countReport values(count_seq.nextVal,
+								#{userId}
+								)
+	</insert>
 </mapper>
 
 

@@ -1,4 +1,6 @@
-   $(document).ready(function () {
+	//상품 신고용
+
+	$(document).ready(function () {
        $('.report-common').click(function (event) {
          var items = $('.report-hide-common');
          for (var item of items) {
@@ -67,12 +69,57 @@
       var span111 = document.getElementsByClassName('close111')[0];
 
       // When the user clicks on the button, open the modal
-      btn111.onclick = function () {
+      function commentReport(that) {
         modal111.style.display = 'block';
+        $('#comment_seq').val($(that).children('.comment_seq').val());
       };
 
       // When the user clicks on <span> (x), close the modal
       span111.onclick = function () {
         modal111.style.display = 'none';
       };
+      
+      
+      
+      //상품 신고 버튼 클릭
+      
+      $('.report-content>div>div>div>button').on('click',function(){
 
+    	  $.ajax({
+  			type: 'post',
+  			url: '/pmang/board/reportUser',
+  			data: {	'targetType' : 'item', 
+  					'reportContent': $(this).text(),
+  					'target_seq': $('#item_seq').val()},
+  			dataType: 'json',
+  			error: function(err){
+  				console.log(err)
+  			},
+  			success: function(result){
+  			}//success
+  		});//ajax
+      });
+      
+      
+      
+      
+      
+      //댓글 신고 버튼 클릭
+      $('.report-content111>div>div>div>button').on('click',function(){
+    	   
+    	  $.ajax({
+  			type: 'post',
+  			url: '/pmang/board/reportUser',
+  			data: {	'targetType' : 'comment', 
+  					'reportContent': $(this).text(),
+  					'target_seq': $('#comment_seq').val()},
+  			dataType: 'json',
+  			error: function(err){
+  				console.log(err)
+  			},
+  			success: function(result){
+  				
+  			}//success
+  		});//ajax
+      }); 
+      

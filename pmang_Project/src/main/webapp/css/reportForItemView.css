@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
         /* The Modal (background) */
-#myBtn{
+/* #myBtn{
 	height: 19px;
 	background-color: rgb(255,255,255);
 	color: rgb(136, 136, 136);
@@ -16,7 +16,7 @@
     border: 0px;
     font: inherit;
     vertical-align: baseline;
-}
+} */
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -295,7 +295,7 @@
 
 
 /* 댓글 신고용 */ 
-#myBtn111{
+/* #myBtn111{
 	height: 19px;
 	background-color: rgb(255,255,255);
 	color: rgb(136, 136, 136);
@@ -310,7 +310,7 @@
     border: 0px;
     font: inherit;
     vertical-align: baseline;
-}
+} */
 .modal111 {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */

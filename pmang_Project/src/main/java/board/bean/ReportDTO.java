@@ -7,16 +7,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 @Data
-public class CommentDTO {
-	
-	private int comment_seq;
-	private int item_seq;
+public class ReportDTO {
+	private int report_seq;
 	private String userId;
-	private String pf_Photo;
-	private String item_comment;
+	private String targetType;
+	private String reportContent;
+	private int target_seq;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
 	private Date logtime;
-	private String ph_photo;
 	
-
 }

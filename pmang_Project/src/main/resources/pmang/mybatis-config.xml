@@ -8,7 +8,8 @@
 		<typeAlias type="board.bean.ItemDTO" alias="item" />
 		<typeAlias type="board.bean.CommentDTO" alias="comment" />
 		<typeAlias type="board.bean.WishlistDTO" alias="wishlist" />
-
+		<typeAlias type="board.bean.ReportDTO" alias="report" />
+		
 	</typeAliases>
 	
 </configuration>
