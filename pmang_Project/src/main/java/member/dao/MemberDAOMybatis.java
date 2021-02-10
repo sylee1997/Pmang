@@ -1,6 +1,5 @@
 package member.dao;
 
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +10,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import member.bean.MemberDTO;
 import board.bean.ItemDTO;
+import member.bean.MemberDTO;
 import member.bean.ZipcodeDTO;
 
 @Repository
@@ -22,9 +21,10 @@ public class MemberDAOMybatis implements MemberDAO {
 	private SqlSession sqlSession;
 	
 	@Override
-	public MemberDTO login(Map<String, String> map) {
-		return sqlSession.selectOne("memberSQL.login", map);
+	public MemberDTO login(String userId) {
+		return sqlSession.selectOne("memberSQL.login", userId);
 	}
+
 
 	@Override
 	public int write(MemberDTO memberDTO) {
@@ -54,7 +54,7 @@ public class MemberDAOMybatis implements MemberDAO {
 	public int regSuccess(String userId, String email_key) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("userId", userId);
-		map.put("email_key", email_key); System.out.println(email_key);
+		map.put("email_key", email_key);
 		return sqlSession.update("memberSQL.regSuccess", map);
 	}
 
@@ -67,6 +67,35 @@ public class MemberDAOMybatis implements MemberDAO {
 	@Override
 	public int kakaoWrite(MemberDTO memberDTO) {
 		return sqlSession.insert("memberSQL.kakaoWrite", memberDTO);
+	}
+
+
+	@Override
+	public String findId(MemberDTO memberDTO) {
+		return sqlSession.selectOne("memberSQL.findId", memberDTO);
+	}
+
+
+	@Override
+	public void updatePwd(MemberDTO resultMember) {
+		sqlSession.update("memberSQL.updatePwd", resultMember);
+	}
+
+
+	@Override
+	public MemberDTO findPwd(MemberDTO memberDTO) {
+		return sqlSession.selectOne("memberSQL.findPwd", memberDTO);
+	}
+	
+	@Override
+	public MemberDTO getMember(String userId) {
+		return sqlSession.selectOne("memberSQL.getMember", userId);
+	}
+	
+	@Override
+	public void modify(MemberDTO memberDTO) {
+		sqlSession.update("memberSQL.modify", memberDTO);
+		
 	}
 
 	
@@ -85,6 +114,11 @@ public class MemberDAOMybatis implements MemberDAO {
 		
 		sqlSession.insert("memberSQL.sellerWrite", itemDTO);
 	}
-	
-	
+
+
+
+
+
+
+
 }

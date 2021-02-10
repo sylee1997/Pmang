@@ -1,5 +1,6 @@
 package member.service;
 
+
 import java.util.List;
 
 import java.util.Map;
@@ -16,7 +17,7 @@ import member.bean.ZipcodeDTO;
 
 public interface MemberService {
 
-	public String login(Map<String, String> map, HttpSession session);
+	public MemberDTO login(String userId);
 
 	public int write(MemberDTO memberDTO);
 
@@ -29,10 +30,24 @@ public interface MemberService {
 	public int regSuccess(String userId, String key);
 
 	public String kakaoLogin(MemberDTO memberDTO, HttpSession session);
+
+	public String findId(MemberDTO memberDTO);
+
+	public String findPwd(MemberDTO memberDTO);
+	
+	public MemberDTO getMember(String userId);
+	
+	public void modify(MemberDTO memberDTO);
 	
 	//-----------------------seller---------------------------//
 	public void sellerWrite(ItemDTO itemDTO);
 
+
 	public List<ZipcodeDTO> searchlocation(String address);
+
+
+
+	
+
 
 }

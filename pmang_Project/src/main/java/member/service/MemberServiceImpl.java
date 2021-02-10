@@ -15,41 +15,39 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 
 import member.bean.MemberDTO;
 import member.bean.ZipcodeDTO;
+
+
+import board.bean.ItemDTO;
+
+
 import member.dao.MemberDAO;
 
 import board.bean.ItemDTO;
+
 @Service
 public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDAO memberDAO;
 	@Autowired
 	private JavaMailSender mailSender;
-
+	@Autowired
+    private PasswordEncoder passwordEncoder;
 	// 난수를 이용한 키 생성
 	private boolean lowerCheck;
 	private int size;
 	
 	@Override
-	public String login(Map<String, String> map, HttpSession session) {
-		MemberDTO memberDTO = memberDAO.login(map);
-		if(memberDTO == null) { // 로그인 해당아이디가 있다 / 없다, 리턴 스트링값을 기다리고있기때문에
-			return "fail";
-		}else {
-			session.setAttribute("memUserName", memberDTO.getUserName());
-			session.setAttribute("memUserId", map.get("userId"));
-			session.setAttribute("memEmail", memberDTO.getEmail1()+"@"+memberDTO.getEmail2());
-			
-			return "success";
-		}
-		
-
-		
+	public MemberDTO login(String userId) {
+		MemberDTO memberDTO = memberDAO.login(userId);
+		return memberDTO;
 	}
-
+	
 	@Override
 	public int write(MemberDTO memberDTO) {
 		return memberDAO.write(memberDTO);
@@ -101,12 +99,12 @@ public class MemberServiceImpl implements MemberService {
 		String key = getKey(false, 20);
 		memberDAO.GetKey(userId, key);
 		MimeMessage mail = mailSender.createMimeMessage();
-		String htmlStr = "<h2>안녕하세요 MS :p 피망마켓~ 입니다!</h2><br><br>" 
+		String htmlStr = "<h2>안녕하세요 PM :p 피망마켓~ 입니다!</h2><br><br>" 
 				+ "<h3>" + userId + "님</h3>" + "<p>인증하기 버튼을 누르시면 로그인을 하실 수 있습니다 : " 
-				+ "<a href='http://localhost:8080" + request.getContextPath() + "/member/regSuccess?userId="+ userId +"&user_key="+key+"'>인증하기</a></p>"
+				+ "<a href='http://localhost:8080" + request.getContextPath() + "/member/regSuccess?userId="+ userId +"&email_key="+key+"'>인증하기</a></p>"
 				+ "(혹시 잘못 전달된 메일이라면 이 이메일을 무시하셔도 됩니다)";
 		try {
-			mail.setSubject("[본인인증] MS :p 피망마켓의 인증메일입니다", "utf-8");
+			mail.setSubject("[본인인증] PM :p 피망마켓의 인증메일입니다", "utf-8");
 			mail.setText(htmlStr, "utf-8", "html");
 			mail.addRecipient(RecipientType.TO, new InternetAddress(email));
 			
@@ -146,6 +144,60 @@ public class MemberServiceImpl implements MemberService {
 		
 		
 	}
+
+	@Override
+	public String findId(MemberDTO memberDTO) {
+		String result = memberDAO.findId(memberDTO);
+		if(result == null) {
+			return "fail";
+		} else {
+			return result;
+		}
+	}
+
+	@Override
+	public String findPwd(MemberDTO memberDTO) {
+		MemberDTO resultMember =  memberDAO.findPwd(memberDTO); 
+		if(resultMember == null) return "findfail";
+		String email1 = resultMember.getEmail1();
+		String email2 = resultMember.getEmail2();
+		String email = email1 + "@" + email2;
+
+
+		String key = getKey(true, 6);
+		MimeMessage mail = mailSender.createMimeMessage();
+		String htmlStr = "<h2>안녕하세요 PM :p 피망마켓~ 입니다!</h2><br><br>" 
+				+ "<h3>" + resultMember.getUserId() + "님</h3>" + "<p>임시비밀번호를 발급해드렸습니다 : "
+				+ "<h3>" + "임시비밀번호는: "+key + "</h3>";
+			
+		try {
+			mail.setSubject("[임시비밀번호] PM :p 피망마켓의 임시비밀번호 입니다", "utf-8");
+			mail.setText(htmlStr, "utf-8", "html");
+			mail.addRecipient(RecipientType.TO, new InternetAddress(email));
+			
+			mailSender.send(mail);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+			return "fail";
+		}
+		String newPwd = passwordEncoder.encode(key);
+		
+		resultMember.setPwd(newPwd);
+		memberDAO.updatePwd(resultMember);
+		
+		return "success";
+	}
+	
+	@Override
+	public MemberDTO getMember(String userId) {
+		return memberDAO.getMember(userId);
+	}
+	
+	@Override
+	public void modify(MemberDTO memberDTO) {
+		memberDAO.modify(memberDTO);
+		
+	}
 		
 
 	//-------------------------seller-----------------------------------//
@@ -155,10 +207,18 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.sellerWrite(itemDTO);
 	}
 
+
 	@Override
 	public List<ZipcodeDTO> searchlocation(String address) {
 		return memberDAO.searchlocation(address);
 	}
+	
+	
+
+
+
+
+
 
 }
 	

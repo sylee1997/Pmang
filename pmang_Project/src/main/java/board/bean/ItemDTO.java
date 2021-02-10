@@ -21,8 +21,8 @@ public class ItemDTO {
 	private String item_content;
 	private String hashtag1, hashtag2, hashtag3;
 	private String buyer_key;
-	private int qty;
 	private int item_price;
+	private int qty;
 	private int hit;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
 	private Date logtime;

@@ -61,35 +61,66 @@ var child = ['영아의류(-2세)', '여아의류(3-6세)', '남아의류(3-6세
 var others = ['피망나눔','차량,오토바이', '기타','',''];
 
 
+//올린 시간 체크.
+function timeForToday(value) {
+    var today = new Date();
+    var timeValue = new Date(value);
+    
+    var betweenSeconds = Math.floor((today.getTime() - timeValue.getTime()) / 1000);
+    if (betweenSeconds < 60) {
+        return betweenSeconds+'초전';
+    }
+
+    var betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+    
+    if (betweenTime < 60) {
+        return betweenTime+'분전';
+    }
+
+    var betweenTimeHour = Math.floor(betweenTime / 60);
+    if (betweenTimeHour < 24) {
+        return betweenTimeHour + '시간전';
+    }
+
+    var betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+    if (betweenTimeDay < 365) {
+        return betweenTimeDay+'일전';
+    }
+
+    return Math.floor(betweenTimeDay / 365)+'년전';
+}
+
+//콤마!
+function addComma(str) {
+    str = String(str);
+    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+}
+
+
+//처음 카테고리 클릭해서 들어왔을 때 -> 최신순으로 아이템 보여줌. 카테고리1, 2, 3 중 뭐가 들어왔는 지 확인해서 detailListDiv를 생성.
 $(document).ready(function(){
-	/* down color 입히기 */
-/*	for(var i=1; i<4; i++){
-		for(var j=0; j<$('.down'+i).children().length; j++){
-			if($('.down'+i).children().eq(j).text().trim() == $('.top'+i).text().trim()){
-				//$('.down'+i).children().eq(j).css('color', 'red');
-				$('.down'+i).children().eq(j).addClass('select'+i);
-			}
-		}	
-	};*/
-	//alert($('.top2').text().trim())
+	
+	//alert($('input[name=pg]').val());
+
 	$('.itemFrame').remove();
 	if($('.top2').text().trim() == ""){
 		$.ajax({
 			type: 'post',
 			url: '/pmang/board/getitemBoardList',
-			data : {'category1' : $('.top1').text().trim()},
+			data : {'category1' : $('.top1').text().trim(), 'pg' : $("#pg").val()},
 			dataType : 'json',
 			success: function(data){
+				//alert(JSON.stringify(data));
 				$.each(data.itemBoardList, function(index, items){
 					
 					var itemFrameDiv = '<div class="itemFrame"></div>';
 					
-					var itemLinkA = '<a class="itemLink">';
+					var itemLinkA = '<a class="itemLink"><span id="item_seqSpan">'+items.item_seq+'</span>';
 					itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
 					var itemContentDiv = '<div class="itemContent">';
 					itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
 					itemContentDiv += '<div class="itemPriceAndTime">';
-					itemContentDiv += '<div class="itemPrice">'+items.item_price+'</div><div class="itemTime"><span>'+items.logtime+'</span></div>'
+					itemContentDiv += '<div class="itemPrice">'+addComma(items.item_price)+'</div><div class="itemTime"><span>'+timeForToday(items.logtime)+'</span></div>'
 					itemContentDiv += '</div>';
 					itemContentDiv += '</div>';
 					
@@ -98,6 +129,13 @@ $(document).ready(function(){
 					
 					$(itemFrameDiv).append($(itemLinkA).append($(itemContentDiv)).append($(itemloc))).appendTo($('.selection3'));
 				});
+				
+				var entireItemNumSpan = '<span id="entireItemNumSpan">' + data.entireItemNum + '개</span>';
+				$("#findItemH2").append($(entireItemNumSpan));
+				
+				$("#itemBoardPagingDiv2").html(data.boardPaging.pagingHTML);
+				
+				
 			},
 			error: function(err){
 				console.log(err);
@@ -107,18 +145,18 @@ $(document).ready(function(){
 		$.ajax({
 			type: 'post',
 			url: '/pmang/board/getitemBoardList',
-			data : {'category1': $('.top1').text().trim(), 'category2':$('.top2').text().trim()},
+			data : {'category1': $('.top1').text().trim(), 'category2':$('.top2').text().trim(), 'pg' : $("#pg").val()},
 			dataType : 'json',
 			success: function(data){
 				$.each(data.itemBoardList, function(index, items){
 					var itemFrameDiv = '<div class="itemFrame"></div>';
 					
-					var itemLinkA = '<a class="itemLink">';
+					var itemLinkA = '<a class="itemLink"><span id="item_seqSpan">'+items.item_seq+'</span>';
 					itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
 					var itemContentDiv = '<div class="itemContent">';
 					itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
 					itemContentDiv += '<div class="itemPriceAndTime">';
-					itemContentDiv += '<div class="itemPrice">'+items.item_price+'</div><div class="itemTime"><span>'+items.logtime+'</span></div>'
+					itemContentDiv += '<div class="itemPrice">'+addComma(items.item_price)+'</div><div class="itemTime"><span>'+timeForToday(items.logtime)+'</span></div>'
 					itemContentDiv += '</div>';
 					itemContentDiv += '</div>';
 					
@@ -127,6 +165,11 @@ $(document).ready(function(){
 					
 					$(itemFrameDiv).append($(itemLinkA).append($(itemContentDiv)).append($(itemloc))).appendTo($('.selection3'));
 				});
+				
+				var entireItemNumSpan = '<span id="entireItemNumSpan">' + data.entireItemNum + '개</span>';
+				$("#findItemH2").append($(entireItemNumSpan));
+				
+				$("#itemBoardPagingDiv2").html(data.boardPaging.pagingHTML);
 			},
 			error: function(err){
 				console.log(err);
@@ -136,18 +179,18 @@ $(document).ready(function(){
 		$.ajax({
 			type: 'post',
 			url: '/pmang/board/getitemBoardList',
-			data : {'category1': $('.top1').text().trim(), 'category2':$('.top2').text().trim(), 'category3':$('.top3').text().trim()},
+			data : {'category1': $('.top1').text().trim(), 'category2':$('.top2').text().trim(), 'category3':$('.top3').text().trim(), 'pg' : $("#pg").val()},
 			dataType : 'json',
 			success: function(data){
 				$.each(data.itemBoardList, function(index, items){
 					var itemFrameDiv = '<div class="itemFrame"></div>';
 					
-					var itemLinkA = '<a class="itemLink">';
+					var itemLinkA = '<a class="itemLink"><span id="item_seqSpan">'+items.item_seq+'</span>';
 					itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
 					var itemContentDiv = '<div class="itemContent">';
 					itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
 					itemContentDiv += '<div class="itemPriceAndTime">';
-					itemContentDiv += '<div class="itemPrice">'+items.item_price+'</div><div class="itemTime"><span>'+items.logtime+'</span></div>'
+					itemContentDiv += '<div class="itemPrice">'+addComma(items.item_price)+'</div><div class="itemTime"><span>'+timeForToday(items.logtime)+'</span></div>'
 					itemContentDiv += '</div>';
 					itemContentDiv += '</div>';
 					
@@ -156,6 +199,11 @@ $(document).ready(function(){
 					
 					$(itemFrameDiv).append($(itemLinkA).append($(itemContentDiv)).append($(itemloc))).appendTo($('.selection3'));
 				});
+				
+				var entireItemNumSpan = '<span id="entireItemNumSpan">' + data.entireItemNum + '개</span>';
+				$("#findItemH2").append($(entireItemNumSpan));
+				
+				$("#itemBoardPagingDiv2").html(data.boardPaging.pagingHTML);
 			},
 			error: function(err){
 				console.log(err);
@@ -753,7 +801,15 @@ $(document).ready(function(){
 });
 
 
+//-----------------------------------------------------------------------------------------------------------------//
+
+
 $('.selectItem1').on('click', 'a', function(){
+	$('.orderChoice').removeClass('orderChoice');
+	$('.orderby').children().eq(0).addClass('orderChoice');
+	$('.top2').text('');
+	$('.top3').text('');
+	$('#pg').val(1);
 	$('.selection3').empty();
 	$('.entireView').css('color','black');
 	var img = '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAAAXNSR0IArs4c6QAAASVJREFUOBGlks9qwkAQxrMLihRKQXyUHjx58dBLEXqxUPCavIKvkpCQgxcTD0LpSQQfoBfpRXwHj16av37fYWWrJhvqwDCbb2d+O5NdYcFc120hzIQQkW3bS2pNzPf9blEUC+ROUffNGkEYQWVZvuE7xfq9CRR1T8hfw5/hR/jIcZyN8DyPsDEEZUZoEASPeZ6vUNdXRYi/aOZVYjGHp9pGC4kRDmLHV4bOHrIs+7qAWYDtoW0lx+OYqDRCwzDsIO8TPtBPQv0PYEOMfGCHVhNoHMftJEl4YcMqGHWhb3JMjguNt64slVJOoH/AR0pk1DtT+h8gxQqoyj/HWzBuXgEpmqBVsEpgHbQOVgu8BTXBjEAdCthOPQ3qdxn+6QsedO8uyH+LT8nvvwPGjeHzAAAAAElFTkSuQmCC" width="10" height="6" alt="카테고리 화살표 아이콘">';
@@ -766,18 +822,18 @@ $('.selectItem1').on('click', 'a', function(){
 	$.ajax({
 		type: 'post',
 		url: '/pmang/board/getitemBoardList',
-		data : {'category1' : $('.select1').text().trim()},
+		data : {'category1' : $('.select1').text().trim(), 'pg' : $("#pg").val()},
 		dataType : 'json',
 		success: function(data){
 			$.each(data.itemBoardList, function(index, items){
 				var itemFrameDiv = '<div class="itemFrame"></div>';
 				
-				var itemLinkA = '<a class="itemLink">';
+				var itemLinkA = '<a class="itemLink"><span id="item_seqSpan">'+items.item_seq+'</span>';
 				itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
 				var itemContentDiv = '<div class="itemContent">';
 				itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
 				itemContentDiv += '<div class="itemPriceAndTime">';
-				itemContentDiv += '<div class="itemPrice">'+items.item_price+'</div><div class="itemTime"><span>'+items.logtime+'</span></div>'
+				itemContentDiv += '<div class="itemPrice">'+addComma(items.item_price)+'</div><div class="itemTime"><span>'+timeForToday(items.logtime)+'</span></div>'
 				itemContentDiv += '</div>';
 				itemContentDiv += '</div>';
 				
@@ -786,6 +842,13 @@ $('.selectItem1').on('click', 'a', function(){
 				
 				$(itemFrameDiv).append($(itemLinkA).append($(itemContentDiv)).append($(itemloc))).appendTo($('.selection3'));
 			});
+			
+			var entireItemNumSpan = '<span id="entireItemNumSpan">' + data.entireItemNum + '개</span>';
+			$("#findItemH2").append($(entireItemNumSpan));
+			
+			$("#itemBoardPagingDiv2").html(data.boardPaging.pagingHTML);
+			
+			
 		},
 		error: function(err){
 			console.log(err);
@@ -945,6 +1008,10 @@ $('.selectItem1').on('click', 'a', function(){
 
 
  $('.detailItem').on('click', '.detailItemList1', function(e){
+	$('.orderChoice').removeClass('orderChoice');
+	$('.orderby').children().eq(0).addClass('orderChoice');
+	 $('#pg').val(1);
+	 $('.top3').text('');
 	 
 	 $('.entireView').css('color','black');
 	 if($(this).children('a').text() != ''){
@@ -980,18 +1047,18 @@ $('.selectItem1').on('click', 'a', function(){
 		$.ajax({
 			type: 'post',
 			url: '/pmang/board/getitemBoardList',
-			data : {'category1': $('.select1').text().trim(), 'category2':$('.select2').text().trim()},
+			data : {'category1': $('.select1').text().trim(), 'category2':$('.select2').text().trim(), 'pg' : $("#pg").val()},
 			dataType : 'json',
 			success: function(data){
 				$.each(data.itemBoardList, function(index, items){
 					var itemFrameDiv = '<div class="itemFrame"></div>';
 					
-					var itemLinkA = '<a class="itemLink">';
+					var itemLinkA = '<a class="itemLink"><span id="item_seqSpan">'+items.item_seq+'</span>';
 					itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
 					var itemContentDiv = '<div class="itemContent">';
 					itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
 					itemContentDiv += '<div class="itemPriceAndTime">';
-					itemContentDiv += '<div class="itemPrice">'+items.item_price+'</div><div class="itemTime"><span>'+items.logtime+'</span></div>'
+					itemContentDiv += '<div class="itemPrice">'+addComma(items.item_price)+'</div><div class="itemTime"><span>'+timeForToday(items.logtime)+'</span></div>'
 					itemContentDiv += '</div>';
 					itemContentDiv += '</div>';
 					
@@ -1000,6 +1067,11 @@ $('.selectItem1').on('click', 'a', function(){
 					
 					$(itemFrameDiv).append($(itemLinkA).append($(itemContentDiv)).append($(itemloc))).appendTo($('.selection3'));
 				});
+				
+				var entireItemNumSpan = '<span id="entireItemNumSpan">' + data.entireItemNum + '개</span>';
+				$("#findItemH2").append($(entireItemNumSpan));
+				
+				$("#itemBoardPagingDiv2").html(data.boardPaging.pagingHTML);
 			},
 			error: function(err){
 				console.log(err);
@@ -1393,6 +1465,10 @@ $('.selectItem1').on('click', 'a', function(){
 
 
 $('.selectItem2').on('click', 'a', function(){
+	$('.orderChoice').removeClass('orderChoice');
+	$('.orderby').children().eq(0).addClass('orderChoice');
+	$('#pg').val(1);
+	$('.top3').text('');
 	$('.selection3').empty();
 	$('.entireView').css('color','black');
 	var img = '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAAAXNSR0IArs4c6QAAASVJREFUOBGlks9qwkAQxrMLihRKQXyUHjx58dBLEXqxUPCavIKvkpCQgxcTD0LpSQQfoBfpRXwHj16av37fYWWrJhvqwDCbb2d+O5NdYcFc120hzIQQkW3bS2pNzPf9blEUC+ROUffNGkEYQWVZvuE7xfq9CRR1T8hfw5/hR/jIcZyN8DyPsDEEZUZoEASPeZ6vUNdXRYi/aOZVYjGHp9pGC4kRDmLHV4bOHrIs+7qAWYDtoW0lx+OYqDRCwzDsIO8TPtBPQv0PYEOMfGCHVhNoHMftJEl4YcMqGHWhb3JMjguNt64slVJOoH/AR0pk1DtT+h8gxQqoyj/HWzBuXgEpmqBVsEpgHbQOVgu8BTXBjEAdCthOPQ3qdxn+6QsedO8uyH+LT8nvvwPGjeHzAAAAAElFTkSuQmCC" width="10" height="6" alt="카테고리 화살표 아이콘">';
@@ -1403,18 +1479,18 @@ $('.selectItem2').on('click', 'a', function(){
 	$.ajax({
 		type: 'post',
 		url: '/pmang/board/getitemBoardList',
-		data : {'category1': $('.select1').text().trim(), 'category2':$('.select2').text().trim()},
+		data : {'category1': $('.select1').text().trim(), 'category2':$('.select2').text().trim(), 'pg' : $("#pg").val()},
 		dataType : 'json',
 		success: function(data){
 			$.each(data.itemBoardList, function(index, items){
 				var itemFrameDiv = '<div class="itemFrame"></div>';
 				
-				var itemLinkA = '<a class="itemLink">';
+				var itemLinkA = '<a class="itemLink"><span id="item_seqSpan">'+items.item_seq+'</span>';
 				itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
 				var itemContentDiv = '<div class="itemContent">';
 				itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
 				itemContentDiv += '<div class="itemPriceAndTime">';
-				itemContentDiv += '<div class="itemPrice">'+items.item_price+'</div><div class="itemTime"><span>'+items.logtime+'</span></div>'
+				itemContentDiv += '<div class="itemPrice">'+addComma(items.item_price)+'</div><div class="itemTime"><span>'+timeForToday(items.logtime)+'</span></div>'
 				itemContentDiv += '</div>';
 				itemContentDiv += '</div>';
 				
@@ -1423,6 +1499,11 @@ $('.selectItem2').on('click', 'a', function(){
 				
 				$(itemFrameDiv).append($(itemLinkA).append($(itemContentDiv)).append($(itemloc))).appendTo($('.selection3'));
 			});
+			
+			var entireItemNumSpan = '<span id="entireItemNumSpan">' + data.entireItemNum + '개</span>';
+			$("#findItemH2").append($(entireItemNumSpan));
+			
+			$("#itemBoardPagingDiv2").html(data.boardPaging.pagingHTML);
 		},
 		error: function(err){
 			console.log(err);
@@ -1823,6 +1904,9 @@ $('.selectItem2').on('click', 'a', function(){
 
 
 $('.detailItem').on('click', '.detailItemList2', function(){
+	$('.orderChoice').removeClass('orderChoice');
+	$('.orderby').children().eq(0).addClass('orderChoice');
+	$('#pg').val(1);
 	$('.entireView').css('color','black');
 	if($(this).children('a').text() != ''){
 		$('.selection3').empty();
@@ -1857,18 +1941,18 @@ $('.detailItem').on('click', '.detailItemList2', function(){
 			$.ajax({
 				type: 'post',
 				url: '/pmang/board/getitemBoardList',
-				data : {'category1': $('.select1').text().trim(), 'category2':$('.select2').text().trim(), 'category3':$('.select3').text().trim()},
+				data : {'category1': $('.select1').text().trim(), 'category2':$('.select2').text().trim(), 'category3':$('.select3').text().trim(), 'pg' : $("#pg").val()},
 				dataType : 'json',
 				success: function(data){
 					$.each(data.itemBoardList, function(index, items){
 						var itemFrameDiv = '<div class="itemFrame"></div>';
 						
-						var itemLinkA = '<a class="itemLink">';
+						var itemLinkA = '<a class="itemLink"><span id="item_seqSpan">'+items.item_seq+'</span>';
 						itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
 						var itemContentDiv = '<div class="itemContent">';
 						itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
 						itemContentDiv += '<div class="itemPriceAndTime">';
-						itemContentDiv += '<div class="itemPrice">'+items.item_price+'</div><div class="itemTime"><span>'+items.logtime+'</span></div>'
+						itemContentDiv += '<div class="itemPrice">'+addComma(items.item_price)+'</div><div class="itemTime"><span>'+timeForToday(items.logtime)+'</span></div>'
 						itemContentDiv += '</div>';
 						itemContentDiv += '</div>';
 						
@@ -1877,6 +1961,11 @@ $('.detailItem').on('click', '.detailItemList2', function(){
 						
 						$(itemFrameDiv).append($(itemLinkA).append($(itemContentDiv)).append($(itemloc))).appendTo($('.selection3'));
 					});
+					
+					var entireItemNumSpan = '<span id="entireItemNumSpan">' + data.entireItemNum + '개</span>';
+					$("#findItemH2").append($(entireItemNumSpan));
+					
+					$("#itemBoardPagingDiv2").html(data.boardPaging.pagingHTML);
 				},
 				error: function(err){
 					console.log(err);
@@ -1889,6 +1978,9 @@ $('.detailItem').on('click', '.detailItemList2', function(){
 });
 
 $('.selectItem3').on('click', 'a', function(){
+	$('.orderChoice').removeClass('orderChoice');
+	$('.orderby').children().eq(0).addClass('orderChoice');
+	$('#pg').val(1);
 	$('.selection3').empty();
 	$('.entireView').css('color','black');
 	var img = '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAAAXNSR0IArs4c6QAAASVJREFUOBGlks9qwkAQxrMLihRKQXyUHjx58dBLEXqxUPCavIKvkpCQgxcTD0LpSQQfoBfpRXwHj16av37fYWWrJhvqwDCbb2d+O5NdYcFc120hzIQQkW3bS2pNzPf9blEUC+ROUffNGkEYQWVZvuE7xfq9CRR1T8hfw5/hR/jIcZyN8DyPsDEEZUZoEASPeZ6vUNdXRYi/aOZVYjGHp9pGC4kRDmLHV4bOHrIs+7qAWYDtoW0lx+OYqDRCwzDsIO8TPtBPQv0PYEOMfGCHVhNoHMftJEl4YcMqGHWhb3JMjguNt64slVJOoH/AR0pk1DtT+h8gxQqoyj/HWzBuXgEpmqBVsEpgHbQOVgu8BTXBjEAdCthOPQ3qdxn+6QsedO8uyH+LT8nvvwPGjeHzAAAAAElFTkSuQmCC" width="10" height="6" alt="카테고리 화살표 아이콘">';
@@ -1900,18 +1992,18 @@ $('.selectItem3').on('click', 'a', function(){
 	$.ajax({
 		type: 'post',
 		url: '/pmang/board/getitemBoardList',
-		data : {'category1': $('.select1').text().trim(), 'category2':$('.select2').text().trim(), 'category3':$('.select3').text().trim()},
+		data : {'category1': $('.select1').text().trim(), 'category2':$('.select2').text().trim(), 'category3':$('.select3').text().trim(), 'pg' : $("#pg").val()},
 		dataType : 'json',
 		success: function(data){
 			$.each(data.itemBoardList, function(index, items){
 				var itemFrameDiv = '<div class="itemFrame"></div>';
 				
-				var itemLinkA = '<a class="itemLink">';
+				var itemLinkA = '<a class="itemLink"><span id="item_seqSpan">'+items.item_seq+'</span>';
 				itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
 				var itemContentDiv = '<div class="itemContent">';
 				itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
 				itemContentDiv += '<div class="itemPriceAndTime">';
-				itemContentDiv += '<div class="itemPrice">'+items.item_price+'</div><div class="itemTime"><span>'+items.logtime+'</span></div>'
+				itemContentDiv += '<div class="itemPrice">'+addComma(items.item_price)+'</div><div class="itemTime"><span>'+timeForToday(items.logtime)+'</span></div>'
 				itemContentDiv += '</div>';
 				itemContentDiv += '</div>';
 				
@@ -1920,6 +2012,11 @@ $('.selectItem3').on('click', 'a', function(){
 				
 				$(itemFrameDiv).append($(itemLinkA).append($(itemContentDiv)).append($(itemloc))).appendTo($('.selection3'));
 			});
+			
+			var entireItemNumSpan = '<span id="entireItemNumSpan">' + data.entireItemNum + '개</span>';
+			$("#findItemH2").append($(entireItemNumSpan));
+			
+			$("#itemBoardPagingDiv2").html(data.boardPaging.pagingHTML);
 		},
 		error: function(err){
 			console.log(err);
@@ -1928,6 +2025,268 @@ $('.selectItem3').on('click', 'a', function(){
 	
 	$('#findItemH2').html('<span>'+$('.select3').text()+'</span>의 전체상품');
 		
+});
+
+
+
+/*orderby click*/
+$('.orderby').on('click','a',function(){
+		$('#order').val($(this).text());
+		$('#pg').val(1);
+		$("#entireItemNumSpan").remove();
+		$('.orderChoice').removeClass('orderChoice');
+		$(this).addClass('orderChoice');
+		
+		$('.itemFrame').remove();
+		if($('.top2').text().trim() == ""){
+			$.ajax({
+				type: 'post',
+				url: '/pmang/board/getOrderbyItem',
+				data : {'category1' : $('.top1').text().trim(), 'order' : $(this).text(), 'pg' : $("#pg").val()},
+				dataType : 'json',
+				success: function(data){
+					$.each(data.orderbylist, function(index, items){
+						
+						var itemFrameDiv = '<div class="itemFrame"></div>';
+						
+						var itemLinkA = '<a class="itemLink"><span id="item_seqSpan">'+items.item_seq+'</span>';
+						itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
+						var itemContentDiv = '<div class="itemContent">';
+						itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
+						itemContentDiv += '<div class="itemPriceAndTime">';
+						itemContentDiv += '<div class="itemPrice">'+addComma(items.item_price)+'</div><div class="itemTime"><span>'+timeForToday(items.logtime)+'</span></div>'
+						itemContentDiv += '</div>';
+						itemContentDiv += '</div>';
+						
+						var itemloc = '<div class="itemLocation"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAiCAYAAABIiGl0AAAAAXNSR0IArs4c6QAAA6xJREFUWAm1l01IVFEUx51xNAtxIcEENuQIrqTxO8OEmj5IAncVUS2E2kS0axO4C5KiFi0lXIh9QBC1kKgwclNGjaNOSUEapVRiUSHoTOo4/c743vjem/vGp8xcuHPu+Z//Of9778y9740rz0EbGxsrjsViQait9JpEIuF1uVzbGCfo0/jT2GGwx6WlpQN+vz+Gn7G5MkXD4fAOil6C047dlImrxxCfg9tVUFBwtbq6ekbHrVYpzAoLo9FoJ+QL9AJrkkN/3u12d9bW1l5hMsvWnDTh4eHh8uXl5fvMutFK3qD/jLxTDQ0Nv4z5JuHR0VH/4uLiKwjy/WWtseJPLKTZKO7Wq4dCoa1LS0tP8bMqKvURrcT0TU1NbRZfWkqYWXVrhJVI9j+bZmZmbuplk1s9NDR0GNEnOpgrKz8ydBrZ8rBHRHCur0MsCvc1Pazl1GF301PbqOFpBh3Z4Rv0oIvVBgBG01hqYKCwsPBMIBD4bAxHIpGKhYWFbrB9RtxuzDEr9yB6zI5gwV/U19cfYLvktjI1mQh19rOI5wSCpqDC4bgelaXvUcRMEGJzAO0qUZ2oxdrx53XMzsI9KMJldgQDPsgPYtLgK4fCoeigMmgA2R2fCG83YMohxCFlQAHCDSlgE8Tkytx8yDZmbHCKMxIMQSdcJueWFU8Y8pRDiA3KgAJ0yJ1wJMwqGrlSWxQ6Jkg4wjWBamfCzQzfqmOrqGwNXo/c56uoeaTFejSuOWjxmNx7KXiHwYIlpnIr4I1xVo9TPF8nyFgwiYFV6LidhZfgJaFXv6vvUeCEHVmBy7UZ0fAAds3rUq+BcD8X0SFZcR5XWJcecGhFqEnrjkW12rfEJoV5PRlgJg+1QM4MGqG6uroHKWEZsNXnCfzNmWpe3iL1z9LjJmGuux+AF3MlTO1rrDb1FExutS5GQB5tj3Q/WxbRSElJyWVjPZOwBLxe70mI8sKXrTaZn59/pLKy8p+xYJqwz+eLFhUVtUH6aCRuZMwC/tBba2pqvlnz04SFUFVV9Zsj1krSd2vCOvwYNdo4sx9UOUphIfJ9f8XsRXxclbgGNiuiHNOXdjxbYUlgtuMINzN8Y1dAgU+BtTDxfkUsBWUUFhYFfmKCTKAvlWU/kDfPJo7mO3vKSiR5V69Fkrg8DPj32IHtwE2+FhvzmFivx+M5xz/ENV8sJM+xsC4yMjKyKx6P32YC8rdE2iz9HKu8m/QcfqxbWOry7N2CkRfznZzR0/yIvjBeV/sPFdozA8TD8zUAAAAASUVORK5CYII=" width="15" height="17" alt="위치 아이콘">';
+						itemloc += items.item_location +'</div>';
+						
+						$(itemFrameDiv).append($(itemLinkA).append($(itemContentDiv)).append($(itemloc))).appendTo($('.selection3'));
+					});
+					
+					var entireItemNumSpan = '<span id="entireItemNumSpan">' + data.entireItemNum + '개</span>';
+					$("#findItemH2").append($(entireItemNumSpan));
+					
+					$("#itemBoardPagingDiv2").html(data.boardPaging.pagingHTML);
+					
+					
+					
+				},
+				error: function(err){
+					console.log(err);
+				}
+			});
+		}else if($('.top3').text().trim() == ""){
+			$.ajax({
+				type: 'post',
+				url: '/pmang/board/getOrderbyItem',
+				data : {'category1': $('.top1').text().trim(), 'category2':$('.top2').text().trim() , 'order' : $(this).text(), 'pg' : $("#pg").val()},
+				dataType : 'json',
+				success: function(data){
+					$.each(data.orderbylist, function(index, items){
+						var itemFrameDiv = '<div class="itemFrame"></div>';
+						
+						var itemLinkA = '<a class="itemLink"><span id="item_seqSpan">'+items.item_seq+'</span>';
+						itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
+						var itemContentDiv = '<div class="itemContent">';
+						itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
+						itemContentDiv += '<div class="itemPriceAndTime">';
+						itemContentDiv += '<div class="itemPrice">'+addComma(items.item_price)+'</div><div class="itemTime"><span>'+timeForToday(items.logtime)+'</span></div>'
+						itemContentDiv += '</div>';
+						itemContentDiv += '</div>';
+						
+						var itemloc = '<div class="itemLocation"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAiCAYAAABIiGl0AAAAAXNSR0IArs4c6QAAA6xJREFUWAm1l01IVFEUx51xNAtxIcEENuQIrqTxO8OEmj5IAncVUS2E2kS0axO4C5KiFi0lXIh9QBC1kKgwclNGjaNOSUEapVRiUSHoTOo4/c743vjem/vGp8xcuHPu+Z//Of9778y9740rz0EbGxsrjsViQait9JpEIuF1uVzbGCfo0/jT2GGwx6WlpQN+vz+Gn7G5MkXD4fAOil6C047dlImrxxCfg9tVUFBwtbq6ekbHrVYpzAoLo9FoJ+QL9AJrkkN/3u12d9bW1l5hMsvWnDTh4eHh8uXl5fvMutFK3qD/jLxTDQ0Nv4z5JuHR0VH/4uLiKwjy/WWtseJPLKTZKO7Wq4dCoa1LS0tP8bMqKvURrcT0TU1NbRZfWkqYWXVrhJVI9j+bZmZmbuplk1s9NDR0GNEnOpgrKz8ydBrZ8rBHRHCur0MsCvc1Pazl1GF301PbqOFpBh3Z4Rv0oIvVBgBG01hqYKCwsPBMIBD4bAxHIpGKhYWFbrB9RtxuzDEr9yB6zI5gwV/U19cfYLvktjI1mQh19rOI5wSCpqDC4bgelaXvUcRMEGJzAO0qUZ2oxdrx53XMzsI9KMJldgQDPsgPYtLgK4fCoeigMmgA2R2fCG83YMohxCFlQAHCDSlgE8Tkytx8yDZmbHCKMxIMQSdcJueWFU8Y8pRDiA3KgAJ0yJ1wJMwqGrlSWxQ6Jkg4wjWBamfCzQzfqmOrqGwNXo/c56uoeaTFejSuOWjxmNx7KXiHwYIlpnIr4I1xVo9TPF8nyFgwiYFV6LidhZfgJaFXv6vvUeCEHVmBy7UZ0fAAds3rUq+BcD8X0SFZcR5XWJcecGhFqEnrjkW12rfEJoV5PRlgJg+1QM4MGqG6uroHKWEZsNXnCfzNmWpe3iL1z9LjJmGuux+AF3MlTO1rrDb1FExutS5GQB5tj3Q/WxbRSElJyWVjPZOwBLxe70mI8sKXrTaZn59/pLKy8p+xYJqwz+eLFhUVtUH6aCRuZMwC/tBba2pqvlnz04SFUFVV9Zsj1krSd2vCOvwYNdo4sx9UOUphIfJ9f8XsRXxclbgGNiuiHNOXdjxbYUlgtuMINzN8Y1dAgU+BtTDxfkUsBWUUFhYFfmKCTKAvlWU/kDfPJo7mO3vKSiR5V69Fkrg8DPj32IHtwE2+FhvzmFivx+M5xz/ENV8sJM+xsC4yMjKyKx6P32YC8rdE2iz9HKu8m/QcfqxbWOry7N2CkRfznZzR0/yIvjBeV/sPFdozA8TD8zUAAAAASUVORK5CYII=" width="15" height="17" alt="위치 아이콘">';
+						itemloc += items.item_location +'</div>';
+						
+						$(itemFrameDiv).append($(itemLinkA).append($(itemContentDiv)).append($(itemloc))).appendTo($('.selection3'));
+					});
+					
+					var entireItemNumSpan = '<span id="entireItemNumSpan">' + data.entireItemNum + '개</span>';
+					$("#findItemH2").append($(entireItemNumSpan));
+					
+					$("#itemBoardPagingDiv2").html(data.boardPaging.pagingHTML);
+				},
+				error: function(err){
+					console.log(err);
+				}
+			});
+		}else{
+			$.ajax({
+				type: 'post',
+				url: '/pmang/board/getOrderbyItem',
+				data : {'category1': $('.top1').text().trim(), 'category2':$('.top2').text().trim(), 'category3':$('.top3').text().trim() , 'order' : $(this).text(), 'pg' : $("#pg").val()},
+				dataType : 'json',
+				success: function(data){
+					$.each(data.orderbylist, function(index, items){
+						var itemFrameDiv = '<div class="itemFrame"></div>';
+						
+						var itemLinkA = '<a class="itemLink"><span id="item_seqSpan">'+items.item_seq+'</span>';
+						itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
+						var itemContentDiv = '<div class="itemContent">';
+						itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
+						itemContentDiv += '<div class="itemPriceAndTime">';
+						itemContentDiv += '<div class="itemPrice">'+addComma(items.item_price)+'</div><div class="itemTime"><span>'+timeForToday(items.logtime)+'</span></div>'
+						itemContentDiv += '</div>';
+						itemContentDiv += '</div>';
+						
+						var itemloc = '<div class="itemLocation"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAiCAYAAABIiGl0AAAAAXNSR0IArs4c6QAAA6xJREFUWAm1l01IVFEUx51xNAtxIcEENuQIrqTxO8OEmj5IAncVUS2E2kS0axO4C5KiFi0lXIh9QBC1kKgwclNGjaNOSUEapVRiUSHoTOo4/c743vjem/vGp8xcuHPu+Z//Of9778y9740rz0EbGxsrjsViQait9JpEIuF1uVzbGCfo0/jT2GGwx6WlpQN+vz+Gn7G5MkXD4fAOil6C047dlImrxxCfg9tVUFBwtbq6ekbHrVYpzAoLo9FoJ+QL9AJrkkN/3u12d9bW1l5hMsvWnDTh4eHh8uXl5fvMutFK3qD/jLxTDQ0Nv4z5JuHR0VH/4uLiKwjy/WWtseJPLKTZKO7Wq4dCoa1LS0tP8bMqKvURrcT0TU1NbRZfWkqYWXVrhJVI9j+bZmZmbuplk1s9NDR0GNEnOpgrKz8ydBrZ8rBHRHCur0MsCvc1Pazl1GF301PbqOFpBh3Z4Rv0oIvVBgBG01hqYKCwsPBMIBD4bAxHIpGKhYWFbrB9RtxuzDEr9yB6zI5gwV/U19cfYLvktjI1mQh19rOI5wSCpqDC4bgelaXvUcRMEGJzAO0qUZ2oxdrx53XMzsI9KMJldgQDPsgPYtLgK4fCoeigMmgA2R2fCG83YMohxCFlQAHCDSlgE8Tkytx8yDZmbHCKMxIMQSdcJueWFU8Y8pRDiA3KgAJ0yJ1wJMwqGrlSWxQ6Jkg4wjWBamfCzQzfqmOrqGwNXo/c56uoeaTFejSuOWjxmNx7KXiHwYIlpnIr4I1xVo9TPF8nyFgwiYFV6LidhZfgJaFXv6vvUeCEHVmBy7UZ0fAAds3rUq+BcD8X0SFZcR5XWJcecGhFqEnrjkW12rfEJoV5PRlgJg+1QM4MGqG6uroHKWEZsNXnCfzNmWpe3iL1z9LjJmGuux+AF3MlTO1rrDb1FExutS5GQB5tj3Q/WxbRSElJyWVjPZOwBLxe70mI8sKXrTaZn59/pLKy8p+xYJqwz+eLFhUVtUH6aCRuZMwC/tBba2pqvlnz04SFUFVV9Zsj1krSd2vCOvwYNdo4sx9UOUphIfJ9f8XsRXxclbgGNiuiHNOXdjxbYUlgtuMINzN8Y1dAgU+BtTDxfkUsBWUUFhYFfmKCTKAvlWU/kDfPJo7mO3vKSiR5V69Fkrg8DPj32IHtwE2+FhvzmFivx+M5xz/ENV8sJM+xsC4yMjKyKx6P32YC8rdE2iz9HKu8m/QcfqxbWOry7N2CkRfznZzR0/yIvjBeV/sPFdozA8TD8zUAAAAASUVORK5CYII=" width="15" height="17" alt="위치 아이콘">';
+						itemloc += items.item_location +'</div>';
+						
+						$(itemFrameDiv).append($(itemLinkA).append($(itemContentDiv)).append($(itemloc))).appendTo($('.selection3'));
+					});
+					
+					var entireItemNumSpan = '<span id="entireItemNumSpan">' + data.entireItemNum + '개</span>';
+					$("#findItemH2").append($(entireItemNumSpan));
+					$("#itemBoardPagingDiv2").html(data.boardPaging.pagingHTML);
+					
+				},
+				error: function(err){
+					console.log(err);
+				}
+			});
+		}
+	
+});
+
+
+//페이징 처리 -> 왜 trigger 안먹냐고
+function boardPaging(pg){
+	if($('#order').val() == ""){
+		if($('.top2').text().trim() == "" && $('.top3').text().trim() == ""){
+			location.href = '/pmang/board/itemBoard?category1='+$('.top1').text().trim()+'&pg='+pg;
+		}else if($('.top2').text().trim() != "" && $('.top3').text().trim() == ""){
+			location.href = '/pmang/board/itemBoard?category1='+$('.top1').text()+'&category2='+$('.top2').text().trim()+'&pg='+pg;
+		}else if($('.top2').text().trim() != "" && $('.top3').text().trim() != ""){
+			location.href = '/pmang/board/itemBoard?category1='+$('.top1').text()+'&category2='+$('.top2').text().trim()+'&category3='+$('.top3').text().trim()+'&pg='+pg;
+		}	
+	}
+	else {
+		$("#entireItemNumSpan").remove();
+		$('.itemFrame').remove();
+		if($('.top2').text().trim() == ""){
+			$.ajax({
+				type: 'post',
+				url: '/pmang/board/getOrderbyItem',
+				data : {'category1' : $('.top1').text().trim(), 'order' : $('#order').val(), 'pg' : pg},
+				dataType : 'json',
+				success: function(data){
+					$.each(data.orderbylist, function(index, items){
+						
+						var itemFrameDiv = '<div class="itemFrame"></div>';
+						
+						var itemLinkA = '<a class="itemLink"><span id="item_seqSpan">'+items.item_seq+'</span>';
+						itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
+						var itemContentDiv = '<div class="itemContent">';
+						itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
+						itemContentDiv += '<div class="itemPriceAndTime">';
+						itemContentDiv += '<div class="itemPrice">'+addComma(items.item_price)+'</div><div class="itemTime"><span>'+timeForToday(items.logtime)+'</span></div>'
+						itemContentDiv += '</div>';
+						itemContentDiv += '</div>';
+						
+						var itemloc = '<div class="itemLocation"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAiCAYAAABIiGl0AAAAAXNSR0IArs4c6QAAA6xJREFUWAm1l01IVFEUx51xNAtxIcEENuQIrqTxO8OEmj5IAncVUS2E2kS0axO4C5KiFi0lXIh9QBC1kKgwclNGjaNOSUEapVRiUSHoTOo4/c743vjem/vGp8xcuHPu+Z//Of9778y9740rz0EbGxsrjsViQait9JpEIuF1uVzbGCfo0/jT2GGwx6WlpQN+vz+Gn7G5MkXD4fAOil6C047dlImrxxCfg9tVUFBwtbq6ekbHrVYpzAoLo9FoJ+QL9AJrkkN/3u12d9bW1l5hMsvWnDTh4eHh8uXl5fvMutFK3qD/jLxTDQ0Nv4z5JuHR0VH/4uLiKwjy/WWtseJPLKTZKO7Wq4dCoa1LS0tP8bMqKvURrcT0TU1NbRZfWkqYWXVrhJVI9j+bZmZmbuplk1s9NDR0GNEnOpgrKz8ydBrZ8rBHRHCur0MsCvc1Pazl1GF301PbqOFpBh3Z4Rv0oIvVBgBG01hqYKCwsPBMIBD4bAxHIpGKhYWFbrB9RtxuzDEr9yB6zI5gwV/U19cfYLvktjI1mQh19rOI5wSCpqDC4bgelaXvUcRMEGJzAO0qUZ2oxdrx53XMzsI9KMJldgQDPsgPYtLgK4fCoeigMmgA2R2fCG83YMohxCFlQAHCDSlgE8Tkytx8yDZmbHCKMxIMQSdcJueWFU8Y8pRDiA3KgAJ0yJ1wJMwqGrlSWxQ6Jkg4wjWBamfCzQzfqmOrqGwNXo/c56uoeaTFejSuOWjxmNx7KXiHwYIlpnIr4I1xVo9TPF8nyFgwiYFV6LidhZfgJaFXv6vvUeCEHVmBy7UZ0fAAds3rUq+BcD8X0SFZcR5XWJcecGhFqEnrjkW12rfEJoV5PRlgJg+1QM4MGqG6uroHKWEZsNXnCfzNmWpe3iL1z9LjJmGuux+AF3MlTO1rrDb1FExutS5GQB5tj3Q/WxbRSElJyWVjPZOwBLxe70mI8sKXrTaZn59/pLKy8p+xYJqwz+eLFhUVtUH6aCRuZMwC/tBba2pqvlnz04SFUFVV9Zsj1krSd2vCOvwYNdo4sx9UOUphIfJ9f8XsRXxclbgGNiuiHNOXdjxbYUlgtuMINzN8Y1dAgU+BtTDxfkUsBWUUFhYFfmKCTKAvlWU/kDfPJo7mO3vKSiR5V69Fkrg8DPj32IHtwE2+FhvzmFivx+M5xz/ENV8sJM+xsC4yMjKyKx6P32YC8rdE2iz9HKu8m/QcfqxbWOry7N2CkRfznZzR0/yIvjBeV/sPFdozA8TD8zUAAAAASUVORK5CYII=" width="15" height="17" alt="위치 아이콘">';
+						itemloc += items.item_location +'</div>';
+						
+						$(itemFrameDiv).append($(itemLinkA).append($(itemContentDiv)).append($(itemloc))).appendTo($('.selection3'));
+					});
+					
+					var entireItemNumSpan = '<span id="entireItemNumSpan">' + data.entireItemNum + '개</span>';
+					$("#findItemH2").append($(entireItemNumSpan));
+					
+					$("#itemBoardPagingDiv2").html(data.boardPaging.pagingHTML);
+					
+					
+					
+				},
+				error: function(err){
+					console.log(err);
+				}
+			});
+		}else if($('.top3').text().trim() == ""){
+			$.ajax({
+				type: 'post',
+				url: '/pmang/board/getOrderbyItem',
+				data : {'category1': $('.top1').text().trim(), 'category2':$('.top2').text().trim() , 'order' : $('#order').val(), 'pg' : pg},
+				dataType : 'json',
+				success: function(data){
+					$.each(data.orderbylist, function(index, items){
+						var itemFrameDiv = '<div class="itemFrame"></div>';
+						
+						var itemLinkA = '<a class="itemLink"><span id="item_seqSpan">'+items.item_seq+'</span>';
+						itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
+						var itemContentDiv = '<div class="itemContent">';
+						itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
+						itemContentDiv += '<div class="itemPriceAndTime">';
+						itemContentDiv += '<div class="itemPrice">'+addComma(items.item_price)+'</div><div class="itemTime"><span>'+timeForToday(items.logtime)+'</span></div>'
+						itemContentDiv += '</div>';
+						itemContentDiv += '</div>';
+						
+						var itemloc = '<div class="itemLocation"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAiCAYAAABIiGl0AAAAAXNSR0IArs4c6QAAA6xJREFUWAm1l01IVFEUx51xNAtxIcEENuQIrqTxO8OEmj5IAncVUS2E2kS0axO4C5KiFi0lXIh9QBC1kKgwclNGjaNOSUEapVRiUSHoTOo4/c743vjem/vGp8xcuHPu+Z//Of9778y9740rz0EbGxsrjsViQait9JpEIuF1uVzbGCfo0/jT2GGwx6WlpQN+vz+Gn7G5MkXD4fAOil6C047dlImrxxCfg9tVUFBwtbq6ekbHrVYpzAoLo9FoJ+QL9AJrkkN/3u12d9bW1l5hMsvWnDTh4eHh8uXl5fvMutFK3qD/jLxTDQ0Nv4z5JuHR0VH/4uLiKwjy/WWtseJPLKTZKO7Wq4dCoa1LS0tP8bMqKvURrcT0TU1NbRZfWkqYWXVrhJVI9j+bZmZmbuplk1s9NDR0GNEnOpgrKz8ydBrZ8rBHRHCur0MsCvc1Pazl1GF301PbqOFpBh3Z4Rv0oIvVBgBG01hqYKCwsPBMIBD4bAxHIpGKhYWFbrB9RtxuzDEr9yB6zI5gwV/U19cfYLvktjI1mQh19rOI5wSCpqDC4bgelaXvUcRMEGJzAO0qUZ2oxdrx53XMzsI9KMJldgQDPsgPYtLgK4fCoeigMmgA2R2fCG83YMohxCFlQAHCDSlgE8Tkytx8yDZmbHCKMxIMQSdcJueWFU8Y8pRDiA3KgAJ0yJ1wJMwqGrlSWxQ6Jkg4wjWBamfCzQzfqmOrqGwNXo/c56uoeaTFejSuOWjxmNx7KXiHwYIlpnIr4I1xVo9TPF8nyFgwiYFV6LidhZfgJaFXv6vvUeCEHVmBy7UZ0fAAds3rUq+BcD8X0SFZcR5XWJcecGhFqEnrjkW12rfEJoV5PRlgJg+1QM4MGqG6uroHKWEZsNXnCfzNmWpe3iL1z9LjJmGuux+AF3MlTO1rrDb1FExutS5GQB5tj3Q/WxbRSElJyWVjPZOwBLxe70mI8sKXrTaZn59/pLKy8p+xYJqwz+eLFhUVtUH6aCRuZMwC/tBba2pqvlnz04SFUFVV9Zsj1krSd2vCOvwYNdo4sx9UOUphIfJ9f8XsRXxclbgGNiuiHNOXdjxbYUlgtuMINzN8Y1dAgU+BtTDxfkUsBWUUFhYFfmKCTKAvlWU/kDfPJo7mO3vKSiR5V69Fkrg8DPj32IHtwE2+FhvzmFivx+M5xz/ENV8sJM+xsC4yMjKyKx6P32YC8rdE2iz9HKu8m/QcfqxbWOry7N2CkRfznZzR0/yIvjBeV/sPFdozA8TD8zUAAAAASUVORK5CYII=" width="15" height="17" alt="위치 아이콘">';
+						itemloc += items.item_location +'</div>';
+						
+						$(itemFrameDiv).append($(itemLinkA).append($(itemContentDiv)).append($(itemloc))).appendTo($('.selection3'));
+					});
+					
+					var entireItemNumSpan = '<span id="entireItemNumSpan">' + data.entireItemNum + '개</span>';
+					$("#findItemH2").append($(entireItemNumSpan));
+					
+					$("#itemBoardPagingDiv2").html(data.boardPaging.pagingHTML);
+				},
+				error: function(err){
+					console.log(err);
+				}
+			});
+		}else{
+			$.ajax({
+				type: 'post',
+				url: '/pmang/board/getOrderbyItem',
+				data : {'category1': $('.top1').text().trim(), 'category2':$('.top2').text().trim(), 'category3':$('.top3').text().trim() , 'order' : $('#order').val(), 'pg' : pg},
+				dataType : 'json',
+				success: function(data){
+					$.each(data.orderbylist, function(index, items){
+						var itemFrameDiv = '<div class="itemFrame"></div>';
+						
+						var itemLinkA = '<a class="itemLink"><span id="item_seqSpan">'+items.item_seq+'</span>';
+						itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
+						var itemContentDiv = '<div class="itemContent">';
+						itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
+						itemContentDiv += '<div class="itemPriceAndTime">';
+						itemContentDiv += '<div class="itemPrice">'+addComma(items.item_price)+'</div><div class="itemTime"><span>'+timeForToday(items.logtime)+'</span></div>'
+						itemContentDiv += '</div>';
+						itemContentDiv += '</div>';
+						
+						var itemloc = '<div class="itemLocation"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAiCAYAAABIiGl0AAAAAXNSR0IArs4c6QAAA6xJREFUWAm1l01IVFEUx51xNAtxIcEENuQIrqTxO8OEmj5IAncVUS2E2kS0axO4C5KiFi0lXIh9QBC1kKgwclNGjaNOSUEapVRiUSHoTOo4/c743vjem/vGp8xcuHPu+Z//Of9778y9740rz0EbGxsrjsViQait9JpEIuF1uVzbGCfo0/jT2GGwx6WlpQN+vz+Gn7G5MkXD4fAOil6C047dlImrxxCfg9tVUFBwtbq6ekbHrVYpzAoLo9FoJ+QL9AJrkkN/3u12d9bW1l5hMsvWnDTh4eHh8uXl5fvMutFK3qD/jLxTDQ0Nv4z5JuHR0VH/4uLiKwjy/WWtseJPLKTZKO7Wq4dCoa1LS0tP8bMqKvURrcT0TU1NbRZfWkqYWXVrhJVI9j+bZmZmbuplk1s9NDR0GNEnOpgrKz8ydBrZ8rBHRHCur0MsCvc1Pazl1GF301PbqOFpBh3Z4Rv0oIvVBgBG01hqYKCwsPBMIBD4bAxHIpGKhYWFbrB9RtxuzDEr9yB6zI5gwV/U19cfYLvktjI1mQh19rOI5wSCpqDC4bgelaXvUcRMEGJzAO0qUZ2oxdrx53XMzsI9KMJldgQDPsgPYtLgK4fCoeigMmgA2R2fCG83YMohxCFlQAHCDSlgE8Tkytx8yDZmbHCKMxIMQSdcJueWFU8Y8pRDiA3KgAJ0yJ1wJMwqGrlSWxQ6Jkg4wjWBamfCzQzfqmOrqGwNXo/c56uoeaTFejSuOWjxmNx7KXiHwYIlpnIr4I1xVo9TPF8nyFgwiYFV6LidhZfgJaFXv6vvUeCEHVmBy7UZ0fAAds3rUq+BcD8X0SFZcR5XWJcecGhFqEnrjkW12rfEJoV5PRlgJg+1QM4MGqG6uroHKWEZsNXnCfzNmWpe3iL1z9LjJmGuux+AF3MlTO1rrDb1FExutS5GQB5tj3Q/WxbRSElJyWVjPZOwBLxe70mI8sKXrTaZn59/pLKy8p+xYJqwz+eLFhUVtUH6aCRuZMwC/tBba2pqvlnz04SFUFVV9Zsj1krSd2vCOvwYNdo4sx9UOUphIfJ9f8XsRXxclbgGNiuiHNOXdjxbYUlgtuMINzN8Y1dAgU+BtTDxfkUsBWUUFhYFfmKCTKAvlWU/kDfPJo7mO3vKSiR5V69Fkrg8DPj32IHtwE2+FhvzmFivx+M5xz/ENV8sJM+xsC4yMjKyKx6P32YC8rdE2iz9HKu8m/QcfqxbWOry7N2CkRfznZzR0/yIvjBeV/sPFdozA8TD8zUAAAAASUVORK5CYII=" width="15" height="17" alt="위치 아이콘">';
+						itemloc += items.item_location +'</div>';
+						
+						$(itemFrameDiv).append($(itemLinkA).append($(itemContentDiv)).append($(itemloc))).appendTo($('.selection3'));
+					});
+					
+					var entireItemNumSpan = '<span id="entireItemNumSpan">' + data.entireItemNum + '개</span>';
+					$("#findItemH2").append($(entireItemNumSpan));
+					$("#itemBoardPagingDiv2").html(data.boardPaging.pagingHTML);
+					
+				},
+				error: function(err){
+					console.log(err);
+				}
+			});
+		}
+
+		
+	}
+}
+
+
+
+
+
+
+
+//아이템 클릭했을 때
+$('.selection3').on('click', '.itemLink', function(){
+
+	var item_seq = $(this).children("#item_seqSpan").text();
+	//alert($(this).children("#item_seqSpan").text());
+	location.href="/pmang/board/itemView?item_seq="+item_seq;
 });
 
 
@@ -1950,6 +2309,23 @@ $(document).click(function(e){
 		$('body').css('overflow','auto');
 	}
 }); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* 위치 검색 */
