@@ -4,7 +4,6 @@
 	<typeAliases>
 
 		<typeAlias type="board.bean.ReviewDTO" alias="review" />
-		<typeAlias type="board.bean.MystoreDTO" alias="mystore" />
 		<typeAlias type="board.bean.WishDTO" alias="wish"/>
 		<typeAlias type="member.bean.SellerDTO" alias="seller" />
 	
