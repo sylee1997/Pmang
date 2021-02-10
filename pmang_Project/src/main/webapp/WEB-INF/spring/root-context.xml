@@ -12,10 +12,35 @@
 	<context:component-scan base-package="board.service"/>
 	
 
+
 	<context:component-scan base-package="member.service"/>
 	<context:component-scan base-package="member.dao"/>
 	<context:component-scan base-package="member.bean"/>
+
 	<context:component-scan base-package="spring.conf"/>
+	<context:component-scan base-package="pmang.conf"/>
+	
+	
+	<!-- 회원가입 메일 인증 -->
+	<bean id="mailSender"	class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" /><!-- 465 or 25 -->
+		<property name="username" value="kimys8894@gmail.com" />
+		<property name="password" value="puppy190407" />
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<context:component-scan base-package="data.url"/>
+
+	
 	
 
 </beans>
