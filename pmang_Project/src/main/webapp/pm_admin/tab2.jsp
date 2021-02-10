@@ -11,13 +11,13 @@
 			<td align="center" width="170">제목</td>
 			<td><input type="text" id="noticeSubject" size="100"
 				name="noticeSubject" placeholder="공지사항 제목 입력">
-				<div id="noticeSubjectDiv"></div></td>
+				<div id="noticeSubjectDiv" align="left"></div></td>
 		</tr>
 		<tr>
 			<td align="center">내용</td>
 			<td><textarea rows="30" cols="100" id="noticeContent"
 					name="noticeContent" placeholder="공지사항 내용 입력"></textarea>
-				<div id="noticeContentDiv"></div></td>
+				<div id="noticeContentDiv" align="left"></div></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center"><input type="button"
