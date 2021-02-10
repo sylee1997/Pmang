@@ -7,8 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="memberSQL">
 	<!-- 로그인 -->
 	<select id="login" parameterType="String" resultType="member">
-		select * from usertable where ((userId=#{userId}) and (pwd=#{pwd}) and (email_key='Y'))
-	</select>
+		select * from usertable where userId=#{userId}
+	</select> 
 	
 	<!-- 회원가입 -->
 	<insert id="write" parameterType="member">
@@ -41,15 +41,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- kakao id 확인 -->
 	<select id="checkKakaoId" parameterType="String" resultType="Integer">
-		select count(*) from usertable where kakaoId=#{kakaoId}
+		select count(*) from usertable where userId=#{kakaoId}
 	</select>
 	
 	<!-- kakao 회원가입  -->
 	<insert id="kakaoWrite" parameterType="member">
-		insert into usertable (userName, gender, email1, email2, userId, kakaoId)
-		values (#{userName}, #{gender}, #{email1}, #{email2}, #{kakaoId}, #{kakaoId})
+		insert into usertable (userName, gender, email1, email2, userId)
+		values (#{userName}, #{gender}, #{email1}, #{email2}, #{kakaoId})
 	</insert>
-
+	
+	<!-- 아이찾기 -->
+	<select id="findId" parameterType="member" resultType="String">
+		select userId from usertable where email1=#{email1} and email2=#{email2} and userName=#{userName}
+	</select>
+	
+	<!-- 비밀번호찾기 -->
+	<select id="findPwd" parameterType="member" resultType="member">
+		select * from usertable where email1=#{email1} and email2=#{email2} and userId=#{userId}	
+	</select>
+	
+	<!-- 비밀번호변경(임시비밀번호) -->
+	<update id="updatePwd" parameterType="member">
+		update usertable set pwd = #{pwd} where userId=#{userId}
+	</update>
+	
+	<!-- 한사람의 정보 -->
+	<select id="getMember" parameterType="String" resultType="member">
+		select * from usertable where userId=#{userId}
+	</select>
+	
+	<update id="modify" parameterType="member">
+		update usertable set userName=#{userName}
+							, pwd=#{pwd}
+							, gender=#{gender}
+							, email1=#{email1}
+							, email2=#{email2}
+							, zipcode=#{zipcode}
+							, addr1=#{addr1}
+							, addr2=#{addr2}
+							, tel1=#{tel1}
+							, tel2=#{tel2}
+							, tel3=#{tel3} where userId=#{userId}
+	</update>
+	
+	<!-- seller -->
+	
 	<!-- 상품등록쪽 -->
 	<insert id="sellerWrite" parameterType="item">
 	insert into item values(item_seq.nextval,

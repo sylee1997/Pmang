@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +17,7 @@ import board.bean.ItemDTO;
 import board.dao.BoardDAO;
 
 import board.bean.ReviewDTO;
+import board.bean.SearchDTO;
 import board.bean.WishDTO;
 import board.dao.MystoreDAO;
 import board.dao.ReviewDAO;
@@ -120,7 +120,7 @@ public class BoardServiceImpl implements BoardService {
 		boardPaging.makePagingHTML();
 		return boardPaging;
 	}
-
+	
 	
 	//------------------------------------------------myStore-------------------------------------------//
 
@@ -327,6 +327,240 @@ public class BoardServiceImpl implements BoardService {
 		List<ItemDTO> list = mystoreDAO.getMystoreWishLowerPriceList(map);
 		return list;
 	}
+	
+	
+	//---------------------------------todayItem------------------------------------//
+
+	@Override
+	public List<ItemDTO> getIndexBoardList(String pg) {
+		
+		int endNum = Integer.parseInt(pg)*20;
+		int startNum = endNum-19;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
+		
+		return boardDAO.getIndexBoardList(map);
+	}
+
+	@Override
+	public String getTotalItem() {
+		return boardDAO.getTotalItem();
+	}
+
+	//----------------------------------------searchBoard-------------------------------------------//
+	
+	
+		//bestItem 목록
+		@Override
+		public List<Object> indexSearchBoardList(String searchKeyword) {
+			return boardDAO.indexSearchBoardList(searchKeyword);
+		}
+		
+		
+		//검색어 전체에 해당하는 아이템개수
+		@Override
+		public int getTotalSearchItem(String searchKeyword) {
+			return boardDAO.getTotalSearchItem(searchKeyword);
+		}
+
+		//페이징
+		@Override
+		public BoardPaging boardPaging(String pg, int totalA) {
+			//int totalA = boardDAO.getTotalSearchItem(searchKeyword);
+			
+			boardPaging.setCurrentPage(Integer.parseInt(pg));
+			boardPaging.setPageBlock(5);
+			boardPaging.setPageSize(20);
+			boardPaging.setTotalA(totalA);
+			boardPaging.makePagingHTML();
+			
+			return boardPaging;
+		}
+		
+		//검색어에 관련된 카테고리 1,2,3 목록
+		@Override
+		public List<Object> getCategory1List(String searchKeyword) {
+			return boardDAO.getCategory1List(searchKeyword);
+		}
+		
+		@Override
+		public List<Object> getCategory2List(String category1, String searchKeyword) {
+			return boardDAO.getCategory2List(category1, searchKeyword);
+		}
+		
+		@Override
+		public List<Object> getCategory3List(Map<String, Object> map) {
+			return boardDAO.getCategory3List(map);
+		}
+		
+		
+		//카테고리에 해당하는 아이템 출력
+		@Override
+		public List<ItemDTO> getSearchItemList(Map<String, Object> map) {
+			//1페이지당 20개씩
+			int pg = Integer.parseInt((String)map.get("pg"));
+			int endNum = pg*20;
+			int startNum = endNum-19;
+							
+			map.put("startNum", startNum);
+			map.put("endNum", endNum);
+			
+			return boardDAO.getSearchItemList(map);
+		}
+		
+		@Override
+		public List<ItemDTO> getSearchItem1List(Map<String, Object> map) {
+			//1페이지당 20개씩
+			int pg = Integer.parseInt((String)map.get("pg"));
+			int endNum = pg*20;
+			int startNum = endNum-19;
+									
+			map.put("startNum", startNum);
+			map.put("endNum", endNum);
+					
+			return boardDAO.getSearchItem1List(map);
+			
+		}
+
+		
+		@Override
+		public List<ItemDTO> getSearchItem2List(Map<String, Object> map) {
+			//1페이지당 20개씩
+			int pg = Integer.parseInt((String)map.get("pg"));
+			int endNum = pg*20;
+			int startNum = endNum-19;
+											
+			map.put("startNum", startNum);
+			map.put("endNum", endNum);
+							
+			return boardDAO.getSearchItem2List(map);
+		}
+		
+		@Override
+		public List<ItemDTO> getSearchItem3List(Map<String, Object> map) {
+			//1페이지당 20개씩
+			int pg = Integer.parseInt((String)map.get("pg"));
+			int endNum = pg*20;
+			int startNum = endNum-19;
+													
+			map.put("startNum", startNum);
+			map.put("endNum", endNum);
+									
+			return boardDAO.getSearchItem3List(map);
+
+		}
+		
+		@Override
+		public List<Object> hashtagBoardList(String hashtag) {
+			return boardDAO.hashtagBoardList(hashtag);
+		}
+
+		@Override
+		public List<Object> getHashtagCategory1List(String hashtag) {
+			return boardDAO.getHashtagCategory1List(hashtag);
+		}
+
+		@Override
+		public int getHashtagTotalSearchItem(String hashtag) {
+			return boardDAO.getHashtagTotalSearchItem(hashtag);
+		}
+
+		@Override
+		public List<ItemDTO> getHashtagItemList(Map<String, Object> map) {
+			//1페이지당 20개씩
+			int pg = Integer.parseInt((String)map.get("pg"));
+			int endNum = pg*20;
+			int startNum = endNum-19;
+													
+			map.put("startNum", startNum);
+			map.put("endNum", endNum);
+			
+			return boardDAO.getHashtagItemList(map);
+		}
+
+		@Override
+		public List<Object> getHashtagCategory2List(String category1, String hashtag) {
+			return boardDAO.getHashtagCategory2List(category1, hashtag);
+		}
+
+		@Override
+		public List<ItemDTO> getHashtagItem1List(Map<String, Object> map) {
+			//1페이지당 20개씩
+			int pg = Integer.parseInt((String)map.get("pg"));
+			int endNum = pg*20;
+			int startNum = endNum-19;
+													
+			map.put("startNum", startNum);
+			map.put("endNum", endNum);
+			
+			
+			return boardDAO.getHashtagItem1List(map);
+		}
+
+		@Override
+		public List<Object> getHashtagCategory3List(Map<String, Object> map) {
+			return boardDAO.getHashtagCategory3List(map);
+		}
+
+		@Override
+		public List<ItemDTO> getHashtagItem2List(Map<String, Object> map) {
+			//1페이지당 20개씩
+			int pg = Integer.parseInt((String)map.get("pg"));
+			int endNum = pg*20;
+			int startNum = endNum-19;
+													
+			map.put("startNum", startNum);
+			map.put("endNum", endNum);
+			
+			
+			return boardDAO.getHashtagItem2List(map);
+		}
+
+		@Override
+		public List<ItemDTO> getHashtagItem3List(Map<String, Object> map) {
+			//1페이지당 20개씩
+			int pg = Integer.parseInt((String)map.get("pg"));
+			int endNum = pg*20;
+			int startNum = endNum-19;
+													
+			map.put("startNum", startNum);
+			map.put("endNum", endNum);
+			
+			
+			return boardDAO.getHashtagItem3List(map);
+		}
+
+		
+		//검색
+		@Override
+		public void setSearchKeyword(String keyword, String userid) {
+			boardDAO.setSearchKeyword(keyword, userid);
+			
+		}
+
+		@Override
+		public List<SearchDTO> getSearchKeyword(String userid) {
+			return boardDAO.getSearchKeyword(userid);
+		}
+
+		@Override
+		public void removeSearch(String keyword, String userid) {
+			boardDAO.removeSearch(keyword, userid);
+			
+		}
+
+		@Override
+		public void searchAllDelete(String userid) {
+			boardDAO.searchAllDelete(userid);
+			
+		}
+		
+		
+
+
+		
 
 }
 

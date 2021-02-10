@@ -17,6 +17,8 @@
 		<typeAlias type="talk.bean.TalkRoomDTO" alias="talkRoom"/>
 		<typeAlias type="talk.bean.MessageDTO" alias="message"/>
 		
+		<typeAlias type="board.bean.SearchDTO" alias="search"/>
+		
 		
 	</typeAliases>
 	
