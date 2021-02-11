@@ -1,4 +1,3 @@
-
 //찜 목록
 $(document).ready(function(){
 	//게시글 총 개수
@@ -70,7 +69,7 @@ $(document).ready(function(){
 	});
 	
 	
-	var bool_sw=false;
+
 	$(this).scroll(function(e){
 		var scrollHeight=$(document).height();
 		var scrollPosition=$(window).height()+$(window).scrollTop();
@@ -84,7 +83,7 @@ $(document).ready(function(){
 		
 		if(scrollPosition>scrollHeight-800){
 			if(cnt==$('.mystoreFavList').length){
-				
+				//console.log('길이가같아ㅏ');
 				return false;
 			}
 			
@@ -97,7 +96,7 @@ $(document).ready(function(){
 				dataType:'json',
 				success:function(data){
 					console.log(JSON.stringify(data));
-					bool_sw=true;
+					
 				//	$('li#wish.tabmenu a span').text(data.list.length);
 					$.each(data.list,function(index,items){
 						$('<div/>').append($('<div/>',{

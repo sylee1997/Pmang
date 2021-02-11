@@ -8,6 +8,7 @@ import member.bean.MemberDTO;
 import member.bean.ZipcodeDTO;
 
 public interface MemberDAO {
+
 	public MemberDTO login(String userId);
 
 	public int write(MemberDTO memberDTO);
@@ -39,10 +40,9 @@ public interface MemberDAO {
 
 	public List<ZipcodeDTO> searchlocation(String address);
 
-	public String adminUserDeleteSearch(String userid);
 
-	public void adminUserDelete(String userid);
 
+	
 
 
 }

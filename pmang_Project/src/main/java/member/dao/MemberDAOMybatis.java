@@ -114,20 +114,11 @@ public class MemberDAOMybatis implements MemberDAO {
 		
 		sqlSession.insert("memberSQL.sellerWrite", itemDTO);
 	}
-	
-	
-	//-----------------------------admin
-	@Override
-	public String adminUserDeleteSearch(String userid) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("memberSQL.adminUserDeleteSearch",userid);
-	}
 
-	@Override
-	public void adminUserDelete(String userid) {
-		// TODO Auto-generated method stub
-		sqlSession.delete("memberSQL.adminUserDelete",userid);
-	}
+
+
+
+
 
 
 }

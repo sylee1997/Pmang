@@ -12,7 +12,7 @@ $(document).ready(function(){
 
 
 $('.imageChoice').change(function(e){
-	//alert($('#imageCountHidden').val());
+	alert($('#imageCountHidden').val());
 	var files = e.target.files;
 	var arr = Array.prototype.slice.call(files);
 
@@ -604,7 +604,7 @@ $('#qtyparent').on('keyup','input',function(){
 });*/
 
 
-$("input[name='itemprice']").bind('keyup', function(e){
+$("input[name='item_price']").bind('keyup', function(e){
 	var rgx1 = /\D/g; //\d의 반대인 \D(숫자가 아닌것들)은 반복검색해서 추출함.
 	var rgx2 = /(\d+)(\d{3})/;
 	var num = this.value.replace(rgx1,"");
@@ -826,3 +826,4 @@ $('#recentlylocation').click(function(){
 		return false;
 	});
 });
+

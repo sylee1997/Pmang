@@ -485,7 +485,6 @@ a {
     background: rgb(255, 255, 255);
     border-radius: 2px;
     color: rgb(155, 153, 169);
-    cursor: pointer;
 }
 
 #currentPaging{
@@ -499,9 +498,4 @@ a {
     border-radius: 2px;
     color: rgb(255, 255, 255);
     background: #246d24;
-    cursor: pointer;
-}
-
-#item_seqSpan{
-	display:none;
 }

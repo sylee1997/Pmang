@@ -27,17 +27,13 @@
 	overflow: hidden;
 	text-align: center;
 	/*  background: url(../image/defaultProfile.png) center 100% no-repeat; */
-	/* background-image: url(../image/grayPmang.png); */
+	background-image: url(../image/grayPmang.png);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 150px;
 	object-fit: fill;
 }
-#profileImg{
-	width:150px;
-	height:150px;
-	border-radius:50%;
-}
+
 .mystoreProfileImg input {
 	border: 1px solid rgb(195, 194, 204);
 	width: 150px;
@@ -61,8 +57,7 @@
 }
 
 .mystoreProfileImg {
-	width: 150px;
-	 height: 150px;
+	width: 150px height: 150px;
 	position: relative;
 	/* display: inline-block; */
 	-webkit-box-align: center;
@@ -159,11 +154,10 @@
 }
 
 #introEdit {
-	/* float: left; */
+	float: left;
 	display: flex;
 	margin-bottom: 10px;
 	margin-top: 10px;
-	 justify-content: space-between; 
 }
 
 .introEdit1 {
@@ -182,26 +176,12 @@
 	border-color: transparent;
 	outline: none;
 }
-#memberInfoModify{
-	display:flex;
-	float:right;
-	font-size:10pt;
-	test-decoration:none;
-	
-	/* margin-left:200px; */
-}
+
 #storeIntroBtn {
 	float: right;
 }
 
-
 /* tab menu*/
-#adminTab {
-	width: 100%;
-	margin: 0 auto;
-	text-align: center;
-	margin-top: 30px;
-}
 #mystoreTab {
 	width: 100%;
 	margin: 0 auto;

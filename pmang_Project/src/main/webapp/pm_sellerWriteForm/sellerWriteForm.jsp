@@ -239,17 +239,17 @@
 						<div class="stateArea_div">
 							<div class="state_div">
 								<label for="upper" class="state_upper">
-									<input type="radio" name="condition" id="upper" value="상" checked>
+									<input type="radio" name="condition" id="upper" value="upper" checked>
 									상
 								</label>
 								
 								<label for="middle" class="state_middle">
-									<input type="radio" name="condition" id="middle" value="중">
+									<input type="radio" name="condition" id="middle" value="middle">
 									중
 								</label>
 								
 								<label for="lower" class="state_lower">
-									<input type="radio" name="condition" id="lower" value="하">
+									<input type="radio" name="condition" id="lower" value="lower">
 									하
 								</label>
 							</div>
@@ -265,12 +265,12 @@
 						<div class="negoArea_div">
 							<div class="nego_div">
 								<label for="impossibility" class="nego_impossibility">
-									<input type="radio" name="nego" id="impossibility" value="불가능" checked>
+									<input type="radio" name="nego" id="impossibility" value="impossibility" checked>
 									불가능
 								</label>
 								
 								<label for="possibility" class="nego_possibility">
-									<input type="radio" name="nego" id="possibility" value="가능">
+									<input type="radio" name="nego" id="possibility" value="possibility">
 									가능
 								</label>
 							</div>
@@ -286,7 +286,7 @@
 						<div class="priceArea_div">
 							<div id="priceparent" class="price_div">
 								<!-- <input type="number" min='0' max='999999999' name="price" placeholder="숫자만 입력해주세요." class="price_input">원 -->
-								<input type="text" name="itemprice" maxlength="9" placeholder="숫자만 입력해주세요." class="price_input">원
+								<input type="text" name="item_price" maxlength="9" placeholder="숫자만 입력해주세요." class="price_input">원
 							</div>
 							<div id="priceDiv"></div><!-- mouseout 100원 이상 입력해주세요 , 한글 키 눌리면 바로 alert- 숫자만 입력해주세요.-->
 							<!-- ajax에서 css 는 추가안해도됨 해놨음. -->

@@ -8,11 +8,11 @@ import lombok.Data;
 
 @Data
 public class SellerDTO {
-	private int userid;	//ï¿½ï¿½ï¿½ï¿½Å°, primary key
-	private String marketname;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	private String pf_photo;		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
-	private String pf_content;	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½
-	private int markethit;		//ï¿½ï¿½ï¿½ï¿½ ï¿½æ¹®ï¿½ï¿½
+	private int userkey;	//À¯ÀúÅ°, primary key
+	private String marketname;	//»óÁ¡¸í
+	private String pf_photo;		//»óÁ¡ ÇÁ·ÎÇÊ »çÁø
+	private String pf_content;	//»óÁ¡ ÇÁ·ÎÇÊ ¼Ò°³±Û
+	private int markethit;		//»óÁ¡ ¹æ¹®¼ö
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy.MM.dd")
-	private Date marketdate;	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private Date marketdate;	//»óÁ¡ ¿ÀÇÂÀÏ
 }

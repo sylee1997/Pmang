@@ -7,15 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionListener;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -36,20 +29,16 @@ import data.url.Base64Utils;
 import member.bean.MemberDTO;
 import member.bean.ZipcodeDTO;
 import member.service.MemberService;
-import net.sf.json.JSONArray;
 
 @Controller
-@RequestMapping(value = "member")
+@RequestMapping(value="member")
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
-
     @Autowired
 	private MemberService mailsender;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    
-    
 	@RequestMapping(value="login", method=RequestMethod.POST)
 	@ResponseBody 
 	public String login(Model model, HttpSession session, HttpServletRequest request) {
@@ -143,7 +132,7 @@ public class MemberController {
 		mailsender.regSuccess(userId, key); // mailsender의 경우 @Autowired
 
 		return "/member/regSuccess";
-	}
+		}
 	
 	// kakao Login
 	@RequestMapping(value="kakaoLogin", method=RequestMethod.POST)
@@ -203,6 +192,7 @@ public class MemberController {
 	
 	
 	
+	
 	//------------------------------------seller------------------------------------------------------//
 	
 	@RequestMapping(value="sellerWriteForm", method=RequestMethod.GET)
@@ -213,7 +203,7 @@ public class MemberController {
 		
 	@RequestMapping(value="sellerWrite", method=RequestMethod.POST)
 	@ResponseBody
-	public void sellerWrite(@ModelAttribute ItemDTO itemDTO, HttpSession session, HttpServletRequest request, @RequestParam("img1url") String img1url, @RequestParam(value="img2url") String img2url, @RequestParam(value="img3url") String img3url) {
+	public void sellerWrite(@ModelAttribute ItemDTO itemDTO, HttpServletRequest request, @RequestParam("img1url") String img1url, @RequestParam(value="img2url") String img2url, @RequestParam(value="img3url") String img3url) {
 		//String filePath ="http://localhost:8080/pmang/storage";
 		
 		String filePath = "D:/git_home/Pmang/pmang_Project/src/main/webapp/storage/";
@@ -230,7 +220,7 @@ public class MemberController {
 		//String realPath = request.getServletPath();
 		//System.out.println(realPath);
 		
-		UUID uuid = UUID.randomUUID(); //이미지 이름 중복되지 못하게!
+		UUID uuid = UUID.randomUUID(); //以묐났 �뙆�씪�씠由� 諛⑹�瑜� �쐞�븳 uuid�꽕�젙
 		
 
 		try {
@@ -262,7 +252,6 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		
-			itemDTO.setUserId((String) session.getAttribute("memUserId"));
 			//DB
 			memberService.sellerWrite(itemDTO);
 		
@@ -279,28 +268,9 @@ public class MemberController {
 		
 		return mav;
 	}
-	
 
-
-	// -----------------admin
-	@RequestMapping(value = "adminUserDeleteForm", method = RequestMethod.GET)
-	public String adminUserDelete() {
-		return "/pm_admin/adminUserDeleteForm";
-	}
-
-	@RequestMapping(value = "adminUserDeleteSearch", method = RequestMethod.POST)
-	@ResponseBody
-	public String adminUserDeleteSearch(@RequestParam String userid) {
-		String resultId = memberService.adminUserDeleteSearch(userid);
-		return resultId;
-	}
-
-	@RequestMapping(value = "adminUserDelete", method = RequestMethod.POST)
-	@ResponseBody
-	public void adminUserDelete(@RequestParam String userid) {
-		memberService.adminUserDelete(userid);
-	}
-	
-	
-	
 }
+
+
+
+

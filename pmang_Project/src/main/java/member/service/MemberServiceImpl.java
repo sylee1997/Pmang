@@ -15,9 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import org.springframework.stereotype.Service;
 
 
@@ -215,19 +213,8 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.searchlocation(address);
 	}
 
-	
-	//--------------------------------admin------------------------
-	@Override
-	public String adminUserDeleteSearch(String userid) {
-		String resultId=memberDAO.adminUserDeleteSearch(userid);
-		return resultId;
-	}
 
-	@Override
-	public void adminUserDelete(String userid) {
-		memberDAO.adminUserDelete(userid);
-		
-	}
+
 
 
 

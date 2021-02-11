@@ -66,7 +66,7 @@ $(document).ready(function(){
 		}
 	});
 	
-	var bool_sw=false;
+	
 	//무한스크롤
 	$(this).on("scroll",function(){
 		var scrollHeight=$(document).height();
@@ -74,11 +74,9 @@ $(document).ready(function(){
 		
 		var pg=$('#pg').val();
 		let cnt=$('.tabName span').text();
-		
 		if(scrollPosition>scrollHeight-800){
 			if(cnt==$('.storeItemFrame').length){
 				//console.log('길이가같아ㅏ');
-				
 				return false;
 			}
 			pg++;
@@ -90,7 +88,7 @@ $(document).ready(function(){
 				success:function(data){
 					console.log(JSON.stringify(data));
 					
-					bool_sw=true;
+					
 					$('#selectCategory span').text(data.list.length);
 					$('#mystoreSold span').text(data.list.length+'회');
 				//	$('li#default.tabmenu a span').text(data.list.length);

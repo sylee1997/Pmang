@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import board.bean.ItemDTO;
-import board.bean.ReportDTO;
 import board.bean.ReviewDTO;
 import board.bean.WishDTO;
 import member.bean.SellerDTO;
@@ -27,14 +26,14 @@ public class MystoreDAOMybatis implements MystoreDAO {
 	}
 
 	@Override
-	public SellerDTO getMystore(String userid) {
+	public SellerDTO getMystore(int userkey) {
 		
-		return sqlSession.selectOne("mystoreSQL.getMystore",userid);
+		return sqlSession.selectOne("mystoreSQL.getMystore",userkey);
 	}
 
 	@Override
-	public void mystoreHitUpdate(String userid) {
-		sqlSession.update("mystoreSQL.mystoreHitUpdate",userid);
+	public void mystoreHitUpdate(int userkey) {
+		sqlSession.update("mystoreSQL.mystoreHitUpdate",userkey);
 		
 	}
 
@@ -44,12 +43,12 @@ public class MystoreDAOMybatis implements MystoreDAO {
 	}
 
 	@Override
-	public List<ItemDTO> getMystoreItemList(Map<String, Object> map) {
+	public List<ItemDTO> getMystoreItemList(Map<String, Integer> map) {
 		return sqlSession.selectList("mystoreSQL.getMystoreItemList",map);
 	}
 
 	@Override
-	public List<WishDTO> getMystoreWishList(Map<String, Object> map) {
+	public List<WishDTO> getMystoreWishList(Map<String, Integer> map) {
 		return sqlSession.selectList("mystoreSQL.getMystoreWishList",map);
 		
 	}
@@ -60,102 +59,61 @@ public class MystoreDAOMybatis implements MystoreDAO {
 	}
 
 	@Override
-	public List<ReviewDTO> getMystoreReviewList(Map<String, Object> map) {
+	public List<ReviewDTO> getMystoreReviewList(Map<String, Integer> map) {
 		return sqlSession.selectList("mystoreSQL.getMystoreReviewList",map);
 	}
 
 	@Override
-	public String getMystoreItemCnt(String userid) {
+	public String getMystoreItemCnt(int userkey) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("mystoreSQL.getMystoreItemCnt",userid);
+		return sqlSession.selectOne("mystoreSQL.getMystoreItemCnt",userkey);
 	}
 
 	@Override
-	public String getMystoreWishCnt(String userid) {
+	public String getMystoreWishCnt(int userkey) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("mystoreSQL.getMystoreWishCnt",userid);
+		return sqlSession.selectOne("mystoreSQL.getMystoreWishCnt",userkey);
 	}
 
 	@Override
-	public String getMystoreReviewCnt(String userid) {
+	public String getMystoreReviewCnt(int userkey) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("mystoreSQL.getMystoreReviewCnt",userid);
+		return sqlSession.selectOne("mystoreSQL.getMystoreReviewCnt",userkey);
 	}
 
 	@Override
-	public List<ItemDTO> getMystoreItemPopularList(Map<String, Object> map) {
+	public List<ItemDTO> getMystoreItemPopularList(Map<String, Integer> map) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("mystoreSQL.getMystoreItemPopularList",map);
 	}
 
 	@Override
-	public List<ItemDTO> getMystoreItemLowerPriceList(Map<String, Object> map) {
+	public List<ItemDTO> getMystoreItemLowerPriceList(Map<String, Integer> map) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("mystoreSQL.getMystoreItemlowerPriceList",map);
 	}
 
 	@Override
-	public List<ItemDTO> getMystoreItemHighestPriceList(Map<String, Object> map) {
+	public List<ItemDTO> getMystoreItemHighestPriceList(Map<String, Integer> map) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("mystoreSQL.getMystoreItemHighestPriceList",map);
 	}
 
 	@Override
-	public List<ItemDTO> getMystoreWishPopularList(Map<String, Object> map) {
+	public List<ItemDTO> getMystoreWishPopularList(Map<String, Integer> map) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("mystoreSQL.getMystoreWishPopularList",map);
 	}
 
 	@Override
-	public List<ItemDTO> getMystoreWishHighestPriceList(Map<String, Object> map) {
+	public List<ItemDTO> getMystoreWishHighestPriceList(Map<String, Integer> map) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("mystoreSQL.getMystoreWishHighestPriceList",map);
 	}
 
 	@Override
-	public List<ItemDTO> getMystoreWishLowerPriceList(Map<String, Object> map) {
+	public List<ItemDTO> getMystoreWishLowerPriceList(Map<String, Integer> map) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("mystoreSQL.getMystoreWishLowerPriceList",map);
-	}
-
-	@Override
-	public int getUserCnt() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("mystoreSQL.getUserCnt");
-	}
-
-	@Override
-	public int getItemCnt() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("mystoreSQL.getItemCnt");
-	}
-
-	@Override
-	public List<ReportDTO> getReportList() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("mystoreSQL.getReportList");
-	}
-
-	@Override
-	public int getTotalA() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("mystoreSQL.getTotalA");
-	}
-
-	@Override
-	public List<ReportDTO> getReport(String userid) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("mystoreSQL.getReport",userid);
-	}
-
-	@Override
-	public List<String> getReportTarget() {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("mystoreSQL.getReportTarget");
-	}
-
-	@Override
-	public void noticeWrite(Map<String, String> map) {
-		sqlSession.insert("mystoreSQL.noticeWrite",map);
 	}
 }
