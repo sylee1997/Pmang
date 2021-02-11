@@ -3,21 +3,105 @@ $(document).ready(function() {
    
    sock.onopen = function() {
       console.log('open');
-   };
+      
+      //커넥트를 하면 기존에 저장했던 messageDTO 데이터 불러와서 화면이 디스플레이하기
+      if($('#messageList').val() != null){
+    	  $.each($('#messageList').val(), function(index, items) {
+    		  if((items.sender_user_id == $('#sender_user_id').val() && items.receiver_user_id == $('#receiver_user_id').val())){
+	    		  $('#talkContentDiv').append($('<div />', {
+	        		  class : 'talkSendDiv'
+	        	  }).append($('<div />',{
+	        		  class : 'talkTimeDiv'
+	        	  }).append($('<div />',{
+	        		  class : 'readCheck',
+	        		  text : '안읽음'//영은이 할부분
+	        	  })).append($('<div />',{
+	        		  class : 'talkSendTime',
+	        		  text : items.send_time//마지막 메세지에만 붙여줘야한다.
+	        	  })))).append($('<div />',{
+	        		  class : 'talkSendTooltip'
+	        	  }).append($('<div />',{
+	        		  class : 'talkSendContent',
+	        		  text : items.talk_content
+	        	  })));
+	        	  
+	    	  }//if
+    		  
+    		  if(items.receiver_user_id == $('#sender_user_id').val()){
+    			  $('#talkContentDiv').append($('<div />',{
+    				  class : 'talkReciveDiv'
+    			  }).append($('<div />',{
+    				  class : 'talkReciveProfile'
+    			  }).append$($('<img />',{
+    				  class : 'profileImg',
+    				  src : '/pmang/image/'+items.receiver_user_profileImage,
+    				  alt : '프로필이미지',
+    				  width : '36',
+    				  height : '36'
+    			  }))).append($('<div />',{
+    				  class : 'talkReciveTooltip'
+    			  }).append($('<div />',{
+    				  class : 'talkReciveContent',
+    				  text : items.talk_content
+    			  }))).append($('<div />',{
+    				  class : 'talkReciveTime',
+    				  text : items.send_time
+    			  })));
+    		  }//if
+	      });//each
+    	  
+      }//if
+	      
+   };//onopen
+   
    sock.onmessage = function(e) {
       var data = e.data;
       console.log(data)
       console.log("e - " + e)
       var obj = JSON.parse(data)
-      console.log(obj)
-      appendMaessge(obj.talk_content);
-
+      console.log(obj.talk_content)
+      if((obj.sender_user_id == $('#sender_user_id').val() && obj.receiver_user_id == $('#receiver_user_id').val()) || obj.receiver_user_id == $('#sender_user_id').val())
+      appendMaessge(obj);
    };
+   
    sock.onclose = function() {
       appendMessage("연결을 끊었습니다.");
       console.log('close');
    };
    
+   function getTimeStamp() {
+	   var d = new Date();
+	   var s =
+	     leadingZeros(d.getFullYear(), 4) + '-' +
+	     leadingZeros(d.getMonth() + 1, 2) + '-' +
+	     leadingZeros(d.getDate(), 2) + ' ' +
+
+	     leadingZeros(d.getHours(), 2) + ':' +
+	     leadingZeros(d.getMinutes(), 2) + ':' +
+	     leadingZeros(d.getSeconds(), 2);
+
+	   return s;
+	 }
+   
+   function getTalkTime() {
+	   var d = new Date();
+	   var s = 
+		   leadingZeros(d.getHours(), 2) + ':' +
+		   leadingZeros(d.getMinutes(), 2);
+	   
+	   return s;
+   }
+
+	 function leadingZeros(n, digits) {
+	   var zero = '';
+	   n = n.toString();
+
+	   if (n.length < digits) {
+	     for (i = 0; i < digits - n.length; i++)
+	       zero += '0';
+	   }
+	   return zero + n;
+	 }
    
    // 메세지 보내기
    $('#sendBtn').click(function() {
@@ -26,13 +110,13 @@ $(document).ready(function() {
      alert($('#talk_message').val());*/
      var msg = $('#talk_message').val();
      if(msg != ""){
-        message = {
-              sender_user_id : $('#sender_user_id').val(),
+    	 message = {
+        		sender_user_id : $('#sender_user_id').val(),
                 receiver_user_id : $('#receiver_user_id').val(),
                 talk_content : $('#talk_message').val(),
                 receiver_user_profileImage : $('#receiver_user_profileImage').val(),
                 item_seq : $('#item_seq').val()
-        }
+    	 }
         sock.send(JSON.stringify(message));
         $('#talk_message').val('');
      }
@@ -46,12 +130,12 @@ $(document).ready(function() {
         }
    });
 
-   function appendMaessge(talk_content) {
-      var talk_content = talk_content;
+   function appendMaessge(obj) {
+      var talk_content = obj.talk_content;
 
-      var talkDate = '오늘날짜가들어감';
-      var profileImg = '이미지주소가 들어감';
-      var talkTime = "asdf";
+      var talkDate = getTimeStamp();
+      var profileImg = '/pmang/image/'+$('#receiver_user_profileImage').val();
+      var talkTime = getTalkTime();
       var talkRead = '안읽음';
 
       // 상단날짜div
@@ -81,7 +165,7 @@ $(document).ready(function() {
          class : 'talkReciveProfile'
       }).append($('<img />', {
          class : 'profileImg',
-         src : 'pmang/image/'+$('#receiver_pf_Photo'),
+         src : profileImg,
          alt : '프로필이미지',
          width : '36',
          height : '36'
@@ -94,7 +178,7 @@ $(document).ready(function() {
 
       // 보낸메세지div
       var talkSendDiv = $('<div />', {
-         class : 'talkSendDiv',
+         class : 'talkSendDiv'
       });
       // 보낸메세지 말풍선+내용
       var talkSendTooltip = $('<div />', {
@@ -114,18 +198,80 @@ $(document).ready(function() {
          text : '안읽음'
       });
       
+      // 메세지가 하루 중 처음 온것인지 아닌지
+      // DB 가서 메세지중 오늘(ex) 8일) 보낸 데이터를 count 하여 0 이면 메시지 append 전에 오늘날짜를 뿌림.
+      $('#talkContentDiv').append($('<div />',{
+    	  class : 'talkDateDiv'
+      }).append(talkDate));
+      
+      // 송신자/수신자 구분
+      
+      //talkSendTime 을 append 하는 것은 새로운 메시지를 append 하기 전에, 기존 데이터의 분과 같은 분에 보낸 메세지라면,
+      //이전 append 를 삭제해줘야함.
+      
+      //우석생각 - 방법 1
       
       
-      $('#talkContentDiv').append($('<div />', {
-         class : 'talkSendDiv'
-      }).append(talkSendTooltip));
+      //방법 2 append(talkSendTime) 을 따로 빼서, 이전 talkSendTime 에는 '' 을넣어주고, liastchild 에만 
+      //text() 에 talkTime 를 찍어준다.
+      
+      
+    	  
+      
+      
+    //송신자 
+      if((obj.sender_user_id == $('#sender_user_id').val() && obj.receiver_user_id == $('#receiver_user_id').val())){
+    	  alert($('#talkContentDiv').children().last().prop('className'));
+    	  if($('#talkContentDiv').children().last().prop('className') == 'talkSendDiv'){//#talkContentDiv 의 마지막 자식의 클래스네임이 talkSendDiv라면,
+             
+    		  let currentMinute = talkDate.split(":");
+    		  let beforeMinute = $('#talkContentDiv').children().last().children('.talkSendTime').text().split(":");
+             
+    		  alert(currentMinute[0])//시간
+    		  alert(currentMinute[1])//분
+             
+    		  alert(beforeMinute[0])
+    		  alert(beforeMinute[1])
+             
+    		  if(currentMinute[1] == beforeMinute[1]){
+    			  $('#talkContentDiv').children().last().children('.talkSendTime').text('');
+    		  }
+    	  } 
+         
+         
+    	  $('#talkContentDiv').append($('<div />', {
+    		  class : 'talkSendDiv'
+    	  }).append(talkSendTime).append(talkSendTooltip));
+      }
+      
+      //수신자
+      if(obj.receiver_user_id == $('#sender_user_id').val()){
+    	  if($('#talkContentDiv').children().last().prop('className') == 'talkRecieveDiv'){//#talkContentDiv 의 마지막 자식의 클래스네임이 talkSendDiv라면,
+        	  
+        	  let currentMinute = talkDate.split(":");
+        	  let beforeMinute = $('#talkContentDiv').children().last().children('.talkSendTime').text().split(":");
+        	  
+        	  alert(currentMinute[0])//시간
+        	  alert(currentMinute[1])//분
+        	  
+        	  alert(beforeMinute[0])
+        	  alert(beforeMinute[1])
+        	  
+        	  if(currentMinute[1] == beforeMinute[1]){
+        		  $('#talkContentDiv').children().last().children('.talkSendTime').text('');
+        	  }
+          }
+    	  
+    	  $('#talkContentDiv').append($('<div />', {
+    	         class : 'talkRecieveDiv',
+    	   }).append(talkRecieveTooltip).append(talkSendTime));
+      }
+      
       
       //스크롤
       $("#talkContentDiv").scrollTop(document.body.scrollHeight)
       
-/*      $('#talkContentDiv').append($('<div />', {
-         class : 'talkRecieveDiv',
-      }).append(talkRecieveTooltip));*/
+
 /*
       var chatAreaHeight = $('.talkSendDiv').height();
       var maxScroll = $("#talkContentDiv").height()-chatAreaHeight;
@@ -134,13 +280,14 @@ $(document).ready(function() {
 
 
       
-      // 1. 메세지가 하루 중 처음 온것인지 아닌지
+      
 
-      // 2. 메세지가 보낸건지 받은건지
+      //안읽음 처리 해야함
 
       // 2-1. 메세지를 보낸거라면 메세지를 읽었는지 안읽었는지
 
-      // 2-2. 메세지를 받은거라면 system시간 기준 1분 사이에 처음 보낸 메세지인지 마지막에 보낸메세지인지
+      //2-2 메세지를 받은거라면 system시간 기준 1분 사이에 처음 보낸 메세지인지 마지막에 보낸메세지인지
+      
    }
    // header 상점명 클릭 모달
    

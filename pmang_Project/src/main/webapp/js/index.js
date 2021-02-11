@@ -605,7 +605,7 @@ $('.itemWriteBtn').click(function(){
 
 //우석 수정 
 $('.pmangTok').on('click',function(){
-	window.open("/pmang/talk/roomList","","width=375 height=667");
+	window.open("/pmang/talk/talkRoomList","","width=375 height=667");
 });
 // 우석 수정 -----------------------------------
 

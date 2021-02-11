@@ -16,20 +16,16 @@ public interface TalkDAO {
 	
 	public void insertMessage(MessageDTO messageDTO);
 	
-	public SellerDTO getSellerInfoSearch(String partner_userId);
-
-	public ItemDTO getItemInfoSearch(String partner_userId);
-
-	public String getPartnerUserId(int item_seq);
+	public ItemDTO getItem(int item_seq);
 	
+	public SellerDTO getSeller(String partner_userId);
 	
-	//방리스트
 	public List<TalkRoomDTO> getRoomList(String userId);
 
-	//영은
-	public ItemDTO getItem(int item_seq); //item
+	public MessageDTO getLastMessage(int talkRoom_seq);
 
-	public SellerDTO getSeller(String partner_userId); //판매자정보
+	public List<MessageDTO> getMessage(Map<String, String> userMap);
 
-	public MessageDTO getLastMessage(int talkRoom_seq); //마지막 메세지
+	public String getReceiver_read_time(String sender_user_id, String receiver_user_id);
+
 }

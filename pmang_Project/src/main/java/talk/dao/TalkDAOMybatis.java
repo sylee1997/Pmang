@@ -1,9 +1,9 @@
 package talk.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections4.map.HashedMap;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -36,40 +36,50 @@ public class TalkDAOMybatis implements TalkDAO {
 	}
 
 	@Override
-	public SellerDTO getSellerInfoSearch(String partner_userId) {
-		return sqlSession.selectOne("talkSQL.getSellerInfoSearch",partner_userId);
-	}
-
-	@Override
-	public ItemDTO getItemInfoSearch(String partner_userId) {
-		return sqlSession.selectOne("talkSQL.getItemInfoSearch",partner_userId);
+	public ItemDTO getItem(int item_seq) {
+		return sqlSession.selectOne("talkSQL.getItem",item_seq);
 	}
 	
 	@Override
-	public String getPartnerUserId(int item_seq) {
-		return sqlSession.selectOne("talkSQL.getPartnerUserId", item_seq);
+	public SellerDTO getSeller(String partner_userId) {
+		return sqlSession.selectOne("talkSQL.getSeller", partner_userId);
 	}
 
-	
-	//방리스트
+
 	@Override
 	public List<TalkRoomDTO> getRoomList(String userId) {
 		return sqlSession.selectList("talkSQL.getRoomList", userId);
-	}
-
-	//영은
-	@Override
-	public ItemDTO getItem(int item_seq) { //아이템
-		return sqlSession.selectOne("talkSQL.getItem", item_seq);
-	}
-
-	@Override
-	public SellerDTO getSeller(String partner_userId) { //판매자
-		return sqlSession.selectOne("talkSQL.getSeller", partner_userId);
 	}
 
 	@Override
 	public MessageDTO getLastMessage(int talkRoom_seq) { //마지막 메세지
 		return sqlSession.selectOne("talkSQL.getLastMessage", talkRoom_seq);
 	}
+
+	@Override
+	public List<MessageDTO> getMessage(Map<String, String> userMap) {
+		return sqlSession.selectList("talkSQL.getMessage", userMap);
+	}
+
+	@Override
+	public String getReceiver_read_time(String sender_user_id, String receiver_user_id) {
+		// receiver_user의 on/off_line 확인
+		
+		// receiver_user가 sender_user에게 send한 메세지를 조회해야함
+		// off_line: send한 메세지가 없는 경우 ,send한 메세지의 read_time이 null값이 아닌 경우
+		// on_line: send한 메세지의 read_time이 null값인 경우
+		// 
+		// send한 메세지의 read_time
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("sender_user_id", sender_user_id);
+		map.put("receiver_user_id", receiver_user_id);
+		
+		try {
+			return sqlSession.selectOne("talkSQL.getReceiver_read_time", map);
+		} catch (Exception e) {
+			return "안읽음";
+		}
+		
+	}
+	
 }

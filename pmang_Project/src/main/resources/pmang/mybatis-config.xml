@@ -20,13 +20,10 @@
 		
 		<typeAlias type="talk.bean.TalkRoomDTO" alias="talkRoom"/>
 		<typeAlias type="talk.bean.MessageDTO" alias="message"/>
-		
-<<<<<<< HEAD
-=======
+
 		<typeAlias type="board.bean.SearchDTO" alias="search"/>
 
 		
->>>>>>> branch 'temp' of https://github.com/sylee1997/Pmang.git
 	</typeAliases>
 
 </configuration>

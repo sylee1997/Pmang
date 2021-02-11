@@ -414,8 +414,8 @@ img {
 /* 채팅창끝--------------------- */
 /* 모달 */
 .modalDiv {
-   display: none;
-   position: fixed;
+	display: none;
+	position: fixed;
     top: 50px;
     left: 0px;
     right: 0px;
@@ -425,14 +425,14 @@ img {
 }
 
 .modal_area {
-   width: 375px;
+	width: 375px;
     height: calc(617px);
     position: fixed;
     background-color: rgba(0,0,0,0.5);
 }
 
 .modal_marketInfo_div{
-   position: absolute;
+	position: absolute;
     width: 100%;
     top: 0px;
     left: 0px;
@@ -441,19 +441,19 @@ img {
 }
 
 .modal_marketInfo_detail_div {
-   width: 100%;
+	width: 100%;
     display: block;
     padding: 8px 0px;
 }
 
 .modal_marketReview {
-   width: 100%;
+	width: 100%;
     display: block;
     padding: 8px 0px;
 }
 
 .market_info_a {
-   display: flex;
+	display: flex;
     flex-direction: row;
     width: 100%;
     height: 2.5rem;
@@ -463,7 +463,7 @@ img {
 }
 
 .market_info_textDiv {
-   margin: 0px 1rem 0px 0px;
+	margin: 0px 1rem 0px 0px;
     color: rgb(114, 112, 127);
     font-size: 15px;
     flex-shrink: 0;
@@ -471,20 +471,20 @@ img {
 }
 
 .market_review_dataArea {
-   flex: 1 1 0%;
+	flex: 1 1 0%;
     min-width: 0px;
     font-size: 15px;
 }
 
 .market_review_data {
-   display: flex;
+	display: flex;
     flex-direction: row;
     height: 1rem;
 }
 
 .market_review_data img {
-   width: 15px;
-   height: 15px;
+	width: 15px;
+	height: 15px;
 }
 
 .market_info_a::after {
@@ -501,16 +501,16 @@ img {
 }
 
 .market_review_dataArea b{
-   margin-left: 0.5rem;
-   margin-right: 0.5rem;
-   font-weight: bold;
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
+	font-weight: bold;
     font-size: 1rem;
 }
 
 
 
 .contact_time_div, .sales_details_div {
-   display: flex;
+	display: flex;
     flex-direction: row;
     width: 100%;
     height: 2.5rem;
@@ -519,8 +519,8 @@ img {
 }
 
 .market_info_Btns {
-   display: flex;
-   flex-direction: row;
+	display: flex;
+	flex-direction: row;
 }
 
 .market_info_Btns > * {
@@ -539,13 +539,13 @@ img {
 }
 
 .seller_market_a {
-   color: rgb(255, 255, 255);
+	color: rgb(255, 255, 255);
     background: green;
 }
 
 .room_setting_modal {
-   display: none;
-   position: fixed;
+	display: none;
+	position: fixed;
     top: 50px;
     left: 0px;
     right: 0px;
@@ -556,13 +556,13 @@ img {
 }
 
 .room_setting_modal_area {
-   width: 100%;
+	width: 100%;
     height: calc(617px);
     background-color: rgba(0,0,0,0.5);
 }
 
 .room_setting_content {
-   position: absolute;
+	position: absolute;
     width: 100%;
     top: 0px;
     left: 0px;
@@ -574,7 +574,7 @@ img {
 }
 
 .room_setting_notification_Btn {
-   width: 4rem;
+	width: 4rem;
     height: 4rem;
     background-image: url(/pmang/image/notification_green.png);
     background-position: center 9px;
@@ -587,7 +587,7 @@ img {
 }
 
 .room_setting_report {
-   width: 4rem;
+	width: 4rem;
     height: 4rem;
     background-image: url(/pmang/image/report.jpg);
     background-position: center 9px;
@@ -600,7 +600,7 @@ img {
 }
 
 .room_setting_reportCheck {
-   width: 4rem;
+	width: 4rem;
     height: 4rem;
     background-image: url(/pmang/image/reportCheck.png);
     background-position: center 9px;
@@ -613,7 +613,7 @@ img {
 }
 
 .room_setting_cutOff {
-   width: 4rem;
+	width: 4rem;
     height: 4rem;
     background-image: url(/pmang/image/cutOff.png);
     background-position: center 9px;
@@ -626,7 +626,7 @@ img {
 }
 
 .room_setting_out {
-   width: 4rem;
+	width: 4rem;
     height: 4rem;
     background-image: url(/pmang/image/out.png);
     background-position: center 9px;
@@ -639,7 +639,7 @@ img {
 }
 
 .room_setting_notification_Btn > b {
-   font-weight: 600;
+	font-weight: 600;
 }
 
 /* 메세지 옵션------------------ */
@@ -759,5 +759,6 @@ img {
    justify-content: center;
    margin-top: 0.5rem;
 }
+
 
 

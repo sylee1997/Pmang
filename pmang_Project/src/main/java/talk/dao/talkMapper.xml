@@ -3,42 +3,61 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="talkSQL">
-    
-    <!-- 방 조회 -->
-    <select id="isRoom" parameterType="talkRoom" resultType="talkRoom">
-       select * from talkroom where userId = #{userId} and partner_userId = #{partner_userId}  
+ 	
+ 	<!-- 방 조회 -->
+ 	<select id="isRoom" parameterType="talkRoom" resultType="talkRoom">
+ 		select * from talkroom where userId = #{userId} and partner_userId = #{partner_userId}  
+ 	</select>
+ 	
+ 	<!-- 방 생성 -->
+ 	<insert id="createRoom" parameterType="talkRoom">
+ 		insert into talkroom values(talkRoom_seq.nextval,#{userId},#{partner_userId},#{item_seq},0)
+ 	</insert>
+ 	
+ 	<!-- Message 생성 -->
+ 	<insert id="insertMessage" parameterType="message">
+		insert into message values(null,#{sender_user_id},#{receiver_user_id},#{talkRoom_seq},#{talk_content},TO_char(systimestamp,'YYYY-MM-DD HH24:MI:SS:FF3'),null,#{receiver_user_profileImage},#{item_seq})
+ 	</insert>
+ 	
+ 	<!-- item 조회 -->
+ 	<select id="getItem" parameterType="int" resultType="item">
+		select * from item where item_seq = #{item_seq}
     </select>
     
-    <!-- 방 생성 -->
-    <insert id="createRoom" parameterType="talkRoom">
-       insert into talkroom values(talkRoom_seq.nextval,#{userId},#{partner_userId},#{item_seq},0)
-    </insert>
-    
-    <!-- Message 생성 -->
-    <insert id="insertMessage" parameterType="message">
-       insert into message values(#{sender_user_id},#{receiver_user_id},#{talkRoom_seq},#{talk_content},sysdate,#{receiver_user_profileImage},#{item_seq})
-    </insert>
-    
-    <!-- 방 리스트 출력 -->
-    <select id="getRoomList" parameterType="String" resultType="talkRoom">
-       select * from talkroom where userId = #{userId}
-    </select>
- 
     <!-- seller조회 -->
     <select id="getSeller" parameterType="String" resultType="seller">
-      select * from seller where userId=#{partner_userId}
+		select * from seller where userId=#{partner_userId}
     </select>
     
-    <!-- item 조회 -->
-    <select id="getItem" parameterType="int" resultType="item">
-       select * from item where item_seq = #{item_seq}
-    </select>
-    
-    <!-- lastMessage 조회 -->
+    <!-- 리스트 전체 빼와야 할경우 사용할수도있어서 냅둠.
+    <select id="getLastMessage" resultType="message">
+    	select * from (select rownum rn,tt.* from(select*from message order by send_time desc)tt)where rn = 1
+    </select> 
+    -->
+ 	
+ 	<!-- 방 리스트 출력 -->
+ 	<select id="getRoomList" parameterType="String" resultType="talkRoom">
+ 		select * from talkroom where userId = #{userId}
+ 	</select>
+ 	
+ 	 <!-- lastMessage 조회 -->
     <select id="getLastMessage" parameterType="int" resultType="message">
-    	select * from(
-    		select * from message where talkRoom_seq = #{talkRoom_seq} order by send_time desc
+		select * from(
+			select * from message where talkRoom_seq = #{talkRoom_seq} order by send_time desc
 		)where ROWNUM = 1
     </select>
+    
+    <select id="getMessage" parameterType="java.util.Map" resultType="message">
+    	select * from message where userId = #{userId} and partner_userId = #{partner_userId} 
+    </select>
+    
+    <!-- 상대방 on/off_line 확인 -->
+
+
+	<select resultType="String" parameterType="hashMap" id="getReceiver_read_time">
+		select read_time from (select * from message where sender_user_id = #{receiver_user_id}, receiver_user_id = #{sender_user_id})where ROWNUM = 1 
+	</select>
+ 	
+ 	
  </mapper>
  

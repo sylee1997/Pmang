@@ -19,7 +19,6 @@ public class TalkServiceImple implements TalkService {
 	
 	@Override
 	public TalkRoomDTO isRoom(TalkRoomDTO talkRoomDTO) {
-		
 		return talkDAO.isRoom(talkRoomDTO);
 	}
 	
@@ -33,43 +32,41 @@ public class TalkServiceImple implements TalkService {
 		talkDAO.insertMessage(messageDTO);
 	}
 
-	@Override
-	public SellerDTO getSellerInfoSearch(String partner_userId) {
-		return talkDAO.getSellerInfoSearch(partner_userId);
-	}
 
 	@Override
-	public ItemDTO getItemInfoSearch(String partner_userId) {
-		return talkDAO.getItemInfoSearch(partner_userId);
-	}
-	
-	@Override
-	public String getPartnerUserId(int item_seq) {
-		return talkDAO.getPartnerUserId(item_seq);
-	}
-	
-	//방리스트
-	@Override
-	public List<TalkRoomDTO> getRoomList(String userId) {	
-		return talkDAO.getRoomList(userId);
-	}
-
-
-	//영은
-	@Override
-	public ItemDTO getItem(int item_seq) { //item
+	public ItemDTO getItem(int item_seq) {
 		return talkDAO.getItem(item_seq);
 	}
-	
+
 	@Override
-	public SellerDTO getSeller(String partner_userId) { //판매자
+	public SellerDTO getSeller(String partner_userId) {
 		return talkDAO.getSeller(partner_userId);
 	}
 
+	
 	@Override
-	public MessageDTO getLastMessage(int talkRoom_seq) { //마지막 메세지
+	public List<TalkRoomDTO> getRoomList(String userId) {
+		return talkDAO.getRoomList(userId);
+	}
+
+	@Override
+	public MessageDTO getLastMessage(int talkRoom_seq) {
 		return talkDAO.getLastMessage(talkRoom_seq);
 	}
 
+	@Override
+	public List<MessageDTO> getMessage(Map<String, String> userMap) {
+		return talkDAO.getMessage(userMap);
+	}
+
+	@Override
+	public String getReceiver_read_time(String sender_user_id, String receiver_user_id) {
+		//receiver_user의 on/off_line 확인 read_time = null(on_line) read_time != null (off_line)
+		if(talkDAO.getReceiver_read_time(sender_user_id, receiver_user_id) == null){
+			return "on_line";
+		}else {
+			return "off_line";			
+		}
+	}
 	
 }
