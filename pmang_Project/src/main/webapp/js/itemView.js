@@ -1,5 +1,4 @@
-/* var firstCategory = ['패션', '디지털/가전', '도서/티켓', '리빙용품', '스포츠/레저', '뷰티/미용', '유아/출산', '기타', '커뮤니티' ] */
-/*  secondCategory 종류  */
+
 var fashion = ['여성의류', '남성의류', '패션잡화'];
 	var women = ['아우터','티셔츠','니트','셔츠/블라우스','맨투맨/후드집업','원피스/세트','바지','스커트'];
 	var men = ['아우터','티셔츠','니트','셔츠','맨투맨/후드집업','바지'];
@@ -36,8 +35,6 @@ var child = ['영아의류(-2세)', '여아의류(3-6세)', '남아의류(3-6세
 	var babygoods = ['신발','모자','가방','양말'];
 	var fairy = ['인형','교육/완구','장난감','물놀이도구','놀이터도구'];
 var others = ['피망나눔','차량,오토바이', '기타'];
-
-
 
 
 
@@ -368,7 +365,6 @@ $('.selectItem3').on('click', 'a', function(){
 
 
 
-
 //올린 시간 몇일전, 몇시간전, 몇분전, 몇초전...
 function timeForToday(value) {
     var today = new Date();
@@ -445,9 +441,6 @@ $("#imgCheckBox").on('change',(function(){
 }));
 
 
-
-
-
 //댓글 등록하기
 $('#replyBtn').click(function() {
 	//alert($('#sessionId').val());
@@ -482,7 +475,34 @@ $('#replyBtn').click(function() {
 	}
 });//replyBtn click
 
-
+//찜 불러오기(강제 호출용)
+$('#likedOrNot').click(function(event){
+	$.ajax({
+		type: 'post',
+		url: '/pmang/board/getWishlist',
+		data: 'item_seq='+$('#item_seq').val(),
+		dataType: 'json',
+		error:function(err){
+			console.log(err);
+		},
+		success:function(result){
+			
+			$('#zzimIcon').attr('src','/pmang/image/zzimNo.png');
+			$('#likedOrNot').val('0');
+			$('#like').css('background-color', 'gray');
+			
+			$('.likeSpan').text(result.list.length);
+			$.each(result.list, function(index, items){
+				
+				if(items.userId== $('#userId').val()){//세션에서 받은 아이디 값을 바꿔줄 것		
+					$('#zzimIcon').attr('src','/pmang/image/zzimYes.png');
+					$('#likedOrNot').val('1');
+					$('#like').css('background-color', 'green');
+				}
+			})//for
+		}//success
+	});//ajax
+});
 
 //댓글 불러오기(강제 호출용)
 $('#comment_seq').click(function(event){
@@ -505,7 +525,7 @@ $('#comment_seq').click(function(event){
 			console.log(commentIndex);
 			$.each(result.list, function(index, items){
 				
-				if(index < (pageSize*commentIndex)){
+				if(index < (pageSize*commentIndex)){//정해진만큼만 글 뿌리기
 					
 				
 					$('<div/>',{
@@ -532,18 +552,31 @@ $('#comment_seq').click(function(event){
 											.append($('<div/>',{
 												class: 'replyContent',
 												text: items.item_comment}))
-											.append($('<div/>',{})
+											.append($('<div/>',{
+												display : 'flex'})
 														.append($('<div/>',{}))
+																	.append($('<img/>',{
+																		src : '/pmang/image/replyIcon_.png',
+																		width : '14px',
+																		height : '14px'}))
 																	.append($('<a/>',{
-																					class: 'commentForComment',
-																					onclick:'commentForComment(this)',
-																					text:'덧글달기'}))
+																		class: 'commentForComment',
+																		onclick:'commentForComment(this)',
+																		text:'덧글달기'}))
 														.append($('<div/>',{
 															class: 'report'+index}))))
 								.append($('<hr/>'))
 					.appendTo($('.replyList'));
 					
-					if(items.userId=='깜냥이'){ //이거 나중에 세션 값으로 바꿔줘
+					if(items.userId==$('#userId').val()){ //이거 나중에 세션 값으로 바꿔줘
+						$('<img/>',{
+							class : 'replyPics',
+							src : '/pmang/image/deleteIcon_.png',
+							width : '14px',
+							height : '14px'})
+						.appendTo($('.report'+index));
+						
+						
 						$('<a/>',{
 							class : 'deleteBtn',
 							onclick:'commentDelete(this)',
@@ -555,8 +588,16 @@ $('#comment_seq').click(function(event){
 									}))	
 						.appendTo($('.report'+index));			
 					}else{
+						$('<img/>',{
+							class : 'replyPics',
+							src : '/pmang/image/reportIcon_.png',
+							width : '14px',
+							height : '14px'})
+						.appendTo($('.report'+index));
+						
 						$('<a/>',{
-							class : 'reportBtn',
+							id : 'myBtn111'/*'reportBtn'*/,
+							onclick:'commentReport(this)',
 							text:'신고하기'})
 									.append($('<input/>',{
 										class: 'comment_seq',
@@ -568,6 +609,12 @@ $('#comment_seq').click(function(event){
 				}//if
 			})//for
 			$('.commentNum').text(result.list.length);
+			if(result.list.length>(pageSize*commentIndex)){
+				$('#morePic').attr("src", "/pmang/image/moreBtn.png");
+				$('#moreText').text("상품문의 더보기");
+			}else{
+				$('#moreBtn').css("display", "none");
+			}
 		}//success
 	});//ajax
 });//click
@@ -587,7 +634,6 @@ function commentDelete(that){
 		$.ajax({
 			type: 'post',
 			url: '/pmang/board/commentDelete',
-			//세션에서 유저키 받아서 넣고, 페이징데이터 추가 필요.
 			data: {'comment_seq' : comment_seq},
 			dataType: 'json',
 			async : false,
@@ -615,7 +661,6 @@ function commentForComment(that){
 	$.ajax({
 		type: 'post',
 		url: '/pmang/board/getAComment',
-		//세션에서 유저키 받아서 넣고, 페이징데이터 추가 필요.
 		data: {'comment_seq' : comment_seq},
 		dataType: 'json',
 		async : false,
@@ -637,4 +682,42 @@ $('#moreBtn').click(function() {
 	let b = a + 1;
 	$('#commentIndex').val(b);
 	$('#comment_seq').trigger('click');
+});
+
+
+//찜버튼 클릭
+$('#like').click(function() {
+	if($('#likedOrNot').val()=='0'){
+		$.ajax({
+			type: 'post',
+			url: '/pmang/board/pushLike',
+			data: {'item_seq' : $('#item_seq').val(), 'userId' : $('#userId').val()},
+			dataType: 'json',
+			error:function(err){
+				console.log(err);
+			},
+			success:function(result){
+				
+			}//success
+		});//ajax
+		
+		$('#likedOrNot').trigger('click');
+		$('#likedOrNot').val('1');
+		
+	}else if($('#likedOrNot').val()=='1'){
+		$.ajax({
+			type: 'post',
+			url: '/pmang/board/cancelLike',
+			data: {'item_seq' : $('#item_seq').val(), 'userId' : $('#userId').val()},
+			dataType: 'json',
+			error:function(err){
+				console.log(err);
+			},
+			success:function(result){
+			
+			}//success
+		});//ajax
+		$('#likedOrNot').trigger('click');
+		$('#likedOrNot').val('0');
+	}//if
 });

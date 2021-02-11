@@ -2285,7 +2285,14 @@ function boardPaging(pg){
 $('.selection3').on('click', '.itemLink', function(){
 
 	var item_seq = $(this).children("#item_seqSpan").text();
+	var itemSubject = $(this).find('.itemName').text();
+	var itemPrice = $(this).find(".itemPrice").text();
+	var img = $(this).children("img").attr('src');
 	//alert($(this).children("#item_seqSpan").text());
+	
+	checkCookie(img, itemSubject, itemPrice, item_seq);
+	
+	
 	location.href="/pmang/board/itemView?item_seq="+item_seq;
 });
 
@@ -2312,8 +2319,20 @@ $(document).click(function(e){
 
 
 
+//최근본상품 쿠키체크!
+function checkCookie(img, itemSubject, itemPrice, item_seq) {
+    var itemID = getCookie("itemID");
+	var thisItem= img+':'+itemSubject+':'+itemPrice+':'+item_seq;
+	
+		if (itemID != "" && itemID != null) {
+			if (itemID.indexOf(thisItem) == -1){ //값이 없으면 
+				setCookie("itemID",thisItem+"&"+itemID, 1);
+			 }
+		} else if (itemID == "" || itemID == null) {
+				setCookie("itemID",thisItem+"&", 1);
+		}
 
-
+}
 
 
 
@@ -2359,9 +2378,4 @@ function searchDetailAddrFromCoords(coords, callback) {
 	var geocoder = new kakao.maps.services.Geocoder();
 	geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
 }
-
-
-
-
-
 

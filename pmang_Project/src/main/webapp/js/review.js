@@ -100,7 +100,7 @@ function preview(arr){
 	
 }
 
-
+//올린 이미지 삭제
 function removeimg(value){
 	var result=confirm('선택한 이미지를 삭제하시겠습니까?');
 	
@@ -163,19 +163,49 @@ $('.scoreLevel input[type=radio]').on('click', function() {
 
 });
 
-$('.reviewOkBtn').click(function(){
+//리뷰작성
+$('.reviewOkBtn').on('click',function(){
 	
-	let formData=new FormData($('#reviewWriteForm')[0]);
-	//alert(formData);
+	var formData=new FormData($('#reviewWriteForm')[0]);
+	
+	var img1url=$('.reviewPhotoPreview').children().eq(0).children('img').attr("src");
+	var img2url=$('.reviewPhotoPreview').children().eq(1).children('img').attr("src");
+	var img3url=$('.reviewPhotoPreview').children().eq(2).children('img').attr("src");
+	
+	var img1=$('.reviewPhotoPreview').children().eq(0).children('img').attr("title");
+	var img2=$('.reviewPhotoPreview').children().eq(1).children('img').attr("title");
+	var img3=$('.reviewPhotoPreview').children().eq(2).children('img').attr("title");
+	
+	formData.append("img1",img1);
+	formData.append("img2",img2);
+	formData.append("img3",img3);
+	formData.append("img1url",img1url);
+	formData.append("img2url",img2url);
+	formData.append("img3url",img3url);
+	
+	var reviewStamp=$('input[type=radio]:checked').val();
+	var sellerid=$('.reviewStoreName').text();
+	var reviewSubject=$('.reviewSubject').text();
+	
+	formData.append("reviewSubject",reviewSubject);
+	formData.append("sellerid",sellerid);
+	formData.append("reviewStamp",reviewStamp);
+	
+	
+	//데이터 잘 들어왔는지 확인
+	for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); } 
+	
+	
 	$.ajax({
 		type:'post',
-		enctype:'multipart/form-data',
+		enctype:'form-data',
 		processData:false,
 		contentType:false,
 		url:'/pmang/board/reviewWrite',
 		data:formData,
 		success:function(data){
 			alert('리뷰 작성을 완료하였습니다.');
+			location.href='/pmang/index';
 			
 		},
 		error:function(err){

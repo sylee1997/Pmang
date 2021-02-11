@@ -826,4 +826,3 @@ $('#recentlylocation').click(function(){
 		return false;
 	});
 });
-

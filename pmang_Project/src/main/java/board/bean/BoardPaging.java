@@ -7,15 +7,15 @@ import lombok.Data;
 @Data
 @Component
 public class BoardPaging {
-	private int currentPage;//현재페이지
-	private int pageBlock;//[이전][1][2][3][4][5][다음]
-	private int pageSize;//1페이지당 20개씩
-	private int totalA;//총글수
+	private int currentPage;//�쁽�옱�럹�씠吏�
+	private int pageBlock;//[�씠�쟾][1][2][3][4][5][�떎�쓬]
+	private int pageSize;//1�럹�씠吏��떦 25媛쒖뵫
+	private int totalA;//珥앷��닔
 	private StringBuffer pagingHTML;
 	
 	public void makePagingHTML(){
 		pagingHTML = new StringBuffer();
-		int totalP = (totalA + pageSize-1) / pageSize; //총페이지수
+		int totalP = (totalA + pageSize-1) / pageSize; //珥앺럹�씠吏��닔
 
 		int startPage = (currentPage-1) / pageBlock * pageBlock + 1;
 		

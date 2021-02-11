@@ -1,6 +1,7 @@
 package board.dao;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -11,18 +12,24 @@ import org.springframework.transaction.annotation.Transactional;
 
 import board.bean.CommentDTO;
 import board.bean.ItemDTO;
+
 import board.bean.SearchDTO;
+import board.bean.WishlistDTO;
+
+import board.bean.ReportDTO;
+import board.bean.ReviewDTO;
+
 
 @Transactional
 @Repository
 public class BoardDAOMybatis implements BoardDAO {
 
-	
 	@Autowired
 	private SqlSession sqlSession;
+
 	@Override
 	public ItemDTO getItem(int item_seq) {
-		return sqlSession.selectOne("boardSQL.getItem", item_seq);  
+		return sqlSession.selectOne("boardSQL.getItem", item_seq);
 	}
 
 	@Override
@@ -44,18 +51,48 @@ public class BoardDAOMybatis implements BoardDAO {
 	public CommentDTO getAComment(String comment_seq) {
 		return sqlSession.selectOne("boardSQL.getAComment", comment_seq);
 	}
-	
+
+
+	@Override
+	public List<WishlistDTO> getWishlist(int item_seq) {
+		return sqlSession.selectList("boardSQL.getWishlist", item_seq);
+	}
+
+	@Override
+	public void pushLike(Map<String, Object> map) {
+		sqlSession.insert("boardSQL.pushLike", map);
+
+	}
+
+	@Override
+	public void cancelLike(Map<String, Object> map) {
+		sqlSession.delete("boardSQL.cancelLike", map);
+	}
+
+	@Override
+	public void reportUser(Map<String, Object> map) {
+		sqlSession.insert("boardSQL.reportUser", map);
+	}
+
+	@Override
+	public void countReport(String userId) {
+		sqlSession.insert("boardSQL.countReport", userId);
+	}
+
+	@Override
+	public String getUserId(Map<String, Object> map) {
+		return sqlSession.selectOne("boardSQL.getUserId", map);
+	}
+
+	// ------------------------------ItemBoard------------------------------------//
 
 	@Override
 	public void itemHitUpdate(int item_seq) {
 		sqlSession.selectOne("boardSQL.itemHitUpdate", item_seq);
-		
 	}
 
-	
-	
-	
-	//------------------------------ItemBoard------------------------------------//
+
+
 	@Override
 	public List<ItemDTO> getItemBoardList(Map<String, Object> map) {
 		return sqlSession.selectList("boardSQL.getItemBoardList", map);
@@ -65,12 +102,12 @@ public class BoardDAOMybatis implements BoardDAO {
 	public List<Object> getItemBoardCount(Map<String, Object> map) {
 		System.out.println(map.get("category1"));
 		System.out.println(map.get("category2"));
-		if(map.get("category2") == null) {
+		if (map.get("category2") == null) {
 			return sqlSession.selectList("boardSQL.getItemBoardCount1", map);
-		}else {
+		} else {
 			return sqlSession.selectList("boardSQL.getItemBoardCount2", map);
 		}
-		
+
 	}
 	
 	@Override
@@ -229,5 +266,14 @@ public class BoardDAOMybatis implements BoardDAO {
 	}
 
 
-}
+	//리뷰작성
+	@Override
+	public void reviewWrite(ReviewDTO reviewDTO) {
+		 sqlSession.insert("boardSQL.reviewWrite", reviewDTO);
 
+	}
+
+
+
+
+}

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
     <input type="hidden" id="total" value="">
+    <input type="hidden" id="pageNo" value="">
   <!-- 인기카테고리 슬라이드영역 -->
          <div id="slide">
             <div id="slideInitial">

@@ -117,6 +117,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="searchlocation" parameterType="String" resultType="zipcode">
 		select DISTINCT sido, sigungu, yubmyundong from newzipcode where sigungu like '%'||#{address}||'%' or yubmyundong like '%'||#{address}||'%' or roadname like '%'||#{address}||'%' order by sido
 	</select>
+	<select id="adminUserDeleteSearch" parameterType="String" resultType="String">
+		select userid from usertable where userid=#{userid}
+	</select>
 	
-	
+	<delete id="adminUserDelete" parameterType="String">
+		delete from usertable where userid=#{userid}
+	</delete>
+
 </mapper>
