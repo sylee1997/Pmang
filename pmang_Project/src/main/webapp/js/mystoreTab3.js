@@ -72,6 +72,8 @@ $(document).ready(function(){
 											value:items.itemNum
 										})).appendTo($('.review'));
 					 
+					 
+					 
 				 }else{
 						// //리뷰사진이랑 리뷰내용을 모두 작성되어있을때
 						
@@ -125,13 +127,13 @@ $(document).ready(function(){
 											value:items.itemNum
 										})).appendTo($('.review'));
 						
-						
+						 
 					 }
 			});
 		}
 		
 	});
-	
+	var bool_sw=false;
 	//무한스크롤
 	$(this).scroll(function(){
 		var scrollHeight=$(document).height();
@@ -145,6 +147,7 @@ $(document).ready(function(){
 		if(scrollPosition>scrollHeight-800){
 			if(cnt==$('.review1').length){
 				//console.log('길이가같아ㅏ');
+				bool_sw=true;
 				return false;
 			}
 			pg++;
@@ -157,7 +160,7 @@ $(document).ready(function(){
 				success:function(data){
 					console.log(JSON.stringify(data));
 				
-					
+					bool_sw=true;
 					$.each(data.list,function(index,items){
 					if(items.reviewImg1==null){
 						 // 리뷰사진이 없을경우
@@ -208,6 +211,7 @@ $(document).ready(function(){
 													id:'itemNum',
 													value:items.itemNum
 												})).appendTo($('.review'));
+							
 							 
 						 }else{
 								// //리뷰사진이랑 리뷰내용을 모두 작성되어있을때
@@ -261,7 +265,7 @@ $(document).ready(function(){
 													id:'itemNum',
 													value:items.itemNum
 												})).appendTo($('.review'));
-								
+								 
 								
 							 }
 					});
@@ -271,6 +275,8 @@ $(document).ready(function(){
 			
 		}
 	});
+	
+	
 	
 });
 
