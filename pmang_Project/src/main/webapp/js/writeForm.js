@@ -322,5 +322,3 @@ $('#checkPostSearchBtn').click(function(){
 		}
 	});	
 });
-
-
