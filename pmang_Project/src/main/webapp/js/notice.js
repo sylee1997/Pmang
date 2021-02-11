@@ -43,6 +43,29 @@ $('.postArea').click(function(){
 });//postArea click
 
 
+if($('#footerTabNo').val()=='1'){
+	$('#tab1').attr('checked', true);
+	
+}else if($('#footerTabNo').val()=='2'){
+	$('#tab2').attr('checked', true);
+	
+}else if($('#footerTabNo').val()=='3'){
+	$('#tab3').attr('checked', true);
+	
+}else if($('#footerTabNo').val()=='4'){
+	$('#tab3').attr('checked', true);
+	$('#menu2').attr('checked', true);
+	
+}/*else{
+	console.log($('#footerTabNo').val());
+	$('#tab1').attr('checked', true);
+}*/
+
+
+
+
+
+
 
 
 

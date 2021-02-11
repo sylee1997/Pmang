@@ -623,21 +623,6 @@ $('#footerFQA').on('click',function(){
 });
 
 
-if('${tabNo}'=='1'){
-	$('#tab1').attr('checked', true);
-}else if('${tabNo}'=='2'){
-	$('#tab2').attr('checked', true);
-}else if('${tabNo}'=='3'){
-	$('#tab3').attr('checked', true);
-}else if('${tabNo}'=='4'){
-	$('#tab3').attr('checked', true);
-	$('#menu2').attr('checked', true);
-}else{
-	$('#tab1').attr('checked', true);
-}
-
-
-
 
 
 /* ---------------------------------------------------------------------- */

@@ -12,6 +12,7 @@
 <title>피망마켓에 오신것을 환영합니다.</title>
 </head>
 <body> 
+
 <!-- 로그인 모달 -->
 <div class="loginModal">
       	<div class="loginModalContent">
@@ -649,10 +650,10 @@
             <a class="cIPDuS" id="footerFQA">자주묻는질문</a>
             <a class="cgGBdw" id="footerPolicy">운영정책</a>
             <a class="cIPDuS" href="#">1:1문의하기</a>
-            <a class="cgGBdw" href="#">사업자정보확인</a>
-            <a class="cgGBdw" href="#">이용약관</a>
-            <a class="cgGBdw" href="#">청소년보호정책</a>
-            <a class="cgGBdw" href="#">위치기반서비스 이용약관</a>
+            <a class="cgGBdw" href="#" onClick="window.open('http://localhost:8080/pmang/pm_notice/companyInfo.jsp','companyInfo')">사업자정보확인</a>
+            <a class="cgGBdw" href="#" onClick="window.open('http://localhost:8080/pmang/pm_notice/servicePolicy.jsp','servicePolicy')">이용약관</a>
+            <a class="cgGBdw" href="#" onClick="window.open('http://localhost:8080/pmang/pm_notice/youthPolicy.jsp','youthPolicy')">청소년보호정책</a>
+            <a class="cgGBdw" href="#" onClick="window.open('http://localhost:8080/pmang/pm_notice/GPSPolicy.jsp','GPSPolicy')">위치기반서비스 이용약관</a>
          </div>
       </div>
       
@@ -660,7 +661,7 @@
          <div class="footerContent">
             <div class="footerContentMark">
       		<img src="/pmang/image/pmangFooter.PNG" alt="피망장터이미지" height="40px"/>
-             <div class="footerContentMarkTitle">피나게 망하지 않을 만큼 판매하는 장터입니다. 누구나, 무엇이든 쉽고 편하고 안전하게 거래할 수 있습니다.</div>
+             <div class="footerContentMarkTitle">피나게 망하지 않을 만큼 판매하는 피망장터입니다. 누구나, 무엇이든 쉽고 편하고 안전하게 거래할 수 있습니다.</div>
             </div>
             
             <div class="indexFooter_icon">
@@ -676,12 +677,12 @@
          
          <div class="footerCompanyInfo">
             <div class="infomain">
-               대표이사: 김우석 &nbsp;|&nbsp; 개인정보담당자: 구세주 &nbsp;|&nbsp; 사업자등록정보 : 110-383-234...
-               &nbsp;|&nbsp; 통신판매업신고 : 아직안했음
+               대표이사: 김피망 &nbsp;|&nbsp; 개인정보담당자: 김당근 &nbsp;|&nbsp; 사업자등록정보 : ABC-DEFG-HIJ
+               &nbsp;|&nbsp; 신고현황 : 통신판매업 신고
                <br>
-               주소: 서울시 서초구 강남대로...
+               주소: 서울 서초구 강남대로 20
                <br>
-               "고객센터 대표번호: 1544-1234" &nbsp;|&nbsp; FAX 02-345-6789
+               "고객센터 대표번호: 1234-5678" &nbsp;|&nbsp; FAX 02-123-6789
                <br>
                
                <div class="CustomerService">
@@ -717,6 +718,18 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script> <!-- 카카오디벨로퍼 -->
 <script type="text/javascript" src="/pmang/js/index.js"></script>
+<script>
+if('${tabNo}'=='1'){
+	$('#tab1').attr('checked', true);
+}else if('${tabNo}'=='2'){
+	$('#tab2').attr('checked', true);
+}else if('${tabNo}'=='3'){
+	$('#tab3').attr('checked', true);
+}else if('${tabNo}'=='4'){
+	$('#tab3').attr('checked', true);
+	$('#menu2').attr('checked', true);
+}
+</script>
 
 </body>
 </html>

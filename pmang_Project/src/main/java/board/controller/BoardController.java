@@ -528,6 +528,7 @@ public class BoardController {
 	//공지사항 창 열기
 	@RequestMapping(value="notice", method=RequestMethod.GET)
 	public String notice(@RequestParam(required=false, defaultValue="0") int tabNo, Model model) {
+		
 		model.addAttribute("tabNo",tabNo);
 		model.addAttribute("display", "/pm_notice/notice.jsp");
 
