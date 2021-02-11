@@ -51,7 +51,7 @@ var others = ['피망나눔','차량,오토바이', '기타'];
 
 //아이템 정보 불러오기
 $(document).ready(function(){
-	window.open("/pmang/talk/talkRoom?item_seq=123&&partner_userId=gil","","width=375 height=667");
+	
 	$.ajax({
 		type:'post',
 		url:'/pmang/board/getItem',
@@ -413,7 +413,7 @@ function timeForToday(value) {
 
 
 /*>>>>>>> b8d99ede94c84a2f307e279d9858c9db651b1157*/
-
+window.open("/pmang/talk/talkRoom?item_seq=123&&partner_userId=gil","","width=375 height=667");
 //탭메뉴, 문의댓글수 제한
 $(document).ready(function(){
 	
