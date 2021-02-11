@@ -1,6 +1,6 @@
 $(document).ready(function() {
    sock = new SockJS('/pmang/talk-ws');//나중에 혹시 안되면 "ws://192.168.8.32:8080/SpringWeb/chat-ws" 나중에 주소적을때 이런 양식으로.
-
+   
    sock.onopen = function() {
       console.log('open');
    };
@@ -17,7 +17,8 @@ $(document).ready(function() {
       appendMessage("연결을 끊었습니다.");
       console.log('close');
    };
-
+   
+   
    // 메세지 보내기
    $('#sendBtn').click(function() {
      /*var msg = $.trim($('#talk_message').val());
@@ -26,13 +27,11 @@ $(document).ready(function() {
      var msg = $('#talk_message').val();
      if(msg != ""){
         message = {
-        		sender_user_id : $('#sender_user_id'),
-                receiver_user_id : $('#receiver_user_id'),
+              sender_user_id : $('#sender_user_id').val(),
+                receiver_user_id : $('#receiver_user_id').val(),
                 talk_content : $('#talk_message').val(),
-                send_time : 값넣어놔야함,
-                receiver_pf_Photo : $('#receiver_pf_Photo'),
-                item_seq : $('#item_seq')
-              
+                receiver_user_profileImage : $('#receiver_user_profileImage').val(),
+                item_seq : $('#item_seq').val()
         }
         sock.send(JSON.stringify(message));
         $('#talk_message').val('');

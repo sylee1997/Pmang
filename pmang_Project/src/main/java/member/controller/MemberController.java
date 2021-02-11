@@ -13,8 +13,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,8 +44,8 @@ public class MemberController {
 
 	@RequestMapping(value="login", method=RequestMethod.POST)
 	@ResponseBody 
-	public String login(@RequestParam Map<String, String> map, HttpSession session) { // 어차피 언젠가는 map으로 묶어야 보낼수있어서 여기서 맵으로 묶었다
-		return memberService.login(map, session); // 맵에실어서 리턴값 문자열을 가지고 간다
+	public String login(@RequestParam Map<String, String> map, HttpSession session) { // �뼱李⑦뵾 �뼵�젨媛��뒗 map�쑝濡� 臾띠뼱�빞 蹂대궪�닔�엳�뼱�꽌 �뿬湲곗꽌 留듭쑝濡� 臾띠뿀�떎
+		return memberService.login(map, session); // 留듭뿉�떎�뼱�꽌 由ы꽩媛� 臾몄옄�뿴�쓣 媛�吏�怨� 媛꾨떎
 	}
 
 	
@@ -72,7 +74,7 @@ public class MemberController {
 		
 		int su = memberService.write(memberDTO);
 
-		// 인증 메일 보내기 메서드
+		// �씤利� 硫붿씪 蹂대궡湲� 硫붿꽌�뱶
 		mailsender.mailSendWithUserKey(memberDTO.getEmail1(),memberDTO.getEmail2(), memberDTO.getUserId(), request);
 		
 		model.addAttribute("su", su);
@@ -87,11 +89,11 @@ public class MemberController {
 		return result;
 	}
 	
-	// e-mail 인증 컨트롤러
+	// e-mail �씤利� 而⑦듃濡ㅻ윭
 	@RequestMapping(value = "regSuccess", method = RequestMethod.GET)
 	public String regSuccess(@RequestParam("userId") String userId, @RequestParam("user_key") String key) {
 
-		mailsender.regSuccess(userId, key); // mailsender의 경우 @Autowired
+		mailsender.regSuccess(userId, key); // mailsender�쓽 寃쎌슦 @Autowired
 
 		return "/member/regSuccess";
 		}
@@ -145,7 +147,7 @@ public class MemberController {
 		//String realPath = request.getServletPath();
 		//System.out.println(realPath);
 		
-		UUID uuid = UUID.randomUUID(); //중복 파일이름 방지를 위한 uuid설정
+		UUID uuid = UUID.randomUUID(); //以묐났 �뙆�씪�씠由� 諛⑹�瑜� �쐞�븳 uuid�꽕�젙
 		
 
 		try {
@@ -193,7 +195,9 @@ public class MemberController {
 		
 		return mav;
 	}
-	
-		
-	
+
 }
+
+
+
+

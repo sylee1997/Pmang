@@ -43,9 +43,6 @@ public class TalkHandler extends TextWebSocketHandler {
 		System.out.println("handleTextMessage session : " + session);
 		System.out.println("handleTextMessage message : " + message);
 		System.out.println("message.getPayload() : " + message.getPayload());
-		
-		Map<String, Object> httpSessionMap = session.getAttributes();//HttpSession에 저장된 세션값을 저장한다.
-		System.out.println(httpSessionMap);
 		//객체담기
 		MessageDTO messageDTO = MessageDTO.convertMessage(message.getPayload());//메세지로 넘어온 데이터 DTO에 삽입
 		System.out.println("messageDTO.toString() : "+messageDTO.toString());
@@ -54,33 +51,27 @@ public class TalkHandler extends TextWebSocketHandler {
 		TalkRoomDTO talkRoomDTO = new TalkRoomDTO();
 		talkRoomDTO.setItem_seq(messageDTO.getItem_seq());
 		talkRoomDTO.setPartner_userId(messageDTO.getReceiver_user_id());
-		talkRoomDTO.setUserId((String) httpSessionMap.get("userId"));
+		talkRoomDTO.setUserId(messageDTO.getSender_user_id());
 		
-		//
-		
-		
-//		
-//		TalkRoomDTO getTalkRoomDTO = talkService.isRoom(talkRoomDTO);
-//		if(getTalkRoomDTO == null) {//방생성
-//			talkService.createRoom(talkRoomDTO);
-//		}
-//		TalkRoomDTO room = talkService.isRoom(talkRoomDTO);
-		
-		
-		//상대방에게 메시지가 왔을 때, 데이터저장 구현
-//		messageDTO.setTalkRoom_seq(room.getTalkRoom_seq());
-		//메세지가 오면 상대방의 유저 아이디에도 보내야함
-		
-		System.out.println(session.getId() + " 로 부터 " + message.getPayload() + "받음");
-		//1. 판매자의 userkey를 get방식으로 보냄
-        //2. messageDTO.getReceiver_user_id 의 userKey를 조회
-        //3. get방식으로 넘어온 userKey 와, 판매자의 userKey를 비교하여 일치하면 메일을 보냄.
-		for(WebSocketSession se : sessionList) {
-			if(httpSessionMap.get("userId").equals(messageDTO.getSender_user_id()) || httpSessionMap.get("userId").equals(messageDTO.getReceiver_user_id())) {
-				
-			}
-			se.sendMessage(new TextMessage(message.getPayload())); //모든 클라이언트들에게 TextMessage 전송. (브로드캐스트)
+		System.out.println("DTO여기까지됨");
+		//방이 없으면 새로 만들고 있으면 있는거 사용
+		TalkRoomDTO getTalkRoomDTO = talkService.isRoom(talkRoomDTO);
+		if(getTalkRoomDTO == null) {
+			talkService.createRoom(talkRoomDTO);
 		}
+		TalkRoomDTO room = talkService.isRoom(talkRoomDTO);		
+		messageDTO.setTalkRoom_seq(room.getTalkRoom_seq());//room_seq 만 여기서 데이터 삽입.
+		
+
+		System.out.println(session.getId() + " 로 부터 " + message.getPayload() + "받음");
+		for(WebSocketSession se : sessionList) {
+			//1. 판매자의 userkey를 get방식으로 보냄
+			//2. messageDTO.getReceiver_user_id 의 userKey를 조회
+			//3. get방식으로 넘어온 userKey 와, 판매자의 userKey를 비교하여 일치하면 메일을 보냄.
+			se.sendMessage(new TextMessage(message.getPayload())); //모든 클라이언트들에게 TextMessage 전송. (브로드캐스트)
+			
+		}
+		talkService.insertMessage(messageDTO); //메세지 DB저장
 		log.info("{}로 부터 {} 받음", session.getId(), message.getPayload());//getPayload 는 문자형태 그대로 받겠다는 말이다
 	}//클라이언트가 소켓에 메시지를 보냈을 떄 실행된다
 	

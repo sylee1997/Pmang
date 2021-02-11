@@ -9,94 +9,95 @@
 </head>
 <body>
 
-<input type="hidden" id="item_seq" value="${sessionScope.item_seq }">
+<input type="hidden" id="item_seq" value="${param.item_seq }">
 <input type="hidden" id="sender_user_id" value="${sessionScope.userId }">
 <input type="hidden" id="receiver_user_id" value="${sellerItem.partner_userId }">
-<input type="hidden" id="receiver_pf_Photo" value="${sellerItem.pf_Photo }">
+<input type="hidden" id="receiver_user_profileImage" value="${sellerItem.pf_Photo }">
+<%-- <input type="hidden" id="roomkey" value="${roomkey }"> --%>
 
 <div id="root">
    <div>
-   		<div class="room_setting_modal">
-   			<div class="room_setting_modal_area"></div>
-   			<div class="room_setting_content">
-   				<button class="room_setting_notification_Btn">
-   				알림
-   				<b>ON</b>
-   				</button>
-   				
-   				<button class="room_setting_report">신고</button>
-   				<button class="room_setting_reportCheck">신고조회</button>
-   				<button class="room_setting_cutOff">차단</button>
-   				<button class="room_setting_out">나가기</button>
-   			</div>
-   		</div>
-   		<!-- 여기부터 -->
-		<div class="modalDiv">
-			<div class="header_modal">
-			</div>
-			<!-- 여기부터 하단모달 -->
-			<div class="all_modal">
-			</div>
-			<div class="item_choice_nav">
+         <div class="room_setting_modal">
+            <div class="room_setting_modal_area"></div>
+            <div class="room_setting_content">
+               <button class="room_setting_notification_Btn">
+               알림
+               <b>ON</b>
+               </button>
+               
+               <button class="room_setting_report">신고</button>
+               <button class="room_setting_reportCheck">신고조회</button>
+               <button class="room_setting_cutOff">차단</button>
+               <button class="room_setting_out">나가기</button>
+            </div>
+         </div>
+         <!-- 여기부터 -->
+      <div class="modalDiv">
+         <div class="header_modal">
+         </div>
+         <!-- 여기부터 하단모달 -->
+         <div class="all_modal">
+         </div>
+         <div class="item_choice_nav">
                 <div class="item_choice_div">상품선택</div><button class="item_choice_closeBtn">x</button>
                 <button class="opponent_item_choice">상대방상점의 상품 선택하기</button><!-- 상대방 아이디 세션필요. -->
-				<button class="my_item_choice">내상점 상품 선택하기</button>
-			</div>
-			<!-- 하단모달끝 -->
-			
-		
-		
-			<div class="modal_area"></div>
-          	<div class="modal_marketInfo_div">
-				<div class="modal_marketInfo_detail_div">
-					<a href="/pmang/board/mystore" class="market_info_a">
-	    				<div class="market_info_textDiv">상점후기</div>
-	    				<div class="market_review_dataArea">
-		    				<div class="market_review_data">
-		    					<img src="/pmang/image/main_logo.JPG" alt="좋아요">
-		    					<b>3</b> <!-- DB에서 상점후기count 불러오기 -->
-		    					<img src="/pmang/image/main_logo.JPG" alt="보통">
-		    					<b>5</b> <!-- DB에서 상점후기count 불러오기 -->
-		    					<img src="/pmang/image/main_logo.JPG" alt="싫어요">
-		    					<b>7</b> <!-- DB에서 상점후기count 불러오기 -->
-		    				</div>
-		    			</div>
-					</a>
-	    		
-					<a href="내상점 - 내상품페이지" class="market_info_a">
-	    				<div class="market_info_textDiv">판매상품</div>
-	    				<div class="market_review_dataArea">
-	    					<b>2</b><!-- DB 에서 상품갯수 count 하기 -->
-	    				</div>
-					</a>
-					
-					<!-- <button type="button" class="market_info_a">
-						<div class="market_info_textDiv">판매내역</div>
-						<div class="market_review_dataArea">
-							<b>4</b>실제 판매 거래완료 개수 카운터하기
-						</div>
-					</button> --> <!-- 우리는 직거래밖에 없으니까 제거, 혹시사용하게 되면 사용할게 -->
-					
-					<div class="sales_details_div">
-						<div class="market_info_textDiv">판매내역</div>
-						<div class="market_review_dataArea">
-							<b>4</b>  <!-- 실제 판매 거래완료 개수 카운터하기 -->
-						</div>
-					</div>
-					
-					<div class="contact_time_div">
-						<div class="market_info_textDiv">연락시간</div>
-						<div class="market_review_dataArea">24시간 연락가능</div>
-					</div>
-				</div>
-				
-				<div class="market_info_Btns">
-					<button type="button" class="Fraud_report_Btn">사기 신고조회</button> <!-- 윈도우창 띄워줘야함 -->
-					<a href="판매자상점으로 바로가기" class="seller_market_a">상점 바로가기</a> <!-- session에 판매자 상점key 기억 후, 이동? 해야하나.. -->
-				</div>	
-    	
-			</div>
-		</div>
+            <button class="my_item_choice">내상점 상품 선택하기</button>
+         </div>
+         <!-- 하단모달끝 -->
+         
+      
+      
+         <div class="modal_area"></div>
+             <div class="modal_marketInfo_div">
+            <div class="modal_marketInfo_detail_div">
+               <a href="/pmang/board/mystore" class="market_info_a">
+                   <div class="market_info_textDiv">상점후기</div>
+                   <div class="market_review_dataArea">
+                      <div class="market_review_data">
+                         <img src="/pmang/image/main_logo.JPG" alt="좋아요">
+                         <b>3</b> <!-- DB에서 상점후기count 불러오기 -->
+                         <img src="/pmang/image/main_logo.JPG" alt="보통">
+                         <b>5</b> <!-- DB에서 상점후기count 불러오기 -->
+                         <img src="/pmang/image/main_logo.JPG" alt="싫어요">
+                         <b>7</b> <!-- DB에서 상점후기count 불러오기 -->
+                      </div>
+                   </div>
+               </a>
+             
+               <a href="내상점 - 내상품페이지" class="market_info_a">
+                   <div class="market_info_textDiv">판매상품</div>
+                   <div class="market_review_dataArea">
+                      <b>2</b><!-- DB 에서 상품갯수 count 하기 -->
+                   </div>
+               </a>
+               
+               <!-- <button type="button" class="market_info_a">
+                  <div class="market_info_textDiv">판매내역</div>
+                  <div class="market_review_dataArea">
+                     <b>4</b>실제 판매 거래완료 개수 카운터하기
+                  </div>
+               </button> --> <!-- 우리는 직거래밖에 없으니까 제거, 혹시사용하게 되면 사용할게 -->
+               
+               <div class="sales_details_div">
+                  <div class="market_info_textDiv">판매내역</div>
+                  <div class="market_review_dataArea">
+                     <b>4</b>  <!-- 실제 판매 거래완료 개수 카운터하기 -->
+                  </div>
+               </div>
+               
+               <div class="contact_time_div">
+                  <div class="market_info_textDiv">연락시간</div>
+                  <div class="market_review_dataArea">24시간 연락가능</div>
+               </div>
+            </div>
+            
+            <div class="market_info_Btns">
+               <button type="button" class="Fraud_report_Btn">사기 신고조회</button> <!-- 윈도우창 띄워줘야함 -->
+               <a href="판매자상점으로 바로가기" class="seller_market_a">상점 바로가기</a> <!-- session에 판매자 상점key 기억 후, 이동? 해야하나.. -->
+            </div>   
+       
+         </div>
+      </div>
       
       
       <div class="talk_Area">
@@ -162,38 +163,38 @@
                </div>
                <div class="talkReciveDiv"></div>받은톡 위와 동일 -->
                <div id="talkContentScroll"></div>
-			</div>
+         </div>
 
             <!-- 메시지창 -->
-			<div class="talk_footer">
-				<div class="talk_send_Area">
-					<div class="message_option_Area">
-						<button type="button" class="message_option_Btn"></button>
-					</div>
+         <div class="talk_footer">
+            <div class="talk_send_Area">
+               <div class="message_option_Area">
+                  <button type="button" class="message_option_Btn"></button>
+               </div>
                   
-					<div class="message_text_Area">
-						<form class="message_text_form">
-							<textarea placeholder="메시지를 입력하세요" class="talk_message" id="talk_message" rows="1"></textarea>
-							<input type="button" id="sendBtn" value="▲">
-						</form>
-					</div>
-				</div>
+               <div class="message_text_Area">
+                  <form class="message_text_form">
+                     <textarea placeholder="메시지를 입력하세요" class="talk_message" id="talk_message" rows="1"></textarea>
+                     <input type="button" id="sendBtn" value="▲">
+                  </form>
+               </div>
+            </div>
                
                <!-- 메세지옵션--------- -->
-				<div class="message_option_div">
-					<div class="sand_img_div">
+            <div class="message_option_div">
+               <div class="sand_img_div">
                         <input type="file"  multiple name="files"  id="files" accept="image/*"  onchange="changeValue(this)"/>
                         <img alt="이미지아이콘" src="../image/014-picture.png" id="fileBtn" width="43px" height="43px" >
-						<div style="font-size: 13px;">이미지</div>
-					</div>
-					<div class="item_choice_div">
-						<div>
-							<img alt="상품아이콘" src="../image/035-shopping-cart.png" id="item_choice_Btn" width="50px" height="50px" >
-							<div style="font-size: 13px;">상품선택</div>
-						</div>
-					</div>
-				</div>
-				<!-- 메세지옵션끝--------- -->
+                  <div style="font-size: 13px;">이미지</div>
+               </div>
+               <div class="item_choice_div">
+                  <div>
+                     <img alt="상품아이콘" src="../image/035-shopping-cart.png" id="item_choice_Btn" width="50px" height="50px" >
+                     <div style="font-size: 13px;">상품선택</div>
+                  </div>
+               </div>
+            </div>
+            <!-- 메세지옵션끝--------- -->
             </div>
          </div>
       </div>
