@@ -8,18 +8,18 @@ import lombok.Data;
 
 @Data
 public class ReviewDTO {
-	private int reviewNum;	//review ¹øÈ£
-	private int buyerNum;	//±¸¸ÅÀÚ ¹øÈ£
-	private int itemNum;	//»óÇ°¹øÈ£
-	private String reviewWriter;	//¸®ºä ÀÛ¼ºÀÚ
-	private String reviewSubject;	//¸®ºäÁ¦¸ñ
-	private String reviewContent;	//¸®ºä³»¿ë
-	private String reviewStamp;		//¸®ºä Á¡¼ö
-	private String reviewImg1;		//¸®ºä»çÁø1
-	private String reviewImg2;		//¸®ºä»çÁø2
-	private String reviewImg3;		//¸®ºä»çÁø3
+	
+	private String sellerid;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
+	private int itemNum;	//ï¿½ï¿½Ç°ï¿½ï¿½È£
+	private String reviewWriter;	//ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½
+	private String reviewSubject;	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String reviewContent;	//ï¿½ï¿½ï¿½ä³»ï¿½ï¿½
+	private String reviewStamp;		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	private String img1;		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1
+	private String img2;		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2
+	private String img3;		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½3
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy.MM.dd")
-	private Date reviewLogtime;		//¸®ºäµî·Ï½Ã°£
+	private Date reviewLogtime;		//ï¿½ï¿½ï¿½ï¿½ï¿½Ï½Ã°ï¿½
 	
 	
 	private String pf_photo;
