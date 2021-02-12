@@ -5,7 +5,8 @@
 <body>
 <input type="hidden" id="lon">
 <input type="hidden" id="lat">
-<input type="hidden" name="pg" id="pg" value="${pg }">
+<input type="hidden" name="pg" id="pg" value="${param.pg }">
+<input type="hidden" name="order" id="order" value="">
 <div id="itemBoard">
 
 	<div id="locationModal" class="locationModal">

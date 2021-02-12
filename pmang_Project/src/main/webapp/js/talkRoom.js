@@ -409,6 +409,12 @@ $('.room_setting_notification_Btn').on('click',function(){
    
    
 });
+
+if($('#sender_user_id').val() == $('#sellerItem_userId').val()){
+	$('.price_change').show();
+}else{
+	$('.price_change').hide();
+}
    
    
 });

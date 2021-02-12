@@ -372,13 +372,14 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 	font-size: 16px;
 }
 
-#reportBtn{
+#myBtn{
 	width:100px;
 	margin-left:50px;
 	height: 100%;
 	display: flex;
 	align-items: center;
-	color: rgb(204, 204, 204);    
+	color: rgb(204, 204, 204);  
+	cursor: pointer;  
 }
 
 .dealInfo{
@@ -421,12 +422,15 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 
 #like{
 	background-color:gray;
+	cursor:pointer;
 }
 #contact{
 	background-color:green;
+	cursor:pointer;
 }
 #pay{
-	background-color:red
+	background-color:red;
+	cursor:pointer;
 }
 
 
@@ -614,34 +618,123 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 }
 
 #moreBtn{
+	
 	clear:both;
 	text-align:center;
 	padding:20px;
 	display:flex;
 	justify-content:center;
+	cursor:pointer;
 }
 
-.deleteBtn{
+.replyPics{
 	margin-left:10px;
 }
 
-.reportBtn{
-	margin-left:10px;
+
+/*///////////////////////////////////////*/
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+ul{
+	/* margin-left:500px; */
+}
+
+/* a {
+  text-decoration: none;
+} */
+
+
+.slide {
+  
+  position: relative;
+  top:10%;
+  left:30%;
+  z-index:100;
+}
+
+.panel {
+  width: 300%;
+  height:100%;
+
+}
+
+.panel:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.panel>li>a>img {
+	width:700px;
+	height:700px;
+
 }
 
 
+.panel>li {
+  width: 800px;
+  height: 700px;
+  float: left;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+}
 
 
+.dot:after {
+  content: "";
+  display: block;
+  clear: both;
+}
 
+.dot {
+  position: absolute;
+  left: 50%;
+  bottom: 10%;
+  transform: translateX(-50%);
+  visibility: hidden;
+}
 
+.dot>li {
+  float: left;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #fff;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-indent: -9999px;
+  cursor: pointer;
+}
 
+.dot>li.on {
+  background-color: #342f2f;
+}
 
+.prev {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 1%;
+  cursor: pointer;
+}
 
-
-
-
-
-
+.next {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  left :34%;
+  cursor: pointer;
+}
 
 
 

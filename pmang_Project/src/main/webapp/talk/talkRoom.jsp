@@ -14,7 +14,7 @@
 <input type="hidden" id="sender_user_id" value="${sessionScope.userId }">
 <input type="hidden" id="receiver_user_id" value="${param.partner_userId }">
 <input type="hidden" id="receiver_user_profileImage" value="${sellerItem.pf_Photo }">
-<%-- <input type="hidden" id="messageList" value="${messageList }"> --%>
+<input type="hidden" id="sellerItem_userId" value="${sellerItem.userId }">
 
 <div id="root">
    <div>
@@ -103,9 +103,16 @@
       
       <div class="talk_Area">
          <div class="talk_area_div">
-            <header class="talk_header"><!-- class명 item이 아니라 marketName이다. 변경해라 -->
+            <header class="talk_header">
                <button type="button" class="talk_itemName_button">
-                  <span class="itemName">${sellerItem.marketName }</span>
+                  <span class="itemName">
+                  	<c:if test="${sellerItem.marketName == null }">
+						${sellerItem.userId }	
+                  	</c:if>
+                  	<c:if test="${sellerItem.marketName != null }">
+						${sellerItem.marketName }
+					</c:if>
+                  </span>
                   <span class="itemName_arrow"></span>
                </button>
                
@@ -133,7 +140,7 @@
                      <div class="item_subject_div">${sellerItem.item_Subject }</div>
                   </div>
                </a><!-- 클릭하면 상품 판매 게시판으로이동 -->
-               <button type="button" class="price_change">가격변경</button> <!-- 판매자일때만 띄우주기 -->
+               		<button type="button" class="price_change">판매완료</button> <!-- 판매자일때만 띄우주기 -->
             </div>
             
             <!-- 메시지창 -->

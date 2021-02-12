@@ -3,12 +3,16 @@
 <!DOCTYPE html>
 
 <link rel="stylesheet" href="/pmang/css/itemView.css">
+<link rel="stylesheet" href="/pmang/css/reportForItemView.css">
 <style>
 </style>
-<input type="hidden" id="item_seq" name="item_seq" value="${item_seq}">
-<input type="hidden" id="comment_seq" name="comment_seq" value="">
-<input type="hidden" id="userId" name="userId" value="hiddenId"> <!-- 나중에 세션에서 받는 값으로 변경 -->
+
+<input type="hidden" id="item_seq" name="item_seq" value="${param.item_seq}"> <!-- 나중에 세션에서 받는 값으로 변경 -->
+<input type="hidden" id="comment_seq" name="comment_seq" value=""> <!-- 강제호출용 click으로 사용 중 -->
+<input type="hidden" id="userId" name="userId" value="${sessionScope.memUserId }"> <!-- 나중에 세션에서 받는 값으로 변경 -->
 <input type="hidden" id="commentIndex" name="commentIndex" value="1">
+<input type="hidden" id="likedOrNot" name="likedOrNot" value="0"> <!-- 강제호출용 click으로 사용 중 -->
+
 
 
 
@@ -26,7 +30,7 @@
 			 width="6" height="10" alt="카테고리 선택그룹 아이콘">
 		 	<div class="selectItem1">
 		 		<div class="top1">
-		 		패션     
+		 		     <span id="topSpan1"></span>
 		 			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAAAXNSR0IArs4c6QAAASVJREFUOBGlks9qwkAQxrMLihRKQXyUHjx58dBLEXqxUPCavIKvkpCQgxcTD0LpSQQfoBfpRXwHj16av37fYWWrJhvqwDCbb2d+O5NdYcFc120hzIQQkW3bS2pNzPf9blEUC+ROUffNGkEYQWVZvuE7xfq9CRR1T8hfw5/hR/jIcZyN8DyPsDEEZUZoEASPeZ6vUNdXRYi/aOZVYjGHp9pGC4kRDmLHV4bOHrIs+7qAWYDtoW0lx+OYqDRCwzDsIO8TPtBPQv0PYEOMfGCHVhNoHMftJEl4YcMqGHWhb3JMjguNt64slVJOoH/AR0pk1DtT+h8gxQqoyj/HWzBuXgEpmqBVsEpgHbQOVgu8BTXBjEAdCthOPQ3qdxn+6QsedO8uyH+LT8nvvwPGjeHzAAAAAElFTkSuQmCC" 
 		 			width="10" height="6" alt="카테고리 화살표 아이콘">
 		 		</div>
@@ -50,7 +54,7 @@
 		 	width="6" height="10" alt="카테고리 선택그룹 아이콘">
 		 	<div class="selectItem2">
 		 		<div class="top2">
-		 			여성의류
+		 			<span id="topSpan2"></span>
 		 			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAAAXNSR0IArs4c6QAAASVJREFUOBGlks9qwkAQxrMLihRKQXyUHjx58dBLEXqxUPCavIKvkpCQgxcTD0LpSQQfoBfpRXwHj16av37fYWWrJhvqwDCbb2d+O5NdYcFc120hzIQQkW3bS2pNzPf9blEUC+ROUffNGkEYQWVZvuE7xfq9CRR1T8hfw5/hR/jIcZyN8DyPsDEEZUZoEASPeZ6vUNdXRYi/aOZVYjGHp9pGC4kRDmLHV4bOHrIs+7qAWYDtoW0lx+OYqDRCwzDsIO8TPtBPQv0PYEOMfGCHVhNoHMftJEl4YcMqGHWhb3JMjguNt64slVJOoH/AR0pk1DtT+h8gxQqoyj/HWzBuXgEpmqBVsEpgHbQOVgu8BTXBjEAdCthOPQ3qdxn+6QsedO8uyH+LT8nvvwPGjeHzAAAAAElFTkSuQmCC" 
 		 			width="10" height="6" alt="카테고리 화살표 아이콘">
 		 		</div>
@@ -66,39 +70,32 @@
 		 	width="6" height="10" alt="카테고리 선택그룹 아이콘">
 		 	<div class="selectItem3">
 		 		<div class="top3">
-		 			아우터
+		 			<span id="topSpan3"></span>
 		 			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAAAXNSR0IArs4c6QAAASVJREFUOBGlks9qwkAQxrMLihRKQXyUHjx58dBLEXqxUPCavIKvkpCQgxcTD0LpSQQfoBfpRXwHj16av37fYWWrJhvqwDCbb2d+O5NdYcFc120hzIQQkW3bS2pNzPf9blEUC+ROUffNGkEYQWVZvuE7xfq9CRR1T8hfw5/hR/jIcZyN8DyPsDEEZUZoEASPeZ6vUNdXRYi/aOZVYjGHp9pGC4kRDmLHV4bOHrIs+7qAWYDtoW0lx+OYqDRCwzDsIO8TPtBPQv0PYEOMfGCHVhNoHMftJEl4YcMqGHWhb3JMjguNt64slVJOoH/AR0pk1DtT+h8gxQqoyj/HWzBuXgEpmqBVsEpgHbQOVgu8BTXBjEAdCthOPQ3qdxn+6QsedO8uyH+LT8nvvwPGjeHzAAAAAElFTkSuQmCC" 
 		 			width="10" height="6" alt="카테고리 화살표 아이콘">
 		 		</div>
 		 		
 		 		<div class="down3">
-		 			<a href="#">아우터</a>
-		 			<a href="#">티셔츠</a>
-		 			<a href="#">니트</a>
-		 			<a href="#">셔츠/블라우스</a>
-		 			<a href="#">맨투맨/후드집업</a>
-		 			<a href="#">원피스/세트</a>
-		 			<a href="#">바지</a>
-		 			<a href="#">스커트</a>
+		
 		 		</div>
 		 	</div><!-- selectItem -->
 		 </div><!-- thirdCategory -->
 		
 	</div><!-- categoryDiv -->
+
 	
-	<div class="detailItemDiv">
-		<div class="detailItem">
-			<a class="entireView" href="#" style="text-decoration: none;">
-			전체보기
-			</a>
-		</div>
-	</div>
-	</div>
+
+
+</div>
+
 
 	
 
 	<!-- 상품 영역 -->
-
+	<br>
+	<hr>
+	<br>
+	<br>
 	<div id="itemDiv">
 
 		<!-- 상품 이미지 영역 -->
@@ -116,22 +113,37 @@
 				<div id="slideShowPage">
 					<!-- 상풍명 -->
 					<span id="modalItemName" class="nameSpan">DB에러</span>
-					<!-- 슬라이드 쇼 영역-->		
-					<div id="slideShowArea">
-						<div id="slideShowDiv">
-							<div id="slideShow">
-								<div>
-									<img src="/pmang/image/itemPic.jpg">
-								</div>
-								<div>
-									<img src="/pmang/image/itemPic.jpg">
-								</div>
-								<div>
-									<img src="/pmang/image/itemPic.jpg">
-								</div>
-							</div>
-						</div>
+					<!-- 슬라이드 쇼 영역-->	
+					
+					
+						
+					<!-- 모달 사진 슬라이드영역 -->
+					<div class="slide">
+					  <ul class="panel">
+					    <li>                       
+							<img src="/pmang/image/itemPic.jpg" alt="배경1" />
+						</li>
+					    <li>
+					    	<img src="/pmang/image/itemPic.jpg" alt="배경2" />
+					    </li>
+					    <li>
+					    	<img src="/pmang/image/itemPic.jpg" alt="배경3" />
+					    </li>
+					  </ul>
+					<!--슬라이드 버튼 히든 상태 -->
+					  <ul class="dot">
+					    <li class="on">슬라이드 버튼1번</li>
+					    <li>슬라이드 버튼2번</li>
+					    <li>슬라이드 버튼3번</li>
+					    
+					  </ul>
+					  <div class="prev"><img width="30px" src="/pmang/image/imgLeft.png" alt="" /></div>
+					  <div class="next"><img width="30px" src="/pmang/image/imgRight.png" alt="" /></div>
 					</div>
+					 <!-- 모달 사진 슬라이드영역 --> 
+          
+          
+          
 					<!-- 슬라이드 쇼 영역 끝-->
 					<!-- 종료버튼 -->
 					<label id="closeBtn" for="imgCheckBox">
@@ -182,6 +194,7 @@
 							<span class="likeSpan">DB에러</span>
 						</div>
 						<div class="likeDateHit">
+						
 							<img src="/pmang/image/hit.jpg" alt="조회수" width="20" height="20">
 							<span class="hitSpan">DB에러</span>
 						</div>
@@ -189,12 +202,13 @@
 							<img src="/pmang/image/date.jpg" alt="게시일" width="20" height="20">
 							<span class="dateSpan">DB에러</span>
 						</div>
-						<div id="reportBtn">
+						<div id="myBtn">
 							<img src="/pmang/image/reportBtn.JPG" alt="신고하기" width="20" height="20">
 							신고하기
 						</div>
 					</div>
 				</div>
+				<br>
 				<!-- 상세 설명 -->
 				<div>
 					<div class="dealInfo">
@@ -216,11 +230,13 @@
 
 				</div>
 			</div>
+			<br>
+			<br>
 			<!-- 상품 설명 -->
 
 			<!-- 버튼 영역 -->
 			<div id="buttonArea">
-				<div id="like"><img src="/pmang/image/zzimNo.png" width="35" height="35">찜하기</div>
+				<div id="like"><img id="zzimIcon" src="/pmang/image/zzimNo.png" width="35" height="35">찜<span class="likeSpan"></span></div>
 				<div id="contact"><img src="/pmang/image/contactIcon.png" width="35" height="35">연락하기</div>
 				<!-- <div id="pay">바로구매</div> -->
 			</div>
@@ -293,7 +309,7 @@
 		
 		<div id="reply"><!-- 댓글창 -->
 			<div class="replyDiv text"><!-- 댓글 test입력 -->
-				<textarea id="replyText" maxlength="300">111</textarea>
+				<textarea id="replyText" maxlength="300"></textarea>
 			</div>
 			
 			<div class="replyDiv"><!-- 댓글 글자제한/등록버튼 -->
@@ -328,10 +344,229 @@
 			</div> 댓글 하나 -->
 		</div>
 	</div>
-	<div id="moreBtn"><img src="/pmang/image/moreBtn.png" width="20" height="20">상품문의 더보기</div>
+	<div id="moreBtn"><img id="morePic" src="" width="20" height="20"><span id="moreText"></span></div>
 	<!-- 상문문의div-->
 </div>
 <!-- 상품상세 + 문의 div -->
 
+<!-- 상품 신고하기 모달 -->
+ 
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+ 
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>                                                               
+        <div class="report">
+			<div class="report-header">
+				<div class="report-subject">신고하기</div>
+					</div>
+					<div class="report-content">
+						<div class="report-ad">
+							<div class="report-ad-div report-common">
+								광고(상점홍보, 낚시글, 도배글)
+								<button type="button">
+									<img src="/pmang/image/reportV.png"width="13" height="8" alt="화살표 아이콘">
+								</button>									
+							</div>
+								<div class="hide report-hide-common">
+					           		<div class="report-ad-ad">
+					                	<button type="button">상점홍보</button>
+					                </div>
+					                <div class="report-ad-ad">
+					                	<button type="button">낚시글</button>
+					                </div>
+					                <div class="report-ad-ad">
+					                	<button type="button">도배글</button>
+					                </div>
+					                <div class="report-ad-ad">
+					                	<button type="button">타사이트,어플 광고</button>
+					                </div>
+					                <!-- <div class="etc">
+					                	<input type="text" class="etcText" placeholder="기타(사유)">
+					                	<button id="report-ad-pr-write" class="etcBtn" type="button">등록</button>
+					                </div> -->
+					           	</div>
+							</div>
+						<div class="report-un">
+							<div class="report-un-div report-common">
+								물품정보 부정확(카테고리,가격,사진)
+								<button type="button">
+									<img src="/pmang/image/reportV.png"width="13" height="8" alt="화살표 아이콘">
+								</button>								
+							</div>
+								<div class="hide report-hide-common">
+					           		<div class="report-un-ad">
+					                	<button id="report-pr-category" type="button">카테고리가 잘못됨</button>
+					                </div>
+					                <div class="report-un-ad">
+					                	<button id="report-pr-price" type="button">가격이 잘못됨</button>
+					                </div>
+					                <div class="report-un-ad">
+					                	<button id="report-pr-pic" type="button">사진이 잘못됨</button>
+					                </div>
+					                <div class="report-un-ad">
+					                	<button id="report-pr-name" type="button">상품명이 잘못됨</button>
+					                </div>
+					                <!-- <div class="etc">
+					                	<input type="text" class="etcText" placeholder="기타(사유)">
+					                	<button type="button" class="etcBtn">등록</button>
+					                </div> -->
+					           	</div>
+							</div>
+						<div class="report-dan">
+							<div class="report-dan-div report-common">
+								거래 금지 품목(담배,주류,장물)
+								<button type="button">
+									<img src="/pmang/image/reportV.png"width="13" height="8" alt="화살표 아이콘">
+								</button>								
+							</div>
+								<div class="hide report-hide-common">
+					           		<div class="report-dan-ad">
+					                	<button type="button">담배/주류</button>
+					                </div>
+					                <div class="report-dan-ad">
+					                	<button type="button">장물(분실폰,분실노트북,..)</button>
+					                </div>
+					                <div class="report-dan-ad">
+					                	<button type="button">의약품류</button>
+					                </div>
+					                <div class="report-dan-ad">
+					                	<button type="button">콘텍트 렌즈</button>
+					                </div>
+					                <!-- <div class="etc">
+					                	<input type="text" class="etcText" placeholder="기타(사유)">
+					                	<button type="button" class="etcBtn">등록</button>
+					                </div> -->
+					           	</div>
+							</div>
+						<div class="report-viol">
+							<div class="report-viol-div report-common">
+								언어폭력(비방,욕설,성희롱)
+								<button type="button">
+									<img src="/pmang/image/reportV.png"width="13" height="8" alt="화살표 아이콘">
+								</button>								
+							</div>
+								<div class="hide report-hide-common">
+					           		<div class="report-viol-ad">
+					                	<button type="button">비방/욕설</button>
+					                </div>
+					                <div class="report-viol-ad">
+					                	<button type="button">성희롱</button>
+					                </div>
+									<!--  <div class="etc">
+					                	<input type="text" class="etcText" placeholder="기타(사유)">
+					                	<button type="button" class="etcBtn">등록</button>
+					                </div> -->
+					           	</div>
+							</div>
+					<!-- <div class="report-write">
+							<div class="report-write-div report-common">
+								기타사유(직접입력)
+								<button type="button">
+									<img src="/pmang/image/reportV.png"width="13" height="8" alt="화살표 아이콘">
+								</button>									
+							</div> 
+								<div class="hide report-hide-common">
+									<div class="report-write-ad">
+										<textarea ></textarea>
+										<div class="resiDiv">
+					                		<button id="report-pr-write" type="button">등록</button>
+					                	</div>
+					                </div>
+					            </div>
+					      </div>  -->
+					      <div class="report-qna">
+					      	<div class="report-qna-div">
+					      		거래사기(1:1문의하기)
+					      		<button id="report-operator" type="button" onclick="/pmang/board/qna">1:1문의하기</button>
+					      	</div>
+					      </div>
+					      
+					</div>
+				</div>
+     		 </div>
+ 		</div>
+<!-- 댓글 신고 모달 -->
+<!-- The Modal -->
+    <div id="myModal111" class="modal111">
+ 
+      <!-- Modal content -->
+      <div class="modal-content111">
+        <span class="close111">&times;</span>                                                               
+				<div class="report111">
+					<div class="report-header111">
+						<div class="report-subject111">신고하기</div>
+					</div>
+					<div class="report-content111">
+						<div class="report-ad111">
+							<div class="report-ad-div111 report-common111">
+								광고(교신 및 상점홍보)
+								<button type="button">
+									<img src="/pmang/image/reportV.png" width="13" height="8" alt="화살표 아이콘">
+								</button>
+							</div>
+							<div class="hide111 report-hide-common111">
+				           		<div class="report-ad-ad111">
+				                	<button type="button">교환신청</button>
+				                </div>
+				                <div class="report-ad-ad111">
+				                	<button type="button">상점홍보</button>
+				                </div>
+								 <div class="report-ad-ad111">
+				                	<button type="button">타사이트,어플광고</button>
+				                </div>
+				                <!-- <div class="etc111">
+				                	<input type="text" class="etcText111" placeholder="기타(사유)">
+				                	<button type="button" class="etcBtn111">등록</button>
+				                </div> -->
+				           	</div>
+						</div>
+
+
+						<div class="report-viol111">
+							<div class="report-viol-div111 report-common111">
+								언어폭력(비방,욕설,성희롱)
+								<button type="button">
+									<img src="/pmang/image/reportV.png" width="13" height="8" alt="화살표 아이콘">
+								</button>
+							</div>
+								<div class="hide111 report-hide-common111">
+					           		<div class="report-viol-ad111">
+					                	<button type="button">비방/욕설</button>
+					                </div>
+					                <div class="report-viol-ad111">
+					                	<button type="button">성희롱</button>
+					                </div>
+					            	<div class="report-viol-ad111">
+					                	<button type="button">리뷰(별점평가)요구 및 테러</button>
+					                </div>
+									<!--  <div class="etc111">
+					                	<input type="text" class="etcText111" placeholder="기타(사유)">
+					                	<button class="reBtn111" class="etcBtn111" type="button">등록</button>
+					                </div> -->
+					           	</div>
+							</div>
+						<!-- <div style="border-top: 1px solid rgb(190, 190, 190);" class="report-write111">
+							<div class="report-write-div111 report-common111">
+								기타사유(직접입력)
+								<button type="button">
+									<img src="/pmang/image/reportV.png" width="13" height="8" alt="화살표 아이콘">
+								</button>								
+							</div>
+								<div class="hide111 report-hide-common111">
+									<div class="report-write-ad111">
+										<textarea></textarea>
+					                	<button style="border: 1px solid rgb(238, 238, 238);" type="button">등록</button>
+					                </div>
+					            </div>
+					      </div> -->
+					      
+					</div>
+				</div>
+     		 </div>
+ 		</div> 		
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="/pmang/js/itemView.js"></script>
+<script type="text/javascript" src="/pmang/js/reportForItemView.js"></script>

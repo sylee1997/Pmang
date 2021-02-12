@@ -608,6 +608,15 @@ $('#index_searchPwBtn').click(function(){
 	location.href="/pmang/member/searchPw"
 });
 
+//엔터시 로그인
+$(document).keydown(function(key) {
+	if(key.keyCode == 13){
+		$('#loginBtn').trigger('click');
+		$(document).click(function(){
+		});
+	}
+});
+
 $('#loginBtn').click(function(){
 	$('#index_userIdDiv').empty();
 	$('#index_pwdDiv').empty();
@@ -789,7 +798,7 @@ $('.itemWriteBtn').click(function(){
 
 //우석 수정 
 $('.pmangTok').on('click',function(){
-	window.open("/pmang/talk/talkRoomList","","width=375 height=667");
+	window.open("/pmang/talk/roomList","","width=375 height=667");
 });
 // 우석 수정 -----------------------------------
 
@@ -805,21 +814,9 @@ $('#footerPolicy').click(function(){
 $('#footerFQA').on('click',function(){
 	$(location).attr("href", "/pmang/board/notice?tabNo=3");
 });
-
-
-if('${tabNo}'=='1'){
-	$('#tab1').attr('checked', true);
-}else if('${tabNo}'=='2'){
-	$('#tab2').attr('checked', true);
-}else if('${tabNo}'=='3'){
-	$('#tab3').attr('checked', true);
-}else if('${tabNo}'=='4'){
-	$('#tab3').attr('checked', true);
-	$('#menu2').attr('checked', true);
-}else{
-	$('#tab1').attr('checked', true);
-}
-
+$('#footerQnA').on('click',function(){
+	$(location).attr("href", "/pmang/board/qna");
+});
 
 
 
@@ -874,3 +871,31 @@ $('#kakaoBtn').click(function(event){
 		}
 	}); 
 });
+// 이거 어젯밤에 하다 만거 여기서부터 해 -> ajax로 찜테이블 유저 아이디로 긁어와서 찜수 반영 하트도 넣어 
+// 내 찜수 확인
+
+$(document).ready(function(){	
+	 $.ajax({
+			type: 'post',
+			url: '/pmang/board/getMyZzim',
+			data: {'userId': $('#hiddenUserId').val()},
+			dataType: 'json',
+			error: function(err){
+				console.log(err);
+			},
+			success: function(result){
+				
+				$('.bag_clickA').text(result.list.length);
+				if(result.list.length==0){
+					$('#userZzim').attr("src","/pmang/image/zzimNo.png");
+				}else{
+					$('#userZzim').attr("src","/pmang/image/zzimYes.png");
+				}
+			}
+			
+		}); 
+	
+});
+
+
+
