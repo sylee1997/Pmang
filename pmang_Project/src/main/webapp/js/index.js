@@ -814,6 +814,9 @@ $('#footerPolicy').click(function(){
 $('#footerFQA').on('click',function(){
 	$(location).attr("href", "/pmang/board/notice?tabNo=3");
 });
+$('#footerQnA').on('click',function(){
+	$(location).attr("href", "/pmang/board/qna");
+});
 
 
 if('${tabNo}'=='1'){

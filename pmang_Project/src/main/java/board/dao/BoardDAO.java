@@ -5,7 +5,7 @@ import java.util.Map;
 
 import board.bean.CommentDTO;
 import board.bean.ItemDTO;
-
+import board.bean.QnaDTO;
 import board.bean.SearchDTO;
 import board.bean.WishlistDTO;
 
@@ -112,6 +112,14 @@ public interface BoardDAO {
 
 
 	public void reviewWrite(ReviewDTO reviewDTO);
+
+	public void qnaWrite(QnaDTO qnaDTO);
+
+	public List<QnaDTO> getQnaList(String userid);
+
+	public List<QnaDTO> getQna();
+
+	public void qnaReplyWrite(String qna_seq,String qnaContent);
 
 	
 

@@ -654,7 +654,7 @@
             <a class="cIPDuS" id="footerNotice">공지사항</a>
             <a class="cIPDuS" id="footerFQA">자주묻는질문</a>
             <a class="cgGBdw" id="footerPolicy">운영정책</a>
-            <a class="cIPDuS" href="#">1:1문의하기</a>
+            <a class="cIPDuS" id="footerQnA">1:1문의하기</a>
             <a class="cgGBdw" href="#">사업자정보확인</a>
             <a class="cgGBdw" href="#">이용약관</a>
             <a class="cgGBdw" href="#">청소년보호정책</a>

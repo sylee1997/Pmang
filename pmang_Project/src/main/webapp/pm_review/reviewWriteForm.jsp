@@ -9,7 +9,7 @@
 </head>
 <body>
 	<input type="hidden" id="photoCountHidden" value="0">
-	<%-- <input type="hidden" id="sellerid" value="${memId }"> --%>
+	<input type="hidden" id="sellerid" value="${memUserId }"> 
 	<form id="reviewWriteForm">
 	
 		<div class="reviewHeader">
@@ -24,9 +24,9 @@
 				</div>
 				<!-- reviewItemImg -->
 				<div class="reviewItemContent">
-					<p class="reviewStoreName">11</p><!-- 마 이게 상점명이다!! sellerid -->
-					<h2 class="reviewSubject">22</h2><!-- 마 이게 상품명이다!! reviewsubject 겸 item_subject -->
-					<p class="reviewLogtime">마 이게 판매상품 등록시간이다!</p>
+					<p class="reviewStoreName"></p><!-- 마 이게 상점명이다!! sellerid -->
+					<h2 class="reviewSubject"></h2><!-- 마 이게 상품명이다!! reviewsubject 겸 item_subject -->
+					<p class="reviewLogtime"></p><!-- 마 이게 판매상품 등록시간이다! -->
 				</div>
 				<!-- reviewItemContent -->
 			</div>

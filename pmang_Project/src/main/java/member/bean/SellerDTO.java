@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 public class SellerDTO {
-	private int userid;	//����Ű, primary key
+	private String userid;	//����Ű, primary key
 	private String marketname;	//������
 	private String pf_photo;		//���� ������ ����
 	private String pf_content;	//���� ������ �Ұ���

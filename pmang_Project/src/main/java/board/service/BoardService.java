@@ -7,7 +7,7 @@ import java.util.Map;
 import board.bean.BoardPaging;
 import board.bean.CommentDTO;
 import board.bean.ItemDTO;
-
+import board.bean.QnaDTO;
 import board.bean.AdminDTO;
 import board.bean.BoardPaging;
 import board.bean.CommentDTO;
@@ -166,6 +166,14 @@ public interface BoardService {
 	public List<String> getReportTarget();
 
 	public void noticeWrite(Map<String, String> map);
+
+	public void qnaWrite(QnaDTO qnaDTO);
+
+	public List<QnaDTO> getQnaList(String userid);
+
+	public List<QnaDTO> getQna();
+
+	public void qnaReplyWrite(String qna_seq,String qnaContent);
 
 
 }
