@@ -258,6 +258,11 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 
+	@Override
+	public List<ZipcodeDTO> mainLoc(Map<String, String> map) {
+		return memberDAO.mainLoc(map);
+	}
+
 
 
 }

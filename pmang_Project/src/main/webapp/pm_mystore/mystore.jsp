@@ -275,8 +275,8 @@
 
 										$('#mystoreOpenDate').text(
 												dateDiff + '일전');
-
-										var str = '<img class="pf_photo" src="'+data.sellerDTO.pf_photo+'" width=150 height=150/>';
+										
+										var str = '<img class="pf_photo" src="/pmang/storage/'+data.sellerDTO.pf_photo+'" width=150 height=150/>';
 										$(str).appendTo('.mystoreProfileImg');
 
 										//프로필사진변경

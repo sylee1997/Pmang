@@ -175,5 +175,11 @@ public class MemberDAOMybatis implements MemberDAO {
 	}
 
 
+	@Override
+	public List<ZipcodeDTO> mainLoc(Map<String, String> map) {
+		return sqlSession.selectList("memberSQL.mainLoc", map);
+	}
+
+
 
 }

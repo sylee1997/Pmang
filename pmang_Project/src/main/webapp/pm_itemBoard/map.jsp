@@ -31,7 +31,7 @@ html, body {
 	top: 0;
     right: 0;
     left: 0;
-    border-bottom: 1px solid #e6e6e6;
+    /* border-bottom: 1px solid #e6e6e6; */
     z-index : 20;
 }
 
@@ -171,6 +171,30 @@ button {
     padding: 10px;
 }
 
+#autoAddrDiv{
+	width: 200px;
+    height: 50px;
+    background: white;
+    margin: 10px;
+    border: 0px;
+    padding: 5px;
+    font-size: 11pt;
+    border-radius: 2px;
+    background: #fff;
+    background: rgba(255,255,255,0.8);
+    z-index: 1;
+}
+
+#title {
+	padding: 3px;
+    margin: 0;
+    font-weight: 600
+}
+
+/* #addressSpan{
+	color : green;
+} */
+
 
 </style>
 </head>
@@ -206,7 +230,7 @@ window.onload = function() {
 	});
 	marker.setMap(map);//마커 표시
 	
-	marker.setDraggable(true); //마커를 드래그 할 수 있게끔 하기
+	//marker.setDraggable(true); //마커를 드래그 할 수 있게끔 하기
 	
 
 	// 아래 코드는 최초 한번만 타일로드 이벤트가 발생했을 때 어떤 처리를 하고 
@@ -250,9 +274,9 @@ window.onload = function() {
 	    searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
 	        if (status === kakao.maps.services.Status.OK) {
 	            var detailAddr = !!result[0].road_address ? '' : '';
-	            detailAddr += '<div id="detailAddrDiv">' + result[0].address.address_name + '</div>';
+	            detailAddr += '<div id="detailAddrDiv">지정 위치 : <span id="addressSpan" style="color : green;">' + result[0].address.address_name + '</span></div>';
 	            
-	            var content = '<div class="bAddr">' +
+	            var content = '<div class="bAddr">' + 
 	                            detailAddr + 
 	                        '</div>';
 	
@@ -274,9 +298,14 @@ window.onload = function() {
    	
    	//위치 지정 완료!
 	$('#map').on('click','#mapFooter',function(){
-		 var address = $("#detailAddrDiv").text();
-		$(opener.document).find("#detailAddr").text(address);
-		$(opener.document).find("#x").trigger("click");
+		 var address = $("#addressSpan").text();
+		 if($(opener.document).find(".top2").text().trim() == "" && $(opener.document).find(".top3").text().trim() == ""){
+				opener.location.href = encodeURI('/pmang/board/itemBoard?category1='+$(opener.document).find(".top1").text().trim()+'&pg='+$(opener.document).find("#pg").val()+'&order='+$(opener.document).find("#order").val()+'&location='+address);
+		}else if($(opener.document).find(".top2").text().trim() != "" && $(opener.document).find(".top3").text().trim() == ""){
+				opener.location.href = encodeURI('/pmang/board/itemBoard?category1='+$(opener.document).find(".top1").text().trim()+'&category2='+$(opener.document).find(".top2").text().trim()+'&pg='+$(opener.document).find("#pg").val()+'&order='+$(opener.document).find("#order").val()+'&location='+address);
+		}else if($(opener.document).find(".top2").text().trim() != "" && $(opener.document).find(".top3").text().trim() != ""){
+				opener.location.href = encodeURI('/pmang/board/itemBoard?category1='+$(opener.document).find(".top1").text().trim()+'&category2='+$(opener.document).find(".top2").text().trim()+'&category3='+$(opener.document).find(".top3").text().trim()+'&pg='+$(opener.document).find("#pg").val()+'&order='+$(opener.document).find("#order").val()+'&location='+address);
+		}
 		 window.close();
 
 	});
@@ -306,7 +335,7 @@ function positionCheck(lat, lon){
 	searchDetailAddrFromCoords(position, function(result, status) {
         if (status === kakao.maps.services.Status.OK) {
           
-           var detailAddr = '<div id="detailAddrDiv">' + result[0].address.address_name + '</div>';
+           var detailAddr = '<div id="detailAddrDiv"> 현재 위치 : <span id="addressSpan">' + result[0].address.address_name + '</span></div>';
            var content = '<div class="bAddr">' +
                            detailAddr + 
                        	'</div>';
@@ -335,7 +364,7 @@ function displayCenterInfo(result, status) {
         for(var i = 0; i < result.length; i++) {
             // 행정동의 region_type 값은 'H' 이므로
             if (result[i].region_type === 'H') {
-                $('#detailAddrDiv').html(result[i].address_name);
+                $('#dutoAddr').html(result[i].address_name);
                 break;
             }
         }
@@ -362,7 +391,12 @@ positionCheck(${param.lat}, ${param.lon});
 		<div id="mapHeader">
 			<h3>지도로 위치 지정</h3>
 		</div>
-	  <div id="addressDetail"></div>
+	  <div id="addressDetail">
+	  </div>
+	  <div id="autoAddrDiv">
+	  <p id="title">중심위치 정보</p>
+	  <div id="dutoAddr"></div>
+	  </div>
 	  </div>
 	
 		<div id="map">

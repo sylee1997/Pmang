@@ -20,7 +20,7 @@
       	<div class="loginModalContent">
       		<div class="loginModal-header">
 				<div class="loginModal-headerDiv">
-					<h3 class="loginModal-title" id="myModalLabel">피망 로그인</h3>
+					<div class="loginModal-title" id="myModalLabel"><img src="/pmang/image/mainlogoP.png" width="100" height="100" alt="피망로그인헤더"></div>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -162,7 +162,7 @@
                   <span class="vertical">|</span>
                 </li>
                 <div class="pmangTok">
-               		<div class="pmangTokDiv">피망Tok
+               		<div class="pmangTokDiv"><img src="/pmang/image/pmangTok.jpg" width="100" height="100" alt="피망톡"><span id="pmangSpan">피망톡</span></div>
                	</div>
               </ul>
             </nav>
@@ -194,7 +194,7 @@
                   <span class="vertical">|</span>
                 </li>
                 <div class="pmangTok">
-               		<div class="pmangTokDiv">피망Tok
+               		<div class="pmangTokDiv"><img src="/pmang/image/pmangTok.jpg" width="50" height="50" alt="피망톡"><span id="pmangSpan">피망톡</span></div>
                	</div>
               </ul>
             </nav>

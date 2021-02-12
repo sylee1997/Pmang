@@ -133,7 +133,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<select id="searchlocation" parameterType="String" resultType="zipcode">
-		select DISTINCT sido, sigungu, yubmyundong from newzipcode where sigungu like '%'||#{address}||'%' or yubmyundong like '%'||#{address}||'%' or sido like '%'||#{address}||'%' order by sido
+		select DISTINCT sido, sigungu, yubmyundong from newzipcode where sigungu like '%'||#{address}||'%' or yubmyundong like '%'||#{address}||'%' or roadname like '%'||#{address}||'%' or sido like '%'||#{address}||'%' order by sido
 	</select>
 	<select id="adminUserDeleteSearch" parameterType="String" resultType="String">
 		select userid from usertable where userid=#{userid}
@@ -145,6 +145,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getSellerLocation" parameterType="String" resultType="String">
 		select addr1 from userTable where userId = #{userId}
+	</select>
+	
+	<select id="mainLoc" parameterType="java.util.Map" resultType="zipcode">
+		select DISTINCT sido, sigungu, yubmyundong from newzipcode where (sigungu like '%'||#{address}||'%' or yubmyundong like '%'||#{address}||'%' or roadname like '%'||#{address}||'%') and sido like '%'||#{sido}||'%'		
 	</select>
 
 </mapper>

@@ -11,6 +11,7 @@ function doubleSubmitCheck() {
 }
 
 
+
 // 내상점정보수정
 $('#storeIntroEditBtn').on(
 		'click',

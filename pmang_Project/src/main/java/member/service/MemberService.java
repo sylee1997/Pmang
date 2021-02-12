@@ -57,6 +57,8 @@ public interface MemberService {
 
 	public void deleteRecentlyLoc(String userId, String address);
 
+	public List<ZipcodeDTO> mainLoc(Map<String, String> map);
+
 
 
 }

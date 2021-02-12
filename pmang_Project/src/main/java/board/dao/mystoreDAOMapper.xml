@@ -5,7 +5,7 @@
 <mapper namespace="mystoreSQL">
 
 	<insert id="insertSeller" parameterType="String">
-		insert into seller(userId, marketname, marketdate) values(#{userId}, #{userId} || '님의 상점', sysdate)
+		insert into seller(userId, marketname, pf_photo, marketdate) values(#{userId}, #{userId} || '님의 상점', 'mk_pro.png', sysdate)
 	</insert>
 
 	<update id="profileImgModify" parameterType="seller">

@@ -122,11 +122,11 @@ $(document).ready(function(){
 $('#checkPostSearchBtn').click(function(){
 	$.ajax({
 		type: 'post',
-		url: '/pmang/member/searchlocation',
-		data: {'address' : $('#address').val()},
+		url: '/pmang/member/mainLoc',
+		data: {'sido' : $('#sido').val(), 'address' : $('#address').val()},
 		dataType: 'json',
 		success: function(data){
-			$('#checkPostTable tr:gt(2)').remove();
+			$('#checkPostTable tr:gt(1)').remove();
 			
 			$.each(data.list, function(index, items){
 				var address = items.sido+' '
@@ -136,7 +136,8 @@ $('#checkPostSearchBtn').click(function(){
 				address = address.replace(/null/g, '');
 				
 				$('<tr/>').append($('<td/>',{
-					colspan: '3',
+					colspan: '2',
+					align : 'center'
 					}).append($('<a/>',{
 						href: '#',
 						id: 'addressA',
@@ -153,7 +154,7 @@ $('#checkPostSearchBtn').click(function(){
 });//click
 
 $('#mainLocUl').on('click', '#mainLoc', function(){
-	var address = $("#mainLoc").text();
+	var address = $(this).text();
 	if($(opener.document).find(".top2").text().trim() == "" && $(opener.document).find(".top3").text().trim() == ""){
 		opener.location.href = encodeURI('/pmang/board/itemBoard?category1='+$(opener.document).find(".top1").text().trim()+'&pg='+$(opener.document).find("#pg").val()+'&order='+$(opener.document).find("#order").val()+'&location='+address);
 	}else if($(opener.document).find(".top2").text().trim() != "" && $(opener.document).find(".top3").text().trim() == ""){

@@ -4,7 +4,7 @@ $(document).ready(function(){
 	$('#category2').hide();
 	$('#category3').hide();
 	
-	$.ajax({
+/*	$.ajax({
 		type : 'post',
 		url : '/pmang/member/getSellerLocation',
 		data : {'userId' : $('#seller_userId').val()},
@@ -18,7 +18,7 @@ $(document).ready(function(){
 			console.log(err);
 		}
 	});
-	
+	*/
 	//$('.location_input').val()
 	
 	//$('.imageCount').text('('+$('#imageCountHidden').val()+'/3)');

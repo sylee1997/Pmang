@@ -2312,6 +2312,24 @@ function checkCookie(img, itemSubject, itemPrice, item_seq) {
 
 /* 위치 검색 */
 
+//위치 검색
+if (navigator.geolocation) { // GPS를 지원하면
+	    navigator.geolocation.getCurrentPosition(function(position) {
+	    	var lat = position.coords.latitude; //위도
+	    	var lon = position.coords.longitude; //경도
+	      	$('#lat').val(lat);
+	    	$('#lon').val(lon);
+	    }, function(error) {
+	      console.error(error);
+	    }, {
+	      enableHighAccuracy: false,
+	      maximumAge: 0,
+	      timeout: Infinity
+	    });
+	  } else {
+	    alert('GPS를 지원하지 않습니다');
+	    }
+
 $('#mainLocBtn').click(function(){
 	if($('#userId').val() != ''){
 		window.open("/pmang/pm_itemBoard/mainLoc.jsp", "주요위치", "width=500, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=no, left=500, top=100" );  		
