@@ -1,7 +1,7 @@
 /* 카테고리 펼쳐지는 부분*/
 //우석 수정 -----------------------------
 $('#contact').on('click', function() {
-	window.open("/pmang/talk/talkRoom?item_seq=123","","width=375 height=667");
+	window.open("/pmang/talk/talkRoom?item_seq=123&&partner_userId=gil","","width=375 height=667");
 
 });
 //-----------------------------------

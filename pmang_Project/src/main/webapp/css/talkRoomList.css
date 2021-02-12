@@ -165,7 +165,16 @@ img {
 #talkRoom_a {
    width: 60%;
 }
-
+.unread_div {
+   background-color: green;
+   border-radius: 50%;
+   margin-top: 5px;
+   margin-bottom: 0px;
+   padding: 5px;
+   color: white;
+   font-size: 10px;
+   min-width: 20px;
+}
 .userName {
    padding-bottom: 10px;
 }
@@ -180,13 +189,14 @@ img {
 
 .talkLogTime {
    font-size: 8px;
-   padding-bottom: 20px;
+   padding-bottom: 0px;
+   margin-left: 2px;
 }
 
 .addBtn {
    justify-content: flex-end;
    width: 40px;
-   padding-left: 11px;
+   padding-left: 0px;
    cursor: pointer;
 }
 

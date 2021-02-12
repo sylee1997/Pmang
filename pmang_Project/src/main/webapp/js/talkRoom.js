@@ -1,18 +1,125 @@
 $(document).ready(function() {
+	$.ajax({
+		type: 'POST',
+		url: '/pmang/talk/getMessage',
+		data: {'partner_userId':$('#receiver_user_id').val()},
+		dataType: 'json',
+		success: function(data) {
+		      if(data != '{}'){//List의 값이 null이 아닐때
+		    	  console.log(data.messageList)
+		    	  $.each(data.messageList, function(index, items) {
+		    		  
+		    		  if($('#talkContentDiv .talkDateDiv:last').text() != items.send_time.substring(0,10)){
+		    	    	  $('#talkContentDiv').append($('<div />',{
+		    	        	  class : 'talkDateDiv'
+		    	          }).append($('<div />',{
+		    	        	  class : 'talkDate',
+		    	        	  align : 'center',
+		    	        	  text : items.send_time.substring(0,10)
+		    	          }))); 
+		    	      }
+		    		  
+		    		  if(items.userId == $('#sender_user_id').val() && (items.sender_user_id == $('#sender_user_id').val() && items.receiver_user_id == $('#receiver_user_id').val())){
+		    			  if($('#talkContentDiv').children().last().prop('className') == 'talkSendDiv'){
+		                      
+		            		  let currentMinute = items.send_time.substring(11,16).split(":");
+		            		  let beforeMinute = $('#talkContentDiv .talkSendTime:last').text().split(":");
+		            		  
+		            		  if(currentMinute[1] == beforeMinute[1]){
+		            			  $('#talkContentDiv .talkSendTime:last').text(' ');
+		            		  }
+		            	  }
+		    			  
+		    			  $('#talkContentDiv').append($('<div />', {
+			        		  class : 'talkSendDiv'
+			        	  }).append($('<div />',{
+			        		  class : 'talkTimeDiv'
+			        	  }).append($('<div />',{
+			        		  class : 'readCheck',
+			        		  text : '안읽음'//영은이 할부분
+			        	  })).append($('<div />',{
+			        		  class : 'talkSendTime',
+			        		  text : items.send_time.substring(11,16)//마지막 메세지에만 붙여줘야한다.
+			        	  }))).append($('<div />',{
+			        		  class : 'talkSendTooltip'
+			        	  }).append($('<div />',{
+			        		  class : 'talkSendContent',
+			        		  text : items.talk_content
+			        	  }))));
+			        	  
+			    	  }//if
+		    		  
+		    		  if(items.userId == $('#sender_user_id').val() && (items.sender_user_id == $('#receiver_user_id').val() && items.receiver_user_id == $('#sender_user_id').val())){
+		    			  if($('#talkContentDiv').children().last().prop('className') == 'talkRecieveDiv'){//#talkContentDiv 의 마지막 자식의 클래스네임이 talkSendDiv라면,
+		    	        	  
+		    	        	  let currentMinute = items.send_time.substring(11,16).split(":");
+		    	    		  let beforeMinute = $('#talkContentDiv .talkSendTime:last').text().split(":");
+		    	    		  
+		    	    		  if(currentMinute[1] == beforeMinute[1]){
+		    	    			  $('#talkContentDiv .talkSendTime:last').text(' ');
+		    	    		  }
+		    	          }
+		    			  
+		    			  $('#talkContentDiv').append($('<div />',{
+		    				  class : 'talkReciveDiv'
+		    			  }).append($('<div />',{
+		    				  class : 'talkReciveProfile'
+		    			  }).append($('<img />',{
+		    				  class : 'profileImg',
+		    				  src : '/pmang/image/'+items.receiver_user_profileImage,
+		    				  alt : '프로필이미지',
+		    				  width : '36',
+		    				  height : '36'
+		    			  }))).append($('<div />',{
+		    				  class : 'talkReciveTooltip'
+		    			  }).append($('<div />',{
+		    				  class : 'talkReciveContent',
+		    				  text : items.talk_content
+		    			  }))).append($('<div />',{
+		    				  class : 'talkReciveTime',
+		    				  text : items.send_time.substring(11,16)
+		    			  })));
+		    		  }//if
+			      });//each
+		    	  
+		      }//if
+		},
+		error: function(err) {
+			console.log(err)
+		}
+		
+	});
+	
    sock = new SockJS('/pmang/talk-ws');//나중에 혹시 안되면 "ws://192.168.8.32:8080/SpringWeb/chat-ws" 나중에 주소적을때 이런 양식으로.
    
    sock.onopen = function() {
       console.log('open');
-   };
+   };//onopen
+   
+   var online_contect = '';//상대방 on/offline 여부
    sock.onmessage = function(e) {
       var data = e.data;
       console.log(data)
       console.log("e - " + e)
       var obj = JSON.parse(data)
       console.log(obj.talk_content)
+      
+      online_contect = obj.read_time;
+      console.log(obj.read_time);
+      if(online_contect == 'on_line'){
+    	  $('.readCheck').text('');
+      }
+      else if(online_contect == 'off_line'){
+    	  unread='안읽음';
+      }
+      if(obj.receiver_user_id== $('#sender_user_id').val() && obj.read_time =='on_line'&&obj.sender_user_id== $('#receiver_user_id').val()){
+    	  $('.readCheck').text('');
+    	  unread='';
+      }
       if((obj.sender_user_id == $('#sender_user_id').val() && obj.receiver_user_id == $('#receiver_user_id').val()) || obj.receiver_user_id == $('#sender_user_id').val())
-      appendMaessge(obj);
+    	  appendMaessge(obj);
    };
+   
    sock.onclose = function() {
       appendMessage("연결을 끊었습니다.");
       console.log('close');
@@ -23,11 +130,7 @@ $(document).ready(function() {
 	   var s =
 	     leadingZeros(d.getFullYear(), 4) + '-' +
 	     leadingZeros(d.getMonth() + 1, 2) + '-' +
-	     leadingZeros(d.getDate(), 2) + ' ' +
-
-	     leadingZeros(d.getHours(), 2) + ':' +
-	     leadingZeros(d.getMinutes(), 2) + ':' +
-	     leadingZeros(d.getSeconds(), 2);
+	     leadingZeros(d.getDate(), 2);
 
 	   return s;
 	 }
@@ -60,17 +163,18 @@ $(document).ready(function() {
      var msg = $('#talk_message').val();
      if(msg != ""){
     	 message = {
-        		sender_user_id : $('#sender_user_id').val(),
-                receiver_user_id : $('#receiver_user_id').val(),
-                talk_content : $('#talk_message').val(),
-                receiver_user_profileImage : $('#receiver_user_profileImage').val(),
-                item_seq : $('#item_seq').val()
+    			 sender_user_id : $('#sender_user_id').val(),
+    			 receiver_user_id : $('#receiver_user_id').val(),
+    			 talk_content : $('#talk_message').val(),
+    			 receiver_user_profileImage : $('#receiver_user_profileImage').val(),
+    			 item_seq : $('#item_seq').val()
     	 }
         sock.send(JSON.stringify(message));
         $('#talk_message').val('');
      }
    });
-
+   
+   
    
    $('#talk_message').keypress(function(e){
         if ( e.which == 13 ) {
@@ -87,71 +191,22 @@ $(document).ready(function() {
       var talkTime = getTalkTime();
       var talkRead = '안읽음';
 
-      // 상단날짜div
-      var talkDateDiv = $('<div />', {
-         class : 'talkDateDiv'
-      });
-      // 상단날짜 들어가는 div
-      var talkDate = $('<div />', {
-         class : 'talkDate',
-         align : 'center',
-         text : talkDate
-      });
-
-      // 받은메세지
-      var talkReciveDiv = $('<div />', {
-         class : 'talkReciveDiv'
-      });
-      // 받은 메세지 말풍선+내용
-      var talkReciveTooltip = $('<div />', {
-         class : 'talkReciveTooltip',
-      }).append($('<div />', {
-         class : 'talkReciveContent',
-         text : talk_content
-      }));
-      // 프로필 사진
-      var talkReciveProfile = $('<div />', {
-         class : 'talkReciveProfile'
-      }).append($('<img />', {
-         class : 'profileImg',
-         src : profileImg,
-         alt : '프로필이미지',
-         width : '36',
-         height : '36'
-      }));
-      // 받은메세지 시간
-      var talkReciveTime = $('<div />', {
-         class : 'talkReciveTime',
-         text : talkTime
-      });
-
-      // 보낸메세지div
-      var talkSendDiv = $('<div />', {
-         class : 'talkSendDiv'
-      });
-      // 보낸메세지 말풍선+내용
-      var talkSendTooltip = $('<div />', {
-         class : 'talkSendTooltip'
-      }).append($('<div />', {
-         class : 'talkSendContent',
-         text : talk_content
-      }));
-      // 보낸메세지 시간
-      var talkSendTime = $('<div />', {
-         class : 'talkSendTime',
-         text : talkTime
-      });
-      // 보낸메세지 읽음 확인
-      var readCheck = $('<div />', {
-         class : 'readCheck',
-         text : '안읽음'
-      });
-      
       // 메세지가 하루 중 처음 온것인지 아닌지
       // DB 가서 메세지중 오늘(ex) 8일) 보낸 데이터를 count 하여 0 이면 메시지 append 전에 오늘날짜를 뿌림.
-      $('#talkContentDiv').append($('<div />',{
-    	  class : 'talkDateDiv'
-      }).append(talkDate));
+//      alert($('#talkContentDiv .talkDateDiv:last').text())
+      
+      if($('#talkContentDiv .talkDateDiv:last').text() != talkDate){
+    	  $('#talkContentDiv').append($('<div />',{
+        	  class : 'talkDateDiv'
+          }).append($('<div />',{
+        	  class : 'talkDate',
+        	  align : 'center',
+        	  text : talkDate
+          }))); 
+      }
+    	  
+      
+
       
       // 송신자/수신자 구분
       
@@ -159,46 +214,76 @@ $(document).ready(function() {
       //이전 append 를 삭제해줘야함.
       
       //우석생각 - 방법 1
-      if($('#talkContentDiv').last().prop('className') == 'talkSendDiv'){//#talkContentDiv 의 마지막 자식의 클래스네임이 talkSendDiv라면,
-    	  
-    	  let currentMinute = talkDate.split(":");
-    	  let beforeMinute = $('#talkContentDiv').last().children('.talkSendTime').text().split(":");
-    	  
-    	  alert(currentMinute[0])//시간
-    	  alert(currentMinute[1])//분
-    	  
-    	  alert(beforeMinute[0])
-    	  alert(beforeMinute[1])
-    	  
-    	  if(currentMinute[1] == beforeMinute[1]){
-    		  $('#talkContentDiv').last().children('.talkSendTime').text('');
-    	  }
-      } 
+      
       
       //방법 2 append(talkSendTime) 을 따로 빼서, 이전 talkSendTime 에는 '' 을넣어주고, liastchild 에만 
       //text() 에 talkTime 를 찍어준다.
       
       
-    	  
       
-      
-      //송신자 
       if((obj.sender_user_id == $('#sender_user_id').val() && obj.receiver_user_id == $('#receiver_user_id').val())){
+//    	  alert($('#talkContentDiv .talkSendTime:last').text())
+    	  if($('#talkContentDiv').children().last().prop('className') == 'talkSendDiv'){//#talkContentDiv 의 마지막 자식의 클래스네임이 talkSendDiv라면,
+              
+    		  let currentMinute = talkTime.split(":");
+    		  let beforeMinute = $('#talkContentDiv .talkSendTime:last').text().split(":");
+    		  
+    		  if(currentMinute[1] == beforeMinute[1]){
+    			  $('#talkContentDiv .talkSendTime:last').text(' ');
+    		  }
+    	  } 
     	  
-    	  $('#talkContentDiv').append($('<div />', {
+		  $('#talkContentDiv').append($('<div />', {
     		  class : 'talkSendDiv'
-    	  }).append(talkSendTime).append(talkSendTooltip));
-      }
-      
-      //수신자
-      if(obj.receiver_user_id == $('#sender_user_id').val()){
+    	  }).append($('<div />',{
+    		  class : 'talkTimeDiv'
+    	  }).append($('<div />',{
+    		  class : 'readCheck',
+    		  text : talkRead//영은이 할부분
+    	  })).append($('<div />',{
+    		  class : 'talkSendTime',
+    		  text : talkTime//마지막 메세지에만 붙여줘야한다.
+    	  }))).append($('<div />',{
+    		  class : 'talkSendTooltip'
+    	  }).append($('<div />',{
+    		  class : 'talkSendContent',
+    		  text : talk_content
+    	  }))));
     	  
-    	  $('#talkContentDiv').append($('<div />', {
-    	         class : 'talkRecieveDiv',
-    	   }).append(talkRecieveTooltip).append(talkSendTime));
-      }
-      
-      
+	  }//if
+	  
+	  if(obj.receiver_user_id == $('#sender_user_id').val()){
+		  if($('#talkContentDiv').children().last().prop('className') == 'talkRecieveDiv'){
+        	  
+        	  let currentMinute = talkTime.split(":");
+    		  let beforeMinute = $('#talkContentDiv .talkSendTime:last').text().split(":");
+    		  
+    		  if(currentMinute[1] == beforeMinute[1]){
+    			  $('#talkContentDiv .talkSendTime:last').text(' ');
+    		  }
+          }
+		  
+		  $('#talkContentDiv').append($('<div />',{
+			  class : 'talkReciveDiv'
+		  }).append($('<div />',{
+			  class : 'talkReciveProfile'
+		  }).append($('<img />',{
+			  class : 'profileImg',
+			  src : profileImg,
+			  alt : '프로필이미지',
+			  width : '36',
+			  height : '36'
+		  }))).append($('<div />',{
+			  class : 'talkReciveTooltip'
+		  }).append($('<div />',{
+			  class : 'talkReciveContent',
+			  text : talk_content
+		  }))).append($('<div />',{
+			  class : 'talkReciveTime',
+			  text : talkTime
+		  })));
+	  }//if
+  
       //스크롤
       $("#talkContentDiv").scrollTop(document.body.scrollHeight)
       
@@ -213,7 +298,7 @@ $(document).ready(function() {
       
       
 
-      
+      //안읽음 처리 해야함
 
       // 2-1. 메세지를 보낸거라면 메세지를 읽었는지 안읽었는지
 
@@ -324,9 +409,12 @@ $('.room_setting_notification_Btn').on('click',function(){
    
    
 });
-   
-   
-   
+
+if($('#sender_user_id').val() == $('#sellerItem_userId').val()){
+	$('.price_change').show();
+}else{
+	$('.price_change').hide();
+}
    
    
 });

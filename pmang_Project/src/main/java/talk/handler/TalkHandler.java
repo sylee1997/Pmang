@@ -31,6 +31,9 @@ public class TalkHandler extends TextWebSocketHandler {
 		
 		System.out.println("afterConnectionEstablished session : " + session);
 		System.out.println("afterConnectionEstablished 연결됨 ");// 테이블이 생성되면  session.getId()
+		System.out.println("이거임 >>>>"+session.getAttributes());//.get("userId")
+		//유저아이디랑 방번호로 >> readtime찍기
+		talkService.setOpen(session.getAttributes().get("userId"), session.getAttributes().get("talkRoom_seq"));
 	}//클라이언트가 서버에 접속했을 때, 실행된다
 	
 	
@@ -51,8 +54,7 @@ public class TalkHandler extends TextWebSocketHandler {
 		TalkRoomDTO talkRoomDTO = new TalkRoomDTO();
 		talkRoomDTO.setItem_seq(messageDTO.getItem_seq());
 		talkRoomDTO.setPartner_userId(messageDTO.getReceiver_user_id());
-		talkRoomDTO.setUserId((String) httpSessionMap.get("userId"));
-		
+		talkRoomDTO.setUserId(messageDTO.getSender_user_id());
 		
 		//방이 없으면 새로 만들고 있으면 있는거 사용
 		TalkRoomDTO getTalkRoomDTO = talkService.isRoom(talkRoomDTO);
@@ -63,16 +65,38 @@ public class TalkHandler extends TextWebSocketHandler {
 		
 		messageDTO.setTalkRoom_seq(room.getTalkRoom_seq());//room_seq 만 여기서 데이터 삽입.
 		
+		//보낸사람 message insert
+		messageDTO.setUserId(room.getUserId());
 		talkService.insertMessage(messageDTO);//메세지 insert
+		
+		//받은사람 message insert
+		messageDTO.setUserId(room.getPartner_userId());
+		talkService.insertMessage(messageDTO);
+		
+		//-----------------------------------------------
+	      //receiver_user의 on/off_line 확인
+	      //receiver_user가 sender_user에게 send한 메세지를 조회해야함
+	      //send한 메세지가 없는 경우 off_line
+	      //send한 메세지의 read_time이 null값이 경우 on_line
+	      //send한 메세지의 read_time이 null값이 아닌 경우 off_line
+	      //send한 메세지의 read_time
+	      String read_time = talkService.getReceiver_read_time(messageDTO.getSender_user_id(), messageDTO.getReceiver_user_id());
+	      System.out.println(read_time);
+	    //-----------------------------------------------
+		
+		
 		
 		//MessageDTO lastMessage = talkService.getLastMessage();
 		//System.out.println("lastMessage Send_time" + lastMessage.getSend_time());;
 		
 		
-		System.out.println(session.getId() + " 로 부터 " + message.getPayload() + "받음");
-		for(WebSocketSession se : sessionList) {
-				se.sendMessage(new TextMessage(message.getPayload())); //모든 클라이언트들에게 TextMessage 전송. (브로드캐스트)
-		}
+	      System.out.println(session.getId() + " 로 부터 " + message.getPayload() + "받음");
+	      for(WebSocketSession se : sessionList) {
+	    	  se.sendMessage(new TextMessage(message.getPayload())); //모든 클라이언트들에게 TextMessage 전송. (브로드캐스트)
+	    	  if(se.getId() == session.getId()){    		 
+	    		  se.sendMessage(new TextMessage("{\"read_time\" : \""+read_time+"\"}"));            	
+	    	  }
+	      }
 		
 			log.info("{}로 부터 {} 받음", session.getId(), message.getPayload());//getPayload 는 문자형태 그대로 받겠다는 말이다
 	}//클라이언트가 소켓에 메시지를 보냈을 떄 실행된다
@@ -82,7 +106,7 @@ public class TalkHandler extends TextWebSocketHandler {
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		System.out.println("afterConnectionClosed session : " + session);
 		System.out.println("afterConnectionClosed status : " + status);
-		
+		talkService.setClose(session.getAttributes().get("userId"), session.getAttributes().get("talkRoom_seq"));
 		sessionList.remove(session);
 		
 		log.info(session.getId()+ "연결 종료");
