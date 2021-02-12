@@ -96,6 +96,7 @@ public class BoardDAOMybatis implements BoardDAO {
 		return sqlSession.selectList("boardSQL.getItemBoardList", map);
 	}
 
+	
 	@Override
 	public List<Object> getItemBoardCount(Map<String, Object> map) {
 		System.out.println(map.get("category1"));
@@ -117,6 +118,35 @@ public class BoardDAOMybatis implements BoardDAO {
 	@Override
 	public List<Object> getOrderbyItem(Map<String, Object> map) {
 		return sqlSession.selectList("boardSQL.getOrderbyItem", map);
+	}
+	
+	@Override
+	public List<Object> getMainLoc(String userId) {
+		return sqlSession.selectList("boardSQL.getMainLoc", userId);
+	}
+	
+	@Override
+	public void setMainLoc(String userId, String address) {
+		
+		List<Map<String,String>> list = sqlSession.selectList("boardSQL.getMainLoc", userId);
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("userId", userId);
+		map.put("addr", address);
+		if(list.isEmpty()) {
+			sqlSession.insert("boardSQL.setMainLoc", map);
+		}else {
+			for(Map<String, String> listMap : list) {
+				if(!listMap.get("ADDR").equals(address)){
+					sqlSession.insert("boardSQL.setMainLoc", map);
+				}
+			}
+		}
+		
+	}
+
+	public void deleteMainLoc(Map<String, String> map) {
+		sqlSession.delete("boardSQL.deleteMainLoc", map);
+		
 	}
 	
 	//--------------------------------------------searchBoard------------------------------------------//
@@ -313,6 +343,9 @@ public class BoardDAOMybatis implements BoardDAO {
 	public ItemDTO getItemInfo(String item_seq) {
 		return sqlSession.selectOne("boardSQL.getItemInfo", item_seq);
 	}
+
+
+
 
 
 

@@ -611,7 +611,7 @@ button, input, optgroup, select, textarea {
 }
 
 .category1_li:hover, .category2_li:hover, .category3_li:hover {
-    background-color : green;
+    background-color : rgb(173 212 173 / 30%);
 }
 
 .category1_li, .category2_li, .category3_li {
@@ -1053,5 +1053,32 @@ button, input, optgroup, select, textarea {
 	margin: 0;
 }
 
+#recentlyLocLi{
+	display: flex;
+    height: 3rem;
+    
+}
 
+#recentlyLocBtn {
+	width: 100%;
+    height: 100%;
+    padding: 0px 1.5rem;
+    outline: none;
+    border: 0px;
+    text-align: left;
+    font-weight: 600;
+}
+
+#delectLocBtn{
+    margin: 0px 30px 5px 0px;
+    font-size: 20px;
+    border: none;
+    outline: none;
+}
+
+
+
+#recentlyLocBtn:hover {
+	background: rgb(173 212 173 / 30%);
+}
 

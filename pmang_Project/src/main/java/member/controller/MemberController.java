@@ -7,24 +7,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionListener;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,9 +26,9 @@ import org.springframework.web.servlet.ModelAndView;
 import board.bean.ItemDTO;
 import data.url.Base64Utils;
 import member.bean.MemberDTO;
+import member.bean.RecentlyDTO;
 import member.bean.ZipcodeDTO;
 import member.service.MemberService;
-import net.sf.json.JSONArray;
 
 @Controller
 @RequestMapping(value = "member")
@@ -141,7 +133,7 @@ public class MemberController {
 	public String regSuccess(@RequestParam("userId") String userId, @RequestParam("email_key") String key) {
 
 		mailsender.regSuccess(userId, key); // mailsender의 경우 @Autowired
-
+		
 		return "/member/regSuccess";
 	}
 	
@@ -216,7 +208,9 @@ public class MemberController {
 	public void sellerWrite(@ModelAttribute ItemDTO itemDTO, HttpSession session, HttpServletRequest request, @RequestParam("img1url") String img1url, @RequestParam(value="img2url") String img2url, @RequestParam(value="img3url") String img3url) {
 		//String filePath ="http://localhost:8080/pmang/storage";
 							
+
 		String filePath = "C:\\git_home\\Pmang\\pmang_Project\\src\\main\\webapp\\storage";
+
 		//D:\git_home\Pmang\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\pmang_Project\storage;
 		//System.out.println(filePath);
 		
@@ -262,7 +256,13 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		
-			itemDTO.setUserId((String) session.getAttribute("memUserId"));
+			String userId = (String) session.getAttribute("memUserId");
+			String location = itemDTO.getItem_location();
+			itemDTO.setUserId(userId);
+			//seller-insert해주기
+			memberService.insertSeller(userId);			
+			//최근지역 넣어주기
+			memberService.insertRecentlyLoc(userId, location);
 			//DB
 			memberService.sellerWrite(itemDTO);
 		
@@ -280,6 +280,43 @@ public class MemberController {
 		return mav;
 	}
 	
+	@RequestMapping(value="getSellerLocation", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView getSellerLocation(@RequestParam String userId, HttpServletResponse response) {
+		String location = memberService.getSellerLocation(userId);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("location", location);
+		mav.setViewName("jsonView");
+		
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="getRecentlyLoc", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView getRecentlyLoc(HttpSession session) {
+		String userId = (String) session.getAttribute("memUserId");
+		
+		List<RecentlyDTO> list = memberService.getRecentlyLoc(userId);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+		
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="deleteRecentlyLoc", method=RequestMethod.POST)
+	@ResponseBody
+	public void delectRecentlyLoc(@RequestParam String address, HttpSession session) {
+		String userId = (String) session.getAttribute("memUserId");
+		memberService.deleteRecentlyLoc(userId, address);
+		
+		
+	}
 
 
 	// -----------------admin

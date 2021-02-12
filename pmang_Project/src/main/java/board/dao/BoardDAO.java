@@ -112,6 +112,13 @@ public interface BoardDAO {
 	public void reviewWrite(ReviewDTO reviewDTO);
 
 
+	public List<Object> getMainLoc(String userId);
+
+	public void setMainLoc(String userId, String address);
+
+	public void deleteMainLoc(Map<String, String> map);
+
+
 	public List<NoticeDTO> getNoticeList();
 
 	public List<WishlistDTO> getMyZzim(String userId);
@@ -125,10 +132,6 @@ public interface BoardDAO {
 	public void qnaReplyWrite(String qna_seq,String qnaContent);
 
 	public ItemDTO getItemInfo(String item_seq);
-
-
-	
-
 
 }
 

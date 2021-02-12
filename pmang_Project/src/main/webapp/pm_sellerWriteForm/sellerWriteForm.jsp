@@ -3,6 +3,8 @@
 
 <link rel="stylesheet" href="/pmang/css/sellerWriteForm.css">
 
+
+<input type="hidden" id="seller_userId" value="${sessionScope.memUserId}">
 <input type="hidden" id="imageCountHidden" value=0>
 <div class="searchlocationModal">
 	<section class="searchlocationContent">
@@ -43,11 +45,6 @@
 				</a>
 			</div>
 			
-			<div class="nav_purchaseSalesLogForm">
-				<a class="nav_move3" href="/pmang/seller/sellerPurchaseSalesLogForm"> 
-				구매/판매 내역
-				</a>
-			</div>
 		</nav>
 	</div>
 

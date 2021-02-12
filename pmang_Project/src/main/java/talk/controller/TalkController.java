@@ -34,18 +34,20 @@ public class TalkController {
 		public ModelAndView talkRoom(@RequestParam String item_seq,
 									 @RequestParam String partner_userId,//상대방 user_id
 									 HttpSession session) {
-			System.out.println(session.getAttribute("memUserId"));
+
+	      	
 			System.out.println("아이템 seq : "+item_seq);
 			System.out.println("partner_userId : " + partner_userId);
-//			session.setAttribute("userId","hong");
-			//session.setAttribute("userId", "gil");
-			
+			System.out.println("로그인된 세션 아이디: " + session.getAttribute("memUserId"));
+
 			TalkRoomDTO talkRoomDTO = new TalkRoomDTO();
 			talkRoomDTO.setItem_seq(Integer.parseInt(item_seq));
 			talkRoomDTO.setPartner_userId(partner_userId);
 			talkRoomDTO.setUserId((String) session.getAttribute("memUserId"));
 			TalkRoomDTO getTalkRoomDTO = talkService.isRoom(talkRoomDTO);
+
 			System.out.println(getTalkRoomDTO);
+
 			if (getTalkRoomDTO != null) {
 				int talkRoom_seq = getTalkRoomDTO.getTalkRoom_seq();
 				session.setAttribute("talkRoom_seq", talkRoom_seq);
@@ -100,13 +102,14 @@ public class TalkController {
 	
 		@RequestMapping(value = "talkRoomList", method = RequestMethod.GET)
 		public String talkRomList(HttpSession session) { // 톡 리스트로 넘어올때, 둘고와야할 데이터.
-			// 임시 세션 저장.
+
 			return "/talk/talkRoomList";
 		}
 	      
 		@RequestMapping(value = "getRoomList", method = RequestMethod.POST)
 		public ModelAndView getRomList(HttpSession session) { // 톡 리스트로 넘어올때, 둘고와야할 데이터.
 			/* session ID 를 들고, DB에 갔다와야함. */
+
 			// 리스트 봅아내기
 			String userId = (String) session.getAttribute("memUserId");
 			System.out.println("userId: " + userId);
@@ -215,9 +218,10 @@ public class TalkController {
 		// 나가기
 		@RequestMapping(value = "getOut", method = RequestMethod.POST)
 		public String getOut(HttpSession session, @RequestParam String partner_userId) {
-			System.out.println("userId : " + session.getAttribute("userId"));
+
+			System.out.println("userId : " + session.getAttribute("memUserId"));
 			System.out.println("partner_userId : " + partner_userId);
-			String userId = (String) session.getAttribute("userId");
+			String userId = (String) session.getAttribute("memUserId");
 
 			talkService.getOut(userId, partner_userId);
 			return "/talk/talkRoomList";

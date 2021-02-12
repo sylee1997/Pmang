@@ -1,7 +1,6 @@
 package member.service;
 
 import java.util.List;
-
 import java.util.Map;
 import java.util.Random;
 
@@ -12,30 +11,25 @@ import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
-
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import org.springframework.stereotype.Service;
 
-
-import member.bean.MemberDTO;
-import member.bean.ZipcodeDTO;
-
-
 import board.bean.ItemDTO;
-
-
+import board.dao.MystoreDAO;
+import member.bean.MemberDTO;
+import member.bean.RecentlyDTO;
+import member.bean.ZipcodeDTO;
 import member.dao.MemberDAO;
 
-import board.bean.ItemDTO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDAO memberDAO;
+	@Autowired
+	private MystoreDAO mystoreDAO;
 	@Autowired
 	private JavaMailSender mailSender;
 	@Autowired
@@ -206,6 +200,9 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public void sellerWrite(ItemDTO itemDTO) {
+		if(itemDTO.getItem_location() == null) {
+			itemDTO.setItem_location("위치 정보 없음");
+		}
 		memberDAO.sellerWrite(itemDTO);
 	}
 
@@ -214,6 +211,29 @@ public class MemberServiceImpl implements MemberService {
 	public List<ZipcodeDTO> searchlocation(String address) {
 		return memberDAO.searchlocation(address);
 	}
+	
+	@Override
+	public String getSellerLocation(String userId) {
+		return memberDAO.getSellerLocation(userId);
+	}
+	
+	@Override
+	public void insertRecentlyLoc(String userId, String location) {
+		memberDAO.insertRecentlyLoc(userId, location);
+		
+	}
+	
+	@Override
+	public List<RecentlyDTO> getRecentlyLoc(String userId) {
+		return memberDAO.getRecentlyLoc(userId);
+	}
+
+	@Override
+	public void deleteRecentlyLoc(String userId, String address) {
+		memberDAO.deleteRecentlyLoc(userId, address);
+		
+	}
+
 
 	
 	//--------------------------------admin------------------------
@@ -223,10 +243,18 @@ public class MemberServiceImpl implements MemberService {
 		
 		return resultId;
 	}
+	
+	//------------------mystore------------------------------------
 
 	@Override
 	public void adminUserDelete(String userid) {
 		memberDAO.adminUserDelete(userid);
+		
+	}
+
+	@Override
+	public void insertSeller(String userId) {
+		mystoreDAO.insertSeller(userId);
 		
 	}
 
