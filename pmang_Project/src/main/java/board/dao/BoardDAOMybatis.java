@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import board.bean.CommentDTO;
 import board.bean.ItemDTO;
 import board.bean.NoticeDTO;
+import board.bean.QnaDTO;
 import board.bean.ReviewDTO;
 import board.bean.SearchDTO;
 import board.bean.WishlistDTO;
@@ -278,6 +279,34 @@ public class BoardDAOMybatis implements BoardDAO {
 	@Override
 	public List<WishlistDTO> getMyZzim(String userId) {
 		 return sqlSession.selectList("boardSQL.getMyZzim", userId);
+	}
+	
+	@Override
+	public void qnaWrite(QnaDTO qnaDTO) {
+		sqlSession.insert("boardSQL.qnaWrite",qnaDTO);
+		
+	}
+
+	@Override
+	public List<QnaDTO> getQnaList(String userid) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("boardSQL.getQnaList",userid);
+	}
+
+	@Override
+	public List<QnaDTO> getQna() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("boardSQL.getQna");
+	}
+
+	@Override
+	public void qnaReplyWrite(String qna_seq,String qnaContent) {
+		Map<String,String> map=new HashMap<String,String>();
+		map.put("qna_seq", qna_seq);
+		map.put("qnaContent", qnaContent);
+		
+		sqlSession.update("boardSQL.qnaReplyWrite",map);
+		
 	}
 
 

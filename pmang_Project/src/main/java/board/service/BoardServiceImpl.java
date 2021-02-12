@@ -13,6 +13,7 @@ import board.bean.BoardPaging;
 import board.bean.CommentDTO;
 import board.bean.ItemDTO;
 import board.bean.NoticeDTO;
+import board.bean.QnaDTO;
 import board.bean.ReportDTO;
 import board.bean.ReviewDTO;
 import board.bean.SearchDTO;
@@ -635,12 +636,37 @@ public class BoardServiceImpl implements BoardService {
 	public List<NoticeDTO> getNoticeList() {
 		return boardDAO.getNoticeList();
 	}
+	
+	@Override
+	public void qnaWrite(QnaDTO qnaDTO) {
+		boardDAO.qnaWrite(qnaDTO);
+
+	}
 
 
 
 	@Override
 	public List<WishlistDTO> getMyZzim(String userId) {
 		return boardDAO.getMyZzim(userId);
+	}
+	
+	@Override
+	public List<QnaDTO> getQnaList(String userid) {
+		return boardDAO.getQnaList(userid);
+	}
+
+
+
+	@Override
+	public List<QnaDTO> getQna() {
+		return boardDAO.getQna();
+	}
+
+
+
+	@Override
+	public void qnaReplyWrite(String qna_seq,String qnaContent) {
+		boardDAO.qnaReplyWrite(qna_seq,qnaContent);
 	}
 
 

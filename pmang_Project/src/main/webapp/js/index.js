@@ -608,6 +608,15 @@ $('#index_searchPwBtn').click(function(){
 	location.href="/pmang/member/searchPw"
 });
 
+//엔터시 로그인
+$(document).keydown(function(key) {
+	if(key.keyCode == 13){
+		$('#loginBtn').trigger('click');
+		$(document).click(function(){
+		});
+	}
+});
+
 $('#loginBtn').click(function(){
 	$('#index_userIdDiv').empty();
 	$('#index_pwdDiv').empty();
@@ -804,6 +813,9 @@ $('#footerPolicy').click(function(){
 
 $('#footerFQA').on('click',function(){
 	$(location).attr("href", "/pmang/board/notice?tabNo=3");
+});
+$('#footerQnA').on('click',function(){
+	$(location).attr("href", "/pmang/board/qna");
 });
 
 

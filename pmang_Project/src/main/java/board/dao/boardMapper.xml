@@ -381,6 +381,7 @@
 							 		
  	</insert>
  	
+
  	
  	<select id="getNoticeList" resultType="notice">
  		select * from notice
@@ -389,6 +390,31 @@
 	<select id="getMyZzim" resultType="wishlist">
 		select * from wishlist where userId=#{userId}
 	</select>
+
+	<insert id="qnaWrite" parameterType="qna">
+		insert into qna(qna_seq,userid,select1,select2,qnaContent,img1,img2,img3) values(
+					qna_seq.nextval
+					,#{userid}
+					,#{select1}
+					,#{select2}
+					,#{qnaContent}
+					,#{img1}
+					,#{img2}
+					,#{img3})
+	</insert>
+	
+	<select id="getQnaList" parameterType="String" resultType="qna">
+		select * from qna where userid=#{userid}
+	</select>
+	
+	<select id="getQna" resultType="qna">
+		select * from qna where qnareply is null order by qna_seq
+	</select>
+	
+	<update id="qnaReplyWrite" parameterType="java.util.Map">
+		update qna set qnareply=#{qnaContent}, logtime=sysdate where qna_seq=#{qna_seq} 
+	</update>
+
 </mapper>
 
 

@@ -24,7 +24,7 @@
 		
 		<typeAlias type="board.bean.NoticeDTO" alias="notice"/>
 
-		
+		<typeAlias type="board.bean.QnaDTO" alias="qna"/>
 	</typeAliases>
 
 </configuration>

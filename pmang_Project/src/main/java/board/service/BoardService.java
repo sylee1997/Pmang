@@ -8,6 +8,7 @@ import board.bean.BoardPaging;
 import board.bean.CommentDTO;
 import board.bean.ItemDTO;
 import board.bean.NoticeDTO;
+import board.bean.QnaDTO;
 import board.bean.ReportDTO;
 import board.bean.ReviewDTO;
 import board.bean.SearchDTO;
@@ -161,9 +162,19 @@ public interface BoardService {
 
 	public void noticeWrite(Map<String, String> map);
 
+
 	public List<NoticeDTO> getNoticeList();
 
 	public List<WishlistDTO> getMyZzim(String userId);
+
+	public void qnaWrite(QnaDTO qnaDTO);
+
+	public List<QnaDTO> getQnaList(String userid);
+
+	public List<QnaDTO> getQna();
+
+	public void qnaReplyWrite(String qna_seq,String qnaContent);
+
 
 
 }

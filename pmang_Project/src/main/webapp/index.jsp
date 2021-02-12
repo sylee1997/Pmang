@@ -657,11 +657,13 @@
             <a class="cIPDuS" id="footerNotice">공지사항</a>
             <a class="cIPDuS" id="footerFQA">자주묻는질문</a>
             <a class="cgGBdw" id="footerPolicy">운영정책</a>
-            <a class="cIPDuS" href="#">1:1문의하기</a>
+
+			<a class="cIPDuS" id="footerQnA">1:1문의하기</a>
             <a class="cgGBdw" href="#" onClick="window.open('http://localhost:8080/pmang/pm_notice/companyInfo.jsp','companyInfo')">사업자정보확인</a>
             <a class="cgGBdw" href="#" onClick="window.open('http://localhost:8080/pmang/pm_notice/servicePolicy.jsp','servicePolicy')">이용약관</a>
             <a class="cgGBdw" href="#" onClick="window.open('http://localhost:8080/pmang/pm_notice/youthPolicy.jsp','youthPolicy')">청소년보호정책</a>
             <a class="cgGBdw" href="#" onClick="window.open('http://localhost:8080/pmang/pm_notice/GPSPolicy.jsp','GPSPolicy')">위치기반서비스 이용약관</a>
+
          </div>
       </div>
       

@@ -48,6 +48,7 @@ import board.bean.ItemDTO;
 import board.bean.WishlistDTO;
 
 import board.bean.NoticeDTO;
+import board.bean.QnaDTO;
 import board.bean.ReportDTO;
 
 import board.bean.ReviewDTO;
@@ -81,11 +82,13 @@ public class BoardController {
 
 	// 수정 후 바뀐 내상점 정보를 출력하기 위해 -- 조회수 처리 안해줬음
 	@RequestMapping(value = "getMystore", method = RequestMethod.POST)
+	@ResponseBody
 	public ModelAndView getMystore(HttpSession session, @CookieValue(value = "memHit", required = false) Cookie cookie,
 			HttpServletResponse response) {
-		// int userid=session.getAttribute("userid");
-		String userid = (String) session.getAttribute("memUserId"); // 세션값 받아야함
-
+		
+		 String userid = (String) session.getAttribute("memUserId"); // 세션값 받아야함
+		
+		
 		// 조회수 - 새로고침방지
 		if (cookie != null) {
 			boardService.mystoreHitUpdate(userid);
@@ -280,7 +283,7 @@ public class BoardController {
 	@RequestMapping(value = "getMystoreWishCnt", method = RequestMethod.POST)
 	@ResponseBody
 	public String getMystoreWishCnt(HttpSession session, HttpServletResponse reponse) {
-		String userid =(String) session.getAttribute("memUserId"); // 세션값 받아야함
+		String userid = (String) session.getAttribute("memUserId"); // 세션값 받아야함
 
 		String result = boardService.getMystoreWishCnt(userid);
 		return result;
@@ -335,7 +338,8 @@ public class BoardController {
 
 		// 나중에 변경 세션받으면!
 		// String userid = (String) session.getAttribute("userid");
-		String userid = (String) session.getAttribute("memUserId");; // 세션값 받아야함
+		String userid = (String) session.getAttribute("memUserId");
+		; // 세션값 받아야함
 
 		List<ItemDTO> list = boardService.getMystoreItemLowerPriceList(pg, userid);
 
@@ -507,10 +511,10 @@ public class BoardController {
 	@ResponseBody
 	public void reviewWrite(@ModelAttribute ReviewDTO reviewDTO, HttpServletRequest request,
 			@RequestParam("img1url") String img1url, @RequestParam("img2url") String img2url,
-			@RequestParam("img3url") String img3url,HttpSession session) {
+			@RequestParam("img3url") String img3url, HttpSession session) {
 		String filePath = "C:/project/Pmang/pmang_Project/src/main/webapp/storage/";
 
-		String reviewWriter =(String) session.getAttribute("memUserId");// 작성자 아이디 세션으로 넣어야함
+		String reviewWriter = (String) session.getAttribute("memUserId");// 작성자 아이디 세션으로 넣어야함
 		reviewDTO.setReviewWriter(reviewWriter);
 
 		UUID uuid = UUID.randomUUID(); // 중복파일이름방지를 위한 uuid설정
@@ -1138,7 +1142,6 @@ public class BoardController {
 	}
 	
 
-
 	// ------------------admin
 
 	@RequestMapping(value = "getAdmin", method = RequestMethod.POST)
@@ -1168,12 +1171,12 @@ public class BoardController {
 	}
 
 	// admin 탭메뉴3
-	/*
-	 * @RequestMapping(value = "adminTab3", method = RequestMethod.GET) public
-	 * String adminTab3() {
-	 * 
-	 * return "/pm_admin/tab3"; }
-	 */
+
+	@RequestMapping(value = "adminTab3", method = RequestMethod.GET)
+	public String adminTab3() {
+
+		return "/pm_admin/tab3";
+	}
 
 	// 신고 리스트
 	@RequestMapping(value = "getReportList", method = RequestMethod.POST)
@@ -1259,5 +1262,81 @@ public class BoardController {
 	}
 	
 	
+	//----------------------qna----------------------------//
+	@RequestMapping(value="qna",method=RequestMethod.GET)
+	public String qna(Model model) {
+		model.addAttribute("display", "/pm_qna/qna.jsp");
+		return "/index";
+	}
+	
+	@RequestMapping(value="qnaWrite",method=RequestMethod.POST)
+	@ResponseBody
+	public void qnaWrite(@ModelAttribute QnaDTO qnaDTO,HttpServletRequest request,@RequestParam("img1url") String img1url
+						,@RequestParam("img2url") String img2url,
+						@RequestParam("img3url") String img3url) {
+		String filePath = "C:/project/Pmang/pmang_Project/src/main/webapp/storage/";
+		
+		UUID uuid=UUID.randomUUID();
+		
+		try {
 
+			byte[] in1 = null;
+			byte[] in2 = null;
+			byte[] in3 = null;
+
+			if (!img1url.equals("undefined")) {
+				in1 = Base64Utils.decodeBase64ToBytes(img1url);
+				File file1 = new File(filePath, uuid.toString() + "_" + qnaDTO.getImg1());
+				FileCopyUtils.copy(in1, new FileOutputStream(file1));
+				qnaDTO.setImg1(uuid.toString() + "_" + qnaDTO.getImg1());
+			}
+			if (!img2url.equals("undefined")) {
+				in2 = Base64Utils.decodeBase64ToBytes(img2url);
+				File file2 = new File(filePath, uuid.toString() + "_" + qnaDTO.getImg2());
+				FileCopyUtils.copy(in2, new FileOutputStream(file2));
+				qnaDTO.setImg2(uuid.toString() + "_" + qnaDTO.getImg2());
+
+			}
+			if (!img3url.equals("undefined")) {
+				in3 = Base64Utils.decodeBase64ToBytes(img3url);
+				File file3 = new File(filePath, uuid.toString() + "_" + qnaDTO.getImg3());
+				FileCopyUtils.copy(in3, new FileOutputStream(file3));
+				qnaDTO.setImg3(uuid.toString() + "_" + qnaDTO.getImg3());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		boardService.qnaWrite(qnaDTO);
+	}
+	
+	@RequestMapping(value="getQnaList",method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView getQnaList(@RequestParam String userid) {
+		List<QnaDTO> list=boardService.getQnaList(userid);
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("list",list);
+		mav.setViewName("jsonView");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value="getQna",method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView getQna() {
+		List<QnaDTO> list=boardService.getQna();
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("list",list);
+		mav.setViewName("jsonView");
+		
+		return mav;
+	}
+
+	@RequestMapping(value="qnaReplyWrite",method=RequestMethod.POST)
+	@ResponseBody
+	public void qnaReplyWrite(@RequestParam String qna_seq,@RequestParam String qnaContent) {
+		boardService.qnaReplyWrite(qna_seq,qnaContent);
+	}
 }

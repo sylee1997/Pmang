@@ -220,6 +220,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String adminUserDeleteSearch(String userid) {
 		String resultId=memberDAO.adminUserDeleteSearch(userid);
+		
 		return resultId;
 	}
 
