@@ -671,6 +671,13 @@ public class BoardServiceImpl implements BoardService {
 
 
 
+	@Override
+	public ItemDTO getItemInfo(String item_seq) {
+		return boardDAO.getItemInfo(item_seq);
+	}
+
+
+
 	
 }
 

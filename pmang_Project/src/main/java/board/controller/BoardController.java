@@ -1339,4 +1339,18 @@ public class BoardController {
 	public void qnaReplyWrite(@RequestParam String qna_seq,@RequestParam String qnaContent) {
 		boardService.qnaReplyWrite(qna_seq,qnaContent);
 	}
+	
+	@RequestMapping(value="getItemInfo",method=RequestMethod.POST)
+	public ModelAndView getItemInfo(@RequestParam String item_seq) {
+		ItemDTO itemDTO = boardService.getItemInfo(item_seq);
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("itemDTO",itemDTO);
+		mav.setViewName("jsonView");
+		
+		return mav;
+	}
+	
+	
+	
 }

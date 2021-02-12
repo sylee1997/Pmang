@@ -175,6 +175,8 @@ public interface BoardService {
 
 	public void qnaReplyWrite(String qna_seq,String qnaContent);
 
+	public ItemDTO getItemInfo(String item_seq);
+
 
 
 }

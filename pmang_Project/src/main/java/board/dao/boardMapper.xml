@@ -415,6 +415,10 @@
 		update qna set qnareply=#{qnaContent}, logtime=sysdate where qna_seq=#{qna_seq} 
 	</update>
 
+
+	<select id="getItemInfo" resultType="item">
+		select * from item where item_seq=#{item_seq}
+	</select>
 </mapper>
 
 
