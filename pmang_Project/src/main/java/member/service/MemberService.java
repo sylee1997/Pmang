@@ -46,8 +46,10 @@ public interface MemberService {
 	public List<ZipcodeDTO> searchlocation(String address);
 
 
+	public String adminUserDeleteSearch(String userid);
 
-	
+	public void adminUserDelete(String userid);
+
 
 
 }

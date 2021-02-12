@@ -14,6 +14,7 @@
 		select * from itemComment where item_seq=#{item_seq} order by logtime desc
 	</select>
 	
+
 	<insert id="itemComment" parameterType="java.util.Map">
 		insert into itemComment values(comment_seq.nextval,
 										#{item_seq},
@@ -33,11 +34,13 @@
 	</select>
 	
 	
+
+	
+	
 	
 	
 	
 	<!-- ItemBoard -->
-
 	<select id="getItemBoardList" parameterType="java.util.Map" resultType="item">
 	select * from (select rownum rn, tt.* from (select item_seq, img1, item_subject, category1, category2, category3, item_location, item_price, hashtag1, hashtag2, hashtag3, hit, logtime from item where category1 = #{category1}	
 		<if test="category2 != null">
@@ -50,21 +53,18 @@
 	
 	</select>
 	
-	
-	
-	
+
 	<select id="getItemBoardCount1" parameterType="java.util.Map" resultType="java.util.Map">
 		select category1, category2, count(category2) as cnt2 from item group by category1, category2 having category1 = #{category1} and category2 is not null
 	</select>
 	
-	
-	
+
+
 	<select id="getItemBoardCount2" parameterType="java.util.Map" resultType="java.util.Map">
 	 	select category2, category3, count(category3) as cnt3 from item group by category2, category3 having category2 = #{category2} and category3 is not null
 	</select>
 	
-
-	<select id="getEntireItemNum" parameterType="java.util.Map" resultType="int">
+<select id="getEntireItemNum" parameterType="java.util.Map" resultType="int">
 	 	<if test="category2 == null and category3 == null">
 	 		select count(category1) from item where category1 = #{category1}
 	 	</if>
@@ -257,12 +257,6 @@
 	
 	
 	
-	
-	
-	
-	
-	
-	
 	<select id="hashtagBoardList" parameterType="String" resultType="java.util.Map">
 		select category1, category2, category3, cnt2, cnt3 from (select rownum rn, tt.* from (select category1, category2, category3, count(category2) as cnt2, count(category3) as cnt3 from item where hashtag1 like '%' || #{hashtag} || '%' or hashtag2 like '%' || #{hashtag} || '%' or hashtag3 like '%' || #{hashtag} || '%' group by category1, category2, category3 order by cnt3 desc)tt) where rn <![CDATA[ <= ]]> 4
 	</select>
@@ -371,7 +365,30 @@
 	<delete id="searchAllDelete" parameterType="String">
 		delete searchkeyword where userid=#{userid}
 	</delete>
-
+	
+	<insert id="reviewWrite" parameterType="review">
+ 		insert into review values(review_seq.nextval,
+							 		#{sellerid},
+							 		#{itemNum},
+							 		#{reviewWriter},
+							 		#{reviewSubject},
+							 		#{reviewContent},
+							 		#{img1},
+							 		#{img2},
+							 		#{img3},
+							 		sysdate,
+							 		#{reviewStamp})
+							 		
+ 	</insert>
+ 	
+ 	
+ 	<select id="getNoticeList" resultType="notice">
+ 		select * from notice
+ 	</select>
+	
+	<select id="getMyZzim" resultType="wishlist">
+		select * from wishlist where userId=#{userId}
+	</select>
 </mapper>
 
 

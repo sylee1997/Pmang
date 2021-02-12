@@ -1,12 +1,186 @@
 //배열로 잡기
-if(localStorage.length != 0){
-	var output = localStorage.getItem("key");
+/*if(localStorage.getItem("key") != null){
+	$('.nonGoods').hide();
+	var output = localStorage.getItem("key"); // 배열받고
 	
-	var goods = JSON.parse(output);
+	var goods = JSON.parse(output); //배열을 제이슨으로 뿌려주고
 	
-	$('#goods_img1').append($('<img src="' + localStorage.goods1 + '" width="80" height="80">'));	
+	var div = '<div id="goods_img" style="width: 80px; height: 80px; border : 1px solid #e5e5e5"></div>';
+	$(div).appendTo('.goods');
+	
+	
+	$('#goods_img').append($('<img src="' + goods[0] + '" width="80" height="80">'));	
+}else{
+	$('.nonGoods').show();
+}
+*/
+
+
+
+
+
+
+
+//recent item(최근본상품)
+
+var Cpage;   // 현재 페이지 
+var pagingSize = 3;   // 3개만 보이게끔. 
+function chkRecent(a){
+	var itemID = getCookie("itemID");
+	$(".goods").html('');    // 일단 내용 지우기
+
+	if(itemID){ //쿠키값이 있다면!
+		
+		$(".nonGoods").hide();
+		
+		var totcount = itemID.split('&').length-1;   //
+		var totpage = Math.ceil(totcount / pagingSize) * 1; //소수점 이하 올림
+
+		Cpage = (totpage >= a )? a:1; //총 페이지보다 a페이지가 작거나 같으면 a페이지로, 총 페이지보다 a페이지가 크다면 1페이지로 이동.
+		Cpage = (Cpage < 1)? totpage:Cpage; //현재 페이지가 1보다 작다면? 현재페이지가 총 페이지로, 1보다 크면 현재페이지 그대로 유지. 
+
+		var start = (Cpage-1) * pagingSize;     
+		
+		
+		
+		
+		for (i = start ; i <= start+(pagingSize-1); i++){
+			var thisItem = itemID.split('&')[i];
+		
+			if(thisItem){
+				var img = thisItem.split(':')[0];
+				var itemSubject = thisItem.split(':')[1];
+				var itemPrice = thisItem.split(':')[2];
+				var item_seq = thisItem.split(':')[3];
+				
+				//var removeBtn = '<button onclick="javascript:removeRecentItem(\''+thisItem+'\')" class="btn_delete"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAYCAYAAAD6S912AAAAAXNSR0IArs4c6QAAAWRJREFUOBHNlOtNhEAQgNmlBbUCSLx4PVzumrALm7EItYkj9qDxePzmx9kDOB9hyALLyz+6yQR2duZjHuwEwb9fZVneZFn2kuf57W+DxRcGLJOm6auAHo0xnyLHOI6/t4CB1XWdiDyI35sNw/AJGAqR85ZIW9gZXxgNi2iKorirqkoPPuTwtBSpA9sDs9aeoii6Gk1vC3QKBqsDslkDnYONgEvQJZgXOAVFT9NEejVD765eyu7BIP0vzgS2cxvg2uv7JBCDFvouoHv2ArtINw90k71vWZ9SdQKq5R3Rhcrdq757TgKdBpDmBRHWTmT25/cCHZg24ECq1E+A+znoqIYeWHMDyGnQKO+N6gFbWCIRNHdTr1NXoDF0NFA64BqYggeR9qBNDYcwqdVx7tdohoDYtDVlSiUw+KDxwZYmjUbq87Uytp61ZkS2FgYUW3w0UlgBY5uprSHr17c8qSkMWFv8/sb2ByEblYtthvS2AAAAAElFTkSuQmCC" width="10" height="12" alt="삭제 버튼 이미지"></button>'
+				
+				$(".goods").append('<div id="goods_img"><div class="detail"><button onclick="javascript:removeRecentItem(\''+thisItem+'\')" class="btn_delete"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAYCAYAAAD6S912AAAAAXNSR0IArs4c6QAAAWRJREFUOBHNlOtNhEAQgNmlBbUCSLx4PVzumrALm7EItYkj9qDxePzmx9kDOB9hyALLyz+6yQR2duZjHuwEwb9fZVneZFn2kuf57W+DxRcGLJOm6auAHo0xnyLHOI6/t4CB1XWdiDyI35sNw/AJGAqR85ZIW9gZXxgNi2iKorirqkoPPuTwtBSpA9sDs9aeoii6Gk1vC3QKBqsDslkDnYONgEvQJZgXOAVFT9NEejVD765eyu7BIP0vzgS2cxvg2uv7JBCDFvouoHv2ArtINw90k71vWZ9SdQKq5R3Rhcrdq757TgKdBpDmBRHWTmT25/cCHZg24ECq1E+A+znoqIYeWHMDyGnQKO+N6gFbWCIRNHdTr1NXoDF0NFA64BqYggeR9qBNDYcwqdVx7tdohoDYtDVlSiUw+KDxwZYmjUbq87Uytp61ZkS2FgYUW3w0UlgBY5uprSHr17c8qSkMWFv8/sb2ByEblYtthvS2AAAAAElFTkSuQmCC" width="10" height="12" alt="삭제 버튼 이미지"></button><div class="recentlySubject">'+ itemSubject +'</div><div class="recentlyPrice">'+ itemPrice +'원</div></div><a class="recentlyGoods" href="/pmang/board/itemView?item_seq='+item_seq+'" target="_top"><img src='+img+'  width="80" heigth="80"></a></div>');
+				
+
+			}
+
+		}
+		
+		//var detailDiv = '<div class="detail">' + removeBtn +'<div class="recentlySubject">'+ itemSubject +'</div><div class="recentlyPrice">'+ itemPrice +'원</div>';
+		//$('.recentlyGoods').append(detailDiv);
+
+		$("#recentlypaging").show();
+
+	}else{
+
+		$(".nonGoods").show();
+
+		$("#recentlypaging").hide();
+		
+		$("#recentCnt").text('');
+
+	}
+
+	updateRecentPage(totcount, Cpage);
+
 }
 
+
+chkRecent(1);
+
+
+function removeRecentItem(itemname){
+
+	var itemID = getCookie("itemID");
+
+	itemID = itemID.replace(itemname+"&","");			
+
+	setCookie("itemID",itemID,1);
+
+	chkRecent(Cpage);
+
+}
+
+
+function updateRecentPage(totcount,Cpage){   
+
+	$("#recentCnt").text(totcount); 
+
+	$("#totalPageCount").text("/ "+Math.ceil((totcount / pagingSize) *1)); 
+
+	if(Math.ceil((totcount / pagingSize) *1) < Cpage){
+
+		$("#recentlycurrentPage").text(Math.ceil((totcount / pagingSize) *1));
+
+	}else{
+
+	$("#recentlycurrentPage").text(Cpage);
+
+	}
+
+}
+
+
+//다음
+$(".btn_next").on('click',function(){
+
+	chkRecent(Cpage + 1);
+
+});
+
+//이전
+$(".btn_prev").on('click',function(){
+
+	chkRecent(Cpage - 1);
+
+});
+
+
+//쿠키 생성
+function setCookie(cName, cValue, cDay){
+     var expire = new Date();
+     expire.setDate(expire.getDate() + cDay);
+     cookies = cName + '=' + escape(cValue) + '; path=/ ';
+     if(typeof cDay != 'undefined') cookies += ';expires=' + expire.toGMTString() + ';';
+     document.cookie = cookies;
+}
+
+// 쿠키 가져오기
+function getCookie(cName) {
+     cName = cName + '=';
+     var cookieData = document.cookie;
+     var start = cookieData.indexOf(cName);
+     var cValue = '';
+     if(start != -1){
+          start += cName.length;
+          var end = cookieData.indexOf(';', start);
+          if(end == -1)end = cookieData.length;
+          cValue = cookieData.substring(start, end);
+     }
+     return unescape(cValue);
+}
+
+$('.goods').on({
+    mouseenter: function(){ $(this).find('.detail').css('display', 'block'); 
+    						$(this).find('.recentlyGoods').css('border', '1px solid black');
+    						$(this).find('.recentlyGoods').css('border-left', '0px');
+    
+    
+    },
+    mouseleave: function(){ $(this).find('.detail').css('display', 'none'); 
+    						$(this).find('.recentlyGoods').css('border', '0px');
+    }
+}, '#goods_img');
+
+
+/*$(document).on('hover', '.recentlyGoods', function(){
+	$('.detail').css('display', 'block')
+},
+function(){
+	$('.detail').css('display', 'none')
+});*/
+/*$('.recentlyGoods').hover(function(){
+	$('.detail').css('display', 'block')
+},
+function(){
+	$('.detail').css('display', 'none')
+});
 
 
 
@@ -372,11 +546,25 @@ $('.category3Menu').on('click','li',function(){
 });
 
 
+//로그인 안했을 때 누르는 판매하기, 내상점
+function nologin(){
+	//alert('먼저 로그인 하세요.');
+	$('#loginli').trigger('click');
+}
+
 
 
 //----------------------------------------------------------------------
 //로그인모달 구현
 $('#loginli').click(function(){
+	//아이디 저장
+	var userId = localStorage.getItem('userId');
+	$('#index_userId').val(userId);
+	if(!userId) {
+		$('#checkedId').prop('checked',false);	
+	} else {
+		$('#checkedId').prop('checked',true);
+	}
 	$('.loginModal').show();
 	$('.loginModal').on('scroll touchmove mousewheel', function(e){
 		e.preventDefault();
@@ -384,12 +572,12 @@ $('#loginli').click(function(){
 		return false;
 	});
 });
-
 $('.close').click(function(){
+	$('#index_userId').val('');
+	$('#index_pwd').val('');
 	$('.loginModal').hide();
 	$('.loginModal').off('scroll touchmove mousewheel');
 });
-
 $(document).click(function(e){
 	if($('.loginModal').is(e.target)){
 		$('.loginModal').hide(); 
@@ -408,17 +596,16 @@ $('.noticeContent').on('click','a',function(){
 
 
 
-
-
-
-
-
-
-
-
 //---------------------------------로그인. 회원가입--------------------------------------------------//
 $('#index_writeBtn').click(function(){
 	location.href="/pmang/member/writeForm"
+});
+
+$('#index_searchIdBtn').click(function(){
+	location.href="/pmang/member/searchId"
+});
+$('#index_searchPwBtn').click(function(){
+	location.href="/pmang/member/searchPw"
 });
 
 $('#loginBtn').click(function(){
@@ -426,7 +613,7 @@ $('#loginBtn').click(function(){
 	$('#index_pwdDiv').empty();
 	
 	if($('#index_userId').val()==''){
-		$('#userIdDiv').text('아이디를 입력해 주세요')
+		$('#index_userIdDiv').text('아이디를 입력해 주세요')
 						.css('color','red')
 						.css('font-size','8pt')
 						.css('font-weight','bold');
@@ -443,44 +630,38 @@ $('#loginBtn').click(function(){
 			data: {'userId': $('#index_userId').val(), 'pwd': $('#index_pwd').val()},
 			dataType: 'text',
 			success: function(data){
+				
 				if(data == 'success'){
-					alert('로그인 성공');
+					//로컬스토리지에 아이디 저장(로그인폼 아이디 저장기능)
+					var checked = $('#checkedId').is(":checked");
+					if(checked) {
+						localStorage.setItem('userId', $('#index_userId').val());
+					} else {
+						localStorage.setItem('userId', '');
+					}
+					alert($('#index_userId').val()+"님 환영합니다!");
 					location.reload();
-				}else if(data == 'fail'){
-					alert('메일인증 또는 회원정보를 확인해 주세요');
+					return 
+				} 
+				if (data == "idFail") {
+					alert('존재하지 않는 아이디입니다.');
+					return 
+				} 
+				if(data == 'pwdfail'){
+					alert('회원정보를 확인해 주세요.');
+					return
+				}
+				if(data == 'authFail'){
+					alert('이메일 인증 후 로그인해주세요.');
+					return
 				}
 			},
 			error: function(err){
 				console.log(err);
 			}
-		});	
+		});
 	}
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -603,6 +784,9 @@ $('.itemWriteBtn').click(function(){
 	}
 });
 
+
+
+
 //우석 수정 
 $('.pmangTok').on('click',function(){
 	window.open("/pmang/talk/roomList","","width=375 height=667");
@@ -675,3 +859,31 @@ $('#kakaoBtn').click(function(event){
 		}
 	}); 
 });
+// 이거 어젯밤에 하다 만거 여기서부터 해 -> ajax로 찜테이블 유저 아이디로 긁어와서 찜수 반영 하트도 넣어 
+// 내 찜수 확인
+
+$(document).ready(function(){	
+	 $.ajax({
+			type: 'post',
+			url: '/pmang/board/getMyZzim',
+			data: {'userId': $('#hiddenUserId').val()},
+			dataType: 'json',
+			error: function(err){
+				console.log(err);
+			},
+			success: function(result){
+				
+				$('.bag_clickA').text(result.list.length);
+				if(result.list.length==0){
+					$('#userZzim').attr("src","/pmang/image/zzimNo.png");
+				}else{
+					$('#userZzim').attr("src","/pmang/image/zzimYes.png");
+				}
+			}
+			
+		}); 
+	
+});
+
+
+

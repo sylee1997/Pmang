@@ -1,11 +1,4 @@
-/* var firstCategory = ['패션', '디지털/가전', '도서/티켓', '리빙용품', '스포츠/레저', '뷰티/미용', '유아/출산', '기타', '커뮤니티' ] */
-/*<<<<<<< HEAD
-var fashion = ['여성의류', '남성의류', '패션잡화', ''];
-	var women = ['아우터','티셔츠','니트','셔츠/블라우스','맨투맨/후드집업','원피스/세트','바지','스커트',''];
-	var men = ['아우터','티셔츠','니트','셔츠','맨투맨/후드집업','바지','','',''];
-	var goods = ['가방','신발','액세서리','시계','모자','','','',''];
-=======*/
-/*  secondCategory 종류  */
+
 var fashion = ['여성의류', '남성의류', '패션잡화'];
 	var women = ['아우터','티셔츠','니트','셔츠/블라우스','맨투맨/후드집업','원피스/세트','바지','스커트'];
 	var men = ['아우터','티셔츠','니트','셔츠','맨투맨/후드집업','바지'];
@@ -47,8 +40,6 @@ var others = ['피망나눔','차량,오토바이', '기타'];
 
 
 
-
-
 //아이템 정보 불러오기
 $(document).ready(function(){
 	$.ajax({
@@ -81,7 +72,7 @@ $(document).ready(function(){
 			$('.hashtag3Span').text(result.itemDTO.hashtag3);
 			
 			$('#comment_seq').trigger('click');
-			
+			$('#likedOrNot').trigger('click');
 			
 			
 
@@ -356,7 +347,6 @@ $('.selectItem1').on('click', 'a', function(){
 	var category1 = $(this).text(); 
 	location.href = '/pmang/board/itemBoard?category1='+category1;
 });
-/*>>>>>>> b8d99ede94c84a2f307e279d9858c9db651b1157*/
 
 
 $('.selectItem2').on('click', 'a', function(){
@@ -365,9 +355,6 @@ $('.selectItem2').on('click', 'a', function(){
 	location.href = '/pmang/board/itemBoard?category1='+category1+'&category2='+category2;
 });
 
-/*<<<<<<< HEAD
-//탭메뉴, 문의댓글수 제한
-=======*/
 	
 $('.selectItem3').on('click', 'a', function(){
 	var category1 = $('.select1').text();
@@ -375,7 +362,6 @@ $('.selectItem3').on('click', 'a', function(){
 	var category3 = $(this).text();
 	location.href = '/pmang/board/itemBoard?category1='+category1+'&category2='+category2+'&category3='+category3;
 });
-
 
 
 
@@ -409,7 +395,6 @@ function timeForToday(value) {
 }
 
 
-/*>>>>>>> b8d99ede94c84a2f307e279d9858c9db651b1157*/
 
 //탭메뉴, 문의댓글수 제한
 $(document).ready(function(){
@@ -454,366 +439,6 @@ $("#imgCheckBox").on('change',(function(){
 		$('.modalComp').css('display', 'none');
 	}
 }));
-
-
-/*<<<<<<< HEAD*/
-//아이템 정보 불러오기
-$(document).ready(function(){
-	
-	
-	$.ajax({
-		type:'post',
-		url:'/pmang/board/getItem',
-		data: 'item_seq='+$('#item_seq').val(),
-		dataType:'json',
-		error:function(err){
-			console.log(err);
-		},
-		success:function(result){
-			let money = Number(result.itemDTO.item_price);
-			$('.nameSpan').text(result.itemDTO.item_subject);
-			$('.priceSpan').text(money.toLocaleString());
-			/*$('.likeSpan').text(result.itemDTO.item_like);*/
-			$('.hitSpan').text(result.itemDTO.hit);
-			$('.dateSpan').text(result.itemDTO.logtime);
-			$('.conditionSpan').text(result.itemDTO.condition);
-			$('.negoSpan').text(result.itemDTO.nego);
-			$('.qtySpan').text(result.itemDTO.qty);
-			$('.locationSpan').text(result.itemDTO.item_location);
-			$('.commentSpan').text(result.itemDTO.item_content);
-			$('.category1Span').text(result.itemDTO.category1);
-			$('.category2Span').text(result.itemDTO.category2);
-			$('.category3Span').text(result.itemDTO.category3);
-			$('.hashtag1Span').text(result.itemDTO.hashtag1);
-			$('.hashtag2Span').text(result.itemDTO.hashtag2);
-			$('.hashtag3Span').text(result.itemDTO.hashtag3);
-			
-			
-			$('#comment_seq').trigger('click');
-			$('#likedOrNot').trigger('click');
-
-			//카테고리 설정
-			if(result.itemDTO.category2 == null && result.itemDTO.category3 == null){
-				$("#topSpan1").text(result.itemDTO.category1);
-			}else if(result.itemDTO.category3 == null){
-				$("#topSpan1").text(result.itemDTO.category1);
-				$("#topSpan2").text(result.itemDTO.category2);
-			}else{
-				$("#topSpan1").text(result.itemDTO.category1);
-				$("#topSpan2").text(result.itemDTO.category2);
-				$("#topSpan3").text(result.itemDTO.category3);
-			}
-			
-			/* down color 입히기 */
-			for(var i=0; i<$('.down1').children().length; i++){
-				if($('.down1').children().eq(i).text().trim() == result.itemDTO.category1){
-					$('.down1').children().eq(i).addClass('select1');
-				}
-			}
-			
-			if($('.select1').text() == '패션'){
-				for(var i = 0; i < fashion.length; i++){
-						$('.down2').append('<a href="#">'+fashion[i]+'</a>');
-				}		
-				}else if($('.select1').text() == '디지털/가전'){
-					for(var i = 0; i < digital.length; i++){
-						$('.down2').append('<a href="#">'+digital[i]+'</a>');
-					}
-				}else if($('.select1').text() == '도서/티켓'){
-					for(var i = 0; i < book.length; i++){
-						$('.down2').append('<a href="#">'+book[i]+'</a>');
-					}
-				}else if($('.select1').text() == '리빙용품'){
-					for(var i = 0; i < living.length; i++){
-						$('.down2').append('<a href="#">'+living[i]+'</a>');
-			
-					}
-				}else if($('.select1').text() == '스포츠/레저'){
-					for(var i = 0; i < sports.length; i++){
-						$('.down2').append('<a href="#">'+sports[i]+'</a>');
-			
-					}
-				}else if($('.select1').text() == '뷰티/미용'){
-					for(var i = 0; i < beauty.length; i++){
-						$('.down2').append('<a href="#">'+beauty[i]+'</a>');
-					}
-				}else if($('.select1').text() == '유아/출산'){
-					for(var i = 0; i < child.length; i++){
-							$('.down2').append('<a href="#">'+child[i]+'</a>');
-						}
-				}else if($('.select1').text() == '기타'){
-					for(var i = 0; i < others.length; i++){
-							$('.down2').append('<a href="#">'+others[i]+'</a>');
-					}
-			
-				}
-			
-			for(var i=0; i<$('.down2').children().length; i++){
-				if($('.down2').children().eq(i).text().trim() == result.itemDTO.category2){
-					$('.down2').children().eq(i).addClass('select2');
-				}
-			}
-			
-			if($('.select2').text() == '여성의류'){
-				for(var i = 0; i < women.length; i++){
-						$('.down3').append('<a href="#">'+women[i]+'</a>');	
-				}		
-			}else if($('.select2').text() == '남성의류'){
-				for(var i = 0; i < men.length; i++){
-				
-						$('.down3').append('<a href="#">'+men[i]+'</a>');
-		
-				}
-			}else if($('.select2').text() == '패션잡화'){
-				for(var i = 0; i < goods.length; i++){
-					$('.down3').append('<a href="#">'+goods[i]+'</a>');	
-				}
-			}else if($('.select2').text() == '모바일'){
-				for(var i = 0; i < mobile.length; i++){
-				
-						$('.down3').append('<a href="#">'+mobile[i]+'</a>');
-		
-				}
-			}else if($('.select2').text() == '가전제품' ){
-				for(var i = 0; i < home.length; i++){
-				
-						$('.down3').append('<a href="#">'+home[i]+'</a>');	
-		
-				}
-			}else if($('.select2').text() == '음반/영상기기'){
-				for(var i = 0; i < music.length; i++){
-			
-						$('.down3').append('<a href="#">'+music[i]+'</a>');
-		
-				}
-			}else if($('.select2').text() == '컴퓨터/주변기기'){
-				for(var i = 0; i < pc.length; i++){
-			
-						$('.down3').append('<a href="#">'+pc[i]+'</a>');
-		
-				}
-			}else if($('.select2').text() == '카메라'){
-				for(var i = 0; i < camera.length; i++){
-		
-						$('.down3').append('<a href="#">'+camera[i]+'</a>');	
-		
-				}
-			}else if($('.select2').text() == '게임'){
-				for(var i = 0; i < game.length; i++){
-			
-						$('.down3').append('<a href="#">'+game[i]+'</a>');
-		
-				}
-			}else if($('.select2').text() == '도서'){
-				for(var i = 0; i < read.length; i++){
-			
-						$('.down3').append('<a href="#">'+read[i]+'</a>');	
-		
-				}
-			}else if($('.select2').text() == '티켓'){
-				for(var i = 0; i < ticket.length; i++){
-			
-						$('.down3').append('<a href="#">'+ticket[i]+'</a>');	
-		
-				}
-			}else if($('.select2').text() == '생활용품'){
-				for(var i = 0; i < daily.length; i++){
-			
-						$('.down3').append('<a href="#">'+daily[i]+'</a>');
-		
-				}
-			}else if($('.select2').text() == '가구'){
-				for(var i = 0; i < furniture.length; i++){
-		
-						$('.down3').append('<a href="#">'+furniture[i]+'</a>');	
-		
-		
-				}
-			}else if($('.select2').text() == '주방용품'){
-				for(var i = 0; i < kitchen.length; i++){
-			
-						$('.down3').append('<a href="#">'+kitchen[i]+'</a>');
-		
-		
-				}
-			}else if($('.select2').text() == '실내'){
-				for(var i = 0; i < indoor.length; i++){
-			
-						$('.down3').append('<a href="#">'+indoor[i]+'</a>');
-		
-				}
-			}else if($('.select2').text() == '실외'){
-				for(var i = 0; i < out.length; i++){
-			
-						$('.down3').append('<a href="#">'+out[i]+'</a>');
-		
-		
-				}
-			}else if($('.select2').text() == '스킨케어'){
-				for(var i = 0; i < skin.length; i++){
-			
-						$('.down3').append('<a href="#">'+skin[i]+'</a>');	
-		
-		
-				}
-			}else if($('.select2').text() == '메이크업'){
-				for(var i = 0; i < makeup.length; i++){
-		
-						$('.down3').append('<a href="#">'+makeup[i]+'</a>');	
-		
-				}
-			}else if($('.select2').text() == '헤어/바디'){
-				for(var i = 0; i < hair.length; i++){
-			
-						$('.down3').append('<a href="#">'+hair[i]+'</a>');
-		
-				}
-			}else if($('.select2').text() == '향수/아로마'){
-				for(var i = 0; i < perfume.length; i++){
-				
-						$('.down3').append('<a href="#">'+perfume[i]+'</a>');	
-		
-				}
-			}else if($('.select2').text() == '네일아트/케어'){
-				for(var i = 0; i < nailArt.length; i++){
-			
-						$('.down3').append('<a href="#">'+nailArt[i]+'</a>');
-		
-					
-				}
-			}else if($('.select2').text() == '뷰티소품'){
-				for(var i = 0; i < beautyTool.length; i++){
-			
-						$('.down3').append('<a href="#">'+beautyTool[i]+'</a>');
-		
-		
-				}
-			}else if($('.select2').text() == '영아의류(-2세)'){
-				for(var i = 0; i < baby.length; i++){
-				
-						$('.down3').append('<a href="#">'+baby[i]+'</a>');	
-		
-				}
-			}else if($('.select2').text() == '여아의류(3-6세)'){
-				for(var i = 0; i < girl.length; i++){
-				
-						$('.down3').append('<a href="#">'+girl[i]+'</a>');	
-		
-				}
-			}else if($('.select2').text() == '남아의류(3-6세)'){
-				for(var i = 0; i < boy.length; i++){
-		
-						$('.down3').append('<a href="#">'+boy[i]+'</a>');	
-		
-		
-				}
-			}else if($('.select2').text() == '육아잡화'){
-				for(var i = 0; i < babygoods.length; i++){
-			
-						$('.down3').append('<a href="#">'+babygoods[i]+'</a>');	
-		
-		
-				}
-			}else if($('.select2').text() == '동화책/완구/인형/장난감'){
-				for(var i = 0; i < fairy.length; i++){
-					$('.down3').append('<a href="#">'+fairy[i]+'</a>');	
-				}
-			}
-			
-			for(var i=0; i<$('.down3').children().length; i++){
-				if($('.down3').children().eq(i).text().trim() == result.itemDTO.category3){
-					$('.down3').children().eq(i).addClass('select3');
-				}
-			}	
-			
-			
-		
-			
-		}//success
-	});//ajax
-});//ready
-/*=======
-
->>>>>>> b8d99ede94c84a2f307e279d9858c9db651b1157*/
-
-/* 카테고리 펼쳐지는 부분*/
-$('.selectItem1').hover(function(){
-	$('.down1').css('display', 'block')
-},
-function(){
-	$('.down1').css('display', 'none')
-});
-
-$('.selectItem2').hover(function(){
-	$('.down2').css('display', 'block')
-},
-function(){
-	$('.down2').css('display', 'none')
-});
-
-$('.selectItem3').hover(function(){
-	$('.down3').css('display', 'block')
-},
-function(){
-	$('.down3').css('display', 'none')
-});
-
-
-//카테고리 선택했을때
-$('.selectItem1').on('click', 'a', function(){
-	var category1 = $(this).text(); 
-	location.href = '/pmang/board/itemBoard?category1='+category1;
-});
-
-
-$('.selectItem2').on('click', 'a', function(){
-	var category1 = $('.select1').text();
-	var category2 = $(this).text();
-	location.href = '/pmang/board/itemBoard?category1='+category1+'&category2='+category2;
-});
-
-	
-$('.selectItem3').on('click', 'a', function(){
-	var category1 = $('.select1').text();
-	var category2 = $('.select2').text();
-	var category3 = $(this).text();
-	location.href = '/pmang/board/itemBoard?category1='+category1+'&category2='+category2+'&category3='+category3;
-});
-
-
-
-
-//올린 시간 몇일전, 몇시간전, 몇분전, 몇초전...
-function timeForToday(value) {
-    var today = new Date();
-    var timeValue = new Date(value);
-    
-    var betweenSeconds = Math.floor((today.getTime() - timeValue.getTime()) / 1000);
-    if (betweenSeconds < 60) {
-        return betweenSeconds+'초전';
-    }
-
-    var betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
-    
-    if (betweenTime < 60) {
-        return betweenTime+'분전';
-    }
-
-    var betweenTimeHour = Math.floor(betweenTime / 60);
-    if (betweenTimeHour < 24) {
-        return betweenTimeHour + '시간전';
-    }
-
-    var betweenTimeDay = Math.floor(betweenTime / 60 / 24);
-    if (betweenTimeDay < 365) {
-        return betweenTimeDay+'일전';
-    }
-
-    return Math.floor(betweenTimeDay / 365)+'년전';
-}
-
-
-
 
 
 //댓글 등록하기
@@ -869,7 +494,7 @@ $('#likedOrNot').click(function(event){
 			$('.likeSpan').text(result.list.length);
 			$.each(result.list, function(index, items){
 				
-				if(items.userId=='깜냥이'){//세션에서 받은 아이디 값을 바꿔줄 것		
+				if(items.userId== $('#userId').val()){//세션에서 받은 아이디 값을 바꿔줄 것		
 					$('#zzimIcon').attr('src','/pmang/image/zzimYes.png');
 					$('#likedOrNot').val('1');
 					$('#like').css('background-color', 'green');
@@ -994,11 +619,6 @@ $('#comment_seq').click(function(event){
 	});//ajax
 });//click
 
-//댓글 삭제하기 -> 이건 왜 안 먹냐면, jsp 바깥에서 만들었기 때문에 js에서 click이 적용이 안된다.
-$('.deleteBtn').on('click',function(){
-	alert(" ");
-});
-
 //댓글 삭제하기
 function commentDelete(that){
 	
@@ -1099,4 +719,130 @@ $('#like').click(function() {
 
 
 
+/* 인기 카테고리 슬라이드 쇼 이벤트 */
 
+$(document).ready(function() {
+  slide();
+});
+
+
+// 슬라이드 
+function slide() {
+  var wid = 0;
+  var now_num = 0;
+  var slide_length = 0;
+  var auto = null;
+  var $dotli = $('.dot>li');
+  var $panel = $('.panel');
+  var $panelLi = $panel.children('li');
+
+  // 변수 초기화
+  function init() {
+    wid = 800/*$('.slide').width()*/;
+    now_num = $('.dot>li.on').index();
+    slide_length = $dotli.length;
+  }
+
+  // 이벤트 묶음
+  function slideEvent() {
+
+    // 슬라이드 하단 dot버튼 클릭했을때
+    $dotli.click(function() {
+      now_num = $(this).index();
+      slideMove();
+    });
+
+    // 이후 버튼 클릭했을때
+    $('.next').click(function() {
+      nextChkPlay();
+    });
+
+    // 이전 버튼 클릭했을때
+    $('.prev').click(function() {
+      prevChkPlay();
+    });
+
+   /* // 오토플레이
+    autoPlay();
+
+    // 오토플레이 멈춤
+    autoPlayStop();
+
+    // 오토플레이 재시작
+    autoPlayRestart();
+    */
+    
+    // 화면크기 재설정 되었을때
+    resize();
+  }
+
+/*  // 자동실행 함수
+  function autoPlay() {
+    auto = setInterval(function() {
+      nextChkPlay();
+    }, 4000);
+  }
+
+  // 자동실행 멈춤
+  function autoPlayStop() {
+    $panelLi.mouseenter(function() {
+      clearInterval(auto);
+    });
+  }
+
+
+  // 자동실행 멈췄다가 재실행
+  function autoPlayRestart() {
+    $panelLi.mouseleave(function() {
+      auto = setInterval(function() {
+        nextChkPlay();
+      }, 4000);
+    });
+  }*/
+
+  // 이전 버튼 클릭시 조건 검사후 슬라이드 무브
+  function prevChkPlay() {
+    if (now_num == 0) {
+      now_num = slide_length - 1;
+    } else {
+      now_num--;
+    }
+    slideMove();
+  }
+
+  // 이후 버튼 클릭시 조건 검사후 슬라이드 무브
+  function nextChkPlay() {
+    if (now_num == slide_length - 1) {
+      now_num = 0;
+    } else {
+      now_num++;
+    }
+    slideMove();
+  }
+
+  // 슬라이드 무브
+  function slideMove() {
+    $panel.stop().animate({
+      'margin-left': -800 * now_num
+    });
+    $dotli.removeClass('on');
+    $dotli.eq(now_num).addClass('on');
+  }
+  
+ 
+  
+  
+  // 화면크기 조정시 화면 재설정
+  function resize() {
+    $(window).resize(function() {
+      init();
+      $panel.css({
+        'margin-left': -800 * now_num
+      });
+    });
+  }
+  init();
+  slideEvent();
+}
+
+      /* 인기 카테고리 슬라이드 쇼 이벤트 */

@@ -21,6 +21,7 @@ public class ItemDTO {
 	private String item_content;
 	private String hashtag1, hashtag2, hashtag3;
 	private String buyer_key;
+
 	private int item_price;
 	private int qty;
 	private int hit;

@@ -67,7 +67,6 @@ body > #wrap {
 	font-weight: bold;
 	color: green;
 	text-indent: 2em;/* 글자 앞 공백 */
-	
 	width: 1024px;
 	margin: 0 auto;
 }
@@ -524,7 +523,8 @@ button div p{
    position: relative;
    width: 1024px;
   /*  height: 2000px; */
-   overflow: auto;
+   overflow-x:hidden;
+   overflow-y: auto;
    margin: 0 auto;
 }
 
@@ -669,9 +669,7 @@ button div p{
 } */
 
 /* ::-webkit-scrollbar {
-
 display:none;
-
 }    */
 
 
@@ -707,7 +705,9 @@ display:none;
 
 .bag_click {
 	font-weight: normal;
-	font-size: 11pt;
+	font-size: 15pt;
+    cursor : pointer;
+	
 }
 
 .bag_clickA {
@@ -725,7 +725,12 @@ display:none;
     font-weight: bold;
     font-size: 10pt;
     margin-bottom: 5px;
-    /* padding: 15px 0px; */
+    padding: 5px 0px;
+    padding-bottom: 10px;
+}
+
+#recentCnt {
+	color : green;
 }
 
 .goods {
@@ -734,13 +739,120 @@ display:none;
 	
 }
 
-#goods_img1 {
+#goods_img {
 	margin-bottom: 5px;
 }
 
-#goods_img2 {
+.recentlyGoods {
+	height: 80px;
+    display: flex;
+	
+}
+
+.nonGoods {
+	height: 120px;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    color: rgb(204, 204, 204);
+    font-size: 12px;
+}
+
+.nonGoods img{
 	margin-bottom: 5px;
 }
+
+.nonGoods div {
+	white-space: pre-wrap;
+    text-align: center;
+    line-height: 1.4;
+}
+
+#recentlypaging {
+	display:;
+	position:relative;
+	line-height:1em;
+}
+
+ #recentlypaging .btn_prev {
+	position: absolute;
+    /* top: 526px; */
+    left: 14px;
+    width: 15px;
+    height: 18px;
+    background: url(/pmang/image/Arrowleft.png) 16px 18px;
+    text-indent: -9000px;
+    /* border: 1px solid #CCC; */
+    display: inline-block;
+
+} 
+
+
+ #recentlypaging .btn_next {
+	position: absolute;
+    /* top: 526px; */
+    right: 12px;
+    width: 15px;
+    height: 18px;
+    background: url(/pmang/image/Arrow.png) 16px 18px;
+    text-indent: -9000px;
+    /* border: 1px solid #CCC; */
+    display: inline-block;
+} 
+
+.detail {
+	display: none;
+    position: absolute;
+    /* top: 0; */
+    left: -150px;
+    width: 150px;
+    height: 80px;
+    background: rgb(255, 255, 255);
+    border-top: 1px solid rgb(33, 33, 33);
+    border-bottom: 1px solid rgb(33, 33, 33);
+    border-left: 1px solid rgb(33, 33, 33);
+    padding: 15px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.btn_delete {
+	position: absolute;
+    top: -1px;
+    left: -17px;
+    width: 17px;
+    height: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(34, 34, 34);
+    cursor: pointer;
+    outline: none;
+    padding: 5px;
+    border-radius: 0;
+    
+}
+
+.recentlySubject{
+	margin-bottom: 7px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.recentlyPrice {
+	font-weight: 600;
+}
+
+/* .recentlyGoods img:hover {
+	border: 1px solid black;
+	border-left: 0px;
+} */
+
 
 .topBtn {
 	text-align: center;

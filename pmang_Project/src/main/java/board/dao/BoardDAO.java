@@ -5,11 +5,13 @@ import java.util.Map;
 
 import board.bean.CommentDTO;
 import board.bean.ItemDTO;
+import board.bean.NoticeDTO;
+import board.bean.ReviewDTO;
 import board.bean.SearchDTO;
 import board.bean.WishlistDTO;
 
-
 public interface BoardDAO {
+
 
 	public ItemDTO getItem(int item_seq);
 
@@ -20,6 +22,7 @@ public interface BoardDAO {
 	public void commentDelete(String comment_seq);
 
 	public CommentDTO getAComment(String comment_seq);
+
 
 	public List<WishlistDTO> getWishlist(int item_seq);
 
@@ -105,6 +108,15 @@ public interface BoardDAO {
 	public String getUserId(Map<String, Object> map);
 
 
+	public void reviewWrite(ReviewDTO reviewDTO);
+
+	public List<NoticeDTO> getNoticeList();
+
+	public List<WishlistDTO> getMyZzim(String userId);
+
+	
 
 
 }
+
+
