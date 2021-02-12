@@ -1343,6 +1343,7 @@ public class BoardController {
 	@RequestMapping(value="getItemInfo",method=RequestMethod.POST)
 	public ModelAndView getItemInfo(@RequestParam String item_seq) {
 		ItemDTO itemDTO = boardService.getItemInfo(item_seq);
+		System.out.println("itemDTO.getUserId() : " + itemDTO.getUserId());
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("itemDTO",itemDTO);
