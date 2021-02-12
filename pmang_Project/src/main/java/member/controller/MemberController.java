@@ -7,10 +7,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionListener;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -28,26 +36,48 @@ import data.url.Base64Utils;
 import member.bean.MemberDTO;
 import member.bean.ZipcodeDTO;
 import member.service.MemberService;
+import net.sf.json.JSONArray;
 
 @Controller
-@RequestMapping(value="member")
+@RequestMapping(value = "member")
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+
     @Autowired
 	private MemberService mailsender;
-
-    @RequestMapping(value="checkPost", method=RequestMethod.GET)
-    public String checkPost() {
-    	return "/member/checkPost";
-    }
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    
+    
 	@RequestMapping(value="login", method=RequestMethod.POST)
 	@ResponseBody 
-	public String login(@RequestParam Map<String, String> map, HttpSession session) { // �뼱李⑦뵾 �뼵�젨媛��뒗 map�쑝濡� 臾띠뼱�빞 蹂대궪�닔�엳�뼱�꽌 �뿬湲곗꽌 留듭쑝濡� 臾띠뿀�떎
-		return memberService.login(map, session); // 留듭뿉�떎�뼱�꽌 由ы꽩媛� 臾몄옄�뿴�쓣 媛�吏�怨� 媛꾨떎
-	}
+	public String login(Model model, HttpSession session, HttpServletRequest request) {
+		String userId = request.getParameter("userId");
+		String pwd = request.getParameter("pwd");
+				
+		
+		MemberDTO memberDTO = memberService.login(userId);
+		
+		if(memberDTO == null) {
+			return "idFail";
+		}
+		
+		//비밀번호 암호화 후  입력비밀번호와 비교
+		if(!passwordEncoder.matches(pwd, memberDTO.getPwd())) {
+			return "pwdfail";
+		} 
 
+		if(!memberDTO.getEmail_key().equals("Y")) {
+			return "authFail";
+		}
+		
+		model.addAttribute("memberDTO", memberDTO);
+		session.setAttribute("memUserId", memberDTO.getUserId());
+		
+		return "success";
+
+	}
 	
 	
     @RequestMapping(value="loginForm")
@@ -71,10 +101,10 @@ public class MemberController {
 	
 	@RequestMapping(value="write", method=RequestMethod.POST)
 	public String write(@ModelAttribute MemberDTO memberDTO, Model model,HttpServletRequest request) throws IOException {
-		
+		memberDTO.setPwd(passwordEncoder.encode(memberDTO.getPwd()));
 		int su = memberService.write(memberDTO);
 
-		// �씤利� 硫붿씪 蹂대궡湲� 硫붿꽌�뱶
+		// 인증 메일 보내기 메서드
 		mailsender.mailSendWithUserKey(memberDTO.getEmail1(),memberDTO.getEmail2(), memberDTO.getUserId(), request);
 		
 		model.addAttribute("su", su);
@@ -83,28 +113,18 @@ public class MemberController {
 	}
 	
 	
-	@RequestMapping(value="/checkId", produces = "application/String;charset=UTF-8",method=RequestMethod.POST)
+	@RequestMapping(value="/checkId", 
+			produces = "application/String;charset=UTF-8",
+			method=RequestMethod.POST)
 	public @ResponseBody String checkId(String userId) {
 		String result = memberService.checkId(userId);
 		return result;
+		
 	}
 	
-	// e-mail �씤利� 而⑦듃濡ㅻ윭
-	@RequestMapping(value = "regSuccess", method = RequestMethod.GET)
-	public String regSuccess(@RequestParam("userId") String userId, @RequestParam("user_key") String key) {
-
-		mailsender.regSuccess(userId, key); // mailsender�쓽 寃쎌슦 @Autowired
-
-		return "/member/regSuccess";
-		}
-	
-	// kakao Login
-	@RequestMapping(value="kakaoLogin", method=RequestMethod.POST)
-	@ResponseBody 
-	public String kakaoLogin(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
-		System.out.println(memberDTO);
-		return memberService.kakaoLogin(memberDTO, session);
-		
+	@RequestMapping(value="checkPost", method=RequestMethod.GET)
+	public String checkPost() {
+		return "/member/checkPost";
 	}
 	
 	@RequestMapping(value="checkPostSearch", method=RequestMethod.POST)
@@ -115,8 +135,71 @@ public class MemberController {
 		mav.setViewName("jsonView");
 		return mav;
 	}
-
 	
+	// e-mail 인증 컨트롤러
+	@RequestMapping(value = "regSuccess", method = RequestMethod.GET)
+	public String regSuccess(@RequestParam("userId") String userId, @RequestParam("email_key") String key) {
+
+		mailsender.regSuccess(userId, key); // mailsender의 경우 @Autowired
+
+		return "/member/regSuccess";
+	}
+	
+	// kakao Login
+	@RequestMapping(value="kakaoLogin", method=RequestMethod.POST)
+	@ResponseBody 
+	public String kakaoLogin(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+		return memberService.kakaoLogin(memberDTO, session);
+		
+	}
+	
+	//id 찾기
+	@RequestMapping(value="findId", method=RequestMethod.POST)
+	@ResponseBody 
+	public String findId(@ModelAttribute MemberDTO memberDTO) {
+		return memberService.findId(memberDTO);
+		
+	}
+	
+	//pwd 찾기
+	@RequestMapping(value="findPwd", method=RequestMethod.POST)
+	@ResponseBody 
+	public String findPwd(@ModelAttribute MemberDTO memberDTO) {
+		return memberService.findPwd(memberDTO);
+
+		
+	}
+	@RequestMapping(value="modifyForm", method=RequestMethod.GET)
+	public String modifyForm(HttpSession session, Model model) {
+		String userId = (String) session.getAttribute("memUserId");
+		MemberDTO memberDTO = memberService.getMember(userId); 
+		
+		model.addAttribute("memberDTO", memberDTO); 
+		model.addAttribute("display", "/member/modifyForm.jsp");
+		return "/index";
+		
+	}
+	
+	@RequestMapping(value="modify", method=RequestMethod.POST)
+	@ResponseBody
+	public void modify(@ModelAttribute MemberDTO memberDTO) {
+		memberDTO.setPwd(passwordEncoder.encode(memberDTO.getPwd()));
+		memberService.modify(memberDTO);
+	}
+	
+	//아이디찾기 폼
+	@RequestMapping(value="searchId", method=RequestMethod.GET)
+	public String searchId(Model model) {
+		model.addAttribute("display", "/member/searchId.jsp");
+		return "/index";
+	}
+	
+	//비밀번호찾기 폼
+	@RequestMapping(value="searchPw", method=RequestMethod.GET)
+	public String searchPw(Model model) {
+		model.addAttribute("display", "/member/searchPw.jsp");
+		return "/index";
+	}
 	
 	
 	
@@ -130,10 +213,10 @@ public class MemberController {
 		
 	@RequestMapping(value="sellerWrite", method=RequestMethod.POST)
 	@ResponseBody
-	public void sellerWrite(@ModelAttribute ItemDTO itemDTO, HttpServletRequest request, @RequestParam("img1url") String img1url, @RequestParam(value="img2url") String img2url, @RequestParam(value="img3url") String img3url) {
+	public void sellerWrite(@ModelAttribute ItemDTO itemDTO, HttpSession session, HttpServletRequest request, @RequestParam("img1url") String img1url, @RequestParam(value="img2url") String img2url, @RequestParam(value="img3url") String img3url) {
 		//String filePath ="http://localhost:8080/pmang/storage";
-		
-		String filePath = "D:/git_home/Pmang/pmang_Project/src/main/webapp/storage/";
+							
+		String filePath = "C:\\Programmer\\project\\Pmang\\pmang_Project\\src\\main\\webapp\\storage\\";
 		//D:\git_home\Pmang\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\pmang_Project\storage;
 		//System.out.println(filePath);
 		
@@ -147,7 +230,7 @@ public class MemberController {
 		//String realPath = request.getServletPath();
 		//System.out.println(realPath);
 		
-		UUID uuid = UUID.randomUUID(); //以묐났 �뙆�씪�씠由� 諛⑹�瑜� �쐞�븳 uuid�꽕�젙
+		UUID uuid = UUID.randomUUID(); //이미지 이름 중복되지 못하게!
 		
 
 		try {
@@ -179,6 +262,7 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		
+			itemDTO.setUserId((String) session.getAttribute("memUserId"));
 			//DB
 			memberService.sellerWrite(itemDTO);
 		
@@ -195,9 +279,30 @@ public class MemberController {
 		
 		return mav;
 	}
+	
 
+
+	// -----------------admin
+	@RequestMapping(value = "adminUserDeleteForm", method = RequestMethod.GET)
+	public String adminUserDelete() {
+		return "/pm_admin/adminUserDeleteForm";
+	}
+
+	@RequestMapping(value = "adminUserDeleteSearch", method = RequestMethod.POST)
+	@ResponseBody
+	public String adminUserDeleteSearch(@RequestParam String userid) {
+		//System.out.println(userid);
+		String resultId = memberService.adminUserDeleteSearch(userid);
+		//System.out.println(resultId);
+		return resultId;
+	}
+
+	@RequestMapping(value = "adminUserDelete", method = RequestMethod.POST)
+	@ResponseBody
+	public void adminUserDelete(@RequestParam String userid) {
+		memberService.adminUserDelete(userid);
+	}
+	
+	
+	
 }
-
-
-
-

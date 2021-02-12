@@ -65,7 +65,7 @@ public class TalkController {
 			Map<String,Object> sellerItem = new HashMap<String,Object>();
 			sellerItem.put("marketName", sellerDTO.getMarketname());
 			sellerItem.put("pf_Photo", sellerDTO.getPf_photo());
-			sellerItem.put("userId", sellerDTO.getUserId());
+			sellerItem.put("userId", sellerDTO.getUserid());
 			sellerItem.put("img1", itemDTO.getImg1());
 			sellerItem.put("item_price", itemDTO.getItem_price());
 			sellerItem.put("item_Subject", itemDTO.getItem_subject());

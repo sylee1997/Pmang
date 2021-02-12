@@ -17,6 +17,7 @@
 	<context:component-scan base-package="hello.controller"/>
 	<context:component-scan base-package="talk.controller"/>
 
+
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
