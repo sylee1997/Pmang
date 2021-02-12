@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 import board.bean.BoardPaging;
 import board.bean.CommentDTO;
 import board.bean.ItemDTO;
+import board.bean.QnaDTO;
 import board.bean.AdminDTO;
-import board.bean.BoardPaging;
 import board.bean.CommentDTO;
 import board.bean.ItemDTO;
 import board.bean.ReportDTO;
@@ -641,6 +641,36 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void noticeWrite(Map<String, String> map) {
 		mystoreDAO.noticeWrite(map);
+	}
+
+
+
+	@Override
+	public void qnaWrite(QnaDTO qnaDTO) {
+		boardDAO.qnaWrite(qnaDTO);
+	}
+
+
+
+	@Override
+	public List<QnaDTO> getQnaList(String userid) {
+		// TODO Auto-generated method stub
+		return boardDAO.getQnaList(userid);
+	}
+
+
+
+	@Override
+	public List<QnaDTO> getQna() {
+		// TODO Auto-generated method stub
+		return boardDAO.getQna();
+	}
+
+
+
+	@Override
+	public void qnaReplyWrite(String qna_seq,String qnaContent) {
+		boardDAO.qnaReplyWrite(qna_seq,qnaContent);
 	}
 
 

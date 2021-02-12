@@ -291,7 +291,9 @@ public class MemberController {
 	@RequestMapping(value = "adminUserDeleteSearch", method = RequestMethod.POST)
 	@ResponseBody
 	public String adminUserDeleteSearch(@RequestParam String userid) {
+		//System.out.println(userid);
 		String resultId = memberService.adminUserDeleteSearch(userid);
+		//System.out.println(resultId);
 		return resultId;
 	}
 

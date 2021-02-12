@@ -12,9 +12,11 @@
 <!-- <input type="hidden" id="memid" value="2"> -->
 <!-- 나중에 세션값 넣어줘야함 통일해야돼(이거는 일반회원!!) -->
 <input type="hidden" id="memid" value="${memUserId }">
+
+<!-- <input type="hidden" id="memid" value="1"> -->
 <!-- 나중에 세션값 넣어줘야함 통일해야돼(이거는 관리자!!) -->
 
-	<c:if test="${memid==admin }">
+	<c:if test="${memUserId==admin }">
 		<!-- *************************관리자 ********************************** -->
 
 		<div class="mystoreContainer">
@@ -79,10 +81,10 @@
 					<li data-tab="adminTab1" class="tabmenu" id="default"><a
 						href="#">신고 리스트</a></li>
 					<li data-tab="adminTab2" class="tabmenu" id="adminUser"><a
-						href="#">공지사항 작성하기</a></li><!-- 전체 회원 관련 통계 -->
+						href="#">공지사항 작성</a></li><!-- 전체 회원 관련 통계 -->
 					<!-- 로그인 했을때만 보이는 탭메뉴  -->
-					<!-- <li data-tab="adminTab3" class="tabmenu" id="adminSold"><a
-						href="#">판매 관련 통계</a></li> -->
+					 <li data-tab="adminTab3" class="tabmenu" id="adminSold"><a
+						href="#">1:1 문의</a></li>
 				</ul>
 				<div id="tabContent"></div>
 			</div>
@@ -93,7 +95,7 @@
 	</c:if>
 	<!-- *************************관리자 ********************************** -->
 
-		<c:if test="${memid != admin }">
+		<c:if test="${memUserId != admin }">
 			<form id="mystoreForm">
 			<div class="mystoreContainer">
 				<div class="mystoreProfile">
@@ -159,10 +161,7 @@
 					</div>
 					<!-- mystoreIntroduce -->
 					<div id="introEdit">
-						<button id="myBtn" style="font-size: 10pt;">
-							<img src="/pmang/image/reportAlert.png" style="margin-top: 3px;"
-								width="13" height="13" alt="신고하기 버튼">신고하기
-						</button>
+						
 						<button id="storeIntroEditBtn">내상점 정보 수정</button>
 						<a href="#" id="memberInfoModify">회원 정보 수정</a>
 					</div>
@@ -193,144 +192,7 @@
 			</div>
 			<!-- mystoreContainer -->
 
-			<!-- The Modal -->
-			<div id="myModal" class="modal">
-
-				<!-- Modal content -->
-				<div class="modal-content">
-					<span class="close">&times;</span>
-					<div class="report">
-						<div class="report-header">
-							<div class="report-subject" style="font-size: 10pt">신고하기</div>
-						</div>
-						<div class="report-content">
-							<div class="report-ad">
-								<div class="report-ad-div report-common">
-									광고(교신 및 상점홍보)
-									<button type="button">
-										<img src="/pmang/image/reportV.png" width="13" height="8"
-											alt="화살표 아이콘">
-									</button>
-								</div>
-								<div class="hide report-hide-common">
-									<div class="report-ad-ad">
-										<button type="button">교환신청</button>
-									</div>
-									<div class="report-ad-ad">
-										<button type="button">상점홍보</button>
-									</div>
-									<div class="report-ad-ad">
-										<button type="button">타사이트,어플광고</button>
-									</div>
-									<div class="etc">
-										<input type="text" placeholder="기타(사유)">
-										<button type="button">등록</button>
-									</div>
-								</div>
-							</div>
-							<div class="report-un">
-								<div class="report-un-div report-common">
-									거래비매너(거래파기,늦은배송)
-									<button type="button">
-										<img src="/pmang/image/reportV.png" width="13" height="8"
-											alt="화살표 아이콘">
-									</button>
-								</div>
-								<div class="hide report-hide-common">
-									<div class="report-un-ad">
-										<button type="button">거래파기</button>
-									</div>
-									<div class="report-un-ad">
-										<button type="button">늦은배송</button>
-									</div>
-									<div class="report-un-ad">
-										<button type="button">불친절한 응대</button>
-									</div>
-									<div class="etc">
-										<input type="text" placeholder="기타(사유)">
-										<button type="button">등록</button>
-									</div>
-								</div>
-							</div>
-							<div class="report-dan">
-								<div class="report-dan-div report-common">
-									거래 금지 품목
-									<button type="button">
-										<img src="/pmang/image/reportV.png" width="13" height="8"
-											alt="화살표 아이콘">
-									</button>
-								</div>
-								<div class="hide report-hide-common">
-									<div class="report-dan-ad">
-										<button type="button">담배/주류</button>
-									</div>
-									<div class="report-dan-ad">
-										<button type="button">장물(분실폰,분실노트북,..)</button>
-									</div>
-									<div class="report-dan-ad">
-										<button type="button">의약품류</button>
-									</div>
-									<div class="report-dan-ad">
-										<button type="button">콘텍트 렌즈</button>
-									</div>
-									<div class="etc">
-										<input type="text" placeholder="기타(사유)">
-										<button type="button">등록</button>
-									</div>
-								</div>
-							</div>
-							<div class="report-viol">
-								<div class="report-viol-div report-common">
-									언어폭력(비방,욕설,성희롱)
-									<button type="button">
-										<img src="/pmang/image/reportV.png" width="13" height="8"
-											alt="화살표 아이콘">
-									</button>
-								</div>
-								<div class="hide report-hide-common">
-									<div class="report-viol-ad">
-										<button type="button">비방/욕설</button>
-									</div>
-									<div class="report-viol-ad">
-										<button type="button">성희롱</button>
-									</div>
-									<div class="report-viol-ad">
-										<button type="button">리뷰(별점평가)요구 및 테러</button>
-									</div>
-									<div class="etc">
-										<input type="text" placeholder="기타(사유)">
-										<button type="button">등록</button>
-									</div>
-								</div>
-							</div>
-							<div class="report-write">
-								<div class="report-write-div report-common">
-									기타사유(직접입력)
-									<button type="button">
-										<img src="/pmang/image/reportV.png" width="13" height="8"
-											alt="화살표 아이콘">
-									</button>
-								</div>
-								<div class="hide report-hide-common">
-									<div class="report-write-ad">
-										<textarea></textarea>
-										<div class="resiDiv">
-											<button id="report-pr-write" type="button">등록</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="report-qna">
-								<div class="report-qna-div">
-									거래사기(1:1문의하기)
-									<button id="report-operator" type="button">1:1문의하기</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- 신고하기 모달 -->
+			
 	</form>
 
 <!-- 프로필 사진 변경 폼 -->
@@ -348,7 +210,6 @@
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="/pmang/js/mystore.js"></script>
-<script type="text/javascript" src="/pmang/js/report.js"></script>
 <script type="text/javascript" src="/pmang/js/admin.js"></script>
 <script>
 	function changeValue(obj) {
@@ -357,17 +218,21 @@
 		document.signform.submit();
 
 	}
-
+	
 	//tab
 	$(document)
 			.ready(
 					function() {
+						//alert($('#memid').val());
 
+						//일반회원일때
+					if($('#memid').val()!='admin'){
+							
+						
 						$('.introEdit1').hide();
 						$('#storeNameModify1').hide();
 
-						$
-								.ajax({
+						$.ajax({
 									type : 'post',
 									url : '/pmang/board/getMystore',
 									dataType : 'json',
@@ -379,12 +244,12 @@
 										if ($('#memid').val() == data.sellerDTO.userid) {	//내상점이 마이 페이지일 경우
 											$('#storeIntroEditBtn').show();
 											$('#memberInfoModify').show();
-											$('#myBtn').hide();
+											//$('#myBtn').hide();
 											$('li#wish').show();
 										} else {											//내상점이 마이페이지가 아닐경우(남의 내상점)
 											$('#storeIntroEditBtn').hide();
 											$('#memberInfoModify').hide();
-											$('#myBtn').show();
+											//$('#myBtn').show();
 											$('li#wish').hide();
 										}
 
@@ -424,9 +289,7 @@
 																	.attr('src');
 															alert(document.signform.target_url.value);
 															e.preventDefault();
-															$(
-																	'input[type=file]')
-																	.click();
+															$('input[type=file]').click();
 														});
 
 									},
@@ -434,7 +297,12 @@
 										console.log(err);
 									}
 								});
+						
 
+					}	//일반회원일때
+						
+					//관리자일때
+					else{
 						//관리자
 						$.ajax({
 							type : 'post',
@@ -468,11 +336,69 @@
 								});
 							}
 						});
-					});
+					
 			
-			$('#adminUserDeleteBtn').click(function(){
-				window.open("/pmang/member/adminUserDeleteForm","회원 강제 탈퇴","width=450 height=150");
-			});
+					$('#adminUserDeleteBtn').click(function(){
+						window.open("/pmang/member/adminUserDeleteForm","회원 강제 탈퇴","width=450 height=150");
+					});
+					
+
+					//강제 탈퇴
+					$('#adminDeleteSearchBtn').click(function(){
+					// alert('클릭');
+						alert($('#userid').val());
+						$.ajax({
+							type:'post',
+							url:'/pmang/member/adminUserDeleteSearch',
+							data:'userid='+$('#userid').val(),
+							dataType:'text',
+							success:function(data){
+								// alert($('input[type=text]').val()+'님을 강제탈퇴하였습니다.');
+							// alert('성공');
+							// alert(data);
+							//	
+								$('.userSearchResultDiv').empty();
+							
+									if(data==$('#userid').val()){
+										
+										$('<div/>').append($('<span/>',{
+											class:'resultid',
+											text:data+''
+										})).append($('<button id="adminUserDelete">탈퇴</button>'))
+										.appendTo($('.userSearchResultDiv'));
+										
+
+										$('#adminUserDelete').on('click',function(){
+											var userid=$('.resultid').text();
+											
+											$.ajax({
+												type:'post',
+												url:'/pmang/member/adminUserDelete',
+												data:"userid="+userid,
+												success:function(){
+													alert(userid+'님을 강제탈퇴했습니다.');
+													window.close();
+												}
+											});
+										});
+											
+										
+									}else if(data==''){
+										$('<div/>').append($('<span/>',{
+											text:'찾고자하는 아이디가 없습니다.'
+										})).appendTo($('.userSearchResultDiv'));
+									}
+								
+								
+							},
+							error:function(err){
+								console.log(err);
+							}
+						});
+						
+					});
+				}
+					
 					
 			// tab operation
 						$('.tabmenu').on('click',function() {
@@ -500,6 +426,6 @@
 									});
 								});
 						$('#default').click();
-
+					});
 				
 </script>
