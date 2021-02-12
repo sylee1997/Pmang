@@ -22,7 +22,12 @@ public class TalkDAOMybatis implements TalkDAO {
 	
 	@Override
 	public TalkRoomDTO isRoom(TalkRoomDTO talkRoomDTO) {
-		return sqlSession.selectOne("talkSQL.isRoom", talkRoomDTO);
+		try {
+			return sqlSession.selectOne("talkSQL.isRoom", talkRoomDTO);
+		} catch (Exception e) {
+			return null;
+		}
+		
 	}
 	
 	@Override

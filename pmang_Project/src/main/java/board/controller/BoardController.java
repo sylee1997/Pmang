@@ -1341,9 +1341,10 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="getItemInfo",method=RequestMethod.POST)
-	public ModelAndView getItemInfo(@RequestParam String item_seq) {
+	public ModelAndView getItemInfo(@RequestParam String item_seq, HttpSession session) {
 		ItemDTO itemDTO = boardService.getItemInfo(item_seq);
-		
+		System.out.println("session ID: "+session.getAttribute("memUserId"));
+
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("itemDTO",itemDTO);
 		mav.setViewName("jsonView");
