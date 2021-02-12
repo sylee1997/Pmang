@@ -1,3 +1,19 @@
+function getItemInfo(){
+	$.ajax({
+
+		type:'post',
+		url:'/pmang/board/getItemInfo',
+		data: 'item_seq='+$('#item_seq').val(),
+		dataType:'json',
+		error:function(err){
+			console.log(err);
+		},
+		success:function(result){
+			console.log(result.itemDTO.userId);
+		}//success
+	});//ajax
+}//function
+
 
 var fashion = ['여성의류', '남성의류', '패션잡화'];
 	var women = ['아우터','티셔츠','니트','셔츠/블라우스','맨투맨/후드집업','원피스/세트','바지','스커트'];
@@ -52,7 +68,7 @@ $(document).ready(function(){
 		},
 		success:function(result){
 			let money = Number(result.itemDTO.item_price);
-			$('#itemPic').attr('src', '/pmang/storage/'+result.itemDTO.img1); //이건 아이템보드에서 이미지 저장할때 
+			/*$('#itemPic').attr('src', '/pmang/storage/'+result.itemDTO.img1); *///이건 아이템보드에서 이미지 저장할때 
 																			  //스토리지에 이미지가 넣어지는데 member컨트롤러에서 폴더경로 바꿔주세요! 꼭!
 			$('.nameSpan').text(result.itemDTO.item_subject);
 			$('.priceSpan').text(money.toLocaleString());
@@ -71,8 +87,69 @@ $(document).ready(function(){
 			$('.hashtag2Span').text(result.itemDTO.hashtag2);
 			$('.hashtag3Span').text(result.itemDTO.hashtag3);
 			
+			if(result.itemDTO.img1!=null){
+				$('#photoNum').val('1');
+			}
+			if(result.itemDTO.img2!=null){
+				$('#photoNum').val('2');
+			}
+			if(result.itemDTO.img3!=null){
+				$('#photoNum').val('3');
+			}
+			
+			
+			//<img id="itemPic" src="/pmang/image/itemPic.jpg" alt="item pic">
+			if(result.itemDTO.img3!=null){
+				$('<img/>',{
+					src:'/pmang/storage/'+result.itemDTO.img3,
+					class:'itemPicture'
+				})
+				.prependTo($('#itemPic'));
+			}
+			if(result.itemDTO.img2!=null){
+				$('<img/>',{
+					src:'/pmang/storage/'+result.itemDTO.img2,
+					class:'itemPicture'
+				})
+				.prependTo($('#itemPic'));
+			}
+			if(result.itemDTO.img1!=null){
+				$('<img/>',{
+					src:'/pmang/storage/'+result.itemDTO.img1,
+					class:'itemPicture'
+				})
+				.prependTo($('#itemPic'));
+			}
+			
+			
+			
+			if(result.itemDTO.img1!=null){
+				$('<li/>',{})
+							.append($('<img/>',{
+								src : '/pmang/storage/'+result.itemDTO.img1,
+								class: 'modalItemPic'}))
+				.appendTo($('.panel'));
+			}
+			if(result.itemDTO.img2!=null){
+				$('<li/>',{})
+							.append($('<img/>',{
+								src : '/pmang/storage/'+result.itemDTO.img2,
+								class: 'modalItemPic'}))
+				.appendTo($('.panel'));
+			}
+			if(result.itemDTO.img3!=null){
+				$('<li/>',{})
+							.append($('<img/>',{
+								src : '/pmang/storage/'+result.itemDTO.img3,
+								class: 'modalItemPic'}))
+				.appendTo($('.panel'));
+			}
+			
+			
+			
 			$('#comment_seq').trigger('click');
 			$('#likedOrNot').trigger('click');
+			
 			
 			
 
@@ -743,11 +820,12 @@ function slide() {
   var $panel = $('.panel');
   var $panelLi = $panel.children('li');
 
+  
   // 변수 초기화
   function init() {
     wid = 800/*$('.slide').width()*/;
     now_num = $('.dot>li.on').index();
-    slide_length = $dotli.length;
+    slide_length = parseInt($('#photoNum').val());
   }
 
   // 이벤트 묶음
@@ -853,3 +931,17 @@ function slide() {
 }
 
       /* 인기 카테고리 슬라이드 쇼 이벤트 */
+
+
+
+// 상품사진 넘기기
+$('#imgLeftBtn').click(function(){
+	
+});
+
+
+
+
+
+
+//imgRightBtn

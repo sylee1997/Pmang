@@ -309,6 +309,11 @@ public class BoardDAOMybatis implements BoardDAO {
 		
 	}
 
+	@Override
+	public ItemDTO getItemInfo(String item_seq) {
+		return sqlSession.selectOne("boardSQL.getItemInfo", item_seq);
+	}
+
 
 
 

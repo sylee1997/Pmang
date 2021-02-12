@@ -324,6 +324,11 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
     flex-shrink: 0;
     width: 500px;
     height: 500px;
+    overflow:hidden;
+}
+.itemPicture{
+	width:500px;
+	height:500px;
 }
 
 #itemArea{
@@ -650,16 +655,16 @@ ul{
 
 
 .slide {
-  
   position: relative;
-  top:10%;
-  left:30%;
+  top:15%;
+  left:35%;
   z-index:100;
 }
 
 .panel {
   width: 300%;
   height:100%;
+  margin-left:1px;
 
 }
 
@@ -667,6 +672,11 @@ ul{
   content: "";
   display: block;
   clear: both;
+}
+
+.modalItemPic{
+	width:700px;
+	height:700px;
 }
 
 .panel>li>a>img {
