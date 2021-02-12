@@ -33,7 +33,7 @@ public class PmangConfiguration {
 		BasicDataSource basicDataSource = new BasicDataSource();
 		basicDataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 		basicDataSource.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-		basicDataSource.setUsername("pmang");
+		basicDataSource.setUsername("c##java");
 		basicDataSource.setPassword("bit");
 		basicDataSource.setMaxTotal(20);
 		basicDataSource.setMaxIdle(3);

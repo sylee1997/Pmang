@@ -216,7 +216,7 @@ public class MemberController {
 	public void sellerWrite(@ModelAttribute ItemDTO itemDTO, HttpSession session, HttpServletRequest request, @RequestParam("img1url") String img1url, @RequestParam(value="img2url") String img2url, @RequestParam(value="img3url") String img3url) {
 		//String filePath ="http://localhost:8080/pmang/storage";
 							
-		String filePath = "C:\\Programmer\\project\\Pmang\\pmang_Project\\src\\main\\webapp\\storage\\";
+		String filePath = "C:\\git_home\\project\\Pmang\\pmang_Project\\src\\main\\webapp\\storage";
 		//D:\git_home\Pmang\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\pmang_Project\storage;
 		//System.out.println(filePath);
 		
