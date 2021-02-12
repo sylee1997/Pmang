@@ -239,11 +239,23 @@
       });*/
   
       
-/*var page = 1;
-
+var page = 1;
 $(document).ready(function(){
 	getList(page);
     page++;
+	
+	$.ajax({
+	      type : 'post',
+	      url : '/pmang/board/getIndexTotalItem',
+	      dataType : 'text',
+	      success : function(data){
+	    	  $('#total').val(data);
+	      },
+	      error : function(err){
+	    	  console.log(err);
+	      }
+	});
+    
 });
       
 $(window).scroll(function(){   //스크롤이 최하단 으로 내려가면 리스트를 조회하고 page를 증가시킨다.
@@ -254,39 +266,44 @@ $(window).scroll(function(){   //스크롤이 최하단 으로 내려가면 리�
 });
 
 function getList(page){
-	 
-    $.ajax({
-        type : 'post',  
-        dataType : 'json', 
-        data : {"pg" : page},
-        url : '/pmang/board/getIndexBoardList',
-        success : function(data) {
-            var html = "";
-            if (page==1){ //페이지가 1일경우에만 id가 list인 html을 비운다.
-                  $(".selection3").html(""); 
-            }
-            
-            if (returnData.startNum<=returnData.totCnt){
-                if(data.length>0){
-                // for문을 돌면서 행을 그린다.
-                }else{
-                //데이터가 없을경우
-                }
-            }
-            html = html.replace(/%20/gi, " ");
-            if (page==1){  //페이지가 1이 아닐경우 데이터를 붙힌다.
-                $("#list").html(html); 
-            }else{
-                $("#busStopList").append(html);
-            }
-       },error:function(e){
-           if(e.status==300){
-               alert("데이터를 가져오는데 실패하였습니다.");
-           };
-       }
-    }); 
+	
+	if(page != 1 && page > $('#total').val()){
+		return;
+	}
+	else{
+		$.ajax({
+	        type : 'post',  
+	        dataType : 'json', 
+	        data : {"pg" : page},
+	        url : '/pmang/board/getIndexBoardList',
+	        success : function(data) {
+	        	if(data.itemList.length == 0){
+	        		$('.selection3').html('<div>아직 장터가 많이 부실해서 등록된 상품이 없습니다.. 상품을 등록해주세요..</div>');
+	        	}
+	        	else{
+	        		$.each(data.itemList, function(index, items){
+	        			var itemFrameDiv = '<div class="itemFrame"></div>';
+	        			
+	        			var itemLinkA = '<a class="itemLink"><span id="item_seqSpan">'+items.item_seq+'</span>';
+	        			itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
+	        			var itemContentDiv = '<div class="itemContent">';
+	        			itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
+	        			itemContentDiv += '<div class="itemPriceAndTime">';
+	        			itemContentDiv += '<div class="itemPrice">'+addComma(items.item_price)+'</div><div class="itemTime"><span>'+timeForToday(items.logtime)+'</span></div>'
+	        			itemContentDiv += '</div>';
+	        			itemContentDiv += '</div>';
+	        			
+	        			$(itemFrameDiv).append($(itemLinkA).append($(itemContentDiv))).appendTo($('.selection3'));
+	        		});//each
+	        	}
+	       },
+	       error: function(err){
+	    	   console.log(err);
+	       }
+		});//each
+	}//else
 }
-*/
+
 
       
       

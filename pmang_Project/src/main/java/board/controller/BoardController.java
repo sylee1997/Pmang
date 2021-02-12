@@ -335,7 +335,7 @@ public class BoardController {
 
 		// 나중에 변경 세션받으면!
 		// String userid = (String) session.getAttribute("userid");
-		String userid = (String) session.getAttribute("memUserId");; // 세션값 받아야함
+		String userid = (String) session.getAttribute("memUserId"); // 세션값 받아야함
 
 		List<ItemDTO> list = boardService.getMystoreItemLowerPriceList(pg, userid);
 
@@ -722,10 +722,13 @@ public class BoardController {
 	//처음 보여줄 때 리스트
 	@RequestMapping(value="getitemBoardList", method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView getitemBoardList(@RequestParam(required=false, defaultValue="1") String pg, @RequestParam Map<String, Object> map, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
+	public ModelAndView getitemBoardList(@RequestParam(required=false, defaultValue="1") String pg, @RequestParam(required=false, defaultValue="최신순") String order, @RequestParam Map<String, Object> map, HttpSession session, HttpServletResponse response) {
 		System.out.println(map.get("category1"));
 		System.out.println(map.get("category2"));
 		System.out.println(map.get("category3"));
+		System.out.println(map.get("location"));
+		
+		
 		List<ItemDTO> list = boardService.getItemBoardList(pg, map);
 
 		
@@ -755,29 +758,30 @@ public class BoardController {
 		return mav;
 	}
 
-	
-	//최신순, 인기순, 고가순, 저가순...
-	@RequestMapping(value="getOrderbyItem", method=RequestMethod.POST)
-	@ResponseBody
-	public ModelAndView getOrderbyItem(@RequestParam(required=false, defaultValue="1") String pg, @RequestParam Map<String, Object> map, HttpSession session, HttpServletResponse response) {
-		
-		System.out.println(pg);
-		List<Object> list = boardService.getOrderbyItem(pg, map);
-		int entireItemNum = boardService.getEntireItemNum(map);
-		//페이징 처리
-		BoardPaging boardPaging = boardService.boardPaging(pg, map);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("orderbylist", list);
-		mav.addObject("entireItemNum", entireItemNum);
-		mav.addObject("pg", pg);
-		mav.addObject("boardPaging", boardPaging);
-		
-		mav.setViewName("jsonView");
-		
-		return mav;
-		
-	}
+	/*
+	 * //최신순, 인기순, 고가순, 저가순...
+	 * 
+	 * @RequestMapping(value="getOrderbyItem", method=RequestMethod.POST)
+	 * 
+	 * @ResponseBody public ModelAndView
+	 * getOrderbyItem(@RequestParam(required=false, defaultValue="1") String
+	 * pg, @RequestParam Map<String, Object> map, HttpSession session,
+	 * HttpServletResponse response) {
+	 * 
+	 * System.out.println(pg); List<Object> list = boardService.getOrderbyItem(pg,
+	 * map); int entireItemNum = boardService.getEntireItemNum(map); //페이징 처리
+	 * BoardPaging boardPaging = boardService.boardPaging(pg, map);
+	 * 
+	 * ModelAndView mav = new ModelAndView(); mav.addObject("orderbylist", list);
+	 * mav.addObject("entireItemNum", entireItemNum); mav.addObject("pg", pg);
+	 * mav.addObject("boardPaging", boardPaging);
+	 * 
+	 * mav.setViewName("jsonView");
+	 * 
+	 * return mav;
+	 * 
+	 * }
+	 */
 	
 	
 	
@@ -803,6 +807,7 @@ public class BoardController {
 		map.put("order", order);
 		List<ItemDTO> itemList = boardService.getSearchItemList(map);
 		
+		
 		/*
 		 * //조회수 - 새로고침 방지 if(session.getAttribute("memUserId") != null) { Cookie[]
 		 * cookies = request.getCookies(); if(cookies != null) { for(int i = 0; i<
@@ -811,7 +816,14 @@ public class BoardController {
 		 * 
 		 * Cookie cookie = new Cookie("itemHit", "0");//생성 cookie.setMaxAge(30*60);//초
 		 * 단위 생존기간 response.addCookie(cookie);//클라이언트에게 보내기 } }
-		 */
+		 */		
+		
+		//조회수 - 새로고침 방지
+		if(session.getAttribute("memUserId") != null) {
+				Cookie cookie = new Cookie("itemHit", "0");//생성
+				cookie.setMaxAge(30*60);//초 단위 생존기간
+				response.addCookie(cookie);//클라이언트에게 보내기
+		}
 		
 		//페이징 처리
 		BoardPaging boardPaging = boardService.boardPaging(pg, totalSearchItem);
@@ -920,6 +932,40 @@ public class BoardController {
 		
 	}
 	
+	@RequestMapping(value="getMainLoc", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView getMainLoc(HttpSession session) {
+		
+		String userId = (String)session.getAttribute("memUserId");
+		
+		List<Object> list = boardService.getMainLoc(userId);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+		
+		return mav;
+		
+	}
+	
+	@RequestMapping(value="setMainLoc", method=RequestMethod.POST)
+	@ResponseBody
+	public void setMainLoc(HttpSession session, @RequestParam String address) {
+		String userId = (String)session.getAttribute("memUserId");
+		boardService.setMainLoc(userId, address);
+	}
+	
+	@RequestMapping(value="deleteMainLoc", method=RequestMethod.POST)
+	@ResponseBody
+	public void deleteMainLoc(HttpSession session, @RequestParam String address) {
+		String userId = (String)session.getAttribute("memUserId");
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("userId", userId);
+		map.put("addr", address);
+		boardService.deleteMainLoc(map);
+	}
+	
+	
 	
 	//-----------------------------------------todayItem-------------------------------------------//
 	@RequestMapping(value="getIndexBoardList", method=RequestMethod.POST)
@@ -928,10 +974,10 @@ public class BoardController {
 		System.out.println(pg);
 		List<ItemDTO> itemList = boardService.getIndexBoardList(pg);
 		
-		//전체페이지
-		String totalItem = boardService.getTotalItem();
-		int paging = (Integer.parseInt(totalItem) + 19) / 20;
-		String pagingTotal = ""+paging;
+		/*
+		 * //전체페이지 String totalItem = boardService.getTotalItem(); int paging =
+		 * (Integer.parseInt(totalItem) + 19) / 20; String pagingTotal = ""+paging;
+		 */
 		
 		/*
 		 * //조회수 - 새로고침 방지 if(session.getAttribute("memUserId") != null) { Cookie[]
@@ -943,21 +989,36 @@ public class BoardController {
 		 * 단위 생존기간 response.addCookie(cookie);//클라이언트에게 보내기 } }
 		 */
 		
+		//조회수 - 새로고침 방지
+		if(session.getAttribute("memUserId") != null) {
+				Cookie cookie = new Cookie("itemHit", "0");//생성
+				cookie.setMaxAge(30*60);//초 단위 생존기간
+				response.addCookie(cookie);//클라이언트에게 보내기
+		}
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("itemList", itemList);
-		mav.addObject("pagingTotal", pagingTotal);
+		//mav.addObject("pagingTotal", pagingTotal);
 		mav.setViewName("jsonView");
 		
 		return mav;
 	}
 		
-	/*
-	 * @RequestMapping(value="getIndexTotalItem", method=RequestMethod.POST)
-	 * 
-	 * @ResponseBody public String getIndexTotalItem() { String totalItem =
-	 * boardService.getTotalItem(); int paging = (Integer.parseInt(totalItem) + 19)
-	 * / 20; String pagingTotal = ""+paging; return pagingTotal; }
-	 */
+	
+	  @RequestMapping(value="getIndexTotalItem", method=RequestMethod.POST)
+	  @ResponseBody
+	  public String getIndexTotalItem() { 
+		  
+		  String totalItem =boardService.getTotalItem(); 
+		  
+		  int paging = (Integer.parseInt(totalItem) + 19)/ 20; 
+		  
+		  String pagingTotal = ""+paging; 
+		  
+		  return pagingTotal;
+		  
+	  }
+	 
 	
 	
 	//-----------------------------hashtagBoard-----------------------------------------------------//

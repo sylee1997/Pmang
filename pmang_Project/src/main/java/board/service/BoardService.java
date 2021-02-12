@@ -167,5 +167,11 @@ public interface BoardService {
 
 	public void noticeWrite(Map<String, String> map);
 
+	public List<Object> getMainLoc(String userId);
+
+	public void setMainLoc(String userId, String address);
+
+	public void deleteMainLoc(Map<String, String> map);
+
 
 }

@@ -98,7 +98,7 @@
            </div>
            
               <div class="search-wrap">
-                 <input type="text" class="searchInput" placeholder="상품명,지역명,@상점명입력" maxlength="20" style="font-size: 10pt;"/>
+                 <input type="text" class="searchInput" placeholder="상품명,지역명,#해시태그명입력" maxlength="20" style="font-size: 10pt;"/>
                  <span id="index_searchInsertXspan">x</span>
                  	<!-- 서치버튼 추가(이서영) -->
                  <a class="searchBtn" href="#">

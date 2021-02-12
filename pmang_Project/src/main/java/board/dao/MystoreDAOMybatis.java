@@ -158,4 +158,18 @@ public class MystoreDAOMybatis implements MystoreDAO {
 	public void noticeWrite(Map<String, String> map) {
 		sqlSession.insert("mystoreSQL.noticeWrite",map);
 	}
+
+	
+	//상품등록 -> insert!
+	@Override
+	public void insertSeller(String userId) {
+		
+		SellerDTO sellerDTO = sqlSession.selectOne("mystoreSQL.getMystore", userId);
+		
+		if(sellerDTO == null) {
+			sqlSession.insert("mystoreSQL.insertSeller", userId);
+		}
+		
+		
+	}
 }

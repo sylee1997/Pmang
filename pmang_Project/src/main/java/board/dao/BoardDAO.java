@@ -113,6 +113,12 @@ public interface BoardDAO {
 
 	public void reviewWrite(ReviewDTO reviewDTO);
 
+	public List<Object> getMainLoc(String userId);
+
+	public void setMainLoc(String userId, String address);
+
+	public void deleteMainLoc(Map<String, String> map);
+
 	
 
 

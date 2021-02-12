@@ -2,17 +2,14 @@ package member.service;
 
 
 import java.util.List;
-
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import member.bean.MemberDTO;
-
-
 import board.bean.ItemDTO;
-
+import member.bean.MemberDTO;
+import member.bean.RecentlyDTO;
 import member.bean.ZipcodeDTO;
 
 public interface MemberService {
@@ -49,6 +46,16 @@ public interface MemberService {
 	public String adminUserDeleteSearch(String userid);
 
 	public void adminUserDelete(String userid);
+
+	public String getSellerLocation(String userId);
+
+	public void insertSeller(String userId);
+
+	public void insertRecentlyLoc(String userId, String location);
+
+	public List<RecentlyDTO> getRecentlyLoc(String userId);
+
+	public void deleteRecentlyLoc(String userId, String address);
 
 
 

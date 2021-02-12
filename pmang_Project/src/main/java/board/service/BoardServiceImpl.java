@@ -15,9 +15,6 @@ import board.bean.BoardPaging;
 import board.bean.CommentDTO;
 import board.bean.ItemDTO;
 import board.bean.AdminDTO;
-import board.bean.BoardPaging;
-import board.bean.CommentDTO;
-import board.bean.ItemDTO;
 import board.bean.ReportDTO;
 import board.dao.BoardDAO;
 
@@ -26,7 +23,6 @@ import board.bean.ReviewDTO;
 import board.bean.SearchDTO;
 import board.bean.WishDTO;
 import board.bean.WishlistDTO;
-import board.dao.BoardDAO;
 import board.dao.MystoreDAO;
 
 import member.bean.SellerDTO;
@@ -105,11 +101,11 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 
-	// ----------------------------ItemBoard------------------------------------------//
 	@Override
 	public void itemHitUpdate(int item_seq) {
 		boardDAO.itemHitUpdate(item_seq);
 	}
+	// ----------------------------ItemBoard------------------------------------------//
 
 	@Override
 	public List<ItemDTO> getItemBoardList(String pg, Map<String, Object> map) {
@@ -160,6 +156,25 @@ public class BoardServiceImpl implements BoardService {
 		boardPaging.makePagingHTML();
 		return boardPaging;
 	}
+	
+	
+	@Override
+	public List<Object> getMainLoc(String userId) {
+		return boardDAO.getMainLoc(userId);
+	}
+	
+	@Override
+	public void setMainLoc(String userId, String address) {
+		boardDAO.setMainLoc(userId, address);
+		
+	}
+	
+	@Override
+	public void deleteMainLoc(Map<String, String> map) {
+		boardDAO.deleteMainLoc(map);
+		
+	}
+
 	
 	
 	
@@ -390,6 +405,7 @@ public class BoardServiceImpl implements BoardService {
 	public String getTotalItem() {
 		return boardDAO.getTotalItem();
 	}
+
 
 	//----------------------------------------searchBoard-------------------------------------------//
 	
@@ -642,6 +658,8 @@ public class BoardServiceImpl implements BoardService {
 	public void noticeWrite(Map<String, String> map) {
 		mystoreDAO.noticeWrite(map);
 	}
+
+
 
 
 

@@ -4,6 +4,23 @@ $(document).ready(function(){
 	$('#category2').hide();
 	$('#category3').hide();
 	
+	$.ajax({
+		type : 'post',
+		url : '/pmang/member/getSellerLocation',
+		data : {'userId' : $('#seller_userId').val()},
+		dataType : 'json',
+		success : function(data){
+			if(data != null || data != ''){
+				$('.location_input').val(data.location);				
+			}
+		},
+		error : function(err){
+			console.log(err);
+		}
+	});
+	
+	//$('.location_input').val()
+	
 	//$('.imageCount').text('('+$('#imageCountHidden').val()+'/3)');
 });
 
@@ -819,10 +836,54 @@ $('.searchlocationList').on('click','#selectAddress', function(){
 
 //최근 지역
 $('#recentlylocation').click(function(){
+	$('.recentlyUl').empty();
 	$('.recentlyModal').css('display', 'flex');
 	$('.recentlyModal').on('scroll touchmove mousewheel', function(e){
 		e.preventDefault();
 		e.stopPropagation(); 
 		return false;
 	});
+	
+	
+	$.ajax({
+		type : 'post',
+		url : '/pmang/member/getRecentlyLoc',
+		dataType : 'json',
+		success : function(data){
+			//alert(data.list);
+			$.each(data.list, function(index, items){
+				$('<li/>', {
+					id : 'recentlyLocLi'}).append($('<button id="recentlyLocBtn">' + items.address + '</button>')).append($('<button id="delectLocBtn">x</button>')).appendTo($('.recentlyUl'));
+			});
+		},
+		error : function(err){
+			console.log(err);
+		}
+	});
 });
+
+
+
+$('.recentlyUl').on('click', '#recentlyLocBtn', function(){
+	//alert('dk');
+	$('.location_input').val($(this).text());
+	$('.recentlyModal').hide(); 
+	$('body').css('overflow','auto');
+});
+
+$('.recentlyUl').on('click', '#delectLocBtn', function(){
+	$(this).parent().remove();
+	$.ajax({
+		type : 'post',
+		url : '/pmang/member/deleteRecentlyLoc',
+		data : {'address' : $(this).prev().text()},
+		success : function(data){
+			//alert('삭제!')
+		},
+		error : function(err){
+			console.log(err);
+		}
+	});
+	
+});
+

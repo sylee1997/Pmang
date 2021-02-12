@@ -4,13 +4,16 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mystoreSQL">
 
+	<insert id="insertSeller" parameterType="String">
+		insert into seller(userId, marketname, marketdate) values(#{userId}, #{userId} || '님의 상점', sysdate)
+	</insert>
+
 	<update id="profileImgModify" parameterType="seller">
 		update seller set
 		pf_photo=#{pf_photo}
 	</update>
 
-	<select id="getMystore" parameterType="String"
-		resultType="seller">
+	<select id="getMystore" parameterType="String" resultType="seller">
 		select *
 		from seller where userid=#{userid}
 	</select>

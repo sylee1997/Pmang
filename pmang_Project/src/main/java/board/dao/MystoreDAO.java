@@ -59,4 +59,6 @@ public interface MystoreDAO {
 
 	public void noticeWrite(Map<String, String> map);
 
+	public void insertSeller(String userId);
+
 }

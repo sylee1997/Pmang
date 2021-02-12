@@ -6,7 +6,9 @@
 <input type="hidden" id="lon">
 <input type="hidden" id="lat">
 <input type="hidden" name="pg" id="pg" value="${param.pg }">
-<input type="hidden" name="order" id="order" value="">
+<input type="hidden" name="order" id="order" value="${param.order }">
+<input type="hidden" id="location" value="${param.location }">
+<input type="hidden" id="userId" value="${sessionScope.memUserId }">
 <div id="itemBoard">
 
 	<div id="locationModal" class="locationModal">
@@ -16,9 +18,9 @@
 			</div>
 			<div class="locationModal_section">
 				<ul>
-					<li><img src="../image/searchLocation.png"><a id="gpsBtn" href="#">현위치로 검색</a></li>
-					<li><img src="../image/appointLocation.png"><a id="mainLocBtn" href="#">주요위치로 검색</a></li>
-					<li><img src="../image/mapSearch.png"><a id="mapBtn" href="#">지도로 위치 검색</a></li>
+					<li><a id="gpsBtn" href="#"><img src="../image/searchLocation.png"><span>현위치로 검색</span></a></li>
+					<li><a id="mainLocBtn" href="#"><img src="../image/appointLocation.png"><span>주요위치로 검색</span></a></li>
+					<li><a id="mapBtn" href="#"><img src="../image/mapSearch.png"><span>지도로 위치 검색</span></a></li>
 
 				</ul>
 			</div>
@@ -109,13 +111,13 @@
 			<div class="locationSearch">
 
 				<span class="locationSpan">
-				<div class="detailAddr">위치검색</div>
+				<div id="detailAddr">위치검색</div>
 				<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAUCAYAAAC58NwRAAAAAXNSR0IArs4c6QAAAaVJREFUKBWFUz1LA0EQde9DIjaxSBNIG2shnR9whYVgIQqnjURikhP/QDqLVPoL9KJJEUHIgYggSFCs7K2tU6ZIrAwa73zvyB6bM8GB3Ox782Z2Z3YjZmCe5832er2WruvVYrH4Rm6aaQz0+/0ruC3f99v1en1xmpi85rpuNQiCfQL41HA4fGo0GhniSaYJIRZigQySnpGUivEhFKgqLmHwhzEBe7Ecx/lQee4QlEqlMsgbNYD1En4PGMicyodNI8nPZrN5+Ds1iPUKBnKLPk3JhwkElmUNk8nkHpIeZZAeR92Au4YPtVECg7Ztf5mmuY2kF2LFdmu12jmxUMho2Ww25weDQRtVlyOSYiHOxnaQwUQi4UMcSKz6PzuwQVS6h55njwycWy6Xj8Z2gIiYDY6JwbUw+mNm6/xIS6fTF1jnJaZHZU7NzuVyP8QGPzRM4RSVeYGqvWLUO5jetyTDI0FcgbgiyZHn09iE+FPlBZp0QPAoqr3jPlYLhUJXJbnmDmsxsgPx+iSxTDgYNcYGu4ZhUNyJFYlgeA98kXhknqZpJ//9RX8BYkCa7Y9z0J0AAAAASUVORK5CYII="
 				 width="6" height="10" alt="카테고리 선택그룹 아이콘">
 				</span>
 			</div>
 			<div class="orderby">
-				<a class="orderChoice">최신순</a>
+				<a>최신순</a>
 				<a>인기순</a>
 				<a>저가순</a>
 				<a>고가순</a>
