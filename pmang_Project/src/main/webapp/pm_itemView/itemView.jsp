@@ -12,6 +12,7 @@
 <input type="hidden" id="userId" name="userId" value="${sessionScope.memUserId }"> <!-- 나중에 세션에서 받는 값으로 변경 -->
 <input type="hidden" id="commentIndex" name="commentIndex" value="1">
 <input type="hidden" id="likedOrNot" name="likedOrNot" value="0"> <!-- 강제호출용 click으로 사용 중 -->
+<input type="hidden" id="photoNum" name="photoNum" value="1">
 
 
 
@@ -100,8 +101,11 @@
 
 		<!-- 상품 이미지 영역 -->
 		<div id="imageArea">
-			<img id="itemPic" src="/pmang/image/itemPic.jpg" alt="item pic">
-
+		
+			<div id="itemPic">
+			<!-- <img id="itemPic" src="/pmang/image/itemPic.jpg" alt="item pic"> -->
+			</div>
+			
 			<!-- 확대 버튼 -->
 			<input type="checkbox" id="imgCheckBox">
 			<label id="imgDetailBtn" for="imgCheckBox">
@@ -119,24 +123,8 @@
 						
 					<!-- 모달 사진 슬라이드영역 -->
 					<div class="slide">
-					  <ul class="panel">
-					    <li>                       
-							<img src="/pmang/image/itemPic.jpg" alt="배경1" />
-						</li>
-					    <li>
-					    	<img src="/pmang/image/itemPic.jpg" alt="배경2" />
-					    </li>
-					    <li>
-					    	<img src="/pmang/image/itemPic.jpg" alt="배경3" />
-					    </li>
-					  </ul>
-					<!--슬라이드 버튼 히든 상태 -->
-					  <ul class="dot">
-					    <li class="on">슬라이드 버튼1번</li>
-					    <li>슬라이드 버튼2번</li>
-					    <li>슬라이드 버튼3번</li>
-					    
-					  </ul>
+					  <ul class="panel"></ul>
+
 					  <div class="prev"><img width="30px" src="/pmang/image/imgLeft.png" alt="" /></div>
 					  <div class="next"><img width="30px" src="/pmang/image/imgRight.png" alt="" /></div>
 					</div>
