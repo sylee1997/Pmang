@@ -377,6 +377,11 @@ img {
 .talkSendDiv div {
 /*    margin: 0px 3px; */
 }
+
+.talkSendTime {
+	width:28.5px;
+	height:13px;
+}
 .talkSendTooltip {
    background-color: green;
    color: white;

@@ -68,7 +68,7 @@
 	font-weight: normal;
 }
 
-.reviewLogtime {
+.reviewTime {
 	display: block;
 	overflow: hidden;
 	/*  -o-text-overflow: ellipsis; */

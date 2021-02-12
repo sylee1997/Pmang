@@ -22,10 +22,18 @@ public interface TalkDAO {
 	
 	public List<TalkRoomDTO> getRoomList(String userId);
 
-	public MessageDTO getLastMessage(int talkRoom_seq);
+	public MessageDTO getLastMessage(String userId, int talkRoom_seq);
 
 	public List<MessageDTO> getMessage(Map<String, String> userMap);
 
 	public String getReceiver_read_time(String sender_user_id, String receiver_user_id);
+
+	public int getUnread_count(int talkRoom_seq);
+	
+	public void setOpen(Object userId, Object talkRoom_seq);
+
+	public void setClose(Object userId, Object talkRoom_seq);
+
+	public void getOut(String userId, String partner_userId);
 
 }

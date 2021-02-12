@@ -8,10 +8,8 @@
 <link rel="stylesheet" href="/pmang/css/review.css">
 </head>
 <body>
-	<input type="hidden" id="photoCountHidden" value="0">
-	<%-- <input type="hidden" id="sellerid" value="${memId }"> --%>
-	<form id="reviewWriteForm">
-	
+	<input type="hidden" id="photoCountHidden" value=0>
+	<form method="post" id="reviewWriteForm" enctype="multipart/form-data">
 		<div class="reviewHeader">
 			<span>리뷰쓰기</span>
 
@@ -24,9 +22,9 @@
 				</div>
 				<!-- reviewItemImg -->
 				<div class="reviewItemContent">
-					<p class="reviewStoreName">11</p><!-- 마 이게 상점명이다!! sellerid -->
-					<h2 class="reviewSubject">22</h2><!-- 마 이게 상품명이다!! reviewsubject 겸 item_subject -->
-					<p class="reviewLogtime">마 이게 판매상품 등록시간이다!</p>
+					<p class="reviewStoreName">상점명상점명</p>
+					<h2 class="reviewSubject">상품명상품명상품명상품명</h2>
+					<p class="reviewTime">거래시간</p>
 				</div>
 				<!-- reviewItemContent -->
 			</div>
@@ -77,7 +75,8 @@
 						<ul class="reviewPhotoUl">
 							<li class="reviewPhotoLi" />
 							<img src="../image/photoIcon.png" alt="카메라아이콘" />사진 등록
-							<input type="file" class="reviewPhoto" name="img[]" accept="image/jpg, image/jpeg, image/png" multiple/>
+							<input type="file" class="reviewPhoto" name="img[]"
+								accept="image/jpg, image/jpeg, image/png" multiple="true">
 						</ul>
 					</div>
 					<!-- reviewPhotoDiv -->

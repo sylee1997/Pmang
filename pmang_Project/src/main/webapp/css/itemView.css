@@ -372,14 +372,13 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 	font-size: 16px;
 }
 
-#myBtn{
+#reportBtn{
 	width:100px;
 	margin-left:50px;
 	height: 100%;
 	display: flex;
 	align-items: center;
-	color: rgb(204, 204, 204);  
-	cursor: pointer;  
+	color: rgb(204, 204, 204);    
 }
 
 .dealInfo{
@@ -422,15 +421,12 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 
 #like{
 	background-color:gray;
-	cursor:pointer;
 }
 #contact{
 	background-color:green;
-	cursor:pointer;
 }
 #pay{
-	background-color:red;
-	cursor:pointer;
+	background-color:red
 }
 
 
@@ -618,15 +614,34 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 }
 
 #moreBtn{
-	
 	clear:both;
 	text-align:center;
 	padding:20px;
 	display:flex;
 	justify-content:center;
-	cursor:pointer;
 }
 
-.replyPics{
+.deleteBtn{
 	margin-left:10px;
 }
+
+.reportBtn{
+	margin-left:10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

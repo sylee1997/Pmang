@@ -42,8 +42,13 @@ public class TalkDAOMybatis implements TalkDAO {
 	
 	@Override
 	public SellerDTO getSeller(String partner_userId) {
-		return sqlSession.selectOne("talkSQL.getSeller", partner_userId);
+		try {
+			return sqlSession.selectOne("talkSQL.getSeller", partner_userId);         
+		} catch (Exception e) {
+			return null;
+		}
 	}
+
 
 
 	@Override
@@ -52,8 +57,15 @@ public class TalkDAOMybatis implements TalkDAO {
 	}
 
 	@Override
-	public MessageDTO getLastMessage(int talkRoom_seq) { //마지막 메세지
-		return sqlSession.selectOne("talkSQL.getLastMessage", talkRoom_seq);
+	public MessageDTO getLastMessage(String userId, int talkRoom_seq) { //마지막 메세지
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("talkRoom_seq", talkRoom_seq);
+		try {
+			return sqlSession.selectOne("talkSQL.getLastMessage", map);			
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	@Override
@@ -82,4 +94,36 @@ public class TalkDAOMybatis implements TalkDAO {
 		
 	}
 	
+	@Override
+	public int getUnread_count(int talkRoom_seq) {
+		//TODO
+		return 0;
+	}
+	
+	@Override
+	public void setOpen(Object userId, Object talkRoom_seq) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("talkRoom_seq", talkRoom_seq);
+		
+		sqlSession.update("talkSQL.setOpen", map);
+	}
+
+	@Override
+	public void setClose(Object userId, Object talkRoom_seq) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		map.put("talkRoom_seq", talkRoom_seq);
+		
+		sqlSession.update("talkSQL.setClose", map);
+	}
+
+	@Override
+	public void getOut(String userId, String partner_userId) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userId", userId);
+		map.put("partner_userId", partner_userId);
+		sqlSession.delete("talkSQL.getOut", map);
+	}
+
 }

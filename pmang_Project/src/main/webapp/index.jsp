@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
 
 <link rel="stylesheet" href="/pmang/css/index.css">
 <style type="text/css"></style>
@@ -58,14 +58,14 @@
 						<tr>
 							<td style="border-top: rgb(0,0,0);">
 								<div id="saveId">
-								<input type="checkbox" name="saveId" value="saveId" id="checkedId">아이디
+								<input type="checkbox" name="saveId" value="saveId">아이디
 								저장
 								</div>
 								<div>
 									<input type="button" id="loginBtn" value="Login">
 								</div>					
 								<div id="findIdPw">
-									<a id ="index_searchIdBtn">아이디 찾기</a> / <a id="index_searchPwBtn" href="#">비밀번호 찾기</a>
+									<a id="find" href="#">아이디 찾기</a> / <a id="find" href="#">비밀번호 찾기</a>
 								</div> <br>
 		
 								<button id="kakaoBtn">
@@ -98,7 +98,7 @@
            </div>
            
               <div class="search-wrap">
-                 <input type="text" class="searchInput" placeholder="상품명,지역명,@상점명입력" maxlength="20" style="font-size: 10pt;"/>
+                 <input type="text" class="searchInput" placeholder="상품명,지역명,@상점명입력" maxlength="20"/>
                  <span id="index_searchInsertXspan">x</span>
                  	<!-- 서치버튼 추가(이서영) -->
                  <a class="searchBtn" href="#">
@@ -106,7 +106,6 @@
                  </a>
                   	<!--  -->
                
-               <c:if test="${sessionScope.memUserId != null }">
                <!-- 이서영 검색클릭div -->
                <div class="searchClick">
                	<div class="searchListDiv">
@@ -129,9 +128,8 @@
                		</a>
                	</div>
                
-               </div><!-- searchClick -->
+               </div>
                
-               </c:if>
                </div>
            	<!-- 세션없을때 -->
            	<c:if test="${sessionScope.memUserId == null }">
@@ -139,14 +137,14 @@
               <ul>
                 <li>
                   <img src="/pmang/image/sell.png" alt="sale" width="40px" height="40px" />
-                  <span class="indexnavSpan" onclick="nologin()">판매하기</span>
+                  <span class="indexnavSpan" onclick="alert('먼저 로그인 하세요.')">판매하기</span>
                 </li>
                 <li>
                   <span class="vertical">|</span>
                 </li>
                 <li>
                   <img src="/pmang/image/mystore.png" alt="store" width="30px" height="30px"/>
-                  <span class="indexnavSpan" onclick="nologin()">내상점</span>
+                  <span class="indexnavSpan" onclick="alert('먼저 로그인 하세요.')">내상점</span>
                 </li>
                 <li>
                   <span class="vertical">|</span>
@@ -166,7 +164,6 @@
          </c:if>
             <!-- 세션있을때  -->
             <c:if test="${memUserId != null }">
-            <input type="hidden" id="sessionId" value="${sessionScope.memUserId}">
              <nav id="sessionOn">
               <ul>
                 <li>
@@ -571,27 +568,19 @@
                </div>
             </div>
             
-		             <div class="recentlyLook">
-		                           최근본상품
-		               <br>
-		               <span id=recentCnt></span> <!-- 계속 바꿔줘야 되는것 -->
-		               <div class="nonGoods">
-			               <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAAgCAYAAABHA7voAAAAAXNSR0IArs4c6QAACJ9JREFUWAntmXlQVlUYxvk+EEEWrcyQhhBzY7HNHCedNKfFsrTV1DKX0abFcsk0p7SsnLIsHdsmm7JxTG3RctosS8XJZrLFphBBBBU0xUYWWQQBod/zdS7dLvcC+tF/nZnDe877Pud5z3v2++ELacN08ODByMrKytRTp0719fl8fevr61ORXRoaGmKRHSVxV0v5OOXjyDLqB5AZ1DPatWuX0atXr31t2KUQX7Bkubm5CTU1NTfRwRFwDUVGBMl5iIA/V46MjNyclJRUHQzfGQVIEGFZWVm3M0PTcD7QrQN0sAH9t8hPwP+QkpKSQblO2Pz8/LNOnDjRn/aDqI7H3k16l1Tp9/vXYF+Wmpqa6WJvUXVaAWZmZkbD+DB5Kk7Pt7EfpPPx6EKlo7w6NDT02T59+uyxYVyLtPEzWDcQ7GIAyQLRvgBRji1VdSV0mwl2cXJy8td/a1r3t1UB4shHJ8YhF5HjjcMq5Hocr6Rz91O+nXIheTKz9WXr3P+DYvDCqT1Bni9/pOnkHylPQTcaqcFVoBsZvJmtGbwAXn+aS9nZ2RdxaLyJgysM7ihOFkZERKzq3r17OR1bjX4Muv0cEtcEe0jAdxe+VsKn1XAPS3O1WTkaRAVvHVTLOnToMD+phT3a7Azu2rXrXhy9AmkEsgYHy8LDwxf27NlTp1/I7t27H2T2XsdWGBYWdnnv3r3/kD7YhN+xcKyBtxzeZIuXQOPQP0+eQJ/U999YtqNYMXspuybXAAsLC6OKioo0a+PUCkefImYxmrkWC8F1xZ5FPYZ8LbYtlq0tJMG8Af8D+F4H9yg7J7YB1F/H3k+DQHkKmA/tGKvstwqW1Al37NixdBNcHQT30/hmcmNwwmJfTNbd9ia2Ng1O/LGxsbPwfQT+O9gmQ6WzEv52UB6IfQX2GPIHDPgcy26X/5rBPXv2dK6rq/uGBpfQuJjNfAebeau9gcoahIqKikKKDSyhC60l5MSpbvbPE3DeAmc3VCco/8TSeoml9S11z0SnZ7AFltJuDUHd7QaE/xH0Gmwo/fPhXGjHNQZogtsKMA1AVvv27Uew1/LsYKusvUn5LRyvwvF4S++UjPwgDqj34OzmtJn623BMhUP7u0k6fPhwh5KSkiLan+rcufN5cXFxlU1AKBiI4WDWkvViega+pyxcYIliCGPm1iEVXHZUVNRAr+DUEJIxhuBzI5sIM2Afw9kN/E5Ww/UxMTFnU+4JWKOuzk5Rh5o0Nor4+HjN9jaqUcXFxTd54XQtwT8crpPgnyTgxkEPBIjiJQxDIChhmkdy9JZ6kUkPNnABR0dHf+OFq62tfRlbF3I6HRigCzoxMbGE0c1NS0vTsruSXAPXbAajvxcPmMAyBpfihZGerfQ9YrLKYJcT02Uq+1nDunemU9aB0uyRqwZ79+5tD64L+bg6LJ0z7d+/X9dK4ORjZO+jXOfEEOiv6F7Dt5/BmOi02+oFpnyBTedahHM1vp6GM4L8ic4KP4X5QjNz0wFsdm1pU/KwTqCN9q4OGdd08uTJRDCRODvCzOW4glDiM93YPGcHzFGDaTFA4YhhAX613S4oLy8f6afS0RB4XpbG/p8J+tB42Hk5MYPqZXbq640iXAG+oQoEH+Xk5AQeu060vc5LRg9rfSnoVeGaOIHzwVTB2ZU3bC9XEEqugKuMLdsLIw7Z4DvkhbHr2XKP0+ZO8BXM/iY/S+g5KhtRdmQvfMEeO9fewFnmdNVJ9afwYPUubJI4pKqxfyQD18RyymFOEB25FN1D+NZgvee0W3XadjflFp+BHCy3gl0oPMFN5HDL1wzWcxrqEs2DLIn9s0EHiUBeiTaZsjEgV3theHjPwvYn+Soc72Amh2nTE1gP7tGZ+PqOrC+I5eyb7V486IfJBtZzlmXnJL6YFbEKHN3zPc/ErZc+cE3oNER5M7kI3UAOkk26xwTwSB9ID+FwD3sIr5tjvHJug/MATi9jJr9i0xdT1l5fQo7CJp7ZXhwMyjnYBpFruUP1HnZN4K5gsPWdKM4NzNw8CxgIUBVGMZNpHUpRy28wDXYw2o0fnFYDI9dBpNfH2OaWtLmb9PvMIrDZyGqkBnMLvm7D5xhyheFsIhhAzXQo+E1eVxKrYzy4rTQ+j7ye4LT/rEOm6W8yOmgIbgvEcQDLyHfR6Aund5bZWnRjyC9ycT/mtAdb18CxkvbRj2j6MIqBWGfnRK87XJ9OgUc2A7aWZTke7L/u3MYZtBrzwZrF/hkE8FdIYsmfEszSvLw86zoJQPngFXEluBnNvUQs3tOR+PQR3LvIaNqlO4PTJDBzm7DNwb9e2S8Q3DhncPLZJEAp9VXO17I+R3QCCjOjqqoqB9LJph7So0cPXRcLqIfzjv3Q7Bc1DzrBpa+PGyGq5Vp60CI0h9QrBP879qvxX0xwI1lhcyk3LksLL9niBcvsjaXxMgit6+Nnnl+zGbF0dGEE/ZVxlon+OvbdYbuD0y3DN4899Wygcz7fNGbvVf3eWlZWpnemnmFnG86tBDeJ4PKb89FigGrM27ITP/NptqZSte40HRrvENR6Tkh9qgygno/TCQS/rTmnbjZtgerq6qXwTDL2uZzCm+FWYGPRB7aIfFB/1Lls3Tila1WAVmM2dQqOnsHJLchQo69Fbkc3WDqkLu4V7OPnWvMDFG3aMWujaaNf7M43nFr+pdT7mrrEUQbvVa6LJQkJCVU2fbPF0wrQYqJDiTjXb6NT0J1l6e3SBKq7aQN5B0tpF7rACcdAaZlpxofAMYEcZ29rL4PZSdYWeZ9Zc/0wtuOd5TMK0CLRF3dpael1OB+BTl/Vnh212rQkCQaahl+Qn4H9jKD0WXXGKagA7V7plI/roh97Rr909aWu5ZWGtA4FO9wqa0bzwWcog5XczmwfsQDByjYL0KsjdDq0oKAglv86xbKHOhKAvuLLOnXqdNzrNxYvrv/1LiPwFxZNaeYJHMFzAAAAAElFTkSuQmCC" width="28" height="16" alt="빈 최근본상품 아이콘">
-			               <div>최근 본 상품이 <br> 없습니다.</div>
-		               </div>
-		               <div class="goods">
-		                  
-		               </div>
-		               <div id="recentlypaging">
-			               <a class="btn_prev" style="cursor:pointer" >이전</a>
-			               <span id="recentlycurrentPage"></span>
-			               <span id="totalPageCount"></span>
-			               <a class="btn_next" style="cursor:pointer" >다음</a>
-		               </div>
-	            </div>
-
-         
-        
+            
+            <div class="recentlyLook">
+               최근본상품
+               <br>
+               0 <!-- 계속 바꿔줘야 되는것 -->
+               <br>
+               <div class="goods">
+                  <div id="goods_img1" style="width: 80px; height: 80px; border : 1px solid #e5e5e5"></div>
+                  <div id="goods_img2" style="width: 80px; height: 80px; border : 1px solid #e5e5e5"></div>
+                  <div id="goods_img3" style="width: 80px; height: 80px; border : 1px solid #e5e5e5"></div>
+               </div>
+            </div>
+            
             <div class="topBtn">
                <a id="topA" href="#" style="color:rgb(33, 33, 33); font-size: 12pt">TOP</a>
             </div>
@@ -607,8 +596,8 @@
       <div id="container">
       
       
-         <jsp:include page="${display}" />
-
+         <jsp:include page="${display}"/>
+   
       
       </div><!-- container -->
 
@@ -722,7 +711,6 @@
 <!-- 검색 클릭 이벤트 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script> <!-- 카카오디벨로퍼 -->
-<<<<<<< HEAD
 
 <script type="text/javascript">
 
@@ -1162,7 +1150,7 @@ $('.itemWriteBtn').click(function(){
 
 //우석 수정 
 $('.pmangTok').on('click',function(){
-   window.open("/pmang/talk/talkRoomList","pmangTalk","width=375 height=667");
+	window.open("/pmang/talk/talkRoomList","pmangTalk","width=375 height=667");
 });
 // 우석 수정 -----------------------------------
 
@@ -1252,9 +1240,6 @@ $('#kakaoBtn').click(function(event){
 
 </script>
 
-=======
-<script type="text/javascript" src="/pmang/js/index.js"></script>
->>>>>>> branch 'temp' of https://github.com/sylee1997/Pmang.git
 
 </body>
 </html>

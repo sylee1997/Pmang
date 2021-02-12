@@ -50,8 +50,8 @@ public class TalkServiceImple implements TalkService {
 	}
 
 	@Override
-	public MessageDTO getLastMessage(int talkRoom_seq) {
-		return talkDAO.getLastMessage(talkRoom_seq);
+	public MessageDTO getLastMessage(String userId, int talkRoom_seq) {
+		return talkDAO.getLastMessage(userId, talkRoom_seq);
 	}
 
 	@Override
@@ -67,6 +67,27 @@ public class TalkServiceImple implements TalkService {
 		}else {
 			return "off_line";			
 		}
+	}
+	
+	@Override
+	public int getUnread_count(int talkRoom_seq) {
+		return talkDAO.getUnread_count(talkRoom_seq);
+	}
+	
+	@Override
+	public void setOpen(Object userId, Object talkRoom_seq) {
+		talkDAO.setOpen(userId, talkRoom_seq);
+	}
+
+	@Override
+	public void setClose(Object userId, Object talkRoom_seq) {
+		talkDAO.setClose(userId, talkRoom_seq);
+	}
+
+	@Override
+	public void getOut(String userId, String partner_userId) {
+		talkDAO.getOut(userId, partner_userId);
+		
 	}
 	
 }

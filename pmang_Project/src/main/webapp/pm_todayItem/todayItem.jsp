@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
     
-    <input type="hidden" id="total" value="">
-    <input type="hidden" id="pageNo" value="">
   <!-- 인기카테고리 슬라이드영역 -->
          <div id="slide">
             <div id="slideInitial">
@@ -59,25 +58,6 @@
                <div class="selection2">
                   <div class="selection3">
                      <!-- 1개상품 -->                  
-<!--                      <div class="itemFrame">
-                        <a class="itemLink" href="#">
-                           <div class="itemImageArea">
-                              <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
-                              <div class="imageAreaDiv"></div>
-                           </div>
-                           <div class="itemContent">
-                              <div class="itemName">상품명</div>
-                              <div class="itemPriceAndTime">
-                                 <div class="itemPrice">5000</div>
-                                 <div class="itemTime">
-                                    <span>7시간 전</span>
-                                 </div>
-                              </div>
-                           </div>
-                        </a>
-                     </div>itemFrame
-                     
-                     1개상품                  
                      <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
@@ -94,9 +74,9 @@
                               </div>
                            </div>
                         </a>
-                     </div>itemFrame
+                     </div><!-- itemFrame -->
                      
-                     1개상품                  
+                     <!-- 1개상품 -->                  
                      <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
@@ -113,9 +93,9 @@
                               </div>
                            </div>
                         </a>
-                     </div>itemFrame
+                     </div><!-- itemFrame -->
                      
-                     1개상품                  
+                     <!-- 1개상품 -->                  
                      <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
@@ -132,9 +112,9 @@
                               </div>
                            </div>
                         </a>
-                     </div>itemFrame
+                     </div><!-- itemFrame -->
                      
-                     1개상품                  
+                     <!-- 1개상품 -->                  
                      <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
@@ -151,9 +131,9 @@
                               </div>
                            </div>
                         </a>
-                     </div>itemFrame
+                     </div><!-- itemFrame -->
                      
-                     1개상품                  
+                     <!-- 1개상품 -->                  
                      <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
@@ -170,9 +150,9 @@
                               </div>
                            </div>
                         </a>
-                     </div>itemFrame
+                     </div><!-- itemFrame -->
                      
-                     1개상품                  
+                     <!-- 1개상품 -->                  
                      <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
@@ -189,9 +169,9 @@
                               </div>
                            </div>
                         </a>
-                     </div>itemFrame
+                     </div><!-- itemFrame -->
                      
-                     1개상품                  
+                     <!-- 1개상품 -->                  
                      <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
@@ -208,9 +188,9 @@
                               </div>
                            </div>
                         </a>
-                     </div>itemFrame
+                     </div><!-- itemFrame -->
                      
-                     1개상품                  
+                     <!-- 1개상품 -->                  
                      <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
@@ -227,9 +207,9 @@
                               </div>
                            </div>
                         </a>
-                     </div>itemFrame
+                     </div><!-- itemFrame -->
                      
-                     1개상품                  
+                     <!-- 1개상품 -->                  
                      <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
@@ -246,9 +226,9 @@
                               </div>
                            </div>
                         </a>
-                     </div>itemFrame
+                     </div><!-- itemFrame -->
                      
-                     1개상품                  
+                     <!-- 1개상품 -->                  
                      <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
@@ -265,9 +245,9 @@
                               </div>
                            </div>
                         </a>
-                     </div>itemFrame
+                     </div><!-- itemFrame -->
                      
-                     1개상품                  
+                     <!-- 1개상품 -->                  
                      <div class="itemFrame">
                         <a class="itemLink" href="#">
                            <div class="itemImageArea">
@@ -284,15 +264,56 @@
                               </div>
                            </div>
                         </a>
-                     </div>itemFrame -->
+                     </div><!-- itemFrame -->
+                     
+                     <!-- 1개상품 -->                  
+                     <div class="itemFrame">
+                        <a class="itemLink" href="#">
+                           <div class="itemImageArea">
+                              <img src="/pmang/image/bench.jpg" width="194" height="194" alt="상품 이미지">
+                              <div class="imageAreaDiv"></div>
+                           </div>
+                           <div class="itemContent">
+                              <div class="itemName">상품명</div>
+                              <div class="itemPriceAndTime">
+                                 <div class="itemPrice">5000</div>
+                                 <div class="itemTime">
+                                    <span>7시간 전</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </a>
+                     </div><!-- itemFrame -->
                      
                      
                   </div><!-- selection3 -->
                </div><!-- selection2 -->
             </div><!-- selection1 -->
          </div><!-- selection -->
-
-
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- <<<<<<< HEAD -->
 <script type="text/javascript" src="/pmang/js/todayItem.js"></script>
+<!-- =======
+         
+         
+<script>
+      /* 인기 카테고리 슬라이드 쇼 이벤트 */
+      var ul = document.querySelector('.slide_wrap');
+      function move() {
+         var curIndex = 0;
+         setInterval(function() {
+            ul.style.transition = '0.5s';
+            ul.style.transform = "translate3d(-" + 1024 * (curIndex + 1)
+                  + "px, 0px, 0px)";
+            curIndex++;
+            if (curIndex === 4) {
+               curIndex = -1;
+            }
+         }, 1000);
+      }
+      document.addEventListener("DOMContentLoaded", function() {
+         // 
+         move();
+      });
+      /* 인기 카테고리 슬라이드 쇼 이벤트 */
+</script>
+>>>>>>> 9636e7367062cf487dfe6e491e12bf0858d65737 -->

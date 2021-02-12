@@ -14,7 +14,7 @@
 <input type="hidden" id="sender_user_id" value="${sessionScope.userId }">
 <input type="hidden" id="receiver_user_id" value="${param.partner_userId }">
 <input type="hidden" id="receiver_user_profileImage" value="${sellerItem.pf_Photo }">
-<input type="hidden" id="messageList" value="${messageList }">
+<%-- <input type="hidden" id="messageList" value="${messageList }"> --%>
 
 <div id="root">
    <div>

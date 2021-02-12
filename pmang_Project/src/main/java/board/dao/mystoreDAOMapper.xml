@@ -6,18 +6,17 @@
 
 	<update id="profileImgModify" parameterType="seller">
 		update seller set
-		pf_photo=#{pf_photo}
+		pf_photo=#{pfphoto}
 	</update>
 
-	<select id="getMystore" parameterType="String"
-		resultType="seller">
+	<select id="getMystore" parameterType="int" resultType="seller">
 		select *
-		from seller where userid=#{userid}
+		from seller where userkey=#{userkey}
 	</select>
 
-	<update id="mystoreHitUpdate" parameterType="String">
+	<update id="mystoreHitUpdate" parameterType="int">
 		update seller set
-		markethit=markethit+1 where userid=#{userid}
+		markethit=markethit+1 where userkey=#{userkey}
 	</update>
 
 	<update id="mystoreModify" parameterType="java.util.Map">
@@ -30,7 +29,7 @@
 		select * from
 		(select rownum rn,tt.* from
 		(select * from item where
-		userid=#{userid} order by logtime desc)tt
+		userkey=#{userkey} order by logtime desc)tt
 		)where rn <![CDATA[>=]]>#{startNum}
 		and rn <![CDATA[<=]]>
 		#{endNum}
@@ -40,12 +39,12 @@
 		resultType="wish">
 		select * from
 		(select rownum rn,tt.* from
-		(select
-		item_subject,img1,item_price, logtime,item_location
-		from wishlist
-		w,item t
-		where t.item_seq=w.item_seq and w.userid=#{userid} order by
-		w.wishlist_seq)tt
+		(select item_seq,
+		itemsubject,img1,item_price, logtime,item_location
+		from wishlist w,item
+		t
+		where t.item_seq=w.itemnum and w.userkey=#{userkey} order by
+		w.wish_key)tt
 		)where rn <![CDATA[>=]]>#{startNum}
 		and rn <![CDATA[<=]]>
 		#{endNum}
@@ -54,7 +53,7 @@
 
 	<delete id="wishListDelete" parameterType="java.util.Map">
 		delete from wishlist
-		where userid=#{userid} and itemnum=#{item_seq}
+		where userkey=#{userkey} and itemnum=#{item_seq}
 	</delete>
 
 	<select id="getMystoreReviewList" parameterType="java.util.Map"
@@ -62,28 +61,28 @@
 		select * from
 		(select rownum rn,tt.* from
 		(select reviewwriter,
-		reviewstamp,reviewsubject,img1,img2,img3,reviewcontent,reviewlogtime,itemnum
+		reviewstamp,reviewsubject,reviewimg1,reviewcontent,reviewlogtime,itemnum
 		from review r,seller s
-		where s.userid=r.sellerid and
-		r.sellerid=#{userid} order by r.reviewlogtime desc)tt
+		where s.userkey=r.userkey and
+		r.userkey=#{userkey} order by r.reviewlogtime desc)tt
 		)where rn <![CDATA[>=]]>#{startNum}
 		and rn <![CDATA[<=]]>
 		#{endNum}
 	</select>
 
-	<select id="getMystoreItemCnt" parameterType="String"
+	<select id="getMystoreItemCnt" parameterType="Integer"
 		resultType="String">
-		select count(*) from item where userid=#{userid}
+		select count(*) from item where userkey=#{userkey}
 	</select>
 
-	<select id="getMystoreWishCnt" parameterType="String"
+	<select id="getMystoreWishCnt" parameterType="Integer"
 		resultType="String">
-		select count(*) from wishlist where userid=#{userid}
+		select count(*) from wishlist where userkey=#{userkey}
 	</select>
 
-	<select id="getMystoreReviewCnt" parameterType="String"
+	<select id="getMystoreReviewCnt" parameterType="Integer"
 		resultType="String">
-		select count(*) from review where sellerid=#{sellerid}
+		select count(*) from review where userkey=#{userkey}
 	</select>
 
 	<select id="getMystoreItemPopularList"
@@ -92,109 +91,71 @@
 		select * from
 		(select rownum rn,tt.* from
 		(select * from item where
-		userid=#{userid} order by hit desc)tt
+		userkey=#{userkey} order by hit desc)tt
 		)where rn <![CDATA[>=]]>#{startNum}
 		and rn <![CDATA[<=]]>
 		#{endNum}
 	</select>
-
-	<select id="getMystoreItemlowerPriceList"
-		parameterType="java.util.Map" resultType="item">
-		select * from
+	
+	<select id="getMystoreItemlowerPriceList" parameterType="java.util.Map" resultType="item">
+	select * from
 		(select rownum rn,tt.* from
 		(select * from item where
-		userid=#{userid} order by to_number(item_price))tt
+		userkey=#{userkey} order by to_number(item_price))tt
 		)where rn <![CDATA[>=]]>#{startNum}
 		and rn <![CDATA[<=]]>
 		#{endNum}
 	</select>
-
-	<select id="getMystoreItemHighestPriceList"
-		parameterType="java.util.Map" resultType="item">
-		select * from
+	
+	<select id="getMystoreItemHighestPriceList" parameterType="java.util.Map" resultType="item">
+	select * from
 		(select rownum rn,tt.* from
 		(select * from item where
-		userid=#{userid} order by to_number(item_price) desc)tt
+		userkey=#{userkey} order by to_number(item_price) desc)tt
 		)where rn <![CDATA[>=]]>#{startNum}
 		and rn <![CDATA[<=]]>
 		#{endNum}
 	</select>
-
-	<select id="getMystoreWishPopularList"
-		parameterType="java.util.Map" resultType="wish">
-		select * from
+	
+	<select id="getMystoreWishPopularList" parameterType="java.util.Map" resultType="wish">
+	select * from
 		(select rownum rn,tt.* from
 		(select item_seq,
 		itemsubject,img1,item_price, logtime,item_location
 		from wishlist w,item
 		t
-		where t.item_seq=w.itemnum and w.userid=#{userid} order by
-		t.hit
-		desc)tt
+		where t.item_seq=w.itemnum and w.userkey=#{userkey} order by
+		t.hit desc)tt
 		)where rn <![CDATA[>=]]>#{startNum}
 		and rn <![CDATA[<=]]>
 		#{endNum}
 	</select>
-
-	<select id="getMystoreWishLowerPriceList"
-		parameterType="java.util.Map" resultType="wish">
-		select * from
+	
+	<select id="getMystoreWishLowerPriceList" parameterType="java.util.Map" resultType="wish">
+	select * from
 		(select rownum rn,tt.* from
 		(select item_seq,
 		itemsubject,img1,item_price, logtime,item_location
 		from wishlist w,item
 		t
-		where t.item_seq=w.itemnum and w.userid=#{userid} order by
+		where t.item_seq=w.itemnum and w.userkey=#{userkey} order by
 		to_number(t.item_price))tt
 		)where rn <![CDATA[>=]]>#{startNum}
 		and rn <![CDATA[<=]]>
 		#{endNum}
 	</select>
-
-	<select id="getMystoreWishHighestPriceList"
-		parameterType="java.util.Map" resultType="wish">
-		select * from
+	
+	<select id="getMystoreWishHighestPriceList" parameterType="java.util.Map" resultType="wish">
+	select * from
 		(select rownum rn,tt.* from
 		(select item_seq,
 		itemsubject,img1,item_price, logtime,item_location
 		from wishlist w,item
 		t
-		where t.item_seq=w.itemnum and w.userid=#{userid} order by
+		where t.item_seq=w.itemnum and w.userkey=#{userkey} order by
 		to_number(t.item_price) desc)tt
 		)where rn <![CDATA[>=]]>#{startNum}
 		and rn <![CDATA[<=]]>
 		#{endNum}
 	</select>
-
-	<select id="getUserCnt" resultType="Integer">
-		select count(*) from
-		usertable
-	</select>
-
-	<select id="getItemCnt" resultType="Integer">
-		select count(*) from item
-	</select>
-
-	<select id="getReportList" resultType="report">
-		select count(userid) as countreport,userid 
-		from countreport
-		group by userid
-		order by count(userid) desc
-	</select>
-	
-	<select id="getTotalA" resultType="int">
-	select count(*) from countreport
-	</select>
-	
-	<select id="getReport" resultType="report">
-		select * from pm_report where userid=#{userid} order by report_seq
-	</select>
-	
-	<select id="getReportTarget" resultType="String">
-		select userid from countreport group by userid having count(userid)>=3
-	</select>
-	
-	<insert id="noticeWrite" parameterType="java.util.Map">
-		insert into notice values(notice_seq.nextval,#{noticeSubject},#{noticeContent},sysdate)
-	</insert>
 </mapper>
