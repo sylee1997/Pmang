@@ -1,3 +1,22 @@
+//------------------------------우석수정
+function getItemInfo(){
+	$.ajax({
+
+		type:'post',
+		url:'/pmang/board/getItemInfo',
+		data: 'item_seq='+$('#item_seq').val(),
+		dataType:'json',
+		error:function(err){
+			console.log(err);
+		},
+		success:function(result){
+			console.log(result.itemDTO.userId);
+			window.open("/pmang/talk/talkRoom?item_seq=" + $('#item_seq').val() + "&partner_userId=" + result.itemDTO.userId,"","width=375 height=667");
+		}//success
+	});//ajax
+}//function
+//------------------------------우석수정
+
 
 var fashion = ['여성의류', '남성의류', '패션잡화'];
 	var women = ['아우터','티셔츠','니트','셔츠/블라우스','맨투맨/후드집업','원피스/세트','바지','스커트'];
@@ -52,7 +71,7 @@ $(document).ready(function(){
 		},
 		success:function(result){
 			let money = Number(result.itemDTO.item_price);
-			$('#itemPic').attr('src', '/pmang/storage/'+result.itemDTO.img1); //이건 아이템보드에서 이미지 저장할때 
+			/*$('#itemPic').attr('src', '/pmang/storage/'+result.itemDTO.img1); *///이건 아이템보드에서 이미지 저장할때 
 																			  //스토리지에 이미지가 넣어지는데 member컨트롤러에서 폴더경로 바꿔주세요! 꼭!
 			$('.nameSpan').text(result.itemDTO.item_subject);
 			$('.priceSpan').text(money.toLocaleString());
@@ -71,7 +90,68 @@ $(document).ready(function(){
 			$('.hashtag2Span').text(result.itemDTO.hashtag2);
 			$('.hashtag3Span').text(result.itemDTO.hashtag3);
 			
+			if(result.itemDTO.img1!=null){
+				$('#photoNum').val('1');
+			}
+			if(result.itemDTO.img2!=null){
+				$('#photoNum').val('2');
+			}
+			if(result.itemDTO.img3!=null){
+				$('#photoNum').val('3');
+			}
+			
+			
+			//<img id="itemPic" src="/pmang/image/itemPic.jpg" alt="item pic">
+			if(result.itemDTO.img3!=null){
+				$('<img/>',{
+					src:'/pmang/storage/'+result.itemDTO.img3,
+					class:'itemPicture'
+				})
+				.prependTo($('#itemPic'));
+			}
+			if(result.itemDTO.img2!=null){
+				$('<img/>',{
+					src:'/pmang/storage/'+result.itemDTO.img2,
+					class:'itemPicture'
+				})
+				.prependTo($('#itemPic'));
+			}
+			if(result.itemDTO.img1!=null){
+				$('<img/>',{
+					src:'/pmang/storage/'+result.itemDTO.img1,
+					class:'itemPicture'
+				})
+				.prependTo($('#itemPic'));
+			}
+			
+			
+			
+			if(result.itemDTO.img1!=null){
+				$('<li/>',{})
+							.append($('<img/>',{
+								src : '/pmang/storage/'+result.itemDTO.img1,
+								class: 'modalItemPic'}))
+				.appendTo($('.panel'));
+			}
+			if(result.itemDTO.img2!=null){
+				$('<li/>',{})
+							.append($('<img/>',{
+								src : '/pmang/storage/'+result.itemDTO.img2,
+								class: 'modalItemPic'}))
+				.appendTo($('.panel'));
+			}
+			if(result.itemDTO.img3!=null){
+				$('<li/>',{})
+							.append($('<img/>',{
+								src : '/pmang/storage/'+result.itemDTO.img3,
+								class: 'modalItemPic'}))
+				.appendTo($('.panel'));
+			}
+			
+			
+			
 			$('#comment_seq').trigger('click');
+			$('#likedOrNot').trigger('click');
 			
 			
 			
@@ -314,12 +394,19 @@ $(document).ready(function(){
 		}//success
 	});//ajax
 	
+	//------------------------------우석수정
+	$('#contact').on('click', function() {
+		getItemInfo();
+	});
+	//------------------------------우석수정
+	
 });	//ready
 
 
 
 
 /* 카테고리 펼쳐지는 부분*/
+
 $('.selectItem1').hover(function(){
 	$('.down1').css('display', 'block')
 },
@@ -619,11 +706,6 @@ $('#comment_seq').click(function(event){
 	});//ajax
 });//click
 
-//댓글 삭제하기 -> 이건 왜 안 먹냐면, jsp 바깥에서 만들었기 때문에 js에서 click이 적용이 안된다.
-$('.deleteBtn').on('click',function(){
-	alert(" ");
-});
-
 //댓글 삭제하기
 function commentDelete(that){
 	
@@ -684,7 +766,6 @@ $('#moreBtn').click(function() {
 	$('#comment_seq').trigger('click');
 });
 
-
 //찜버튼 클릭
 $('#like').click(function() {
 	if($('#likedOrNot').val()=='0'){
@@ -721,3 +802,148 @@ $('#like').click(function() {
 		$('#likedOrNot').val('0');
 	}//if
 });
+
+
+
+/* 인기 카테고리 슬라이드 쇼 이벤트 */
+
+$(document).ready(function() {
+  slide();
+});
+
+
+// 슬라이드 
+function slide() {
+  var wid = 0;
+  var now_num = 0;
+  var slide_length = 0;
+  var auto = null;
+  var $dotli = $('.dot>li');
+  var $panel = $('.panel');
+  var $panelLi = $panel.children('li');
+
+  
+  // 변수 초기화
+  function init() {
+    wid = 800/*$('.slide').width()*/;
+    now_num = $('.dot>li.on').index();
+    slide_length = parseInt($('#photoNum').val());
+  }
+
+  // 이벤트 묶음
+  function slideEvent() {
+
+    // 슬라이드 하단 dot버튼 클릭했을때
+    $dotli.click(function() {
+      now_num = $(this).index();
+      slideMove();
+    });
+
+    // 이후 버튼 클릭했을때
+    $('.next').click(function() {
+      nextChkPlay();
+    });
+
+    // 이전 버튼 클릭했을때
+    $('.prev').click(function() {
+      prevChkPlay();
+    });
+
+   /* // 오토플레이
+    autoPlay();
+
+    // 오토플레이 멈춤
+    autoPlayStop();
+
+    // 오토플레이 재시작
+    autoPlayRestart();
+    */
+    
+    // 화면크기 재설정 되었을때
+    resize();
+  }
+
+/*  // 자동실행 함수
+  function autoPlay() {
+    auto = setInterval(function() {
+      nextChkPlay();
+    }, 4000);
+  }
+
+  // 자동실행 멈춤
+  function autoPlayStop() {
+    $panelLi.mouseenter(function() {
+      clearInterval(auto);
+    });
+  }
+
+
+  // 자동실행 멈췄다가 재실행
+  function autoPlayRestart() {
+    $panelLi.mouseleave(function() {
+      auto = setInterval(function() {
+        nextChkPlay();
+      }, 4000);
+    });
+  }*/
+
+  // 이전 버튼 클릭시 조건 검사후 슬라이드 무브
+  function prevChkPlay() {
+    if (now_num == 0) {
+      now_num = slide_length - 1;
+    } else {
+      now_num--;
+    }
+    slideMove();
+  }
+
+  // 이후 버튼 클릭시 조건 검사후 슬라이드 무브
+  function nextChkPlay() {
+    if (now_num == slide_length - 1) {
+      now_num = 0;
+    } else {
+      now_num++;
+    }
+    slideMove();
+  }
+
+  // 슬라이드 무브
+  function slideMove() {
+    $panel.stop().animate({
+      'margin-left': -800 * now_num
+    });
+    $dotli.removeClass('on');
+    $dotli.eq(now_num).addClass('on');
+  }
+  
+ 
+  
+  
+  // 화면크기 조정시 화면 재설정
+  function resize() {
+    $(window).resize(function() {
+      init();
+      $panel.css({
+        'margin-left': -800 * now_num
+      });
+    });
+  }
+  init();
+  slideEvent();
+}
+
+      /* 인기 카테고리 슬라이드 쇼 이벤트 */
+
+
+
+// 상품사진 넘기기
+$('#imgLeftBtn').click(function(){
+	
+});
+
+
+
+
+
+
+//imgRightBtn

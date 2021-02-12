@@ -28,6 +28,7 @@
 	<resources location="/font/" mapping="/font/**"/>
 	<resources location="/js/" mapping="/js/**"/>
 	<resources location="/item/" mapping="/item/**"/>
+	<resources location="/talk/" mapping="/talk/**"/>
 	<resources location="/storage/" mapping="/storage/**"/>
 
 	<resources location="/pm_itemView/" mapping="/pm_itemView/**"/>

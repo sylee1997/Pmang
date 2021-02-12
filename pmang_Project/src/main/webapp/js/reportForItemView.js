@@ -98,15 +98,14 @@
   			success: function(result){
   			}//success
   		});//ajax
+    	modal.style.display = 'none';
+    	alert("신고가 접수되었습니다.");
       });
-      
-      
-      
-      
+
       
       //댓글 신고 버튼 클릭
       $('.report-content111>div>div>div>button').on('click',function(){
-    	   
+    	  
     	  $.ajax({
   			type: 'post',
   			url: '/pmang/board/reportUser',
@@ -120,6 +119,12 @@
   			success: function(result){
   				
   			}//success
+  			
   		});//ajax
+    	modal111.style.display = 'none';
+    	alert("신고가 접수되었습니다.");
       }); 
+      
+      
+     
       

@@ -163,7 +163,9 @@ public class MemberDAOMybatis implements MemberDAO {
 	@Override
 	public String adminUserDeleteSearch(String userid) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("memberSQL.adminUserDeleteSearch",userid);
+		String result=sqlSession.selectOne("memberSQL.adminUserDeleteSearch",userid);
+		//System.out.println(result);
+		return result;
 	}
 
 	@Override

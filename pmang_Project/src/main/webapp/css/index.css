@@ -67,7 +67,6 @@ body > #wrap {
 	font-weight: bold;
 	color: green;
 	text-indent: 2em;/* 글자 앞 공백 */
-	
 	width: 1024px;
 	margin: 0 auto;
 }
@@ -524,7 +523,8 @@ button div p{
    position: relative;
    width: 1024px;
   /*  height: 2000px; */
-   overflow: auto;
+   overflow-x:hidden;
+   overflow-y: auto;
    margin: 0 auto;
 }
 
@@ -705,7 +705,9 @@ display:none;
 
 .bag_click {
 	font-weight: normal;
-	font-size: 11pt;
+	font-size: 15pt;
+    cursor : pointer;
+	
 }
 
 .bag_clickA {

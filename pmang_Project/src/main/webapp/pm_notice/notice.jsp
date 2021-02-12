@@ -12,7 +12,8 @@
 		
 		
 		    <input id="tab1" class="tabs" type="radio" name="tabName" value="1">
-		    <label class="tabLabel" for="tab1">공지사항</label>
+		    <label class="tabLabel" for="tab1" id="noticeLabel" onclick>공지사항</label>
+		    <input id="btn1" type="hidden">
 		
 		    <input id="tab2" class="tabs" type="radio" name="tabName" value="2">
 		    <label class="tabLabel" for="tab2">운영정책</label>
@@ -25,7 +26,7 @@
 		    <section id="bulletin">
 				<div class="bulletinDiv">
 				
-					<div class="bulletinArea">
+					<!-- <div class="bulletinArea">
 						<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
 						<div class="bulletinTitle">[공지] 설날 연휴 사기 거래 주의! 꼭 읽어주세요!</div>
 						<div class="bulletinDate">2021/02/05</div>
@@ -86,9 +87,15 @@
 					</div></div>
 				
 					<div class="bulletinArea">
-						<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
-						<div class="bulletinTitle">[공지] 타 사이트 대리결제 거래 시 제재 정책 강화 안내</div>
-						<div class="bulletinDate">2021/01/15</div>
+						<div class="arrowImg">
+							<img  src="/pmang/image/open.png" width="20" height="20">
+						</div>
+						<div class="bulletinTitle">
+							[공지] 타 사이트 대리결제 거래 시 제재 정책 강화 안내
+						</div>
+						<div class="bulletinDate">
+							2021/01/15
+						</div>
 						<div class="bulletinContent">
 
 							안녕하세요. 피망마켓입니다.
@@ -98,7 +105,8 @@
 							깨끗한 거래 환경이 유지될 수 있도록 협조 부탁 드립니다.
 							감사합니다.
 							
-					</div></div>
+						</div>
+					</div>
 						
 					<div class="bulletinArea">
 						<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
@@ -114,7 +122,7 @@
 							깨끗한 거래 환경이 유지될 수 있도록 협조 부탁 드립니다.
 							감사합니다.
 							
-					</div></div>
+					</div></div> -->
 					
 
 					

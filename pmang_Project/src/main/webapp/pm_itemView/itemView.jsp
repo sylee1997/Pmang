@@ -12,6 +12,7 @@
 <input type="hidden" id="userId" name="userId" value="${sessionScope.memUserId }"> <!-- 나중에 세션에서 받는 값으로 변경 -->
 <input type="hidden" id="commentIndex" name="commentIndex" value="1">
 <input type="hidden" id="likedOrNot" name="likedOrNot" value="0"> <!-- 강제호출용 click으로 사용 중 -->
+<input type="hidden" id="photoNum" name="photoNum" value="1">
 
 
 
@@ -92,13 +93,19 @@
 	
 
 	<!-- 상품 영역 -->
-
+	<br>
+	<hr>
+	<br>
+	<br>
 	<div id="itemDiv">
 
 		<!-- 상품 이미지 영역 -->
 		<div id="imageArea">
-			<img id="itemPic" src="/pmang/image/itemPic.jpg" alt="item pic">
-
+		
+			<div id="itemPic">
+			<!-- <img id="itemPic" src="/pmang/image/itemPic.jpg" alt="item pic"> -->
+			</div>
+			
 			<!-- 확대 버튼 -->
 			<input type="checkbox" id="imgCheckBox">
 			<label id="imgDetailBtn" for="imgCheckBox">
@@ -110,22 +117,21 @@
 				<div id="slideShowPage">
 					<!-- 상풍명 -->
 					<span id="modalItemName" class="nameSpan">DB에러</span>
-					<!-- 슬라이드 쇼 영역-->		
-					<div id="slideShowArea">
-						<div id="slideShowDiv">
-							<div id="slideShow">
-								<div>
-									<img src="/pmang/image/itemPic.jpg"> <!-- 얘네도 storage에서 끌고온걸로 변경해주셔야 해욤! img1,2,3 찾아서! -->
-								</div>
-								<div>
-									<img src="/pmang/image/itemPic.jpg">
-								</div>
-								<div>
-									<img src="/pmang/image/itemPic.jpg">
-								</div>
-							</div>
-						</div>
+					<!-- 슬라이드 쇼 영역-->	
+					
+					
+						
+					<!-- 모달 사진 슬라이드영역 -->
+					<div class="slide">
+					  <ul class="panel"></ul>
+
+					  <div class="prev"><img width="30px" src="/pmang/image/imgLeft.png" alt="" /></div>
+					  <div class="next"><img width="30px" src="/pmang/image/imgRight.png" alt="" /></div>
 					</div>
+					 <!-- 모달 사진 슬라이드영역 --> 
+          
+          
+          
 					<!-- 슬라이드 쇼 영역 끝-->
 					<!-- 종료버튼 -->
 					<label id="closeBtn" for="imgCheckBox">
@@ -190,6 +196,7 @@
 						</div>
 					</div>
 				</div>
+				<br>
 				<!-- 상세 설명 -->
 				<div>
 					<div class="dealInfo">
@@ -211,6 +218,8 @@
 
 				</div>
 			</div>
+			<br>
+			<br>
 			<!-- 상품 설명 -->
 
 			<!-- 버튼 영역 -->
@@ -288,7 +297,7 @@
 		
 		<div id="reply"><!-- 댓글창 -->
 			<div class="replyDiv text"><!-- 댓글 test입력 -->
-				<textarea id="replyText" maxlength="300">111</textarea>
+				<textarea id="replyText" maxlength="300"></textarea>
 			</div>
 			
 			<div class="replyDiv"><!-- 댓글 글자제한/등록버튼 -->
@@ -361,10 +370,10 @@
 					                <div class="report-ad-ad">
 					                	<button type="button">타사이트,어플 광고</button>
 					                </div>
-					                <div class="etc">
-					                	<input type="text" placeholder="기타(사유)">
-					                	<button id="report-ad-pr-write" type="button">등록</button>
-					                </div>
+					                <!-- <div class="etc">
+					                	<input type="text" class="etcText" placeholder="기타(사유)">
+					                	<button id="report-ad-pr-write" class="etcBtn" type="button">등록</button>
+					                </div> -->
 					           	</div>
 							</div>
 						<div class="report-un">
@@ -387,10 +396,10 @@
 					                <div class="report-un-ad">
 					                	<button id="report-pr-name" type="button">상품명이 잘못됨</button>
 					                </div>
-					                <div class="etc">
-					                	<input type="text" placeholder="기타(사유)">
-					                	<button type="button">등록</button>
-					                </div>
+					                <!-- <div class="etc">
+					                	<input type="text" class="etcText" placeholder="기타(사유)">
+					                	<button type="button" class="etcBtn">등록</button>
+					                </div> -->
 					           	</div>
 							</div>
 						<div class="report-dan">
@@ -413,10 +422,10 @@
 					                <div class="report-dan-ad">
 					                	<button type="button">콘텍트 렌즈</button>
 					                </div>
-					                <div class="etc">
-					                	<input type="text" placeholder="기타(사유)">
-					                	<button type="button">등록</button>
-					                </div>
+					                <!-- <div class="etc">
+					                	<input type="text" class="etcText" placeholder="기타(사유)">
+					                	<button type="button" class="etcBtn">등록</button>
+					                </div> -->
 					           	</div>
 							</div>
 						<div class="report-viol">
@@ -433,34 +442,35 @@
 					                <div class="report-viol-ad">
 					                	<button type="button">성희롱</button>
 					                </div>
-									 <div class="etc">
-					                	<input type="text" placeholder="기타(사유)">
-					                	<button type="button">등록</button>
-					                </div>
+									<!--  <div class="etc">
+					                	<input type="text" class="etcText" placeholder="기타(사유)">
+					                	<button type="button" class="etcBtn">등록</button>
+					                </div> -->
 					           	</div>
 							</div>
-						<div class="report-write">
+					<!-- <div class="report-write">
 							<div class="report-write-div report-common">
 								기타사유(직접입력)
 								<button type="button">
 									<img src="/pmang/image/reportV.png"width="13" height="8" alt="화살표 아이콘">
 								</button>									
-							</div>
+							</div> 
 								<div class="hide report-hide-common">
 									<div class="report-write-ad">
-										<textarea></textarea>
+										<textarea ></textarea>
 										<div class="resiDiv">
 					                		<button id="report-pr-write" type="button">등록</button>
 					                	</div>
 					                </div>
 					            </div>
-					      </div>
+					      </div>  -->
 					      <div class="report-qna">
 					      	<div class="report-qna-div">
 					      		거래사기(1:1문의하기)
-					      		<button id="report-operator" type="button">1:1문의하기</button>
+					      		<button id="report-operator" type="button" onclick="/pmang/board/qna">1:1문의하기</button>
 					      	</div>
 					      </div>
+					      
 					</div>
 				</div>
      		 </div>
@@ -494,10 +504,10 @@
 								 <div class="report-ad-ad111">
 				                	<button type="button">타사이트,어플광고</button>
 				                </div>
-				                <div class="etc111">
-				                	<input type="text" placeholder="기타(사유)">
-				                	<button type="button">등록</button>
-				                </div>
+				                <!-- <div class="etc111">
+				                	<input type="text" class="etcText111" placeholder="기타(사유)">
+				                	<button type="button" class="etcBtn111">등록</button>
+				                </div> -->
 				           	</div>
 						</div>
 
@@ -519,13 +529,13 @@
 					            	<div class="report-viol-ad111">
 					                	<button type="button">리뷰(별점평가)요구 및 테러</button>
 					                </div>
-									 <div class="etc111">
-					                	<input type="text" placeholder="기타(사유)">
-					                	<button class="reBtn111" type="button">등록</button>
-					                </div>
+									<!--  <div class="etc111">
+					                	<input type="text" class="etcText111" placeholder="기타(사유)">
+					                	<button class="reBtn111" class="etcBtn111" type="button">등록</button>
+					                </div> -->
 					           	</div>
 							</div>
-						<div style="border-top: 1px solid rgb(190, 190, 190);" class="report-write111">
+						<!-- <div style="border-top: 1px solid rgb(190, 190, 190);" class="report-write111">
 							<div class="report-write-div111 report-common111">
 								기타사유(직접입력)
 								<button type="button">
@@ -538,7 +548,8 @@
 					                	<button style="border: 1px solid rgb(238, 238, 238);" type="button">등록</button>
 					                </div>
 					            </div>
-					      </div>
+					      </div> -->
+					      
 					</div>
 				</div>
      		 </div>

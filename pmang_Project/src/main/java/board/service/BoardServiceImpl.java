@@ -2,29 +2,25 @@ package board.service;
 
 
 import java.util.HashMap;
-
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import board.bean.AdminDTO;
 import board.bean.BoardPaging;
 import board.bean.CommentDTO;
 import board.bean.ItemDTO;
-import board.bean.AdminDTO;
+import board.bean.NoticeDTO;
+import board.bean.QnaDTO;
 import board.bean.ReportDTO;
-import board.dao.BoardDAO;
-
-
 import board.bean.ReviewDTO;
 import board.bean.SearchDTO;
 import board.bean.WishDTO;
 import board.bean.WishlistDTO;
+import board.dao.BoardDAO;
 import board.dao.MystoreDAO;
-
 import member.bean.SellerDTO;
 
 @Service
@@ -634,9 +630,6 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<ReportDTO> getReportList() {
-		
-		
-		
 		return mystoreDAO.getReportList();
 	}
 
@@ -644,13 +637,11 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<ReportDTO> getReport(String userid) {
-		// TODO Auto-generated method stub
 		return mystoreDAO.getReport(userid);
 	}
 
 	@Override
 	public List<String> getReportTarget() {
-		// TODO Auto-generated method stub
 		return mystoreDAO.getReportTarget();
 	}
 
@@ -660,7 +651,49 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 
+	@Override
+	public List<NoticeDTO> getNoticeList() {
+		return boardDAO.getNoticeList();
+	}
+	
+	@Override
+	public void qnaWrite(QnaDTO qnaDTO) {
+		boardDAO.qnaWrite(qnaDTO);
 
+	}
+
+
+
+	@Override
+	public List<WishlistDTO> getMyZzim(String userId) {
+		return boardDAO.getMyZzim(userId);
+	}
+	
+	@Override
+	public List<QnaDTO> getQnaList(String userid) {
+		return boardDAO.getQnaList(userid);
+	}
+
+
+
+	@Override
+	public List<QnaDTO> getQna() {
+		return boardDAO.getQna();
+	}
+
+
+
+	@Override
+	public void qnaReplyWrite(String qna_seq,String qnaContent) {
+		boardDAO.qnaReplyWrite(qna_seq,qnaContent);
+	}
+
+
+
+	@Override
+	public ItemDTO getItemInfo(String item_seq) {
+		return boardDAO.getItemInfo(item_seq);
+	}
 
 
 	

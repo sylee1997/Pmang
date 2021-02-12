@@ -1,11 +1,13 @@
-
+/*
 //강제 탈퇴
 $('#adminDeleteSearchBtn').click(function(){
 // alert('클릭');
+	alert($('#userid').val());
 	$.ajax({
 		type:'post',
 		url:'/pmang/member/adminUserDeleteSearch',
 		data:'userid='+$('#userid').val(),
+		dataType:'text',
 		success:function(data){
 			// alert($('input[type=text]').val()+'님을 강제탈퇴하였습니다.');
 		// alert('성공');
@@ -22,7 +24,7 @@ $('#adminDeleteSearchBtn').click(function(){
 					.appendTo($('.userSearchResultDiv'));
 					
 
-					$('#adminUserDelete').click(function(){
+					$('#adminUserDelete').on('click',function(){
 						var userid=$('.resultid').text();
 						
 						$.ajax({
@@ -37,7 +39,7 @@ $('#adminDeleteSearchBtn').click(function(){
 					});
 						
 					
-				}else{
+				}else if(data==''){
 					$('<div/>').append($('<span/>',{
 						text:'찾고자하는 아이디가 없습니다.'
 					})).appendTo($('.userSearchResultDiv'));
@@ -45,10 +47,10 @@ $('#adminDeleteSearchBtn').click(function(){
 			
 			
 		},
-		error:function(data){
-			
+		error:function(err){
+			console.log(err);
 		}
 	});
 	
-});
+});*/
 
