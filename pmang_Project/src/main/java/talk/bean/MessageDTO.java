@@ -1,19 +1,28 @@
 package talk.bean;
 
-import java.util.Date;
+import com.google.gson.Gson;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-public class MessageDTO {
-	private int talk_room_seq;//Åå¹æ seq
-	private String sender_user_id; //º¸³½»ç¶÷ id
-	private String receiver_user_id; //¹ŞÀº »ç¶÷id
-	private String user_id;//À¯Àúid
-	private String talk_content; //¸Ş¼¼Áö ³»¿ë
-	private Date send_time;//¸Ş¼¼Áö º¸³½½Ã°£
-	private Date read_time;//¸Ş¼¼Áö ÀĞÀº ½Ã°£
-	private int unread_count;//¸Ş¼¼Áö ¾ÈÀĞÀº °¹¼ö
+@Data
+public class MessageDTO {// ë©”ì‹œì§€ í•œì¤„ í•œì¤„
+	private String userId;//1ê°œì˜ ë©”ì‹œì§€ì— sender/recieverì˜ Message ì €ì¥. 
+	private String sender_user_id;//ë³´ë‚¸ì‚¬ëŒ id :O
+	private String receiver_user_id;//ë°›ì€ì‚¬ëŒ id :O
+	private int talkRoom_seq;//í†¡ë°© seq :O
+	private String talk_content;//ë©”ì‹œì§€ ë‚´ìš© :O
+	private String send_time;//ë©”ì„¸ì§€ ë³´ë‚¸ ì‹œê°„ :sysdate
+	private String read_time;//ë©”ì„¸ì§€ ë°›ì€ ì‹œê°„ :
+	//private int unRead_Check;//ì•ˆì½ì€ ë©”ì‹œì§€ ì²´í¬  : send_time < read_time
+	private String receiver_user_profileImage;//ìƒëŒ€ë°© í”„ë¡œí•„ ì´ë¯¸ì§€ :O
+	private int item_seq;//íŒë§¤ì•„ì´í…œ seq :O
+	
+	public static MessageDTO convertMessage(String source) {
+		MessageDTO message = new MessageDTO();
+		Gson gson = new Gson();
+		message = gson.fromJson(source, MessageDTO.class);
+		//sourceë¡œ ë„˜ì–´ì˜¨ json ê°ì²´í˜•ì‹ìœ¼ë¡œ ë‹´ê²¨ìˆëŠ” String ë°ì´í„°ë¥¼ MessageDTO í´ë˜ìŠ¤ì˜ ê°ì²´ì˜ í•„ë“œì— ê°’ì„ ìë™ ì„¸íŒ…í•œë‹¤.
+		//ê²°ê³¼ì˜ˆì œ Member [id=jekalmin, name=Min, age=26, address=Seoul]
+		return message;
+	}
 }
