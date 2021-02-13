@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import board.bean.ItemDTO;
 import member.bean.MemberDTO;
+import member.bean.RecentlyDTO;
 import member.bean.ZipcodeDTO;
 
 @Repository
@@ -115,6 +115,50 @@ public class MemberDAOMybatis implements MemberDAO {
 		sqlSession.insert("memberSQL.sellerWrite", itemDTO);
 	}
 	
+	@Override
+	public String getSellerLocation(String userId) {
+		return sqlSession.selectOne("memberSQL.getSellerLocation", userId);
+	}
+	
+	@Override
+	public void insertRecentlyLoc(String userId, String location) {
+		Map<String, String> insertMap = new HashMap<String, String>();
+		insertMap.put("userId", userId);
+		insertMap.put("address", location);
+		
+		List<RecentlyDTO> list = sqlSession.selectList("memberSQL.checkRecentlyLoc", userId);
+
+		if(insertMap.get("address") != null) {
+			if(list.isEmpty()) {
+				sqlSession.insert("memberSQL.insertRecentlyLoc", insertMap);
+			}
+			else {
+				for(RecentlyDTO dto : list) {
+					if(!dto.getAddress().equals(location)) {
+						sqlSession.insert("memberSQL.insertRecentlyLoc", insertMap);	
+					}
+				}
+			}	
+		}
+		
+		
+	}
+	
+	@Override
+	public List<RecentlyDTO> getRecentlyLoc(String userId) {
+		return sqlSession.selectList("memberSQL.checkRecentlyLoc", userId);
+	}
+	
+	@Override
+	public void deleteRecentlyLoc(String userId, String address) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userId", userId);
+		map.put("address", address);
+		
+		sqlSession.delete("memberSQL.deleteRecentlyLoc", map);
+		
+	}
+	
 	
 	//-----------------------------admin
 	@Override
@@ -130,6 +174,13 @@ public class MemberDAOMybatis implements MemberDAO {
 		// TODO Auto-generated method stub
 		sqlSession.delete("memberSQL.adminUserDelete",userid);
 	}
+
+
+	@Override
+	public List<ZipcodeDTO> mainLoc(Map<String, String> map) {
+		return sqlSession.selectList("memberSQL.mainLoc", map);
+	}
+
 
 
 }

@@ -6,6 +6,7 @@
 		<typeAlias type="board.bean.ReviewDTO" alias="review" />
 		<typeAlias type="board.bean.WishDTO" alias="wish"/>
 		<typeAlias type="member.bean.SellerDTO" alias="seller" />
+		<typeAlias type="member.bean.RecentlyDTO" alias="recently" />
 	
 		<typeAlias type="member.bean.MemberDTO" alias="member"/>
 		<typeAlias type="member.bean.ZipcodeDTO" alias="zipcode"/>

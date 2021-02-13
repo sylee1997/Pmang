@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="/pmang/css/sellerManagement.css">
 
 <input type="hidden" id="pg" value="1">
-<input type="hidden" id="userid" value="aaaa">
+<input type="hidden" id="userid" value="aaaa"> <!-- 세션 값으로 받아올 예정 -->
 <input type="hidden" id="item_seq" value="${item_seq }">
 <div class="management_head">
 	<nav class="management_nav">

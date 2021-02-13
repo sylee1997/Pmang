@@ -25,21 +25,18 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-	<resources mapping="/js/**" location="/js/" />
-	<resources mapping="/css/**" location="/css/" />
 	<resources location="/image/" mapping="/image/**"/>
+	<resources location="/css/" mapping="/css/**"/>
 	<resources location="/font/" mapping="/font/**"/>
-<<<<<<< HEAD
-=======
 	<resources location="/js/" mapping="/js/**"/>
 	<resources location="/item/" mapping="/item/**"/>
+	<resources location="/talk/" mapping="/talk/**"/>
 	<resources location="/storage/" mapping="/storage/**"/>
 
 	<resources location="/pm_itemView/" mapping="/pm_itemView/**"/>
 	<resources location="/pm_mystore/" mapping="/pm_mystore/**"/>
 	<resources location="/pm_sellerWriteForm/" mapping="/pm_sellerWriteForm/**"/>
 	
-
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
    <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
       <beans:property name="suffix" value=".jsp" />
@@ -55,22 +52,12 @@
 		<beans:property name="order" value="0"/>
 	</beans:bean>
 
->>>>>>> temp
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-<<<<<<< HEAD
-	<!-- file upload -->
-	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<beans:property name="maxUploadSize" value="5000000"/>	<!-- 5MB -->
-	</beans:bean>
-	
-	<context:component-scan base-package="com.mvc.pmang" />
-	
-=======
 	<!-- fileupload -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="maxUploadSize" value="20000000"/> <!-- 20MB -->
@@ -78,7 +65,6 @@
 
 	<!-- 웹소켓 -->
 	<beans:bean id="talkHandler" class="talk.handler.TalkHandler"></beans:bean>
->>>>>>> temp
 	
 	<websocket:handlers>
 		<websocket:mapping handler="talkHandler" path="/talk-ws" /> <!-- path에 요청이 오면 talkHandler를 처리하겠다. -->
