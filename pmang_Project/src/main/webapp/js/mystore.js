@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //프로필 사진 변경 -> 이건 DB랑 연동해야할거 같아서 일단 업로드창 띄우는거까지만 구현 210121(승은)
 //https://doolyit.tistory.com/204 ************** 참고
 function changeValue(obj) {
@@ -115,3 +116,70 @@ $(document).on("click","input[id='choice_chk']",function(){
 	}
 });
 
+=======
+
+//중복 클릭 방지 코드
+var doubleSubmitFlag = false;
+function doubleSubmitCheck() {
+	if (doubleSubmitFlag) {
+		return doubleSubmitFlag;
+	} else {
+		doubleSubmitFlag = true;
+		return false;
+	}
+}
+
+
+// 내상점정보수정
+$('#storeIntroEditBtn').on(
+		'click',
+		function(e) {
+			// e.stopPropagation();
+			if (doubleSubmitCheck())
+				return; // 중복클릭방지
+			// alert('클릭');
+
+			// 상점명
+			var infoName = $('.infoName span').text();
+			// $('#storeNameModify').hide();
+			$('.infoName').empty();
+
+			$('.infoName').append(
+					'<input type="text" id="storeNameEdit" value="' + infoName
+							+ '">');
+			// $('#storeNameModify1').show();
+
+			// 소개글
+			$('#introEdit').hide();
+			var mystoreIntroduce = $('#mystoreIntroduce textarea').text();
+			$('#mystoreIntroduce').empty();
+
+			$('#mystoreIntroduce').append(
+					'<textarea id="storeIntro">' + mystoreIntroduce
+							+ '</textarea>');
+
+			$('.introEdit1').show();
+
+			// 내상점정보수정버튼 -> db로 가서 고쳐야댐
+			$('#storeIntroBtn').on(
+					'click',
+					function() {
+
+						$.ajax({
+							type : 'post',
+							url : '/pmang/board/mystoreModify',
+							data : 'marketname=' + $('#storeNameEdit').val()
+									+ '&marketcontent='
+									+ $('#storeIntro').val(),
+							success : function() {
+								alert('내 상점 정보가 수정되었습니다.');
+								location.href = 'mystore';
+							},
+							error : function(err) {
+								console.log(err);
+							}
+
+						});
+					});
+		});
+>>>>>>> temp

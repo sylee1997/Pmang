@@ -3,6 +3,7 @@
 .project
 .springBeans
 .settings/
+*.properties
 target/
 src/test/
 src/main/resources/META-INF/

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="talkSQL">
+ 	
+ 	<!-- 방 조회 -->
+ 	<select id="isRoom" parameterType="talkRoom" resultType="talkRoom">
+ 		select * from talkroom where userId = #{userId} and partner_userId = #{partner_userId}  
+ 	</select>
+ 	
+ 	<!-- 방 생성 -->
+ 	<insert id="createRoom" parameterType="talkRoom">
+ 		insert into talkroom values(talkRoom_seq.nextval,#{userId},#{partner_userId},#{item_seq},0)
+ 	</insert>
+ 	
+ 	<!-- 방 리스트 출력 -->
+ 	<select id="getRoomList" parameterType="String" resultType="talkRoom">
+ 		select * from talkroom where userId = #{userId}
+ 	</select>
+ </mapper>
+ 
