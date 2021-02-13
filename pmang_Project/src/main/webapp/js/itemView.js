@@ -80,8 +80,8 @@ $(document).ready(function(){
 			$('.qtySpan').text(result.itemDTO.qty);
 			$('.locationSpan').text(result.itemDTO.item_location);
 			$('.commentSpan').text(result.itemDTO.item_content);
-			$('.category1Span').text(result.itemDTO.category1);
-			$('.category2Span').text(result.itemDTO.category2);
+			$('.category1Span').text(result.itemDTO.category1+" /");
+			$('.category2Span').text(result.itemDTO.category2+" /");
 			$('.category3Span').text(result.itemDTO.category3);
 			$('.hashtag1Span').text(result.itemDTO.hashtag1);
 			$('.hashtag2Span').text(result.itemDTO.hashtag2);
@@ -102,23 +102,20 @@ $(document).ready(function(){
 			if(result.itemDTO.img3!=null){
 				$('<img/>',{
 					src:'/pmang/storage/'+result.itemDTO.img3,
-					class:'itemPicture'
-				})
-				.prependTo($('#itemPic'));
+					class:'itemPicture'})
+				.prependTo($('#itemPictureDiv'));
 			}
 			if(result.itemDTO.img2!=null){
 				$('<img/>',{
 					src:'/pmang/storage/'+result.itemDTO.img2,
-					class:'itemPicture'
-				})
-				.prependTo($('#itemPic'));
+					class:'itemPicture'})
+				.prependTo($('#itemPictureDiv'));
 			}
 			if(result.itemDTO.img1!=null){
 				$('<img/>',{
 					src:'/pmang/storage/'+result.itemDTO.img1,
-					class:'itemPicture'
-				})
-				.prependTo($('#itemPic'));
+					class:'itemPicture'})
+				.prependTo($('#itemPictureDiv'));
 			}
 			
 			
@@ -608,11 +605,11 @@ $('#comment_seq').click(function(event){
 					$('<div/>',{
 						class:'replyUser'})
 								.append($('<a/>',{
-									href:'#'})
+									href:''})
 											.append($('<img/>',{
 												class:'profilePic',
 												alt: '프사',
-												src: items.ph_photo,
+												src: items.pf_photo,
 												width: '50',
 												height: '50'})))
 								.append($('<div/>',{
@@ -775,6 +772,7 @@ $('#like').click(function() {
 		
 		$('#likedOrNot').trigger('click');
 		$('#likedOrNot').val('1');
+		$('#hiddenUserId').trigger('click');
 		
 	}else if($('#likedOrNot').val()=='1'){
 		$.ajax({
@@ -791,6 +789,7 @@ $('#like').click(function() {
 		});//ajax
 		$('#likedOrNot').trigger('click');
 		$('#likedOrNot').val('0');
+		$('#hiddenUserId').trigger('click');
 	}//if
 });
 
@@ -800,6 +799,7 @@ $('#like').click(function() {
 
 $(document).ready(function() {
   slide();
+  slideItemPic();
 });
 
 
@@ -809,26 +809,19 @@ function slide() {
   var now_num = 0;
   var slide_length = 0;
   var auto = null;
-  var $dotli = $('.dot>li');
   var $panel = $('.panel');
-  var $panelLi = $panel.children('li');
+/*  var $panelLi = $panel.children('li');*/
 
   
   // 변수 초기화
   function init() {
     wid = 800/*$('.slide').width()*/;
-    now_num = $('.dot>li.on').index();
+    now_num = 0;
     slide_length = parseInt($('#photoNum').val());
   }
 
   // 이벤트 묶음
   function slideEvent() {
-
-    // 슬라이드 하단 dot버튼 클릭했을때
-    $dotli.click(function() {
-      now_num = $(this).index();
-      slideMove();
-    });
 
     // 이후 버튼 클릭했을때
     $('.next').click(function() {
@@ -839,44 +832,11 @@ function slide() {
     $('.prev').click(function() {
       prevChkPlay();
     });
-
-   /* // 오토플레이
-    autoPlay();
-
-    // 오토플레이 멈춤
-    autoPlayStop();
-
-    // 오토플레이 재시작
-    autoPlayRestart();
-    */
     
     // 화면크기 재설정 되었을때
     resize();
   }
 
-/*  // 자동실행 함수
-  function autoPlay() {
-    auto = setInterval(function() {
-      nextChkPlay();
-    }, 4000);
-  }
-
-  // 자동실행 멈춤
-  function autoPlayStop() {
-    $panelLi.mouseenter(function() {
-      clearInterval(auto);
-    });
-  }
-
-
-  // 자동실행 멈췄다가 재실행
-  function autoPlayRestart() {
-    $panelLi.mouseleave(function() {
-      auto = setInterval(function() {
-        nextChkPlay();
-      }, 4000);
-    });
-  }*/
 
   // 이전 버튼 클릭시 조건 검사후 슬라이드 무브
   function prevChkPlay() {
@@ -903,12 +863,10 @@ function slide() {
     $panel.stop().animate({
       'margin-left': -800 * now_num
     });
-    $dotli.removeClass('on');
-    $dotli.eq(now_num).addClass('on');
+   
   }
   
- 
-  
+
   
   // 화면크기 조정시 화면 재설정
   function resize() {
@@ -921,20 +879,82 @@ function slide() {
   }
   init();
   slideEvent();
-}
+  }
 
       /* 인기 카테고리 슬라이드 쇼 이벤트 */
 
-
-
-// 상품사진 넘기기
-$('#imgLeftBtn').click(function(){
+function slideItemPic(){
 	
-});
+	//변수 초기화
+	function init_pic() {
+	    wid_pic = 500;
+	    now_num_pic = 0;
+	    slide_length_pic = parseInt($('#photoNum').val());
+	    
+	}
+	
+	  // 이벤트 묶음
+	  function slideEvent_pic() {
+
+	    // 이후 버튼 클릭했을때
+	    $('#imgRightBtn').click(function() {
+	      nextChkPlay_pic();
+	    });
+
+	    // 이전 버튼 클릭했을때
+	    $('#imgLeftBtn').click(function() {
+	      prevChkPlay_pic();
+	    });
+	    
+	    // 화면크기 재설정 되었을때
+	    resize_pic();
+	  }
+
+	  // 이전 버튼 클릭시 조건 검사후 슬라이드 무브
+	  function prevChkPlay_pic() {
+		  console.log("이전 버튼");
+	    if (now_num_pic == 0) {
+	      now_num_pic = slide_length_pic - 1;
+	    } else {
+	      now_num_pic--;
+	    }
+	    slideMove_pic();
+	  }
+
+	  // 이후 버튼 클릭시 조건 검사후 슬라이드 무브
+	  function nextChkPlay_pic() {
+		  console.log("이후 버튼");
+	    if (now_num_pic == slide_length_pic - 1) {
+	      now_num_pic = 0;
+	    } else {
+	      now_num_pic++;
+	    }
+	    slideMove_pic();
+	  }
+
+	  // 슬라이드 무브
+	  function slideMove_pic() {
+		  console.log("슬라이드 무브");
+		  $('#itemPictureDiv').stop().animate({
+	      'margin-left': -500 * now_num_pic
+	    });
+	  }
+	  
+
+	  
+	  // 화면크기 조정시 화면 재설정
+	  function resize_pic() {
+	    $(window).resize(function() {
+	    	console.log("화면 조정");
+	      init_pic();
+	      $('#itemPictureDiv').css({
+	        'margin-left': -500 * now_num_pic
+	      });
+	    });
+	  }
+	  
+	  init_pic();
+	  slideEvent_pic();
+}
 
 
-
-
-
-
-//imgRightBtn

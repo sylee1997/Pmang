@@ -13,7 +13,9 @@
 </head>
 <body> 
 
+<!-- 강제 호출용으로 사용중 -->
 <input type="hidden" id="hiddenUserId" value="${sessionScope.memUserId }">
+
 
 <!-- 로그인 모달 -->
 <div class="loginModal">

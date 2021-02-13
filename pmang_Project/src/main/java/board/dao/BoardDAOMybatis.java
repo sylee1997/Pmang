@@ -16,6 +16,7 @@ import board.bean.QnaDTO;
 import board.bean.ReviewDTO;
 import board.bean.SearchDTO;
 import board.bean.WishlistDTO;
+import member.bean.SellerDTO;
 
 
 @Transactional
@@ -312,6 +313,11 @@ public class BoardDAOMybatis implements BoardDAO {
 	@Override
 	public ItemDTO getItemInfo(String item_seq) {
 		return sqlSession.selectOne("boardSQL.getItemInfo", item_seq);
+	}
+
+	@Override
+	public SellerDTO getSellerInfo(String userId) {
+		return sqlSession.selectOne("boardSQL.getSellerInfo", userId);
 	}
 
 

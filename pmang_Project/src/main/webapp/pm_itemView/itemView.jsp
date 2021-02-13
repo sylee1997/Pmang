@@ -103,7 +103,9 @@
 		<div id="imageArea">
 		
 			<div id="itemPic">
+				<div id="itemPictureDiv">
 			<!-- <img id="itemPic" src="/pmang/image/itemPic.jpg" alt="item pic"> -->
+				</div>
 			</div>
 			
 			<!-- 확대 버튼 -->
@@ -125,8 +127,8 @@
 					<div class="slide">
 					  <ul class="panel"></ul>
 
-					  <div class="prev"><img width="30px" src="/pmang/image/imgLeft.png" alt="" /></div>
-					  <div class="next"><img width="30px" src="/pmang/image/imgRight.png" alt="" /></div>
+					  <div class="prev"><img width="50px" height="50" src="/pmang/image/imgLeft.png" alt="" /></div>
+					  <div class="next"><img width="50px" height="50" src="/pmang/image/imgRight.png" alt="" /></div>
 					</div>
 					 <!-- 모달 사진 슬라이드영역 --> 
           
@@ -264,13 +266,13 @@
 		<!-- 거래지역, 카테고리, 상품태그 div -->
 		<div id="productInfo">
 			<div class="productInfo">
-				<div class="productInfoDiv">거래지역</div>
+				<div class="productInfoDiv"><img src="/pmang/image/areaIcon.jpg" width="15" height="15">거래지역</div>
 	
 				<div><a href="#"><span class="locationSpan">DB에러</span></a></div>			
 	
 			</div>
 			<div class="productInfo border">
-				<div class="productInfoDiv">카테고리</div>
+				<div class="productInfoDiv"><img src="/pmang/image/categoryIcon.jpg" width="15" height="15">카테고리</div>
 				<div><a href="#">
 					<span class="category1Span">DB에러</span>
 					<span class="category2Span"></span>
@@ -278,7 +280,7 @@
 					</a></div>
 			</div>
 			<div class="productInfo border">
-				<div class="productInfoDiv">상품태그</div>
+				<div class="productInfoDiv"><img src="/pmang/image/tagIcon.jpg" width="15" height="15">상품태그</div>
 				<div><a href="#">
 					<span class="hashtag1Span">DB에러</span>
 					<span class="hashtag2Span"></span>

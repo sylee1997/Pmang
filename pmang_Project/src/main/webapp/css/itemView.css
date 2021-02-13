@@ -177,10 +177,10 @@ a {
 }
 /* 모달안의 상품 제목 */
 #modalItemName{
-	position : absolute;
+	position : fixed;
 	text-align : center;
 	top:5%;
-	left:calc(50% - 250px);
+	left:calc(50% - 230px);
 	width:500px;
 	height:100px;
 	font-size:30px;
@@ -191,11 +191,11 @@ a {
 
 /* 종료버튼 */
 #closeBtn {
-	position:absolute;
+	position:fixed;
 	width:30px;
 	height:30px;
-	top:2%;
-	left:97%;
+	top:3%;
+	right:3%;
 	z-index:100;
 }
 
@@ -293,6 +293,7 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 /***********/	
 	
 #itemDiv{
+	width:2000px;
     display: flex;
     padding:20px 0px;
 }
@@ -319,20 +320,27 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 	left:87%;
 	transform:translate(-50%,-50%);
 }
-#itemPic{
+#itemPic{ /* 보여지는 사진 한장을 위한 div */
     margin-right: 20px;
     flex-shrink: 0;
     width: 500px;
     height: 500px;
     overflow:hidden;
 }
-.itemPicture{
+
+#itemPictureDiv{/* 사진 전체를 담는 div */
+	width:300%;
+}
+
+.itemPicture{/* 사진 한장 */
+	margin-left:0px;
 	width:500px;
 	height:500px;
+	
 }
 
 #itemArea{
-    flex-grow: 1;
+   /*  flex-grow: 1; */
 }
 
 #nameNPrice{
@@ -498,6 +506,7 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 	/* width: 70%; */
 	margin:0 auto; 
 	text-align: center;
+
 }
 #productInfo .border {
 	border-left: 1px solid #eee;
@@ -513,6 +522,7 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 	color: #c8c8c8;
 	font-size: 15px;
 	font-weight: bold;
+	width:310px;
 }
 .productInfo div a {
 	text-decoration: none;
@@ -583,6 +593,7 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 .profilePic{
 	border-radius:50%;
 	margin:20px;
+	cursor:default;
 
 }
 .replyUser {
@@ -664,7 +675,7 @@ ul{
 .panel {
   width: 300%;
   height:100%;
-  margin-left:1px;
+  margin-left:0px;
 
 }
 
@@ -679,7 +690,7 @@ ul{
 	height:700px;
 }
 
-.panel>li>a>img {
+.panel>li>a>div>img {
 	width:700px;
 	height:700px;
 
@@ -696,53 +707,25 @@ ul{
 }
 
 
-.dot:after {
-  content: "";
-  display: block;
-  clear: both;
-}
 
-.dot {
-  position: absolute;
-  left: 50%;
-  bottom: 10%;
-  transform: translateX(-50%);
-  visibility: hidden;
-}
-
-.dot>li {
-  float: left;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background-color: #fff;
-  margin-left: 10px;
-  margin-right: 10px;
-  text-indent: -9999px;
-  cursor: pointer;
-}
-
-.dot>li.on {
-  background-color: #342f2f;
-}
 
 .prev {
-  position: absolute;
+  position: fixed;
   width: 50px;
   height: 50px;
   top: 50%;
   transform: translateY(-50%);
-  left: 1%;
+  left: 3%;
   cursor: pointer;
 }
 
 .next {
-  position: absolute;
+  position: fixed;
   width: 50px;
   height: 50px;
   top: 50%;
   transform: translateY(-50%);
-  left :34%;
+  right :3%;
   cursor: pointer;
 }
 

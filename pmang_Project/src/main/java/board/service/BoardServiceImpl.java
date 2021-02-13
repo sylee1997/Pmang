@@ -678,6 +678,13 @@ public class BoardServiceImpl implements BoardService {
 
 
 
+	@Override
+	public SellerDTO getSellerInfo(String userId) {
+		return boardDAO.getSellerInfo(userId);
+	}
+
+
+
 	
 }
 

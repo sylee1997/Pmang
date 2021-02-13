@@ -21,7 +21,7 @@
 										#{userId},<!-- 유저아이디, 세션에서 받아 넣을 것 --> <!-- 확인 -->
 										#{item_comment},
 										sysdate,
-										'/pmang/image/itemPic.jpg' <!-- 유저아이디로 조인 걸어서 받아올 것 -->
+										#{pf_photo} <!-- 유저아이디로 조인 걸어서 받아올 것 -->
 										)
 	</insert>
 	
@@ -418,6 +418,10 @@
 
 	<select id="getItemInfo" resultType="item">
 		select * from item where item_seq=#{item_seq}
+	</select>
+	
+	<select id="getSellerInfo" resultType="seller">
+		select * from seller where userId=${userId}
 	</select>
 </mapper>
 

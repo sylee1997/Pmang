@@ -177,6 +177,8 @@ public interface BoardService {
 
 	public ItemDTO getItemInfo(String item_seq);
 
+	public SellerDTO getSellerInfo(String userId);
+
 
 
 }

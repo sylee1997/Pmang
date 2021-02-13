@@ -871,10 +871,16 @@ $('#kakaoBtn').click(function(event){
 		}
 	}); 
 });
-// 이거 어젯밤에 하다 만거 여기서부터 해 -> ajax로 찜테이블 유저 아이디로 긁어와서 찜수 반영 하트도 넣어 
-// 내 찜수 확인
 
-$(document).ready(function(){	
+
+
+// 내 찜수 확인
+$(document).ready(function(){
+	$('#hiddenUserId').trigger('click');
+});
+
+
+$('#hiddenUserId').click(function(event){	
 	 $.ajax({
 			type: 'post',
 			url: '/pmang/board/getMyZzim',
