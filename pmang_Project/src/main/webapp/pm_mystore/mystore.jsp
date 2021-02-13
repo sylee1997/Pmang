@@ -120,6 +120,7 @@
 							<span></span>
 						</div>
 						<div id="storeNameModify">
+							<a href="/pmang/member/modifyForm" id="memberInfoModify">회원 정보 수정</a>
 							<!-- <button id="storeNameEditBtn">상점명 수정</button> -->
 						</div>
 						<!-- storeNameModify -->
@@ -156,14 +157,14 @@
 					</div>
 					<!-- mystoreSpec -->
 					<div id="mystoreIntroduce">
-						<textarea disabled readonly
+						<textarea id="mystoreText" disabled readonly
 							style="background: transparent; font-family: sans-serif;"></textarea>
 					</div>
 					<!-- mystoreIntroduce -->
 					<div id="introEdit">
 						
-						<button id="storeIntroEditBtn">내상점 정보 수정</button>
-						<a href="#" id="memberInfoModify">회원 정보 수정</a>
+						<button id="storeIntroEditBtn" type="button">내상점 정보 수정</button>
+						<!-- <a href="/pmang/member/modifyForm" id="memberInfoModify">회원 정보 수정</a> -->
 					</div>
 					<!-- introEdit -->
 					<div class="introEdit1">
@@ -212,6 +213,7 @@
 <script type="text/javascript" src="/pmang/js/mystore.js"></script>
 <script type="text/javascript" src="/pmang/js/admin.js"></script>
 <script>
+
 	function changeValue(obj) {
 		//var file=obj.target.file;
 		alert(obj);
@@ -403,10 +405,10 @@
 			// tab operation
 						$('.tabmenu').on('click',function() {
 									var activeTab = $(this).attr('data-tab');
-									$('li').css('background-color',
-											'rgb(250, 250, 250)').css(
+								 	$('li').css('background-color',
+											'white').css(
 											'border-top',
-											'2px solid transparent');
+											'2px solid transparent'); 
 									$(this).css('background-color', 'white')
 											.css('border-top',
 													'2px solid green');

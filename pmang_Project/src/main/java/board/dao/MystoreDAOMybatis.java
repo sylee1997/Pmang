@@ -9,10 +9,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import board.bean.ItemDTO;
-import board.bean.ReportDTO;
 import board.bean.ReviewDTO;
 import board.bean.WishDTO;
 import member.bean.SellerDTO;
+import board.bean.ReportDTO;
+
 
 @Transactional
 @Repository
@@ -169,7 +170,5 @@ public class MystoreDAOMybatis implements MystoreDAO {
 		if(sellerDTO == null) {
 			sqlSession.insert("mystoreSQL.insertSeller", userId);
 		}
-		
-		
 	}
 }

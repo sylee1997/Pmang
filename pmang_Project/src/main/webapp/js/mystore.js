@@ -10,12 +10,27 @@ function doubleSubmitCheck() {
 	}
 }
 
+function len_chk(){
+	var frm = $('#storeIntro').val();
+	
+	if(frm.length > 200){
+		alert('최대 1000자까지 입력 가능합니다.');
+		$('#storeIntro').val(frm.substring(0, 1000));
+		//$('#mystoreText').focus();
+	}
+}
+
 
 
 // 내상점정보수정
 $('#storeIntroEditBtn').on(
 		'click',
 		function(e) {
+			
+			$(".infoName").css('border', '1px solid rgb(217 217 217)');
+			
+			
+			$('#memberInfoModify').hide();
 			// e.stopPropagation();
 			if (doubleSubmitCheck())
 				return; // 중복클릭방지
@@ -37,7 +52,7 @@ $('#storeIntroEditBtn').on(
 			$('#mystoreIntroduce').empty();
 
 			$('#mystoreIntroduce').append(
-					'<textarea id="storeIntro">' + mystoreIntroduce
+					'<textarea id="storeIntro" onKeyup="len_chk()">' + mystoreIntroduce
 							+ '</textarea>');
 
 			$('.introEdit1').show();

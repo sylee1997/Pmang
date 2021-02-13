@@ -161,6 +161,7 @@ public class MemberController {
 
 		
 	}
+	
 	@RequestMapping(value="modifyForm", method=RequestMethod.GET)
 	public String modifyForm(HttpSession session, Model model) {
 		String userId = (String) session.getAttribute("memUserId");
@@ -207,6 +208,14 @@ public class MemberController {
 	@ResponseBody
 	public void sellerWrite(@ModelAttribute ItemDTO itemDTO, HttpSession session, HttpServletRequest request, @RequestParam("img1url") String img1url, @RequestParam(value="img2url") String img2url, @RequestParam(value="img3url") String img3url) {
 		//String filePath ="http://localhost:8080/pmang/storage";
+		System.out.println(itemDTO.getItem_location());//null
+		System.out.println(session.getAttribute("memUserId"));
+		
+		if(itemDTO.getItem_location().length() == 0) {
+			itemDTO.setItem_location("위치 정보 없음.");
+		}
+		
+		System.out.println(itemDTO.getItem_location());
 							
 		String filePath = "D:\\git_home\\Pmang\\pmang_Project\\src\\main\\webapp\\storage";
 		//D:\git_home\Pmang\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\pmang_Project\storage;
@@ -256,11 +265,18 @@ public class MemberController {
 		
 			String userId = (String) session.getAttribute("memUserId");
 			String location = itemDTO.getItem_location();
+			
 			itemDTO.setUserId(userId);
+			
+			
 			//seller-insert해주기
 			memberService.insertSeller(userId);			
 			//최근지역 넣어주기
-			memberService.insertRecentlyLoc(userId, location);
+			
+			if(itemDTO.getItem_location() != "위치 정보 없음.") {
+				memberService.insertRecentlyLoc(userId, location);
+			}
+			
 			//DB
 			memberService.sellerWrite(itemDTO);
 		

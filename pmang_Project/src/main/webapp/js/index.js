@@ -186,6 +186,8 @@ function(){
 
 /*=======================================검색쪽============================*/
 
+
+
 $.ajax({
 	type : 'post',
 	url : '/pmang/board/getSearchKeyword',
@@ -846,7 +848,8 @@ $('#kakaoBtn').click(function(event){
 						url: '/pmang/member/kakaoLogin',
 						data: {
 							'kakaoId': kakaoId,
-							'userName': userName,
+							'userId': kakaoId,
+							'userName' : userName,
 							'gender': gender,
 							'email1': email1,
 							'email2': email2,
