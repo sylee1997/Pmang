@@ -68,14 +68,10 @@ public class BoardController {
 
 	// 내상점 기본정보
 	@RequestMapping(value = "mystore", method = RequestMethod.GET)
-	public String mystore(HttpSession session, Model model) {
-		// 나중에 세션 받아와야함.
-		// String userid=(String)session.getAttribute("memId");
-		// int userid = 1;
-		// SellerDTO sellerDTO = boardService.getMystore(userid);
+	public String mystore(HttpSession session, Model model,@RequestParam(required = false, defaultValue = "memUserId") String userid) {
+		
 
-		// model.addAttribute("sellerDTO", sellerDTO);
-
+		model.addAttribute("userid",userid);
 		model.addAttribute("display", "/pm_mystore/mystore.jsp");
 		return "/index";
 	}
@@ -83,10 +79,10 @@ public class BoardController {
 	// 수정 후 바뀐 내상점 정보를 출력하기 위해 -- 조회수 처리 안해줬음
 	@RequestMapping(value = "getMystore", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView getMystore(HttpSession session, @CookieValue(value = "memHit", required = false) Cookie cookie,
+	public ModelAndView getMystore(@RequestParam String userid,HttpSession session, @CookieValue(value = "memHit", required = false) Cookie cookie,
 			HttpServletResponse response) {
 		
-		 String userid = (String) session.getAttribute("memUserId"); // 세션값 받아야함
+		
 		
 		
 		// 조회수 - 새로고침방지

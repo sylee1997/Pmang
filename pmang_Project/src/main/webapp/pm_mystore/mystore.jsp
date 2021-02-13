@@ -11,6 +11,7 @@
 
 <!-- <input type="hidden" id="memid" value="2"> -->
 <!-- 나중에 세션값 넣어줘야함 통일해야돼(이거는 일반회원!!) -->
+<input type="hidden" id="userid" value="${param.userid }">
 <input type="hidden" id="memid" value="${memUserId }">
 
 <!-- <input type="hidden" id="memid" value="1"> -->
@@ -226,16 +227,18 @@
 						//alert($('#memid').val());
 
 						//일반회원일때
-					if($('#memid').val()!='admin'){
+					if($('#memId').val()!='admin'){
 							
 						
 						$('.introEdit1').hide();
 						$('#storeNameModify1').hide();
-
+						
+						
 						$.ajax({
 									type : 'post',
 									url : '/pmang/board/getMystore',
 									dataType : 'json',
+									data:{'userid':$('#userid').val()}
 									success : function(data) {
 										//alert(JSON.stringify(data));
 
