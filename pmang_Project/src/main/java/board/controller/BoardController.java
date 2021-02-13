@@ -1241,6 +1241,7 @@ public class BoardController {
 	
 	// 공지사항 목록 불러오기
 	@RequestMapping(value = "getNoticeList", method = RequestMethod.POST)
+	@ResponseBody
 	public ModelAndView getNoticeList() {
 		List<NoticeDTO> list = boardService.getNoticeList();
 		

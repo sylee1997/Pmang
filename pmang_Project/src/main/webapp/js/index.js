@@ -805,6 +805,7 @@ $('.pmangTok').on('click',function(){
 
 $('#footerNotice').click(function(){
 	$(location).attr("href", "/pmang/board/notice?tabNo=1");
+	$('#noticeLabel').trigger('click');
 });
 
 $('#footerPolicy').click(function(){

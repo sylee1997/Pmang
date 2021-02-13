@@ -12,7 +12,7 @@
 		
 		
 		    <input id="tab1" class="tabs" type="radio" name="tabName" value="1">
-		    <label class="tabLabel" for="tab1" id="noticeLabel" onclick>공지사항</label>
+		    <label class="tabLabel" for="tab1" id="noticeLabel">공지사항</label>
 		    <input id="btn1" type="hidden">
 		
 		    <input id="tab2" class="tabs" type="radio" name="tabName" value="2">
@@ -26,103 +26,7 @@
 		    <section id="bulletin">
 				<div class="bulletinDiv">
 				
-					<!-- <div class="bulletinArea">
-						<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
-						<div class="bulletinTitle">[공지] 설날 연휴 사기 거래 주의! 꼭 읽어주세요!</div>
-						<div class="bulletinDate">2021/02/05</div>
-						<div class="bulletinContent">
-안녕하세요 고객님.
-
-오늘도 피망장터를 이용해주셔서 감사합니다.
-
- 
-
-추석을 앞두고 에어팟(디지털/가전 기기), 선물세트, 상품권 등 명절 선물을 저렴한 가격에 올린 후,
-
-카톡 등 외부 메신저로 유인하는 사기 거래 행위가 늘어날 것으로 예상되어 안내드립니다.
-
- 
-
-아래와 같이 사기가 의심 되는 경우 피망장터 내에서 피망페이를 통해 거래하시면 구매 후 물건을 직접 확인할 때까지
-
-피망장터가 금액을 안전하게 보관하고 있어 각종 사기 피해를 미연에 방지하실 수 있다는 점, 잊지 마세요!
-
- 
-
- 
-
-[사기 의심 유형]
-
- 
-
-1. 피망톡에서 외부 메신저로 유도하는 행위 (카톡ID, 계좌, 연락처를 이미지로 전달하는 경우)
-
- 
-
-2. 직거래가 어렵다며 안전결제 유도 후 피망페이를 URL로 보내는 경우 (URL은 모두 가짜!!)
-
- 
-
-3. 피망장터에서 제공하지 않는 결제 서비스를 유도하는 경우 (피망송금, 피장웹거래 등)
-
- 
-
-4. 상품의 가격이 시세 대비 비정상적으로 저렴한 경우
-
-
- 
-
-고객님께서도 사기 유형들을 숙지하시어 주의해 주시고 사기 거래가 의심될 경우 즉시 거래를 중단하고 '내상점 > 1:1문의'로 신고해 주시기 바랍니다.
-
- 
-
-앞으로도 피망장터는 고객님의 더 안전한 거래를 위해 최선을 다하겠습니다.
-
-행복하고 풍요로운 추석 되세요.
-
- 
-
-감사합니다.
-
-					</div></div>
-				
-					<div class="bulletinArea">
-						<div class="arrowImg">
-							<img  src="/pmang/image/open.png" width="20" height="20">
-						</div>
-						<div class="bulletinTitle">
-							[공지] 타 사이트 대리결제 거래 시 제재 정책 강화 안내
-						</div>
-						<div class="bulletinDate">
-							2021/01/15
-						</div>
-						<div class="bulletinContent">
-
-							안녕하세요. 피망마켓입니다.
-							
-							타 사이트 대리결제를 통해 피해가 발생되고 있습니다.
-							실물 상품을 확보하지 않은 상태에서 <span class="contentEmp">타 사이트 대리결제 거래</span>가 확인 될 경우 상품 삭제 및 제재를 받을 수 있습니다.
-							깨끗한 거래 환경이 유지될 수 있도록 협조 부탁 드립니다.
-							감사합니다.
-							
-						</div>
-					</div>
-						
-					<div class="bulletinArea">
-						<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
-						<div class="bulletinTitle">[공지] 각종 인증번호 거래 시 제재 정책 강화 안내</div>
-						<div class="bulletinDate">2020/11/18</div>
-						<div class="bulletinContent">
-
-							안녕하세요. 피망마켓입니다.
-							
-							최근 인증번호 거래를 통해 각종 피해가 발생되고 있습니다.
-							개인정보 확인을 통해 획득한 인증번호 거래가 확인될 경우 상품 삭제 및 제재를 받을 수 있습니다.
-							특히, 피망장터 로그인 연동이 가능한 카카오톡, 네이버, 페이스북의 인증번호 거래 시 영구제재 될 수 있는 점 이용에 참고 부탁 드립니다.
-							깨끗한 거래 환경이 유지될 수 있도록 협조 부탁 드립니다.
-							감사합니다.
-							
-					</div></div> -->
+		
 					
 
 					
@@ -360,10 +264,10 @@
 								
 								</div></div>
 						
-								<div class="postArea" id="postArea_prohibitedItem">
+								<div class="postArea">
 									<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
 									<div class="postTitle">거래를 하면 안되는 것들은 어떤 것이 있나요?</div>
-									<div class="postContent">
+									<div class="postContent" id="postArea_prohibitedItem">
 										
 <span class="contentEmp">거래금지품목은 이용약관 및 현행 법률에 따라 즉시 삭제 및 계정 차단</span>이 될 수 있으므로 운영정책을 참고하셔서 이용 부탁 드립니다.  
 
@@ -541,7 +445,7 @@
 								
 								<div class="postArea">
 									<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
-									<div class="postTitle">개인정보 설절은 어떻게 하나요?</div>
+									<div class="postTitle">개인정보 설정은 어떻게 하나요?</div>
 									<div class="postContent">
 										<span class="contentEmp">내상점'에서 개인정보 설정 가능</span>
 										
@@ -880,3 +784,103 @@ SMS발송 – PIN번호, 기프티콘 등 구매 전 사용여부 확인불가�
 
 <script type="text/javascript"src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="/pmang/js/notice.js"></script>
+
+
+
+			<!-- <div class="bulletinArea">
+						<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
+						<div class="bulletinTitle">[공지] 설날 연휴 사기 거래 주의! 꼭 읽어주세요!</div>
+						<div class="bulletinDate">2021/02/05</div>
+						<div class="bulletinContent">
+안녕하세요 고객님.
+
+오늘도 피망장터를 이용해주셔서 감사합니다.
+
+ 
+
+추석을 앞두고 에어팟(디지털/가전 기기), 선물세트, 상품권 등 명절 선물을 저렴한 가격에 올린 후,
+
+카톡 등 외부 메신저로 유인하는 사기 거래 행위가 늘어날 것으로 예상되어 안내드립니다.
+
+ 
+
+아래와 같이 사기가 의심 되는 경우 피망장터 내에서 피망페이를 통해 거래하시면 구매 후 물건을 직접 확인할 때까지
+
+피망장터가 금액을 안전하게 보관하고 있어 각종 사기 피해를 미연에 방지하실 수 있다는 점, 잊지 마세요!
+
+ 
+
+ 
+
+[사기 의심 유형]
+
+ 
+
+1. 피망톡에서 외부 메신저로 유도하는 행위 (카톡ID, 계좌, 연락처를 이미지로 전달하는 경우)
+
+ 
+
+2. 직거래가 어렵다며 안전결제 유도 후 피망페이를 URL로 보내는 경우 (URL은 모두 가짜!!)
+
+ 
+
+3. 피망장터에서 제공하지 않는 결제 서비스를 유도하는 경우 (피망송금, 피장웹거래 등)
+
+ 
+
+4. 상품의 가격이 시세 대비 비정상적으로 저렴한 경우
+
+
+ 
+
+고객님께서도 사기 유형들을 숙지하시어 주의해 주시고 사기 거래가 의심될 경우 즉시 거래를 중단하고 '내상점 > 1:1문의'로 신고해 주시기 바랍니다.
+
+ 
+
+앞으로도 피망장터는 고객님의 더 안전한 거래를 위해 최선을 다하겠습니다.
+
+행복하고 풍요로운 추석 되세요.
+
+ 
+
+감사합니다.
+
+					</div></div>
+				
+					<div class="bulletinArea">
+						<div class="arrowImg">
+							<img  src="/pmang/image/open.png" width="20" height="20">
+						</div>
+						<div class="bulletinTitle">
+							[공지] 타 사이트 대리결제 거래 시 제재 정책 강화 안내
+						</div>
+						<div class="bulletinDate">
+							2021/01/15
+						</div>
+						<div class="bulletinContent">
+
+							안녕하세요. 피망마켓입니다.
+							
+							타 사이트 대리결제를 통해 피해가 발생되고 있습니다.
+							실물 상품을 확보하지 않은 상태에서 <span class="contentEmp">타 사이트 대리결제 거래</span>가 확인 될 경우 상품 삭제 및 제재를 받을 수 있습니다.
+							깨끗한 거래 환경이 유지될 수 있도록 협조 부탁 드립니다.
+							감사합니다.
+							
+						</div>
+					</div>
+						
+					<div class="bulletinArea">
+						<div class="arrowImg"><img  src="/pmang/image/open.png" width="20" height="20"></div>
+						<div class="bulletinTitle">[공지] 각종 인증번호 거래 시 제재 정책 강화 안내</div>
+						<div class="bulletinDate">2020/11/18</div>
+						<div class="bulletinContent">
+
+							안녕하세요. 피망마켓입니다.
+							
+							최근 인증번호 거래를 통해 각종 피해가 발생되고 있습니다.
+							개인정보 확인을 통해 획득한 인증번호 거래가 확인될 경우 상품 삭제 및 제재를 받을 수 있습니다.
+							특히, 피망장터 로그인 연동이 가능한 카카오톡, 네이버, 페이스북의 인증번호 거래 시 영구제재 될 수 있는 점 이용에 참고 부탁 드립니다.
+							깨끗한 거래 환경이 유지될 수 있도록 협조 부탁 드립니다.
+							감사합니다.
+							
+					</div></div> -->
