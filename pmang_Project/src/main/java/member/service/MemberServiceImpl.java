@@ -129,7 +129,7 @@ public class MemberServiceImpl implements MemberService {
 
 		//로그인
 		if(count > 0) {	
-			session.setAttribute("memUserId", memberDTO.getUserName());
+			session.setAttribute("memUserId", memberDTO.getUserId());
 			session.setAttribute("memEmail", memberDTO.getEmail1()+"@"+memberDTO.getEmail2());
 			return "loginSuccess";
 		} else {

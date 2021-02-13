@@ -10,9 +10,10 @@
 .mystoreProfile {
 	display: inline-block;
 	float: left;
-	background: rgb(238, 238, 238);
+	background: rgb(193 228 193 / 50%);
 	width: 310px;
 	height: 310px;
+	
 }
 
 .mystoreProfileImg {
@@ -156,7 +157,29 @@
 	line-height: 1.57;
 	white-space: pre-wrap;
 	text-align: left;
+	display : flex;
 }
+
+input#storeNameEdit {
+    /* height: 30px; */
+    padding: 10px;
+    /* margin: 0px 15px; */
+    font-size: 14px;
+    -webkit-box-flex: 1;
+    border: 0px;
+    flex-grow: 1;
+    background: rgb(220 253 214 / 10%);
+    font-weight: 600;
+}
+
+
+/* .infoName {
+    display: flex;
+    border: 1px solid rgb(217 217 217);
+    height: 32px;
+    width: 300px;
+    background: rgb(220 253 214 / 10%);
+} */
 
 #introEdit {
 	/* float: left; */
@@ -167,29 +190,45 @@
 }
 
 .introEdit1 {
-	margin-top: 10px;
+	margin: 10px;
 }
 
 #mystoreIntroduce>textarea {
 	-webkit-box-flex: 1;
-	display: flex;
-	float: left;
-	width: 100%;
-	height: 100%;
-	flex-grow: 1;
-	resize: none;
-	background-color: rgb(238, 238, 238);
-	border-color: transparent;
-	outline: none;
+    display: flex;
+    float: left;
+    width: 100%;
+    height: 100%;
+    flex-grow: 1;
+    resize: none;
+    background-color: rgb(220 253 214 / 10%);
+    border-color: transparent;
+    outline: none;
+    border: 1px solid #e5e5e5;
+    padding: 10px;
 }
+
+button#storeIntroEditBtn {
+    position: relative;
+    left: 500px;
+}
+
+
 #memberInfoModify{
-	display:flex;
-	float:right;
-	font-size:10pt;
-	test-decoration:none;
-	
-	/* margin-left:200px; */
+	display: flex;
+    float: right;
+    margin-top: 5px;
+    /* border: 1px solid black; */
+    /* border-radius: 5px; */
+    padding-left: 25px;
+    padding-top: 20px;
+    font-size: 9pt;
+    test-decoration: none;
+    margin-left: 450px;
+    text-decoration: underline;
 }
+
+
 #storeIntroBtn {
 	float: right;
 }
@@ -452,7 +491,8 @@ a:visited {
 }
 
 .sortGroup a {
-	font-size: 8pt;
+	font-size: 10pt;
+	font-weight : 600;
 	display: flex;
 	float: left;
 	margin: 0 auto;
@@ -603,9 +643,9 @@ a:visited {
 }
 
 .favInfoLoc {
-	height: 20px;
+	height: 40px;
 	display: flex;
-	width: 100%;
+	width: 340px;
 	-webkit-box-align: center;
 	align-items: center;
 	padding-left: 20px;
@@ -614,6 +654,27 @@ a:visited {
 	color: rgb(102, 102, 102);
 	box-sizing: border-box;
 	text-decoration: none;
+}
+
+.itemLocation {
+	height: 40px;
+    border-top: 1px solid rgb(238, 238, 238);
+    font-size: 12px;
+    display: block;
+    padding: 14px 10px 14px 35px;
+    color: rgb(102, 102, 102);
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: relative;
+}
+
+.itemLocation img {
+	position: absolute;
+    left: 10px;
+    top: calc(50% - 8px);
+
 }
 
 /* tab3 - 상점 후기*/

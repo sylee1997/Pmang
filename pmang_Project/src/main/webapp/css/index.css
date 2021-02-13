@@ -699,7 +699,7 @@ display:none;
 
 .asideDiv {
 	position: relative;
-    bottom: 70px;
+    bottom: 20px;
     background: white;
 }
 
@@ -906,7 +906,7 @@ display:none;
 
 .pmangTokDiv {
     position: relative;
-    padding: 0px 0px 10px 0px;
+    padding: 10px 0px 10px 0px;
     display: flex;
     cursor: pointer;
 }
@@ -924,32 +924,7 @@ span#pmangSpan {
     font-weight: 700;
 }
 
-.notice {
-	padding: 15px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 9pt;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    overflow: inherit;
-}
 
-.noticeDiv{
-	background: #EBFFEB;
-    border: 1px solid lightgray;
-    position: absolute;
-    z-index: 40;
-    right: 85px;
-    display: none;
-    border-radius: 10px;
-}
-
-.noticeContent {
-	padding : 10px;
-	text-align: left;
-	white-space: nowrap;
-}
 
 
 /* footer */

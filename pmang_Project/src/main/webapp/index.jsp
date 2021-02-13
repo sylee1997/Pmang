@@ -559,15 +559,6 @@
         <div id="aside">
          <div class="asideDiv">
               <!-- 알림창 구현 -->
-            <div class="notice">
-	            <div class="noticeDiv">
-	            	<div class="noticeContent">
-	            		<a href="#">로그인을 하세요.</a>
-	            	</div>
-	            </div>
-            	<img src="/pmang/image/noticeImg.PNG" style="width:30px; height:30px;"> 
-            	<div>알림(0)</div>
-            </div>
             <div class="likebag" onclick="location.href='/pmang/board/mystore'">찜한상품
                <div class="bag_click">
                   <img id="userZzim" src="" style="width:15px; height:15px;">

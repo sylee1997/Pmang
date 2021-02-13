@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class WishDTO {
 	private int item_seq;
-	private String itemSubject;
+	private String item_subject;
 	private String img1;
 	private String item_price;
 	private String item_location;

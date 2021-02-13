@@ -41,12 +41,12 @@ $(document).ready(function(){
 							}).append($('<span/>'
 									)))).append($('<div/>',{
 										class:'favImg'
-									}).append($('<img src="/pmang/image/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
+									}).append($('<img src="/pmang/storage/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
 								))).append($('<div/>',{
 								class:'favInfo'
 							}).append($('<div/>',{
 								class:'favInfoName',
-								text:items.itemSubject,
+								text:items.item_subject,
 							})).append($('<div/>',{
 								class:'favInfoPrice',
 								text:items.item_price+'원'
@@ -116,12 +116,12 @@ $(document).ready(function(){
 									}).append($('<span/>'
 											)))).append($('<div/>',{
 												class:'favImg'
-											}).append($('<img src="/pmang/image/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
+											}).append($('<img src="/pmang/storage/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
 										))).append($('<div/>',{
 										class:'favInfo'
 									}).append($('<div/>',{
 										class:'favInfoName',
-										text:items.itemSubject,
+										text:items.item_subject,
 									})).append($('<div/>',{
 										class:'favInfoPrice',
 										text:items.item_price+'원'
@@ -267,12 +267,12 @@ $('#latest').on('click',function(){
 							}).append($('<span/>'
 									)))).append($('<div/>',{
 										class:'favImg'
-									}).append($('<img src="/pmang/image/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
+									}).append($('<img src="/pmang/storage/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
 								))).append($('<div/>',{
 								class:'favInfo'
 							}).append($('<div/>',{
 								class:'favInfoName',
-								text:items.itemSubject,
+								text:items.item_subject,
 							})).append($('<div/>',{
 								class:'favInfoPrice',
 								text:items.item_price+'원'
@@ -330,12 +330,12 @@ $('#popularity').click(function(){
 							}).append($('<span/>'
 									)))).append($('<div/>',{
 										class:'favImg'
-									}).append($('<img src="/pmang/image/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
+									}).append($('<img src="/pmang/storage/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
 								))).append($('<div/>',{
 								class:'favInfo'
 							}).append($('<div/>',{
 								class:'favInfoName',
-								text:items.itemSubject,
+								text:items.item_subject,
 							})).append($('<div/>',{
 								class:'favInfoPrice',
 								text:items.item_price+'원'
@@ -394,12 +394,12 @@ $('#lowerPrice').click(function(){
 							}).append($('<span/>'
 									)))).append($('<div/>',{
 										class:'favImg'
-									}).append($('<img src="/pmang/image/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
+									}).append($('<img src="/pmang/storage/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
 								))).append($('<div/>',{
 								class:'favInfo'
 							}).append($('<div/>',{
 								class:'favInfoName',
-								text:items.itemSubject,
+								text:items.item_subject,
 							})).append($('<div/>',{
 								class:'favInfoPrice',
 								text:items.item_price+'원'
@@ -459,12 +459,12 @@ $('#highestPrice').click(function(){
 							}).append($('<span/>'
 									)))).append($('<div/>',{
 										class:'favImg'
-									}).append($('<img src="/pmang/image/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
+									}).append($('<img src="/pmang/storage/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
 								))).append($('<div/>',{
 								class:'favInfo'
 							}).append($('<div/>',{
 								class:'favInfoName',
-								text:items.itemSubject,
+								text:items.item_subject,
 							})).append($('<div/>',{
 								class:'favInfoPrice',
 								text:items.item_price+'원'
