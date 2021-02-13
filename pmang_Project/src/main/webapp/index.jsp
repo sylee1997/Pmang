@@ -664,7 +664,7 @@
          <div class="footerContent">
             <div class="footerContentMark">
       		<img src="/pmang/image/pmangFooter.PNG" alt="피망장터이미지" height="40px"/>
-             <div class="footerContentMarkTitle">피나게 망하지 않을 만큼 판매하는 피망장터입니다. 누구나, 무엇이든 쉽고 편하고 안전하게 거래할 수 있습니다.</div>
+             <div class="footerContentMarkTitle">피나게 망하지 않을 만큼 판매하는 피망장터입니다. 누구나, 언제 어디서나 쉽고 빠르게 안전한 거래를 할 수 있습니다.</div>
             </div>
             
             <div class="indexFooter_icon">
