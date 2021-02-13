@@ -15,13 +15,13 @@
 }
 
 
-/*¶óµð¿À¹öÆ° ¼û±è*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½*/
 
 .tabs {
 	display: none;
 }
 
-/* ¶óµð¿À¹öÆ°ÀÇ ¶óº§È­ */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½È­ */
 
 .tabLabel {
 
@@ -41,14 +41,14 @@
 	cursor: pointer;
 }
 
-/*input Å¬¸¯½Ã, label ½ºÅ¸ÀÏ*/
+/*input Å¬ï¿½ï¿½ï¿½ï¿½, label ï¿½ï¿½Å¸ï¿½ï¿½*/
 
 .tabs:checked+label {
-	color: red;
-	border-bottom: 3px solid red;
+	color: green;
+	border-bottom: 3px solid green;
 }
 
-/* tabÀÌ Ã¼Å©µÇ¸é tabºÎÅÍ content±îÁöÀÇ ¸ðµç ÀÚ½Ä¿¡ ´ëÇÑ ½ºÅ¸ÀÏ  */
+/* tabï¿½ï¿½ Ã¼Å©ï¿½Ç¸ï¿½ tabï¿½ï¿½ï¿½ï¿½ contentï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ú½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½  */
 
 #tab1:checked ~ #bulletin,
 #tab2:checked ~ #policy,
@@ -56,20 +56,20 @@
 	display: block;
 }
 
-/* ¼±ÅÃ¿¡ µû¶ó Ãß°¡µÉ ³»¿ë ½ºÅ¸ÀÏ */
+/* ï¿½ï¿½ï¿½Ã¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ */
 section {
 	display: none;
 	border-top: 1px solid #ddd;
 }
 
 
-/* °øÁö»çÇ× ¿µ¿ª */
+
 .bulletinDiv{
 
 
 }
 
-/* °øÁö»çÇ× ±Û ÇÏ³ª */
+
 
 .bulletinArea{
 
@@ -208,7 +208,7 @@ section {
     border-bottom: 1px solid rgb(94, 92, 107);
 }
 #e3{
-	color: red;
+	color: green;
     font-size: 13px;
     margin-top: 15px;
     display: flex;
@@ -272,12 +272,12 @@ section {
 	cursor: pointer;
 }
 
-/*input Å¬¸¯½Ã, label ½ºÅ¸ÀÏ*/
+/*input Å¬ï¿½ï¿½ï¿½ï¿½, label ï¿½ï¿½Å¸ï¿½ï¿½*/
 .menu:checked+label {
-	color: red;
+	color: green;
 }
 
-/* tabÀÌ Ã¼Å©µÇ¸é tabºÎÅÍ content±îÁöÀÇ ¸ðµç ÀÚ½Ä¿¡ ´ëÇÑ ½ºÅ¸ÀÏ  */
+/* tabï¿½ï¿½ Ã¼Å©ï¿½Ç¸ï¿½ tabï¿½ï¿½ï¿½ï¿½ contentï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ú½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½  */
 #menu1:checked ~ #section1,
 #menu2:checked ~ #section2,
 #menu3:checked ~ #section3,
@@ -290,7 +290,7 @@ section {
 	display: block;
 }
 
-/* °øÁö»çÇ× ±Û ÇÏ³ª */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ï³ï¿½ */
 .postArea{
 	border:1px solid #d2d2d2;
 	text-align:left;
