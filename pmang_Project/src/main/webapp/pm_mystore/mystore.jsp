@@ -110,7 +110,7 @@
 					</div>
 					<!-- mystoreName -->
 					<div id="mystoreBtns">
-						<button onclick="window.location.href='#'">내 상점 관리</button>
+						<button onclick="window.location.href='/pmang/seller/'">내 상점 관리</button>
 					</div>
 					<!-- mystoreBtns -->
 				</div>

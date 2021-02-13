@@ -7,18 +7,16 @@
 <head>
 <meta charset="UTF-8">
 
-<<<<<<< HEAD
-
 <link rel="stylesheet" href="/pmang/css/pm_index.css">
 <style type="text/css">
    
          
 /* --------------------------------------------서영이조 */
 </style>
-=======
+
 <link rel="stylesheet" href="/pmang/css/index.css">
 <style type="text/css"></style>
->>>>>>> temp
+
 <title>피망마켓에 오신것을 환영합니다.</title>
 </head>
 <body> 
