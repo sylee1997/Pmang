@@ -170,7 +170,7 @@
 	margin-top: 10px;
 }
 
-#mystoreIntroduce>textarea {
+#mystoreIntroduce textarea {
 	-webkit-box-flex: 1;
 	display: flex;
 	float: left;
@@ -181,6 +181,8 @@
 	background-color: rgb(238, 238, 238);
 	border-color: transparent;
 	outline: none;
+	white-space: nowrap;
+	overflow:hidden;
 }
 #memberInfoModify{
 	display:flex;

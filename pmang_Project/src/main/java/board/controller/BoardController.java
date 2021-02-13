@@ -125,19 +125,21 @@ public class BoardController {
 
 	@RequestMapping(value = "mystoreModify", method = RequestMethod.POST)
 	@ResponseBody
-	public void mystoreModify(@RequestParam String marketname, @RequestParam String marketcontent) {
+	public void mystoreModify(@RequestParam String marketname, @RequestParam String marketcontent,HttpSession session) {
+		String userid=(String) session.getAttribute("memUserId");
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("marketname", marketname);
 		map.put("pf_content", marketcontent);
+		map.put("userid", userid);
 
 		boardService.mystoreModify(map);
 	}
 
 	// 프로필 사진 수정
 	@RequestMapping(value = "profileImgModify", method = RequestMethod.POST)
-	// @ResponseBody
+	//@ResponseBody
 	public String profileImgModify(@ModelAttribute SellerDTO sellerDTO, @RequestParam("img") MultipartFile img,
-			Model model) {
+			Model model,HttpSession session) {
 		String filePath = "C:/project/Pmang/pmang_Project/src/main/webapp/storage/";
 		String fileName = img.getOriginalFilename();
 		File file = new File(filePath, fileName);
@@ -149,9 +151,13 @@ public class BoardController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		sellerDTO.setPf_photo("/pmang/storage/" + fileName);
-
+		String userid=(String) session.getAttribute("memUserId");
+		System.out.println("userid : "+userid);
+		
+		
+		sellerDTO.setPf_photo(fileName);
+		sellerDTO.setUserid(userid);
+		System.out.println(sellerDTO+"");
 		// db
 		boardService.profileImgModify(sellerDTO);
 		model.addAttribute("display", "/pm_mystore/mystore.jsp");

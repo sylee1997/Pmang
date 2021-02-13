@@ -52,7 +52,7 @@ $(document).ready(function(){
 						class:'itemPriceAndTime'
 					}).append($('<div/>',{
 						class:'itemPrice',
-						text:items.item_price+'원'
+						text:items.item_price
 					})).append($('<div/>',{
 						class:'itemTime'
 						}).append($('<span/>',{
@@ -119,7 +119,7 @@ $(document).ready(function(){
 								class:'itemPriceAndTime'
 							}).append($('<div/>',{
 								class:'itemPrice',
-								text:items.item_price+'원'
+								text:items.item_price
 							})).append($('<div/>',{
 								class:'itemTime'
 								}).append($('<span/>',{
@@ -206,7 +206,7 @@ $('#latest').on('click',function(){
 						class:'itemPriceAndTime'
 					}).append($('<div/>',{
 						class:'itemPrice',
-						text:items.item_price+'원'
+						text:items.item_price
 					})).append($('<div/>',{
 						class:'itemTime'
 						}).append($('<span/>',{
@@ -266,7 +266,7 @@ $('#popularity').click(function(){
 						class:'itemPriceAndTime'
 					}).append($('<div/>',{
 						class:'itemPrice',
-						text:items.item_price+'원'
+						text:items.item_price
 					})).append($('<div/>',{
 						class:'itemTime'
 						}).append($('<span/>',{
@@ -327,7 +327,7 @@ $('#lowerPrice').click(function(){
 						class:'itemPriceAndTime'
 					}).append($('<div/>',{
 						class:'itemPrice',
-						text:items.item_price+'원'
+						text:items.item_price
 					})).append($('<div/>',{
 						class:'itemTime'
 						}).append($('<span/>',{
@@ -389,7 +389,7 @@ $('#highestPrice').click(function(){
 						class:'itemPriceAndTime'
 					}).append($('<div/>',{
 						class:'itemPrice',
-						text:items.item_price+'원'
+						text:items.item_price
 					})).append($('<div/>',{
 						class:'itemTime'
 						}).append($('<span/>',{

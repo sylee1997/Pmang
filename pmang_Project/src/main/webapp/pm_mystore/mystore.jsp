@@ -215,9 +215,9 @@
 <script>
 	function changeValue(obj) {
 		//var file=obj.target.file;
-		alert(obj);
+		//alert(file);
 		document.signform.submit();
-
+		//location.href="/pmang/board/mystore?userid="+$('#userid').val();
 	}
 	
 	//tab
@@ -225,7 +225,7 @@
 			.ready(
 					function() {
 						//남의상점인지 내 상점인지
-						alert($('#memid').val()+' '+$('#userid').val());
+						//alert($('#memid').val()+' '+$('#userid').val());
 
 						//일반회원일때
 					if($('#memid').val()!='admin'){
@@ -244,7 +244,7 @@
 									dataType : 'json',
 									data:{'userid':$('#userid').val()},
 									success : function(data) {
-										alert(JSON.stringify(data));
+										//alert(JSON.stringify(data));
 
 										//세션이랑 유저아이디랑 같을시 내상점정보변경버튼,회원정보버튼이 보여야함
 										//아닐경우에는 숨기고, 신고하기버튼만 보이도록해야함
@@ -268,8 +268,7 @@
 												.text(
 														data.sellerDTO.markethit
 																+ " 명");
-										$('#mystoreIntroduce textarea').text(
-												data.sellerDTO.pf_content);
+										$('#mystoreIntroduce textarea').text(data.sellerDTO.pf_content);
 
 										//상점 오픈일 날짜 계산
 										var openDate = new Date(
@@ -294,7 +293,7 @@
 															document.signform.target_url.value = $(
 																	'.pf_photo')
 																	.attr('src');
-															alert(document.signform.target_url.value);
+															//alert(document.signform.target_url.value);
 															e.preventDefault();
 															$('input[type=file]').click();
 														});
@@ -340,8 +339,7 @@
 													.text(
 															data.sellerDTO.markethit
 																	+ " 명");
-											$('#mystoreIntroduce textarea').text(
-													data.sellerDTO.pf_content);
+											$('#mystoreIntroduce textarea').text(data.sellerDTO.pf_content);
 
 											//상점 오픈일 날짜 계산
 											var openDate = new Date(
@@ -366,7 +364,7 @@
 																document.signform.target_url.value = $(
 																		'.pf_photo')
 																		.attr('src');
-																alert(document.signform.target_url.value);
+																//alert(document.signform.target_url.value);
 																e.preventDefault();
 																$('input[type=file]').click();
 															});
