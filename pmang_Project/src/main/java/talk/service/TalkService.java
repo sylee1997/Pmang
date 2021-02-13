@@ -36,4 +36,18 @@ public interface TalkService {
 
 	public void getOut(String userId, String partner_userId);
 
+	public Map<String, Integer> getReviewStamp();
+
+	public int getItemCount(String userId);
+
+	public int getSalesCount(String userId);
+
+	public void itemSold(String item_seq);
+
+	public String getItemState(String item_seq);
+
+	public String sellCheck(int item_seq);
+
+	public void updateItemSeq(TalkRoomDTO talkRoomDTO);
+
 }

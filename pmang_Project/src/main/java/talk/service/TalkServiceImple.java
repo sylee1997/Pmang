@@ -87,7 +87,41 @@ public class TalkServiceImple implements TalkService {
 	@Override
 	public void getOut(String userId, String partner_userId) {
 		talkDAO.getOut(userId, partner_userId);
-		
+	}
+
+	@Override
+	public Map<String, Integer> getReviewStamp() {
+		return talkDAO.getReviewStamp();
+	}
+
+	@Override
+	public int getItemCount(String userId) {
+		return talkDAO.getItemCount(userId);
+	}
+
+	@Override
+	public int getSalesCount(String userId) {
+		return talkDAO.getSalesCount(userId);
+	}
+
+	@Override
+	public void itemSold(String item_seq) {
+		talkDAO.itemSold(item_seq);
+	}
+
+	@Override
+	public String getItemState(String item_seq) {
+		return talkDAO.getItemState(item_seq);
+	}
+
+	@Override
+	public String sellCheck(int item_seq) {
+		return talkDAO.sellCheck(item_seq);
+	}
+
+	@Override
+	public void updateItemSeq(TalkRoomDTO talkRoomDTO) {
+		talkDAO.updateItemSeq(talkRoomDTO);
 	}
 	
 }

@@ -798,7 +798,12 @@ $('.itemWriteBtn').click(function(){
 
 //우석 수정 
 $('.pmangTok').on('click',function(){
-	window.open("/pmang/talk/talkRoomList","pmangTalk","width=375 height=667");
+	if($('#sessionId').val() != null){
+		window.open("/pmang/talk/talkRoomList","pmangTalk","width=375 height=667");      
+	}else {
+		alert('로그인 하세요.');
+		$('#loginli').trigger('click');
+	}
 });
 // 우석 수정 -----------------------------------
 

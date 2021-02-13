@@ -36,7 +36,7 @@ $(document).ready(function() {
 			        		  class : 'talkTimeDiv'
 			        	  }).append($('<div />',{
 			        		  class : 'readCheck',
-			        		  text : '안읽음'//영은이 할부분
+			        		  text : ''//영은이 할부분
 			        	  })).append($('<div />',{
 			        		  class : 'talkSendTime',
 			        		  text : items.send_time.substring(11,16)//마지막 메세지에만 붙여줘야한다.
@@ -52,21 +52,21 @@ $(document).ready(function() {
 		    		  if(items.userId == $('#sender_user_id').val() && (items.sender_user_id == $('#receiver_user_id').val() && items.receiver_user_id == $('#sender_user_id').val())){
 		    			  if($('#talkContentDiv').children().last().prop('className') == 'talkRecieveDiv'){//#talkContentDiv 의 마지막 자식의 클래스네임이 talkSendDiv라면,
 		    	        	  
-		    	        	  let currentMinute = items.send_time.substring(11,16).split(":");
-		    	    		  let beforeMinute = $('#talkContentDiv .talkSendTime:last').text().split(":");
+		    	        	  let currentMinute1 = items.send_time.substring(11,16).split(":");
+		    	    		  let beforeMinute1 = $('#talkContentDiv .talkReciveTime:last').text().split(":");
 		    	    		  
-		    	    		  if(currentMinute[1] == beforeMinute[1]){
-		    	    			  $('#talkContentDiv .talkSendTime:last').text(' ');
+		    	    		  if(currentMinute1[1] == beforeMinute1[1]){
+		    	    			  $('#talkContentDiv .talkReciveTime:last').text(' ');
 		    	    		  }
 		    	          }
 		    			  
 		    			  $('#talkContentDiv').append($('<div />',{
-		    				  class : 'talkReciveDiv'
+		    				  class : 'talkRecieveDiv'
 		    			  }).append($('<div />',{
 		    				  class : 'talkReciveProfile'
 		    			  }).append($('<img />',{
 		    				  class : 'profileImg',
-		    				  src : '/pmang/image/'+items.receiver_user_profileImage,
+		    				  src : $('#receiver_user_profileImage').val(),
 		    				  alt : '프로필이미지',
 		    				  width : '36',
 		    				  height : '36'
@@ -83,6 +83,7 @@ $(document).ready(function() {
 			      });//each
 		    	  
 		      }//if
+		      $("#talkContentDiv").scrollTop($('#talkContentDiv')[0].scrollHeight)
 		},
 		error: function(err) {
 			console.log(err)
@@ -116,8 +117,13 @@ $(document).ready(function() {
     	  $('.readCheck').text('');
     	  unread='';
       }
-      if((obj.sender_user_id == $('#sender_user_id').val() && obj.receiver_user_id == $('#receiver_user_id').val()) || obj.receiver_user_id == $('#sender_user_id').val())
-    	  appendMaessge(obj);
+      
+	  if((obj.sender_user_id == $('#sender_user_id').val() && obj.receiver_user_id == $('#receiver_user_id').val()) || obj.receiver_user_id == $('#sender_user_id').val()){
+		  appendMaessge(obj);
+      }
+		  
+      
+      
    };
    
    sock.onclose = function() {
@@ -174,22 +180,31 @@ $(document).ready(function() {
      }
    });
    
-   
-   
    $('#talk_message').keypress(function(e){
         if ( e.which == 13 ) {
             $('#sendBtn').click();
             return false;
         }
    });
+   
+   //이미지 보내기
+   $('.imageChoice').change(function(e){
+	   message = {
+  			 sender_user_id : $('#sender_user_id').val(),
+  			 receiver_user_id : $('#receiver_user_id').val(),
+  			 talk_content : $('#talk_message').val(),
+  			 receiver_user_profileImage : $('#receiver_user_profileImage').val(),
+  			 item_seq : $('#item_seq').val()
+	   }
+   });
 
    function appendMaessge(obj) {
       var talk_content = obj.talk_content;
 
       var talkDate = getTimeStamp();
-      var profileImg = '/pmang/image/'+$('#receiver_user_profileImage').val();
+      var profileImg = $('#receiver_user_profileImage').val();
       var talkTime = getTalkTime();
-      var talkRead = '안읽음';
+      var talkRead = '';
 
       // 메세지가 하루 중 처음 온것인지 아닌지
       // DB 가서 메세지중 오늘(ex) 8일) 보낸 데이터를 count 하여 0 이면 메시지 append 전에 오늘날짜를 뿌림.
@@ -204,9 +219,6 @@ $(document).ready(function() {
         	  text : talkDate
           }))); 
       }
-    	  
-      
-
       
       // 송신자/수신자 구분
       
@@ -264,7 +276,7 @@ $(document).ready(function() {
           }
 		  
 		  $('#talkContentDiv').append($('<div />',{
-			  class : 'talkReciveDiv'
+			  class : 'talkRecieveDiv'
 		  }).append($('<div />',{
 			  class : 'talkReciveProfile'
 		  }).append($('<img />',{
@@ -285,7 +297,7 @@ $(document).ready(function() {
 	  }//if
   
       //스크롤
-      $("#talkContentDiv").scrollTop(document.body.scrollHeight)
+      $("#talkContentDiv").scrollTop($('#talkContentDiv')[0].scrollHeight)
       
 
 /*
@@ -410,11 +422,108 @@ $('.room_setting_notification_Btn').on('click',function(){
    
 });
 
-if($('#sender_user_id').val() == $('#sellerItem_userId').val()){
-	$('.price_change').show();
+if($('#sender_user_id').val() == $('#sellerItem_userId').val()){//세션에 로그인된 사람이 판매자이면.
+	$('.price_change').text('판매완료');
 }else{
-	$('.price_change').hide();
+	$('.price_change').text('리뷰작성');
 }
-   
+
+// 판매완료/ 리뷰작성
+$('.modal_div').hide();
+$('.modal_div2').hide();
+$('.price_change').on('click',function(){
+	if($('#sender_user_id').val() == $('#sellerItem_userId').val()){//판매완료
+		$.ajax({
+			type: 'POST',
+			url: '/pmang/talk/itemSold',//판매완료
+			data: {item_seq : $('#item_seq').val()},
+			dataType: 'json',
+			success: function(data) {
+				if(data.item_state == 'sell'){
+					$('#talk_message').val('판매가 완료되었습니다. 리뷰를 남겨주세요.');
+					$('#sendBtn').click();
+				}else{
+					$('.modal_div2').show();
+					$('.all_modal2').addClass('on');
+					$('.modal_div2').css('position', 'fixed');
+					$('.modal_div2').css('left', '42px');
+					$('.modal_div2').css('top', '200px');
+			         // 모달바탕 클릭했을때(꺼짐)
+					$('.on').click(function() {
+						$('.all_modal2').removeClass('on');
+			            $('.modal_div2').css('position', 'static');
+			            $('.modal_div2').hide();
+					}); 
+				}
+				
+			},
+			error: function(err) {
+				console.log(err)
+			}
+		});
+	}else{//리뷰작성
+		var sellCheck;
+	      $.ajax({
+	         type: 'POST',
+	         url: '/pmang/talk/sellCheck',
+	         data: {
+	            'item_seq': $('#item_seq').val()
+	         },
+	         async: false ,
+	         dataType: 'json',
+	         success: function(data) {
+	            console.log(data);
+	            sellCheck = data.check;
+	         }
+	      });
+	      if(sellCheck =='sell'){//판매중
+	         //modal
+	         
+	         // alert($(this).prop('className'));
+	/*         $('.userName_modal').text( items.marketname);*/
+	         $('.modal_div').show();
+	         $('.all_modal').addClass('on');
+	         $('.modal_div').css('position', 'fixed');
+	         $('.modal_div').css('left', '42px');
+	         $('.modal_div').css('top', '200px');
+	         // 모달바탕 클릭했을때(꺼짐)
+	         $('.on').click(function() {
+	            $('.all_modal').removeClass('on');
+	            $('.modal_div').css('position', 'static');
+	            $('.modal_div').hide();
+	         });      
+	      
+	      }else {//판매완료
+	         //주소연결
+	         window.open("/pmang/board/reviewWriteForm?item_seq="+$('#item_seq').val(),"Review","width=375 height=667");      
+	      }
+
+	}
+});
+
+//------------------------모달 헤더 
+$('.itemboard_move').on('click',function(){
+	opener.parent.location='/pmang/board/itemView?item_seq='+$('#item_seq').val();
+});
+
+$('.seller_market_a').on('click',function(){
+	opener.parent.location='/pmang/board/mystore' + $('#sellerItem_userId').val();
+});
+
+$('.room_setting_out').on('click',function(){
+	
+		$.ajax({
+			type: 'POST',
+			url: '/pmang/talk/roomOut',
+			data: {'partner_userId':$('#receiver_user_id').val()},
+			success: function() {
+				window.close()
+			},
+			error: function(err){
+				console.log(err)
+			}
+		});
+});
+//-------------------------------
    
 });
