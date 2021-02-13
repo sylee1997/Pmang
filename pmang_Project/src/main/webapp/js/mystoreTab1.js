@@ -39,7 +39,7 @@ $(document).ready(function(){
 						href:'#'
 					}).append($('<div/>',{
 						class:'itemImageArea'
-						}).append($('<img src="/pmang/image/'+items.img1+'" width="194px" height="194px" alt="상품 이미지"/>'
+						}).append($('<img src="/pmang/storage/'+items.img1+'" width="194px" height="194px" alt="상품 이미지"/>'
 								)).append($('<div/>',{
 									class:'imageAreaDiv'
 								})))
@@ -106,7 +106,7 @@ $(document).ready(function(){
 								href:'#'
 							}).append($('<div/>',{
 								class:'itemImageArea'
-								}).append($('<img src="/pmang/image/'+items.img1+'" width="194px" height="194px" alt="상품 이미지"/>'
+								}).append($('<img src="/pmang/storage/'+items.img1+'" width="194px" height="194px" alt="상품 이미지"/>'
 										)).append($('<div/>',{
 											class:'imageAreaDiv'
 										})))
@@ -193,7 +193,7 @@ $('#latest').on('click',function(){
 						href:'#'
 					}).append($('<div/>',{
 						class:'itemImageArea'
-						}).append($('<img src="/pmang/image/'+items.img1+'" width="194px" height="194px" alt="상품 이미지"/>'
+						}).append($('<img src="/pmang/storage/'+items.img1+'" width="194px" height="194px" alt="상품 이미지"/>'
 								)).append($('<div/>',{
 									class:'imageAreaDiv'
 								})))
@@ -253,7 +253,7 @@ $('#popularity').click(function(){
 						href:'#'
 					}).append($('<div/>',{
 						class:'itemImageArea'
-						}).append($('<img src="/pmang/image/'+items.img1+'" width="194px" height="194px" alt="상품 이미지"/>'
+						}).append($('<img src="/pmang/storage/'+items.img1+'" width="194px" height="194px" alt="상품 이미지"/>'
 								)).append($('<div/>',{
 									class:'imageAreaDiv'
 								})))
@@ -314,7 +314,7 @@ $('#lowerPrice').click(function(){
 						href:'#'
 					}).append($('<div/>',{
 						class:'itemImageArea'
-						}).append($('<img src="/pmang/image/'+items.img1+'" width="194px" height="194px" alt="상품 이미지"/>'
+						}).append($('<img src="/pmang/storage/'+items.img1+'" width="194px" height="194px" alt="상품 이미지"/>'
 								)).append($('<div/>',{
 									class:'imageAreaDiv'
 								})))
@@ -376,7 +376,7 @@ $('#highestPrice').click(function(){
 						href:'#'
 					}).append($('<div/>',{
 						class:'itemImageArea'
-						}).append($('<img src="/pmang/image/'+items.img1+'" width="194px" height="194px" alt="상품 이미지"/>'
+						}).append($('<img src="/pmang/storage/'+items.img1+'" width="194px" height="194px" alt="상품 이미지"/>'
 								)).append($('<div/>',{
 									class:'imageAreaDiv'
 								})))

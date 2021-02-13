@@ -183,7 +183,7 @@
                 </li>
                 <li>
                   <img src="/pmang/image/mystore.png" alt="store" width="30px" height="30px"/>
-                  <span class="indexnavSpan" onclick="location.href='/pmang/board/mystore'">내상점</span>
+                  <span class="indexnavSpan" onclick="location.href='/pmang/board/mystore?userid=${memUserId }'">내상점</span>
                 </li>
                 <li>
                   <span class="vertical">|</span>

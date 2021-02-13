@@ -163,12 +163,12 @@
 					<!-- mystoreIntroduce -->
 					<div id="introEdit">
 						
-						<button id="storeIntroEditBtn">내상점 정보 수정</button>
+						<button type="button" id="storeIntroEditBtn">내상점 정보 수정</button>
 						<a href="#" id="memberInfoModify">회원 정보 수정</a>
 					</div>
 					<!-- introEdit -->
 					<div class="introEdit1">
-						<button id="storeIntroBtn">확인</button>
+						<button type="button" id="storeIntroBtn">확인</button>
 					</div>
 					<!-- introEdit1 -->
 
@@ -224,10 +224,14 @@
 	$(document)
 			.ready(
 					function() {
-						//alert($('#memid').val());
+						//남의상점인지 내 상점인지
+						alert($('#memid').val()+' '+$('#userid').val());
 
 						//일반회원일때
-					if($('#memId').val()!='admin'){
+					if($('#memid').val()!='admin'){
+							
+						//남의 상점
+						if($('#memid').val()!=$('#userid').val()){
 							
 						
 						$('.introEdit1').hide();
@@ -238,9 +242,9 @@
 									type : 'post',
 									url : '/pmang/board/getMystore',
 									dataType : 'json',
-									data:{'userid':$('#userid').val()}
+									data:{'userid':$('#userid').val()},
 									success : function(data) {
-										//alert(JSON.stringify(data));
+										alert(JSON.stringify(data));
 
 										//세션이랑 유저아이디랑 같을시 내상점정보변경버튼,회원정보버튼이 보여야함
 										//아닐경우에는 숨기고, 신고하기버튼만 보이도록해야함
@@ -300,7 +304,79 @@
 										console.log(err);
 									}
 								});
-						
+						}else if($('#memid').val()==$('#userid').val()){	//내상점 일때
+
+							$('.introEdit1').hide();
+							$('#storeNameModify1').hide();
+							
+							
+							$.ajax({
+										type : 'post',
+										url : '/pmang/board/getMystore',
+										dataType : 'json',
+										data:{'userid':$('#memid').val()},
+										success : function(data) {
+										//	alert(JSON.stringify(data));
+
+											//세션이랑 유저아이디랑 같을시 내상점정보변경버튼,회원정보버튼이 보여야함
+											//아닐경우에는 숨기고, 신고하기버튼만 보이도록해야함
+											if ($('#memid').val() == data.sellerDTO.userid) {	//내상점이 마이 페이지일 경우
+												$('#storeIntroEditBtn').show();
+												$('#memberInfoModify').show();
+												//$('#myBtn').hide();
+												$('li#wish').show();
+											} else {											//내상점이 마이페이지가 아닐경우(남의 내상점)
+												$('#storeIntroEditBtn').hide();
+												$('#memberInfoModify').hide();
+												//$('#myBtn').show();
+												$('li#wish').hide();
+											}
+
+											$('.infoName span').text(
+													data.sellerDTO.marketname);
+											$('#mystoreName h3').text(
+													data.sellerDTO.marketname);
+											$('#mystoreHit')
+													.text(
+															data.sellerDTO.markethit
+																	+ " 명");
+											$('#mystoreIntroduce textarea').text(
+													data.sellerDTO.pf_content);
+
+											//상점 오픈일 날짜 계산
+											var openDate = new Date(
+													data.sellerDTO.marketdate);
+											var today = new Date();
+											var dateDiff = Math
+													.ceil((today.getTime() - openDate
+															.getTime())
+															/ (1000 * 3500 * 24));
+
+											$('#mystoreOpenDate').text(
+													dateDiff + '일전');
+											
+											var str = '<img class="pf_photo" src="/pmang/storage/'+data.sellerDTO.pf_photo+'" width=150 height=150/>';
+											$(str).appendTo('.mystoreProfileImg');
+
+											//프로필사진변경
+											$('.pf_photo')
+													.on('click',
+															function(e) {
+																//alert('클릭');
+																document.signform.target_url.value = $(
+																		'.pf_photo')
+																		.attr('src');
+																alert(document.signform.target_url.value);
+																e.preventDefault();
+																$('input[type=file]').click();
+															});
+
+										},
+										error : function(err) {
+											console.log(err);
+										}
+									});
+						}
 
 					}	//일반회원일때
 						

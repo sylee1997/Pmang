@@ -67,10 +67,11 @@ public class BoardController {
 	// -------------------mystote------------------------
 
 	// 내상점 기본정보
-	@RequestMapping(value = "mystore", method = RequestMethod.GET)
-	public String mystore(HttpSession session, Model model,@RequestParam(required = false, defaultValue = "memUserId") String userid) {
+	@RequestMapping(value = "mystore")
+	public String mystore(HttpSession session, Model model,@RequestParam String userid) {
 		
-
+		//System.out.println(userid);
+	
 		model.addAttribute("userid",userid);
 		model.addAttribute("display", "/pm_mystore/mystore.jsp");
 		return "/index";
@@ -83,8 +84,8 @@ public class BoardController {
 			HttpServletResponse response) {
 		
 		
-		
-		
+		//System.out.println("userid :"+userid);
+		//System.out.println(session.getAttribute("memUserId"));
 		// 조회수 - 새로고침방지
 		if (cookie != null) {
 			boardService.mystoreHitUpdate(userid);
@@ -149,7 +150,7 @@ public class BoardController {
 			e.printStackTrace();
 		}
 
-		sellerDTO.setPf_photo("/pmang/image/" + fileName);
+		sellerDTO.setPf_photo("/pmang/storage/" + fileName);
 
 		// db
 		boardService.profileImgModify(sellerDTO);
@@ -168,7 +169,7 @@ public class BoardController {
 		List<ItemDTO> list = boardService.getMystoreItemList(pg, userid);
 
 		// 조회수 - 새로고침 방지
-		if (session.getAttribute("memId") != null) {
+		if (session.getAttribute("memUserId") != null) {
 			Cookie cookie = new Cookie("memHit", "0");// 생성
 			cookie.setMaxAge(30 * 60);// 초 단위 생존기간
 			cookie.setPath("/"); // 모든 경로에서 접근 가능 하도록 설정
@@ -197,7 +198,7 @@ public class BoardController {
 		List<WishDTO> list = boardService.getMystoreWishList(pg, userid);
 
 		// 조회수 - 새로고침 방지
-		if (session.getAttribute("memId") != null) {
+		if (session.getAttribute("memUserId") != null) {
 			Cookie cookie = new Cookie("memHit", "0");// 생성
 			cookie.setMaxAge(30 * 60);// 초 단위 생존기간
 			cookie.setPath("/"); // 모든 경로에서 접근 가능 하도록 설정
@@ -250,7 +251,7 @@ public class BoardController {
 		List<ReviewDTO> list = boardService.getMystoreReviewList(pg, userid);
 
 		// 조회수 - 새로고침 방지
-		if (session.getAttribute("memId") != null) {
+		if (session.getAttribute("memUserId") != null) {
 			Cookie cookie = new Cookie("memHit", "0");// 생성
 			cookie.setMaxAge(30 * 60);// 초 단위 생존기간
 			cookie.setPath("/"); // 모든 경로에서 접근 가능 하도록 설정
@@ -306,7 +307,7 @@ public class BoardController {
 		List<ItemDTO> list = boardService.getMystoreItemPopularList(pg, userid);
 
 		// 조회수 - 새로고침 방지
-		if (session.getAttribute("memId") != null) {
+		if (session.getAttribute("memUserId") != null) {
 			Cookie cookie = new Cookie("memHit", "0");// 생성
 			cookie.setMaxAge(30 * 60);// 초 단위 생존기간
 			cookie.setPath("/"); // 모든 경로에서 접근 가능 하도록 설정
@@ -340,7 +341,7 @@ public class BoardController {
 		List<ItemDTO> list = boardService.getMystoreItemLowerPriceList(pg, userid);
 
 		// 조회수 - 새로고침 방지
-		if (session.getAttribute("memId") != null) {
+		if (session.getAttribute("memUserId") != null) {
 			Cookie cookie = new Cookie("memHit", "0");// 생성
 			cookie.setMaxAge(30 * 60);// 초 단위 생존기간
 			cookie.setPath("/"); // 모든 경로에서 접근 가능 하도록 설정
@@ -372,7 +373,7 @@ public class BoardController {
 		List<ItemDTO> list = boardService.getMystoreItemHighestPriceList(pg, userid);
 
 		// 조회수 - 새로고침 방지
-		if (session.getAttribute("memId") != null) {
+		if (session.getAttribute("memUserId") != null) {
 			Cookie cookie = new Cookie("memHit", "0");// 생성
 			cookie.setMaxAge(30 * 60);// 초 단위 생존기간
 			cookie.setPath("/"); // 모든 경로에서 접근 가능 하도록 설정
@@ -405,7 +406,7 @@ public class BoardController {
 		List<ItemDTO> list = boardService.getMystoreWishPopularList(pg, userid);
 
 		// 조회수 - 새로고침 방지
-		if (session.getAttribute("memId") != null) {
+		if (session.getAttribute("memUserId") != null) {
 			Cookie cookie = new Cookie("memHit", "0");// 생성
 			cookie.setMaxAge(30 * 60);// 초 단위 생존기간
 			cookie.setPath("/"); // 모든 경로에서 접근 가능 하도록 설정
@@ -439,7 +440,7 @@ public class BoardController {
 		List<ItemDTO> list = boardService.getMystoreWishLowerPriceList(pg, userid);
 
 		// 조회수 - 새로고침 방지
-		if (session.getAttribute("memId") != null) {
+		if (session.getAttribute("memUserId") != null) {
 			Cookie cookie = new Cookie("memHit", "0");// 생성
 			cookie.setMaxAge(30 * 60);// 초 단위 생존기간
 			cookie.setPath("/"); // 모든 경로에서 접근 가능 하도록 설정
@@ -472,7 +473,7 @@ public class BoardController {
 		List<ItemDTO> list = boardService.getMystoreWishHighestPriceList(pg, userid);
 
 		// 조회수 - 새로고침 방지
-		if (session.getAttribute("memId") != null) {
+		if (session.getAttribute("memUserId") != null) {
 			Cookie cookie = new Cookie("memHit", "0");// 생성
 			cookie.setMaxAge(30 * 60);// 초 단위 생존기간
 			cookie.setPath("/"); // 모든 경로에서 접근 가능 하도록 설정
@@ -510,7 +511,8 @@ public class BoardController {
 			@RequestParam("img3url") String img3url, HttpSession session) {
 		String filePath = "C:/project/Pmang/pmang_Project/src/main/webapp/storage/";
 
-		String reviewWriter = (String) session.getAttribute("memUserId");// 작성자 아이디 세션으로 넣어야함
+		//String reviewWriter = (String) session.getAttribute("memUserId");// 작성자 아이디 세션으로 넣어야함
+		String reviewWriter="tmddms2292";
 		reviewDTO.setReviewWriter(reviewWriter);
 
 		UUID uuid = UUID.randomUUID(); // 중복파일이름방지를 위한 uuid설정
