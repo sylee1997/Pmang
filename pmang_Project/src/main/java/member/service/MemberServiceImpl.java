@@ -200,9 +200,13 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public void sellerWrite(ItemDTO itemDTO) {
-		if(itemDTO.getItem_location() == null) {
-			itemDTO.setItem_location("위치 정보 없음");
-		}
+		
+		System.out.println(itemDTO.getItem_location());
+		/*
+		 * if(itemDTO.getItem_location().equals('')) {
+		 * itemDTO.setItem_location("위치 정보 없음"); }
+		 */
+		
 		memberDAO.sellerWrite(itemDTO);
 	}
 
@@ -267,4 +271,3 @@ public class MemberServiceImpl implements MemberService {
 
 }
 	
-

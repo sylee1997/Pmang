@@ -128,16 +128,17 @@ public class MemberDAOMybatis implements MemberDAO {
 		
 		List<RecentlyDTO> list = sqlSession.selectList("memberSQL.checkRecentlyLoc", userId);
 
-		
-		if(list.isEmpty()) {
-			sqlSession.insert("memberSQL.insertRecentlyLoc", insertMap);
-		}
-		else {
-			for(RecentlyDTO dto : list) {
-				if(!dto.getAddress().equals(location)) {
-					sqlSession.insert("memberSQL.insertRecentlyLoc", insertMap);	
-				}
+		if(insertMap.get("address") != null) {
+			if(list.isEmpty()) {
+				sqlSession.insert("memberSQL.insertRecentlyLoc", insertMap);
 			}
+			else {
+				for(RecentlyDTO dto : list) {
+					if(!dto.getAddress().equals(location)) {
+						sqlSession.insert("memberSQL.insertRecentlyLoc", insertMap);	
+					}
+				}
+			}	
 		}
 		
 		
