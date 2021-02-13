@@ -13,6 +13,7 @@ public class WishDTO {
 	private String img1;
 	private String item_price;
 	private String item_location;
+	private String item_state;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy.MM.dd")
 	private Date logtime;
 }

@@ -52,8 +52,8 @@ $('#storeIntroEditBtn').on(
 			$('#mystoreIntroduce').empty();
 
 			$('#mystoreIntroduce').append(
-					'<textarea id="storeIntro" onKeyup="len_chk()">' + mystoreIntroduce
-							+ '</textarea>');
+					'<textarea id="storeIntro" onKeyup="len_chk()">' + mystoreIntroduce+ '</textarea>');
+
 
 			$('.introEdit1').show();
 
@@ -70,7 +70,7 @@ $('#storeIntroEditBtn').on(
 									+ $('#storeIntro').val(),
 							success : function() {
 								alert('내 상점 정보가 수정되었습니다.');
-								location.href = 'mystore';
+								location.href = 'mystore?userid='+$('#memid').val();
 							},
 							error : function(err) {
 								console.log(err);

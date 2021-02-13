@@ -9,7 +9,8 @@
 </head>
 <body>
 	<input type="hidden" id="photoCountHidden" value="0">
-	<input type="hidden" id="sellerid" value="${memUserId }"> 
+	<%-- <input type="hidden" id="sellerid" value="${memUserId }">  --%>
+	<input type="hidden" id="item_seq" value="${item_seq }">
 	<form id="reviewWriteForm">
 	
 		<div class="reviewHeader">
@@ -20,13 +21,13 @@
 		<div class="reviewContainer">
 			<div class="reviewItemDiv">
 				<div class="reviewItemImg">
-					<img alt="상품이미지" src="../image/bench.jpg" width="75" height="75">
+					<!-- <img alt="상품이미지" src="../image/bench.jpg" width="75" height="75"> -->
 				</div>
 				<!-- reviewItemImg -->
 				<div class="reviewItemContent">
-					<p class="reviewStoreName"></p><!-- 마 이게 상점명이다!! sellerid -->
-					<h2 class="reviewSubject"></h2><!-- 마 이게 상품명이다!! reviewsubject 겸 item_subject -->
-					<p class="reviewLogtime"></p><!-- 마 이게 판매상품 등록시간이다! -->
+					<div class="reviewStoreName"></div><!-- 마 이게 상점명이다!! sellerid -->
+					<div class="reviewSubject"></div><!-- 마 이게 상품명이다!! reviewsubject 겸 item_subject -->
+					<div class="reviewLogtime"></div> <!-- 마 이게 판매상품 등록시간이다! -->
 				</div>
 				<!-- reviewItemContent -->
 			</div>
@@ -122,6 +123,38 @@
 	<script>
 		$(document).ready(function() {
 			$('.reviewOkBtn').attr('disabled', true);
+			
+			$.ajax({
+				type:'post',
+				url:'/pmang/board/getItem',
+				dataType:'json',
+				data:{'item_seq':$('#item_seq').val()},
+				success:function(data){
+					console.log(JSON.stringify(data));
+					
+					
+					var imgstr='<img src="/pmang/storage/'+data.itemDTO.img1+'" width="75" height="75">';
+					$(imgstr).appendTo($('.reviewItemImg'));
+					
+					$('.reviewStoreName').text(data.itemDTO.userId);
+					$('.reviewSubject').text(data.itemDTO.item_subject);
+					
+					var dataFormat=data.itemDTO.logtime;
+					var year=dataFormat.substr(0,4);
+					var month=dataFormat.substr(5,2);
+					var day=dataFormat.substr(8,2);
+					
+					$('.reviewLogtime').text(year+'.'+month+'.'+day);
+					
+					
+					
+					
+				},
+				error:function(err){
+					console.log(err);
+				}
+					
+			});
 		});
 		
 		

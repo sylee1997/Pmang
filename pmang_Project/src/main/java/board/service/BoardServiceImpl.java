@@ -246,17 +246,19 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<ReviewDTO> getMystoreReviewList(String pg, String userid) {
-		// 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 3占쏙옙占쏙옙
+
+		
 		int endNum = Integer.parseInt(pg) * 3;
 		int startNum = endNum - 2;
 
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("startNum", startNum);
 		map.put("endNum", endNum);
-		map.put("userid", userid+"");
-		//System.out.println(userid);
+		map.put("userid", userid);
+		
 		List<ReviewDTO> list = mystoreDAO.getMystoreReviewList(map);
-		//System.out.println(list);
+	
 		return list;
 
 	}

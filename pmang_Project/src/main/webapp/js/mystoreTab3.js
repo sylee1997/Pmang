@@ -108,7 +108,7 @@ $(document).ready(function(){
 									text:items.reviewSubject+'              >'
 								})))).append($('<div/>',{
 									class:'reviewPhoto'
-								}).append($('<img src="/pmang/image/'+items.reviewImg1+'" alt="상품이미지" style="border:1px solid rgb(238,238,238)"/>'))
+								}).append($('<img src="/pmang/storage/'+items.reviewImg1+'" alt="상품이미지" style="border:1px solid rgb(238,238,238)"/>'))
 										).append($('<div/>',{
 											class:'reviewDetail',
 											text:items.reviewContent
@@ -247,7 +247,7 @@ $(document).ready(function(){
 											text:items.reviewSubject+'              >'
 										})))).append($('<div/>',{
 											class:'reviewPhoto'
-										}).append($('<img src="/pmang/image/'+items.reviewImg1+'" alt="상품이미지" style="border:1px solid rgb(238,238,238)"/>'))
+										}).append($('<img src="/pmang/storage/'+items.reviewImg1+'" alt="상품이미지" style="border:1px solid rgb(238,238,238)"/>'))
 												).append($('<div/>',{
 													class:'reviewDetail',
 													text:items.reviewContent
