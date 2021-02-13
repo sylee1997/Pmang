@@ -159,11 +159,10 @@ function slide() {
           return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
       }
       
-      
-      
-      
-      
-$(document).ready(function() {
+var page = 1;
+$(document).ready(function(){
+	getList(page);
+    page++;
 	
 	$.ajax({
 	      type : 'post',
@@ -176,86 +175,54 @@ $(document).ready(function() {
 	    	  console.log(err);
 	      }
 	});
+    
+});
+      
+$(window).scroll(function(){   //스크롤이 최하단 으로 내려가면 리스트를 조회하고 page를 증가시킨다.
+    if($(window).scrollTop() >= $(document).height() - $(window).height()){
+         getList(page);
+         page++;   
+    } 
+});
+
+function getList(page){
 	
-	 $.ajax({
-	      type : 'post',
-	      url : '/pmang/board/getIndexBoardList',
-	      data : {'pg' : '1'},
-	      dataType : 'json',
-	      success : function(data){
-	    	 //console.log(JSON.stringify(data));
-	      	$.each(data.itemList, function(index, items){
-	      				
-	      		var itemFrameDiv = '<div class="itemFrame"></div>';
-	      				
-	      				var itemLinkA = '<a class="itemLink"><span id="item_seqSpan">'+items.item_seq+'</span>';
-	      				itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
-	      				var itemContentDiv = '<div class="itemContent">';
-	      				itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
-	      				itemContentDiv += '<div class="itemPriceAndTime">';
-	      				itemContentDiv += '<div class="itemPrice">'+addComma(items.item_price)+'</div><div class="itemTime"><span>'+timeForToday(items.logtime)+'</span></div>'
-	      				itemContentDiv += '</div>';
-	      				itemContentDiv += '</div>';
-	      				
-
-	      				
-	      				$(itemFrameDiv).append($(itemLinkA).append($(itemContentDiv))).appendTo($('.selection3'));
-	      			});
-	      		},
-	      		error : function(err){
-	      			console.log(err);
-	      		}
-	      		
-	      	});
-	
-	$(document).scroll(function() {
-		var maxHeight = $(document).height();
-		var currentScroll = $(window).scrollTop() + $(window).height();
-		
-		if (maxHeight - 500 < currentScroll) {
-			// $("#enters").append("<h1>Page " + page + "</h1><BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~<BR/>So<BR/>MANY<BR/>BRS<BR/>YEAHHH~");
-			for(var i = 2; i <= $('#total').val(); i++){
-				$.ajax({
-					type : 'post',
-					url : '/pmang/board/getIndexBoardList',
-					data : {'pg' : i},
-					dataType : 'json',
-					success : function(data){
-						console.log(JSON.stringify(data));
-						$.each(data.itemList, function(index, items){
-							
-							var itemFrameDiv = '<div class="itemFrame"></div>';
-							
-							var itemLinkA = '<a class="itemLink"><span id="item_seqSpan">'+items.item_seq+'</span>';
-							itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
-							var itemContentDiv = '<div class="itemContent">';
-							itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
-							itemContentDiv += '<div class="itemPriceAndTime">';
-							itemContentDiv += '<div class="itemPrice">'+addComma(items.item_price)+'</div><div class="itemTime"><span>'+timeForToday(items.logtime)+'</span></div>'
-							itemContentDiv += '</div>';
-							itemContentDiv += '</div>';
-							
-							
-							
-							$(itemFrameDiv).append($(itemLinkA).append($(itemContentDiv))).appendTo($('.selection3'));
-						});
-					},
-					error : function(err){
-						console.log(err);
-					}
-					
-				});//ajax
-			}//for
-			
-		}//if
-		
-		if($(window).scrollTop() == $(document).height() - $(window).height()){
-			alert("bottom!");
-		}
-	});//scroll
-
-});//ready
-
+	if(page != 1 && page > $('#total').val()){
+		return;
+	}
+	else{
+		$.ajax({
+	        type : 'post',  
+	        dataType : 'json', 
+	        data : {"pg" : page},
+	        url : '/pmang/board/getIndexBoardList',
+	        success : function(data) {
+	        	if(data.itemList.length == 0){
+	        		$('.selection3').html('<div>아직 장터가 많이 부실해서 등록된 상품이 없습니다.. 상품을 등록해주세요..</div>');
+	        	}
+	        	else{
+	        		$.each(data.itemList, function(index, items){
+	        			var itemFrameDiv = '<div class="itemFrame"></div>';
+	        			
+	        			var itemLinkA = '<a class="itemLink"><span id="item_seqSpan">'+items.item_seq+'</span>';
+	        			itemLinkA += '<img src="/pmang/storage/'+items.img1+'" width="194" height="194" alt="상품이미지"></a>';
+	        			var itemContentDiv = '<div class="itemContent">';
+	        			itemContentDiv += '<div class="itemName">'+items.item_subject+'</div>';
+	        			itemContentDiv += '<div class="itemPriceAndTime">';
+	        			itemContentDiv += '<div class="itemPrice">'+addComma(items.item_price)+'</div><div class="itemTime"><span>'+timeForToday(items.logtime)+'</span></div>'
+	        			itemContentDiv += '</div>';
+	        			itemContentDiv += '</div>';
+	        			
+	        			$(itemFrameDiv).append($(itemLinkA).append($(itemContentDiv))).appendTo($('.selection3'));
+	        		});//each
+	        	}
+	       },
+	       error: function(err){
+	    	   console.log(err);
+	       }
+		});//each
+	}//else
+}
 
 
 

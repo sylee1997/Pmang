@@ -5,6 +5,7 @@ import java.util.Map;
 
 import board.bean.ItemDTO;
 import member.bean.MemberDTO;
+import member.bean.RecentlyDTO;
 import member.bean.ZipcodeDTO;
 
 public interface MemberDAO {
@@ -42,6 +43,17 @@ public interface MemberDAO {
 	public String adminUserDeleteSearch(String userid);
 
 	public void adminUserDelete(String userid);
+
+	public String getSellerLocation(String userId);
+
+	public void insertRecentlyLoc(String userId, String location);
+
+	public List<RecentlyDTO> getRecentlyLoc(String userId);
+
+	public void deleteRecentlyLoc(String userId, String address);
+
+	public List<ZipcodeDTO> mainLoc(Map<String, String> map);
+
 
 
 

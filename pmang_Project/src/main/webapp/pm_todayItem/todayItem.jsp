@@ -41,7 +41,7 @@
          
          <!-- 최근게시글 -->
          <div id="selection">
-            <h2>오늘의 상품 추천</h2>
+            <h2>♥ 피망 유저분들의 상품들 ♥</h2>
             
             
             <div class="selection1">

@@ -1,3 +1,4 @@
+//------------------------------우석수정
 function getItemInfo(){
 	$.ajax({
 
@@ -10,9 +11,11 @@ function getItemInfo(){
 		},
 		success:function(result){
 			console.log(result.itemDTO.userId);
+			window.open("/pmang/talk/talkRoom?item_seq=" + $('#item_seq').val() + "&partner_userId=" + result.itemDTO.userId,"","width=375 height=667");
 		}//success
 	});//ajax
 }//function
+//------------------------------우석수정
 
 
 var fashion = ['여성의류', '남성의류', '패션잡화'];
@@ -388,12 +391,19 @@ $(document).ready(function(){
 		}//success
 	});//ajax
 	
+	//------------------------------우석수정
+	$('#contact').on('click', function() {
+		getItemInfo();
+	});
+	//------------------------------우석수정
+	
 });	//ready
 
 
 
 
 /* 카테고리 펼쳐지는 부분*/
+
 $('.selectItem1').hover(function(){
 	$('.down1').css('display', 'block')
 },
@@ -752,7 +762,6 @@ $('#moreBtn').click(function() {
 	$('#commentIndex').val(b);
 	$('#comment_seq').trigger('click');
 });
-
 
 //찜버튼 클릭
 $('#like').click(function() {
