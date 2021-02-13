@@ -270,7 +270,7 @@ public class MemberController {
 			
 			
 			//seller-insert해주기
-			memberService.insertSeller(userId);			
+			//memberService.insertSeller(userId);			
 			//최근지역 넣어주기
 			
 			if(itemDTO.getItem_location() != "위치 정보 없음.") {

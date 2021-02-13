@@ -117,6 +117,10 @@ public class MemberServiceImpl implements MemberService {
 		
 		resultCnt = memberDAO.regSuccess(userId, key);
 		
+		if(resultCnt ==  1) {
+			insertSeller(userId);
+		}
+		
 		return resultCnt;
 		
 		
@@ -135,6 +139,10 @@ public class MemberServiceImpl implements MemberService {
 		} else {
 		//회원가입	
 			int success = memberDAO.kakaoWrite(memberDTO);
+			if(success == 1) {
+				String userId = memberDTO.getUserId();
+				insertSeller(userId);	
+			}
 			return "JoinSuccess";
 		}
 		

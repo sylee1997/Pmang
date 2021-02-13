@@ -82,9 +82,17 @@
 	margin-bottom: 10px;
 }
 
+.infoName {
+	width: 200px;
+    /* margin: 0; */
+    /* padding: 0; */
+    text-align: left;
+	
+}
+
 .infoName span {
 	font-family: sans-serif;
-	margin-right: 10px;
+	margin-right: 40px;
 	font-weight: bold;
 }
 
@@ -224,7 +232,7 @@ button#storeIntroEditBtn {
     padding-top: 20px;
     font-size: 9pt;
     test-decoration: none;
-    margin-left: 450px;
+    margin-left: 350px;
     text-decoration: underline;
 }
 
