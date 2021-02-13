@@ -33,7 +33,9 @@ public class TalkHandler extends TextWebSocketHandler {
 		System.out.println("afterConnectionEstablished 연결됨 ");// 테이블이 생성되면  session.getId()
 		System.out.println("이거임 >>>>"+session.getAttributes());//.get("userId")
 		//유저아이디랑 방번호로 >> readtime찍기
-		talkService.setOpen(session.getAttributes().get("userId"), session.getAttributes().get("talkRoom_seq"));
+		if(session.getAttributes().get("talkRoom_seq") != null) {
+	         talkService.setOpen(session.getAttributes().get("memUserId"), session.getAttributes().get("talkRoom_seq"));         
+		}
 	}//클라이언트가 서버에 접속했을 때, 실행된다
 	
 	
@@ -60,6 +62,10 @@ public class TalkHandler extends TextWebSocketHandler {
 		TalkRoomDTO getTalkRoomDTO = talkService.isRoom(talkRoomDTO);
 		if(getTalkRoomDTO == null) {
 			talkService.createRoom(talkRoomDTO);
+		}else {
+			if(messageDTO.getItem_seq() != getTalkRoomDTO.getItem_seq()) {
+				talkService.updateItemSeq(talkRoomDTO);
+			}
 		}
 		TalkRoomDTO room = talkService.isRoom(talkRoomDTO);
 		
@@ -106,7 +112,7 @@ public class TalkHandler extends TextWebSocketHandler {
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		System.out.println("afterConnectionClosed session : " + session);
 		System.out.println("afterConnectionClosed status : " + status);
-		talkService.setClose(session.getAttributes().get("userId"), session.getAttributes().get("talkRoom_seq"));
+		talkService.setClose(session.getAttributes().get("memUserId"), session.getAttributes().get("talkRoom_seq"));
 		sessionList.remove(session);
 		
 		log.info(session.getId()+ "연결 종료");

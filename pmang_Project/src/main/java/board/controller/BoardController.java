@@ -1401,18 +1401,22 @@ public class BoardController {
 		boardService.qnaReplyWrite(qna_seq,qnaContent);
 	}
 	
+	
+	//---------------------------------------------우석수정
 	@RequestMapping(value="getItemInfo",method=RequestMethod.POST)
-	public ModelAndView getItemInfo(@RequestParam String item_seq, HttpSession session) {
+	public ModelAndView getItemInfo(HttpSession session,@RequestParam String item_seq) {
 		ItemDTO itemDTO = boardService.getItemInfo(item_seq);
 		System.out.println("itemDTO.getUserId() : " + itemDTO.getUserId());
-
+		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("itemDTO",itemDTO);
+		mav.addObject("memUserId",session.getAttribute("memUserId"));
+		System.out.println("test : "+session.getAttribute("memUserId"));
 		mav.setViewName("jsonView");
 		
 		return mav;
 	}
-	
+	//---------------------------------------------우석수정
 	
 	
 }

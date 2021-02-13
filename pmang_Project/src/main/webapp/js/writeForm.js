@@ -98,11 +98,11 @@ $('#writeBtn').click(function(event){
 		$('#telDiv').css('font-size','8pt')
 		$('#telDiv').css('font-weight','bold');
 
-//	}else if($('#postcode').val()==''||$('#address').val()==''){
-//		$('#addrDiv').text('필수 정보 입니다')
-//		$('#addrDiv').css('color','red')
-//		$('#addrDiv').css('font-size','8pt')
-//		$('#addrDiv').css('font-weight','bold');
+	}else if($('#postcode').val()==''||$('#address').val()==''){
+		$('#addrDiv').text('필수 정보 입니다')
+		$('#addrDiv').css('color','red')
+		$('#addrDiv').css('font-size','8pt')
+		$('#addrDiv').css('font-weight','bold');
 		
 	}else if($('#userId').val() != $('#check').val()){		//아이디 중복 체크
 		$('#userIdDiv').text('중복체크 하세요')

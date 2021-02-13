@@ -1,23 +1,36 @@
-
 //------------------------------우석수정
-function getItemInfo(){
-	$.ajax({
+var partner_userId;
 
-		type:'post',
-		url:'/pmang/board/getItemInfo',
-		data: 'item_seq='+$('#item_seq').val(),
-		dataType:'json',
-		error:function(err){
-			console.log(err);
-		},
-		success:function(result){
-			console.log(result.itemDTO.userId);
-			window.open("/pmang/talk/talkRoom?item_seq=" + $('#item_seq').val() + "&partner_userId=" + result.itemDTO.userId,"","width=375 height=667");
-		}//success
-	});//ajax
-}//function
+      function getItemInfo(){
+         $.ajax({
+            type:'post',
+            url:'/pmang/board/getItemInfo',
+            data: 'item_seq='+$('#item_seq').val(),
+            dataType:'json',
+            async: false ,
+            error:function(err){
+               console.log(err);
+            },
+            success:function(result){
+               console.log(result.memUserId);
+               partner_userId = result.itemDTO.userId;
+               memUserId = result.memUserId;
+            }// success
+         });// ajax
+      }// function
+      
+      getItemInfo();
+      $('#contact').on('click', function() {
+         if(memUserId != null && memUserId != partner_userId){
+            window.open("/pmang/talk/talkRoom?item_seq=" +$('#item_seq').val() + "&partner_userId=" +partner_userId,"","width=375 height=667");
+         }else if(memUserId == partner_userId){
+        	 alert('로그인한 유저의 게시물 입니다.');
+         }else {
+            alert('로그인 하세요.');
+            $('#loginli').trigger('click');
+         }
+      });
 //------------------------------우석수정
-
 
 
 var fashion = ['여성의류', '남성의류', '패션잡화'];
@@ -63,24 +76,6 @@ var others = ['피망나눔','차량,오토바이', '기타'];
 
 //아이템 정보 불러오기
 $(document).ready(function(){
-	getItemInfo();
-	function getItemInfo(){
-		$.ajax({
-			type:'post',
-			url:'/pmang/board/getItemInfo',
-			data: 'item_seq='+$('#item_seq').val(),
-			dataType:'json',
-			error:function(err){
-				console.log(err);
-			},
-			success:function(result){
-				console.log(result.itemDTO.userId);
-				$('#contact').on('click', function() {
-					window.open("/pmang/talk/talkRoom?item_seq="+$('#item_seq').val()+"&&partner_userId="+result.itemDTO.userId,"","width=375 height=667");
-				});
-			}//success
-		});//ajax
-	}//function
 	$.ajax({
 		type:'post',
 		url:'/pmang/board/getItem',
@@ -413,12 +408,6 @@ $(document).ready(function(){
 	
 		}//success
 	});//ajax
-	
-	//------------------------------우석수정
-	$('#contact').on('click', function() {
-		getItemInfo();
-	});
-	//------------------------------우석수정
 	
 });	//ready
 
