@@ -286,7 +286,7 @@ $('.entireDelete').click(function(){
 		type : 'post',
 		url : '/pmang/board/searchAllDelete',
 		success : function(data){
-			alert('전체삭제완료!')
+			//alert('전체삭제완료!')
 		},
 		error : function(err){
 			console.log(err);
@@ -358,7 +358,7 @@ $('.searchBtn').click(function(){
 			url : '/pmang/board/setSearchKeyword',
 			data : {'keyword' : keyword},
 			success : function(){
-				alert('저장!');
+				//alert('저장!');
 				if(keyword.charAt(0) == "#"){
 					var hashtag = keyword.replace('#','')
 					location.href = '/pmang/board/searchBoard?hashtag='+hashtag;
@@ -429,7 +429,7 @@ $('div').off('click').on('click' , '#indexSearchX', function(e){
 			url : '/pmang/board/removeSearch',
 			data : {'keyword' : $(this).parent().children('#keywordSpan').text()},
 			success : function(){
-				alert('삭제!')
+				//alert('삭제!')
 			},
 			error : function(err){
 				console.log(err);
@@ -659,7 +659,7 @@ $('#loginBtn').click(function(){
 					return 
 				} 
 				if(data == 'pwdfail'){
-					alert('회원정보를 확인해 주세요.');
+					alert('비밀번호를 확인해 주세요.');
 					return
 				}
 				if(data == 'authFail'){

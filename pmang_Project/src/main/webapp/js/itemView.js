@@ -90,31 +90,32 @@ $(document).ready(function(){
 			$('.hashtag2Span').text(result.itemDTO.hashtag2);
 			$('.hashtag3Span').text(result.itemDTO.hashtag3);
 			
-			if(result.itemDTO.img1!=null){
+			
+			if(result.itemDTO.img1 != 'undefined'){
 				$('#photoNum').val('1');
 			}
-			if(result.itemDTO.img2!=null){
+			if(result.itemDTO.img2 != 'undefined'){
 				$('#photoNum').val('2');
 			}
-			if(result.itemDTO.img3!=null){
+			if(result.itemDTO.img3 != 'undefined'){
 				$('#photoNum').val('3');
 			}
 			
 			
 			//<img id="itemPic" src="/pmang/image/itemPic.jpg" alt="item pic">
-			if(result.itemDTO.img3!=null){
+			if(result.itemDTO.img3!='undefined'){
 				$('<img/>',{
 					src:'/pmang/storage/'+result.itemDTO.img3,
 					class:'itemPicture'})
 				.prependTo($('#itemPictureDiv'));
 			}
-			if(result.itemDTO.img2!=null){
+			if(result.itemDTO.img2!='undefined'){
 				$('<img/>',{
 					src:'/pmang/storage/'+result.itemDTO.img2,
 					class:'itemPicture'})
 				.prependTo($('#itemPictureDiv'));
 			}
-			if(result.itemDTO.img1!=null){
+			if(result.itemDTO.img1!='undefined'){
 				$('<img/>',{
 					src:'/pmang/storage/'+result.itemDTO.img1,
 					class:'itemPicture'})
@@ -123,21 +124,21 @@ $(document).ready(function(){
 			
 			
 			
-			if(result.itemDTO.img1!=null){
+			if(result.itemDTO.img1!='undefined'){
 				$('<li/>',{})
 							.append($('<img/>',{
 								src : '/pmang/storage/'+result.itemDTO.img1,
 								class: 'modalItemPic'}))
 				.appendTo($('.panel'));
 			}
-			if(result.itemDTO.img2!=null){
+			if(result.itemDTO.img2!='undefined'){
 				$('<li/>',{})
 							.append($('<img/>',{
 								src : '/pmang/storage/'+result.itemDTO.img2,
 								class: 'modalItemPic'}))
 				.appendTo($('.panel'));
 			}
-			if(result.itemDTO.img3!=null){
+			if(result.itemDTO.img3!='undefined'){
 				$('<li/>',{})
 							.append($('<img/>',{
 								src : '/pmang/storage/'+result.itemDTO.img3,

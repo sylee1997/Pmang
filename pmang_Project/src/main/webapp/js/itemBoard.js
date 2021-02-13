@@ -2387,7 +2387,7 @@ function positionCheck(lat, lon){
             //address = address.replace(empty, "");
             address = address.replace(num, "");
             
-            alert(address)
+            //alert(address)
 
 
             
