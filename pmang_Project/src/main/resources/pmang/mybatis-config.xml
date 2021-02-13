@@ -25,6 +25,8 @@
 		<typeAlias type="board.bean.NoticeDTO" alias="notice"/>
 
 		<typeAlias type="board.bean.QnaDTO" alias="qna"/>
+		
+		<typeAlias type="seller.bean.SellerManagementDTO" alias="sellerManagement"/>
 	</typeAliases>
 
 </configuration>

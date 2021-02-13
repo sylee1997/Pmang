@@ -11,7 +11,9 @@
 	<context:component-scan base-package="board.dao"/>
 	<context:component-scan base-package="board.service"/>
 	
-
+	<context:component-scan base-package="seller.bean"/>
+	<context:component-scan base-package="seller.dao"/>
+	<context:component-scan base-package="seller.service"/>
 
 	<context:component-scan base-package="member.service"/>
 	<context:component-scan base-package="member.dao"/>

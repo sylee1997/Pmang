@@ -16,6 +16,7 @@
 	<context:component-scan base-package="board.controller"/>
 	<context:component-scan base-package="hello.controller"/>
 	<context:component-scan base-package="talk.controller"/>
+	<context:component-scan base-package="seller.controller"/>
 
 
 	<!-- Enables the Spring MVC @Controller programming model -->
@@ -32,6 +33,7 @@
 
 	<resources location="/pm_itemView/" mapping="/pm_itemView/**"/>
 	<resources location="/pm_mystore/" mapping="/pm_mystore/**"/>
+	<resources location="/pm_sellerWriteForm/" mapping="/pm_sellerWriteForm/**"/>
 	
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
