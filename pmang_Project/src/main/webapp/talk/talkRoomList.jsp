@@ -12,28 +12,28 @@
 <header id="talkList_header">피망톡</header>
 <div id="list_div"><!-- list div -->
 <ul id="talkList"><!--list를 li에 담아서 뿌립니다...  -->
-	<li class="talkRoom">
+	<!-- <li class="talkRoom">
 	<div class="talkRoom_div">
 		<div class="profile_img_div">
 			<a class="profile_img_a" href="#유저프로필">
 				<img class="profile_img" alt="상대방프로필이미지" src="../image/profileimg.png" height="50" width="50">
 			</a>
 		</div>
-		<a class="talkRoom_a" href="#톡방"><!-- 유저닉네임+마지막톡내용 -->
+		<a class="talkRoom_a" href="#톡방">유저닉네임+마지막톡내용
 			<div>
 				<div class="userName">유저닉네임!</div>
 				<div class="talkView">마지막 대화가 보여야 합니다..
 				대화가 길어지면 어떻게 되려나 알아맞춰 봅시다.</div>
 			</div>
 		</a>
-		<div class="talkLogTime">22:22</div><!-- 마지막톡 한 시간 -->
-		<div><!-- 더보기 버튼 모달 -->
+		<div class="talkLogTime">22:22</div>마지막톡 한 시간
+		<div>더보기 버튼 모달
 			<button class="addBtn">
 				<img alt="더보기" src="../image/addBtn.png" height="15" width="15">
-			</button><!-- 번개장터는 이곳을 img삽입해서 이쁘게 만듬 -->
+			</button>번개장터는 이곳을 img삽입해서 이쁘게 만듬
 		</div>
 	</div>
-	</li>
+	</li> -->
 	<!-- li를 계속 추가~ -->
 	
 </ul>
