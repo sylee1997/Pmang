@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,11 +10,11 @@
 </head>
 <body>
 
-<input type="hidden" id="item_seq" value="${room.item_seq }">
-<input type="hidden" id="sender_user_id" value="${room.userId }">
-<input type="hidden" id="receiver_user_id" value="${room.partner_userId }">
-<input type="hidden" id="talkRoom_seq" value="${room.talkRoom_seq }">
-<input type="hidden" id="receiver_pf_Photo" value="${room.pf_Photo }">
+<input type="hidden" id="item_seq" value="${param.item_seq }">
+<input type="hidden" id="sender_user_id" value="${sessionScope.userId }">
+<input type="hidden" id="receiver_user_id" value="${param.partner_userId }">
+<input type="hidden" id="receiver_user_profileImage" value="${sellerItem.pf_Photo }">
+<input type="hidden" id="sellerItem_userId" value="${sellerItem.userId }">
 
 <div id="root">
    <div>
@@ -104,7 +105,14 @@
          <div class="talk_area_div">
             <header class="talk_header">
                <button type="button" class="talk_itemName_button">
-                  <span class="itemName">상점명 받아오기</span>
+                  <span class="itemName">
+                  	<c:if test="${sellerItem.marketName == null }">
+						${sellerItem.userId }	
+                  	</c:if>
+                  	<c:if test="${sellerItem.marketName != null }">
+						${sellerItem.marketName }
+					</c:if>
+                  </span>
                   <span class="itemName_arrow"></span>
                </button>
                
@@ -122,17 +130,17 @@
             
             <div class="talk_itemInfo">
                <a class="itemboard_move">
-                  <img src="/pmang/image/itemPic.jpg" alt="상품이미지" width="40px" height="40px">
+                  <img src="/pmang/image/${sellerItem.img1 }" alt="상품이미지" width="40px" height="40px">
                   
                   <div class="talk_itemList">
-                     <div class="item_price_div">0,000
+                     <div class="item_price_div">${sellerItem.item_price }
                      <small>원</small>
                      </div>
                      
-                     <div class="item_subject_div">상품명</div>
+                     <div class="item_subject_div">${sellerItem.item_Subject }</div>
                   </div>
                </a><!-- 클릭하면 상품 판매 게시판으로이동 -->
-               <button type="button" class="price_change">가격변경</button> <!-- 판매자일때만 띄우주기 -->
+               		<button type="button" class="price_change">판매완료</button> <!-- 판매자일때만 띄우주기 -->
             </div>
             
             <!-- 메시지창 -->
@@ -141,6 +149,7 @@
                   <div class="talkDate" align="center">하루처음보내는 톡
                   201*.**.** *요일
                   </div>
+                  
                   <div class="talkReciveDiv">받은톡
                      <div class="talkReciveProfile">받은 톡은 상대방의 프사
                         <img src="../image/profileimg.png" width="36" height="36" alt="프로필 이미지">
@@ -162,7 +171,7 @@
                   </div>
                </div>
                <div class="talkReciveDiv"></div>받은톡 위와 동일 -->
-               <div id="talkContentScroll"></div>
+               <!-- <div id="talkContentScroll"></div> -->
 			</div>
 
             <!-- 메시지창 -->

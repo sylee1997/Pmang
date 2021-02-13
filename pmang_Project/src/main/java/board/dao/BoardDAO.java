@@ -10,6 +10,7 @@ import board.bean.QnaDTO;
 import board.bean.ReviewDTO;
 import board.bean.SearchDTO;
 import board.bean.WishlistDTO;
+import member.bean.SellerDTO;
 
 public interface BoardDAO {
 
@@ -112,6 +113,13 @@ public interface BoardDAO {
 	public void reviewWrite(ReviewDTO reviewDTO);
 
 
+	public List<Object> getMainLoc(String userId);
+
+	public void setMainLoc(String userId, String address);
+
+	public void deleteMainLoc(Map<String, String> map);
+
+
 	public List<NoticeDTO> getNoticeList();
 
 	public List<WishlistDTO> getMyZzim(String userId);
@@ -126,8 +134,11 @@ public interface BoardDAO {
 
 	public ItemDTO getItemInfo(String item_seq);
 
+	public SellerDTO getSellerInfo(String userId);
+
 
 	
+
 
 
 }

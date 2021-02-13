@@ -162,6 +162,12 @@ public interface BoardService {
 
 	public void noticeWrite(Map<String, String> map);
 
+	public List<Object> getMainLoc(String userId);
+
+	public void setMainLoc(String userId, String address);
+
+	public void deleteMainLoc(Map<String, String> map);
+
 
 	public List<NoticeDTO> getNoticeList();
 
@@ -176,6 +182,8 @@ public interface BoardService {
 	public void qnaReplyWrite(String qna_seq,String qnaContent);
 
 	public ItemDTO getItemInfo(String item_seq);
+
+	public SellerDTO getSellerInfo(String userId);
 
 
 

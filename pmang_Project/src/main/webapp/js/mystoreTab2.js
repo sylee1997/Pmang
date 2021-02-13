@@ -25,11 +25,14 @@ $(document).ready(function(){
 			
 		//	$('li#wish.tabmenu a span').text(data.list.length);
 			$.each(data.list,function(index,items){
-				$('<div/>').append($('<div/>',{
+				
+				//console.log(items.item_seq);
+			
+				if(items.item_state=='sold'){	//판매완료
+					$('<div/>').append($('<div/>',{
 						class:'mystoreFavList'
 							}).append($('<a/>',{
-								class:'favList',
-								href:'#'
+								class:'favList'
 							}).append($('<div/>',{
 								class:'favChoice'
 							}).append($('<input/>',{
@@ -41,12 +44,15 @@ $(document).ready(function(){
 							}).append($('<span/>'
 									)))).append($('<div/>',{
 										class:'favImg'
-									}).append($('<img src="/pmang/image/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
+									}).append($('<img src="/pmang/storage/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
 								))).append($('<div/>',{
+									class:'wishitemSoldDiv',
+									text:'판매완료'
+								})).append($('<div/>',{
 								class:'favInfo'
 							}).append($('<div/>',{
 								class:'favInfoName',
-								text:items.itemSubject,
+								text:items.item_subject,
 							})).append($('<div/>',{
 								class:'favInfoPrice',
 								text:items.item_price+'원'
@@ -62,7 +68,82 @@ $(document).ready(function(){
 										id:'item_seq',
 										value:items.item_seq
 									})).appendTo($('.mystoreFav'));
+					
+					$('.favImg').css('opacity','0.4');
+					
+				}else if(items.item_state!='sold'){
+					$('<div/>').append($('<div/>',{
+						class:'mystoreFavList'
+							}).append($('<a/>',{
+								class:'favList',
+								href:'#'
+							}).append($('<div/>',{
+								class:'favChoice'
+							}).append($('<input/>',{
+								type:'checkbox',
+								id:'chk_li',
+								value:items.item_seq
+							})).append($('<label/>',{
+								for:'chk_li'
+							}).append($('<span/>'
+									)))).append($('<div/>',{
+										class:'favImg'
+									}).append($('<img src="/pmang/storage/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
+								))).append($('<div/>',{
+								class:'favInfo'
+							}).append($('<div/>',{
+								class:'favInfoName',
+								text:items.item_subject,
+							})).append($('<div/>',{
+								class:'favInfoPrice',
+								text:items.item_price+'원'
+							})).append($('<div/>',{
+								class:'favInfoTime',
+								text:timeCalc(items.logtime)
+							})).append($('<div/>',{
+								class:'favInfoLoc',
+								text:items.item_location
+							}).prepend($('<img src="../image/locationIcon.png" alt="위치 아이콘"/>'
+									)))))).append($('<input/>',{
+										type:'hidden',
+										id:'item_seq',
+										value:items.item_seq
+									})).appendTo($('.mystoreFav'));
+				}
+				
 				//$('#mystoreTab2PagingDiv').html(data.mystoreTab2Paging.pagingHTML);
+				
+				// 최근본상품 쿠키체크!
+				function checkCookie(img, itemSubject, itemPrice, item_seq) {
+				    var itemID = getCookie("itemID");
+					var thisItem= img+':'+itemSubject+':'+itemPrice+':'+item_seq;
+					
+						if (itemID != "" && itemID != null) {
+							if (itemID.indexOf(thisItem) == -1){ // 값이 없으면
+								setCookie("itemID",thisItem+"&"+itemID, 1);
+							 }
+						} else if (itemID == "" || itemID == null) {
+								setCookie("itemID",thisItem+"&", 1);
+						}
+
+				}
+				
+			//찜 상품 클릭했을 때 상품이동 -> itemView로
+			$('.favList').on('click',function(){
+				//alert('클릭');
+				var item_seq=$(this).find("#chk_li").val();
+				//alert(item_seq);
+				
+				var itemSubject=$(this).find(".favInfoName").text();
+				var itemPrice=$(this).find(".favInfoPrice").text();
+				var img=$(this).find("img").attr("src");
+				
+				//alert(item_seq+' '+itemSubject+' '+itemPrice+' '+img);
+				
+				checkCookie(img, itemSubject, itemPrice, item_seq);
+				
+				location.href="/pmang/board/itemView?item_seq="+item_seq;
+			});
 			});
 		},error:function(err){
 			console.log(err);
@@ -100,11 +181,14 @@ $(document).ready(function(){
 					bool_sw=true;
 				//	$('li#wish.tabmenu a span').text(data.list.length);
 					$.each(data.list,function(index,items){
-						$('<div/>').append($('<div/>',{
+						
+						//console.log(items.item_seq);
+					
+						if(items.item_state=='sold'){	//판매완료
+							$('<div/>').append($('<div/>',{
 								class:'mystoreFavList'
 									}).append($('<a/>',{
-										class:'favList',
-										href:'#'
+										class:'favList'
 									}).append($('<div/>',{
 										class:'favChoice'
 									}).append($('<input/>',{
@@ -116,12 +200,15 @@ $(document).ready(function(){
 									}).append($('<span/>'
 											)))).append($('<div/>',{
 												class:'favImg'
-											}).append($('<img src="/pmang/image/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
+											}).append($('<img src="/pmang/storage/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
 										))).append($('<div/>',{
+											class:'wishitemSoldDiv',
+											text:'판매완료'
+										})).append($('<div/>',{
 										class:'favInfo'
 									}).append($('<div/>',{
 										class:'favInfoName',
-										text:items.itemSubject,
+										text:items.item_subject,
 									})).append($('<div/>',{
 										class:'favInfoPrice',
 										text:items.item_price+'원'
@@ -137,7 +224,82 @@ $(document).ready(function(){
 												id:'item_seq',
 												value:items.item_seq
 											})).appendTo($('.mystoreFav'));
+							
+							$('.favImg').css('opacity','0.4');
+							
+						}else if(items.item_state!='sold'){
+							$('<div/>').append($('<div/>',{
+								class:'mystoreFavList'
+									}).append($('<a/>',{
+										class:'favList',
+										href:'#'
+									}).append($('<div/>',{
+										class:'favChoice'
+									}).append($('<input/>',{
+										type:'checkbox',
+										id:'chk_li',
+										value:items.item_seq
+									})).append($('<label/>',{
+										for:'chk_li'
+									}).append($('<span/>'
+											)))).append($('<div/>',{
+												class:'favImg'
+											}).append($('<img src="/pmang/storage/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
+										))).append($('<div/>',{
+										class:'favInfo'
+									}).append($('<div/>',{
+										class:'favInfoName',
+										text:items.item_subject,
+									})).append($('<div/>',{
+										class:'favInfoPrice',
+										text:items.item_price+'원'
+									})).append($('<div/>',{
+										class:'favInfoTime',
+										text:timeCalc(items.logtime)
+									})).append($('<div/>',{
+										class:'favInfoLoc',
+										text:items.item_location
+									}).prepend($('<img src="../image/locationIcon.png" alt="위치 아이콘"/>'
+											)))))).append($('<input/>',{
+												type:'hidden',
+												id:'item_seq',
+												value:items.item_seq
+											})).appendTo($('.mystoreFav'));
+						}
+						
 						//$('#mystoreTab2PagingDiv').html(data.mystoreTab2Paging.pagingHTML);
+						
+						// 최근본상품 쿠키체크!
+						function checkCookie(img, itemSubject, itemPrice, item_seq) {
+						    var itemID = getCookie("itemID");
+							var thisItem= img+':'+itemSubject+':'+itemPrice+':'+item_seq;
+							
+								if (itemID != "" && itemID != null) {
+									if (itemID.indexOf(thisItem) == -1){ // 값이 없으면
+										setCookie("itemID",thisItem+"&"+itemID, 1);
+									 }
+								} else if (itemID == "" || itemID == null) {
+										setCookie("itemID",thisItem+"&", 1);
+								}
+
+						}
+						
+					//찜 상품 클릭했을 때 상품이동 -> itemView로
+					$('.favList').on('click',function(){
+						//alert('클릭');
+						var item_seq=$(this).find("#chk_li").val();
+						//alert(item_seq);
+						
+						var itemSubject=$(this).find(".favInfoName").text();
+						var itemPrice=$(this).find(".favInfoPrice").text();
+						var img=$(this).find("img").attr("src");
+						
+						//alert(item_seq+' '+itemSubject+' '+itemPrice+' '+img);
+						
+						checkCookie(img, itemSubject, itemPrice, item_seq);
+						
+						location.href="/pmang/board/itemView?item_seq="+item_seq;
+					});
 					});
 				},error:function(err){
 					console.log(err);
@@ -222,7 +384,7 @@ $(document).on("click",".choiceDeleteBtn",function(){
 				if(data>0){
 					
 					alert('찜 목록을 삭제했습니다.');
-					location.href='/pmang/board/mystore';
+					location.href='/pmang/board/mystore?userid='+$('#memid').val();
 				}
 			},
 			error:function(err){
@@ -250,12 +412,15 @@ $('#latest').on('click',function(){
 			console.log(JSON.stringify(data));
 			
 		//	$('li#wish.tabmenu a span').text(data.list.length);
-			$.each(data.list,function(index,items){
-				$('<div/>').append($('<div/>',{
+$.each(data.list,function(index,items){
+				
+				//console.log(items.item_seq);
+			
+				if(items.item_state=='sold'){	//판매완료
+					$('<div/>').append($('<div/>',{
 						class:'mystoreFavList'
 							}).append($('<a/>',{
-								class:'favList',
-								href:'#'
+								class:'favList'
 							}).append($('<div/>',{
 								class:'favChoice'
 							}).append($('<input/>',{
@@ -267,12 +432,15 @@ $('#latest').on('click',function(){
 							}).append($('<span/>'
 									)))).append($('<div/>',{
 										class:'favImg'
-									}).append($('<img src="/pmang/image/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
+									}).append($('<img src="/pmang/storage/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
 								))).append($('<div/>',{
+									class:'wishitemSoldDiv',
+									text:'판매완료'
+								})).append($('<div/>',{
 								class:'favInfo'
 							}).append($('<div/>',{
 								class:'favInfoName',
-								text:items.itemSubject,
+								text:items.item_subject,
 							})).append($('<div/>',{
 								class:'favInfoPrice',
 								text:items.item_price+'원'
@@ -288,7 +456,82 @@ $('#latest').on('click',function(){
 										id:'item_seq',
 										value:items.item_seq
 									})).appendTo($('.mystoreFav'));
+					
+					$('.favImg').css('opacity','0.4');
+					
+				}else if(items.item_state!='sold'){
+					$('<div/>').append($('<div/>',{
+						class:'mystoreFavList'
+							}).append($('<a/>',{
+								class:'favList',
+								href:'#'
+							}).append($('<div/>',{
+								class:'favChoice'
+							}).append($('<input/>',{
+								type:'checkbox',
+								id:'chk_li',
+								value:items.item_seq
+							})).append($('<label/>',{
+								for:'chk_li'
+							}).append($('<span/>'
+									)))).append($('<div/>',{
+										class:'favImg'
+									}).append($('<img src="/pmang/storage/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
+								))).append($('<div/>',{
+								class:'favInfo'
+							}).append($('<div/>',{
+								class:'favInfoName',
+								text:items.item_subject,
+							})).append($('<div/>',{
+								class:'favInfoPrice',
+								text:items.item_price+'원'
+							})).append($('<div/>',{
+								class:'favInfoTime',
+								text:timeCalc(items.logtime)
+							})).append($('<div/>',{
+								class:'favInfoLoc',
+								text:items.item_location
+							}).prepend($('<img src="../image/locationIcon.png" alt="위치 아이콘"/>'
+									)))))).append($('<input/>',{
+										type:'hidden',
+										id:'item_seq',
+										value:items.item_seq
+									})).appendTo($('.mystoreFav'));
+				}
+				
 				//$('#mystoreTab2PagingDiv').html(data.mystoreTab2Paging.pagingHTML);
+				
+				// 최근본상품 쿠키체크!
+				function checkCookie(img, itemSubject, itemPrice, item_seq) {
+				    var itemID = getCookie("itemID");
+					var thisItem= img+':'+itemSubject+':'+itemPrice+':'+item_seq;
+					
+						if (itemID != "" && itemID != null) {
+							if (itemID.indexOf(thisItem) == -1){ // 값이 없으면
+								setCookie("itemID",thisItem+"&"+itemID, 1);
+							 }
+						} else if (itemID == "" || itemID == null) {
+								setCookie("itemID",thisItem+"&", 1);
+						}
+
+				}
+				
+			//찜 상품 클릭했을 때 상품이동 -> itemView로
+			$('.favList').on('click',function(){
+				//alert('클릭');
+				var item_seq=$(this).find("#chk_li").val();
+				//alert(item_seq);
+				
+				var itemSubject=$(this).find(".favInfoName").text();
+				var itemPrice=$(this).find(".favInfoPrice").text();
+				var img=$(this).find("img").attr("src");
+				
+				//alert(item_seq+' '+itemSubject+' '+itemPrice+' '+img);
+				
+				checkCookie(img, itemSubject, itemPrice, item_seq);
+				
+				location.href="/pmang/board/itemView?item_seq="+item_seq;
+			});
 			});
 		},error:function(err){
 			console.log(err);
@@ -313,12 +556,15 @@ $('#popularity').click(function(){
 			console.log(JSON.stringify(data));
 			
 		//	$('li#wish.tabmenu a span').text(data.list.length);
-			$.each(data.list,function(index,items){
-				$('<div/>').append($('<div/>',{
+$.each(data.list,function(index,items){
+				
+				//console.log(items.item_seq);
+			
+				if(items.item_state=='sold'){	//판매완료
+					$('<div/>').append($('<div/>',{
 						class:'mystoreFavList'
 							}).append($('<a/>',{
-								class:'favList',
-								href:'#'
+								class:'favList'
 							}).append($('<div/>',{
 								class:'favChoice'
 							}).append($('<input/>',{
@@ -330,12 +576,15 @@ $('#popularity').click(function(){
 							}).append($('<span/>'
 									)))).append($('<div/>',{
 										class:'favImg'
-									}).append($('<img src="/pmang/image/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
+									}).append($('<img src="/pmang/storage/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
 								))).append($('<div/>',{
+									class:'wishitemSoldDiv',
+									text:'판매완료'
+								})).append($('<div/>',{
 								class:'favInfo'
 							}).append($('<div/>',{
 								class:'favInfoName',
-								text:items.itemSubject,
+								text:items.item_subject,
 							})).append($('<div/>',{
 								class:'favInfoPrice',
 								text:items.item_price+'원'
@@ -351,7 +600,82 @@ $('#popularity').click(function(){
 										id:'item_seq',
 										value:items.item_seq
 									})).appendTo($('.mystoreFav'));
+					
+					$('.favImg').css('opacity','0.4');
+					
+				}else if(items.item_state!='sold'){
+					$('<div/>').append($('<div/>',{
+						class:'mystoreFavList'
+							}).append($('<a/>',{
+								class:'favList',
+								href:'#'
+							}).append($('<div/>',{
+								class:'favChoice'
+							}).append($('<input/>',{
+								type:'checkbox',
+								id:'chk_li',
+								value:items.item_seq
+							})).append($('<label/>',{
+								for:'chk_li'
+							}).append($('<span/>'
+									)))).append($('<div/>',{
+										class:'favImg'
+									}).append($('<img src="/pmang/storage/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
+								))).append($('<div/>',{
+								class:'favInfo'
+							}).append($('<div/>',{
+								class:'favInfoName',
+								text:items.item_subject,
+							})).append($('<div/>',{
+								class:'favInfoPrice',
+								text:items.item_price+'원'
+							})).append($('<div/>',{
+								class:'favInfoTime',
+								text:timeCalc(items.logtime)
+							})).append($('<div/>',{
+								class:'favInfoLoc',
+								text:items.item_location
+							}).prepend($('<img src="../image/locationIcon.png" alt="위치 아이콘"/>'
+									)))))).append($('<input/>',{
+										type:'hidden',
+										id:'item_seq',
+										value:items.item_seq
+									})).appendTo($('.mystoreFav'));
+				}
+				
 				//$('#mystoreTab2PagingDiv').html(data.mystoreTab2Paging.pagingHTML);
+				
+				// 최근본상품 쿠키체크!
+				function checkCookie(img, itemSubject, itemPrice, item_seq) {
+				    var itemID = getCookie("itemID");
+					var thisItem= img+':'+itemSubject+':'+itemPrice+':'+item_seq;
+					
+						if (itemID != "" && itemID != null) {
+							if (itemID.indexOf(thisItem) == -1){ // 값이 없으면
+								setCookie("itemID",thisItem+"&"+itemID, 1);
+							 }
+						} else if (itemID == "" || itemID == null) {
+								setCookie("itemID",thisItem+"&", 1);
+						}
+
+				}
+				
+			//찜 상품 클릭했을 때 상품이동 -> itemView로
+			$('.favList').on('click',function(){
+				//alert('클릭');
+				var item_seq=$(this).find("#chk_li").val();
+				//alert(item_seq);
+				
+				var itemSubject=$(this).find(".favInfoName").text();
+				var itemPrice=$(this).find(".favInfoPrice").text();
+				var img=$(this).find("img").attr("src");
+				
+				//alert(item_seq+' '+itemSubject+' '+itemPrice+' '+img);
+				
+				checkCookie(img, itemSubject, itemPrice, item_seq);
+				
+				location.href="/pmang/board/itemView?item_seq="+item_seq;
+			});
 			});
 		},error:function(err){
 			console.log(err);
@@ -377,12 +701,15 @@ $('#lowerPrice').click(function(){
 			console.log(JSON.stringify(data));
 			
 		//	$('li#wish.tabmenu a span').text(data.list.length);
-			$.each(data.list,function(index,items){
-				$('<div/>').append($('<div/>',{
+$.each(data.list,function(index,items){
+				
+				//console.log(items.item_seq);
+			
+				if(items.item_state=='sold'){	//판매완료
+					$('<div/>').append($('<div/>',{
 						class:'mystoreFavList'
 							}).append($('<a/>',{
-								class:'favList',
-								href:'#'
+								class:'favList'
 							}).append($('<div/>',{
 								class:'favChoice'
 							}).append($('<input/>',{
@@ -394,12 +721,15 @@ $('#lowerPrice').click(function(){
 							}).append($('<span/>'
 									)))).append($('<div/>',{
 										class:'favImg'
-									}).append($('<img src="/pmang/image/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
+									}).append($('<img src="/pmang/storage/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
 								))).append($('<div/>',{
+									class:'wishitemSoldDiv',
+									text:'판매완료'
+								})).append($('<div/>',{
 								class:'favInfo'
 							}).append($('<div/>',{
 								class:'favInfoName',
-								text:items.itemSubject,
+								text:items.item_subject,
 							})).append($('<div/>',{
 								class:'favInfoPrice',
 								text:items.item_price+'원'
@@ -415,7 +745,82 @@ $('#lowerPrice').click(function(){
 										id:'item_seq',
 										value:items.item_seq
 									})).appendTo($('.mystoreFav'));
+					
+					$('.favImg').css('opacity','0.4');
+					
+				}else if(items.item_state!='sold'){
+					$('<div/>').append($('<div/>',{
+						class:'mystoreFavList'
+							}).append($('<a/>',{
+								class:'favList',
+								href:'#'
+							}).append($('<div/>',{
+								class:'favChoice'
+							}).append($('<input/>',{
+								type:'checkbox',
+								id:'chk_li',
+								value:items.item_seq
+							})).append($('<label/>',{
+								for:'chk_li'
+							}).append($('<span/>'
+									)))).append($('<div/>',{
+										class:'favImg'
+									}).append($('<img src="/pmang/storage/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
+								))).append($('<div/>',{
+								class:'favInfo'
+							}).append($('<div/>',{
+								class:'favInfoName',
+								text:items.item_subject,
+							})).append($('<div/>',{
+								class:'favInfoPrice',
+								text:items.item_price+'원'
+							})).append($('<div/>',{
+								class:'favInfoTime',
+								text:timeCalc(items.logtime)
+							})).append($('<div/>',{
+								class:'favInfoLoc',
+								text:items.item_location
+							}).prepend($('<img src="../image/locationIcon.png" alt="위치 아이콘"/>'
+									)))))).append($('<input/>',{
+										type:'hidden',
+										id:'item_seq',
+										value:items.item_seq
+									})).appendTo($('.mystoreFav'));
+				}
+				
 				//$('#mystoreTab2PagingDiv').html(data.mystoreTab2Paging.pagingHTML);
+				
+				// 최근본상품 쿠키체크!
+				function checkCookie(img, itemSubject, itemPrice, item_seq) {
+				    var itemID = getCookie("itemID");
+					var thisItem= img+':'+itemSubject+':'+itemPrice+':'+item_seq;
+					
+						if (itemID != "" && itemID != null) {
+							if (itemID.indexOf(thisItem) == -1){ // 값이 없으면
+								setCookie("itemID",thisItem+"&"+itemID, 1);
+							 }
+						} else if (itemID == "" || itemID == null) {
+								setCookie("itemID",thisItem+"&", 1);
+						}
+
+				}
+				
+			//찜 상품 클릭했을 때 상품이동 -> itemView로
+			$('.favList').on('click',function(){
+				//alert('클릭');
+				var item_seq=$(this).find("#chk_li").val();
+				//alert(item_seq);
+				
+				var itemSubject=$(this).find(".favInfoName").text();
+				var itemPrice=$(this).find(".favInfoPrice").text();
+				var img=$(this).find("img").attr("src");
+				
+				//alert(item_seq+' '+itemSubject+' '+itemPrice+' '+img);
+				
+				checkCookie(img, itemSubject, itemPrice, item_seq);
+				
+				location.href="/pmang/board/itemView?item_seq="+item_seq;
+			});
 			});
 		},error:function(err){
 			console.log(err);
@@ -442,12 +847,15 @@ $('#highestPrice').click(function(){
 			console.log(JSON.stringify(data));
 			
 		//	$('li#wish.tabmenu a span').text(data.list.length);
-			$.each(data.list,function(index,items){
-				$('<div/>').append($('<div/>',{
+$.each(data.list,function(index,items){
+				
+				//console.log(items.item_seq);
+			
+				if(items.item_state=='sold'){	//판매완료
+					$('<div/>').append($('<div/>',{
 						class:'mystoreFavList'
 							}).append($('<a/>',{
-								class:'favList',
-								href:'#'
+								class:'favList'
 							}).append($('<div/>',{
 								class:'favChoice'
 							}).append($('<input/>',{
@@ -459,12 +867,15 @@ $('#highestPrice').click(function(){
 							}).append($('<span/>'
 									)))).append($('<div/>',{
 										class:'favImg'
-									}).append($('<img src="/pmang/image/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
+									}).append($('<img src="/pmang/storage/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
 								))).append($('<div/>',{
+									class:'wishitemSoldDiv',
+									text:'판매완료'
+								})).append($('<div/>',{
 								class:'favInfo'
 							}).append($('<div/>',{
 								class:'favInfoName',
-								text:items.itemSubject,
+								text:items.item_subject,
 							})).append($('<div/>',{
 								class:'favInfoPrice',
 								text:items.item_price+'원'
@@ -480,10 +891,87 @@ $('#highestPrice').click(function(){
 										id:'item_seq',
 										value:items.item_seq
 									})).appendTo($('.mystoreFav'));
+					
+					$('.favImg').css('opacity','0.4');
+					
+				}else if(items.item_state!='sold'){
+					$('<div/>').append($('<div/>',{
+						class:'mystoreFavList'
+							}).append($('<a/>',{
+								class:'favList',
+								href:'#'
+							}).append($('<div/>',{
+								class:'favChoice'
+							}).append($('<input/>',{
+								type:'checkbox',
+								id:'chk_li',
+								value:items.item_seq
+							})).append($('<label/>',{
+								for:'chk_li'
+							}).append($('<span/>'
+									)))).append($('<div/>',{
+										class:'favImg'
+									}).append($('<img src="/pmang/storage/'+items.img1+'" width="139" height="100%" alt="찜한 상품이미지"/>' 
+								))).append($('<div/>',{
+								class:'favInfo'
+							}).append($('<div/>',{
+								class:'favInfoName',
+								text:items.item_subject,
+							})).append($('<div/>',{
+								class:'favInfoPrice',
+								text:items.item_price+'원'
+							})).append($('<div/>',{
+								class:'favInfoTime',
+								text:timeCalc(items.logtime)
+							})).append($('<div/>',{
+								class:'favInfoLoc',
+								text:items.item_location
+							}).prepend($('<img src="../image/locationIcon.png" alt="위치 아이콘"/>'
+									)))))).append($('<input/>',{
+										type:'hidden',
+										id:'item_seq',
+										value:items.item_seq
+									})).appendTo($('.mystoreFav'));
+				}
+				
 				//$('#mystoreTab2PagingDiv').html(data.mystoreTab2Paging.pagingHTML);
+				
+				// 최근본상품 쿠키체크!
+				function checkCookie(img, itemSubject, itemPrice, item_seq) {
+				    var itemID = getCookie("itemID");
+					var thisItem= img+':'+itemSubject+':'+itemPrice+':'+item_seq;
+					
+						if (itemID != "" && itemID != null) {
+							if (itemID.indexOf(thisItem) == -1){ // 값이 없으면
+								setCookie("itemID",thisItem+"&"+itemID, 1);
+							 }
+						} else if (itemID == "" || itemID == null) {
+								setCookie("itemID",thisItem+"&", 1);
+						}
+
+				}
+				
+			//찜 상품 클릭했을 때 상품이동 -> itemView로
+			$('.favList').on('click',function(){
+				//alert('클릭');
+				var item_seq=$(this).find("#chk_li").val();
+				//alert(item_seq);
+				
+				var itemSubject=$(this).find(".favInfoName").text();
+				var itemPrice=$(this).find(".favInfoPrice").text();
+				var img=$(this).find("img").attr("src");
+				
+				//alert(item_seq+' '+itemSubject+' '+itemPrice+' '+img);
+				
+				checkCookie(img, itemSubject, itemPrice, item_seq);
+				
+				location.href="/pmang/board/itemView?item_seq="+item_seq;
+			});
 			});
 		},error:function(err){
 			console.log(err);
 		}
 	});
+
+	
 });

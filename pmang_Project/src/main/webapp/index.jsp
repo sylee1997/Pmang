@@ -23,14 +23,16 @@
 </head>
 <body> 
 
+<!-- 강제 호출용으로 사용중 -->
 <input type="hidden" id="hiddenUserId" value="${sessionScope.memUserId }">
+
 
 <!-- 로그인 모달 -->
 <div class="loginModal">
       	<div class="loginModalContent">
       		<div class="loginModal-header">
 				<div class="loginModal-headerDiv">
-					<h3 class="loginModal-title" id="myModalLabel">피망 로그인</h3>
+					<div class="loginModal-title" id="myModalLabel"><img src="/pmang/image/mainlogoP.png" width="100" height="100" alt="피망로그인헤더"></div>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -111,7 +113,7 @@
            </div>
            
               <div class="search-wrap">
-                 <input type="text" class="searchInput" placeholder="상품명,지역명,@상점명입력" maxlength="20" style="font-size: 10pt;"/>
+                 <input type="text" class="searchInput" placeholder="상품명,지역명,#해시태그명입력" maxlength="20" style="font-size: 10pt;"/>
                  <span id="index_searchInsertXspan">x</span>
                  	<!-- 서치버튼 추가(이서영) -->
                  <a class="searchBtn" href="#">
@@ -172,7 +174,7 @@
                   <span class="vertical">|</span>
                 </li>
                 <div class="pmangTok">
-               		<div class="pmangTokDiv">피망Tok
+               		<div class="pmangTokDiv"><img src="/pmang/image/pmangTok.jpg" width="100" height="100" alt="피망톡"><span id="pmangSpan">피망톡</span></div>
                	</div>
               </ul>
             </nav>
@@ -191,7 +193,7 @@
                 </li>
                 <li>
                   <img src="/pmang/image/mystore.png" alt="store" width="30px" height="30px"/>
-                  <span class="indexnavSpan" onclick="location.href='/pmang/board/mystore'">내상점</span>
+                  <span class="indexnavSpan" onclick="location.href='/pmang/board/mystore?userid=${memUserId }'">내상점</span>
                 </li>
                 <li>
                   <span class="vertical">|</span>
@@ -204,7 +206,7 @@
                   <span class="vertical">|</span>
                 </li>
                 <div class="pmangTok">
-               		<div class="pmangTokDiv">피망Tok
+               		<div class="pmangTokDiv"><img src="/pmang/image/pmangTok.jpg" width="50" height="50" alt="피망톡"><span id="pmangSpan">피망톡</span></div>
                	</div>
               </ul>
             </nav>
@@ -567,15 +569,6 @@
         <div id="aside">
          <div class="asideDiv">
               <!-- 알림창 구현 -->
-            <div class="notice">
-	            <div class="noticeDiv">
-	            	<div class="noticeContent">
-	            		<a href="#">로그인을 하세요.</a>
-	            	</div>
-	            </div>
-            	<img src="/pmang/image/noticeImg.PNG" style="width:30px; height:30px;"> 
-            	<div>알림(0)</div>
-            </div>
             <div class="likebag" onclick="location.href='/pmang/board/mystore'">찜한상품
                <div class="bag_click">
                   <img id="userZzim" src="" style="width:15px; height:15px;">
@@ -681,7 +674,7 @@
          <div class="footerContent">
             <div class="footerContentMark">
       		<img src="/pmang/image/pmangFooter.PNG" alt="피망장터이미지" height="40px"/>
-             <div class="footerContentMarkTitle">피나게 망하지 않을 만큼 판매하는 피망장터입니다. 누구나, 무엇이든 쉽고 편하고 안전하게 거래할 수 있습니다.</div>
+             <div class="footerContentMarkTitle">피나게 망하지 않을 만큼 판매하는 피망장터입니다. 누구나, 언제 어디서나 쉽고 빠르게 안전한 거래를 할 수 있습니다.</div>
             </div>
             
             <div class="indexFooter_icon">

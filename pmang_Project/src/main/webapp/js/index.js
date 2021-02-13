@@ -186,6 +186,8 @@ function(){
 
 /*=======================================검색쪽============================*/
 
+
+
 $.ajax({
 	type : 'post',
 	url : '/pmang/board/getSearchKeyword',
@@ -284,7 +286,7 @@ $('.entireDelete').click(function(){
 		type : 'post',
 		url : '/pmang/board/searchAllDelete',
 		success : function(data){
-			alert('전체삭제완료!')
+			//alert('전체삭제완료!')
 		},
 		error : function(err){
 			console.log(err);
@@ -356,7 +358,7 @@ $('.searchBtn').click(function(){
 			url : '/pmang/board/setSearchKeyword',
 			data : {'keyword' : keyword},
 			success : function(){
-				alert('저장!');
+				//alert('저장!');
 				if(keyword.charAt(0) == "#"){
 					var hashtag = keyword.replace('#','')
 					location.href = '/pmang/board/searchBoard?hashtag='+hashtag;
@@ -427,7 +429,7 @@ $('div').off('click').on('click' , '#indexSearchX', function(e){
 			url : '/pmang/board/removeSearch',
 			data : {'keyword' : $(this).parent().children('#keywordSpan').text()},
 			success : function(){
-				alert('삭제!')
+				//alert('삭제!')
 			},
 			error : function(err){
 				console.log(err);
@@ -657,7 +659,7 @@ $('#loginBtn').click(function(){
 					return 
 				} 
 				if(data == 'pwdfail'){
-					alert('회원정보를 확인해 주세요.');
+					alert('비밀번호를 확인해 주세요.');
 					return
 				}
 				if(data == 'authFail'){
@@ -798,13 +800,14 @@ $('.itemWriteBtn').click(function(){
 
 //우석 수정 
 $('.pmangTok').on('click',function(){
-	window.open("/pmang/talk/roomList","","width=375 height=667");
+	window.open("/pmang/talk/talkRoomList","pmangTalk","width=375 height=667");
 });
 // 우석 수정 -----------------------------------
 
 
 $('#footerNotice').click(function(){
 	$(location).attr("href", "/pmang/board/notice?tabNo=1");
+	$('#noticeLabel').trigger('click');
 });
 
 $('#footerPolicy').click(function(){
@@ -845,7 +848,8 @@ $('#kakaoBtn').click(function(event){
 						url: '/pmang/member/kakaoLogin',
 						data: {
 							'kakaoId': kakaoId,
-							'userName': userName,
+							'userId': kakaoId,
+							'userName' : userName,
 							'gender': gender,
 							'email1': email1,
 							'email2': email2,
@@ -871,10 +875,16 @@ $('#kakaoBtn').click(function(event){
 		}
 	}); 
 });
-// 이거 어젯밤에 하다 만거 여기서부터 해 -> ajax로 찜테이블 유저 아이디로 긁어와서 찜수 반영 하트도 넣어 
-// 내 찜수 확인
 
-$(document).ready(function(){	
+
+
+// 내 찜수 확인
+$(document).ready(function(){
+	$('#hiddenUserId').trigger('click');
+});
+
+
+$('#hiddenUserId').click(function(event){	
 	 $.ajax({
 			type: 'post',
 			url: '/pmang/board/getMyZzim',

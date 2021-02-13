@@ -97,11 +97,11 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 
-	// ----------------------------ItemBoard------------------------------------------//
 	@Override
 	public void itemHitUpdate(int item_seq) {
 		boardDAO.itemHitUpdate(item_seq);
 	}
+	// ----------------------------ItemBoard------------------------------------------//
 
 	@Override
 	public List<ItemDTO> getItemBoardList(String pg, Map<String, Object> map) {
@@ -152,6 +152,25 @@ public class BoardServiceImpl implements BoardService {
 		boardPaging.makePagingHTML();
 		return boardPaging;
 	}
+	
+	
+	@Override
+	public List<Object> getMainLoc(String userId) {
+		return boardDAO.getMainLoc(userId);
+	}
+	
+	@Override
+	public void setMainLoc(String userId, String address) {
+		boardDAO.setMainLoc(userId, address);
+		
+	}
+	
+	@Override
+	public void deleteMainLoc(Map<String, String> map) {
+		boardDAO.deleteMainLoc(map);
+		
+	}
+
 	
 	
 	
@@ -227,17 +246,19 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<ReviewDTO> getMystoreReviewList(String pg, String userid) {
-		// 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 3占쏙옙占쏙옙
+
+		
 		int endNum = Integer.parseInt(pg) * 3;
 		int startNum = endNum - 2;
 
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("startNum", startNum);
 		map.put("endNum", endNum);
-		map.put("userid", userid+"");
-		//System.out.println(userid);
+		map.put("userid", userid);
+		
 		List<ReviewDTO> list = mystoreDAO.getMystoreReviewList(map);
-		//System.out.println(list);
+	
 		return list;
 
 	}
@@ -382,6 +403,7 @@ public class BoardServiceImpl implements BoardService {
 	public String getTotalItem() {
 		return boardDAO.getTotalItem();
 	}
+
 
 	//----------------------------------------searchBoard-------------------------------------------//
 	
@@ -631,7 +653,6 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 
-
 	@Override
 	public List<NoticeDTO> getNoticeList() {
 		return boardDAO.getNoticeList();
@@ -674,6 +695,14 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public ItemDTO getItemInfo(String item_seq) {
 		return boardDAO.getItemInfo(item_seq);
+	}
+
+
+
+
+	@Override
+	public SellerDTO getSellerInfo(String userId) {
+		return boardDAO.getSellerInfo(userId);
 	}
 
 

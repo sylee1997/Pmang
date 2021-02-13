@@ -10,7 +10,7 @@
 
 	<update id="profileImgModify" parameterType="seller">
 		update seller set
-		pf_photo=#{pf_photo}
+		pf_photo=#{pf_photo} where userid=#{userid}
 	</update>
 
 	<select id="getMystore" parameterType="String" resultType="seller">
@@ -25,7 +25,7 @@
 
 	<update id="mystoreModify" parameterType="java.util.Map">
 		update seller set
-		marketname=#{marketname} , pf_content=#{pf_content}
+		marketname=#{marketname} , pf_content=#{pf_content} where userid=#{userid}
 	</update>
 
 	<select id="getMystoreItemList" parameterType="java.util.Map"
@@ -44,7 +44,7 @@
 		select * from
 		(select rownum rn,tt.* from
 		(select
-		item_subject,img1,item_price, logtime,item_location
+		item_subject,img1,item_price, logtime,item_location,t.item_seq,t.item_state
 		from wishlist
 		w,item t
 		where t.item_seq=w.item_seq and w.userid=#{userid} order by
@@ -57,7 +57,7 @@
 
 	<delete id="wishListDelete" parameterType="java.util.Map">
 		delete from wishlist
-		where userid=#{userid} and itemnum=#{item_seq}
+		where userid=#{userid} and item_seq=#{item_seq}
 	</delete>
 
 	<select id="getMystoreReviewList" parameterType="java.util.Map"
@@ -127,11 +127,11 @@
 		parameterType="java.util.Map" resultType="wish">
 		select * from
 		(select rownum rn,tt.* from
-		(select item_seq,
-		itemsubject,img1,item_price, logtime,item_location
+		(select t.item_seq,t.item_state,
+		item_subject,img1,item_price, logtime,item_location
 		from wishlist w,item
 		t
-		where t.item_seq=w.itemnum and w.userid=#{userid} order by
+		where t.item_seq=w.item_seq and w.userid=#{userid} order by
 		t.hit
 		desc)tt
 		)where rn <![CDATA[>=]]>#{startNum}
@@ -143,11 +143,11 @@
 		parameterType="java.util.Map" resultType="wish">
 		select * from
 		(select rownum rn,tt.* from
-		(select item_seq,
-		itemsubject,img1,item_price, logtime,item_location
+		(select t.item_seq,t.item_state,
+		item_subject,img1,item_price, logtime,item_location
 		from wishlist w,item
 		t
-		where t.item_seq=w.itemnum and w.userid=#{userid} order by
+		where t.item_seq=w.item_seq and w.userid=#{userid} order by
 		to_number(t.item_price))tt
 		)where rn <![CDATA[>=]]>#{startNum}
 		and rn <![CDATA[<=]]>
@@ -158,11 +158,11 @@
 		parameterType="java.util.Map" resultType="wish">
 		select * from
 		(select rownum rn,tt.* from
-		(select item_seq,
-		itemsubject,img1,item_price, logtime,item_location
+		(select t.item_seq,t.item_state,
+		item_subject,img1,item_price, logtime,item_location
 		from wishlist w,item
 		t
-		where t.item_seq=w.itemnum and w.userid=#{userid} order by
+		where t.item_seq=w.item_seq and w.userid=#{userid} order by
 		to_number(t.item_price) desc)tt
 		)where rn <![CDATA[>=]]>#{startNum}
 		and rn <![CDATA[<=]]>

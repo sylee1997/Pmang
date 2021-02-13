@@ -67,15 +67,12 @@ public class BoardController {
 	// -------------------mystote------------------------
 
 	// 내상점 기본정보
-	@RequestMapping(value = "mystore", method = RequestMethod.GET)
-	public String mystore(HttpSession session, Model model) {
-		// 나중에 세션 받아와야함.
-		// String userid=(String)session.getAttribute("memId");
-		// int userid = 1;
-		// SellerDTO sellerDTO = boardService.getMystore(userid);
-
-		// model.addAttribute("sellerDTO", sellerDTO);
-
+	@RequestMapping(value = "mystore")
+	public String mystore(HttpSession session, Model model,@RequestParam String userid) {
+		
+		//System.out.println(userid);
+	
+		model.addAttribute("userid",userid);
 		model.addAttribute("display", "/pm_mystore/mystore.jsp");
 		return "/index";
 	}
@@ -83,12 +80,12 @@ public class BoardController {
 	// 수정 후 바뀐 내상점 정보를 출력하기 위해 -- 조회수 처리 안해줬음
 	@RequestMapping(value = "getMystore", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView getMystore(HttpSession session, @CookieValue(value = "memHit", required = false) Cookie cookie,
+	public ModelAndView getMystore(@RequestParam String userid,HttpSession session, @CookieValue(value = "memHit", required = false) Cookie cookie,
 			HttpServletResponse response) {
 		
-		 String userid = (String) session.getAttribute("memUserId"); // 세션값 받아야함
 		
-		
+		//System.out.println("userid :"+userid);
+		//System.out.println(session.getAttribute("memUserId"));
 		// 조회수 - 새로고침방지
 		if (cookie != null) {
 			boardService.mystoreHitUpdate(userid);
@@ -128,19 +125,21 @@ public class BoardController {
 
 	@RequestMapping(value = "mystoreModify", method = RequestMethod.POST)
 	@ResponseBody
-	public void mystoreModify(@RequestParam String marketname, @RequestParam String marketcontent) {
+	public void mystoreModify(@RequestParam String marketname, @RequestParam String marketcontent,HttpSession session) {
+		String userid=(String) session.getAttribute("memUserId");
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("marketname", marketname);
 		map.put("pf_content", marketcontent);
+		map.put("userid", userid);
 
 		boardService.mystoreModify(map);
 	}
 
 	// 프로필 사진 수정
 	@RequestMapping(value = "profileImgModify", method = RequestMethod.POST)
-	// @ResponseBody
+	//@ResponseBody
 	public String profileImgModify(@ModelAttribute SellerDTO sellerDTO, @RequestParam("img") MultipartFile img,
-			Model model) {
+			Model model,HttpSession session) {
 		String filePath = "C:/project/Pmang/pmang_Project/src/main/webapp/storage/";
 		String fileName = img.getOriginalFilename();
 		File file = new File(filePath, fileName);
@@ -152,9 +151,13 @@ public class BoardController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		sellerDTO.setPf_photo("/pmang/image/" + fileName);
-
+		String userid=(String) session.getAttribute("memUserId");
+		System.out.println("userid : "+userid);
+		
+		
+		sellerDTO.setPf_photo(fileName);
+		sellerDTO.setUserid(userid);
+		System.out.println(sellerDTO+"");
 		// db
 		boardService.profileImgModify(sellerDTO);
 		model.addAttribute("display", "/pm_mystore/mystore.jsp");
@@ -172,7 +175,7 @@ public class BoardController {
 		List<ItemDTO> list = boardService.getMystoreItemList(pg, userid);
 
 		// 조회수 - 새로고침 방지
-		if (session.getAttribute("memId") != null) {
+		if (session.getAttribute("memUserId") != null) {
 			Cookie cookie = new Cookie("memHit", "0");// 생성
 			cookie.setMaxAge(30 * 60);// 초 단위 생존기간
 			cookie.setPath("/"); // 모든 경로에서 접근 가능 하도록 설정
@@ -201,7 +204,7 @@ public class BoardController {
 		List<WishDTO> list = boardService.getMystoreWishList(pg, userid);
 
 		// 조회수 - 새로고침 방지
-		if (session.getAttribute("memId") != null) {
+		if (session.getAttribute("memUserId") != null) {
 			Cookie cookie = new Cookie("memHit", "0");// 생성
 			cookie.setMaxAge(30 * 60);// 초 단위 생존기간
 			cookie.setPath("/"); // 모든 경로에서 접근 가능 하도록 설정
@@ -254,7 +257,7 @@ public class BoardController {
 		List<ReviewDTO> list = boardService.getMystoreReviewList(pg, userid);
 
 		// 조회수 - 새로고침 방지
-		if (session.getAttribute("memId") != null) {
+		if (session.getAttribute("memUserId") != null) {
 			Cookie cookie = new Cookie("memHit", "0");// 생성
 			cookie.setMaxAge(30 * 60);// 초 단위 생존기간
 			cookie.setPath("/"); // 모든 경로에서 접근 가능 하도록 설정
@@ -310,7 +313,7 @@ public class BoardController {
 		List<ItemDTO> list = boardService.getMystoreItemPopularList(pg, userid);
 
 		// 조회수 - 새로고침 방지
-		if (session.getAttribute("memId") != null) {
+		if (session.getAttribute("memUserId") != null) {
 			Cookie cookie = new Cookie("memHit", "0");// 생성
 			cookie.setMaxAge(30 * 60);// 초 단위 생존기간
 			cookie.setPath("/"); // 모든 경로에서 접근 가능 하도록 설정
@@ -338,13 +341,13 @@ public class BoardController {
 
 		// 나중에 변경 세션받으면!
 		// String userid = (String) session.getAttribute("userid");
-		String userid = (String) session.getAttribute("memUserId");
-		; // 세션값 받아야함
+		String userid = (String) session.getAttribute("memUserId"); // 세션값 받아야함
+
 
 		List<ItemDTO> list = boardService.getMystoreItemLowerPriceList(pg, userid);
 
 		// 조회수 - 새로고침 방지
-		if (session.getAttribute("memId") != null) {
+		if (session.getAttribute("memUserId") != null) {
 			Cookie cookie = new Cookie("memHit", "0");// 생성
 			cookie.setMaxAge(30 * 60);// 초 단위 생존기간
 			cookie.setPath("/"); // 모든 경로에서 접근 가능 하도록 설정
@@ -376,7 +379,7 @@ public class BoardController {
 		List<ItemDTO> list = boardService.getMystoreItemHighestPriceList(pg, userid);
 
 		// 조회수 - 새로고침 방지
-		if (session.getAttribute("memId") != null) {
+		if (session.getAttribute("memUserId") != null) {
 			Cookie cookie = new Cookie("memHit", "0");// 생성
 			cookie.setMaxAge(30 * 60);// 초 단위 생존기간
 			cookie.setPath("/"); // 모든 경로에서 접근 가능 하도록 설정
@@ -409,7 +412,7 @@ public class BoardController {
 		List<ItemDTO> list = boardService.getMystoreWishPopularList(pg, userid);
 
 		// 조회수 - 새로고침 방지
-		if (session.getAttribute("memId") != null) {
+		if (session.getAttribute("memUserId") != null) {
 			Cookie cookie = new Cookie("memHit", "0");// 생성
 			cookie.setMaxAge(30 * 60);// 초 단위 생존기간
 			cookie.setPath("/"); // 모든 경로에서 접근 가능 하도록 설정
@@ -443,7 +446,7 @@ public class BoardController {
 		List<ItemDTO> list = boardService.getMystoreWishLowerPriceList(pg, userid);
 
 		// 조회수 - 새로고침 방지
-		if (session.getAttribute("memId") != null) {
+		if (session.getAttribute("memUserId") != null) {
 			Cookie cookie = new Cookie("memHit", "0");// 생성
 			cookie.setMaxAge(30 * 60);// 초 단위 생존기간
 			cookie.setPath("/"); // 모든 경로에서 접근 가능 하도록 설정
@@ -476,7 +479,7 @@ public class BoardController {
 		List<ItemDTO> list = boardService.getMystoreWishHighestPriceList(pg, userid);
 
 		// 조회수 - 새로고침 방지
-		if (session.getAttribute("memId") != null) {
+		if (session.getAttribute("memUserId") != null) {
 			Cookie cookie = new Cookie("memHit", "0");// 생성
 			cookie.setMaxAge(30 * 60);// 초 단위 생존기간
 			cookie.setPath("/"); // 모든 경로에서 접근 가능 하도록 설정
@@ -502,7 +505,12 @@ public class BoardController {
 	// -------------------review-------------------
 	// 리뷰 작성폼
 	@RequestMapping(value = "reviewWriteForm", method = RequestMethod.GET)
-	public String reviewWriteForm() {
+	public String reviewWriteForm(@RequestParam String item_seq,Model model,HttpSession session) {
+		
+		//String userid=(String) session.getAttribute("memUserId");
+		
+		//model.addAttribute("memUserId",userid);
+		model.addAttribute("item_seq",item_seq);
 		return "/pm_review/reviewWriteForm";
 	}
 
@@ -515,6 +523,7 @@ public class BoardController {
 		String filePath = "C:/project/Pmang/pmang_Project/src/main/webapp/storage/";
 
 		String reviewWriter = (String) session.getAttribute("memUserId");// 작성자 아이디 세션으로 넣어야함
+		//String reviewWriter="tmddms2292";
 		reviewDTO.setReviewWriter(reviewWriter);
 
 		UUID uuid = UUID.randomUUID(); // 중복파일이름방지를 위한 uuid설정
@@ -628,7 +637,9 @@ public class BoardController {
 		map.put("item_comment", item_comment);
 		// --------------------------------------------------//
 		map.put("userId", userId);
-
+		
+		SellerDTO sellerDTO = boardService.getSellerInfo(userId);
+		map.put("pf_photo", sellerDTO.getPf_photo());
 		boardService.itemComment(map); // -->서비스쪽이랑 디비, 메퍼쪽도 바뀌었으니 확인해보세용!
 
 	}
@@ -729,10 +740,13 @@ public class BoardController {
 	//처음 보여줄 때 리스트
 	@RequestMapping(value="getitemBoardList", method=RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView getitemBoardList(@RequestParam(required=false, defaultValue="1") String pg, @RequestParam Map<String, Object> map, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
+	public ModelAndView getitemBoardList(@RequestParam(required=false, defaultValue="1") String pg, @RequestParam(required=false, defaultValue="최신순") String order, @RequestParam Map<String, Object> map, HttpSession session, HttpServletResponse response) {
 		System.out.println(map.get("category1"));
 		System.out.println(map.get("category2"));
 		System.out.println(map.get("category3"));
+		System.out.println(map.get("location"));
+		
+		
 		List<ItemDTO> list = boardService.getItemBoardList(pg, map);
 
 		
@@ -762,29 +776,30 @@ public class BoardController {
 		return mav;
 	}
 
-	
-	//최신순, 인기순, 고가순, 저가순...
-	@RequestMapping(value="getOrderbyItem", method=RequestMethod.POST)
-	@ResponseBody
-	public ModelAndView getOrderbyItem(@RequestParam(required=false, defaultValue="1") String pg, @RequestParam Map<String, Object> map, HttpSession session, HttpServletResponse response) {
-		
-		System.out.println(pg);
-		List<Object> list = boardService.getOrderbyItem(pg, map);
-		int entireItemNum = boardService.getEntireItemNum(map);
-		//페이징 처리
-		BoardPaging boardPaging = boardService.boardPaging(pg, map);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("orderbylist", list);
-		mav.addObject("entireItemNum", entireItemNum);
-		mav.addObject("pg", pg);
-		mav.addObject("boardPaging", boardPaging);
-		
-		mav.setViewName("jsonView");
-		
-		return mav;
-		
-	}
+	/*
+	 * //최신순, 인기순, 고가순, 저가순...
+	 * 
+	 * @RequestMapping(value="getOrderbyItem", method=RequestMethod.POST)
+	 * 
+	 * @ResponseBody public ModelAndView
+	 * getOrderbyItem(@RequestParam(required=false, defaultValue="1") String
+	 * pg, @RequestParam Map<String, Object> map, HttpSession session,
+	 * HttpServletResponse response) {
+	 * 
+	 * System.out.println(pg); List<Object> list = boardService.getOrderbyItem(pg,
+	 * map); int entireItemNum = boardService.getEntireItemNum(map); //페이징 처리
+	 * BoardPaging boardPaging = boardService.boardPaging(pg, map);
+	 * 
+	 * ModelAndView mav = new ModelAndView(); mav.addObject("orderbylist", list);
+	 * mav.addObject("entireItemNum", entireItemNum); mav.addObject("pg", pg);
+	 * mav.addObject("boardPaging", boardPaging);
+	 * 
+	 * mav.setViewName("jsonView");
+	 * 
+	 * return mav;
+	 * 
+	 * }
+	 */
 	
 	
 	
@@ -810,6 +825,7 @@ public class BoardController {
 		map.put("order", order);
 		List<ItemDTO> itemList = boardService.getSearchItemList(map);
 		
+		
 		/*
 		 * //조회수 - 새로고침 방지 if(session.getAttribute("memUserId") != null) { Cookie[]
 		 * cookies = request.getCookies(); if(cookies != null) { for(int i = 0; i<
@@ -818,7 +834,14 @@ public class BoardController {
 		 * 
 		 * Cookie cookie = new Cookie("itemHit", "0");//생성 cookie.setMaxAge(30*60);//초
 		 * 단위 생존기간 response.addCookie(cookie);//클라이언트에게 보내기 } }
-		 */
+		 */		
+		
+		//조회수 - 새로고침 방지
+		if(session.getAttribute("memUserId") != null) {
+				Cookie cookie = new Cookie("itemHit", "0");//생성
+				cookie.setMaxAge(30*60);//초 단위 생존기간
+				response.addCookie(cookie);//클라이언트에게 보내기
+		}
 		
 		//페이징 처리
 		BoardPaging boardPaging = boardService.boardPaging(pg, totalSearchItem);
@@ -927,6 +950,40 @@ public class BoardController {
 		
 	}
 	
+	@RequestMapping(value="getMainLoc", method=RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView getMainLoc(HttpSession session) {
+		
+		String userId = (String)session.getAttribute("memUserId");
+		
+		List<Object> list = boardService.getMainLoc(userId);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("jsonView");
+		
+		return mav;
+		
+	}
+	
+	@RequestMapping(value="setMainLoc", method=RequestMethod.POST)
+	@ResponseBody
+	public void setMainLoc(HttpSession session, @RequestParam String address) {
+		String userId = (String)session.getAttribute("memUserId");
+		boardService.setMainLoc(userId, address);
+	}
+	
+	@RequestMapping(value="deleteMainLoc", method=RequestMethod.POST)
+	@ResponseBody
+	public void deleteMainLoc(HttpSession session, @RequestParam String address) {
+		String userId = (String)session.getAttribute("memUserId");
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("userId", userId);
+		map.put("addr", address);
+		boardService.deleteMainLoc(map);
+	}
+	
+	
 	
 	//-----------------------------------------todayItem-------------------------------------------//
 	@RequestMapping(value="getIndexBoardList", method=RequestMethod.POST)
@@ -935,10 +992,10 @@ public class BoardController {
 		System.out.println(pg);
 		List<ItemDTO> itemList = boardService.getIndexBoardList(pg);
 		
-		//전체페이지
-		String totalItem = boardService.getTotalItem();
-		int paging = (Integer.parseInt(totalItem) + 19) / 20;
-		String pagingTotal = ""+paging;
+		/*
+		 * //전체페이지 String totalItem = boardService.getTotalItem(); int paging =
+		 * (Integer.parseInt(totalItem) + 19) / 20; String pagingTotal = ""+paging;
+		 */
 		
 		/*
 		 * //조회수 - 새로고침 방지 if(session.getAttribute("memUserId") != null) { Cookie[]
@@ -950,21 +1007,36 @@ public class BoardController {
 		 * 단위 생존기간 response.addCookie(cookie);//클라이언트에게 보내기 } }
 		 */
 		
+		//조회수 - 새로고침 방지
+		if(session.getAttribute("memUserId") != null) {
+				Cookie cookie = new Cookie("itemHit", "0");//생성
+				cookie.setMaxAge(30*60);//초 단위 생존기간
+				response.addCookie(cookie);//클라이언트에게 보내기
+		}
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("itemList", itemList);
-		mav.addObject("pagingTotal", pagingTotal);
+		//mav.addObject("pagingTotal", pagingTotal);
 		mav.setViewName("jsonView");
 		
 		return mav;
 	}
 		
-	/*
-	 * @RequestMapping(value="getIndexTotalItem", method=RequestMethod.POST)
-	 * 
-	 * @ResponseBody public String getIndexTotalItem() { String totalItem =
-	 * boardService.getTotalItem(); int paging = (Integer.parseInt(totalItem) + 19)
-	 * / 20; String pagingTotal = ""+paging; return pagingTotal; }
-	 */
+	
+	  @RequestMapping(value="getIndexTotalItem", method=RequestMethod.POST)
+	  @ResponseBody
+	  public String getIndexTotalItem() { 
+		  
+		  String totalItem =boardService.getTotalItem(); 
+		  
+		  int paging = (Integer.parseInt(totalItem) + 19)/ 20; 
+		  
+		  String pagingTotal = ""+paging; 
+		  
+		  return pagingTotal;
+		  
+	  }
+	 
 	
 	
 	//-----------------------------hashtagBoard-----------------------------------------------------//
@@ -1239,6 +1311,7 @@ public class BoardController {
 	
 	// 공지사항 목록 불러오기
 	@RequestMapping(value = "getNoticeList", method = RequestMethod.POST)
+	@ResponseBody
 	public ModelAndView getNoticeList() {
 		List<NoticeDTO> list = boardService.getNoticeList();
 		
@@ -1343,6 +1416,7 @@ public class BoardController {
 	@RequestMapping(value="getItemInfo",method=RequestMethod.POST)
 	public ModelAndView getItemInfo(@RequestParam String item_seq) {
 		ItemDTO itemDTO = boardService.getItemInfo(item_seq);
+		System.out.println("itemDTO.getUserId() : " + itemDTO.getUserId());
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("itemDTO",itemDTO);

@@ -389,24 +389,26 @@ body > #wrap {
 
 .loginModal-header {
     position: relative;
-    bottom: 20px;
+    bottom: 25px;
     color: darkgreen;
     width: 450px;
     right: 50px;
+    margin-top: -30px;
+    margin-bottom: -20px;
 }
 
 /* 로그인창 */
 
 .loginModal-headerDiv {
     position: relative;
-    bottom: 30px;
+    bottom: 0px;
     border-bottom: 1px solid #e5e5e5;
     text-align: center;
 }
 
 
 .close {
-	margin-top : -50px;
+	margin-top : -80px;
     padding: 0 20px;
     cursor: pointer;
     background: 0 0;
@@ -427,6 +429,14 @@ body > #wrap {
     padding: 5px 10px;
     font-size: 14px;
     font-weight: normal;
+}
+
+.loginModal-center {
+    padding-top: 20px;
+}
+
+input#checkedId {
+    margin-right: 10px;
 }
 
 button {
@@ -558,6 +568,7 @@ button div p{
 .selection1{
     position: relative;
     overflow: hidden;
+    padding-top: 30px;
 }
 
 .selection3{
@@ -688,7 +699,7 @@ display:none;
 
 .asideDiv {
 	position: relative;
-    bottom: 70px;
+    bottom: 20px;
     background: white;
 }
 
@@ -712,7 +723,11 @@ display:none;
 
 .bag_clickA {
 	text-decoration: none;
-	color : #c0c0c0;
+    color: #c0c0c0;
+    font-size: 11pt;
+    position: relative;
+    padding: 0px;
+    bottom: 1.52px;
 }
 
 .recentlyLook {
@@ -874,7 +889,7 @@ display:none;
 	color : green;
 }
 
-.pmangTok {
+/* .pmangTok {
    	margin-top: 12px;
     width: 50px;
     height: 54px;
@@ -887,44 +902,29 @@ display:none;
     cursor: pointer;
     color: green;
 
-}
+} */
 
 .pmangTokDiv {
     position: relative;
-    padding: 7px 10px;
+    padding: 10px 0px 10px 0px;
+    display: flex;
+    cursor: pointer;
 }
 
 .pmangTok img {
-	width: 50px;
-	height: 50px;
+	width: 60px;
+    height: 62px;
 }
 
-.notice {
-	padding: 15px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 9pt;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    overflow: inherit;
-}
-
-.noticeDiv{
-	background: #EBFFEB;
-    border: 1px solid lightgray;
+span#pmangSpan {
+    font-size: 11pt;
     position: absolute;
-    z-index: 40;
-    right: 85px;
-    display: none;
-    border-radius: 10px;
+    padding-top: 55px;
+    padding-left: 8px;
+    font-weight: 700;
 }
 
-.noticeContent {
-	padding : 10px;
-	text-align: left;
-	white-space: nowrap;
-}
+
 
 
 /* footer */

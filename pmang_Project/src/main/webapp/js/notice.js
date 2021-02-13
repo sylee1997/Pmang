@@ -1,4 +1,4 @@
-$('.prohibitedLink').click(function() {
+$('.prohibitedLink').on('click',function() {
 	$(location).attr("href", "/pmang/board/notice?tabNo=4");
 	//거래항목 check조건은 index <script>에 포함됨
 	
@@ -7,7 +7,7 @@ $('.prohibitedLink').click(function() {
 });
 
 
-$('.bulletinArea').on('click',function(){
+$(document).on('click','.bulletinArea' ,function(){
 	$('.bulletinContent').slideUp();
 	$(".arrowImg").stop().css({'transform': 'rotate(0deg)'},1000);
 	
@@ -37,6 +37,7 @@ $('.postArea').click(function(){
 });//postArea click
 
 
+
 if($('#footerTabNo').val()=='1'){
 	$('#tab1').attr('checked', true);
 	
@@ -49,32 +50,30 @@ if($('#footerTabNo').val()=='1'){
 }else if($('#footerTabNo').val()=='4'){
 	$('#tab3').attr('checked', true);
 	$('#menu2').attr('checked', true);
-	
-}/*else{
-	console.log($('#footerTabNo').val());
-	$('#tab1').attr('checked', true);
-}*/
+	$('#postArea_prohibitedItem').slideDown();
+}
 
 
 
-
+$(document).ready(function(){
 
 //공지사항 불러오기
 $('#noticeLabel').on('click',function(event){
-	
+	$('.bulletinDiv').empty();
 	$.ajax({
 		type: 'post',
 		url: '/pmang/board/getNoticeList',
 		dataType:'json',
+		async: false,
 		error: function(err){
 			console.log(err)
 		},
 		success: function(result){
 			
 			console.log(result);
-			console.log(result.list);
 			
 			$.each(result.list, function(index, items){
+		
 				$('<div/>',{
 					class:'bulletinArea'})
 							.append($('<div/>',{
@@ -85,22 +84,23 @@ $('#noticeLabel').on('click',function(event){
 											height:'20'})))
 							.append($('<div/>',{
 								class:'bulletinTitle',
-								text:'items.noticeSubject'}))
+								text:items.noticeSubject}))
 								
 							.append($('<div/>',{
 								class:'bulletinDate',
-								text:'items.logtime'}))
+								text:items.logtime}))
 								
 							.append($('<div/>',{
 								class:'bulletinContent',
-								text:'items.noticeContent'}))
+								text:items.noticeContent}))
 								
-				.appendTo($('#bulletinDiv'));
+				.appendTo($('.bulletinDiv'));
 			});//for
 		}//success
 	});//ajax
-});//ajax
+});//click
 
+})//ready
 
 
 
