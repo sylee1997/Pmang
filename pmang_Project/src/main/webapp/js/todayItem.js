@@ -233,28 +233,27 @@ $('.selection3').on('click', '.itemLink', function(){
 	var itemPrice = $(this).find(".itemPrice").text();
 	var img = $(this).children("img").attr('src');
 	
-	var goods = [img, itemSubject, itemPrice];
-	localStorage.setItem("key", JSON.stringify(goods));
-
+	checkCookie(img, itemSubject, itemPrice, item_seq);
+	
+	
+	//아이템 뷰로 이동!
 	location.href="/pmang/board/itemView?item_seq="+item_seq;
-	/*$.ajax({
-		type : 'post',
-		url : '/pmang/member/recentlyGoods',
-		data : {'imgSrc' : img, 'item_seq' : item_seq},
-		success : function(){
-			alert("저장!")
-			location.href="/pmang/board/itemView?item_seq="+item_seq;
-		},
-		error : function(err){
-			console.log(err);
-		}
-		
-	});
-	*/
-	//alert($(this).children("#item_seqSpan").text());
-	//$('#goods_img1').append($('<img src="' + img + '" width="80" height="80">'));
-	//location.href="/pmang/board/itemView?item_seq="+item_seq;
+	
 });
+
+function checkCookie(img, itemSubject, itemPrice, item_seq) {
+    var itemID = getCookie("itemID");
+	var thisItem= img+':'+itemSubject+':'+itemPrice+':'+item_seq;
+	
+		if (itemID != "" && itemID != null) {
+			if (itemID.indexOf(thisItem) == -1){ //값이 없으면 
+				setCookie("itemID",thisItem+"&"+itemID, 1);
+			 }
+		} else if (itemID == "" || itemID == null) {
+				setCookie("itemID",thisItem+"&", 1);
+		}
+
+}
 
 
 

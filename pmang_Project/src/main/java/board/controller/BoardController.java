@@ -505,7 +505,12 @@ public class BoardController {
 	// -------------------review-------------------
 	// 리뷰 작성폼
 	@RequestMapping(value = "reviewWriteForm", method = RequestMethod.GET)
-	public String reviewWriteForm() {
+	public String reviewWriteForm(@RequestParam String item_seq,Model model,HttpSession session) {
+		
+		//String userid=(String) session.getAttribute("memUserId");
+		
+		//model.addAttribute("memUserId",userid);
+		model.addAttribute("item_seq",item_seq);
 		return "/pm_review/reviewWriteForm";
 	}
 
@@ -517,8 +522,8 @@ public class BoardController {
 			@RequestParam("img3url") String img3url, HttpSession session) {
 		String filePath = "C:/project/Pmang/pmang_Project/src/main/webapp/storage/";
 
-		//String reviewWriter = (String) session.getAttribute("memUserId");// 작성자 아이디 세션으로 넣어야함
-		String reviewWriter="tmddms2292";
+		String reviewWriter = (String) session.getAttribute("memUserId");// 작성자 아이디 세션으로 넣어야함
+		//String reviewWriter="tmddms2292";
 		reviewDTO.setReviewWriter(reviewWriter);
 
 		UUID uuid = UUID.randomUUID(); // 중복파일이름방지를 위한 uuid설정

@@ -10,7 +10,7 @@
 <body>
 	<input type="hidden" id="photoCountHidden" value="0">
 	<%-- <input type="hidden" id="sellerid" value="${memUserId }">  --%>
-	<input type="hidden" id="item_seq" value="12">
+	<input type="hidden" id="item_seq" value="${item_seq }">
 	<form id="reviewWriteForm">
 	
 		<div class="reviewHeader">

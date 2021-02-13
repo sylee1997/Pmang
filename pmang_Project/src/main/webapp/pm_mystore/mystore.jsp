@@ -121,6 +121,7 @@
 							<span></span>
 						</div>
 						<div id="storeNameModify">
+							<a href="/pmang/member/modifyForm" id="memberInfoModify">회원 정보 수정</a>
 							<!-- <button id="storeNameEditBtn">상점명 수정</button> -->
 						</div>
 						<!-- storeNameModify -->
@@ -157,14 +158,15 @@
 					</div>
 					<!-- mystoreSpec -->
 					<div id="mystoreIntroduce">
-						<textarea disabled readonly
+						<textarea id="mystoreText" disabled readonly
 							style="background: transparent; font-family: sans-serif;"></textarea>
 					</div>
 					<!-- mystoreIntroduce -->
 					<div id="introEdit">
-						
-						<button type="button" id="storeIntroEditBtn">내상점 정보 수정</button>
-						<a href="#" id="memberInfoModify">회원 정보 수정</a>
+					
+						<button id="storeIntroEditBtn" type="button">내상점 정보 수정</button>
+						<!-- <a href="/pmang/member/modifyForm" id="memberInfoModify">회원 정보 수정</a> -->
+
 					</div>
 					<!-- introEdit -->
 					<div class="introEdit1">
@@ -213,11 +215,41 @@
 <script type="text/javascript" src="/pmang/js/mystore.js"></script>
 <script type="text/javascript" src="/pmang/js/admin.js"></script>
 <script>
+
 	function changeValue(obj) {
 		//var file=obj.target.file;
 		//alert(file);
 		document.signform.submit();
 		//location.href="/pmang/board/mystore?userid="+$('#userid').val();
+	}
+	
+	// 올린 시간 체크.
+	function timeForToday(value) {
+	    var today = new Date();
+	    var timeValue = new Date(value);
+	    
+	    var betweenSeconds = Math.floor((today.getTime() - timeValue.getTime()) / 1000);
+	    if (betweenSeconds < 60) {
+	        return betweenSeconds+'초전';
+	    }
+
+	    var betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+	    
+	    if (betweenTime < 60) {
+	        return betweenTime+'분전';
+	    }
+
+	    var betweenTimeHour = Math.floor(betweenTime / 60);
+	    if (betweenTimeHour < 24) {
+	        return betweenTimeHour + '시간전';
+	    }
+
+	    var betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+	    if (betweenTimeDay < 365) {
+	        return betweenTimeDay+'일전';
+	    }
+
+	    return Math.floor(betweenTimeDay / 365)+'년전';
 	}
 	
 	//tab
@@ -270,17 +302,8 @@
 																+ " 명");
 										$('#mystoreIntroduce textarea').text(data.sellerDTO.pf_content);
 
-										//상점 오픈일 날짜 계산
-										var openDate = new Date(
-												data.sellerDTO.marketdate);
-										var today = new Date();
-										var dateDiff = Math
-												.ceil((today.getTime() - openDate
-														.getTime())
-														/ (1000 * 3500 * 24));
-
 										$('#mystoreOpenDate').text(
-												dateDiff + '일전');
+												timeForToday(data.sellerDTO.marketdate));
 										
 										var str = '<img class="pf_photo" src="/pmang/storage/'+data.sellerDTO.pf_photo+'" width=150 height=150/>';
 										$(str).appendTo('.mystoreProfileImg');
@@ -342,16 +365,16 @@
 											$('#mystoreIntroduce textarea').text(data.sellerDTO.pf_content);
 
 											//상점 오픈일 날짜 계산
-											var openDate = new Date(
+											/* var openDate = new Date(
 													data.sellerDTO.marketdate);
 											var today = new Date();
 											var dateDiff = Math
 													.ceil((today.getTime() - openDate
 															.getTime())
-															/ (1000 * 3500 * 24));
-
+															/ (1000 * 3600 * 24)); */
+											
 											$('#mystoreOpenDate').text(
-													dateDiff + '일전');
+													timeForToday(data.sellerDTO.marketdate));
 											
 											var str = '<img class="pf_photo" src="/pmang/storage/'+data.sellerDTO.pf_photo+'" width=150 height=150/>';
 											$(str).appendTo('.mystoreProfileImg');
@@ -480,10 +503,10 @@
 			// tab operation
 						$('.tabmenu').on('click',function() {
 									var activeTab = $(this).attr('data-tab');
-									$('li').css('background-color',
-											'rgb(250, 250, 250)').css(
+								 	$('li').css('background-color',
+											'white').css(
 											'border-top',
-											'2px solid transparent');
+											'2px solid transparent'); 
 									$(this).css('background-color', 'white')
 											.css('border-top',
 													'2px solid green');

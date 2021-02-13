@@ -44,7 +44,7 @@
 		select * from
 		(select rownum rn,tt.* from
 		(select
-		item_subject,img1,item_price, logtime,item_location
+		item_subject,img1,item_price, logtime,item_location,t.item_seq,t.item_state
 		from wishlist
 		w,item t
 		where t.item_seq=w.item_seq and w.userid=#{userid} order by
@@ -127,8 +127,8 @@
 		parameterType="java.util.Map" resultType="wish">
 		select * from
 		(select rownum rn,tt.* from
-		(select item_seq,
-		itemsubject,img1,item_price, logtime,item_location
+		(select t.item_seq,t.item_state,
+		item_subject,img1,item_price, logtime,item_location
 		from wishlist w,item
 		t
 		where t.item_seq=w.item_seq and w.userid=#{userid} order by
@@ -143,8 +143,8 @@
 		parameterType="java.util.Map" resultType="wish">
 		select * from
 		(select rownum rn,tt.* from
-		(select item_seq,
-		itemsubject,img1,item_price, logtime,item_location
+		(select t.item_seq,t.item_state,
+		item_subject,img1,item_price, logtime,item_location
 		from wishlist w,item
 		t
 		where t.item_seq=w.item_seq and w.userid=#{userid} order by
@@ -158,8 +158,8 @@
 		parameterType="java.util.Map" resultType="wish">
 		select * from
 		(select rownum rn,tt.* from
-		(select item_seq,
-		itemsubject,img1,item_price, logtime,item_location
+		(select t.item_seq,t.item_state,
+		item_subject,img1,item_price, logtime,item_location
 		from wishlist w,item
 		t
 		where t.item_seq=w.item_seq and w.userid=#{userid} order by
