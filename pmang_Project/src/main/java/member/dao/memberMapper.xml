@@ -84,6 +84,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 							, tel3=#{tel3} where userId=#{userId}
 	</update>
 	
+	<!-- 탈퇴 패스워드 체크 -->
+	<select id="deleteId" parameterType="String" resultType="member">
+		delete from usertable where userId=#{userId}
+	</select>
+	
+	<delete id="deleteMember" parameterType="member">
+        delete from usertable where pwd=#{pwd}
+    </delete>
+	
 	<!-- seller -->
 	
 	<!-- 상품등록쪽 -->

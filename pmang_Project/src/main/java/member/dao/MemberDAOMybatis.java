@@ -97,6 +97,13 @@ public class MemberDAOMybatis implements MemberDAO {
 		sqlSession.update("memberSQL.modify", memberDTO);
 		
 	}
+	
+	@Override
+	public void deleteId(MemberDTO memberDTO) {
+		sqlSession.delete("memberSQL.deleteId", memberDTO);
+
+	}
+
 
 	
 	
@@ -180,6 +187,7 @@ public class MemberDAOMybatis implements MemberDAO {
 	public List<ZipcodeDTO> mainLoc(Map<String, String> map) {
 		return sqlSession.selectList("memberSQL.mainLoc", map);
 	}
+
 
 
 

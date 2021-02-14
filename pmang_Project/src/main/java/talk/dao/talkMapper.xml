@@ -59,17 +59,17 @@
 		where ROWNUM = 1 
 		</select>
 
-	<!-- readtime null -->
+	<!-- readtime -->
 	<update id="setOpen" parameterType="hashMap">
 		update message 
 		set read_time = '3000-11-12T15:20:31.000'
-		where sender_user_id = #{userId} and talkRoom_seq = #{talkRoom_seq} 
+		where receiver_user_id = #{userId} and talkRoom_seq = #{talkRoom_seq} 
 	</update>
 
 	<update id="setClose" parameterType="hashMap">
 		update message 
 		set read_time = TO_char(systimestamp,'YYYY-MM-DD HH24:MI:SS.FF3') 
-		where sender_user_id = #{userId} and talkRoom_seq = #{talkRoom_seq} 
+		where receiver_user_id = #{userId} and talkRoom_seq = #{talkRoom_seq} 
 	</update>
 
 	<!-- 나가기 -->
@@ -77,7 +77,51 @@
 		delete from message 
 		where((sender_user_id = #{userId} and receiver_user_id = #{partner_userId}) or (sender_user_id = #{partner_userId} and receiver_user_id = #{userId}))and userId= #{userId} 
 	</delete>
+	
+	<!-- 판매자 정보 조회 -->
+ 	<!-- 상점후기 -->
+ 	<select id="getGood" resultType="int">
+ 		select count(*) from review where reviewstamp = '좋아요'
+ 	</select>
  	
+ 	<select id="getSoso" resultType="int">
+ 		select count(*) from review where reviewstamp = '보통이에요'
+ 	</select>
  	
+ 	<select id="getNotGood" resultType="int">
+ 		select count(*) from review where reviewstamp = '별로에요'
+ 	</select>
+ 	
+ 	<!-- 판매상품 (판매중인상품)-->
+ 	<select id="getItemCount" parameterType="String" resultType="int">
+ 		select count(*) from item where userid = #{userId} and item_state = 'sell'
+ 	</select>
+ 	
+ 	<select id="getSalesCount" parameterType="String" resultType="int">
+ 		select count(*) from item where userid = #{userId}
+ 	</select>
+ 	<!-- 판매완료 -->
+ 	<update id="itemSold" parameterType="String">
+ 		update item
+ 		set item_state = 'sold'
+ 		where item_seq = #{item_seq }
+ 	</update>
+ 	
+ 	<!-- 현재 itemState 상태 -->
+ 	<select id="getItemState" parameterType="String" resultType="String">
+ 		select item_state from item where item_seq = #{item_seq }
+ 	</select>
+ 	
+ 	<!-- 아이템판매상태 조회 -->
+    <select id="sellCheck" parameterType="Map" resultType="String">
+		select item_state from item where item_seq = #{item_seq}
+    </select>
+    
+    <!-- item_seq 업데이트 -->
+    <update id="updateItemSeq" parameterType="talkRoom">
+    	update talkroom
+    	set item_seq = #{item_seq}
+    	where (userId = #{userId} and partner_userId = #{partner_userId}) or (userId = #{partner_userId} and partner_userId = #{userId})
+    </update>
  </mapper>
  

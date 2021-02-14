@@ -53,8 +53,7 @@ $('#storeIntroEditBtn').on(
 
 			$('#mystoreIntroduce').append(
 					'<textarea id="storeIntro" onKeyup="len_chk()">' + mystoreIntroduce+ '</textarea>');
-
-
+			
 			$('.introEdit1').show();
 
 			// 내상점정보수정버튼 -> db로 가서 고쳐야댐
@@ -79,3 +78,8 @@ $('#storeIntroEditBtn').on(
 						});
 					});
 		});
+
+//내상점관리 버튼
+$('#manageBtn').click(function(){
+	location.href='/pmang/seller/sellerManagementForm';
+});

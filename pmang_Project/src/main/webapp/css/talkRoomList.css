@@ -4,7 +4,7 @@ body, #root {
    max-width: 375px;
    max-height: 667px;
    overflow: hidden;
-   background-color: gray;
+   background-color: #fafafa;
 }
 
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,

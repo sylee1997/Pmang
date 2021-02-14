@@ -407,7 +407,7 @@
 	<insert id="reviewWrite" parameterType="review">
  		insert into review values(review_seq.nextval,
 							 		#{sellerid},
-							 		#{itemNum},
+							 		#{item_seq},
 							 		#{reviewWriter},
 							 		#{reviewSubject},
 							 		#{reviewContent},
@@ -473,7 +473,7 @@
 	</select>
 	
 	<select id="getSellerInfo" resultType="seller">
-		select * from seller where userId=${userId}
+		select * from seller where userId = #{userId}
 	</select>
 </mapper>
 

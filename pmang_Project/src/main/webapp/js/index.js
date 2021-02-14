@@ -800,7 +800,12 @@ $('.itemWriteBtn').click(function(){
 
 //우석 수정 
 $('.pmangTok').on('click',function(){
-	window.open("/pmang/talk/talkRoomList","pmangTalk","width=375 height=667");
+	if($('#sessionId').val() != null){
+		window.open("/pmang/talk/talkRoomList","pmangTalk","width=375 height=667");      
+	}else {
+		alert('로그인 하세요.');
+		$('#loginli').trigger('click');
+	}
 });
 // 우석 수정 -----------------------------------
 
@@ -861,6 +866,7 @@ $('#kakaoBtn').click(function(event){
 								location.href="/pmang/index";
 							} else if(data == 'JoinSuccess'){
 								alert('카카오 회원가입을 축하드립니다.');
+								location.href="/pmang/index";
 							}
 							console.log(data);
 						},

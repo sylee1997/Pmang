@@ -141,7 +141,9 @@ public class MemberServiceImpl implements MemberService {
 			int success = memberDAO.kakaoWrite(memberDTO);
 			if(success == 1) {
 				String userId = memberDTO.getUserId();
-				insertSeller(userId);	
+				insertSeller(userId);
+				session.setAttribute("memUserId", memberDTO.getUserId());
+				session.setAttribute("memEmail", memberDTO.getEmail1()+"@"+memberDTO.getEmail2());
 			}
 			return "JoinSuccess";
 		}
@@ -200,6 +202,13 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void modify(MemberDTO memberDTO) {
 		memberDAO.modify(memberDTO);
+		
+	}
+	
+	@Override
+	public void deleteId(MemberDTO memberDTO, HttpSession session) {
+		memberDAO.deleteId(memberDTO);
+		session.invalidate();
 		
 	}
 		

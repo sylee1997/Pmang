@@ -194,6 +194,12 @@ public class MemberController {
 		return "/index";
 	}
 	
+	@RequestMapping(value="deleteId", method=RequestMethod.POST)
+	@ResponseBody
+	public void deleteId(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+		memberService.deleteId(memberDTO, session);
+	}
+	
 	
 	
 	//------------------------------------seller------------------------------------------------------//
@@ -218,6 +224,7 @@ public class MemberController {
 		System.out.println(itemDTO.getItem_location());
 							
 		String filePath = "D:\\git_home\\Pmang\\pmang_Project\\src\\main\\webapp\\storage";
+		//C:\\Programmer\\project\\Pmang\\pmang_Project\\src\\main\\webapp\\storage
 		//D:\git_home\Pmang\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\pmang_Project\storage;
 		//System.out.println(filePath);
 		

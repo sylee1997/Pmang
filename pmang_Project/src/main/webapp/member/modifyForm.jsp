@@ -141,6 +141,7 @@
 						<td align="center" colspan="2">
 							<div class="form-group">
                         <button class="btn btn-primary" id="modifyBtn" type="button" style="width: 50%; margin: 10px 25%;">회원정보수정</button>
+							 <button class="btn btn-primary" id="deleteId" type="button" style="width: 50%; margin: 10px 25%;">회원탈퇴</button>
 							</div>
 						</td>
 					</tr>

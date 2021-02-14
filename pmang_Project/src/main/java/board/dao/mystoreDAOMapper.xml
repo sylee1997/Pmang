@@ -65,7 +65,7 @@
 		select * from
 		(select rownum rn,tt.* from
 		(select reviewwriter,
-		reviewstamp,reviewsubject,img1,img2,img3,reviewcontent,reviewlogtime,itemnum
+		reviewstamp,reviewsubject,img1,img2,img3,reviewcontent,reviewlogtime,item_seq
 		from review r,seller s
 		where s.userid=r.sellerid and
 		r.sellerid=#{userid} order by r.reviewlogtime desc)tt

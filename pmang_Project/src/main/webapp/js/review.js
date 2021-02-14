@@ -186,7 +186,9 @@ $('.reviewOkBtn').on('click',function(){
 	var reviewStamp=$('input[type=radio]:checked').val();
 	var sellerid=$('.reviewStoreName').text();
 	var reviewSubject=$('.reviewSubject').text();
+	var item_seq=$('.item_seq').text();
 	
+	formData.append("item_seq",item_seq);
 	formData.append("reviewSubject",reviewSubject);
 	formData.append("sellerid",sellerid);
 	formData.append("reviewStamp",reviewStamp);
@@ -206,6 +208,7 @@ $('.reviewOkBtn').on('click',function(){
 		success:function(data){
 			alert('리뷰 작성을 완료하였습니다.');
 			location.href='/pmang/index';
+			//window.close();
 			
 		},
 		error:function(err){

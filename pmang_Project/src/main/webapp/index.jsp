@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 
 <link rel="stylesheet" href="/pmang/css/index.css">
-<style type="text/css"></style>
+
 <title>피망마켓에 오신것을 환영합니다.</title>
 </head>
 <body> 
@@ -732,8 +732,6 @@ if('${tabNo}'=='1'){
 	$('#tab3').attr('checked', true);
 	$('#menu2').attr('checked', true);
 }
-
-
 </script>
 
 </body>

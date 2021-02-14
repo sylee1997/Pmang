@@ -4,15 +4,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style type="text/css">
+.item_seq{
+display:none;
+}
+</style>
 <title>리뷰쓰기</title>
 <link rel="stylesheet" href="/pmang/css/review.css">
 </head>
 <body>
 	<input type="hidden" id="photoCountHidden" value="0">
-	<%-- <input type="hidden" id="sellerid" value="${memUserId }">  --%>
-	<input type="hidden" id="item_seq" value="${item_seq }">
-	<form id="reviewWriteForm">
 	
+	<form id="reviewWriteForm">
+	<input type="hidden" id="item_seq" value="${item_seq }">
+	 <span class="item_seq">${item_seq }</span>
 		<div class="reviewHeader">
 			<span>리뷰쓰기</span>
 
