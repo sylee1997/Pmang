@@ -17,7 +17,7 @@
 <!-- <input type="hidden" id="memid" value="1"> -->
 <!-- 나중에 세션값 넣어줘야함 통일해야돼(이거는 관리자!!) -->
 
-	<c:if test="${memUserId==admin }">
+	<c:if test="${memUserId=='admin123' }">
 		<!-- *************************관리자 ********************************** -->
 
 		<div class="mystoreContainer">
@@ -96,7 +96,7 @@
 	</c:if>
 	<!-- *************************관리자 ********************************** -->
 
-		<c:if test="${memUserId != admin }">
+		<c:if test="${memUserId != 'admin123' }">
 			<form id="mystoreForm">
 			<div class="mystoreContainer">
 				<div class="mystoreProfile">
@@ -260,7 +260,7 @@
 						//alert($('#memid').val()+' '+$('#userid').val());
 
 						//일반회원일때
-					if($('#memid').val()!='admin'){
+					if($('#memid').val()!='admin123'){
 							
 						//남의 상점
 						if($('#memid').val()!=$('#userid').val()){
