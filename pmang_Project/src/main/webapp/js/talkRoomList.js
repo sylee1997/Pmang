@@ -1,4 +1,6 @@
 $(document).ready(function() {
+ //window.setTimeout('window.location.reload()', 2000);
+   
    // list append
    $.ajax({
      type: 'POST',
@@ -12,6 +14,15 @@ $(document).ready(function() {
         console.log(data);
          
            $.each(data.mapList, function(index, items) {
+              var unread_div;
+              var unread_count;
+              if(items.unread_count == '0'){
+                 unread_div = 'div';
+                 unread_count = '';
+              }else {
+                 unread_div = 'unread_div';
+                 unread_count = items.unread_count; 
+              }
               $('#talkList').append($('<li/>', {
                  class: 'talkRoom'
                  }).append($('<div/>',{
@@ -24,7 +35,7 @@ $(document).ready(function() {
                           }).append($('<img/>', {
                              class: 'profile_img',
                              alt: '프로필이미지',
-                             src: '../image/'+items.pf_photo,// 가상폴더에서 이미지
+                             src: items.pf_photo,// 가상폴더에서 이미지
                                                 // 들고와야함!
                              height: '50', 
                              width: '50'
@@ -51,8 +62,8 @@ $(document).ready(function() {
                           text: items.send_time// 마지막 대화시간인데 SQL문 수정해야함
                           })// time
                        ).append($('<div/>',{
-                          class: 'unread_div',
-                          text: items.unread_count
+                          class: unread_div,
+                          text: unread_count
                           })// unread_div
                        )// talkLogTime
                     ).append($('<div/>').append($('<button/>', {
@@ -81,8 +92,8 @@ $(document).ready(function() {
                     $('.userName_modal').text( items.marketname);
                     $('.all_modal').addClass('on');
                     $('.modal_div').css('position', 'fixed');
-                    $('.modal_div').css('right', '50%');
-                    $('.modal_div').css('bottom', '50%');
+                    $('.modal_div').css('left', '42px');
+                    $('.modal_div').css('top', '200px');
                     // 모달바탕 클릭했을때(꺼짐)
                     $('.on').click(function() {
                        $('.all_modal').removeClass('on');
@@ -97,18 +108,18 @@ $(document).ready(function() {
                         $('.all_modal').removeClass('on');
                         $('.modal_div').css('position', 'static');
                         $.ajax({ 
-                        	type: 'POST',
-                        	url: '/pmang/talk/getOut',
-                        	data: {
-                        		'partner_userId': items.partner_userId,
-                        	},
-                        	success: function(){
-                        		console.log('데이터지우기 성공');
-                        	}
-                        	,error: function(err) {
-								console.log(err);
-							}
-                        	
+                           type: 'POST',
+                           url: '/pmang/talk/getOut',
+                           data: {
+                              'partner_userId': items.partner_userId,
+                           },
+                           success: function(){
+                              console.log('데이터지우기 성공');
+                           }
+                           ,error: function(err) {
+                        console.log(err);
+                     }
+                           
                         })
                      });
                      

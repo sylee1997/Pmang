@@ -131,4 +131,75 @@ public class TalkDAOMybatis implements TalkDAO {
 		sqlSession.delete("talkSQL.getOut", map);
 	}
 
+	@Override
+	public Map<String, Integer> getReviewStamp() {
+		Map<String, Integer> review = new HashMap<String, Integer>();
+		int good = 0;
+		int soso = 0;
+		int notgood = 0;
+		
+		try {
+			good = sqlSession.selectOne("talkSQL.getGood");
+		} catch (Exception e) {
+			good = 0;
+		}
+		
+		try {
+			sqlSession.selectOne("talkSQL.getSoso");
+		} catch (Exception e) {
+			soso = 0;
+		}
+		
+		try {
+			notgood = sqlSession.selectOne("talkSQL.getNotGood");
+		} catch (Exception e) {
+			notgood = 0;
+		}
+		
+		review.put("good", good);
+		review.put("soso", soso);
+		review.put("notgood", notgood);
+		
+		return review;
+	}
+
+	@Override
+	public int getItemCount(String userId) {
+		try {
+			return sqlSession.selectOne("talkSQL.getItemCount",userId);
+		} catch (Exception e) {
+			return 0;
+		}
+		
+	}
+
+	@Override
+	public int getSalesCount(String userId) {
+		try {
+			return sqlSession.selectOne("talkSQL.getSalesCount",userId);
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+	@Override
+	public void itemSold(String item_seq) {
+		sqlSession.update("talkSQL.itemSold",item_seq);
+	}
+
+	@Override
+	public String getItemState(String item_seq) {
+		return sqlSession.selectOne("talkSQL.getItemState",item_seq);
+	}
+	
+	@Override
+	public String sellCheck(int item_seq) {
+		return sqlSession.selectOne("talkSQL.sellCheck", item_seq);
+	}
+
+	@Override
+	public void updateItemSeq(TalkRoomDTO talkRoomDTO) {
+		sqlSession.update("talkSQL.updateItemSeq", talkRoomDTO);
+	}
+
 }
