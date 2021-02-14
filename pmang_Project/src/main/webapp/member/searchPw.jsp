@@ -27,14 +27,18 @@
               </tr>
               <tr id="email_tr">
                 <td id="search_id">이메일 주소</td>
-                <td><input type="text"  style="width:140px;  height: 30px; border: 1px solid #e5e5e5;" name="email1" id="email1"> @ <input type="text" style="width:140px;  height: 30px; border: 1px solid #e5e5e5;" name="email2" id="email2"><select class="form-control input-sm" name="selection" onChange="selectEmail(this)">
+                <td><input type="text"  style="width:140px;  height: 30px; border: 1px solid #e5e5e5;" name="email1" id="email1"> @ <input type="text" style="width:140px;  height: 30px; border: 1px solid #e5e5e5;" name="email2" id="email2">
+                <td>
+                <select class="form-control input-sm" name="selection" onChange="selectEmail(this)">
 						<option value="1">직접 입력</option>
 						<option value="gmail.com">gmail.com</option>
 						<option value="naver.com">naver.com</option>
 						<option value="hanmail.net">hanmail.net</option>
-					</select>
+				</select>
+				</td>
+				<td>
 				<div id="emailDiv" align="left"></div>
-					</td>
+				</td>
               </tr>
             </table>
             <br>

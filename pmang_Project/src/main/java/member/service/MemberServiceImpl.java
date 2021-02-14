@@ -141,7 +141,9 @@ public class MemberServiceImpl implements MemberService {
 			int success = memberDAO.kakaoWrite(memberDTO);
 			if(success == 1) {
 				String userId = memberDTO.getUserId();
-				insertSeller(userId);	
+				insertSeller(userId);
+				session.setAttribute("memUserId", memberDTO.getUserId());
+				session.setAttribute("memEmail", memberDTO.getEmail1()+"@"+memberDTO.getEmail2());
 			}
 			return "JoinSuccess";
 		}

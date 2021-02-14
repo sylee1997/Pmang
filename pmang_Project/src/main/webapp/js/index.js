@@ -861,6 +861,7 @@ $('#kakaoBtn').click(function(event){
 								location.href="/pmang/index";
 							} else if(data == 'JoinSuccess'){
 								alert('카카오 회원가입을 축하드립니다.');
+								location.href="/pmang/index";
 							}
 							console.log(data);
 						},

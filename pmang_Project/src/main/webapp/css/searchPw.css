@@ -22,5 +22,9 @@
 }
 .btn-primary{
 	background-color:green;
+	color : white;
+	font-weight: 600;
+	width: 400px;
+	margin-left: 70px;
 }
 

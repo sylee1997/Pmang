@@ -7,7 +7,6 @@
 <head>
 <meta charset="UTF-8">
 
-<<<<<<< HEAD
 
 <link rel="stylesheet" href="/pmang/css/pm_index.css">
 <style type="text/css">
@@ -15,10 +14,8 @@
          
 /* --------------------------------------------서영이조 */
 </style>
-=======
 <link rel="stylesheet" href="/pmang/css/index.css">
 <style type="text/css"></style>
->>>>>>> temp
 <title>피망마켓에 오신것을 환영합니다.</title>
 </head>
 <body> 
@@ -752,7 +749,7 @@
          move();
       });
       /* 인기 카테고리 슬라이드 쇼 이벤트 */
-=======
+
 if('${tabNo}'=='1'){
 	$('#tab1').attr('checked', true);
 }else if('${tabNo}'=='2'){
@@ -765,7 +762,6 @@ if('${tabNo}'=='1'){
 }
 
 
->>>>>>> temp
 </script>
 
 </body>
