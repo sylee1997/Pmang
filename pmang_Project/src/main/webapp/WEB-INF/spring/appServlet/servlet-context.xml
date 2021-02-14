@@ -9,6 +9,7 @@
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
+	<context:component-scan base-package="member.controller"/>
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 
 	
@@ -16,6 +17,8 @@
 	<context:component-scan base-package="board.controller"/>
 	<context:component-scan base-package="hello.controller"/>
 	<context:component-scan base-package="talk.controller"/>
+	<context:component-scan base-package="seller.controller"/>
+
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
@@ -27,12 +30,13 @@
 	<resources location="/font/" mapping="/font/**"/>
 	<resources location="/js/" mapping="/js/**"/>
 	<resources location="/item/" mapping="/item/**"/>
+	<resources location="/talk/" mapping="/talk/**"/>
 	<resources location="/storage/" mapping="/storage/**"/>
 
 	<resources location="/pm_itemView/" mapping="/pm_itemView/**"/>
 	<resources location="/pm_mystore/" mapping="/pm_mystore/**"/>
+	<resources location="/pm_sellerWriteForm/" mapping="/pm_sellerWriteForm/**"/>
 	
-
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
    <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
       <beans:property name="suffix" value=".jsp" />

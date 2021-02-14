@@ -10,7 +10,7 @@
 .mystoreProfile {
 	display: inline-block;
 	float: left;
-	background: rgb(238, 238, 238);
+	background: rgb(193 228 193/ 50%);
 	width: 310px;
 	height: 310px;
 }
@@ -27,11 +27,17 @@
 	overflow: hidden;
 	text-align: center;
 	/*  background: url(../image/defaultProfile.png) center 100% no-repeat; */
-	background-image: url(../image/grayPmang.png);
+	/* background-image: url(../image/grayPmang.png); */
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 150px;
 	object-fit: fill;
+}
+
+#profileImg {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
 }
 
 .mystoreProfileImg input {
@@ -57,7 +63,8 @@
 }
 
 .mystoreProfileImg {
-	width: 150px height: 150px;
+	width: 150px;
+	height: 150px;
 	position: relative;
 	/* display: inline-block; */
 	-webkit-box-align: center;
@@ -76,9 +83,17 @@
 	margin-bottom: 10px;
 }
 
+.infoName {
+	width: 200px;
+    /* margin: 0; */
+    /* padding: 0; */
+    text-align: left;
+	
+}
+
 .infoName span {
 	font-family: sans-serif;
-	margin-right: 10px;
+	margin-right: 40px;
 	font-weight: bold;
 }
 
@@ -151,20 +166,41 @@
 	line-height: 1.57;
 	white-space: pre-wrap;
 	text-align: left;
+	display: flex;
 }
 
+input#storeNameEdit {
+	/* height: 30px; */
+	padding: 10px;
+	/* margin: 0px 15px; */
+	font-size: 14px;
+	-webkit-box-flex: 1;
+	border: 0px;
+	flex-grow: 1;
+	background: rgb(220 253 214/ 10%);
+	font-weight: 600;
+}
+
+/* .infoName {
+    display: flex;
+    border: 1px solid rgb(217 217 217);
+    height: 32px;
+    width: 300px;
+    background: rgb(220 253 214 / 10%);
+} */
 #introEdit {
-	float: left;
+	/* float: left; */
 	display: flex;
 	margin-bottom: 10px;
 	margin-top: 10px;
+	justify-content: space-between;
 }
 
 .introEdit1 {
-	margin-top: 10px;
+	margin: 10px;
 }
 
-#mystoreIntroduce>textarea {
+#mystoreIntroduce textarea {
 	-webkit-box-flex: 1;
 	display: flex;
 	float: left;
@@ -172,9 +208,33 @@
 	height: 100%;
 	flex-grow: 1;
 	resize: none;
-	background-color: rgb(238, 238, 238);
+	background-color: rgb(220 253 214/ 10%);
 	border-color: transparent;
 	outline: none;
+	border: 1px solid #e5e5e5;
+	padding: 10px;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+button#storeIntroEditBtn {
+	position: relative;
+	left: 500px;
+}
+
+#memberInfoModify {
+	display: flex;
+    float: right;
+    margin-top: 5px;
+    /* border: 1px solid black; */
+    /* border-radius: 5px; */
+    padding-left: 25px;
+    padding-top: 20px;
+    font-size: 9pt;
+    test-decoration: none;
+    margin-left: 350px;
+    text-decoration: underline;
+
 }
 
 #storeIntroBtn {
@@ -182,6 +242,13 @@
 }
 
 /* tab menu*/
+#adminTab {
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 30px;
+}
+
 #mystoreTab {
 	width: 100%;
 	margin: 0 auto;
@@ -258,22 +325,27 @@ a:visited {
 	width: 200px;
 	display: flex;
 }
+
 .tab2Name {
 	width: 200px;
 	display: flex;
 }
+
 .tab3Name {
 	width: 200px;
 	display: flex;
 }
+
 .tabName span {
 	color: red;
 	margin-left: 10px;
 }
+
 .tab2Name span {
 	color: red;
 	margin-left: 10px;
 }
+
 .tab3Name span {
 	color: red;
 	margin-left: 10px;
@@ -432,13 +504,14 @@ a:visited {
 }
 
 .sortGroup a {
-	font-size: 8pt;
+	font-size: 10pt;
+	font-weight: 600;
 	display: flex;
 	float: left;
 	margin: 0 auto;
 	padding: 0;
 	text-decoration: none;
-	 color:black; 
+	color: black;
 }
 
 .defaultSort {
@@ -583,9 +656,9 @@ a:visited {
 }
 
 .favInfoLoc {
-	height: 20px;
+	height: 40px;
 	display: flex;
-	width: 100%;
+	width: 340px;
 	-webkit-box-align: center;
 	align-items: center;
 	padding-left: 20px;
@@ -594,6 +667,26 @@ a:visited {
 	color: rgb(102, 102, 102);
 	box-sizing: border-box;
 	text-decoration: none;
+}
+
+.itemLocation {
+	height: 40px;
+	border-top: 1px solid rgb(238, 238, 238);
+	font-size: 12px;
+	display: block;
+	padding: 14px 10px 14px 35px;
+	color: rgb(102, 102, 102);
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	position: relative;
+}
+
+.itemLocation img {
+	position: absolute;
+	left: 10px;
+	top: calc(50% - 8px);
 }
 
 /* tab3 - 상점 후기*/
@@ -765,4 +858,37 @@ a:visited {
 	font-size: 14px;
 	color: rgb(136, 136, 136);
 	width: 100%;
+}
+
+.itemSoldDiv {
+	z-index:999;
+	text-align: center; 
+
+	/* width: 194px;
+	height: 194px; */
+	color:green;
+	font-size:15pt;
+	font-weight:bold;
+	font-family:sans-serif;
+	
+	position: absolute;
+	top: 30%;
+	left: 10%; 
+	transform: translate(-50%, -50%);
+}
+.wishitemSoldDiv {
+	z-index:1;
+	text-align: center; 
+
+	/* width: 194px;
+	height: 194px; */
+	color:green;
+	font-size:15pt;
+	font-weight:bold;
+	font-family:sans-serif;
+	
+	position: absolute;
+	top: 50%;
+	 left: 15%; 
+	transform: translate(-50%, -50%);
 }

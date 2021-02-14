@@ -1,23 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 
-
 <link rel="stylesheet" href="/pmang/css/index.css">
-<style type="text/css"></style>
+
 <title>피망마켓에 오신것을 환영합니다.</title>
 </head>
 <body> 
+
+<!-- 강제 호출용으로 사용중 -->
+<input type="hidden" id="hiddenUserId" value="${sessionScope.memUserId }">
+
+
 <!-- 로그인 모달 -->
 <div class="loginModal">
       	<div class="loginModalContent">
       		<div class="loginModal-header">
 				<div class="loginModal-headerDiv">
-					<h3 class="loginModal-title" id="myModalLabel">피망 로그인</h3>
+					<div class="loginModal-title" id="myModalLabel"><img src="/pmang/image/mainlogoP.png" width="100" height="100" alt="피망로그인헤더"></div>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -58,14 +63,14 @@
 						<tr>
 							<td style="border-top: rgb(0,0,0);">
 								<div id="saveId">
-								<input type="checkbox" name="saveId" value="saveId">아이디
+								<input type="checkbox" name="saveId" value="saveId" id="checkedId">아이디
 								저장
 								</div>
 								<div>
 									<input type="button" id="loginBtn" value="Login">
 								</div>					
 								<div id="findIdPw">
-									<a id="find" href="#">아이디 찾기</a> / <a id="find" href="#">비밀번호 찾기</a>
+									<a id ="index_searchIdBtn">아이디 찾기</a> / <a id="index_searchPwBtn" href="#">비밀번호 찾기</a>
 								</div> <br>
 		
 								<button id="kakaoBtn">
@@ -98,7 +103,7 @@
            </div>
            
               <div class="search-wrap">
-                 <input type="text" class="searchInput" placeholder="상품명,지역명,@상점명입력" maxlength="20"/>
+                 <input type="text" class="searchInput" placeholder="상품명,지역명,#해시태그명입력" maxlength="20" style="font-size: 10pt;"/>
                  <span id="index_searchInsertXspan">x</span>
                  	<!-- 서치버튼 추가(이서영) -->
                  <a class="searchBtn" href="#">
@@ -106,6 +111,7 @@
                  </a>
                   	<!--  -->
                
+               <c:if test="${sessionScope.memUserId != null }">
                <!-- 이서영 검색클릭div -->
                <div class="searchClick">
                	<div class="searchListDiv">
@@ -128,8 +134,9 @@
                		</a>
                	</div>
                
-               </div>
+               </div><!-- searchClick -->
                
+               </c:if>
                </div>
            	<!-- 세션없을때 -->
            	<c:if test="${sessionScope.memUserId == null }">
@@ -137,14 +144,14 @@
               <ul>
                 <li>
                   <img src="/pmang/image/sell.png" alt="sale" width="40px" height="40px" />
-                  <span class="indexnavSpan" onclick="alert('먼저 로그인 하세요.')">판매하기</span>
+                  <span class="indexnavSpan" onclick="nologin()">판매하기</span>
                 </li>
                 <li>
                   <span class="vertical">|</span>
                 </li>
                 <li>
                   <img src="/pmang/image/mystore.png" alt="store" width="30px" height="30px"/>
-                  <span class="indexnavSpan" onclick="alert('먼저 로그인 하세요.')">내상점</span>
+                  <span class="indexnavSpan" onclick="nologin()">내상점</span>
                 </li>
                 <li>
                   <span class="vertical">|</span>
@@ -157,13 +164,14 @@
                   <span class="vertical">|</span>
                 </li>
                 <div class="pmangTok">
-               		<div class="pmangTokDiv">피망Tok
+               		<div class="pmangTokDiv"><img src="/pmang/image/pmangTok.jpg" width="100" height="100" alt="피망톡"><span id="pmangSpan">피망톡</span></div>
                	</div>
               </ul>
             </nav>
          </c:if>
             <!-- 세션있을때  -->
             <c:if test="${memUserId != null }">
+            <input type="hidden" id="sessionId" value="${sessionScope.memUserId}">
              <nav id="sessionOn">
               <ul>
                 <li>
@@ -175,7 +183,7 @@
                 </li>
                 <li>
                   <img src="/pmang/image/mystore.png" alt="store" width="30px" height="30px"/>
-                  <span class="indexnavSpan" onclick="location.href='/pmang/board/mystore'">내상점</span>
+                  <span class="indexnavSpan" onclick="location.href='/pmang/board/mystore?userid=${memUserId }'">내상점</span>
                 </li>
                 <li>
                   <span class="vertical">|</span>
@@ -188,7 +196,7 @@
                   <span class="vertical">|</span>
                 </li>
                 <div class="pmangTok">
-               		<div class="pmangTokDiv">피망Tok
+               		<div class="pmangTokDiv"><img src="/pmang/image/pmangTok.jpg" width="50" height="50" alt="피망톡"><span id="pmangSpan">피망톡</span></div>
                	</div>
               </ul>
             </nav>
@@ -551,36 +559,35 @@
         <div id="aside">
          <div class="asideDiv">
               <!-- 알림창 구현 -->
-            <div class="notice">
-	            <div class="noticeDiv">
-	            	<div class="noticeContent">
-	            		<a href="#">로그인을 하세요.</a>
-	            	</div>
-	            </div>
-            	<img src="/pmang/image/noticeImg.PNG" style="width:30px; height:30px;"> 
-            	<div>알림(0)</div>
-            </div>
-            <div class="likebag">찜한상품
+            <div class="likebag" onclick="location.href='/pmang/board/mystore'">찜한상품
                <div class="bag_click">
-                  <a class="bag_clickA" href="#">
-                  0 <!-- 계속 바꿔줘야 되는것 -->
+                  <img id="userZzim" src="" style="width:15px; height:15px;">
+                  <a class="bag_clickA" >
                   </a>
                </div>
             </div>
             
-            
-            <div class="recentlyLook">
-               최근본상품
-               <br>
-               0 <!-- 계속 바꿔줘야 되는것 -->
-               <br>
-               <div class="goods">
-                  <div id="goods_img1" style="width: 80px; height: 80px; border : 1px solid #e5e5e5"></div>
-                  <div id="goods_img2" style="width: 80px; height: 80px; border : 1px solid #e5e5e5"></div>
-                  <div id="goods_img3" style="width: 80px; height: 80px; border : 1px solid #e5e5e5"></div>
-               </div>
-            </div>
-            
+		             <div class="recentlyLook">
+		                           최근본상품
+		               <br>
+		               <span id=recentCnt></span> <!-- 계속 바꿔줘야 되는것 -->
+		               <div class="nonGoods">
+			               <img src="data:image/png;base64,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" width="28" height="16" alt="빈 최근본상품 아이콘">
+			               <div>최근 본 상품이 <br> 없습니다.</div>
+		               </div>
+		               <div class="goods">
+		                  
+		               </div>
+		               <div id="recentlypaging">
+			               <a class="btn_prev" style="cursor:pointer" >이전</a>
+			               <span id="recentlycurrentPage"></span>
+			               <span id="totalPageCount"></span>
+			               <a class="btn_next" style="cursor:pointer" >다음</a>
+		               </div>
+	            </div>
+
+         
+        
             <div class="topBtn">
                <a id="topA" href="#" style="color:rgb(33, 33, 33); font-size: 12pt">TOP</a>
             </div>
@@ -596,8 +603,8 @@
       <div id="container">
       
       
-         <jsp:include page="${display}"/>
-   
+         <jsp:include page="${display}" />
+
       
       </div><!-- container -->
 
@@ -643,11 +650,13 @@
             <a class="cIPDuS" id="footerNotice">공지사항</a>
             <a class="cIPDuS" id="footerFQA">자주묻는질문</a>
             <a class="cgGBdw" id="footerPolicy">운영정책</a>
-            <a class="cIPDuS" href="#">1:1문의하기</a>
-            <a class="cgGBdw" href="#">사업자정보확인</a>
-            <a class="cgGBdw" href="#">이용약관</a>
-            <a class="cgGBdw" href="#">청소년보호정책</a>
-            <a class="cgGBdw" href="#">위치기반서비스 이용약관</a>
+
+			<a class="cIPDuS" id="footerQnA">1:1문의하기</a>
+            <a class="cgGBdw" href="#" onClick="window.open('http://localhost:8080/pmang/pm_notice/companyInfo.jsp','companyInfo')">사업자정보확인</a>
+            <a class="cgGBdw" href="#" onClick="window.open('http://localhost:8080/pmang/pm_notice/servicePolicy.jsp','servicePolicy')">이용약관</a>
+            <a class="cgGBdw" href="#" onClick="window.open('http://localhost:8080/pmang/pm_notice/youthPolicy.jsp','youthPolicy')">청소년보호정책</a>
+            <a class="cgGBdw" href="#" onClick="window.open('http://localhost:8080/pmang/pm_notice/GPSPolicy.jsp','GPSPolicy')">위치기반서비스 이용약관</a>
+
          </div>
       </div>
       
@@ -655,7 +664,7 @@
          <div class="footerContent">
             <div class="footerContentMark">
       		<img src="/pmang/image/pmangFooter.PNG" alt="피망장터이미지" height="40px"/>
-             <div class="footerContentMarkTitle">피나게 망하지 않을 만큼 판매하는 장터입니다. 누구나, 무엇이든 쉽고 편하고 안전하게 거래할 수 있습니다.</div>
+             <div class="footerContentMarkTitle">피나게 망하지 않을 만큼 판매하는 피망장터입니다. 누구나, 언제 어디서나 쉽고 빠르게 안전한 거래를 할 수 있습니다.</div>
             </div>
             
             <div class="indexFooter_icon">
@@ -671,12 +680,12 @@
          
          <div class="footerCompanyInfo">
             <div class="infomain">
-               대표이사: 김우석 &nbsp;|&nbsp; 개인정보담당자: 구세주 &nbsp;|&nbsp; 사업자등록정보 : 110-383-234...
-               &nbsp;|&nbsp; 통신판매업신고 : 아직안했음
+               대표이사: 김피망 &nbsp;|&nbsp; 개인정보담당자: 김당근 &nbsp;|&nbsp; 사업자등록정보 : ABC-DEFG-HIJ
+               &nbsp;|&nbsp; 신고현황 : 통신판매업 신고
                <br>
-               주소: 서울시 서초구 강남대로...
+               주소: 서울 서초구 강남대로 20
                <br>
-               "고객센터 대표번호: 1544-1234" &nbsp;|&nbsp; FAX 02-345-6789
+               "고객센터 대표번호: 1234-5678" &nbsp;|&nbsp; FAX 02-123-6789
                <br>
                
                <div class="CustomerService">
@@ -711,463 +720,8 @@
 <!-- 검색 클릭 이벤트 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script> <!-- 카카오디벨로퍼 -->
-
-<script type="text/javascript">
-
-
-//검색 input에 커서 올라가면 이벤트
-$('.searchInput').focus(function(){
-	$('.searchClick').show();
-}); 
-
-//input안에 x버튼 추가하기
-$('.search-wrap').on('input', '.searchInput', function() {
-	if($('.searchInput').val() != ""){
-		$('#index_searchInsertXspan').show();	
-	}else{
-		$('#index_searchInsertXspan').hide();
-	}
-});
-
-//input안에 x버튼 누르면 삭제!
-$('#index_searchInsertXspan').click(function(){
-	$('.searchInput').val('');
-	$('#index_searchInsertXspan').hide();
-	$('.searchClick').show();
-});
-
-
-/* $('.searchInput').blur(function(){
-	$('.searchClick').hide();
-});  */
-
-
-/* $(document).on("click", function(e){
-	if($('#searchListHide').val() == 'show'){
-		$('.searchClick').show();
-	}else{
-		if($('.searchClick').is(e.target)){
-			$('.searchClick').hide();
-			$('#searchListHide').val("");
-		}
-	}
-});  */
-
-//검색창 이외에 다른 곳을 눌렀을 시 검색창 사라지게 하는것
-$(document).click(function(e){
-	if(e.target != $('.searchListDiv')){
-		if($('form, div').is(e.target)){
-			$('.searchClick').hide(); 
-		}else if($('#header h2, #header img, .indexnavSpan').is(e.target)){
-			$('.searchClick').hide(); 
-		}else if($('.footer a, .footer img').is(e.target)){
-			$('.searchClick').hide(); 
-		}else if($('.hoverli a').is(e.target)){
-			$('.searchClick').hide(); 
-		}else if($('#aside img, #aside a').is(e.target)){
-			$('.searchClick').hide(); 
-		}else if($('.slide_wrap img').is(e.target)){
-			$('.searchClick').hide(); 
-		}		
-	}
-});
-
-
-/* $(document).click(function(e){
-	if(e.target != $('.searchListDiv')){
-		if($('#aside img, #aside a').is(e.target)){
-			$('.searchClick').hide(); 
-		}	
-	}
-}); */
-
-//검색어 전체 삭제
-$('.entireDelete').click(function(){
-	$('.existList').remove();
-	$('.nonList').show();
-});
-
-
-
-/* 최근검색어 구현 */
-$('.searchBtn').click(function(){
-	if($('.searchInput').val() == ''){
-		alert('검색어를 입력해주세요.');
-	}else {
-		var keyword = $('.searchInput').val();
-		localStorage.setItem("search", keyword);
-	
-		var keyword = localStorage.getItem('search');
-		var insert = '<div id="index_listKeyword"><span>'+ keyword + '</span><a id="indexSearchX">x</a></div>'
-	
-		$('.existList').prepend(insert);
-	}
-	
-	
-	$('.searchClick').hide();
-	
-	
-	//최근검색어 보여주기
-	if($('.existList').first('div') == null){
-		$('.nonList').show();
-	}else {
-		$('.nonList').hide();
-	}
-});
-
-//엔터값 넣어주기
-$('.searchInput').keydown(function(key) {
-	if(key.keyCode == 13){
-		$('.searchBtn').trigger('click');
-		$('.searchInput').click(function(){
-			$('.searchClick').show();
-		});
-	}
-});
-
-
-//최근검색어 목록에 x 누르면 삭제되는것
-$('div').off('click').on('click' , '#indexSearchX', function(e){
-		e.stopPropagation(); //이벤트 여러번 발생시 부모한테 이벤트가 가지 못하게 막는 것.
-		$(this).parent().remove();
-		
-		if(!$('#index_listKeyword').length){
-			$('.nonList').show()
-		}else {
-			$('.nonList').hide();
-		}
-});
-
-//닫기버튼 클릭
-$('.search_exit').click(function(){
-	$('.searchClick').hide();
-});
-
-
-//------------------------------------------------------------------------------
-//aside 알림창
-$('.notice').hover(function(){
-	$('.noticeDiv').toggle();
-});
-
-
-
-//------------------------------------------------------------------------------
-//카테고리
-//카테고리
-$('.hoverli').hover(function(){
-	var img = '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAgCAYAAABgrToAAAAAAXNSR0IArs4c6QAAAE9JREFUWAnt1rEJACAQA0B1IQv3n8tSwRXSPHLfP4RLk77nOq3wjcLZXjQBqzckHwECBAj8LtCtmbBiayYE9E6AAAECBEIBayYEbNZMKngBdrgHHmiUuOgAAAAASUVORK5CYII=" width="20" height="16" alt="메뉴 버튼 아이콘">';
-	$('.hoverliA').html(img);
-	$('.category1Menu').show();
-}, function(){
-	var img = '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAgCAYAAABgrToAAAAAAXNSR0IArs4c6QAAAExJREFUWAnt1sEJACAMA0DrJt1/SAVXyKfI9V8Il0+qu88afHtwthdNwOkNyUeAAAECvwuUNRNWbM2EgN4JECBAgEAoYM2EgMuaSQUv1d0EPE4sEMMAAAAASUVORK5CYII=" width="20" height="16" alt="메뉴 버튼 아이콘">';
-	$('.hoverliA').html(img);
-	$('.category1Menu').hide();
-});
-
-
-/*  $('.category1Menu').on('mouseenter mouseleave','li',function(){
-	//alert($(this).children('a').text());
-	if($(this).children('.category1A').text() != ""){
-		$('.category2Div').text($(this).children('.category1A').text());
-	}
-}); */
-
-
-
-$('.category1Menu').on('mouseenter','li',function(){
-	if($(this).children('.category1A').text() != ""){
-		$(this).css('background','green');
-		$(this).children('.category1A').css('color','white');
-		if($(this).children('.category1A').text() != ""){
-			$('.category2Div').text($(this).children('.category1A').text());
-		}
-	}
-});
-
-$('.category1Menu').on('mouseleave','li',function(){
-	if($(this).children('.category1A').text() != ""){
-		$(this).css('background','white');
-		$(this).children('.category1A').css('color','black');
-		
-	}
-});
-
-/* $('.category2Menu').on('mouseenter mouseleave','li',function(){
-	//alert($(this).children('a').text());
-	if($(this).children('.category2A').text() != ""){
-		$('.category3Div').text($(this).children('.category2A').text());
-	}
-}); */
-
-$('.category2Menu').on('mouseenter','li',function(){
-	if($(this).children('.category2A').text() != ""){
-		$(this).css('background','green');
-		$(this).children('.category2A').css('color','white');
-		if($(this).children('.category2A').text() != ""){
-			$('.category3Div').text($(this).children('.category2A').text());
-		}
-	}
-});
-
-$('.category1Menu').on('mouseleave','li',function(){
-	if($(this).children('.category2A').text() != ""){
-		$(this).css('background','white');
-		$(this).children('.category2A').css('color','black');
-	}
-});
-
-
-
-$('.category1A').click(function(){
-	var firstCategory = $(this).text(); 
-	location.href = "/pmang/board/itemBoard?category1="+firstCategory;
-});
-
-$('.category2A').click(function(){
-	var firstCategory = $(this).parents('#categoryClickli1').children('a').text();
-	var secondCategory = $(this).text();
-	
-	location.href = "/pmang/board/itemBoard?category1="+firstCategory+"&category2="+secondCategory;
-});
-
-$('.category3Menu').on('click','li',function(){
-	var firstCategory = $(this).parents('#categoryClickli1').children('a').text();
-	var secondCategory = $(this).parent().parent().children('a').text();
-	var thirdCategory = $(this).children('a').text();
-	
-	location.href = "/pmang/board/itemBoard?category1="+firstCategory+"&category2="+secondCategory+"&category3="+thirdCategory;
-	
-});
-
-
-
-
-//----------------------------------------------------------------------
-//로그인모달 구현
-$('#loginli').click(function(){
-	$('.loginModal').show();
-	$('.loginModal').on('scroll touchmove mousewheel', function(e){
-		e.preventDefault();
-		e.stopPropagation(); 
-		return false;
-	});
-});
-
-$('.close').click(function(){
-	$('.loginModal').hide();
-	$('.loginModal').off('scroll touchmove mousewheel');
-});
-
-$(document).click(function(e){
-	if($('.loginModal').is(e.target)){
-		$('.loginModal').hide(); 
-		$('.loginModal').off('scroll touchmove mousewheel');
-	}
-});
-
-
-$('.noticeContent').on('click','a',function(){
-	$('#loginli').trigger('click');
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//---------------------------------로그인. 회원가입--------------------------------------------------//
-$('#index_writeBtn').click(function(){
-	location.href="/pmang/member/writeForm"
-});
-
-$('#loginBtn').click(function(){
-	$('#index_userIdDiv').empty();
-	$('#index_pwdDiv').empty();
-	
-	if($('#index_userId').val()==''){
-		$('#userIdDiv').text('아이디를 입력해 주세요')
-						.css('color','red')
-						.css('font-size','8pt')
-						.css('font-weight','bold');
-		
-	}else if($('#index_pwd').val()==''){
-		$('#index_pwdDiv').text('비밀번호를 입력해 주세요')
-						 .css('color','red')
-						 .css('font-size','8pt')
-						 .css('font-weight','bold');
-	}else{
-		$.ajax({
-			type: 'post',
-			url: '/pmang/member/login',
-			data: {'userId': $('#index_userId').val(), 'pwd': $('#index_pwd').val()},
-			dataType: 'text',
-			success: function(data){
-				if(data == 'success'){
-					alert('로그인 성공');
-					location.reload();
-				}else if(data == 'fail'){
-					alert('메일인증 또는 회원정보를 확인해 주세요');
-				}
-			},
-			error: function(err){
-				console.log(err);
-			}
-		});	
-	}
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//여긴 상품등록쪽..
-//---------------------------------------------------------------------------------------------------
-//등록하기 버튼을 클릭했을때.
-$('.itemWriteBtn').click(function(){
-	//alert('아')
-	//전송할 formData 생성!
-	var formData = new FormData($('#sellerWriteForm')[0]); 
-	
-	for(var i = 1; i < 4; i++){
-		if($("#hashtag"+i).text() != ""){
-			formData.append("hashtag"+i, $("#hashtag"+i).text());
-		}else {
-			formData.append("hashtag"+i, "undefined");
-		}
-	}
-	
-	var category1 = $(".selectL").text();
-	var category2 = $(".selectM").text();
-	var category3 = $(".selectS").text();
-	
-	var img1url = $('.imageChoice_ul').children().eq(1).children('img').attr("src");
-	var img2url = $('.imageChoice_ul').children().eq(2).children('img').attr("src");
-	var img3url = $('.imageChoice_ul').children().eq(3).children('img').attr("src");
-	var img1 = $('.imageChoice_ul').children().eq(1).children('img').attr("title");
-	var img2 = $('.imageChoice_ul').children().eq(2).children('img').attr("title");
-	var img3 = $('.imageChoice_ul').children().eq(3).children('img').attr("title");
-	
-	formData.append("category1",category1);
-	formData.append("category2",category2);
-	formData.append("category3",category3);
-	formData.append("img1",img1);
-	formData.append("img2",img2);
-	formData.append("img3",img3);
-	formData.append("img1url",img1url);
-	formData.append("img2url",img2url);
-	formData.append("img3url",img3url);
-	
-
-	//데이터 잘 들어왔는지 확인
-	/* for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); } */
-
-
-	
-	
-	
-	//유효성 검사
-	$('#imageCheck').hide();
-	$('.itemSubjectDiv').hide();
-	$('#categoryCheck').hide();
-	$('#priceDiv').text("");
-	
-	$('.imageChoice_ul').css('border-color','rgb(195, 194, 204)');
-	$('.itemSubjectText').css('border-color','rgb(195, 194, 204)');
-	$('input[name=item_subject]').css('border-color','rgb(195, 194, 204)');
-	$('.categoryChoice_div').css('border-color','rgb(195, 194, 204)');
-	$('.price_input').css('border','1px solid rgb(195, 194, 204)');
-	
-	if($('#imageCountHidden').val() == 0){ //이미지 등록 확인
-		$('#imageCheck').show();
-		$('.imageChoice_li').css('border-color','green');
-		
-		var offset = $('.main_sectionFrame').offset();
-		$('html').animate({scrollTop : offset.top}, 400);
-		
-	}else if($('input[name=item_subject]').val().length < 2){ //제목 수 확인
-		$('input[name=item_subject]').css('border-color','green');
-		$('input[name=item_subject]').css('border-color','green');
-		$('.itemSubjectDiv').show();
-		
-		var offset = $('.imageChoice_div').offset();
-		$('html').animate({scrollTop : offset.top}, 400);
-		
-	}else if($('#choice').text() == ""){ //카테고리 확인
-		$('.categoryChoice_div').css('border-color','green');
-		$('#categoryCheck').show();
-		
-		var offset = $('.imagecontent').offset();
-		$('html').animate({scrollTop : offset.top}, 400);
-		
-	}else if($('.price_input').val() == "" || $('.price_input').val() < 100){ //가격확인
-		$('#priceDiv').text('※100원 이상 입력해주세요.');
-		$('.price_input').css('border','1px solid green');
-		
-		var offset = $('.locationText_div').offset();
-		$('html').animate({scrollTop : offset.top}, 400);
-		
-	}else if($('.qty_input').val() == ""){ //수량 확인
-		$('.qty_input').val('1');
-	}else {
-		$.ajax({
-			type: 'post',
-			enctype: 'form-data',
-			processData: false, //데이터를 컨텐트 타입에 맞게 변환 여부
-			contentType: false,//요청 컨텐트 타입
-			url: '/pmang/member/sellerWrite',
-			data: formData,
-			success: function(data){
-				alert('상품 등록 완료');
-				location.href='/pmang/index'; //추후에 상품관리 페이지로 바뀌게 해야함!
-			},
-			error: function(err){
-				console.log(err);
-			}
-		});
-		
-	}
-});
-
-//우석 수정 
-$('.pmangTok').on('click',function(){
-	window.open("/pmang/talk/roomList","","width=375 height=667");
-});
-// 우석 수정 -----------------------------------
-
-
-$('#footerNotice').click(function(){
-	$(location).attr("href", "/pmang/board/notice?tabNo=1");
-});
-
-$('#footerPolicy').click(function(){
-	$(location).attr("href", "/pmang/board/notice?tabNo=2");	
-});
-
-$('#footerFQA').on('click',function(){
-	$(location).attr("href", "/pmang/board/notice?tabNo=3");
-});
-
-
+<script type="text/javascript" src="/pmang/js/index.js"></script>
+<script>
 if('${tabNo}'=='1'){
 	$('#tab1').attr('checked', true);
 }else if('${tabNo}'=='2'){
@@ -1177,69 +731,8 @@ if('${tabNo}'=='1'){
 }else if('${tabNo}'=='4'){
 	$('#tab3').attr('checked', true);
 	$('#menu2').attr('checked', true);
-}else{
-	$('#tab1').attr('checked', true);
 }
-
-
-
-
-
-/* ---------------------------------------------------------------------- */
-//카카오 로그인 js
- window.Kakao.init("d738a87db4961b1bfd9e5ce2fefec44d");
-$('#kakaoBtn').click(function(event){
-	event.preventDefault();
-	 window.Kakao.Auth.login({
-		scope:'profile, account_email, gender',
-		success: function(authObj){
-			window.Kakao.API.request({
-				url:'/v2/user/me',
-				success: function(res){
-		
-					var kakaoId = res.id;
-					var userName = res.kakao_account.profile.nickname;
-					var gender = res.kakao_account.gender == 'male' ? 0 : 1;
-					var emailIndex= res.kakao_account.email.indexOf('@');
-					var email1 = res.kakao_account.email.substring(0,emailIndex);
-					var email2 = res.kakao_account.email.substring(emailIndex + 1, res.kakao_account.email.length);
-					 	
-					 $.ajax({
-						type: 'post',
-						url: '/pmang/member/kakaoLogin',
-						data: {
-							'kakaoId': kakaoId,
-							'userName': userName,
-							'gender': gender,
-							'email1': email1,
-							'email2': email2,
-						},
-						dataType: 'text',
-						success: function(data){
-							if(data == 'loginSuccess'){
-								alert('로그인 성공');
-								location.href="/pmang/index";
-							} else if(data == 'JoinSuccess'){
-								alert('카카오 회원가입을 축하드립니다.');
-							}
-							console.log(data);
-						},
-						error: function(err){
-							console.log(err);
-						}
-					}); 
-				}
-				
-				
-			});
-		}
-	}); 
-});
-
-
-
 </script>
-
 
 </body>
 </html>

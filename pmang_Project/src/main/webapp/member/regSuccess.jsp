@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div style="margin: 100px;">
-		<a><img src="${pageContext.request.contextPath}/image/kakao_icon.png"	style="height: 80px; margin-left: 10px;" /></a> <br>
+		<a><img src="${pageContext.request.contextPath}/image/main_logo.JPG"	style="height: 80px; margin-left: 10px;" /></a> <br>
 		<br>
 		<h3>안녕하세요, ${param.userId} 님</h3>
 		<br>

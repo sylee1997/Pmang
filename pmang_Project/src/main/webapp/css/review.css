@@ -65,10 +65,10 @@
 	white-space: nowrap;
 	margin-top: 8px;
 	font-size: 14px;
-	font-weight: normal;
+	font-weight: bold;
 }
 
-.reviewTime {
+.reviewLogtime {
 	display: block;
 	overflow: hidden;
 	/*  -o-text-overflow: ellipsis; */

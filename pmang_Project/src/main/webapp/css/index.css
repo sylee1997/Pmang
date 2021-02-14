@@ -67,7 +67,6 @@ body > #wrap {
 	font-weight: bold;
 	color: green;
 	text-indent: 2em;/* 글자 앞 공백 */
-	
 	width: 1024px;
 	margin: 0 auto;
 }
@@ -390,24 +389,26 @@ body > #wrap {
 
 .loginModal-header {
     position: relative;
-    bottom: 20px;
+    bottom: 25px;
     color: darkgreen;
     width: 450px;
     right: 50px;
+    margin-top: -30px;
+    margin-bottom: -20px;
 }
 
 /* 로그인창 */
 
 .loginModal-headerDiv {
     position: relative;
-    bottom: 30px;
+    bottom: 0px;
     border-bottom: 1px solid #e5e5e5;
     text-align: center;
 }
 
 
 .close {
-	margin-top : -50px;
+	margin-top : -80px;
     padding: 0 20px;
     cursor: pointer;
     background: 0 0;
@@ -428,6 +429,14 @@ body > #wrap {
     padding: 5px 10px;
     font-size: 14px;
     font-weight: normal;
+}
+
+.loginModal-center {
+    padding-top: 20px;
+}
+
+input#checkedId {
+    margin-right: 10px;
 }
 
 button {
@@ -523,8 +532,9 @@ button div p{
 #container {
    position: relative;
    width: 1024px;
-   /* height: 5729px; */
-   overflow: auto;
+  /*  height: 2000px; */
+   overflow-x:hidden;
+   overflow-y: auto;
    margin: 0 auto;
 }
 
@@ -558,6 +568,7 @@ button div p{
 .selection1{
     position: relative;
     overflow: hidden;
+    padding-top: 30px;
 }
 
 .selection3{
@@ -668,11 +679,9 @@ button div p{
 	-ms-overflow-style: none;
 } */
 
- ::-webkit-scrollbar {
-
+/* ::-webkit-scrollbar {
 display:none;
-
-}  
+}    */
 
 
 
@@ -690,7 +699,7 @@ display:none;
 
 .asideDiv {
 	position: relative;
-    bottom: 70px;
+    bottom: 20px;
     background: white;
 }
 
@@ -707,12 +716,18 @@ display:none;
 
 .bag_click {
 	font-weight: normal;
-	font-size: 11pt;
+	font-size: 15pt;
+    cursor : pointer;
+	
 }
 
 .bag_clickA {
 	text-decoration: none;
-	color : #c0c0c0;
+    color: #c0c0c0;
+    font-size: 11pt;
+    position: relative;
+    padding: 0px;
+    bottom: 1.52px;
 }
 
 .recentlyLook {
@@ -725,7 +740,12 @@ display:none;
     font-weight: bold;
     font-size: 10pt;
     margin-bottom: 5px;
-    /* padding: 15px 0px; */
+    padding: 5px 0px;
+    padding-bottom: 10px;
+}
+
+#recentCnt {
+	color : green;
 }
 
 .goods {
@@ -734,13 +754,120 @@ display:none;
 	
 }
 
-#goods_img1 {
+#goods_img {
 	margin-bottom: 5px;
 }
 
-#goods_img2 {
+.recentlyGoods {
+	height: 80px;
+    display: flex;
+	
+}
+
+.nonGoods {
+	height: 120px;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    color: rgb(204, 204, 204);
+    font-size: 12px;
+}
+
+.nonGoods img{
 	margin-bottom: 5px;
 }
+
+.nonGoods div {
+	white-space: pre-wrap;
+    text-align: center;
+    line-height: 1.4;
+}
+
+#recentlypaging {
+	display:;
+	position:relative;
+	line-height:1em;
+}
+
+ #recentlypaging .btn_prev {
+	position: absolute;
+    /* top: 526px; */
+    left: 14px;
+    width: 15px;
+    height: 18px;
+    background: url(/pmang/image/Arrowleft.png) 16px 18px;
+    text-indent: -9000px;
+    /* border: 1px solid #CCC; */
+    display: inline-block;
+
+} 
+
+
+ #recentlypaging .btn_next {
+	position: absolute;
+    /* top: 526px; */
+    right: 12px;
+    width: 15px;
+    height: 18px;
+    background: url(/pmang/image/Arrow.png) 16px 18px;
+    text-indent: -9000px;
+    /* border: 1px solid #CCC; */
+    display: inline-block;
+} 
+
+.detail {
+	display: none;
+    position: absolute;
+    /* top: 0; */
+    left: -150px;
+    width: 150px;
+    height: 80px;
+    background: rgb(255, 255, 255);
+    border-top: 1px solid rgb(33, 33, 33);
+    border-bottom: 1px solid rgb(33, 33, 33);
+    border-left: 1px solid rgb(33, 33, 33);
+    padding: 15px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.btn_delete {
+	position: absolute;
+    top: -1px;
+    left: -17px;
+    width: 17px;
+    height: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(34, 34, 34);
+    cursor: pointer;
+    outline: none;
+    padding: 5px;
+    border-radius: 0;
+    
+}
+
+.recentlySubject{
+	margin-bottom: 7px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.recentlyPrice {
+	font-weight: 600;
+}
+
+/* .recentlyGoods img:hover {
+	border: 1px solid black;
+	border-left: 0px;
+} */
+
 
 .topBtn {
 	text-align: center;
@@ -762,7 +889,7 @@ display:none;
 	color : green;
 }
 
-.pmangTok {
+/* .pmangTok {
    	margin-top: 12px;
     width: 50px;
     height: 54px;
@@ -775,44 +902,29 @@ display:none;
     cursor: pointer;
     color: green;
 
-}
+} */
 
 .pmangTokDiv {
     position: relative;
-    padding: 7px 10px;
+    padding: 10px 0px 10px 0px;
+    display: flex;
+    cursor: pointer;
 }
 
 .pmangTok img {
-	width: 50px;
-	height: 50px;
+	width: 60px;
+    height: 62px;
 }
 
-.notice {
-	padding: 15px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 9pt;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    overflow: inherit;
-}
-
-.noticeDiv{
-	background: #EBFFEB;
-    border: 1px solid lightgray;
+span#pmangSpan {
+    font-size: 11pt;
     position: absolute;
-    z-index: 40;
-    right: 85px;
-    display: none;
-    border-radius: 10px;
+    padding-top: 55px;
+    padding-left: 8px;
+    font-weight: 700;
 }
 
-.noticeContent {
-	padding : 10px;
-	text-align: left;
-	white-space: nowrap;
-}
+
 
 
 /* footer */
@@ -936,4 +1048,34 @@ display:none;
 
 .sellerWriteForm_footer {
 	display : none;
+}
+
+#item_seqSpan {
+	display: none;
+}
+
+.itemPrice::after {
+    content: "원";
+    font-size: 13px;
+    margin-left: 3px;
+}
+
+span#storageDate {
+   position: absolute;
+   right: 40px;
+}
+
+#keywordSpan:hover {
+	color: green;
+	font-weight: bold;
+}
+
+#keywordSpan {
+	display: flex;
+    width: 250px;
+}
+#storageDate {
+	position: absolute;
+    right: 40px;
+    bottom: 10px;
 }

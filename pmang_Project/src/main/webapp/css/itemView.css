@@ -177,10 +177,10 @@ a {
 }
 /* 모달안의 상품 제목 */
 #modalItemName{
-	position : absolute;
+	position : fixed;
 	text-align : center;
 	top:5%;
-	left:calc(50% - 250px);
+	left:calc(50% - 230px);
 	width:500px;
 	height:100px;
 	font-size:30px;
@@ -191,11 +191,11 @@ a {
 
 /* 종료버튼 */
 #closeBtn {
-	position:absolute;
+	position:fixed;
 	width:30px;
 	height:30px;
-	top:2%;
-	left:97%;
+	top:3%;
+	right:3%;
 	z-index:100;
 }
 
@@ -293,6 +293,7 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 /***********/	
 	
 #itemDiv{
+	width:2000px;
     display: flex;
     padding:20px 0px;
 }
@@ -319,15 +320,27 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 	left:87%;
 	transform:translate(-50%,-50%);
 }
-#itemPic{
+#itemPic{ /* 보여지는 사진 한장을 위한 div */
     margin-right: 20px;
     flex-shrink: 0;
     width: 500px;
     height: 500px;
+    overflow:hidden;
+}
+
+#itemPictureDiv{/* 사진 전체를 담는 div */
+	width:300%;
+}
+
+.itemPicture{/* 사진 한장 */
+	margin-left:0px;
+	width:500px;
+	height:500px;
+	
 }
 
 #itemArea{
-    flex-grow: 1;
+   /*  flex-grow: 1; */
 }
 
 #nameNPrice{
@@ -372,13 +385,14 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 	font-size: 16px;
 }
 
-#reportBtn{
+#myBtn{
 	width:100px;
 	margin-left:50px;
 	height: 100%;
 	display: flex;
 	align-items: center;
-	color: rgb(204, 204, 204);    
+	color: rgb(204, 204, 204);  
+	cursor: pointer;  
 }
 
 .dealInfo{
@@ -421,12 +435,15 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 
 #like{
 	background-color:gray;
+	cursor:pointer;
 }
 #contact{
 	background-color:green;
+	cursor:pointer;
 }
 #pay{
-	background-color:red
+	background-color:red;
+	cursor:pointer;
 }
 
 
@@ -489,6 +506,7 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 	/* width: 70%; */
 	margin:0 auto; 
 	text-align: center;
+
 }
 #productInfo .border {
 	border-left: 1px solid #eee;
@@ -504,6 +522,7 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 	color: #c8c8c8;
 	font-size: 15px;
 	font-weight: bold;
+	width:310px;
 }
 .productInfo div a {
 	text-decoration: none;
@@ -574,6 +593,7 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 .profilePic{
 	border-radius:50%;
 	margin:20px;
+	cursor:default;
 
 }
 .replyUser {
@@ -614,34 +634,100 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 }
 
 #moreBtn{
+	
 	clear:both;
 	text-align:center;
 	padding:20px;
 	display:flex;
 	justify-content:center;
+	cursor:pointer;
 }
 
-.deleteBtn{
+.replyPics{
 	margin-left:10px;
 }
 
-.reportBtn{
-	margin-left:10px;
+
+/*///////////////////////////////////////*/
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+ul{
+	/* margin-left:500px; */
+}
+
+/* a {
+  text-decoration: none;
+} */
+
+
+.slide {
+  position: relative;
+  top:15%;
+  left:35%;
+  z-index:100;
+}
+
+.panel {
+  width: 300%;
+  height:100%;
+  margin-left:0px;
+
+}
+
+.panel:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.modalItemPic{
+	width:700px;
+	height:700px;
+}
+
+.panel>li>a>div>img {
+	width:700px;
+	height:700px;
+
+}
+
+
+.panel>li {
+  width: 800px;
+  height: 700px;
+  float: left;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: relative;
 }
 
 
 
 
+.prev {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 3%;
+  cursor: pointer;
+}
 
-
-
-
-
-
-
-
-
-
+.next {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+  right :3%;
+  cursor: pointer;
+}
 
 
 

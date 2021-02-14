@@ -332,7 +332,7 @@ img {
    margin-top: 10px; 
 }
 /* 받은 메세지 */
-.talkReciveDiv {
+.talkRecieveDiv {
     width: 100%;
    display: flex;
    overflow:hidden;
@@ -376,6 +376,11 @@ img {
 }
 .talkSendDiv div {
 /*    margin: 0px 3px; */
+}
+
+.talkSendTime {
+	width:28.5px;
+	height:13px;
 }
 .talkSendTooltip {
    background-color: green;
@@ -452,14 +457,13 @@ img {
     padding: 8px 0px;
 }
 
-.market_info_a {
+.market_info_div {
 	display: flex;
     flex-direction: row;
     width: 100%;
     height: 2.5rem;
     align-items: center;
     padding: 0px 3rem 0px 1.5rem;
-    position: relative;
 }
 
 .market_info_textDiv {
@@ -487,7 +491,7 @@ img {
 	height: 15px;
 }
 
-.market_info_a::after {
+/* .market_info_a::after {
     content: "";
     position: absolute;
     background-image: url(/pmang/image/open.png);
@@ -498,7 +502,7 @@ img {
     width: 1rem;
     height: 1rem;
     right: 1rem;
-}
+} */
 
 .market_review_dataArea b{
 	margin-left: 0.5rem;
@@ -758,6 +762,63 @@ img {
    -webkit-box-pack: center;
    justify-content: center;
    margin-top: 0.5rem;
+}
+
+/* 추가 */
+.on {
+   position: fixed;
+   opacity: 0.4;
+   background: black;
+   width: 375px;
+   height: 667px;
+   top: 0px;
+}
+.all_modal {
+   z-index: 30;
+   display: flex;
+}
+.modal_div {
+    display: flex;
+    flex-direction: column;
+    width: 296px;
+    background: rgb(255, 255, 255);
+    z-index: 1102;
+    padding: 1.5rem 0px;
+    border-radius: 2px;
+    text-align: center;
+}
+.userName_modal {
+   padding-bottom: 20px;
+   font-weight: bold;
+   color: black;
+}
+
+.on2 {
+   position: fixed;
+   opacity: 0.4;
+   background: black;
+   width: 375px;
+   height: 667px;
+   top: 0px;
+}
+.all_modal2 {
+   z-index: 30;
+   display: flex;
+}
+.modal_div2 {
+    display: flex;
+    flex-direction: column;
+    width: 296px;
+    background: rgb(255, 255, 255);
+    z-index: 1102;
+    padding: 1.5rem 0px;
+    border-radius: 2px;
+    text-align: center;
+}
+.userName_modal2 {
+   padding-bottom: 20px;
+   font-weight: bold;
+   color: black;
 }
 
 

@@ -12,11 +12,11 @@ public class CommentDTO {
 	private int comment_seq;
 	private int item_seq;
 	private String userId;
-	private String pf_Photo;
+	private String pf_photo;
 	private String item_comment;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy.MM.dd")
+
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
 	private Date logtime;
-	private String ph_photo;
 	
 
 }

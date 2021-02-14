@@ -9,7 +9,7 @@
 	width : 1024px;
 	/* background-color: rgb(249, 249, 249); */
 	padding-top: 30px;
-	/* height: 2000px; */
+	/* height: 2000px; */itemLocation
 }
 
 /* select01 */
@@ -368,7 +368,7 @@ a {
 
 .locationModalContent {
 	background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 20% auto; /* 15% from the top and centered */
     padding: 20px;
     width: 50%;
     min-width: 1024px;
@@ -378,13 +378,13 @@ a {
 
 .locationModal_header {
 	position : absolute;
-	width: 100%;
+	/* width: 100%; */
 	margin-top : -20px;
 }
 
 #x {
 	position : relative;
-	font-size : 30pt;
+	font-size : 20pt;
 	cursor: pointer;
 }
 
@@ -411,6 +411,12 @@ a {
     cursor: pointer;
     margin: 0px 5px;
     align-items: center;
+    padding-left: 30px;
+    font-weight: 600;
+}
+
+.locationModal_section ul li a span {
+	padding: 0 20px;
 }
 
 .locationModal_section ul li img{
@@ -426,6 +432,7 @@ a {
 .locationModal_section a {
 	padding: 0.3rem 0.5rem;
 	text-align: center;
+	display : flex;
 }
 
 #entireItemNumSpan {
@@ -485,6 +492,7 @@ a {
     background: rgb(255, 255, 255);
     border-radius: 2px;
     color: rgb(155, 153, 169);
+    cursor: pointer;
 }
 
 #currentPaging{
@@ -498,4 +506,9 @@ a {
     border-radius: 2px;
     color: rgb(255, 255, 255);
     background: #246d24;
+    cursor: pointer;
+}
+
+#item_seqSpan{
+	display:none;
 }
