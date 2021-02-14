@@ -264,7 +264,7 @@ $(document).ready(function() {
     	  
 	  }//if
 	  
-	  if(obj.receiver_user_id == $('#sender_user_id').val()){
+	  if(obj.receiver_user_id == $('#sender_user_id').val() && obj.sender_user_id == $('#receiver_user_id').val()){
 		  if($('#talkContentDiv').children().last().prop('className') == 'talkRecieveDiv'){
         	  
         	  let currentMinute = talkTime.split(":");

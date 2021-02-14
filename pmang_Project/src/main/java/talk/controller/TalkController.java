@@ -61,7 +61,8 @@ public class TalkController {
        //String partner_userId = itemDTO.getUserId();
        
        SellerDTO sellerDTO = talkService.getSeller(itemDTO.getUserId());
-       
+       System.out.println("itemDTO.getUserId() : " + itemDTO.getUserId());
+       System.out.println("sellerDTO.getMarketname()"+sellerDTO.getMarketname());
        
        Map<String,Object> sellerItem = new HashMap<String,Object>();
        sellerItem.put("marketName", sellerDTO.getMarketname());
