@@ -53,7 +53,7 @@
 				},
 				success : function(data) {
 					alert('공지사항 작성을 완료했습니다.');
-					location.href = '/pmang/index';
+					location.href = '/pmang/board/notice';
 
 				},
 				error : function(err) {

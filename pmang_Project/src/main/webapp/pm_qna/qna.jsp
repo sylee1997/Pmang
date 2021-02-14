@@ -3,8 +3,8 @@
     <link rel="stylesheet" href="/pmang/css/qna.css">
 <div id="tabArea">
 	<input type="hidden" id="photoCountHidden" value="0">
-	<%-- <input type="hidden" id="userid" value="${memUserId }">  --%>
-	<input type="hidden" id="userid" value="tmddms">
+	<input type="hidden" id="userid" value="${memUserId }">
+	<!-- <input type="hidden" id="userid" value="tmddms"> -->
 	<div id="tabDiv">
 		<input id="tab1" class="tabs" type="radio" name="tabName" value="1">
 		<label class="tabLabel" for="tab1">1:1 문의하기</label>
