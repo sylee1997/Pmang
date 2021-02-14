@@ -25,8 +25,8 @@ public class SellerController {
 	
 	// -------------------sellerManagement-------------------
 	
-		@RequestMapping(value = "sellerManagementList", method = RequestMethod.GET)
-		public String sellerManagementList(@RequestParam(required = false, defaultValue = "1") String pg, String userid, Model model) {
+		@RequestMapping(value = "sellerManagementForm", method = RequestMethod.GET)
+		public String sellerManagementForm(@RequestParam(required = false, defaultValue = "1") String pg, String userid, Model model) {
 			model.addAttribute("pg", pg);
 			model.addAttribute("userid", userid);
 			model.addAttribute("display", "/pm_sellerWriteForm/sellerManagementForm.jsp");

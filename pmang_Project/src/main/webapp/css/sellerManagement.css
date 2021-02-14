@@ -17,7 +17,6 @@
 
 .bodyMainHeader>form, div {
 	display: flex;
-	float: left;
 }
 
 .management_nav {
