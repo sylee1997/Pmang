@@ -124,121 +124,118 @@ public class TalkController {
 			return "/talk/talkRoomList";
 		}
 	      
-		@RequestMapping(value = "getRoomList", method = RequestMethod.POST)
-		public ModelAndView getRomList(HttpSession session) { // 톡 리스트로 넘어올때, 둘고와야할 데이터.
-	         /* session ID 를 들고, DB에 갔다와야함. */
+		   @RequestMapping(value = "getRoomList", method = RequestMethod.POST)
+		   public ModelAndView getRomList(HttpSession session) { // 톡 리스트로 넘어올때, 둘고와야할 데이터.
+		      /* session ID 를 들고, DB에 갔다와야함. */
 
-	         // 리스트 봅아내기
-	         String userId = (String) session.getAttribute("memUserId");
-	         System.out.println("userId: " + userId);
-	         List<TalkRoomDTO> list = talkService.getRoomList(userId);
-	         System.out.println("list갯수: " + list.size());
-	         // 리스트내용
-	         List<Map<String, Object>> mapList = new ArrayList<Map<String, Object>>();
+		      // 리스트 봅아내기
+		      String userId = (String) session.getAttribute("memUserId");
+		      System.out.println("userId: " + userId);
+		      List<TalkRoomDTO> list = talkService.getRoomList(userId);
+		      System.out.println("list갯수: " + list.size());
+		      // 리스트내용
+		      List<Map<String, Object>> mapList = new ArrayList<Map<String, Object>>();
 
-	         for (TalkRoomDTO talkRoomDTO : list) {
-	               int talkRoom_seq = talkRoomDTO.getTalkRoom_seq();// 방번호
-	               System.out.println(talkRoom_seq);
-	               String partner_userId = talkRoomDTO.getPartner_userId();// 상대방 유저아이디
-	               if (partner_userId.equals(userId)) {
-	                     partner_userId = talkRoomDTO.getUserId();
-	                  }
-	                  System.out.println("partner_userId: " + partner_userId);
+		      for (TalkRoomDTO talkRoomDTO : list) {
+		         int talkRoom_seq = talkRoomDTO.getTalkRoom_seq();// 방번호
+		         System.out.println(talkRoom_seq);
+		         String partner_userId = talkRoomDTO.getPartner_userId();// 상대방 유저아이디
+		         if (partner_userId.equals(userId)) {
+		            partner_userId = talkRoomDTO.getUserId();
+		         }
+		         System.out.println("partner_userId: " + partner_userId);
 
-	                  Map<String, Object> map = new HashMap<String, Object>();
-	                  // 방번호, 파트너유저아이디, 알람여부,
-	                  map.put("talkRoom_seq", talkRoom_seq);
-	                  map.put("partner_userId", partner_userId);
-	                  map.put("notification_status", talkRoomDTO.getNotification_status());
-	                  System.out.println("3");
-	                  // 유저마켓이름, 프로필
-	                  SellerDTO sellerDTO = talkService.getSeller(partner_userId);
-	                  if (sellerDTO == null) {// 마켓네임이 없으면 일단 유저 아이디를 넣어놈
-	                     map.put("marketname", partner_userId);
-	                     map.put("pf_photo", "/pmang/image/grayPmang.png");
-	                  } else {
-	                     map.put("marketname", sellerDTO.getMarketname());
-	                     if(sellerDTO.getPf_photo()==null) {
-	                        map.put("pf_photo", "/pmang/image/grayPmang.png");
-	                        System.out.println(sellerDTO.getPf_photo());
-	                     }else {
-	                        map.put("pf_photo","/pmang/storage/"+ sellerDTO.getPf_photo());                     
-	                     }
-	                  }
-	                  // 마지막대화내용, 시간, item_seq
-	                  MessageDTO messageDTO = talkService.getLastMessage(userId, talkRoom_seq);
-	                  System.out.println("messageDTO : " + messageDTO);
-	                  
-	                  //여기부터 nullPoint
-	                  try {
-	                     if (messageDTO != null) {
-	                        //만약<img로 시작하면 사진이라고 써야하는데..
-	                        if(messageDTO.getTalk_content().contains("<img")) {
-	                           map.put("talk_content", "사진");
-	                        }else {
-	                           map.put("talk_content", messageDTO.getTalk_content());                        
-	                        }
-	                        
-	                        map.put("send_time", messageDTO.getSend_time().substring(11, 16));
-	                        map.put("item_seq", messageDTO.getItem_seq());
-	                        mapList.add(map);
-	                        
-	                        // message가 존재한다면, message 가져오기
-	                        Map<String, String> userMap = new HashMap<String, String>();
-	                        
-	                        userMap.put("userId", userId);
-	                        userMap.put("partner_userId", partner_userId);
-	                        
-	                        // 안읽은 메세지 갯수
-	                        int unread_count = 0;
-	                        
-	                        List<MessageDTO> messageList = talkService.getMessage(userMap);
-	                        String user_readtime = null;
-	                        
-	                        for (MessageDTO message : messageList) {
-	                           if (user_readtime == null) {
-	                              if (message.getUserId().equals(userId)&&message.getReceiver_user_id().equals(userId)) {
-	                                 user_readtime = message.getRead_time().replace(" ", "T");
-	                              }
-	                           }
-	                        }
-	                        if(user_readtime == null) {
-	                           user_readtime = "2000-11-12T15:20:31.000";
-	                        }
-	                        System.out.println(user_readtime);
-	                        System.out.println("user_readtime : "+user_readtime);
-	                        LocalDateTime partner_readtime_time = LocalDateTime.parse(user_readtime);
-	                        for (MessageDTO message : messageList) {
-	                           // 상대방이 보낸 메세지의 readtime이 내가보낸 메세지의 sendtime보다 과거면 true반환
-	                           if (message.getUserId().equals(userId)) {
-	                              if (message.getReceiver_user_id().equals(userId)) {
-	                                 LocalDateTime partner_sendtime = LocalDateTime.parse(message.getSend_time().replace(" ", "T"));
-	                                 if(partner_readtime_time.isBefore(partner_sendtime)) {
-	                                    System.out.println("partner_sendtime: "+partner_sendtime);
-	                                    unread_count++;
-	                                 }
-	                              }
-	                           }
-	                        }            
-	                        map.put("unread_count", unread_count);
-	                        System.out.println(unread_count);
-	                     }
-	                     
-	                  } catch (Exception e) {
-	                     // TODO: handle exception
-	                     System.out.println(e);
-	                  }
+		         Map<String, Object> map = new HashMap<String, Object>();
+		         // 방번호, 파트너유저아이디, 알람여부,
+		         map.put("talkRoom_seq", talkRoom_seq);
+		         map.put("partner_userId", partner_userId);
+		         map.put("notification_status", talkRoomDTO.getNotification_status());
+		         // 유저마켓이름, 프로필
+		         if (partner_userId != null) {
+		            SellerDTO sellerDTO = talkService.getSeller(partner_userId);
+		            if (sellerDTO == null) {// 마켓네임이 없으면 일단 유저 아이디를 넣어놈
+		               map.put("marketname", partner_userId);
+		               map.put("pf_photo", "/pmang/image/grayPmang.png");
+		            } else {
+		               map.put("marketname", sellerDTO.getMarketname());
+		               if (sellerDTO.getPf_photo() == null) {
+		                  map.put("pf_photo", "/pmang/image/grayPmang.png");
+		                  System.out.println(sellerDTO.getPf_photo());
+		               } else {
+		                  map.put("pf_photo", "/pmang/storage/" + sellerDTO.getPf_photo());
+		               }
+		            }
+		            // 마지막대화내용, 시간, item_seq
+		            MessageDTO messageDTO = talkService.getLastMessage(userId, talkRoom_seq);
+		            System.out.println("messageDTO : " + messageDTO);
 
-	               }
+		            try {
+		               if (messageDTO != null) {
+		                  // 만약<img로 시작하면 사진이라고 써야하는데..
+		                  if (messageDTO.getTalk_content().contains("<img")) {
+		                     map.put("talk_content", "사진");
+		                  } else {
+		                     map.put("talk_content", messageDTO.getTalk_content());
+		                  }
 
-	               // 리스트 보내기
-	               ModelAndView mav = new ModelAndView();
-	               mav.addObject("userId", userId);
-	               mav.addObject("mapList", mapList);
-	               mav.setViewName("jsonView");
-	               //
-	               return mav;
-		}
+		                  map.put("send_time", messageDTO.getSend_time().substring(11, 16));
+		                  map.put("item_seq", messageDTO.getItem_seq());
+		                  mapList.add(map);
+
+		                  // message가 존재한다면, message 가져오기
+		                  Map<String, String> userMap = new HashMap<String, String>();
+
+		                  userMap.put("userId", userId);
+		                  userMap.put("partner_userId", partner_userId);
+
+		                  // 안읽은 메세지 갯수
+		                  int unread_count = 0;
+		                  // --------------------------------------Null Point
+		                  List<MessageDTO> messageList = talkService.getMessage(userMap);
+		               
+
+		                  for (MessageDTO message : messageList) {
+		                     //System.out.println("err : " + message);
+
+		                     if (message.getUserId().equals(userId) && message.getReceiver_user_id().equals(userId)) {
+
+		                        LocalDateTime partner_sendtime = LocalDateTime.parse(message.getSend_time().replace(" ", "T"));
+		                        LocalDateTime user_readtime = null;
+		                        if (message.getRead_time() == null) {
+		                           user_readtime = LocalDateTime.parse("2000-11-12T15:20:31.000");
+		                        } else {
+		                           user_readtime = LocalDateTime.parse(message.getRead_time().replace(" ", "T"));
+		                        }
+
+		                        if (user_readtime.isBefore(partner_sendtime)) {
+		                           System.out.println("partner_sendtime: " + partner_sendtime);
+		                           unread_count++;
+		                        }
+		                     }
+
+		                  }
+		                  // --------------------------------------Null Point해결??
+		                  map.put("unread_count", unread_count);
+		                  System.out.println(unread_count);
+		               }
+
+		            } catch (Exception e) {
+		               // TODO: handle exception
+		               System.out.println(e);
+		            }
+
+		         }
+
+		      }
+
+		      // 리스트 보내기
+		      ModelAndView mav = new ModelAndView();
+		      mav.addObject("userId", userId);
+		      mav.addObject("mapList", mapList);
+		      mav.setViewName("jsonView");
+		      //
+		      return mav;
+		   }
 
 		// 나가기
 		@RequestMapping(value = "getOut", method = RequestMethod.POST)

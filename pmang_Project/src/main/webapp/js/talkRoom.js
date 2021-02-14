@@ -503,11 +503,13 @@ $('.price_change').on('click',function(){
 
 //------------------------모달 헤더 
 $('.itemboard_move').on('click',function(){
-	opener.parent.location='/pmang/board/itemView?item_seq='+$('#item_seq').val();
+//	opener.parent.top.location='/pmang/board/itemView?item_seq='+$('#item_seq').val();
+	window.open('/pmang/board/itemView?item_seq='+$('#item_seq').val(),'itemViewMove');
 });
 
 $('.seller_market_a').on('click',function(){
-	opener.parent.location='/pmang/board/mystore' + $('#sellerItem_userId').val();
+//	opener.top.location='/pmang/board/mystore?userid=' + $('#sellerItem_userId').val();
+	window.open('/pmang/board/mystore?userid=' + $('#sellerItem_userId').val(),'mystoreMove');
 });
 
 $('.room_setting_out').on('click',function(){

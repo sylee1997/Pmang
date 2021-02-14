@@ -16,6 +16,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
    nav, output, ruby, section, summary, time, mark, audio, video {
    margin: 0px;
    padding: 0px;
+   border: 0px;
    font: inherit;
    vertical-align: baseline;
 }
@@ -82,6 +83,7 @@ a {
 #root {
    width: 375px;
    height: 667px;
+   overflow: hidden;
 }
 /* 헤더 */
 #talkList_header {
@@ -104,12 +106,16 @@ a {
 /* 헤더끝 ------------- */
 /* List */
 #list_div {
-   height: 100%;
+    width: 375px;
+    height: 667px;
+    background: rgb(244, 244, 250);
+    overflow: hidden;
 }
 
 ul {
    display: block;
    list-style-type: disc;
+   list-style: none;
    margin-block-start: 0px;
    margin-block-end: 0px;
    margin-inline-start: 0px;
@@ -136,14 +142,16 @@ li {
 }
 
 #talkList {
-   display: block;
-   background: white;
+    flex: 1 1 0%;
+    height: calc(617px);
+    overflow: hidden auto;
+    list-style: none;
 }
 
 .talkRoom {
    display: flex;
    background-color: white;
-   height: 100%;
+   /* height: 100%; */
    align-items: center;
    width: 100%;
 }
