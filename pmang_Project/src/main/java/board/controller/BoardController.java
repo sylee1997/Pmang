@@ -505,12 +505,12 @@ public class BoardController {
 	// -------------------review-------------------
 	// 리뷰 작성폼
 	@RequestMapping(value = "reviewWriteForm", method = RequestMethod.GET)
-	public String reviewWriteForm(@RequestParam String item_seq,Model model,HttpSession session) {
+	public String reviewWriteForm(/* @RequestParam(required=false) String item_seq, */Model model) {
 		
 		//String userid=(String) session.getAttribute("memUserId");
 		
 		//model.addAttribute("memUserId",userid);
-		model.addAttribute("item_seq",item_seq);
+		//model.addAttribute("item_seq",item_seq);
 		return "/pm_review/reviewWriteForm";
 	}
 
@@ -518,8 +518,8 @@ public class BoardController {
 	@RequestMapping(value = "reviewWrite", method = RequestMethod.POST)
 	@ResponseBody
 	public void reviewWrite(@ModelAttribute ReviewDTO reviewDTO, HttpServletRequest request,
-			@RequestParam("img1url") String img1url, @RequestParam("img2url") String img2url,
-			@RequestParam("img3url") String img3url, HttpSession session) {
+			@RequestParam(value="img1url",required=false) String img1url, @RequestParam(value="img2url",required=false) String img2url,
+			@RequestParam(value="img3url",required=false) String img3url, HttpSession session) {
 		String filePath = "C:/project/Pmang/pmang_Project/src/main/webapp/storage/";
 
 		String reviewWriter = (String) session.getAttribute("memUserId");// 작성자 아이디 세션으로 넣어야함
