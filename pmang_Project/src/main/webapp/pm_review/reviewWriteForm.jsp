@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-.item_seq{
+.item_seqSpan{
 display:none;
 }
 </style>
@@ -16,8 +16,8 @@ display:none;
 	<input type="hidden" id="photoCountHidden" value="0">
 	
 	<form id="reviewWriteForm">
-	<input type="hidden" id="item_seq" value="${item_seq }">
-	 <span class="item_seq">${item_seq }</span>
+	 <input type="hidden" id="item_seq" value="${param.item_seq }"> 
+	<span class="item_seqSpan">${param.item_seq }</span>
 		<div class="reviewHeader">
 			<span>리뷰쓰기</span>
 
