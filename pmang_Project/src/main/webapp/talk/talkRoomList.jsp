@@ -9,8 +9,8 @@
 </head>
 <body>
 <div id="root">
-<header id="talkList_header">피망톡</header>
 <div id="list_div"><!-- list div -->
+<header id="talkList_header">피망톡</header>
 <ul id="talkList"><!--list를 li에 담아서 뿌립니다...  -->
    <!-- <li class="talkRoom">
    <div class="talkRoom_div">

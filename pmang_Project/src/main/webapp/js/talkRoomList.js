@@ -84,7 +84,7 @@ $(document).ready(function() {
               )// talkList
                  // 리스트 > 방으로
                  $('#list_div').on('click', '.talkRoom_a_'+items.partner_userId, function(){
-                    window.open("/pmang/talk/talkRoom?item_seq="+items.item_seq+"&&partner_userId="+items.partner_userId,"","width=375 height=667");   
+                    window.open("/pmang/talk/talkRoom?item_seq="+items.item_seq+"&&partner_userId="+items.partner_userId,"","width=375 height=667");
                  });
                  // 리스트 > 차단,신고 버튼
                  $('#talkList').on('click', '.addBtn_'+items.partner_userId, function(){
