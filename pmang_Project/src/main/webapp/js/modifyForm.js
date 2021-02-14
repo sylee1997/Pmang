@@ -204,3 +204,31 @@ $('#tel3').focusout(function(){
 		$('#telDiv').empty();
 	}
 });
+
+
+//회원탈퇴
+$('#deleteId').click(function(event){
+	event.preventDefault();
+if(confirm('정말로 탈퇴하시겠습니까?')){
+	$.ajax({
+		type: 'post',
+		url: '/pmang/member/deleteId',
+		data: {
+			'userId': $("#userId").val(),
+		},
+		dataType: 'text',
+		success: function(data){
+			alert('회원탈퇴 완료!!');
+			location.href='/pmang/index';
+		},
+		error: function(err){
+			console.log(err);
+		}
+	});
+}
+
+else{
+	return false;
+}
+
+});

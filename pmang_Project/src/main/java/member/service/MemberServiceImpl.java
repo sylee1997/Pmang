@@ -204,6 +204,13 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.modify(memberDTO);
 		
 	}
+	
+	@Override
+	public void deleteId(MemberDTO memberDTO, HttpSession session) {
+		memberDAO.deleteId(memberDTO);
+		session.invalidate();
+		
+	}
 		
 
 	//-------------------------seller-----------------------------------//
@@ -276,6 +283,7 @@ public class MemberServiceImpl implements MemberService {
 	public List<ZipcodeDTO> mainLoc(Map<String, String> map) {
 		return memberDAO.mainLoc(map);
 	}
+
 
 
 }

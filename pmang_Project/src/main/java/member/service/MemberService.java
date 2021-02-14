@@ -59,6 +59,8 @@ public interface MemberService {
 
 	public List<ZipcodeDTO> mainLoc(Map<String, String> map);
 
+	public void deleteId(MemberDTO memberDTO, HttpSession session);
+
 
 
 }

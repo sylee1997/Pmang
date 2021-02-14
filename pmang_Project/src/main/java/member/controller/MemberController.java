@@ -194,6 +194,12 @@ public class MemberController {
 		return "/index";
 	}
 	
+	@RequestMapping(value="deleteId", method=RequestMethod.POST)
+	@ResponseBody
+	public void deleteId(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+		memberService.deleteId(memberDTO, session);
+	}
+	
 	
 	
 	//------------------------------------seller------------------------------------------------------//
