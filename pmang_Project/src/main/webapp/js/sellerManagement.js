@@ -1,83 +1,14 @@
-// 정렬 기준 콤보박스
-$('.selectQty').hover(function(){					//+items.item_seq
-	$('.qtyDropbox').css('display', 'block')}
-, function(){
-	$('.qtyDropbox').css('display', 'none')
-});
-
-// color 입히기
-for(var i=0; i<$('.qtyDropbox').children().length; i++){
-	if($('.qtyDropbox').children().eq(i).text().trim() == $('.selectQtyBox').text().trim()){
-		$('.qtyDropbox').children().eq(i).addClass('select1');
-	}
-}	
-
-// 드롭다운 영역에서 요소를 클릭하면 반영되는 기능
-$('.selectQty').on('click', 'a',function() {
-	var img = '<img src="../image/open.png" width="10" height="6" alt="카테고리 화살표 아이콘">';
-	$('.select1').removeClass('select1');
-	$(this).addClass('select1');
-	$(this).addValue()
-	$('.selectQtyBox').html($(this).text() + img);
-});
-
-// 검색용 판매 상태 콤보박스
-$('.selectStatus').hover(function() {
-	$('.statusDropbox').css('display', 'block')
-}, function() {
-	$('.statusDropbox').css('display', 'none')
-});
-
-// color 입히기				이거 alert이나 console로 찍어봐야함
-for(var i=0; i<$('.statusDropbox').children().length; i++){
-	if($('.statusDropbox').children().eq(i).text().trim() == $('.selectStatusBox').text().trim()){
-		$('.statusDropbox').children().eq(i).addClass('select2');
-	}
-}	
-
-//드롭다운 영역에서 요소를 클릭하면 반영되는 기능
-$('.selectStatus').on('click', 'a', function() {
-	var img = '<img src="../image/open.png" width="10" height="6" alt="카테고리 화살표 아이콘">';
-	$('.select2').removeClass('select2');
-	$(this).addClass('select2');
-	$('.selectStatusBox').html($(this).text() + img);
-});
-
-//삭제 버튼 클릭
-$('.sellManagementTbody').on('click', '.contentDelete', function(){
-	
-	var item_seq = $(this).attr('id');
-	item_seq = item_seq.replace(/[^0-9]/g,'');
-	//alert(item_seq);
-	if(confirm("선택한 글을 삭제하시겠습니까?")){
-		$.ajax({
-			type: 'post',
-			url: '/pmang/seller/sellerManagementDelete',
-			data: {'item_seq' : item_seq},
-			success: function(data){
-				alert("삭제 완료");
-				location.href='/pmang/seller/sellerManagementForm';
-			},
-			error: function(err){
-				console.log(err);
-			}
-		});
-	}
-});	
-
 
 //리스트 출력
 $(document).ready(function(){
-	
-	
-	
+
 	//$('#container').css('width', '1100px');
 	$('#container').css('overflow-y', 'hidden');
 	
 	$.ajax({
 		type: 'post',
 		url: '/pmang/seller/getSellerManagementList', 
-		data: {'pg':$('#pg').val(), 'userid':$('#hiddenUserId').val()},
+		data: {'pg': $('#pg').val(), 'userid' : $('#hiddenUserId').val()},
 		dataType: 'json', 
 		success: function(data){
 			console.log(data);
@@ -119,13 +50,13 @@ $(document).ready(function(){
 										id: 'manageStatusDropbox'+items.item_seq
 									}).append($('<a\>', {
 										href: '#',
-										text: '판매 중'
+										text: 'sell'
 									})).append($('<a\>', {
 										href: '#',
-										text: '예약 중'
+										text: 'book'
 									})).append($('<a\>', {
 										href: '#',
-										text: '판매완료'
+										text: 'sold'
 									})))))))
 				).append($('<td\>', {			//상품명 삽입
 					}).append($('<a\>', {
@@ -175,20 +106,43 @@ $(document).ready(function(){
 					$('#manageStatusDropbox'+items.item_seq).css('display', 'none')
 				});
 
-				// color 입히기
+	/*			// color 입히기
 				for(var i=0; i<$('#manageStatusDropbox'+items.item_seq).children().length; i++){
 					if($('#manageStatusDropbox'+items.item_seq).children().eq(i).text().trim() == $('#selectStatusBox'+items.item_seq).text().trim()){
 						$('#manageStatusDropbox'+items.item_seq).children().eq(i).addClass('select3');
 					}
-				}		
-
+				}	*/	
 				//드롭다운 영역에서 요소를 클릭하면 반영되는 기능
 				$('#manageSelectStatus'+items.item_seq).on('click', 'a', function(){
 					var img = '<img src="../image/open.png" width="10" height="6" alt="카테고리 화살표 아이콘">';
 					$('.select3').removeClass('select3');
 					$(this).addClass('select3');
 					$('#manageSelectStatusBox'+items.item_seq).html($(this).text() + img);
+					
+					var item_seq = $(this).parent().attr('id');
+					item_seq = item_seq.replace(/[^0-9]/g,'');
+					//alert(item_seq);
+					
+					$.ajax({
+						type : 'post',
+						url : '/pmang/seller/itemstateChange',
+						data : {'item_state' : $(this).text(), 'item_seq' : item_seq},
+						success : function(data){
+							alert('상태가 변경되었습니다.')
+							location.reload();
+						},
+						error : function(err){
+							console.log(err);
+						}
+					})
 				});
+				
+				for(var i=0; i < $('#manageStatusDropbox'+items.item_seq).children().length; i++){
+					if($('#manageStatusDropbox'+items.item_seq).children().eq(i).text().trim() == $('#manageSelectStatusBox'+items.item_seq).text().trim()){
+						$('#manageStatusDropbox'+items.item_seq).children().eq(i).addClass('select3');
+					}
+				}	
+
 				
 				//up버튼 클릭
 				$('#logtimeUpdate'+items.item_seq).click(function(event){
@@ -214,6 +168,28 @@ $(document).ready(function(){
 						}
 //					}
 				});
+				
+				//삭제 버튼 클릭
+				$('.sellManagementTbody').on('click', '#contentDelete'+items.item_seq, function(){
+					
+					var item_seq = $(this).attr('id');
+					item_seq = item_seq.replace(/[^0-9]/g,'');
+					//alert(item_seq);
+					if(confirm("선택한 글을 삭제하시겠습니까?")){
+						$.ajax({
+							type: 'post',
+							url: '/pmang/seller/sellerManagementDelete',
+							data: {'item_seq' : item_seq},
+							success: function(data){
+								alert("삭제 완료");
+								location.href='/pmang/seller/sellerManagementForm';
+							},
+							error: function(err){
+								console.log(err);
+							}
+						});
+					}
+				});	
 					
 			});//each
 			
@@ -227,8 +203,8 @@ $(document).ready(function(){
 });
 
 //페이징 처리
-function sellerManagementPaging(pg) {
-		location.href="sellerManagementForm?pg="+pg;
+function boardPaging(pg) {
+	location.href="sellerManagementForm?pg="+pg;
 }
 
 //
@@ -260,7 +236,7 @@ function sellerManagementPaging(pg) {
 
 
 //서치 버튼 클릭
-$('.inputFormBtn').click(function(event, str){
+/*$('.inputFormBtn').click(function(event, str){
 	if(str != 'research')	$('input[name=pg]').val(1);
 	$.ajax({
 		type: 'post',
@@ -366,7 +342,6 @@ $('.inputFormBtn').click(function(event, str){
 							type: 'post',
 							url: '/pmang/seller/sellerManagementDelete',
 							data: 'item_seq='+$('#item_seq').val(),
-							dataType: 'json',
 							success: function(){
 								alert("삭제 완료");
 								location.href='/pmang/seller/sellerManagementForm';
@@ -410,7 +385,8 @@ $('.inputFormBtn').click(function(event, str){
 			console.log(err);
 		}
 	});
-});
+});*/
+
 
 
 

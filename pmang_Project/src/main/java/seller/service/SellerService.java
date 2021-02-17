@@ -20,4 +20,6 @@ public interface SellerService {
 	public List<SellerManagementDTO> getManagementSearch(Map<String, String> map);
 
 	public void sellerLogtimeUpdate(int item_seq);
+
+	public void itemstateChange(Map<String,String> map);
 }

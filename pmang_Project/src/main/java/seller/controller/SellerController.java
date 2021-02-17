@@ -35,7 +35,7 @@ public class SellerController {
 
 		@RequestMapping(value = "getSellerManagementList", method = RequestMethod.POST)
 		@ResponseBody
-		public ModelAndView getSellerManagementList(@RequestParam String pg, @RequestParam String userid) {
+		public ModelAndView getSellerManagementList(@RequestParam(required = false, defaultValue = "1") String pg, @RequestParam String userid) {
 			List<SellerManagementDTO> list = sellerService.getSellerManagementList(pg, userid);
 			// 페이징 처리
 			SellerManagementPaging sellerManagementPaging = sellerService.sellerManagementPaging(pg, userid);
@@ -51,10 +51,8 @@ public class SellerController {
 
 		@RequestMapping(value="sellerManagementDelete", method=RequestMethod.POST)
 		@ResponseBody
-		public ModelAndView sellerManagementDelete(int item_seq) {
+		public void sellerManagementDelete(int item_seq) {
 			sellerService.sellerManagementDelete(item_seq);
-
-			return new ModelAndView("redirect:/pm_sellerWriteForm/sellerManagementForm");
 		}
 
 		@RequestMapping(value = "sellerModifyForm", method=RequestMethod.GET)
@@ -77,8 +75,8 @@ public class SellerController {
 			sellerService.sellerLogtimeUpdate(item_seq);
 		}
 		
-		@RequestMapping(value="getManagementSearch", method=RequestMethod.POST)
-		public ModelAndView getManagementSearch(@RequestParam(required = false, defaultValue = "1") String pg, @RequestParam String userid, @RequestParam String setting, @RequestParam String item_state, @RequestParam String keyword) {
+		/* @RequestMapping(value="getManagementSearch", method=RequestMethod.POST) */
+/*		public ModelAndView getManagementSearch(@RequestParam(required = false, defaultValue = "1") String pg, @RequestParam String userid, @RequestParam String setting, @RequestParam String item_state, @RequestParam String keyword) {
 			System.out.println(keyword);
 			
 			Map<String, String> map = new HashedMap<String, String>();
@@ -101,5 +99,11 @@ public class SellerController {
 			
 			return mav;
 			
+		}*/
+		
+		@RequestMapping(value = "itemstateChange", method = RequestMethod.POST)
+		@ResponseBody
+		public void itemstateChange(@RequestParam Map<String,String> map) {
+			sellerService.itemstateChange(map);
 		}
 }

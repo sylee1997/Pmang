@@ -79,11 +79,20 @@ font-size: 17px;
 								text:items.qnaContent
 							}).append($('<div/>',{
 								class:'qnaImgDiv'
-							})).append($('<img src="/pmang/storage/'+items.img1+'"/>'))
-							.append($('<img src="/pmang/storage/'+items.img2+'"/>'))
-							.append($('<img src="/pmang/storage/'+items.img3+'"/>')))
+							})).append($('<img id="qnaimg1' + items.qna_seq + '" src="/pmang/storage/'+items.img1+'" width="130px" height="130px"/>'))
+							.append($('<img id="qnaimg2' + items.qna_seq + '" src="/pmang/storage/'+items.img2+'" width="130px" height="130px"/>'))
+							.append($('<img id="qnaimg3' + items.qna_seq + '" src="/pmang/storage/'+items.img3+'" width="130px" height="130px"/>')))
 							.appendTo($('.qnaReplyFrame'));
 					
+					if($('#qnaimg1'+items.qna_seq).attr('src') == '/pmang/storage/undefined'){
+						$('#qnaimg1'+items.qna_seq).hide();
+					}
+					if($('#qnaimg2'+items.qna_seq).attr('src') == '/pmang/storage/undefined'){
+						$('#qnaimg2'+items.qna_seq).hide();
+					}
+					if($('#qnaimg3'+items.qna_seq).attr('src') == '/pmang/storage/undefined'){
+						$('#qnaimg3'+items.qna_seq).hide();
+					}
 					
 				});//each
 				

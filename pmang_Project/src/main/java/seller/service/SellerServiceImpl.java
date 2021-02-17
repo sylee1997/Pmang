@@ -85,4 +85,9 @@ public class SellerServiceImpl implements SellerService {
 		
 	}
 
+	@Override
+	public void itemstateChange(Map<String, String> map) {
+		sellerManagementDAO.itemstateChange(map);
+	}
+
 }

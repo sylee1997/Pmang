@@ -603,7 +603,7 @@ $('#likedOrNot').click(function(event){
 			$('.likeSpan').text(result.list.length);
 			$.each(result.list, function(index, items){
 				
-				if(items.userId== $('#userId').val()){//세션에서 받은 아이디 값을 바꿔줄 것		
+				if(items.userId == $('#userId').val()){//세션에서 받은 아이디 값을 바꿔줄 것		
 					$('#zzimIcon').attr('src','/pmang/image/zzimYes.png');
 					$('#likedOrNot').val('1');
 					$('#like').css('background-color', 'green');
@@ -644,7 +644,7 @@ $('#comment_seq').click(function(event){
 											.append($('<img/>',{
 												class:'profilePic',
 												alt: '프사',
-												src: '/pmang/storage/' + items.pf_photo,
+												src: items.pf_photo,
 												width: '50',
 												height: '50'})))
 								.append($('<div/>',{

@@ -181,9 +181,16 @@
                 <li>
                   <span class="vertical">|</span>
                 </li>
+                
                 <li>
+                <c:if test="${sessionScope.memUserId == 'admin123'}">
+                  <img src="/pmang/image/mystore.png" alt="store" width="30px" height="30px"/>
+                  <span class="indexnavSpan" onclick="location.href='/pmang/board/mystore?userid=${memUserId }'">관리자상점</span>
+                </c:if>
+                <c:if test="${sessionScope.memUserId != 'admin123'}">
                   <img src="/pmang/image/mystore.png" alt="store" width="30px" height="30px"/>
                   <span class="indexnavSpan" onclick="location.href='/pmang/board/mystore?userid=${memUserId }'">내상점</span>
+                </c:if>
                 </li>
                 <li>
                   <span class="vertical">|</span>

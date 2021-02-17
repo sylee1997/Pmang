@@ -21,4 +21,6 @@ public interface SellerManagementDAO {
 
 	public void sellerLogtimeUpdate(int item_Seq);
 
+	public void itemstateChange(Map<String, String> map);
+
 }

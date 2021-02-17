@@ -77,6 +77,7 @@
 <script type="text/javascript" src="../js/qna.js"></script>
 <script>
 $(document).ready(function(){
+	
 	//문의내역
 	$.ajax({
 		type:'post',
@@ -112,10 +113,21 @@ $(document).ready(function(){
 						text:items.qnaContent
 					}).append($('<div/>',{
 						class:'qnaImgDiv'
-					}).append($('<img src="/pmang/storage/'+items.img1+'"/>'))
-					.append($('<img src="/pmang/storage/'+items.img2+'"/>'))
-					.append($('<img src="/pmang/storage/'+items.img3+'"/>'))))
+					}).append($('<img id="qnaimg4' + items.qna_seq + '" src="/pmang/storage/'+items.img1+'" width="130px" height="130px"/>'))
+					.append($('<img id="qnaimg5' + items.qna_seq + '" src="/pmang/storage/'+items.img2+'" width="130px" height="130px"/>'))
+					.append($('<img id="qnaimg6' + items.qna_seq + '" src="/pmang/storage/'+items.img3+'" width="130px" height="130px"/>'))))
 					.appendTo($('.qnaListDiv'));
+				
+					if($('#qnaimg4'+items.qna_seq).attr('src') == '/pmang/storage/undefined'){
+						$('#qnaimg4'+items.qna_seq).hide();
+					}
+					if($('#qnaimg5'+items.qna_seq).attr('src') == '/pmang/storage/undefined'){
+						$('#qnaimg5'+items.qna_seq).hide();
+					}
+					if($('#qnaimg6'+items.qna_seq).attr('src') == '/pmang/storage/undefined'){
+						$('#qnaimg6'+items.qna_seq).hide();
+					}
+				
 					
 					
 				}else if(items.qnaReply){	//답글 달린거
@@ -144,9 +156,9 @@ $(document).ready(function(){
 							text:items.qnaContent
 						}).append($('<div/>',{
 							class:'qnaImgDiv'
-						}).append($('<img src="/pmang/storage/'+items.img1+'"/>'))
-						.append($('<img src="/pmang/storage/'+items.img2+'"/>'))
-						.append($('<img src="/pmang/storage/'+items.img3+'"/>'))))
+						}).append($('<img id="qnaimg1' + items.qna_seq + '" src="/pmang/storage/'+items.img1+'" width="130px" height="130px"/>'))
+						.append($('<img id="qnaimg2' + items.qna_seq + '" src="/pmang/storage/'+items.img2+'" width="130px" height="130px"/>'))
+						.append($('<img id="qnaimg3' + items.qna_seq + '" src="/pmang/storage/'+items.img3+'" width="130px" height="130px"/>'))))
 						
 						.append($('<div/>',{
 							class:'qnaReply'
@@ -158,14 +170,21 @@ $(document).ready(function(){
 						})))
 						.appendTo($('.qnaListDiv'));
 						
-						
+						if($('#qnaimg1'+items.qna_seq).attr('src') == '/pmang/storage/undefined'){
+							$('#qnaimg1'+items.qna_seq).hide();
+						}
+						if($('#qnaimg2'+items.qna_seq).attr('src') == '/pmang/storage/undefined'){
+							$('#qnaimg2'+items.qna_seq).hide();
+						}
+						if($('#qnaimg3'+items.qna_seq).attr('src') == '/pmang/storage/undefined'){
+							$('#qnaimg3'+items.qna_seq).hide();
+						}
 				
 				}
 			});
-					
-					
-					
-
+			
+			
+			
 				//문의 내역
 				$('.qnaListDiv div').click(function(){
 					$('.qnaContent').slideUp();

@@ -64,4 +64,8 @@
  		) where rn between #{startNum} and #{endNum}
  	</select>
  	
+ 	<update id="itemstateChange" parameterType="java.util.Map">
+ 		update item set item_state = #{item_state} where item_seq = #{item_seq}
+ 	</update>
+ 	
  </mapper>
