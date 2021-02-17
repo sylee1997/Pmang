@@ -13,6 +13,6 @@ public class SellerDTO {
 	private String pf_photo;
 	private String pf_content;
 	private int markethit;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy.MM.dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
 	private Date marketdate;
 }

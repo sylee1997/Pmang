@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/pmang/css/sellerWriteForm.css">
 
 <input type="hidden" id="imageCountHidden" value=0>
-<input type="hidden" id="item_seq" value=1>
+<input type="hidden" id="item_seq" value=${param.item_seq }>
 <div class="searchlocationModal">
 	<section class="searchlocationContent">
 		<header id="searchlocationHeader">주소 검색 <button type="button" class="searchlocationCloseBtn"></button></header>

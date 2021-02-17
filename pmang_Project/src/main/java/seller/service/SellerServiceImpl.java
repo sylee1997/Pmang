@@ -79,4 +79,15 @@ public class SellerServiceImpl implements SellerService {
 		return sellerManagementDAO.getsellerManagementSearch(map);
 	}
 
+	@Override
+	public void sellerLogtimeUpdate(int item_seq) {
+		sellerManagementDAO.sellerLogtimeUpdate(item_seq);
+		
+	}
+
+	@Override
+	public void itemstateChange(Map<String, String> map) {
+		sellerManagementDAO.itemstateChange(map);
+	}
+
 }

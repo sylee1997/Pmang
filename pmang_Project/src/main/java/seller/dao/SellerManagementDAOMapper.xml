@@ -28,8 +28,8 @@
  	</select>
  	
  	<!-- 최근 수정일 업데이트 -->
- 	<update id="logtimeUpdate" parameterType="int">
- 		update item set logtime = sysdate where item_seq = #{item_seq} ;
+ 	<update id="sellerLogtimeUpdate" parameterType="int">
+ 		update item set logtime = sysdate where item_seq = #{item_seq}
  	</update>
  	
  	<!-- 게시글 삭제하기 -->
@@ -63,5 +63,9 @@
  		(select * from sellerManagement where userid = #{userid} and item_state=#{item_state} and item_subject like '%'||#{keyword}||'%' order by item_seq desc)tt
  		) where rn between #{startNum} and #{endNum}
  	</select>
+ 	
+ 	<update id="itemstateChange" parameterType="java.util.Map">
+ 		update item set item_state = #{item_state} where item_seq = #{item_seq}
+ 	</update>
  	
  </mapper>

@@ -1,5 +1,13 @@
 @charset "UTF-8";
 
+.qnaImgDiv {
+    padding-top: 10px;
+}
+
+#wrap {
+	background: #eeeeee;
+}
+
 #tabArea {
 	background: #eeeeee;
 	padding-top: 20px;
@@ -120,6 +128,7 @@ section {
 	display: block;
 	/* float:left; */
 	justify-content: space-between;
+	padding: 10px;
 }
 
 .qnaSelectDiv {
@@ -186,5 +195,10 @@ section {
 .qnaDate {
 	text-align: left;
 }
+
+/* .qnaImgDiv img {
+	width : 130px;
+	height : 130px;
+} */
 
 

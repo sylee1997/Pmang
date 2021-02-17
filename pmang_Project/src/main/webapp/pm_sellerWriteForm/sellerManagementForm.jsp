@@ -4,9 +4,9 @@
 	
 <link rel="stylesheet" href="/pmang/css/sellerManagement.css">
 
-<input type="hidden" id="pg" value="1">
-<input type="hidden" id="userid" value="aaaa"> <!-- 세션 값으로 받아올 예정 -->
-<input type="hidden" id="item_seq" value="${item_seq }">
+<input type="hidden" id="pg" value = "${param.pg }">
+<%-- <input type="hidden" id="item_seq" value="${item_seq }"> --%>
+<div class="manage_wrap">
 <div class="management_head">
 	<nav class="management_nav">
 		<div class="nav_management">
@@ -25,51 +25,7 @@
 
 <div class="management_body">
 	<main class="bodyMain">
-		<header class="bodyMainHeader">
-			<form class="headerInputForm">
-				<input type="hidden" id="pg" vlaue="1">
-				<input type="search" id="keyword" name="keyword" placeholder="상품명을 입력해주세요." value="">
-				<button type="button" id="inputFormBtn" class="inputFormBtn"></button>
-			</form>
-
-			<div class="selectQtyDiv">
-				<div class="selectContainer">
-					<div class="selectBorder">
-						<div class="selectQty">
-							<div class="selectQtyBox">
-							5개씩 <img src="../image/open.png" width="10" height="6"
-									alt="카테고리 화살표 아이콘">
-							</div>
-							<div class="qtyDropbox">
-								<a href="#" value="5">5개씩</a>
-								<a href="#" value="10">10개씩</a>
-								<a href="#" value="25">25개씩</a>
-								<a href="#" value="50">50개씩</a>
-							</div>
-						</div>	<!-- selectQty -->
-					</div>	<!-- selectBorder -->
-				</div>	<!-- selectContainer -->
-			</div>	<!-- selectQtyDiv -->
-
-			<div class="selectStatusDiv">
-				<div class="selectContainer">
-					<div class="selectBorder">
-						<div class="selectStatus">
-							<div class="selectStatusBox">
-							전체 <img src="../image/open.png" width="10" height="6"
-									alt="카테고리 화살표 아이콘">
-							</div>
-							<div class="statusDropbox">
-								<a href="#">전체</a>
-								<a href="#">판매 중</a>
-								<a href="#">예약 중</a>
-								<a href="#">판매완료</a>
-							</div>
-						</div>	<!-- selectStatus -->
-					</div>	<!-- selectBorder -->
-				</div>	<!-- selectContainer -->
-			</div>	<!-- selectStatusDiv -->
-		</header>
+		
 
 		<table class="sellManagementTable" style="border-spacing: 2px;">
 			<thead class="sellManagementThead">
@@ -96,6 +52,7 @@
 		<div class="footerPagingDiv">
 		</div>
 	</footer>
+</div>
 </div>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

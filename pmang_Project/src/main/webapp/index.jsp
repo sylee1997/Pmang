@@ -99,7 +99,7 @@
       	<div class="header_logo">
             <div class="logo-wrap" onclick="location.href='/pmang/index'">
                  <img src="/pmang/image/main_logo.JPG" alt="main_logo" />
-                 <h2 style="color: green; font-weight: bold">피망장터</h2>
+                 <h2 style="color: green; font-weight: bold">피망마켓</h2>
            </div>
            
               <div class="search-wrap">
@@ -181,9 +181,16 @@
                 <li>
                   <span class="vertical">|</span>
                 </li>
+                
                 <li>
+                <c:if test="${sessionScope.memUserId == 'admin123'}">
+                  <img src="/pmang/image/mystore.png" alt="store" width="30px" height="30px"/>
+                  <span class="indexnavSpan" onclick="location.href='/pmang/board/mystore?userid=${memUserId }'">관리자상점</span>
+                </c:if>
+                <c:if test="${sessionScope.memUserId != 'admin123'}">
                   <img src="/pmang/image/mystore.png" alt="store" width="30px" height="30px"/>
                   <span class="indexnavSpan" onclick="location.href='/pmang/board/mystore?userid=${memUserId }'">내상점</span>
+                </c:if>
                 </li>
                 <li>
                   <span class="vertical">|</span>
@@ -559,14 +566,24 @@
         <div id="aside">
          <div class="asideDiv">
               <!-- 알림창 구현 -->
-            <div class="likebag" onclick="location.href='/pmang/board/mystore'">찜한상품
+            <c:if test="${sessionScope.memUserId != null }">
+            <div class="likebag" onclick="location.href='/pmang/board/mystore?userid=${sessionScope.memUserId }'">찜한상품
                <div class="bag_click">
                   <img id="userZzim" src="" style="width:15px; height:15px;">
                   <a class="bag_clickA" >
                   </a>
                </div>
             </div>
-            
+            </c:if>
+            <c:if test="${sessionScope.memUserId == null }">
+	            <div class="likebag" onclick="nologin()">찜한상품
+	               <div class="bag_click">
+	                  <img id="userZzim" src="" style="width:15px; height:15px;">
+	                  <a class="bag_clickA" >
+	                  </a>
+	               </div>
+	            </div>
+            </c:if>
 		             <div class="recentlyLook">
 		                           최근본상품
 		               <br>

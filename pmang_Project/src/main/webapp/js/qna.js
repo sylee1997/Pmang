@@ -1,3 +1,6 @@
+
+
+
 //문의 사진등록
 $('.qnaWritePhotoBtn').on('click',function(){
 		$('.qnaWritePhoto').click();
@@ -115,7 +118,13 @@ $('.qnaWritePhoto').change(function(e) {
 	// 문의하기 작성
 	$('.qnaWriteBtn').click(
 			function() {
-$('#qnaContentDiv').empty();
+				//alert($('#hiddenUserId').val())
+				
+				if($('#hiddenUserId').val() == ''){
+					nologin();
+				}
+				
+				$('#qnaContentDiv').empty();
 				if ($('#qnaContent').val() == '') {
 					$('#qnaContentDiv').text('내용을 입력하세요')
 					$('#qnaContentDiv').css('color', 'red')

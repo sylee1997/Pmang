@@ -1068,9 +1068,9 @@ $('.searchItemList3').on('click', '.itemLink', function(){
 //페이징
 function boardPaging(pg){
 	if($('#hashtag').val() == ''){
-		location.href='/pmang/board/searchBoard?search='+$('#search').val()+'&pg='+$('#pg').val()+'&order='+$('#order').val();
+		location.href='/pmang/board/searchBoard?search='+$('#search').val()+'&pg='+pg+'&order='+$('#order').val();
 	}else {
-		location.href='/pmang/board/searchBoard?hashtag='+$('#hashtag').val()+'&pg='+$('#pg').val()+'&order='+$('#order').val();
+		location.href='/pmang/board/searchBoard?hashtag='+$('#hashtag').val()+'&pg='+pg+'&order='+$('#order').val();
 	}
 }
 

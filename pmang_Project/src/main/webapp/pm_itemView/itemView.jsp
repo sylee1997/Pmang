@@ -166,12 +166,12 @@
 				<!-- 상품명, 상품가 -->
 				<div id="nameNPrice">
 					<div id="itemName">
-						<h4><span class="nameSpan">DB에러</span></h4>
+						<h4><span class="nameSpan"></span></h4>
 					</div>
 
 					<div id="itemPrice">
 						<h4>
-							<span class="priceSpan"> DB에러 </span>원
+							<span class="priceSpan"> </span>원
 						</h4>
 					</div>
 				</div>
@@ -181,16 +181,16 @@
 					<div id="likeHitDate">
 						<div class="likeDateHit">
 							<img src="/pmang/image/like.jpg" alt="찜수" width="20" height="20">
-							<span class="likeSpan">DB에러</span>
+							<span class="likeSpan"></span>
 						</div>
 						<div class="likeDateHit">
 						
 							<img src="/pmang/image/hit.jpg" alt="조회수" width="20" height="20">
-							<span class="hitSpan">DB에러</span>
+							<span class="hitSpan"></span>
 						</div>
 						<div class="likeDateHit" style="width:200px;">
 							<img src="/pmang/image/date.jpg" alt="게시일" width="20" height="20">
-							<span class="dateSpan">DB에러</span>
+							<span class="dateSpan"></span>
 						</div>
 						<div id="myBtn">
 							<img src="/pmang/image/reportBtn.JPG" alt="신고하기" width="20" height="20">
@@ -247,7 +247,7 @@
 		<ul id="contentMenu">
 			<li class="contentMenu current" data-tab="contentSection01">상품정보</li>
 			<li class="contentMenu" data-tab="contentSection02">상품문의 (<span
-				class="commentNum">DB에러</span>)
+				class="commentNum"></span>)
 			</li>
 			<!-- 상품문의 옆에 댓글개수 나오도록 구현해야합니다~ -->
 		</ul>
@@ -256,11 +256,11 @@
 
 
 	<!-- 상품정보 -->
-	<div id="contentSection01" class="contentSection">
+	<div class="contentSection" id="contentSection01">
 		<h3>상품정보</h3>
-		<hr width="90%" align="left" size="1px" color="#eee" noshade="noshade" >
+		<hr width="100%" align="left" size="1px" color="#eee" noshade="noshade" >
 		<br>
-		<div><span class="commentSpan">DB에러</span></div>
+		<div><span class="commentSpan"></span></div>
 		<br><br>
 		
 		<!-- 거래지역, 카테고리, 상품태그 div -->
@@ -268,13 +268,13 @@
 			<div class="productInfo">
 				<div class="productInfoDiv"><img src="/pmang/image/areaIcon.jpg" width="15" height="15">거래지역</div>
 	
-				<div><a href="#"><span class="locationSpan">DB에러</span></a></div>			
+				<div><a href="#"><span class="locationSpan"></span></a></div>			
 	
 			</div>
 			<div class="productInfo border">
 				<div class="productInfoDiv"><img src="/pmang/image/categoryIcon.jpg" width="15" height="15">카테고리</div>
 				<div><a href="#">
-					<span class="category1Span">DB에러</span>
+					<span class="category1Span"></span>
 					<span class="category2Span"></span>
 					<span class="category3Span"></span>
 					</a></div>
@@ -282,7 +282,7 @@
 			<div class="productInfo border">
 				<div class="productInfoDiv"><img src="/pmang/image/tagIcon.jpg" width="15" height="15">상품태그</div>
 				<div><a href="#">
-					<span class="hashtag1Span">DB에러</span>
+					<span class="hashtag1Span"></span>
 					<span class="hashtag2Span"></span>
 					<span class="hashtag3Span"></span>
 					</a></div>
@@ -291,11 +291,11 @@
 		<!-- --거래지역, 카테고리, 상품태그 div  -->
 	</div>
 	<!-- 상품정보div -->
-	<br><br>
+	<br>
 	<!-- 상품문의 -->
 	<div id="contentSection02" class="contentSection">
 	
-		<h3>상품문의 <span class="commentNum" style="color: green;">DB에러</span></h3>
+		<h3>상품문의 <span class="commentNum" style="color: green;"></span></h3>
 		
 		<div id="reply"><!-- 댓글창 -->
 			<div class="replyDiv text"><!-- 댓글 test입력 -->

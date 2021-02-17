@@ -85,6 +85,18 @@ $(document).ready(function(){
 			console.log(err);
 		},
 		success:function(result){
+			
+			if($('#hiddenUserId').val() == result.itemDTO.userId){
+				var div = '<div id="contact" onclick="loc()">내 상점 관리</div>';
+				$('#buttonArea').empty();
+				$('#buttonArea').append($(div));
+			}
+			
+			if(result.itemDTO.category3 == null){
+				$('.thirdCategory').hide();
+			}
+			
+			
 			let money = Number(result.itemDTO.item_price);
 			/*$('#itemPic').attr('src', '/pmang/storage/'+result.itemDTO.img1); *///이건 아이템보드에서 이미지 저장할때 
 																			  //스토리지에 이미지가 넣어지는데 member컨트롤러에서 폴더경로 바꿔주세요! 꼭!
@@ -409,7 +421,10 @@ $(document).ready(function(){
 	
 });	//ready
 
-
+function loc(){
+	var userid = $('#hiddenUserId').val();
+	location.href='/pmang/seller/sellerManagementForm';
+}
 
 
 /* 카테고리 펼쳐지는 부분*/
@@ -501,7 +516,7 @@ $(document).ready(function(){
 		
 		/* To스크롤 */
 		var offset = $("#"+contentSection).offset();
-		$('html, body').animate({scrollTop : offset.top}, 200);
+		$('html, body').animate({scrollTop : offset.top},0);
 
 		
 		
@@ -588,7 +603,7 @@ $('#likedOrNot').click(function(event){
 			$('.likeSpan').text(result.list.length);
 			$.each(result.list, function(index, items){
 				
-				if(items.userId== $('#userId').val()){//세션에서 받은 아이디 값을 바꿔줄 것		
+				if(items.userId == $('#userId').val()){//세션에서 받은 아이디 값을 바꿔줄 것		
 					$('#zzimIcon').attr('src','/pmang/image/zzimYes.png');
 					$('#likedOrNot').val('1');
 					$('#like').css('background-color', 'green');
@@ -757,7 +772,7 @@ function commentForComment(that){
 			console.log(err)
 		},
 		success: function(result){
-			//console.log(result.commentDTO.userId);		
+			//console.log(result.commentDTO.userId);	
 			$('#replyText').val('@'+result.commentDTO.userId+':');
 		}//success
 	});//ajax

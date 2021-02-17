@@ -470,7 +470,7 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 }
 
 .contentMenu { /* select x설정 */
-	width:500px;
+	width:510px;
 	border: 1px solid #eee;
 	border-bottom-color: black;
 	background: #fafafa;
@@ -532,8 +532,8 @@ body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;} */
 /* ==============상품정보 */
 /* 상품문의 */
 #reply {
-	width: 90%;
-	padding: 10px;
+	width: 100%;
+    padding-right: 100px;
 }
 .replyDiv {
 	padding: 25px;

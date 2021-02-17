@@ -140,7 +140,7 @@ public class BoardController {
 	//@ResponseBody
 	public String profileImgModify(@ModelAttribute SellerDTO sellerDTO, @RequestParam("img") MultipartFile img,
 			Model model,HttpSession session) {
-		String filePath = "C:/project/Pmang/pmang_Project/src/main/webapp/storage/";
+		String filePath = "D:\\git_home\\Pmang\\pmang_Project\\src\\main\\webapp\\storage";
 		String fileName = img.getOriginalFilename();
 		File file = new File(filePath, fileName);
 
@@ -1353,7 +1353,9 @@ public class BoardController {
 	public void qnaWrite(@ModelAttribute QnaDTO qnaDTO,HttpServletRequest request,@RequestParam("img1url") String img1url
 						,@RequestParam("img2url") String img2url,
 						@RequestParam("img3url") String img3url) {
-		String filePath = "C:/project/Pmang/pmang_Project/src/main/webapp/storage/";
+		//String filePath = "C:/project/Pmang/pmang_Project/src/main/webapp/storage/";
+
+		String filePath = "D:\\git_home\\Pmang\\pmang_Project\\src\\main\\webapp\\storage";
 		
 		UUID uuid=UUID.randomUUID();
 		

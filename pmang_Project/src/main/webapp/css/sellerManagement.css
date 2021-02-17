@@ -2,7 +2,6 @@
 
 .bodyMain {
 	width: 1024px;
-	margin: auto;
 	display: block;
 }
 
@@ -267,6 +266,7 @@ body {
 	letter-spacing: -0.5px;
 	width: 3.25rem;
 	height: 2rem;
+	padding: 0;
 	text-align: center;
 	border-radius: 2px;
 	border: 1px solid rgb(195, 194, 204);
@@ -317,6 +317,7 @@ body {
 	font-size: 100%;
 	line-height: 1.15;
 	margin-bottom: 0.5rem;
+	padding: 0;
 }
 
 .lastTd {
@@ -331,7 +332,7 @@ body {
 }
 
 .bodyMain table tr>:nth-child(3) {
-	width: 21rem;
+	width: 16rem;
 }
 
 .bodyMain table tr>:nth-child(4) {
@@ -359,6 +360,7 @@ body {
 	justify-content: center;
 	height: 9.5rem;
 	margin-right: 0px;
+	margin-top : 10px;
 }
 
 #subject {
@@ -372,60 +374,56 @@ body {
 	justify-content: center;
 }
 
+.sellManagementFooter {
+	display: flex;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
 .footerPagingDiv {
 	display: flex;
 }
 
-.footerPageA {
+#paging{
 	width: 33px;
-	height: 33px;
-	display: flex;
-	-webkit-box-pack: center;
-	justify-content: center;
-	-webkit-box-align: center;
-	align-items: center;
-	margin-right: 12px;
-	border: 1px solid rgb(204, 204, 204);
-	background: rgb(255, 255, 255);
-	border-radius: 2px;
-	color: rgb(155, 153, 169);
-	visibility: hidden;
+    height: 33px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 12px;
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    border-radius: 2px;
+    color: rgb(155, 153, 169);
+    cursor: pointer;
 }
 
-.footerPageLeft {
-	transform: rotate(180deg);
-	vertical-align: bottom; /* 아랫줄까지 img 공통 */
-	border-style: none;
-}
-
-.footerCurrentPage {
+#currentPaging{
 	width: 33px;
-	height: 33px;
-	display: flex;
-	-webkit-box-pack: center;
-	justify-content: center;
-	-webkit-box-align: center;
-	align-items: center;
-	margin-right: 12px;
-	border: 1px solid green;
-	border-radius: 2px;
-	color: rgb(255, 255, 255);
-	background-color: green;
-	text-decoration: none;
-	cursor: pointer;
+    height: 33px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 12px;
+    border: 1px solid #246d24;
+    border-radius: 2px;
+    color: rgb(255, 255, 255);
+    background: #246d24;
+    cursor: pointer;
 }
 
-.selectQtyDiv {
+.selectQtyDiv, .manageSelectStatusDiv {
 	width: 7rem;
+	margin-left: 10px;
 }
 
-.selectContainer {
+.selectContainer, .manageSelectContainer {
 	position: relative;
 	box-sizing: border-box;
 	width: 100%;
 }
 
-.selectBorder {
+.selectBorder, .manageSelectBorder {
 	width: 100%;
 	height: 3rem;
 	display: flex;
@@ -433,7 +431,7 @@ body {
 	border-radius: 2px;
 }
 
-.selectQty {
+.selectQty, .manageSelectStatus {
 	-webkit-box-align: center;
 	align-items: center;
 	display: flex;
@@ -444,7 +442,7 @@ body {
 	box-sizing: border-box;
 }
 
-.selectQtyBox {
+.selectQtyBox, .manageSelectStatusBox {
 	width: fit-content;
 	background: #FFFFFF url("../image/dropdown.png") no-repeat scroll;
 	overflow: hidden;
@@ -454,7 +452,7 @@ body {
 	width: 155px;
 }
 
-.selectQtyBox img {
+.selectQtyBox img, .manageSelectStatusBox img {
 	margin: 0px 10px;
 	position: absolute;
 	right: 10px;
@@ -462,7 +460,7 @@ body {
 	transform: translateY(-50%);
 }
 
-.qtyDropbox {
+.qtyDropbox, .manageStatusDropbox {
 	position: absolute;
 	top: 47.5px;
 	left: -0.5px;
@@ -479,26 +477,26 @@ body {
 	overflow-y: auto;
 }
 
-.qtyDropbox a {
+.qtyDropbox a, .manageStatusDropbox a {
 	/* width: 100%; */
 	height: 28px;
 	padding: 0px 10px;
 	display: flex;
 	align-items: center;
 	text-decoration: none;
-	color: rgb(33, 33, 33);
 }
 
-.qtyDropbox a:hover {
-	color: darkgreen;
+.qtyDropbox a:hover, .statusDropbox a:hover, .manageStatusDropbox a:hover
+	{
+	color: green;
 }
 
 *, ::before, ::after {
 	box-sizing: border-box;
 }
 
-.select1, .select2, .select3 {
-	text-color: red;
+.select3 {
+	background: rgb(173 212 173 / 50%);
 }
 
 .selectStatus {
@@ -606,10 +604,10 @@ body {
 
 .manageStatusDropbox a {
 	/* width: 100%; */
-	height: 28px;
+	height: 40px;
 	padding: 0px 10px;
 	display: flex;
 	align-items: center;
 	text-decoration: none;
-	color: rgb(33, 33, 33);
+	font-weight: 600;
 }
