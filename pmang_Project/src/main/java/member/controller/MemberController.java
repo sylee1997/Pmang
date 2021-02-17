@@ -221,6 +221,18 @@ public class MemberController {
 			itemDTO.setItem_location("위치 정보 없음.");
 		}
 		
+		String img1 = itemDTO.getImg1().replaceAll(" ","");
+		itemDTO.setImg1(img1);
+		System.out.println(img1);
+		if(itemDTO.getImg2() != null) {
+			String img2 = itemDTO.getImg2().replaceAll(" ","");
+			itemDTO.setImg2(img2);
+		}
+		if(itemDTO.getImg3() != null) {
+			String img3 = itemDTO.getImg3().replaceAll(" ","");
+			itemDTO.setImg2(img3);		
+		}
+		
 		System.out.println(itemDTO.getItem_location());
 							
 		String filePath = "D:\\git_home\\Pmang\\pmang_Project\\src\\main\\webapp\\storage";

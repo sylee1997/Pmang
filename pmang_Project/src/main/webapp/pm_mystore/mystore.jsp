@@ -110,7 +110,7 @@
 					</div>
 					<!-- mystoreName -->
 					<div id="mystoreBtns">
-						<button onclick="window.location.href='/pmang/seller/'">내 상점 관리</button>
+						<button onclick="window.location.href='/pmang/seller/sellerManagementForm'">내 상점 관리</button>
 					</div>
 					<!-- mystoreBtns -->
 				</div>
@@ -199,13 +199,9 @@
 	</form>
 
 <!-- 프로필 사진 변경 폼 -->
-<form name="signform" method="post" enctype="multipart/form-data"
-	action="/pmang/board/profileImgModify">
-	<input type="file" class="/pmang/board/profileImgModify" id="img"
-		name="img" style="display: none;"
-		accept="image/jpg, image/jpeg, image/png"
-		onchange="javascript:changeValue(this);" /> <input type="hidden"
-		id="target_url">
+<form name="signform" method="post" enctype="multipart/form-data" action="/pmang/board/profileImgModify">
+	<input type="file" class="/pmang/board/profileImgModify" id="img" name="img" style="display: none;" accept="image/jpg, image/jpeg, image/png" onchange="javascript:changeValue(this);" /> 
+	<input type="hidden" id="target_url">
 </form>
 	</c:if>
 
@@ -320,6 +316,7 @@
 															e.preventDefault();
 															$('input[type=file]').click();
 														});
+										
 
 									},
 									error : function(err) {

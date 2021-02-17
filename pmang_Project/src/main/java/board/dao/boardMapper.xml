@@ -473,7 +473,7 @@
 	</select>
 	
 	<select id="getSellerInfo" resultType="seller">
-		select * from seller where userId=${userId}
+		select * from seller where userId=#{userId}
 	</select>
 </mapper>
 

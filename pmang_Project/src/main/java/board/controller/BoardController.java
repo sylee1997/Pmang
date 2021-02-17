@@ -140,7 +140,7 @@ public class BoardController {
 	//@ResponseBody
 	public String profileImgModify(@ModelAttribute SellerDTO sellerDTO, @RequestParam("img") MultipartFile img,
 			Model model,HttpSession session) {
-		String filePath = "C:/project/Pmang/pmang_Project/src/main/webapp/storage/";
+		String filePath = "D:\\git_home\\Pmang\\pmang_Project\\src\\main\\webapp\\storage";
 		String fileName = img.getOriginalFilename();
 		File file = new File(filePath, fileName);
 

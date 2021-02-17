@@ -19,4 +19,6 @@ public interface SellerManagementDAO {
 
 	public List<SellerManagementDTO> getsellerManagementSearch(Map<String, String> map);
 
+	public void sellerLogtimeUpdate(int item_Seq);
+
 }

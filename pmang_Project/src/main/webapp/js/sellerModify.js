@@ -14,38 +14,42 @@ $(document).ready(function(){
 			$('.content_textarea').val(data.itemDTO.item_content);
 			$('.qty_input').val(data.itemDTO.qty);
 			
-			if(data.itemDTO.img3!=null){
-				$('<img/>',{
-					src:'/pmang/storage/'+result.itemDTO.img3,
+			if(data.itemDTO.img3!='undefined'){
+				$('<li/>',{
+					class : 'image_li'
+				}).append($('<img/>',{
+					src:'/pmang/storage/'+data.itemDTO.img3,
 					class:'itemPicture'
-				})
-				.prependTo($('#itemPic'));
+				}))
+				.appendTo($('.imageChoice_ul'));
 			}
-			if(data.itemDTO.img2!=null){
-				$('<img/>',{
-					src:'/pmang/storage/'+result.itemDTO.img2,
+			if(data.itemDTO.img2!='undefined'){
+				$('<li/>',{
+					class : 'image_li'
+				}).append($('<img/>',{
+					src:'/pmang/storage/'+data.itemDTO.img2,
 					class:'itemPicture'
-				})
-				.prependTo($('#itemPic'));
+				}))
+				.appendTo($('.imageChoice_ul'));
 			}
-			if(data.itemDTO.img1!=null){
-				$('<img/>',{
-					src:'/pmang/storage/'+result.itemDTO.img1,
+			if(data.itemDTO.img1!='undefined'){
+				$('<li/>',{
+					class : 'image_li'
+				}).append($('<img/>',{
+					src:'/pmang/storage/'+data.itemDTO.img1,
 					class:'itemPicture'
-				})
-				.prependTo($('#itemPic'));
+				}))
+				.appendTo($('.imageChoice_ul'));
 			}
 			
 			if(data.itemDTO.category1!=null){
-				$('#choice').val(data.itemDTO.category1);
+				$('#choice').text(data.itemDTO.category1);
 			}
 			if(data.itemDTO.category2!=null){
-				$('#choice').val(' > ');
-				$('#choice').val(data.itemDTO.category2);
+				$('#choice').text(data.itemDTO.category1+ ' > ' + data.itemDTO.category2);
 			}
 			if(data.itemDTO.category3!=null){
-				$('#choice').val(' > ');
-				$('#choice').val(data.itemDTO.category3);
+				$('#choice').text(data.itemDTO.category1+ ' > ' + data.itemDTO.category2+ ' > '+ data.itemDTO.category3);
 			}
 			
 		},

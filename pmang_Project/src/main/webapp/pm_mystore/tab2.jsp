@@ -23,7 +23,7 @@
 				<a href="#" id="latest" class="defaultSort" style="color:green;">최신순 &emsp;|&emsp;</a>
 				<a href="#" id="popularity" class="sort">인기순 &emsp;|&emsp;</a>
 				<a href="#" id="lowerPrice" class="sort">저가순 &emsp;|&emsp;</a>
-				<a href="#" id="highestPrice" class="sort">고가순</a>&emsp;&emsp;
+				<a href="#" id="highestPrice" class="sort">고가순</a>
 			</div><!-- sortGroup -->
 		</div><!-- sortItem -->
 	</div><!-- mystoreBar -->

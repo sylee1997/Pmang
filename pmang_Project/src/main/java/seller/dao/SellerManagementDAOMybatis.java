@@ -46,4 +46,9 @@ public class SellerManagementDAOMybatis implements SellerManagementDAO {
 		return sqlSession.selectList("sellerManagementSQL.getsellerManagementSearch", map);
 	}
 
+	@Override
+	public void sellerLogtimeUpdate(int item_seq) {
+		sqlSession.update("sellerManagementSQL.sellerLogtimeUpdate", item_seq);		
+	}
+
 }

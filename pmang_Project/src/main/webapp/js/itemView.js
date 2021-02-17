@@ -85,6 +85,18 @@ $(document).ready(function(){
 			console.log(err);
 		},
 		success:function(result){
+			
+			if($('#hiddenUserId').val() == result.itemDTO.userId){
+				var div = '<div id="contact" onclick="loc()">내 상점 관리</div>';
+				$('#buttonArea').empty();
+				$('#buttonArea').append($(div));
+			}
+			
+			if(result.itemDTO.category3 == null){
+				$('.thirdCategory').hide();
+			}
+			
+			
 			let money = Number(result.itemDTO.item_price);
 			/*$('#itemPic').attr('src', '/pmang/storage/'+result.itemDTO.img1); *///이건 아이템보드에서 이미지 저장할때 
 																			  //스토리지에 이미지가 넣어지는데 member컨트롤러에서 폴더경로 바꿔주세요! 꼭!
@@ -409,7 +421,10 @@ $(document).ready(function(){
 	
 });	//ready
 
-
+function loc(){
+	var userid = $('#hiddenUserId').val();
+	location.href='/pmang/seller/sellerManagementForm';
+}
 
 
 /* 카테고리 펼쳐지는 부분*/
@@ -501,7 +516,7 @@ $(document).ready(function(){
 		
 		/* To스크롤 */
 		var offset = $("#"+contentSection).offset();
-		$('html, body').animate({scrollTop : offset.top}, 200);
+		$('html, body').animate({scrollTop : offset.top},0);
 
 		
 		
@@ -629,7 +644,7 @@ $('#comment_seq').click(function(event){
 											.append($('<img/>',{
 												class:'profilePic',
 												alt: '프사',
-												src: items.pf_photo,
+												src: '/pmang/storage/' + items.pf_photo,
 												width: '50',
 												height: '50'})))
 								.append($('<div/>',{
@@ -757,7 +772,7 @@ function commentForComment(that){
 			console.log(err)
 		},
 		success: function(result){
-			//console.log(result.commentDTO.userId);		
+			//console.log(result.commentDTO.userId);	
 			$('#replyText').val('@'+result.commentDTO.userId+':');
 		}//success
 	});//ajax
