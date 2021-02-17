@@ -22,7 +22,7 @@ $(document).ready(function(){
 		
 			
 			$.each(data.list,function(index,items){
-			if(items.reviewImg1==null){
+			if(items.img1=='undefined'){
 				 // 리뷰사진이 없을경우
 					
 					 $('<div/>').append($('<div/>',{
@@ -103,7 +103,7 @@ $(document).ready(function(){
 									text:items.item_seq
 								})))).append($('<div/>',{
 									class:'reviewPhoto'
-								}).append($('<img src="/pmang/storage/'+items.reviewImg1+'" alt="상품이미지" style="border:1px solid rgb(238,238,238)"/>'))
+								}).append($('<img src="/pmang/storage/'+items.img1+'" alt="상품이미지" style="border:1px solid rgb(238,238,238)"/>'))
 										).append($('<div/>',{
 											class:'reviewDetail',
 											text:items.reviewContent
@@ -148,7 +148,7 @@ $(document).ready(function(){
 				
 					bool_sw=true;
 					$.each(data.list,function(index,items){
-						if(items.reviewImg1==null){
+						if(items.img=='undefined'){
 							 // 리뷰사진이 없을경우
 								
 								 $('<div/>').append($('<div/>',{
@@ -229,7 +229,7 @@ $(document).ready(function(){
 												text:items.item_seq
 											})))).append($('<div/>',{
 												class:'reviewPhoto'
-											}).append($('<img src="/pmang/storage/'+items.reviewImg1+'" alt="상품이미지" style="border:1px solid rgb(238,238,238)"/>'))
+											}).append($('<img src="/pmang/storage/'+items.img1+'" alt="상품이미지" style="border:1px solid rgb(238,238,238)"/>'))
 													).append($('<div/>',{
 														class:'reviewDetail',
 														text:items.reviewContent

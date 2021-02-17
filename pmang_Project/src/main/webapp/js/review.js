@@ -166,6 +166,7 @@ $('.scoreLevel input[type=radio]').on('click', function() {
 //리뷰작성
 $('.reviewOkBtn').on('click',function(){
 	
+		
 	var formData=new FormData($('#reviewWriteForm')[0]);
 	
 	var img1url=$('.reviewPhotoPreview').children().eq(0).children('img').attr("src");
@@ -186,7 +187,7 @@ $('.reviewOkBtn').on('click',function(){
 	var reviewStamp=$('input[type=radio]:checked').val();
 	var sellerid=$('.reviewStoreName').text();
 	var reviewSubject=$('.reviewSubject').text();
-	var item_seq=$('.item_seq').text();
+	var item_seq=$('.item_seqSpan').text();
 	
 	formData.append("item_seq",item_seq);
 	formData.append("reviewSubject",reviewSubject);
@@ -197,7 +198,7 @@ $('.reviewOkBtn').on('click',function(){
 	//데이터 잘 들어왔는지 확인
 	for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); } 
 	
-	
+//	alert('z');
 	$.ajax({
 		type:'post',
 		enctype:'form-data',

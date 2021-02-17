@@ -863,16 +863,16 @@ a:visited {
 }
 
 .itemSoldDiv {
-	z-index: 1;
-	text-align: center;
-	color: green;
-	font-size: 15pt;
-	font-weight: bold;
-	font-family: sans-serif;
-	position: relative;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	    z-index: 1;
+    text-align: center;
+    color: green;
+    font-size: 15pt;
+    font-weight: bold;
+    font-family: sans-serif;
+    position: relative;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -1200%);
 }
 
 .wishitemSoldDiv {
