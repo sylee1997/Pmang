@@ -1,69 +1,80 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <link rel="stylesheet" href="/pmang/css/qna.css">
+	pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="/pmang/css/qna.css">
 <div id="tabArea">
-	<input type="hidden" id="photoCountHidden" value="0">
-	<input type="hidden" id="userid" value="${memUserId }"> 
+	<input type="hidden" id="photoCountHidden" value="0"> <input
+		type="hidden" id="userid" value="${memUserId }">
 	<!-- <input type="hidden" id="userid" value="tmddms"> -->
 	<div id="tabDiv">
 		<input id="tab1" class="tabs" type="radio" name="tabName" value="1">
-		<label class="tabLabel" for="tab1">1:1 문의하기</label>
-		
-		<input id="tab2" class="tabs" type="radio" name="tabName" value="2">
-		<label class="tabLabel" for="tab2">문의 내역</label>
-		
-		
+		<label class="tabLabel" for="tab1">1:1 문의하기</label> <input id="tab2"
+			class="tabs" type="radio" name="tabName" value="2"> <label
+			class="tabLabel" for="tab2">문의 내역</label>
+
+
 		<section id="qnaWriteSection">
-		<form id="qnaWriteForm">
-			<div class="qnaWriteDiv">
-			
-				<div id="qnaSelect1Div">
-					<select name="qnaWriteType1" id="select1" style="width:723px;height:30px;margin-bottom:5px;margin-top:10px" onChange="changeQnAType(this)">
-						<option value="">선택하세요</option>
-						<option value="계정문의">계정문의</option>
-						<option value="거래신고">거래신고</option>
-						<option value="이용방법">이용방법</option>
-						<option value="제보제안">제보제안</option>
-						
-					</select>
-				</div><!-- qnaSelect1Div -->
-				<div id="qnaSelect2Div">
-					<select name="qnaWriteType2" id="select2" style="width:723px;height:30px;margin-bottom:10px;">
-						<option value="">선택하세요</option>
-					</select>
+			<form id="qnaWriteForm">
+				<div class="qnaWriteDiv">
+
+					<div id="qnaSelect1Div">
+						<select name="qnaWriteType1" id="select1"
+							style="width: 723px; height: 30px; margin-bottom: 5px; margin-top: 10px"
+							onChange="changeQnAType(this)">
+							<option value="">선택하세요</option>
+							<option value="계정문의">계정문의</option>
+							<option value="거래신고">거래신고</option>
+							<option value="이용방법">이용방법</option>
+							<option value="제보제안">제보제안</option>
+
+						</select>
+					</div>
+					<!-- qnaSelect1Div -->
+					<div id="qnaSelect2Div">
+						<select name="qnaWriteType2" id="select2"
+							style="width: 723px; height: 30px; margin-bottom: 10px;">
+							<option value="">선택하세요</option>
+						</select>
+					</div>
 				</div>
-			</div><!-- qnaWriteDiv -->
-			<div class="qnaWriteContentDiv">
-				<textarea rows="20" cols="100" id="qnaContent" name="qnaContent" placeholder="문의 내용 입력" style="resize:none;"></textarea>
-				<div id="qnaContentDiv" ></div>
-			</div><!-- qnaWriteContentDiv -->
-			<div class="qnaPhtotPreview"></div>
-			<div class="qnaWriteBtnDiv">
-				
-					<input type="file" class="qnaWritePhoto" name="img[]" accept="image/jpg, image/jpeg, image/png" multiple/>
-					
+				<!-- qnaWriteDiv -->
+				<div class="qnaWriteContentDiv">
+					<textarea rows="20" cols="100" id="qnaContent" name="qnaContent"
+						placeholder="문의 내용 입력" style="resize: none;"></textarea>
+					<div id="qnaContentDiv"></div>
+				</div>
+				<!-- qnaWriteContentDiv -->
+				<div class="qnaPhtotPreview"></div>
+				<div class="qnaWriteBtnDiv">
+
+					<input type="file" class="qnaWritePhoto" name="img[]"
+						accept="image/jpg, image/jpeg, image/png" multiple />
+
 					<!-- <input type="button" id="qnaWritePhotoBtn" value="사진 등록">
 					<input type="button" id="qnaWriteBtn" value="문의 등록"> -->
-					<button type="button" class="qnaWritePhotoBtn" style="background-color:green;color:white;">사진 등록</button>
+					<button type="button" class="qnaWritePhotoBtn"
+						style="background-color: green; color: white;">사진 등록</button>
 					<button type="button" class="qnaWriteBtn">문의 등록</button>
-			
-			</div><!-- qnaWriteBtnDiv -->
-			
+
+				</div>
+				<!-- qnaWriteBtnDiv -->
+
 			</form>
-			
-		</section><!-- qnaWriteSection -->
-		
+
+		</section>
+		<!-- qnaWriteSection -->
+
 		<section id="qnaListSection">
-			<div class="qnaListDiv">
-			
-			</div>
-		</section><!-- qnaListSection -->
-	</div><!-- tabDiv -->
-</div><!-- tabArea -->
+			<div class="qnaListDiv"></div>
+		</section>
+		<!-- qnaListSection -->
+	</div>
+	<!-- tabDiv -->
+</div>
+<!-- tabArea -->
 
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-		<script type="text/javascript" src="../js/qna.js"></script>
+<script type="text/javascript" src="../js/qna.js"></script>
 <script>
 $(document).ready(function(){
 	//문의내역

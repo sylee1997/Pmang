@@ -10,7 +10,7 @@ import lombok.Data;
 public class ReviewDTO {
 	
 	private String sellerid;	//������ ��ȣ
-	private int itemNum;	//��ǰ��ȣ
+	private int item_seq;	//��ǰ��ȣ
 	private String reviewWriter;	//���� �ۼ���
 	private String reviewSubject;	//��������
 	private String reviewContent;	//���䳻��

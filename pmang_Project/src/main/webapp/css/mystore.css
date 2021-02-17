@@ -5,6 +5,7 @@
 	height: 100%;
 	margin: 0 auto;
 	text-align: center;
+	
 }
 
 .mystoreProfile {
@@ -85,10 +86,9 @@
 
 .infoName {
 	width: 200px;
-    /* margin: 0; */
-    /* padding: 0; */
-    text-align: left;
-	
+	/* margin: 0; */
+	/* padding: 0; */
+	text-align: left;
 }
 
 .infoName span {
@@ -224,17 +224,16 @@ button#storeIntroEditBtn {
 
 #memberInfoModify {
 	display: flex;
-    float: right;
-    margin-top: 5px;
-    /* border: 1px solid black; */
-    /* border-radius: 5px; */
-    padding-left: 25px;
-    padding-top: 20px;
-    font-size: 9pt;
-    test-decoration: none;
-    margin-left: 350px;
-    text-decoration: underline;
-
+	float: right;
+	margin-top: 5px;
+	/* border: 1px solid black; */
+	/* border-radius: 5px; */
+	padding-left: 25px;
+	padding-top: 20px;
+	font-size: 9pt;
+	test-decoration: none;
+	margin-left: 350px;
+	text-decoration: underline;
 }
 
 #storeIntroBtn {
@@ -309,6 +308,7 @@ a:visited {
 	border: 0px;
 	font: inherit;
 	vertical-align: baseline;
+	/* overflow-y:hidden; */
 }
 
 .tab1bar {
@@ -863,34 +863,33 @@ a:visited {
 }
 
 .itemSoldDiv {
-	z-index:999;
-	text-align: center; 
-
-	/* width: 194px;
-	height: 194px; */
-	color:green;
-	font-size:15pt;
-	font-weight:bold;
-	font-family:sans-serif;
-	
-	position: absolute;
-	top: 30%;
-	left: 10%; 
+	z-index: 1;
+	text-align: center;
+	color: green;
+	font-size: 15pt;
+	font-weight: bold;
+	font-family: sans-serif;
+	position: relative;
+	top: 50%;
+	left: 50%;
 	transform: translate(-50%, -50%);
 }
-.wishitemSoldDiv {
-	z-index:1;
-	text-align: center; 
 
+.wishitemSoldDiv {
+	z-index: 1;
+	text-align: center;
 	/* width: 194px;
 	height: 194px; */
-	color:green;
-	font-size:15pt;
-	font-weight:bold;
-	font-family:sans-serif;
-	
+	color: green;
+	font-size: 15pt;
+	font-weight: bold;
+	font-family: sans-serif;
 	position: absolute;
 	top: 50%;
-	 left: 15%; 
+	left: 15%;
 	transform: translate(-50%, -50%);
+}
+
+#itemNum{
+	display:none;
 }

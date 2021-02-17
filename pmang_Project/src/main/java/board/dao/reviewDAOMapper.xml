@@ -4,7 +4,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="reviewSQL">
  	<insert id="reviewWrite" parameterType="review">
- 		insert into review values(review_seq.nextval,#{buyerNum},#{itemNum},#{reviewWriter},#{reviewSubject},#{reviewContent},#{reviewImg1},#{reviewImg2},#{reviewImg3},to_char(systimestamp,'YYYY-MM-DD HH24:MI:SS:FF'),#{reviesStamp})
+ 		insert into review values(review_seq.nextval,#{buyerNum},#{item_seq},#{reviewWriter},#{reviewSubject},#{reviewContent},#{reviewImg1},#{reviewImg2},#{reviewImg3},to_char(systimestamp,'YYYY-MM-DD HH24:MI:SS:FF'),#{reviesStamp})
  		
  	</insert>
  </mapper>

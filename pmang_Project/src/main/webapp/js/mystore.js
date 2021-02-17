@@ -78,3 +78,8 @@ $('#storeIntroEditBtn').on(
 						});
 					});
 		});
+
+//내상점관리 버튼
+$('#manageBtn').click(function(){
+	location.href='/pmang/seller/sellerManagementForm';
+});

@@ -29,7 +29,7 @@ $(document).ready(function(){
 							class:'review1'
 						}).append($('<a/>',{
 							class:'review_snb',
-							href:'#'
+							href:'/pmang/board/mystore?userid='+items.reviewWriter
 								
 						}).append($('<img src="/pmang/image/grayPmang.png" style="border:1px solid green;border-radius: 50%;" width="60" height="60"/>')))
 						.append($('<div/>',{
@@ -51,26 +51,17 @@ $(document).ready(function(){
 								)))).append($('<div/>',{
 									class:'reviewSubjectWrap'
 								}).append($('<button/>',{
-									class:'reviewSubjectBtn'
+									class:'reviewSubjectBtn',
+									type:'button'
 								}).append($('<span/>',{
 									text:items.reviewSubject+'              >'
+								})).append($('<span/>',{
+									id:'itemNum',
+									text:items.item_seq
 								})))).append($('<div/>',{
 											class:'reviewDetail',
 											text:items.reviewContent
-										})).append($('<div/>',{
-											class:'reportDiv'
-										}).append($('<a/>',{
-											class:'report',
-											href:'#'
-												
-										}).append($('<img src="../image/declaimIcon.png" width="20" height="20" alt="신고버튼아이콘"/>'))
-										.append($('<span/>',{
-											text:'신고하기'
-										})))))).append($('<input/>',{
-											type:'hidden',
-											id:'itemNum',
-											value:items.itemNum
-										})).appendTo($('.review'));
+										})))).appendTo($('.review'));
 					 
 					 
 					 
@@ -81,7 +72,7 @@ $(document).ready(function(){
 							class:'review1'
 						}).append($('<a/>',{
 							class:'review_snb',
-							href:'#'
+							href:'/pmang/board/mystore?userid='+items.reviewWriter
 								
 						}).append($('<img src="/pmang/image/grayPmang.png" style="border:1px solid green;border-radius: 50%;" width="60" height="60"/>')))
 						.append($('<div/>',{
@@ -103,32 +94,27 @@ $(document).ready(function(){
 								)))).append($('<div/>',{
 									class:'reviewSubjectWrap'
 								}).append($('<button/>',{
-									class:'reviewSubjectBtn'
+									class:'reviewSubjectBtn',
+									type:'button'
 								}).append($('<span/>',{
 									text:items.reviewSubject+'              >'
+								})).append($('<span/>',{
+									id:'itemNum',
+									text:items.item_seq
 								})))).append($('<div/>',{
 									class:'reviewPhoto'
 								}).append($('<img src="/pmang/storage/'+items.reviewImg1+'" alt="상품이미지" style="border:1px solid rgb(238,238,238)"/>'))
 										).append($('<div/>',{
 											class:'reviewDetail',
 											text:items.reviewContent
-										})).append($('<div/>',{
-											class:'reportDiv'
-										}).append($('<a/>',{
-											class:'report',
-											href:'#'
-												
-										}).append($('<img src="../image/declaimIcon.png" width="20" height="20" alt="신고버튼아이콘"/>'))
-										.append($('<span/>',{
-											text:'신고하기'
-										})))))).append($('<input/>',{
-											type:'hidden',
-											id:'itemNum',
-											value:items.itemNum
-										})).appendTo($('.review'));
+										})))).appendTo($('.review'));
 						
 						 
 					 }
+			});
+			$('.reviewSubjectBtn span').click(function(){
+				//alert($(this).next().text());
+				location.href='/pmang/board/itemView?item_seq='+$(this).next().text();
 			});
 		}
 		
@@ -162,113 +148,100 @@ $(document).ready(function(){
 				
 					bool_sw=true;
 					$.each(data.list,function(index,items){
-					if(items.reviewImg1==null){
-						 // 리뷰사진이 없을경우
-							
-							 $('<div/>').append($('<div/>',{
-									class:'review1'
-								}).append($('<a/>',{
-									class:'review_snb',
-									href:'#'
-										
-								}).append($('<img src="/pmang/image/grayPmang.png" style="border:1px solid green;border-radius: 50%;" width="60" height="60"/>')))
-								.append($('<div/>',{
-									class:'review_content'
-								}).append($('<div/>',{
-									class:'review_header'
-								}).append($('<div/>',{
-									class:'reviewNameDiv'
-								}).append($('<a/>',{
-									class:'reviewName',
-									text:items.reviewWriter
-								})).append($('<div/>',{
-									class:'reviewTime',
-									text:timeCalc(items.reviewLogtime)
-								}))).append($('<a/>',{
-									class:'score',
-									text:items.reviewStamp
-								}).prepend($('<img src="/pmang/image/main_logo.JPG" width="20" height="20"/>'
-										)))).append($('<div/>',{
-											class:'reviewSubjectWrap'
-										}).append($('<button/>',{
-											class:'reviewSubjectBtn'
-										}).append($('<span/>',{
-											text:items.reviewSubject+'              >'
-										})))).append($('<div/>',{
-													class:'reviewDetail',
-													text:items.reviewContent
-												})).append($('<div/>',{
-													class:'reportDiv'
-												}).append($('<a/>',{
-													class:'report',
-													href:'#'
-														
-												}).append($('<img src="../image/declaimIcon.png" width="20" height="20" alt="신고버튼아이콘"/>'))
-												.append($('<span/>',{
-													text:'신고하기'
-												})))))).append($('<input/>',{
-													type:'hidden',
-													id:'itemNum',
-													value:items.itemNum
-												})).appendTo($('.review'));
-							
-							 
-						 }else{
-								// //리뷰사진이랑 리뷰내용을 모두 작성되어있을때
+						if(items.reviewImg1==null){
+							 // 리뷰사진이 없을경우
 								
-								$('<div/>').append($('<div/>',{
-									class:'review1'
-								}).append($('<a/>',{
-									class:'review_snb',
-									href:'#'
-										
-								}).append($('<img src="/pmang/image/grayPmang.png" style="border:1px solid green;border-radius: 50%;" width="60" height="60"/>')))
-								.append($('<div/>',{
-									class:'review_content'
-								}).append($('<div/>',{
-									class:'review_header'
-								}).append($('<div/>',{
-									class:'reviewNameDiv'
-								}).append($('<a/>',{
-									class:'reviewName',
-									text:items.reviewWriter
-								})).append($('<div/>',{
-									class:'reviewTime',
-									text:timeCalc(items.reviewLogtime)
-								}))).append($('<a/>',{
-									class:'score',
-									text:items.reviewStamp
-								}).prepend($('<img src="/pmang/image/main_logo.JPG" width="20" height="20"/>'
-										)))).append($('<div/>',{
-											class:'reviewSubjectWrap'
-										}).append($('<button/>',{
-											class:'reviewSubjectBtn'
-										}).append($('<span/>',{
-											text:items.reviewSubject+'              >'
-										})))).append($('<div/>',{
-											class:'reviewPhoto'
-										}).append($('<img src="/pmang/storage/'+items.reviewImg1+'" alt="상품이미지" style="border:1px solid rgb(238,238,238)"/>'))
-												).append($('<div/>',{
-													class:'reviewDetail',
-													text:items.reviewContent
-												})).append($('<div/>',{
-													class:'reportDiv'
-												}).append($('<a/>',{
-													class:'report',
-													href:'#'
-														
-												}).append($('<img src="../image/declaimIcon.png" width="20" height="20" alt="신고버튼아이콘"/>'))
-												.append($('<span/>',{
-													text:'신고하기'
-												})))))).append($('<input/>',{
-													type:'hidden',
-													id:'itemNum',
-													value:items.itemNum
-												})).appendTo($('.review'));
+								 $('<div/>').append($('<div/>',{
+										class:'review1'
+									}).append($('<a/>',{
+										class:'review_snb',
+										href:'/pmang/board/mystore?userid='+items.reviewWriter
+											
+									}).append($('<img src="/pmang/image/grayPmang.png" style="border:1px solid green;border-radius: 50%;" width="60" height="60"/>')))
+									.append($('<div/>',{
+										class:'review_content'
+									}).append($('<div/>',{
+										class:'review_header'
+									}).append($('<div/>',{
+										class:'reviewNameDiv'
+									}).append($('<a/>',{
+										class:'reviewName',
+										text:items.reviewWriter
+									})).append($('<div/>',{
+										class:'reviewTime',
+										text:timeCalc(items.reviewLogtime)
+									}))).append($('<a/>',{
+										class:'score',
+										text:items.reviewStamp
+									}).prepend($('<img src="/pmang/image/main_logo.JPG" width="20" height="20"/>'
+											)))).append($('<div/>',{
+												class:'reviewSubjectWrap'
+											}).append($('<button/>',{
+												class:'reviewSubjectBtn',
+												type:'button'
+											}).append($('<span/>',{
+												text:items.reviewSubject+'              >'
+											})).append($('<span/>',{
+												id:'itemNum',
+												text:items.item_seq
+											})))).append($('<div/>',{
+														class:'reviewDetail',
+														text:items.reviewContent
+													})))).appendTo($('.review'));
 								 
-								
-							 }
-					});
+								 
+								 
+							 }else{
+									// //리뷰사진이랑 리뷰내용을 모두 작성되어있을때
+									
+									$('<div/>').append($('<div/>',{
+										class:'review1'
+									}).append($('<a/>',{
+										class:'review_snb',
+										href:'/pmang/board/mystore?userid='+items.reviewWriter
+											
+									}).append($('<img src="/pmang/image/grayPmang.png" style="border:1px solid green;border-radius: 50%;" width="60" height="60"/>')))
+									.append($('<div/>',{
+										class:'review_content'
+									}).append($('<div/>',{
+										class:'review_header'
+									}).append($('<div/>',{
+										class:'reviewNameDiv'
+									}).append($('<a/>',{
+										class:'reviewName',
+										text:items.reviewWriter
+									})).append($('<div/>',{
+										class:'reviewTime',
+										text:timeCalc(items.reviewLogtime)
+									}))).append($('<a/>',{
+										class:'score',
+										text:items.reviewStamp
+									}).prepend($('<img src="/pmang/image/main_logo.JPG" width="20" height="20"/>'
+											)))).append($('<div/>',{
+												class:'reviewSubjectWrap'
+											}).append($('<button/>',{
+												class:'reviewSubjectBtn',
+												type:'button'
+											}).append($('<span/>',{
+												text:items.reviewSubject+'              >'
+											})).append($('<span/>',{
+												id:'itemNum',
+												text:items.item_seq
+											})))).append($('<div/>',{
+												class:'reviewPhoto'
+											}).append($('<img src="/pmang/storage/'+items.reviewImg1+'" alt="상품이미지" style="border:1px solid rgb(238,238,238)"/>'))
+													).append($('<div/>',{
+														class:'reviewDetail',
+														text:items.reviewContent
+													})))).appendTo($('.review'));
+									
+									 
+								 }
+						});
+						$('.reviewSubjectBtn span').click(function(){
+							//alert($(this).next().text());
+							location.href='/pmang/board/itemView?item_seq='+$(this).next().text();
+						});
 				}
 				
 			});

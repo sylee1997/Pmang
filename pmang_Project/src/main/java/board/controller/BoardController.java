@@ -639,7 +639,13 @@ public class BoardController {
 		map.put("userId", userId);
 		
 		SellerDTO sellerDTO = boardService.getSellerInfo(userId);
-		map.put("pf_photo", sellerDTO.getPf_photo());
+		System.out.println(sellerDTO);
+		if(sellerDTO==null) {
+			map.put("pf_photo", "/pmang/image/profileimg.png");
+		}else {
+			map.put("pf_photo", "/pmang/storage/"+sellerDTO.getPf_photo());
+
+		}
 		boardService.itemComment(map); // -->서비스쪽이랑 디비, 메퍼쪽도 바뀌었으니 확인해보세용!
 
 	}
