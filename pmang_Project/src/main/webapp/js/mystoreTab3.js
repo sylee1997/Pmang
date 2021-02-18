@@ -31,7 +31,7 @@ $(document).ready(function(){
 							class:'review_snb',
 							href:'/pmang/board/mystore?userid='+items.reviewWriter
 								
-						}).append($('<img src="/pmang/image/grayPmang.png" style="border:1px solid green;border-radius: 50%;" width="60" height="60"/>')))
+						}).append($('<img src="/pmang/storage/'+items.pf_photo+'" style="border-radius: 50%;" width="60" height="60"/>')))
 						.append($('<div/>',{
 							class:'review_content'
 						}).append($('<div/>',{

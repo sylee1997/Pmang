@@ -103,7 +103,7 @@ display:none;
 						<!--********************************************************** score점수를 매겼을 경우에 disabled:false로 바꾸기 -->
 
 						<!-- <input type="button" id="reviewOkBtn" value="등록" disabled="disabled"> -->
-						<button class="reviewOkBtn">등록</button>
+						<button type="button" class="reviewOkBtn">등록</button>
 					</div>
 					<!-- reviewOk -->
 				</div>
