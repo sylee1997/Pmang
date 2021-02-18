@@ -14,7 +14,6 @@ display:none;
 </head>
 <body>
 	<input type="hidden" id="photoCountHidden" value="0">
-	
 	<form id="reviewWriteForm">
 	 <input type="hidden" id="item_seq" value="${param.item_seq }"> 
 	<span class="item_seqSpan">${param.item_seq }</span>
@@ -103,7 +102,7 @@ display:none;
 						<!--********************************************************** score점수를 매겼을 경우에 disabled:false로 바꾸기 -->
 
 						<!-- <input type="button" id="reviewOkBtn" value="등록" disabled="disabled"> -->
-						<button class="reviewOkBtn">등록</button>
+						<button type="button" class="reviewOkBtn">등록</button>
 					</div>
 					<!-- reviewOk -->
 				</div>
@@ -133,7 +132,7 @@ display:none;
 				type:'post',
 				url:'/pmang/board/getItem',
 				dataType:'json',
-				data:{'item_seq':$('#item_seq').val()},
+				data:{'item_seq': $('#item_seq').val()},
 				success:function(data){
 					console.log(JSON.stringify(data));
 					

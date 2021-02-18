@@ -205,11 +205,11 @@ $('.reviewOkBtn').on('click',function(){
 		processData:false,
 		contentType:false,
 		url:'/pmang/board/reviewWrite',
-		data:formData,
+		data: formData,
 		success:function(data){
 			alert('리뷰 작성을 완료하였습니다.');
-			opener.location.href='/pmang/index';
 			window.close();
+			opener.opener.location.href='/pmang/index';
 			
 		},
 		error:function(err){

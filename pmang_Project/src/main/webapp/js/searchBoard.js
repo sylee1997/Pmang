@@ -82,7 +82,9 @@ $(document).ready(function(){
 					var bestA = '<a id="bestA">';
 					bestA += '<div class="bestctg1">' + items.CATEGORY1 + '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAUCAYAAAC58NwRAAAAAXNSR0IArs4c6QAAAaVJREFUKBWFUz1LA0EQde9DIjaxSBNIG2shnR9whYVgIQqnjURikhP/QDqLVPoL9KJJEUHIgYggSFCs7K2tU6ZIrAwa73zvyB6bM8GB3Ox782Z2Z3YjZmCe5832er2WruvVYrH4Rm6aaQz0+/0ruC3f99v1en1xmpi85rpuNQiCfQL41HA4fGo0GhniSaYJIRZigQySnpGUivEhFKgqLmHwhzEBe7Ecx/lQee4QlEqlMsgbNYD1En4PGMicyodNI8nPZrN5+Ds1iPUKBnKLPk3JhwkElmUNk8nkHpIeZZAeR92Au4YPtVECg7Ztf5mmuY2kF2LFdmu12jmxUMho2Ww25weDQRtVlyOSYiHOxnaQwUQi4UMcSKz6PzuwQVS6h55njwycWy6Xj8Z2gIiYDY6JwbUw+mNm6/xIS6fTF1jnJaZHZU7NzuVyP8QGPzRM4RSVeYGqvWLUO5jetyTDI0FcgbgiyZHn09iE+FPlBZp0QPAoqr3jPlYLhUJXJbnmDmsxsgPx+iSxTDgYNcYGu4ZhUNyJFYlgeA98kXhknqZpJ//9RX8BYkCa7Y9z0J0AAAAASUVORK5CYII=" width="6" height="10" alt="화살표 아이콘"></div>';
 					bestA += '<div class="bestctg2">' + items.CATEGORY2 + '</div>';
-					bestA += '<div class="bestctg3">' + items.CATEGORY3 + '</div>';
+					if(items.CATEGORY3 != null){
+						bestA += '<div class="bestctg3">' + items.CATEGORY3 + '</div>';
+					}
 					bestA += '<div class="bestCount">' + items.CNT3 + '개</div>';
 					bestA += '</a>';
 					
@@ -102,10 +104,14 @@ $(document).ready(function(){
 					
 					num += 1;	
 					
+					if(num == 5){
+						num = 0;
+					}
+					
 				});
 				
 				if(5 % num != 0){
-					for(var i = 0; i < 5-num; i++){
+					for(var i = 0; i < Math.abs(5-num); i++){
 						var emptyDiv = "<div id='emptyDiv'></div>";
 						$(emptyDiv).appendTo($('.searchCtgListDiv'));
 					}
@@ -161,7 +167,7 @@ $(document).ready(function(){
 				if(data.bestItemList.length == 0){
 					$('.search_catagoryDiv').remove();
 					var zero = '<div class="zeroDiv">';
-					zero += '<div class="zeroKeyword">'+$("#search").val()+'</div>';
+					zero += '<div class="zeroKeyword">'+$("#hashtag").val()+'</div>';
 					zero += '에 대한 검색결과가 없습니다.';
 					zero += '</div>';
 					
@@ -200,7 +206,12 @@ $(document).ready(function(){
 					
 					$(ListA).appendTo($('.searchCtgListDiv'));
 					
-					num += 1;	
+					num += 1;
+					
+					if(num == 5){
+						num = 0;
+					}
+					
 					
 				});
 				
@@ -292,6 +303,11 @@ if($('#hashtag').val() == ''){
 					
 					num += 1;	
 					
+					if(num == 5){
+						num = 0;
+					}
+					
+					
 				});
 				
 				if(5 % num != 0){
@@ -351,6 +367,10 @@ else {
 					$(ListA).appendTo($('.searchCtgListDiv'));
 					
 					num += 1;	
+					
+					if(num == 5){
+						num = 0;
+					}
 					
 				});
 				
@@ -424,6 +444,8 @@ $('.searchCtgListDiv').on('click', '#clickCtg2A', function(){
 				//카테고리3 버튼
 				$.each(data.category3List, function(index, items){
 					
+					if(items.CATEGORY3 != null){
+					
 					var ListA = "<div id='clickCategoryList'>";
 					ListA += "<a id='clickCtg3A'>";
 					ListA += "<div class='clickCtg3'>"+ items.CATEGORY3 + "</div>";
@@ -433,7 +455,13 @@ $('.searchCtgListDiv').on('click', '#clickCtg2A', function(){
 					
 					$(ListA).appendTo($('.searchCtgListDiv'));
 					
+					}
+					
 					num += 1;	
+					
+					if(num == 5){
+						num = 0;
+					}
 					
 				});
 				
@@ -485,16 +513,23 @@ $('.searchCtgListDiv').on('click', '#clickCtg2A', function(){
 				//카테고리3 버튼
 				$.each(data.category3List, function(index, items){
 					
-					var ListA = "<div id='clickCategoryList'>";
-					ListA += "<a id='clickCtg3A'>";
-					ListA += "<div class='clickCtg3'>"+ items.CATEGORY3 + "</div>";
-					ListA += "<div class='clickCtgCount'>" + items.CNT3 + '개</div>';
-					ListA += "</a>";
-					ListA += "</div>";
-					
-					$(ListA).appendTo($('.searchCtgListDiv'));
+					if(items.CATEGORY3 != null){
+						
+						var ListA = "<div id='clickCategoryList'>";
+						ListA += "<a id='clickCtg3A'>";
+						ListA += "<div class='clickCtg3'>"+ items.CATEGORY3 + "</div>";
+						ListA += "<div class='clickCtgCount'>" + items.CNT3 + '개</div>';
+						ListA += "</a>";
+						ListA += "</div>";
+						
+						$(ListA).appendTo($('.searchCtgListDiv'));
+						
+						}
 					
 					num += 1;	
+					if(num == 5){
+						num = 0;
+					}
 					
 				});
 				
@@ -653,16 +688,31 @@ $('.bestCatagoryDiv').on('click', '.beforeA', function(){
 					//카테고리3 버튼
 					$.each(data.category3List, function(index, items){
 						
-						var ListA = "<div id='clickCategoryList'>";
-						ListA += "<a id='clickCtg3A'>";
-						ListA += "<div class='clickCtg3'>"+ items.CATEGORY3 + "</div>";
-						ListA += "<div class='clickCtgCount'>" + items.CNT3 + '개</div>';
-						ListA += "</a>";
-						ListA += "</div>";
-						
-						$(ListA).appendTo($('.searchCtgListDiv'));
+						if(items.CATEGORY3 != null){
+							
+							var ListA = "<div id='clickCategoryList'>";
+							ListA += "<a id='clickCtg3A'>";
+							ListA += "<div class='clickCtg3'>"+ items.CATEGORY3 + "</div>";
+							ListA += "<div class='clickCtgCount'>" + items.CNT3 + '개</div>';
+							ListA += "</a>";
+							ListA += "</div>";
+							
+							$(ListA).appendTo($('.searchCtgListDiv'));
+							
+							}
+						else {
+							if($('#hashtag').val() == ''){
+								location.href='/pmang/board/searchBoard?search='+$('#search').val()+'&pg='+$('#pg').val()+'&order='+$('#order').val();
+							}else {
+								location.href='/pmang/board/searchBoard?hashtag='+$('#hashtag').val()+'&pg='+$('#pg').val()+'&order='+$('#order').val();
+							}
+						}
 						
 						num += 1;	
+						
+						if(num == 5){
+							num = 0;
+						}
 						
 					});
 					
@@ -716,16 +766,31 @@ $('.bestCatagoryDiv').on('click', '.beforeA', function(){
 					//카테고리3 버튼
 					$.each(data.category3List, function(index, items){
 						
-						var ListA = "<div id='clickCategoryList'>";
-						ListA += "<a id='clickCtg3A'>";
-						ListA += "<div class='clickCtg3'>"+ items.CATEGORY3 + "</div>";
-						ListA += "<div class='clickCtgCount'>" + items.CNT3 + '개</div>';
-						ListA += "</a>";
-						ListA += "</div>";
-						
-						$(ListA).appendTo($('.searchCtgListDiv'));
+						if(items.CATEGORY3 != null){
+							
+							var ListA = "<div id='clickCategoryList'>";
+							ListA += "<a id='clickCtg3A'>";
+							ListA += "<div class='clickCtg3'>"+ items.CATEGORY3 + "</div>";
+							ListA += "<div class='clickCtgCount'>" + items.CNT3 + '개</div>';
+							ListA += "</a>";
+							ListA += "</div>";
+							
+							$(ListA).appendTo($('.searchCtgListDiv'));
+							
+							}
+						else {
+							if($('#hashtag').val() == ''){
+								location.href='/pmang/board/searchBoard?search='+$('#search').val()+'&pg='+$('#pg').val()+'&order='+$('#order').val();
+							}else {
+								location.href='/pmang/board/searchBoard?hashtag='+$('#hashtag').val()+'&pg='+$('#pg').val()+'&order='+$('#order').val();
+							}
+						}
 						
 						num += 1;	
+						
+						if(num == 5){
+							num = 0;
+						}
 						
 					});
 					
@@ -769,7 +834,6 @@ $('.bestCatagoryDiv').on('click', '.beforeA', function(){
 			});//ajax
 		}//hashtag
 	}//if
-	
 	else if($('#clickCtg3A').length){
 		//카테고리1 버튼 클릭 한 후.
 		$('#ltSpan').remove();
@@ -805,6 +869,10 @@ $('.bestCatagoryDiv').on('click', '.beforeA', function(){
 						$(ListA).appendTo($('.searchCtgListDiv'));
 						
 						num += 1;	
+						
+						if(num == 5){
+							num = 0;
+						}
 						
 					});
 					
@@ -869,6 +937,10 @@ $('.bestCatagoryDiv').on('click', '.beforeA', function(){
 						
 						num += 1;	
 						
+						if(num == 5){
+							num = 0;
+						}
+						
 					});
 					
 					if(5 % num != 0){
@@ -916,12 +988,8 @@ $('.bestCatagoryDiv').on('click', '.beforeA', function(){
 		}else {
 			location.href='/pmang/board/searchBoard?hashtag='+$('#hashtag').val()+'&pg='+$('#pg').val()+'&order='+$('#order').val();
 		}
-	
-	
-	
 	}
 });
-
 
 
 

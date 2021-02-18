@@ -520,7 +520,8 @@ public class BoardController {
 	public void reviewWrite(@ModelAttribute ReviewDTO reviewDTO, HttpServletRequest request,
 			@RequestParam(value="img1url",required=false) String img1url, @RequestParam(value="img2url",required=false) String img2url,
 			@RequestParam(value="img3url",required=false) String img3url, HttpSession session) {
-		String filePath = "C:/project/Pmang/pmang_Project/src/main/webapp/storage/";
+		
+		String filePath = "D:\\git_home\\Pmang\\pmang_Project\\src\\main\\webapp\\storage";
 
 		String reviewWriter = (String) session.getAttribute("memUserId");// 작성자 아이디 세션으로 넣어야함
 		//String reviewWriter="tmddms2292";
